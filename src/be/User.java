@@ -3,27 +3,28 @@ package be;
 import be.Interface.ILogin;
 import be.enums.UserType;
 
+
 public class User implements ILogin {
     private int id;
     private String name;
     private String username;
     private String password;
-    private UserType type;
+    private UserType userType;
 
 
-    public User(int id, String name, String username, String password, UserType type) {
+    public User(int id, String name, String username, String password, UserType userType) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
-        this.type = type;
+        this.userType = userType;
     }
 
-    public User(int id, String username, String password, UserType type) {
+    public User(int id, String username, String password, UserType userType) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.type = type;
+        this.userType = userType;
     }
 
     @Override
@@ -36,11 +37,11 @@ public class User implements ILogin {
         this.id = id;
     }
 
-    private String getName(){
+    public String getName(){
         return name;
     }
 
-    private void setName(String name){
+    public void setName(String name){
         this.name = name;
     }
 
@@ -66,11 +67,11 @@ public class User implements ILogin {
 
     @Override
     public UserType getUsertype() {
-        return type;
+        return userType;
     }
 
     @Override
-    public void setUserType(UserType type) {
-        this.type = type;
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 }

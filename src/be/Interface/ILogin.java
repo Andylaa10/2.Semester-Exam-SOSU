@@ -14,4 +14,5 @@ public interface ILogin {
     UserType getUsertype();
     void setUserType(UserType type);
 
+
 }
