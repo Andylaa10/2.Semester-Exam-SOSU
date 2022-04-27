@@ -4,7 +4,6 @@ import be.User;
 import be.enums.UserType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
-
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,15 +14,13 @@ public class UserDAO {
     private final DatabaseConnector connector = DatabaseConnector.getInstance();
 
     public UserDAO() throws IOException {
-
     }
 
     /**
      * Making a students list, connecting to the database and adding the results to our ArrayList.
      * @return a list of students or an empty list of students.
      */
-
-    public List<User> getStudents() throws SQLServerException, SQLException {
+    public List<User> getStudents() {
         ArrayList<User> allStudents = new ArrayList<>();
 
         try (Connection connection = connector.getConnection()) {
@@ -50,7 +47,7 @@ public class UserDAO {
      * Making a teacher list, connecting to the database and adding the results to our ArrayList.
      * @return a list of teachers or an empty list of teachers.
      */
-    public List<User> getTeachers() throws SQLServerException, SQLException {
+    public List<User> getTeachers() {
         ArrayList<User> allTeachers = new ArrayList<>();
 
         try (Connection connection = connector.getConnection()) {
@@ -70,6 +67,32 @@ public class UserDAO {
         } catch (SQLException sqlException) {
         }
         return allTeachers;
+    }
+
+    /**
+     * Making an admin list, connecting to the database and adding the results to our ArrayList.
+     * @return a list of admins or an empty list of admins.
+     */
+    public List<User> getAdmins() {
+        ArrayList<User> allAdmins = new ArrayList<>();
+
+        try (Connection connection = connector.getConnection()) {
+            String sql = "SELECT * FROM Login WHERE userType ='Administrator' ;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultset = preparedStatement.executeQuery();
+            while (resultset.next()) {
+                int loginID = resultset.getInt("LoginID");
+                String username = resultset.getString("username");
+                String password = resultset.getString("password");
+                UserType userType = UserType.valueOf(resultset.getString("userType"));
+
+                User teacher = new User(loginID, username, password, userType);
+                allAdmins.add(teacher);
+            }
+        } catch (SQLException sqlException) {
+        }
+        return allAdmins;
     }
 
     /**
@@ -139,6 +162,39 @@ public class UserDAO {
     }
 
     /**
+     * Creating a new admin by inserting name, username, password and type of user.
+     * @param name
+     * @param username
+     * @param password
+     * @param userType
+     * @return a user type student
+     * @throws SQLException
+     */
+    public User createAdmin (String name, String username, String password, UserType userType) throws SQLException {
+        try (Connection connection = connector.getConnection()) {
+            String sql = "INSERT INTO Login (name, username, password, userType) VALUES (?,?,?,?);";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                preparedStatement.setString(1, name);
+                preparedStatement.setString(2, username);
+                preparedStatement.setString(3, password);
+                preparedStatement.setString(4, String.valueOf(userType.ADMINISTRATOR));
+                preparedStatement.execute();
+
+                ResultSet resultSet = preparedStatement.getGeneratedKeys();
+                int id = 0;
+                if (resultSet.next()) {
+                    id = resultSet.getInt(1);
+                }
+
+                User student = new User(id, name, username, password, userType.ADMINISTRATOR);
+                return student;
+            }
+        } catch (SQLServerException throwables) {
+        }
+        return null;
+    }
+
+    /**
      * Deletes a student by taking the id and where the userType equals student
      * @param id
      */
@@ -166,6 +222,25 @@ public class UserDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             preparedStatement.setString(2, String.valueOf(userType.TEACHER));
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Deletes an admin by taking the id and where the userType equals admin
+     * @param id
+     */
+    public void deleteAdmin(int id, UserType userType) {
+        try (Connection connection = connector.getConnection()) {
+            String sql = "DELETE FROM Login WHERE LoginID =? AND userType =?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.setString(2, String.valueOf(userType.ADMINISTRATOR));
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -215,6 +290,27 @@ public class UserDAO {
     }
 
     /**
+     * Edits an admin
+     * @param admin
+     * @throws Exception
+     */
+    public void editAdmin(User admin) throws Exception {
+        try (Connection connection = connector.getConnection()) {
+            String sql = "UPDATE Login SET name=? username=?, password=? WHERE LoginID=? AND userType='Administrator';";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, admin.getName());
+            preparedStatement.setString(2, admin.getUsername());
+            preparedStatement.setString(3, admin.getPassword());
+            preparedStatement.setInt(4, admin.getId());
+            preparedStatement.setString(5, String.valueOf(admin.getUsertype()));
+
+            if (preparedStatement.executeUpdate() != 1) {
+                throw new Exception("Could not edit admin");
+            }
+        }
+    }
+
+    /**
      * This method gets a login from the database and check if it is a student, teacher or administrator
      * @param user
      * @param pass
@@ -249,7 +345,7 @@ public class UserDAO {
         return null;
     }
 
-    public static void main(String[] args) throws IOException, SQLException {
+    public static void main(String[] args) throws IOException {
         UserDAO dao = new UserDAO();
         dao.deleteStudent(3, UserType.STUDENT);
         System.out.println(dao.getStudents());

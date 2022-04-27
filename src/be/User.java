@@ -5,12 +5,12 @@ import be.enums.UserType;
 
 
 public class User implements ILogin {
+
     private int id;
     private String name;
     private String username;
     private String password;
     private UserType userType;
-
 
     public User(int id, String name, String username, String password, UserType userType) {
         this.id = id;

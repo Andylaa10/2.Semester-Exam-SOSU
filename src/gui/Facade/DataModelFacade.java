@@ -20,7 +20,7 @@ public class DataModelFacade {
     }
 
     /**
-     * Get a list of student using the getStudents method from userModel
+     * Get a list of students using the getStudents method from userModel
      * @return
      * @throws SQLException
      */
@@ -35,6 +35,15 @@ public class DataModelFacade {
      */
     public List<User> getTeachers() throws SQLException {
         return userModel.getTeachers();
+    }
+
+    /**
+     * Get a list of admins using the getAdmins method from userModel
+     * @return
+     * @throws SQLException
+     */
+    public List<User> getAdmins() throws SQLException {
+        return userModel.getAdmins();
     }
 
     /**
@@ -64,6 +73,19 @@ public class DataModelFacade {
     }
 
     /**
+     * Creates an admin using the createAdmin method from userModel
+     * @param name
+     * @param username
+     * @param password
+     * @param userType
+     * @return
+     * @throws SQLException
+     */
+    public User createAdmin(String name, String username, String password, UserType userType) throws SQLException {
+        return userModel.createAdmin(name, username, password, userType);
+    }
+
+    /**
      * Deletes a student using the deleteStudent method from userModel
      * @param id
      * @param userType
@@ -82,6 +104,15 @@ public class DataModelFacade {
     }
 
     /**
+     * Deletes an admin using the deleteAdmin method from userModel
+     * @param id
+     * @param userType
+     */
+    public void deleteAdmin(int id, UserType userType){
+        userModel.deleteAdmin(id, userType);
+    }
+
+    /**
      * Edits a student using the editStudent method from userModel
      * @param student
      * @throws Exception
@@ -97,6 +128,15 @@ public class DataModelFacade {
      */
     public void editTeacher(User teacher) throws Exception {
         userModel.editTeacher(teacher);
+    }
+
+    /**
+     * Edits an admin using the editAdmin method from userModel
+     * @param admin
+     * @throws Exception
+     */
+    public void editAdmin(User admin) throws Exception {
+        userModel.editAdmin(admin);
     }
 
     /**
