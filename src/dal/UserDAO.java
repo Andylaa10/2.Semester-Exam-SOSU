@@ -86,8 +86,8 @@ public class UserDAO {
                 String password = resultset.getString("password");
                 UserType userType = UserType.valueOf(resultset.getString("userType"));
 
-                User teacher = new User(loginID, username, password, userType);
-                allAdmins.add(teacher);
+                User admin = new User(loginID, username, password, userType);
+                allAdmins.add(admin);
             }
         } catch (SQLException sqlException) {
         }
