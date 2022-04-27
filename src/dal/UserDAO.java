@@ -24,9 +24,10 @@ public class UserDAO {
         ArrayList<User> allStudents = new ArrayList<>();
 
         try (Connection connection = connector.getConnection()) {
-            String sql = "SELECT * FROM Login WHERE userType ='Student';";
+            String sql = "SELECT * FROM Login WHERE userType =?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, String.valueOf(UserType.STUDENT));
             ResultSet resultset = preparedStatement.executeQuery();
 
             while (resultset.next()) {
@@ -50,9 +51,10 @@ public class UserDAO {
     public List<User> getTeachers() {
         ArrayList<User> allTeachers = new ArrayList<>();
         try (Connection connection = connector.getConnection()) {
-            String sql = "SELECT * FROM Login WHERE userType ='Teacher' ;";
+            String sql = "SELECT * FROM Login WHERE userType =? ;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, String.valueOf(UserType.TEACHER));
             ResultSet resultset = preparedStatement.executeQuery();
             while (resultset.next()) {
                 int loginID = resultset.getInt("LoginID");
@@ -76,9 +78,10 @@ public class UserDAO {
         ArrayList<User> allAdmins = new ArrayList<>();
 
         try (Connection connection = connector.getConnection()) {
-            String sql = "SELECT * FROM Login WHERE userType ='Administrator' ;";
+            String sql = "SELECT * FROM Login WHERE userType =? ;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, String.valueOf(UserType.ADMINISTRATOR));
             ResultSet resultset = preparedStatement.executeQuery();
             while (resultset.next()) {
                 int loginID = resultset.getInt("LoginID");
@@ -86,8 +89,8 @@ public class UserDAO {
                 String password = resultset.getString("password");
                 UserType userType = UserType.valueOf(resultset.getString("userType"));
 
-                User teacher = new User(loginID, username, password, userType);
-                allAdmins.add(teacher);
+                User admin = new User(loginID, username, password, userType);
+                allAdmins.add(admin);
             }
         } catch (SQLException sqlException) {
         }
@@ -255,13 +258,13 @@ public class UserDAO {
      */
     public void editStudent(User student) throws Exception {
         try (Connection connection = connector.getConnection()) {
-            String sql = "UPDATE Login SET name=? username=?, password=? WHERE LoginID=? AND userType='Student';";
+            String sql = "UPDATE Login SET name=? username=?, password=? WHERE LoginID=? AND userType=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, student.getName());
             preparedStatement.setString(2, student.getUsername());
             preparedStatement.setString(3, student.getPassword());
             preparedStatement.setInt(4, student.getId());
-            preparedStatement.setString(5, String.valueOf(student.getUsertype()));
+            preparedStatement.setString(5, String.valueOf(UserType.STUDENT));
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception("Could not edit student");
             }
@@ -275,13 +278,13 @@ public class UserDAO {
      */
     public void editTeacher(User teacher) throws Exception {
         try (Connection connection = connector.getConnection()) {
-            String sql = "UPDATE Login SET name=? username=?, password=? WHERE LoginID=? AND userType='Student';";
+            String sql = "UPDATE Login SET name=? username=?, password=? WHERE LoginID=? AND userType=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, teacher.getName());
             preparedStatement.setString(2, teacher.getUsername());
             preparedStatement.setString(3, teacher.getPassword());
             preparedStatement.setInt(4, teacher.getId());
-            preparedStatement.setString(5, String.valueOf(teacher.getUsertype()));
+            preparedStatement.setString(5, String.valueOf(UserType.TEACHER));
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception("Could not edit teacher");
             }
@@ -295,13 +298,13 @@ public class UserDAO {
      */
     public void editAdmin(User admin) throws Exception {
         try (Connection connection = connector.getConnection()) {
-            String sql = "UPDATE Login SET name=? username=?, password=? WHERE LoginID=? AND userType='Administrator';";
+            String sql = "UPDATE Login SET name=? username=?, password=? WHERE LoginID=? AND userType=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, admin.getName());
             preparedStatement.setString(2, admin.getUsername());
             preparedStatement.setString(3, admin.getPassword());
             preparedStatement.setInt(4, admin.getId());
-            preparedStatement.setString(5, String.valueOf(admin.getUsertype()));
+            preparedStatement.setString(5, String.valueOf(UserType.ADMINISTRATOR));
 
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception("Could not edit admin");
@@ -346,7 +349,9 @@ public class UserDAO {
 
     public static void main(String[] args) throws IOException, SQLException {
         UserDAO dao = new UserDAO();
-        dao.createAdmin("admin", "admin", "admin", UserType.ADMINISTRATOR);
+        //dao.createAdmin("admin", "admin", "admin", UserType.ADMINISTRATOR);
         System.out.println(dao.getAdmins());
+        System.out.println(dao.getStudents());
+        System.out.println(dao.getTeachers());
     }
 }
