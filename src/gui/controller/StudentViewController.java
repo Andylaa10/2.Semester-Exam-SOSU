@@ -16,6 +16,7 @@ public class StudentViewController implements IController {
     private Label lblWelcome;
     @FXML
     private AnchorPane loginPane;
+
     @Override
     public void setUser(User user) throws SQLException, IOException {
         lblWelcome.setText("Welcome " + user.getName());
