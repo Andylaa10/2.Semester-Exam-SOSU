@@ -34,7 +34,7 @@ public class LoginMenuController{
         String username = txtFieldUsername.getText();
         String password = pField.getText();
         User user = facade.login(username, password);
-        if(user != null && user.getUsertype() == UserType.STUDENT){
+        if (user != null && user.getUsertype() == UserType.STUDENT) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage switcher = (Stage) btnLogin.getScene().getWindow();
@@ -43,7 +43,7 @@ public class LoginMenuController{
             controller.setUser(user);
             switcher.setTitle("Student");
             switcher.show();
-        } else if (user != null && user.getUsertype() == UserType.TEACHER){
+        } else if (user != null && user.getUsertype() == UserType.TEACHER) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/TeacherView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage switcher = (Stage) btnLogin.getScene().getWindow();
@@ -51,6 +51,15 @@ public class LoginMenuController{
             IController controller = loader.getController();
             controller.setUser(user);
             switcher.setTitle("Teacher");
+            switcher.show();
+        } else if (user != null && user.getUsertype() == UserType.ADMINISTRATOR) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/AdminView.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage switcher = (Stage) btnLogin.getScene().getWindow();
+            switcher.setScene(scene);
+            IController controller = loader.getController();
+            controller.setUser(user);
+            switcher.setTitle("Admin");
             switcher.show();
         }
     }
