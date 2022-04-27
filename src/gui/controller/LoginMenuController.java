@@ -43,8 +43,8 @@ public class LoginMenuController{
             controller.setUser(user);
             switcher.setTitle("Student");
             switcher.show();
-        } else if (user != null && user.getUsertype() == UserType.TEACHER) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/TeacherView.fxml"));
+        } else if (user != null && user.getUsertype() == UserType.TEACHER){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/NewTeacherView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage switcher = (Stage) btnLogin.getScene().getWindow();
             switcher.setScene(scene);

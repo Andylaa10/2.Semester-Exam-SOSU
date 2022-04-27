@@ -1,10 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TeacherViewController">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" stylesheets="@css/Main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TeacherViewController">
    <children>
-      <Label fx:id="lblWelcome" layoutX="273.0" layoutY="182.0" text="Welcome" />
+      <Circle layoutX="250.0" layoutY="213.0" radius="150.0" stroke="BLACK" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.04545454590609577" startY="0.5757575685327704">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.05426900461316109" green="0.5052631497383118" blue="0.0918518528342247" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Circle>
+      <ImageView fitHeight="173.0" fitWidth="273.0" layoutX="120.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/SOSU%20SIMULATION_free-file.png" />
+         </image>
+      </ImageView>
+      <Circle layoutX="120.0" layoutY="401.0" radius="49.0" stroke="BLACK" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.04545454590609577" startY="0.5757575685327704">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.05426900461316109" green="0.5052631497383118" blue="0.0918518528342247" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Circle>
+      <Circle layoutX="380.0" layoutY="396.0" radius="49.0" stroke="BLACK" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.04545454590609577" startY="0.8863636399760391">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.05426900461316109" green="0.5052631497383118" blue="0.0918518528342247" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Circle>
+      <Circle layoutX="250.0" layoutY="429.0" radius="49.0" stroke="BLACK" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="0.04545454590609577" startY="0.5757575685327704">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.05426900461316109" green="0.5052631497383118" blue="0.0918518528342247" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Circle>
+      <Button layoutX="334.0" layoutY="359.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="92.0" style="-fx-background-color: transparent;" text="Borgere">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button layoutX="79.0" layoutY="364.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="82.0" style="-fx-background-color: transparent;" text="Elever">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button layoutX="212.0" layoutY="392.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="74.0" style="-fx-background-color: transparent;" text="Sager">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Label layoutX="161.0" text="Lærer" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Copperplate Gothic Bold" size="50.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Label>
+      <Label layoutX="434.0" layoutY="465.0" text="Log Ud" textFill="#0e7338" underline="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

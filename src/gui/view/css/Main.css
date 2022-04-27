@@ -15,12 +15,13 @@ Redefine of the background color, to a dark blue color.
     -fx-control-inner-background-alt: derive(-fx-control-inner-background, 2.5%);
 
     /* text colors depending on background's brightness */
-    -fx-light-text-color: rgb(255, 255, 255);
+   // -fx-light-text-color: rgb(255, 255, 255);
+    //-fx-text-fill: white;
 
 
     /* A bright blue for highlighting/accenting objects.  For example: selected
      * text; selected items in menus, lists, trees, and tables; progress bars */
-    -fx-accent: #b5eadc;
+    -fx-accent: #044d39;
 
     /* color of non-focused yet selected elements */
     -fx-selection-bar-non-focused: rgb(255, 255, 255);
@@ -30,15 +31,22 @@ Redefine of the background color, to a dark blue color.
     -fx-background-color: #ce8640;
 }
 .table-row-cell:selected .text {
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #3ce5bc;
 }
 
+.button:hover{
+    -fx-background-color: rgb(0, 171, 208);
+}
+
+.button{
+    -fx-background-color:  #044d39;
+}
 .table-row-cell {
     -fx-background-color: transparent;
 }
 /* Keep prompt invisible when focused (above color fix overrides it) */
 .text-input:focused {
-    -fx-prompt-text-fill: rgba(203, 30, 30, 0.5);
+    -fx-prompt-text-fill: rgb(83, 208, 156);
 }
 .text-field{
     -fx-prompt-text-fill: rgba(255, 255, 255, 0.50);
