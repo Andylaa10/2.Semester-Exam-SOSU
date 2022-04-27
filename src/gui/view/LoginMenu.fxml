@@ -7,15 +7,20 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LoginMenuController">
+<AnchorPane prefHeight="535.0" prefWidth="800.0" stylesheets="@css/Main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LoginMenuController">
    <children>
-      <ImageView fitHeight="234.0" fitWidth="525.0" layoutX="488.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="612.0" fitWidth="800.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/1j7a2705.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="141.0" fitWidth="303.0" layoutX="248.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/SOSU%20SIMULATION_free-file.png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtFieldUsername" layoutX="675.0" layoutY="277.0" promptText="Username" />
-      <PasswordField fx:id="pField" layoutX="676.0" layoutY="350.0" promptText="Password" />
-      <Button fx:id="btnLogin" layoutX="714.0" layoutY="453.0" mnemonicParsing="false" onAction="#Login" text="Login" />
+      <TextField fx:id="txtFieldUsername" layoutX="309.0" layoutY="281.0" prefHeight="37.0" prefWidth="181.0" promptText="Username" />
+      <PasswordField fx:id="pField" layoutX="309.0" layoutY="343.0" prefHeight="38.0" prefWidth="182.0" promptText="Password" />
+      <Button fx:id="btnLogin" layoutX="528.0" layoutY="439.0" mnemonicParsing="false" onAction="#Login" text="Login" />
    </children>
 </AnchorPane>
