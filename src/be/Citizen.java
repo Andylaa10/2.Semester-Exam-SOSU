@@ -1,8 +1,9 @@
 package be;
 
 public class Citizen {
+
     private int id;
-    private String cprNr;
+    private String ssn;
     private String firstName;
     private String lastName;
     private int age;

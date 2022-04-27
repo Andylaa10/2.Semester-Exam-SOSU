@@ -35,6 +35,15 @@ public class UserModel {
     }
 
     /**
+     * Get a list of admins using the getAdmins method from userManager
+     * @return
+     * @throws SQLException
+     */
+    public List<User> getAdmins() throws SQLException {
+        return userManager.getAdmins();
+    }
+
+    /**
      * Creates a student using the createStudent method from userManager
      * @param name
      * @param username
@@ -61,6 +70,19 @@ public class UserModel {
     }
 
     /**
+     * Creates an admin using the createAdmin method from userManager
+     * @param name
+     * @param username
+     * @param password
+     * @param userType
+     * @return
+     * @throws SQLException
+     */
+    public User createAdmin(String name, String username, String password, UserType userType) throws SQLException {
+        return userManager.createAdmin(name, username, password, userType);
+    }
+
+    /**
      * Deletes a student using the deleteStudent method from userManager
      * @param id
      * @param userType
@@ -79,6 +101,15 @@ public class UserModel {
     }
 
     /**
+     * Deletes an admin using the deleteAdmin method from userManager
+     * @param id
+     * @param userType
+     */
+    public void deleteAdmin(int id, UserType userType){
+        userManager.deleteAdmin(id, userType);
+    }
+
+    /**
      * Edits a student using the editStudent method from userManager
      * @param student
      * @throws Exception
@@ -94,6 +125,15 @@ public class UserModel {
      */
     public void editTeacher(User teacher) throws Exception {
         userManager.editTeacher(teacher);
+    }
+
+    /**
+     * Edits an admin using the editAdmin method from userManager
+     * @param admin
+     * @throws Exception
+     */
+    public void editAdmin(User admin) throws Exception {
+        userManager.editAdmin(admin);
     }
 
     /**
