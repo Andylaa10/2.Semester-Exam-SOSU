@@ -344,9 +344,9 @@ public class UserDAO {
         return null;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
         UserDAO dao = new UserDAO();
-        dao.deleteStudent(3, UserType.STUDENT);
-        System.out.println(dao.getStudents());
+        dao.createAdmin("admin", "admin", "admin", UserType.ADMINISTRATOR);
+        System.out.println(dao.getAdmins());
     }
 }
