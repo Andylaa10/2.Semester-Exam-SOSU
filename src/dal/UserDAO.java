@@ -49,7 +49,6 @@ public class UserDAO {
      */
     public List<User> getTeachers() {
         ArrayList<User> allTeachers = new ArrayList<>();
-
         try (Connection connection = connector.getConnection()) {
             String sql = "SELECT * FROM Login WHERE userType ='Teacher' ;";
 

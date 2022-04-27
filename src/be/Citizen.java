@@ -6,8 +6,8 @@ public class Citizen {
     private String ssn;
     private String firstName;
     private String lastName;
-    private int age;
     private String sex;
     private String address;
+    private FunctionalAbilities abilities;
 
 }
