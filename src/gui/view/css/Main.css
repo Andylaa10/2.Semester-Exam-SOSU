@@ -3,7 +3,7 @@ Redefine of the background color, to a dark blue color.
  */
 
 .root {
-    -fx-base: rgb(4, 77, 57);
+    -fx-base: rgb(12, 119, 88);
     -fx-background: rgb(169, 236, 232);
 
     /* make controls like buttons a little bit lighter for a relaxed design effect */
@@ -20,7 +20,7 @@ Redefine of the background color, to a dark blue color.
 
     /* A bright blue for highlighting/accenting objects.  For example: selected
      * text; selected items in menus, lists, trees, and tables; progress bars */
-    -fx-accent: #ce8640;
+    -fx-accent: #b5eadc;
 
     /* color of non-focused yet selected elements */
     -fx-selection-bar-non-focused: rgb(255, 255, 255);
@@ -38,7 +38,7 @@ Redefine of the background color, to a dark blue color.
 }
 /* Keep prompt invisible when focused (above color fix overrides it) */
 .text-input:focused {
-    -fx-prompt-text-fill: rgba(255, 255, 255, 0.50);
+    -fx-prompt-text-fill: rgba(203, 30, 30, 0.5);
 }
 .text-field{
     -fx-prompt-text-fill: rgba(255, 255, 255, 0.50);
