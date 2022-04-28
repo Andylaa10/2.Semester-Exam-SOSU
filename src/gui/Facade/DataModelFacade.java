@@ -112,7 +112,7 @@ public class DataModelFacade {
      * @param id
      * @param userType
      */
-    public void deleteStudent(int id, UserType userType){
+    public void deleteStudent(int id, UserType userType) throws SQLException {
         userModel.deleteStudent(id, userType);
     }
 
@@ -121,7 +121,7 @@ public class DataModelFacade {
      * @param id
      * @param userType
      */
-    public void deleteTeacher(int id, UserType userType){
+    public void deleteTeacher(int id, UserType userType) throws SQLException {
         userModel.deleteTeacher(id, userType);
     }
 
@@ -130,7 +130,7 @@ public class DataModelFacade {
      * @param id
      * @param userType
      */
-    public void deleteAdmin(int id, UserType userType){
+    public void deleteAdmin(int id, UserType userType) throws SQLException {
         userModel.deleteAdmin(id, userType);
     }
 
@@ -138,7 +138,7 @@ public class DataModelFacade {
      * Deletes a super admin using the deleteSuperAdmin method from superAdminModel
      * @param id
      */
-    public void deleteSuperAdmin(int id) {
+    public void deleteSuperAdmin(int id) throws SQLException {
         superAdminModel.deleteSuperAdmin(id);
     }
 

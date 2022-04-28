@@ -70,6 +70,7 @@ public class LoginMenuController{
             switcher.setTitle("Super Admin");
             switcher.show();
         } else {
+            //TODO ADD PROPER ERROR HANDLING
             System.out.println("Something probably went wrong lol");
         }
     }

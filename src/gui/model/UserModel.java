@@ -89,7 +89,7 @@ public class UserModel {
      * @param id
      * @param userType
      */
-    public void deleteStudent(int id, UserType userType){
+    public void deleteStudent(int id, UserType userType) throws SQLException {
         userManager.deleteStudent(id, userType);
     }
 
@@ -98,7 +98,7 @@ public class UserModel {
      * @param id
      * @param userType
      */
-    public void deleteTeacher(int id, UserType userType){
+    public void deleteTeacher(int id, UserType userType) throws SQLException {
         userManager.deleteTeacher(id, userType);
     }
 
@@ -107,7 +107,7 @@ public class UserModel {
      * @param id
      * @param userType
      */
-    public void deleteAdmin(int id, UserType userType){
+    public void deleteAdmin(int id, UserType userType) throws SQLException {
         userManager.deleteAdmin(id, userType);
     }
 

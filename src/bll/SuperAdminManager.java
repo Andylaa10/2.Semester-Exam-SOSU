@@ -33,7 +33,7 @@ public class SuperAdminManager {
      * Deletes a super admin using the deleteSuperAdmin method in superAdminDAO
      * @param id
      */
-    public void deleteSuperAdmin(int id){
+    public void deleteSuperAdmin(int id) throws SQLException {
         superAdminDAO.deleteSuperAdmin(id);
     }
 

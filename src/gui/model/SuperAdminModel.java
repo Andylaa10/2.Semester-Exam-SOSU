@@ -33,7 +33,7 @@ public class SuperAdminModel {
      * Deletes a super admin using the deleteSuperAdmin method from superAdminManager
      * @param id
      */
-    public void deleteSuperAdmin(int id){
+    public void deleteSuperAdmin(int id) throws SQLException {
         superAdminManager.deleteSuperAdmin(id);
     }
 

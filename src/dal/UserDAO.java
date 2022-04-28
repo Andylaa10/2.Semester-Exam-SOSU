@@ -212,7 +212,7 @@ public class UserDAO {
      * Deletes a student by taking the id and where the userType equals student
      * @param id
      */
-    public void deleteStudent(int id, UserType userType) {
+    public void deleteStudent(int id, UserType userType) throws SQLException {
         try (Connection connection = connector.getConnection()) {
             String sql = "DELETE FROM Login WHERE LoginID =? AND userType =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -220,9 +220,7 @@ public class UserDAO {
             preparedStatement.setString(2, String.valueOf(userType.STUDENT));
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+            throw new SQLException();
         }
     }
 
@@ -230,7 +228,7 @@ public class UserDAO {
      * Deletes a teacher by taking the id and where the userType equals teacher
      * @param id
      */
-    public void deleteTeacher(int id, UserType userType) {
+    public void deleteTeacher(int id, UserType userType) throws SQLException {
         try (Connection connection = connector.getConnection()) {
             String sql = "DELETE FROM Login WHERE LoginID =? AND userType =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -238,9 +236,7 @@ public class UserDAO {
             preparedStatement.setString(2, String.valueOf(userType.TEACHER));
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+            throw new SQLException();
         }
     }
 
@@ -248,7 +244,7 @@ public class UserDAO {
      * Deletes an admin by taking the id and where the userType equals admin
      * @param id
      */
-    public void deleteAdmin(int id, UserType userType) {
+    public void deleteAdmin(int id, UserType userType) throws SQLException {
         try (Connection connection = connector.getConnection()) {
             String sql = "DELETE FROM Login WHERE LoginID =? AND userType =?;";
 
@@ -257,9 +253,7 @@ public class UserDAO {
             preparedStatement.setString(2, String.valueOf(userType.ADMINISTRATOR));
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+            throw new SQLException();
         }
     }
 

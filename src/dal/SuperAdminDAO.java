@@ -38,16 +38,14 @@ public class SuperAdminDAO {
     }
 
 
-    public void deleteSuperAdmin(int id) {
+    public void deleteSuperAdmin(int id) throws SQLException {
         try (Connection connection = connector.getConnection()) {
             String sql = "DELETE FROM SuperAdmin WHERE superAdminID =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+            throw new SQLException();
         }
     }
 
