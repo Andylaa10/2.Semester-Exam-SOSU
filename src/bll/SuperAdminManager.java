@@ -1,5 +1,6 @@
 package bll;
 
+import be.School;
 import be.SuperAdmin;
 import be.User;
 import be.enums.UserType;
@@ -29,8 +30,20 @@ public class SuperAdminManager {
         superAdminDAO.editSuperAdmin(superAdmin);
     }
 
-    public SuperAdmin superAdminLogin(String username, String password){
+    public SuperAdmin superAdminLogin(String username, String password) throws SQLException {
         return superAdminDAO.superAdminLogin(username, password);
+    }
+
+    public School createSchool(String schoolName) throws SQLException {
+        return superAdminDAO.createSchool(schoolName);
+    }
+
+    public void deleteSchool(int schoolID) {
+        superAdminDAO.deleteSchool(schoolID);
+    }
+
+    public void editSchool(School school) throws Exception {
+        superAdminDAO.editSchool(school);
     }
 
 }

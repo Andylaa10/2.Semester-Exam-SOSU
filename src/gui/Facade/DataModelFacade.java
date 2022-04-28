@@ -1,5 +1,6 @@
 package gui.Facade;
 
+import be.School;
 import be.SuperAdmin;
 import be.User;
 import be.enums.UserType;
@@ -166,7 +167,21 @@ public class DataModelFacade {
         return userModel.userLogin(username, password);
     }
 
-    public SuperAdmin superAdminLogin(String username, String password){
+    public SuperAdmin superAdminLogin(String username, String password) throws SQLException {
         return superAdminModel.superAdminLogin(username, password);
     }
+
+    public School createSchool(String schoolName) throws SQLException {
+        return superAdminModel.createSchool(schoolName);
+    }
+
+    public void deleteSchool(int schoolID) {
+        superAdminModel.deleteSchool(schoolID);
+    }
+
+    public void editSchool(School school) throws Exception {
+        superAdminModel.editSchool(school);
+    }
+
+
 }

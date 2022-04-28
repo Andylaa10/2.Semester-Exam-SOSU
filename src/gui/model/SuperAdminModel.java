@@ -1,5 +1,6 @@
 package gui.model;
 
+import be.School;
 import be.SuperAdmin;
 import bll.SuperAdminManager;
 import dal.SuperAdminDAO;
@@ -28,8 +29,22 @@ public class SuperAdminModel {
         superAdminManager.editSuperAdmin(superAdmin);
     }
 
-    public SuperAdmin superAdminLogin(String username, String password){
+    public SuperAdmin superAdminLogin(String username, String password) throws SQLException {
         return superAdminManager.superAdminLogin(username, password);
     }
+
+    public School createSchool(String schoolName) throws SQLException {
+        return superAdminManager.createSchool(schoolName);
+    }
+
+    public void deleteSchool(int schoolID) {
+        superAdminManager.deleteSchool(schoolID);
+    }
+
+    public void editSchool(School school) throws Exception {
+        superAdminManager.editSchool(school);
+    }
+
+
 
 }

@@ -1,8 +1,7 @@
 package dal;
 
+import be.School;
 import be.SuperAdmin;
-import be.User;
-import be.enums.UserType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 
@@ -16,8 +15,6 @@ public class SuperAdminDAO {
 
     public SuperAdminDAO() throws IOException {
     }
-
-
 
     public SuperAdmin createSuperAdmin (String username, String password) throws SQLException {
         try (Connection connection = connector.getConnection()) {
@@ -69,7 +66,7 @@ public class SuperAdminDAO {
     }
 
 
-    public SuperAdmin superAdminLogin(String user, String pass) {
+    public SuperAdmin superAdminLogin(String user, String pass) throws SQLException {
         String sql = "SELECT * FROM SuperAdmin WHERE username =? AND password =?;";
         try(Connection connection = connector.getConnection()){
             PreparedStatement st = connection.prepareStatement(sql);
@@ -85,11 +82,56 @@ public class SuperAdminDAO {
                     return null;
                 }
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        } {
-            return null;
+            throw new SQLException();
         }
     }
+
+    public School createSchool(String schoolName) throws SQLException {
+        try (Connection connection = connector.getConnection()) {
+            String sql = "INSERT INTO School (name) VALUES (?);";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                preparedStatement.setString(1, schoolName);
+                preparedStatement.execute();
+
+                ResultSet resultSet = preparedStatement.getGeneratedKeys();
+                int id = 0;
+                if (resultSet.next()) {
+                    id = resultSet.getInt(1);
+                }
+
+                School school = new School(id, schoolName);
+                return school;
+            }
+        } catch (SQLServerException throwables) {
+        }
+        return null;
+    }
+
+    public void deleteSchool(int schoolID) {
+        try (Connection connection = connector.getConnection()) {
+            String sql = "DELETE FROM School WHERE schoolID =?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, schoolID);
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editSchool(School school) throws Exception {
+        try (Connection connection = connector.getConnection()) {
+            String sql = "UPDATE School SET name=? WHERE schoolID=?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, school.getSchoolName());
+            preparedStatement.setInt(2, school.getSchoolID());
+            if (preparedStatement.executeUpdate() != 1) {
+                throw new Exception("Could not edit school name");
+            }
+        }
+    }
+
 
 
     /**
@@ -100,8 +142,10 @@ public class SuperAdminDAO {
      */
     public static void main(String[] args) throws IOException, SQLException {
         SuperAdminDAO superAdminDAO = new SuperAdminDAO();
+        superAdminDAO.createSchool("SOSU Esbjerg");
+        //superAdminDAO.deleteSchool(1);
         //superAdminDAO.createSuperAdmin("superadmin", "superadmin");
-        superAdminDAO.deleteSuperAdmin(2);
+        //superAdminDAO.deleteSuperAdmin(1);
     }
 
 }
