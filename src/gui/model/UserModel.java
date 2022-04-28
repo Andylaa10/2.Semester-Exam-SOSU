@@ -3,7 +3,6 @@ package gui.model;
 import be.User;
 import be.enums.UserType;
 import bll.UserManager;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;

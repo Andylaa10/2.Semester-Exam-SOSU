@@ -2,7 +2,6 @@ package gui.controller;
 
 import be.User;
 import gui.controller.Interface.IController;
-
 import java.io.IOException;
 import java.sql.SQLException;
 

@@ -9,7 +9,6 @@ import gui.model.CaseModel;
 import gui.model.CitizenModel;
 import gui.model.SuperAdminModel;
 import gui.model.UserModel;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;

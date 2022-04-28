@@ -2,7 +2,6 @@ package gui.model;
 
 import be.Case;
 import bll.CaseManager;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;

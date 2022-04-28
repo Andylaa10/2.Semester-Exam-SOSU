@@ -3,8 +3,6 @@ package gui.model;
 import be.School;
 import be.SuperAdmin;
 import bll.SuperAdminManager;
-import dal.SuperAdminDAO;
-
 import java.io.IOException;
 import java.sql.SQLException;
 

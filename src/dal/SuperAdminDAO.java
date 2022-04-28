@@ -4,7 +4,6 @@ import be.School;
 import be.SuperAdmin;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
-
 import java.io.IOException;
 import java.sql.*;
 
