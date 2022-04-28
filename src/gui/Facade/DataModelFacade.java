@@ -54,41 +54,44 @@ public class DataModelFacade {
 
     /**
      * Creates a student using the createStudent method from userModel
-     * @param name
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      * @return
      * @throws SQLException
      */
-    public User createStudent(String name, String username, String password, UserType userType) throws SQLException {
-        return userModel.createStudent(name, username, password, userType);
+    public User createStudent(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
+        return userModel.createStudent(firstName, lastName, username, password, userType);
     }
 
     /**
      * Creates a teacher using the createTeacher method from userModel
-     * @param name
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      * @return
      * @throws SQLException
      */
-    public User createTeacher(String name, String username, String password, UserType userType) throws SQLException {
-        return userModel.createTeacher(name, username, password, userType);
+    public User createTeacher(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
+        return userModel.createTeacher(firstName, lastName, username, password, userType);
     }
 
     /**
      * Creates an admin using the createAdmin method from userModel
-     * @param name
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      * @return
      * @throws SQLException
      */
-    public User createAdmin(String name, String username, String password, UserType userType) throws SQLException {
-        return userModel.createAdmin(name, username, password, userType);
+    public User createAdmin(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
+        return userModel.createAdmin(firstName, lastName, username, password, userType);
     }
 
     public SuperAdmin createSuperAdmin(String username, String password) throws SQLException {

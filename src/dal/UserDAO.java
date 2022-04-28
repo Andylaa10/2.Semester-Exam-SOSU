@@ -32,11 +32,13 @@ public class UserDAO {
 
             while (resultset.next()) {
                 int loginID = resultset.getInt("LoginID");
+                String firstName = resultset.getString("firstName");
+                String lastName = resultset.getString("lastName");
                 String username = resultset.getString("username");
                 String password = resultset.getString("password");
                 UserType userType = UserType.valueOf(resultset.getString("userType"));
 
-                User student = new User(loginID, username, password, userType);
+                User student = new User(loginID, firstName, lastName, username, password, userType);
                 allStudents.add(student);
             }
         } catch (SQLException sqlException) {
@@ -58,11 +60,13 @@ public class UserDAO {
             ResultSet resultset = preparedStatement.executeQuery();
             while (resultset.next()) {
                 int loginID = resultset.getInt("LoginID");
+                String firstName = resultset.getString("firstName");
+                String lastName = resultset.getString("lastName");
                 String username = resultset.getString("username");
                 String password = resultset.getString("password");
                 UserType userType = UserType.valueOf(resultset.getString("userType"));
 
-                User teacher = new User(loginID, username, password, userType);
+                User teacher = new User(loginID, firstName, lastName, username, password, userType);
                 allTeachers.add(teacher);
             }
         } catch (SQLException sqlException) {
@@ -85,11 +89,13 @@ public class UserDAO {
             ResultSet resultset = preparedStatement.executeQuery();
             while (resultset.next()) {
                 int loginID = resultset.getInt("LoginID");
+                String firstName = resultset.getString("firstName");
+                String lastName = resultset.getString("lastName");
                 String username = resultset.getString("username");
                 String password = resultset.getString("password");
                 UserType userType = UserType.valueOf(resultset.getString("userType"));
 
-                User admin = new User(loginID, username, password, userType);
+                User admin = new User(loginID, firstName, lastName, username, password, userType);
                 allAdmins.add(admin);
             }
         } catch (SQLException sqlException) {
@@ -98,22 +104,24 @@ public class UserDAO {
     }
 
     /**
-     * Creating a new user, type student by inserting name, username, password and type of user.
-     * @param name
+     * Creating a new student, by inserting first name, last name, username, password and type of user.
+     * @param firstname
+     * @param lastName
      * @param username
      * @param password
      * @param userType
-     * @return a user type student
+     * @return
      * @throws SQLException
      */
-    public User createStudent (String name, String username, String password, UserType userType) throws SQLException {
+    public User createStudent (String firstname, String lastName, String username, String password, UserType userType) throws SQLException {
         try (Connection connection = connector.getConnection()) {
-            String sql = "INSERT INTO Login (name, username, password, userType) VALUES (?,?,?,?);";
+            String sql = "INSERT INTO Login (firstName, lastName, username, password, userType) VALUES (?,?,?,?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                preparedStatement.setString(1, name);
-                preparedStatement.setString(2, username);
-                preparedStatement.setString(3, password);
-                preparedStatement.setString(4, String.valueOf(userType.STUDENT));
+                preparedStatement.setString(1, firstname);
+                preparedStatement.setString(2, lastName);
+                preparedStatement.setString(3, username);
+                preparedStatement.setString(4, password);
+                preparedStatement.setString(5, String.valueOf(userType.STUDENT));
                 preparedStatement.execute();
 
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -122,7 +130,7 @@ public class UserDAO {
                     id = resultSet.getInt(1);
                 }
 
-                User student = new User(id, name, username, password, userType.STUDENT);
+                User student = new User(id, firstname, lastName, username, password, userType.STUDENT);
                 return student;
             }
         } catch (SQLServerException throwables) {
@@ -131,22 +139,24 @@ public class UserDAO {
     }
 
     /**
-     * Creating a new user, type teacher by inserting name, username, password and type of user.
-     * @param name
+     * Creating a new user, type teacher by inserting first name, last name, username, password and type of user.
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      * @return a user type teacher
      * @throws SQLException
      */
-    public User createTeacher (String name, String username, String password, UserType userType) throws SQLException {
+    public User createTeacher (String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
         try (Connection connection = connector.getConnection()) {
-            String sql = "INSERT INTO Login (name, username, password, userType) VALUES (?,?,?,?);";
+            String sql = "INSERT INTO Login (firstName, lastName, username, password, userType) VALUES (?,?,?,?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                preparedStatement.setString(1, name);
-                preparedStatement.setString(2, username);
-                preparedStatement.setString(3, password);
-                preparedStatement.setString(4, String.valueOf(userType.TEACHER));
+                preparedStatement.setString(1, firstName);
+                preparedStatement.setString(2, lastName);
+                preparedStatement.setString(3, username);
+                preparedStatement.setString(4, password);
+                preparedStatement.setString(5, String.valueOf(userType.TEACHER));
                 preparedStatement.execute();
 
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -155,8 +165,8 @@ public class UserDAO {
                     id = resultSet.getInt(1);
                 }
 
-                User student = new User(id, name, username, password, userType.TEACHER);
-                return student;
+                User teacher = new User(id, firstName, lastName, username, password, userType.TEACHER);
+                return teacher;
             }
         } catch (SQLServerException throwables) {
         }
@@ -164,22 +174,24 @@ public class UserDAO {
     }
 
     /**
-     * Creating a new admin by inserting name, username, password and type of user.
-     * @param name
+     * Creating a new admin, type teacher by inserting first name, last name, username, password and type of user.
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
-     * @return a user type student
+     * @return a user type admin
      * @throws SQLException
      */
-    public User createAdmin (String name, String username, String password, UserType userType) throws SQLException {
+    public User createAdmin (String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
         try (Connection connection = connector.getConnection()) {
-            String sql = "INSERT INTO Login (name, username, password, userType) VALUES (?,?,?,?);";
+            String sql = "INSERT INTO Login (firstName, lastName, username, password, userType) VALUES (?,?,?,?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                preparedStatement.setString(1, name);
-                preparedStatement.setString(2, username);
-                preparedStatement.setString(3, password);
-                preparedStatement.setString(4, String.valueOf(userType.ADMINISTRATOR));
+                preparedStatement.setString(1, firstName);
+                preparedStatement.setString(2, lastName);
+                preparedStatement.setString(3, username);
+                preparedStatement.setString(4, password);
+                preparedStatement.setString(5, String.valueOf(userType.ADMINISTRATOR));
                 preparedStatement.execute();
 
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -188,8 +200,8 @@ public class UserDAO {
                     id = resultSet.getInt(1);
                 }
 
-                User student = new User(id, name, username, password, userType.ADMINISTRATOR);
-                return student;
+                User admin = new User(id, firstName, lastName, username, password, userType.ADMINISTRATOR);
+                return admin;
             }
         } catch (SQLServerException throwables) {
         }
@@ -258,13 +270,14 @@ public class UserDAO {
      */
     public void editStudent(User student) throws Exception {
         try (Connection connection = connector.getConnection()) {
-            String sql = "UPDATE Login SET name=? username=?, password=? WHERE LoginID=? AND userType=?;";
+            String sql = "UPDATE Login SET firstName=?, lastName=?, username=?, password=? WHERE LoginID=? AND userType=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, student.getName());
-            preparedStatement.setString(2, student.getUsername());
-            preparedStatement.setString(3, student.getPassword());
-            preparedStatement.setInt(4, student.getId());
-            preparedStatement.setString(5, String.valueOf(UserType.STUDENT));
+            preparedStatement.setString(1, student.getFirstName());
+            preparedStatement.setString(2, student.getLastName());
+            preparedStatement.setString(3, student.getUsername());
+            preparedStatement.setString(4, student.getPassword());
+            preparedStatement.setInt(5, student.getId());
+            preparedStatement.setString(6, String.valueOf(UserType.STUDENT));
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception("Could not edit student");
             }
@@ -278,13 +291,14 @@ public class UserDAO {
      */
     public void editTeacher(User teacher) throws Exception {
         try (Connection connection = connector.getConnection()) {
-            String sql = "UPDATE Login SET name=? username=?, password=? WHERE LoginID=? AND userType=?;";
+            String sql = "UPDATE Login SET firstName=?, lastName=?, username=?, password=? WHERE LoginID=? AND userType=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, teacher.getName());
-            preparedStatement.setString(2, teacher.getUsername());
-            preparedStatement.setString(3, teacher.getPassword());
-            preparedStatement.setInt(4, teacher.getId());
-            preparedStatement.setString(5, String.valueOf(UserType.TEACHER));
+            preparedStatement.setString(1, teacher.getFirstName());
+            preparedStatement.setString(2, teacher.getLastName());
+            preparedStatement.setString(3, teacher.getUsername());
+            preparedStatement.setString(4, teacher.getPassword());
+            preparedStatement.setInt(5, teacher.getId());
+            preparedStatement.setString(6, String.valueOf(UserType.TEACHER));
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception("Could not edit teacher");
             }
@@ -298,13 +312,14 @@ public class UserDAO {
      */
     public void editAdmin(User admin) throws Exception {
         try (Connection connection = connector.getConnection()) {
-            String sql = "UPDATE Login SET name=? username=?, password=? WHERE LoginID=? AND userType=?;";
+            String sql = "UPDATE Login SET firstName=?, lastName=?, username=?, password=? WHERE LoginID=? AND userType=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, admin.getName());
-            preparedStatement.setString(2, admin.getUsername());
-            preparedStatement.setString(3, admin.getPassword());
-            preparedStatement.setInt(4, admin.getId());
-            preparedStatement.setString(5, String.valueOf(UserType.ADMINISTRATOR));
+            preparedStatement.setString(1, admin.getFirstName());
+            preparedStatement.setString(2, admin.getLastName());
+            preparedStatement.setString(3, admin.getUsername());
+            preparedStatement.setString(4, admin.getPassword());
+            preparedStatement.setInt(5, admin.getId());
+            preparedStatement.setString(6, String.valueOf(UserType.ADMINISTRATOR));
 
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception("Could not edit admin");
@@ -327,16 +342,17 @@ public class UserDAO {
             ResultSet rs = st.executeQuery();
             if (rs.next()){
                 int id = rs.getInt("LoginID");
-                String name = rs.getString("name");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
                 UserType userType = UserType.valueOf(rs.getString("userType"));
                 if (userType == UserType.STUDENT){
-                    return new User(id, name, username, password, userType);
+                    return new User(id, firstName, lastName, username, password, userType);
                 } else if (userType == UserType.TEACHER){
-                    return new User(id, name, username, password, userType);
+                    return new User(id, firstName, lastName, username, password, userType);
                 } else if (userType == UserType.ADMINISTRATOR) {
-                    return new User(id, name, username, password, userType);
+                    return new User(id, firstName, lastName, username, password, userType);
                 }else {
                     return null;
                 }
@@ -349,9 +365,12 @@ public class UserDAO {
 
     public static void main(String[] args) throws IOException, SQLException {
         UserDAO dao = new UserDAO();
-        //dao.createAdmin("admin", "admin", "admin", UserType.ADMINISTRATOR);
+        dao.createAdmin("John", "Johnson", "John", "1", UserType.ADMINISTRATOR);
+        //dao.createTeacher("Kim", "Larsen", "Kim", "1", UserType.TEACHER);
+        //dao.createStudent("andy", "lam", "Andy", "1", UserType.STUDENT);
+        //dao.createStudent("Kristian", "Hollænder", "kris",  "1", UserType.STUDENT);
         System.out.println(dao.getAdmins());
-        System.out.println(dao.getStudents());
-        System.out.println(dao.getTeachers());
+        //System.out.println(dao.getStudents());
+        //System.out.println(dao.getTeachers());
     }
 }

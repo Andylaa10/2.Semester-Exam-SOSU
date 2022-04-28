@@ -2,7 +2,7 @@ package be.enums;
 
 public enum FunctionalEnum {
     /**
-     * These value is based on functional abilities
+     * These values is based on functional abilities
      */
     NO_LIMIT(0), LIGHT_LIMIT(1),
     MODERATE_LIMIT(2), SEVERE_LIMIT(3),

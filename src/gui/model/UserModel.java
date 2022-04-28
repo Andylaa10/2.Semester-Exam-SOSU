@@ -45,41 +45,44 @@ public class UserModel {
 
     /**
      * Creates a student using the createStudent method from userManager
-     * @param name
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      * @return
      * @throws SQLException
      */
-    public User createStudent(String name, String username, String password, UserType userType) throws SQLException {
-        return userManager.createStudent(name, username, password, userType);
+    public User createStudent(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
+        return userManager.createStudent(firstName, lastName, username, password, userType);
     }
 
     /**
      * Creates a teacher using the createTeacher method from userManager
-     * @param name
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      * @return
      * @throws SQLException
      */
-    public User createTeacher(String name, String username, String password, UserType userType) throws SQLException {
-        return userManager.createTeacher(name, username, password, userType);
+    public User createTeacher(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
+        return userManager.createTeacher(firstName, lastName, username, password, userType);
     }
 
     /**
      * Creates an admin using the createAdmin method from userManager
-     * @param name
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      * @return
      * @throws SQLException
      */
-    public User createAdmin(String name, String username, String password, UserType userType) throws SQLException {
-        return userManager.createAdmin(name, username, password, userType);
+    public User createAdmin(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
+        return userManager.createAdmin(firstName, lastName, username, password, userType);
     }
 
     /**

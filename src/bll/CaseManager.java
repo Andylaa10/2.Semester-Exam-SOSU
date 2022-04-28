@@ -1,0 +1,40 @@
+package bll;
+
+import be.Case;
+import be.User;
+import be.enums.UserType;
+import dal.CaseDAO;
+
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+public class CaseManager {
+
+    private CaseDAO caseDAO;
+
+    public CaseManager() throws IOException {
+        caseDAO = new CaseDAO();
+    }
+
+    /**
+     * Get a list of case using the getCases method from caseDAO
+     * @return
+     * @throws SQLException
+     */
+    public List<Case> getCases() throws SQLException {
+        return caseDAO.getCases();
+    }
+
+    /**
+     * Creates a case using the createCase method from caseDAO
+     * @param name
+     * @param date
+     * @param info
+     * @return
+     * @throws SQLException
+     */
+    public Case createCase(String name, String date, String info) throws SQLException {
+        return caseDAO.createCase(name, date, info);
+    }
+}

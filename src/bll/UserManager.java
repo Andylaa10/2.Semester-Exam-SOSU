@@ -43,42 +43,45 @@ public class UserManager {
     }
 
     /**
-     * Creates a student using the createStudent method from userDAO
-     * @param name
+     * Creates a student using the createStudent method in userDAO
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      * @return
      * @throws SQLException
      */
-    public User createStudent(String name, String username, String password, UserType userType) throws SQLException {
-        return userDAO.createStudent(name, username, password, userType);
+    public User createStudent(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
+        return userDAO.createStudent(firstName, lastName, username, password, userType);
     }
 
     /**
      * Creates a teacher using the createTeacher method from userDAO
-     * @param name
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      * @return
      * @throws SQLException
      */
-    public User createTeacher(String name, String username, String password, UserType userType) throws SQLException {
-        return userDAO.createTeacher(name, username, password, userType);
+    public User createTeacher(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
+        return userDAO.createTeacher(firstName, lastName, username, password, userType);
     }
 
     /**
      * Creates an admin using the createAdmin method from userDAO
-     * @param name
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      * @return
      * @throws SQLException
      */
-    public User createAdmin(String name, String username, String password, UserType userType) throws SQLException {
-        return userDAO.createAdmin(name, username, password, userType);
+    public User createAdmin(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
+        return userDAO.createAdmin(firstName, lastName, username, password, userType);
     }
 
 

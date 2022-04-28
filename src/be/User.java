@@ -7,7 +7,8 @@ import be.enums.UserType;
 public class User implements ILogin {
 
     private int id;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String username;
     private String password;
     private UserType userType;
@@ -18,17 +19,20 @@ public class User implements ILogin {
     public User() {
     }
 
+
     /**
-     * Constructor with id, name, username, password and userType
+     * Overloaded constructor with id, firstName, lastName, username, password and usertype
      * @param id
-     * @param name
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      */
-    public User(int id, String name, String username, String password, UserType userType) {
+    public User(int id, String firstName, String lastName, String username, String password, UserType userType) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.userType = userType;
@@ -67,19 +71,35 @@ public class User implements ILogin {
     }
 
     /**
-     * Gets the name
+     * Gets the first name
      * @return
      */
-    public String getName(){
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
     /**
-     * Sets the name
-     * @param name
+     * Sets the first name
+     * @param firstName
      */
-    public void setName(String name){
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    /**
+     * Gets the last name
+     * @return
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    /**
+     * Sets the last name
+     * @param lastName
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     /**
@@ -135,4 +155,5 @@ public class User implements ILogin {
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
+
 }
