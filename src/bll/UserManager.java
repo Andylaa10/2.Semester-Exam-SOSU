@@ -137,13 +137,13 @@ public class UserManager {
     }
 
     /**
-     * Gets the user login using the login method from userDAO
+     * Gets the user userLogin using the userLogin method from userDAO
      * @param username
      * @param password
      * @return
      */
-    public User login(String username, String password){
-        return userDAO.login(username, password);
+    public User userLogin(String username, String password){
+        return userDAO.userLogin(username, password);
     }
 
 }

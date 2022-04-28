@@ -137,12 +137,12 @@ public class UserModel {
     }
 
     /**
-     * Gets the user login using the login method from userManager
+     * Gets the user userLogin using the userLogin method from userManager
      * @param username
      * @param password
      * @return
      */
-    public User login(String username, String password){
-        return userManager.login(username, password);
+    public User userLogin(String username, String password){
+        return userManager.userLogin(username, password);
     }
 }

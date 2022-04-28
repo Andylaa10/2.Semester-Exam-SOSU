@@ -13,6 +13,6 @@ public class AdminViewController implements IController {
 
     @Override
     public void setUser(User user) throws SQLException, IOException {
-        
+
     }
 }

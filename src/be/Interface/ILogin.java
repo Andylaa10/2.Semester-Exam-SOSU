@@ -4,7 +4,7 @@ import be.enums.UserType;
 
 public interface ILogin {
 
-    //Interface used for the database login
+    //Interface used for the database userLogin
     int getId();
     void setId(int id);
     String getUsername();

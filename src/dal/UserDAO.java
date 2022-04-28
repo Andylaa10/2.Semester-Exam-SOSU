@@ -313,12 +313,12 @@ public class UserDAO {
     }
 
     /**
-     * This method gets a login from the database and check if it is a student, teacher or administrator
+     * This method gets a userLogin from the database and check if it is a student, teacher or administrator
      * @param user
      * @param pass
      * @return
      */
-    public User login(String user, String pass) {
+    public User userLogin(String user, String pass) {
         String sql = "SELECT * FROM Login WHERE username =? AND password =?;";
         try(Connection connection = connector.getConnection()){
             PreparedStatement st = connection.prepareStatement(sql);

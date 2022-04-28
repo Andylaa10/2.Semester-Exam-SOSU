@@ -1,8 +1,11 @@
 package gui.Facade;
 
+import be.SuperAdmin;
 import be.User;
 import be.enums.UserType;
+import dal.SuperAdminDAO;
 import gui.model.CitizenModel;
+import gui.model.SuperAdminModel;
 import gui.model.UserModel;
 
 import java.io.IOException;
@@ -13,10 +16,12 @@ public class DataModelFacade {
 
     private CitizenModel citizenModel;
     private UserModel userModel;
+    private SuperAdminModel superAdminModel;
 
     public DataModelFacade() throws IOException {
         citizenModel = new CitizenModel();
         userModel = new UserModel();
+        superAdminModel = new SuperAdminModel();
     }
 
     /**
@@ -85,6 +90,10 @@ public class DataModelFacade {
         return userModel.createAdmin(name, username, password, userType);
     }
 
+    public SuperAdmin createSuperAdmin(String username, String password) throws SQLException {
+        return superAdminModel.createSuperAdmin(username, password);
+    }
+
     /**
      * Deletes a student using the deleteStudent method from userModel
      * @param id
@@ -110,6 +119,10 @@ public class DataModelFacade {
      */
     public void deleteAdmin(int id, UserType userType){
         userModel.deleteAdmin(id, userType);
+    }
+
+    public void deleteSuperAdmin(int id) {
+        superAdminModel.deleteSuperAdmin(id);
     }
 
     /**
@@ -139,13 +152,21 @@ public class DataModelFacade {
         userModel.editAdmin(admin);
     }
 
+    public void editSuperAdmin(SuperAdmin superAdmin) throws Exception {
+        superAdminModel.editSuperAdmin(superAdmin);
+    }
+
     /**
-     * Gets the user login using the login method from userModel
+     * Gets the user userLogin using the userLogin method from userModel
      * @param username
      * @param password
      * @return
      */
-    public User login(String username, String password){
-        return userModel.login(username, password);
+    public User userLogin(String username, String password){
+        return userModel.userLogin(username, password);
+    }
+
+    public SuperAdmin superAdminLogin(String username, String password){
+        return superAdminModel.superAdminLogin(username, password);
     }
 }
