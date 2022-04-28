@@ -104,16 +104,14 @@ public class SuperAdminDAO {
         return null;
     }
 
-    public void deleteSchool(int schoolID) {
+    public void deleteSchool(int schoolID) throws SQLException {
         try (Connection connection = connector.getConnection()) {
             String sql = "DELETE FROM School WHERE schoolID =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, schoolID);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+            throw new SQLException();
         }
     }
 

@@ -71,7 +71,7 @@ public class SuperAdminManager {
      * Deletes a school using the deleteSchool method in superAdminDAO
      * @param schoolID
      */
-    public void deleteSchool(int schoolID) {
+    public void deleteSchool(int schoolID) throws SQLException {
         superAdminDAO.deleteSchool(schoolID);
     }
 

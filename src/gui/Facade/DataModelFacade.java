@@ -213,7 +213,7 @@ public class DataModelFacade {
      * Deletes a school using the deleteSchool method from superAdminModel
      * @param id
      */
-    public void deleteSchool(int id) {
+    public void deleteSchool(int id) throws SQLException {
         superAdminModel.deleteSchool(id);
     }
 
