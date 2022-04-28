@@ -22,7 +22,7 @@ public class StudentViewController implements IController, Initializable {
 
     @Override
     public void setUser(User user) throws SQLException, IOException {
-        lblWelcome.setText("Welcome " + user.getName());
+        lblWelcome.setText("Welcome " + user.getFirstName() + user.getLastName());
     }
 
     public void clickMe() throws IOException {

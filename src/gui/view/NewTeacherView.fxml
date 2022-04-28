@@ -158,13 +158,13 @@
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <TableView layoutX="14.0" layoutY="42.0" prefHeight="334.0" prefWidth="266.0" style="-fx-background-color: transparent;">
+            <TableView layoutX="14.0" layoutY="42.0" prefHeight="361.0" prefWidth="266.0" style="-fx-background-color: transparent;">
               <columns>
                 <TableColumn prefWidth="132.0" text="Navn" />
                 <TableColumn prefWidth="132.79998779296875" text="Dato" />
               </columns>
             </TableView>
-            <TableView layoutX="329.0" layoutY="42.0" prefHeight="334.0" prefWidth="266.0" style="-fx-background-color: transparent;">
+            <TableView layoutX="329.0" layoutY="42.0" prefHeight="362.0" prefWidth="266.0" style="-fx-background-color: transparent;">
                <columns>
                   <TableColumn prefWidth="75.0" text="Fornavn" />
                   <TableColumn prefWidth="79.9998779296875" text="Efternavn" />
@@ -181,8 +181,12 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="14.0" layoutY="393.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="232.0" style="-fx-background-color: rgb(19, 138, 104);" text="Opret/Gem Sag" />
-            <Button layoutX="303.0" layoutY="394.0" mnemonicParsing="false" text="Button" />
+            <Button layoutX="14.0" layoutY="416.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="137.0" text="Tildel Sag til Borger">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect>
+            </Button>
+            <Label layoutX="337.0" layoutY="416.0" prefHeight="26.0" prefWidth="258.0" text="Dobbeltklik på borger for at se flere oplysninger" />
          </children></AnchorPane>
       <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
@@ -211,7 +215,11 @@
             </Label>
             <Label layoutX="20.0" layoutY="303.0" text="Information" />
             <TextArea layoutX="106.0" layoutY="285.0" prefHeight="119.0" prefWidth="363.0" />
-            <Button layoutX="106.0" layoutY="415.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: rgb(19, 138, 104);" text="Opret/Gem Borger" />
+            <Button layoutX="106.0" layoutY="415.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Borger">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
@@ -226,9 +234,18 @@
             <TextField layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="180.0" promptText="Navn" />
             <TextField layoutX="416.0" layoutY="367.0" prefHeight="26.0" prefWidth="180.0" promptText="Password" />
             <TextField layoutX="216.0" layoutY="367.0" prefHeight="26.0" prefWidth="180.0" promptText="Username" />
-            <Button layoutX="14.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: rgb(19, 138, 104);" text="Opret/Gem Elev" />
-            <Button layoutX="216.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: rgb(19, 138, 104);" text="Rediger Elev" />
-            <Button layoutX="416.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: rgb(19, 138, 104);" text="Slet Elev" />
+            <Button layoutX="14.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Elev">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect></Button>
+            <Button layoutX="216.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Rediger Elev">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect></Button>
+            <Button layoutX="416.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Slet Elev">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect></Button>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
@@ -277,7 +294,10 @@
                 <TableColumn prefWidth="132.79998779296875" text="Dato" />
               </columns>
             </TableView>
-            <Button layoutX="63.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="232.0" style="-fx-background-color: rgb(19, 138, 104);" text="Opret/Gem Sag" />
+            <Button layoutX="63.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="232.0" text="Opret/Gem Sag">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect></Button>
             <Label layoutX="354.0" layoutY="22.0" text="Nuværende Sager" textFill="#1d5e3f">
                <font>
                   <Font size="24.0" />
@@ -286,9 +306,18 @@
                   <Bloom threshold="0.36" />
                </effect>
             </Label>
-            <Button layoutX="325.0" layoutY="369.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: rgb(19, 138, 104);" text="Rediger Sag" />
-            <Button layoutX="456.0" layoutY="368.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" style="-fx-background-color: rgb(19, 138, 104);" text="Slet Sag" />
-            <Button layoutX="325.0" layoutY="405.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="250.0" style="-fx-background-color: rgb(19, 138, 104);" text="Kopier Sag" />
+            <Button layoutX="325.0" layoutY="369.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" text="Rediger Sag">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect></Button>
+            <Button layoutX="456.0" layoutY="368.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" text="Slet Sag">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect></Button>
+            <Button layoutX="325.0" layoutY="405.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="250.0" text="Kopier Sag">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect></Button>
          </children>
       </AnchorPane>
    </children>

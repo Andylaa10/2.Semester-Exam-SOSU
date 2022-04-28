@@ -121,6 +121,7 @@ public class NewTeacherViewController extends Application implements Initializab
         anchorPaneStudent.setVisible(false);
         anchorPaneCase.setVisible(false);
         anchorPaneCitizen.setVisible(false);
+        anchorPaneCreateCitizen.setVisible(false);
     }
 
     public void btnClickLogout(ActionEvent actionEvent) throws IOException {
@@ -136,7 +137,7 @@ public class NewTeacherViewController extends Application implements Initializab
     @Override
     public void setUser(User user) throws SQLException, IOException {
         labelTitle.setText("Lærer");
-        labelInfo.setText("Du er nu logget ind som lærer: " + user.getName());
+        labelInfo.setText("Du er nu logget ind som lærer: " + user.getFirstName() + user.getLastName());
         labelInfoNewLine.setText("");
     }
 

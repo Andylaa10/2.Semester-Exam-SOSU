@@ -17,7 +17,7 @@ public class TeacherViewController implements IController, Initializable {
     private Label lblWelcome;
     @Override
     public void setUser(User user) throws SQLException, IOException {
-        lblWelcome.setText("Welcome " + user.getName());
+        lblWelcome.setText("Welcome " + user.getFirstName() + user.getLastName());
     }
 
     @Override
