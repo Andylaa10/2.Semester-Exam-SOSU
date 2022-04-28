@@ -1,12 +1,12 @@
 package gui.controller;
 
+import be.SuperAdmin;
 import be.User;
 import be.enums.UserType;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -33,7 +33,8 @@ public class LoginMenuController{
     public void Login() throws IOException, SQLException {
         String username = txtFieldUsername.getText();
         String password = pField.getText();
-        User user = facade.login(username, password);
+        User user = facade.userLogin(username, password);
+        SuperAdmin superAdmin = facade.superAdminLogin(username, password);
         if (user != null && user.getUsertype() == UserType.STUDENT) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
             Scene scene = new Scene(loader.load());
@@ -61,6 +62,15 @@ public class LoginMenuController{
             controller.setUser(user);
             switcher.setTitle("Admin");
             switcher.show();
+        } else if (superAdmin != null){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/SuperAdminView.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage switcher = (Stage) btnLogin.getScene().getWindow();
+            switcher.setScene(scene);
+            switcher.setTitle("Super Admin");
+            switcher.show();
+        } else {
+            System.out.println("Something probably went wrong lol");
         }
     }
 

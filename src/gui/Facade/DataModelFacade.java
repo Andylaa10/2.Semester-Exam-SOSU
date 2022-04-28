@@ -1,8 +1,12 @@
 package gui.Facade;
 
+import be.School;
+import be.SuperAdmin;
 import be.User;
 import be.enums.UserType;
+import dal.SuperAdminDAO;
 import gui.model.CitizenModel;
+import gui.model.SuperAdminModel;
 import gui.model.UserModel;
 
 import java.io.IOException;
@@ -13,10 +17,12 @@ public class DataModelFacade {
 
     private CitizenModel citizenModel;
     private UserModel userModel;
+    private SuperAdminModel superAdminModel;
 
     public DataModelFacade() throws IOException {
         citizenModel = new CitizenModel();
         userModel = new UserModel();
+        superAdminModel = new SuperAdminModel();
     }
 
     /**
@@ -48,41 +54,48 @@ public class DataModelFacade {
 
     /**
      * Creates a student using the createStudent method from userModel
-     * @param name
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      * @return
      * @throws SQLException
      */
-    public User createStudent(String name, String username, String password, UserType userType) throws SQLException {
-        return userModel.createStudent(name, username, password, userType);
+    public User createStudent(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
+        return userModel.createStudent(firstName, lastName, username, password, userType);
     }
 
     /**
      * Creates a teacher using the createTeacher method from userModel
-     * @param name
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      * @return
      * @throws SQLException
      */
-    public User createTeacher(String name, String username, String password, UserType userType) throws SQLException {
-        return userModel.createTeacher(name, username, password, userType);
+    public User createTeacher(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
+        return userModel.createTeacher(firstName, lastName, username, password, userType);
     }
 
     /**
      * Creates an admin using the createAdmin method from userModel
-     * @param name
+     * @param firstName
+     * @param lastName
      * @param username
      * @param password
      * @param userType
      * @return
      * @throws SQLException
      */
-    public User createAdmin(String name, String username, String password, UserType userType) throws SQLException {
-        return userModel.createAdmin(name, username, password, userType);
+    public User createAdmin(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
+        return userModel.createAdmin(firstName, lastName, username, password, userType);
+    }
+
+    public SuperAdmin createSuperAdmin(String username, String password) throws SQLException {
+        return superAdminModel.createSuperAdmin(username, password);
     }
 
     /**
@@ -112,6 +125,10 @@ public class DataModelFacade {
         userModel.deleteAdmin(id, userType);
     }
 
+    public void deleteSuperAdmin(int id) {
+        superAdminModel.deleteSuperAdmin(id);
+    }
+
     /**
      * Edits a student using the editStudent method from userModel
      * @param student
@@ -139,13 +156,35 @@ public class DataModelFacade {
         userModel.editAdmin(admin);
     }
 
+    public void editSuperAdmin(SuperAdmin superAdmin) throws Exception {
+        superAdminModel.editSuperAdmin(superAdmin);
+    }
+
     /**
-     * Gets the user login using the login method from userModel
+     * Gets the user userLogin using the userLogin method from userModel
      * @param username
      * @param password
      * @return
      */
-    public User login(String username, String password){
-        return userModel.login(username, password);
+    public User userLogin(String username, String password){
+        return userModel.userLogin(username, password);
     }
+
+    public SuperAdmin superAdminLogin(String username, String password) throws SQLException {
+        return superAdminModel.superAdminLogin(username, password);
+    }
+
+    public School createSchool(String schoolName) throws SQLException {
+        return superAdminModel.createSchool(schoolName);
+    }
+
+    public void deleteSchool(int schoolID) {
+        superAdminModel.deleteSchool(schoolID);
+    }
+
+    public void editSchool(School school) throws Exception {
+        superAdminModel.editSchool(school);
+    }
+
+
 }
