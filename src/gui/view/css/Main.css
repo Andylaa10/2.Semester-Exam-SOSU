@@ -23,6 +23,7 @@ Redefine of the background color, to a dark blue color.
 
 .text-area{
     -fx-control-inner-background: rgb(138, 192, 189);
+    -fx-wrap-text: true;
 }
 .text-area:focused{
     -fx-control-inner-background: rgb(83, 208, 156);

@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -23,6 +24,8 @@ public class TeacherViewController extends Application implements Initializable,
 
     @FXML
     private AnchorPane topPane;
+    @FXML
+    private TextArea txtAreaGeneralInfo;
     @FXML
     private Button btnStudent;
     @FXML
