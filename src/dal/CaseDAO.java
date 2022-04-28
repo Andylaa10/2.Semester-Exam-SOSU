@@ -94,7 +94,7 @@ public class CaseDAO {
      * Changes the name of a case if a match is found
      * @param aCase
      */
-    public void editMovie(Case aCase) throws Exception {
+    public void editCase(Case aCase) throws Exception {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE Cases SET name=?, date=?, info=? WHERE casesID=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);

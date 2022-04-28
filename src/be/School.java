@@ -2,27 +2,55 @@ package be;
 
 public class School {
 
-    private int schoolID;
+    private int id;
     private String schoolName;
 
-    public School(int schoolID, String schoolName) {
-        this.schoolID = schoolID;
+    /**
+     * Constructor
+     */
+    public School() {
+    }
+
+    /**
+     * Overloaded constructor with id and schoolName
+     * @param id
+     * @param schoolName
+     */
+    public School(int id, String schoolName) {
+        this.id = id;
         this.schoolName = schoolName;
     }
 
+    /**
+     * Gets the id
+     * @return
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Sets the id
+     * @param id
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets the schoolName
+     * @return
+     */
     public String getSchoolName() {
         return schoolName;
     }
 
+    /**
+     * Sets the schoolName
+     * @param schoolName
+     */
     public void setSchoolName(String schoolName) {
         this.schoolName = schoolName;
     }
 
-    public int getSchoolID() {
-        return schoolID;
-    }
-
-    public void setSchoolID(int schoolID) {
-        this.schoolID = schoolID;
-    }
 }

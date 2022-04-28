@@ -3,7 +3,6 @@ package bll;
 import be.User;
 import be.enums.UserType;
 import dal.UserDAO;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;

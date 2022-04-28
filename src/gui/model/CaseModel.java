@@ -1,32 +1,31 @@
-package bll;
+package gui.model;
 
 import be.Case;
-import be.School;
-import dal.CaseDAO;
+import bll.CaseManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class CaseManager {
+public class CaseModel {
 
-    private CaseDAO caseDAO;
+    private CaseManager caseManager;
 
-    public CaseManager() throws IOException {
-        caseDAO = new CaseDAO();
+    public CaseModel() throws IOException {
+        caseManager = new CaseManager();
     }
 
     /**
-     * Get a list of case using the getCases method from caseDAO
+     * Get a list of case using the getCases method from caseManager
      * @return
      * @throws SQLException
      */
     public List<Case> getCases() throws SQLException {
-        return caseDAO.getCases();
+        return caseManager.getCases();
     }
 
     /**
-     * Creates a case using the createCase method from caseDAO
+     * Creates a case using the createCase method from caseManager
      * @param name
      * @param date
      * @param info
@@ -34,26 +33,24 @@ public class CaseManager {
      * @throws SQLException
      */
     public Case createCase(String name, String date, String info) throws SQLException {
-        return caseDAO.createCase(name, date, info);
+        return caseManager.createCase(name, date, info);
     }
 
     /**
-     * Deletes a case using the deleteCase method from caseDAO
+     * Deletes a case using the deleteCase method from caseManager
      * @param id
      * @throws Exception
      */
     public void deleteCase(int id) throws Exception {
-        caseDAO.deleteCase(id);
+         caseManager.deleteCase(id);
     }
 
     /**
-     * Edits a case using the editCase method in caseDAO
+     * Edits a case using the editCase method in caseManager
      * @param aCase
      * @throws Exception
      */
     public void editCase(Case aCase) throws Exception {
-        caseDAO.editCase(aCase);
+        caseManager.editCase(aCase);
     }
-
-
 }

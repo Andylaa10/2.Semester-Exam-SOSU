@@ -1,10 +1,11 @@
 package gui.Facade;
 
+import be.Case;
 import be.School;
 import be.SuperAdmin;
 import be.User;
 import be.enums.UserType;
-import dal.SuperAdminDAO;
+import gui.model.CaseModel;
 import gui.model.CitizenModel;
 import gui.model.SuperAdminModel;
 import gui.model.UserModel;
@@ -18,11 +19,13 @@ public class DataModelFacade {
     private CitizenModel citizenModel;
     private UserModel userModel;
     private SuperAdminModel superAdminModel;
+    private CaseModel caseModel;
 
     public DataModelFacade() throws IOException {
         citizenModel = new CitizenModel();
         userModel = new UserModel();
         superAdminModel = new SuperAdminModel();
+        caseModel = new CaseModel();
     }
 
     /**
@@ -94,6 +97,13 @@ public class DataModelFacade {
         return userModel.createAdmin(firstName, lastName, username, password, userType);
     }
 
+    /**
+     * Create a super admin using the createSuperAdmin method from superAdminModel
+     * @param username
+     * @param password
+     * @return
+     * @throws SQLException
+     */
     public SuperAdmin createSuperAdmin(String username, String password) throws SQLException {
         return superAdminModel.createSuperAdmin(username, password);
     }
@@ -125,6 +135,10 @@ public class DataModelFacade {
         userModel.deleteAdmin(id, userType);
     }
 
+    /**
+     * Deletes a super admin using the deleteSuperAdmin method from superAdminModel
+     * @param id
+     */
     public void deleteSuperAdmin(int id) {
         superAdminModel.deleteSuperAdmin(id);
     }
@@ -156,6 +170,11 @@ public class DataModelFacade {
         userModel.editAdmin(admin);
     }
 
+    /**
+     * Edits a super admin using the editSuperAdmin method from superAdminModel
+     * @param superAdmin
+     * @throws Exception
+     */
     public void editSuperAdmin(SuperAdmin superAdmin) throws Exception {
         superAdminModel.editSuperAdmin(superAdmin);
     }
@@ -170,20 +189,81 @@ public class DataModelFacade {
         return userModel.userLogin(username, password);
     }
 
+    /**
+     * Gets the super admin login using the superAdminLogin method from superAdminModel
+     * @param username
+     * @param password
+     * @return
+     * @throws SQLException
+     */
     public SuperAdmin superAdminLogin(String username, String password) throws SQLException {
         return superAdminModel.superAdminLogin(username, password);
     }
 
+    /**
+     * Creates a school using the createSchool method from superAdminModel
+     * @param schoolName
+     * @return
+     * @throws SQLException
+     */
     public School createSchool(String schoolName) throws SQLException {
         return superAdminModel.createSchool(schoolName);
     }
 
-    public void deleteSchool(int schoolID) {
-        superAdminModel.deleteSchool(schoolID);
+    /**
+     * Deletes a school using the deleteSchool method from superAdminModel
+     * @param id
+     */
+    public void deleteSchool(int id) {
+        superAdminModel.deleteSchool(id);
     }
 
+    /**
+     * Edits a school using the editSchool method from superAdminModel
+     * @param school
+     * @throws Exception
+     */
     public void editSchool(School school) throws Exception {
         superAdminModel.editSchool(school);
+    }
+
+    /**
+     * Get a list of case using the getCases method from caseModel
+     * @return
+     * @throws SQLException
+     */
+    public List<Case> getCases() throws SQLException {
+        return caseModel.getCases();
+    }
+
+    /**
+     * Creates a case using the createCase method from caseModel
+     * @param name
+     * @param date
+     * @param info
+     * @return
+     * @throws SQLException
+     */
+    public Case createCase(String name, String date, String info) throws SQLException {
+        return caseModel.createCase(name, date, info);
+    }
+
+    /**
+     * Deletes a case using the deleteCase method from caseModel
+     * @param id
+     * @throws Exception
+     */
+    public void deleteCase(int id) throws Exception {
+        caseModel.deleteCase(id);
+    }
+
+    /**
+     * Edits a case using the editCase method in caseModel
+     * @param aCase
+     * @throws Exception
+     */
+    public void editCase(Case aCase) throws Exception {
+        caseModel.editCase(aCase);
     }
 
 

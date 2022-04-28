@@ -58,7 +58,7 @@ public class SuperAdminDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, superAdmin.getUsername());
             preparedStatement.setString(2, superAdmin.getPassword());
-            preparedStatement.setInt(3, superAdmin.getID());
+            preparedStatement.setInt(3, superAdmin.getId());
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception("Could not edit super admin");
             }
@@ -125,7 +125,7 @@ public class SuperAdminDAO {
             String sql = "UPDATE School SET name=? WHERE schoolID=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, school.getSchoolName());
-            preparedStatement.setInt(2, school.getSchoolID());
+            preparedStatement.setInt(2, school.getId());
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception("Could not edit school name");
             }
