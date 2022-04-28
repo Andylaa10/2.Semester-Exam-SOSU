@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -28,7 +29,9 @@ public class NewTeacherViewController extends Application implements Initializab
     @FXML
     private Button btnStudent;
     @FXML
-    private Button btnCitizen;
+    private Button btnCitizens;
+    @FXML
+    private Button btnCreateCitizen;
     @FXML
     private Button btnCase;
     @FXML
@@ -40,9 +43,13 @@ public class NewTeacherViewController extends Application implements Initializab
     @FXML
     private Label labelInfo;
     @FXML
+    private Label labelInfoNewLine;
+    @FXML
     private AnchorPane anchorPaneStudent;
     @FXML
     private AnchorPane anchorPaneCitizen;
+    @FXML
+    private AnchorPane anchorPaneCreateCitizen;
     @FXML
     private AnchorPane anchorPaneCase;
     @FXML
@@ -54,7 +61,9 @@ public class NewTeacherViewController extends Application implements Initializab
     }
 
     private void setAnchorPanesVisibility(){
+        labelInfoNewLine.setText("");
         anchorPaneTeacher.setVisible(true);
+        anchorPaneCreateCitizen.setVisible(false);
         anchorPaneStudent.setVisible(false);
         anchorPaneCitizen.setVisible(false);
         anchorPaneCase.setVisible(false);
@@ -63,33 +72,51 @@ public class NewTeacherViewController extends Application implements Initializab
     public void btnClickStudent(ActionEvent actionEvent) {
         labelTitle.setText("Elever");
         labelInfo.setText("Overblik over alle oprettede elever");
+        labelInfoNewLine.setText("");
+        anchorPaneCreateCitizen.setVisible(false);
         anchorPaneTeacher.setVisible(false);
         anchorPaneCitizen.setVisible(false);
         anchorPaneCase.setVisible(false);
         anchorPaneStudent.setVisible(true);
     }
 
-    public void btnClickCitizen(ActionEvent actionEvent) {
+    public void btnClickCase(ActionEvent actionEvent) {
+        labelTitle.setText("Sager");
+        labelInfo.setText("Overblik over alle oprettede sager. Opret nye sager, eller og kopier sager");
+        labelInfoNewLine.setText("");
+        anchorPaneCreateCitizen.setVisible(false);
+        anchorPaneTeacher.setVisible(false);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCase.setVisible(true);
+        anchorPaneCitizen.setVisible(false);
+    }
+
+    public void btnClickSeeCitizens(ActionEvent actionEvent){
         labelTitle.setText("Borgere");
-        labelInfo.setText("Overblik over alle oprettede borgere");
+        labelInfo.setText("Overblik over alle oprettede borgere. Tildel en sag til en borger, se yderligere informationer,");
+        labelInfoNewLine.setText( "rediger eller slet borger.");
+        anchorPaneCreateCitizen.setVisible(false);
         anchorPaneTeacher.setVisible(false);
         anchorPaneStudent.setVisible(false);
         anchorPaneCase.setVisible(false);
         anchorPaneCitizen.setVisible(true);
     }
 
-    public void btnClickCase(ActionEvent actionEvent) {
-        labelTitle.setText("Borgere");
-        labelInfo.setText("Overblik over alle oprettede borgere");
+    public void btnClickCitizen(ActionEvent actionEvent) {
+        labelTitle.setText("Opret Borger");
+        labelInfo.setText("Oprettelses vindue til borger");
+        labelInfoNewLine.setText("");
         anchorPaneTeacher.setVisible(false);
         anchorPaneStudent.setVisible(false);
         anchorPaneCase.setVisible(false);
-        anchorPaneCitizen.setVisible(true);
+        anchorPaneCreateCitizen.setVisible(true);
+        anchorPaneCitizen.setVisible(false);
     }
 
     public void btnClickHome(ActionEvent actionEvent){
         labelTitle.setText("Lærer");
         labelInfo.setText("Logget ind som lærer");
+        labelInfoNewLine.setText("");
         anchorPaneTeacher.setVisible(true);
         anchorPaneStudent.setVisible(false);
         anchorPaneCase.setVisible(false);
@@ -110,6 +137,7 @@ public class NewTeacherViewController extends Application implements Initializab
     public void setUser(User user) throws SQLException, IOException {
         labelTitle.setText("Lærer");
         labelInfo.setText("Du er nu logget ind som lærer: " + user.getName());
+        labelInfoNewLine.setText("");
     }
 
 

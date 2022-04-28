@@ -13,12 +13,12 @@
    <children>
       <ImageView fitHeight="612.0" fitWidth="800.0" opacity="0.82" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/1j7a2705.jpg" />
+            <Image url="@img/LogInScreen.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="155.0" fitWidth="228.0" layoutX="286.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/SOSU%20SIMULATION_free-file.png" />
+            <Image url="@img/Logo.png" />
          </image>
       </ImageView>
       <TextField fx:id="txtFieldUsername" alignment="CENTER" layoutX="309.0" layoutY="296.0" prefHeight="37.0" prefWidth="181.0" promptText="Username">
