@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.User;
 import gui.controller.Interface.IController;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class NewTeacherViewController implements Initializable, IController {
+public class NewTeacherViewController extends Application implements Initializable, IController{
 
     @FXML
     private AnchorPane topPane;
@@ -30,6 +31,8 @@ public class NewTeacherViewController implements Initializable, IController {
     private Button btnCitizen;
     @FXML
     private Button btnCase;
+    @FXML
+    private Button btnHome;
     @FXML
     private Button btnLogOut;
     @FXML
@@ -42,6 +45,8 @@ public class NewTeacherViewController implements Initializable, IController {
     private AnchorPane anchorPaneCitizen;
     @FXML
     private AnchorPane anchorPaneCase;
+    @FXML
+    private AnchorPane anchorPaneTeacher;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,6 +54,7 @@ public class NewTeacherViewController implements Initializable, IController {
     }
 
     private void setAnchorPanesVisibility(){
+        anchorPaneTeacher.setVisible(true);
         anchorPaneStudent.setVisible(false);
         anchorPaneCitizen.setVisible(false);
         anchorPaneCase.setVisible(false);
@@ -57,6 +63,7 @@ public class NewTeacherViewController implements Initializable, IController {
     public void btnClickStudent(ActionEvent actionEvent) {
         labelTitle.setText("Elever");
         labelInfo.setText("Overblik over alle oprettede elever");
+        anchorPaneTeacher.setVisible(false);
         anchorPaneCitizen.setVisible(false);
         anchorPaneCase.setVisible(false);
         anchorPaneStudent.setVisible(true);
@@ -65,17 +72,28 @@ public class NewTeacherViewController implements Initializable, IController {
     public void btnClickCitizen(ActionEvent actionEvent) {
         labelTitle.setText("Borgere");
         labelInfo.setText("Overblik over alle oprettede borgere");
+        anchorPaneTeacher.setVisible(false);
         anchorPaneStudent.setVisible(false);
         anchorPaneCase.setVisible(false);
         anchorPaneCitizen.setVisible(true);
     }
 
     public void btnClickCase(ActionEvent actionEvent) {
-        labelTitle.setText("Sager");
-        labelInfo.setText("Overblik over alle oprettede sager");
+        labelTitle.setText("Borgere");
+        labelInfo.setText("Overblik over alle oprettede borgere");
+        anchorPaneTeacher.setVisible(false);
         anchorPaneStudent.setVisible(false);
+        anchorPaneCase.setVisible(false);
+        anchorPaneCitizen.setVisible(true);
+    }
+
+    public void btnClickHome(ActionEvent actionEvent){
+        labelTitle.setText("Lærer");
+        labelInfo.setText("Logget ind som lærer");
+        anchorPaneTeacher.setVisible(true);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCase.setVisible(false);
         anchorPaneCitizen.setVisible(false);
-        anchorPaneCase.setVisible(true);
     }
 
     public void btnClickLogout(ActionEvent actionEvent) throws IOException {
@@ -87,9 +105,23 @@ public class NewTeacherViewController implements Initializable, IController {
         switcher.show();
     }
 
+
     @Override
     public void setUser(User user) throws SQLException, IOException {
         labelTitle.setText("Lærer");
         labelInfo.setText("Du er nu logget ind som lærer: " + user.getName());
+    }
+
+
+
+    public static void main(String[] args) {launch(args);}
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/NewTeacherView.fxml"));
+        primaryStage.setTitle("SOSU Simulation");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
+        primaryStage.show();
     }
 }

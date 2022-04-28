@@ -26,6 +26,10 @@ Redefine of the background color, to a dark blue color.
     -fx-selection-bar-non-focused: rgb(255, 255, 255);
 }
 
+.text-area{
+    -fx-control-inner-background: transparent;
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 10%);
+}
 .table-row-cell:selected {
     -fx-background-color: #ce8640;
 }

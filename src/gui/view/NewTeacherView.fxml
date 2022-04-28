@@ -4,7 +4,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,11 +17,11 @@
 
 <AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.NewTeacherViewController">
    <children>
-      <VBox prefHeight="600.0" prefWidth="218.0" style="-fx-background-color: #044d39;">
+      <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: #044d39;">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="9.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="134.0" fitWidth="166.0" layoutX="9.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/SOSU%20SIMULATION_free-file.png" />
                      </image>
@@ -27,6 +29,7 @@
                         <ColorAdjust contrast="0.15" />
                      </effect>
                   </ImageView>
+                  <Button fx:id="btnHome" layoutX="7.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnClickHome" prefHeight="133.0" prefWidth="172.0" style="-fx-background-color: transparent;" />
                </children>
             </Pane>
             <Button fx:id="btnStudent" mnemonicParsing="false" onAction="#btnClickStudent" prefHeight="42.0" prefWidth="218.0" stylesheets="@css/Main.css" text="Elever">
@@ -34,15 +37,6 @@
                   <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/clipart3051769.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="btnCitizen" mnemonicParsing="false" onAction="#btnClickCitizen" prefHeight="42.0" prefWidth="218.0" text="Borgere">
-               <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/16-169348_user-icon-user-white-icon-transparent-clipart-removebg-preview.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -56,11 +50,20 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Pane prefHeight="272.0" prefWidth="218.0" />
+            <Button fx:id="btnCitizen" mnemonicParsing="false" onAction="#btnClickCitizen" prefHeight="42.0" prefWidth="218.0" text="Borgere">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/16-169348_user-icon-user-white-icon-transparent-clipart-removebg-preview.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Pane prefHeight="253.0" prefWidth="182.0" />
             <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#btnClickLogout" prefHeight="42.0" prefWidth="218.0" text="Log Ud " />
          </children>
       </VBox>
-      <Pane layoutX="218.0" layoutY="46.0" prefHeight="86.0" prefWidth="582.0" style="-fx-background-color: #3ce5bc;">
+      <Pane layoutX="182.0" layoutY="46.0" prefHeight="86.0" prefWidth="618.0" style="-fx-background-color: #3ce5bc;">
          <children>
             <Label fx:id="labelTitle" layoutX="31.0" layoutY="7.0" prefHeight="47.0" prefWidth="534.0" text="Tekst" textFill="WHITE">
                <font>
@@ -75,16 +78,81 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="anchorPaneLærer" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="568.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneTeacher" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <Label layoutX="6.0" layoutY="240.0" prefHeight="47.0" prefWidth="211.0" text="Lærer">
+            <Label alignment="TOP_LEFT" layoutX="2.0" layoutY="50.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="90.0" prefHeight="35.0" prefWidth="400.0" text="- Få et overblik og håndtere alle dine elever, samt deres logins">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="126.0" prefHeight="35.0" prefWidth="586.0" text="- Få et overblik eller opret flere borgere i systemet, samt udfylde deres generelle informationer">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="161.0" prefHeight="35.0" prefWidth="545.0" text="- Åbne nye sager til dine borgere, derudover har du også mulighed for at tildele en sag, ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="178.0" prefHeight="35.0" prefWidth="84.0" text="til en borger">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="205.0" prefHeight="35.0" prefWidth="545.0" text="- Nederst til venstre er det muligt at logge ud">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="241.0" prefHeight="35.0" prefWidth="594.0" text="- Ved at trykke på logoet (øverst venstre), kommer du tilbage til hjemmeskærmen dvs.">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="20.0" layoutY="258.0" prefHeight="35.0" prefWidth="148.0" text="det nuværende vindue">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="568.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+         <children>
+            <Label layoutX="120.0" layoutY="12.0" text="Opret ny sag" textFill="#1d5e3f">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <effect>
+                  <Bloom threshold="0.21" />
+               </effect>
+            </Label>
+            <TextField layoutX="65.0" layoutY="40.0" prefHeight="26.0" prefWidth="202.0" />
+            <Label layoutX="14.0" layoutY="41.0" text="Navn">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextArea layoutX="66.0" layoutY="122.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" />
+            <Label layoutX="15.0" layoutY="121.0" text="Info">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="87.0" text="Dato">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField layoutX="64.0" layoutY="85.0" prefHeight="26.0" prefWidth="202.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Label layoutY="105.0" prefHeight="47.0" prefWidth="211.0" text="Borger knappe">
                <font>
@@ -93,30 +161,21 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="568.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <Label layoutY="61.0" prefHeight="47.0" prefWidth="211.0" text="sager knappen">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="568.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
-         <children>
-            <TableView layoutX="14.0" layoutY="14.0" prefHeight="340.0" prefWidth="542.0" style="-fx-background-color: transparent;">
+            <TableView layoutX="7.0" layoutY="8.0" prefHeight="340.0" prefWidth="594.0" style="-fx-background-color: transparent;">
               <columns>
-                <TableColumn prefWidth="190.0" text="Navn" />
-                  <TableColumn prefWidth="175.0" text="Username" />
-                  <TableColumn prefWidth="175.0" text="Password" />
+                <TableColumn prefWidth="188.7999849319458" text="Navn" />
+                  <TableColumn prefWidth="207.2000274658203" text="Username" />
+                  <TableColumn prefWidth="196.79998779296875" text="Password" />
               </columns>
             </TableView>
-            <TextField layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="165.0" promptText="Navn" />
-            <TextField layoutX="388.0" layoutY="366.0" prefHeight="26.0" prefWidth="165.0" promptText="Password" />
-            <TextField layoutX="202.0" layoutY="366.0" prefHeight="26.0" prefWidth="165.0" promptText="Username" />
-            <Button layoutX="14.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: rgb(19, 138, 104);" text="Opret/Gem Elev" />
-            <Button layoutX="200.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: rgb(19, 138, 104);" text="Rediger Elev" />
-            <Button layoutX="388.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="165.0" style="-fx-background-color: rgb(19, 138, 104);" text="Slet Elev" />
+            <TextField layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="180.0" promptText="Navn" />
+            <TextField layoutX="416.0" layoutY="367.0" prefHeight="26.0" prefWidth="180.0" promptText="Password" />
+            <TextField layoutX="216.0" layoutY="367.0" prefHeight="26.0" prefWidth="180.0" promptText="Username" />
+            <Button layoutX="14.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: rgb(19, 138, 104);" text="Opret/Gem Elev" />
+            <Button layoutX="216.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: rgb(19, 138, 104);" text="Rediger Elev" />
+            <Button layoutX="416.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" style="-fx-background-color: rgb(19, 138, 104);" text="Slet Elev" />
          </children>
       </AnchorPane>
    </children>
