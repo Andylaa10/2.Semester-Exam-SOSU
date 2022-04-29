@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.User;
 import gui.controller.Interface.IController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,7 +22,6 @@ public class StudentViewController implements IController, Initializable {
 
     @Override
     public void setUser(User user) throws SQLException, IOException {
-        lblWelcome.setText("Welcome " + user.getFirstName() + user.getLastName());
     }
 
     public void clickMe() throws IOException {
@@ -32,5 +32,23 @@ public class StudentViewController implements IController, Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void btnClickHome(ActionEvent actionEvent) {
+    }
+
+    public void btnClickStudent(ActionEvent actionEvent) {
+    }
+
+    public void btnClickCase(ActionEvent actionEvent) {
+    }
+
+    public void btnClickSeeCitizens(ActionEvent actionEvent) {
+    }
+
+    public void btnClickCitizen(ActionEvent actionEvent) {
+    }
+
+    public void btnClickLogout(ActionEvent actionEvent) {
     }
 }
