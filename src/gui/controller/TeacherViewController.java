@@ -25,13 +25,9 @@ import java.util.ResourceBundle;
 
 public class TeacherViewController extends Application implements Initializable, IController{
 
-<<<<<<< Updated upstream
-
-=======
     /**
      * Top Pane
      */
->>>>>>> Stashed changes
     @FXML
     private AnchorPane topPane;
     @FXML
@@ -157,7 +153,6 @@ public class TeacherViewController extends Application implements Initializable,
     @FXML
     private Button btnSaveCitizen;
 
-    
     private ObservableList<User> allStudents = FXCollections.observableArrayList();
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCases = FXCollections.observableArrayList();
@@ -172,19 +167,39 @@ public class TeacherViewController extends Application implements Initializable,
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setAnchorPanesVisibility();
-        initializeTable();
+        try {
+            initializeTable();
+        } catch (Exception e) {
+            try {
+                throw new Exception();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
-    private void initializeTable() {
+    private void initializeTable() throws Exception {
         //Initialize the students table
         tcStudentFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcStudentLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcStudentUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         tcStudentPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
+        try {
+            allStudents = FXCollections.observableList(dataModelFacade.getStudents());
+            tableViewLoadStudents(allStudents);
+        } catch (Exception e) {
+            throw new Exception();
+        }
 
         //Initialize the cases table
         tcCasesName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcCasesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        try {
+            allCases = FXCollections.observableList(dataModelFacade.getCases());
+            tableViewLoadCases(allCases);
+        } catch (Exception e) {
+            throw new Exception();
+        }
 
         //Initialize the citizens table
         tcCitizenFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -194,6 +209,12 @@ public class TeacherViewController extends Application implements Initializable,
         //Initialize the current cases table at citizen window
         tcCurrentCasesName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcCurrentCasesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        try {
+            allCurrentCases = FXCollections.observableList(dataModelFacade.getCases());
+            tableViewLoadCurrentCases(allCurrentCases);
+        } catch (Exception e) {
+            throw new Exception();
+        }
     }
 
 
