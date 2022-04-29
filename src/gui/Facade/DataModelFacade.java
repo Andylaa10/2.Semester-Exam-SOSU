@@ -1,9 +1,6 @@
 package gui.Facade;
 
-import be.Case;
-import be.School;
-import be.SuperAdmin;
-import be.User;
+import be.*;
 import be.enums.UserType;
 import gui.model.CaseModel;
 import gui.model.CitizenModel;
@@ -263,6 +260,15 @@ public class DataModelFacade {
      */
     public void editCase(Case aCase) throws Exception {
         caseModel.editCase(aCase);
+    }
+
+    /**
+     * Get a list of citizen using the getCitizens method from citizenModel
+     * @return
+     * @throws SQLException
+     */
+    public List<Citizen> getCitizens() throws SQLException {
+        return citizenModel.getCitizens();
     }
 
 

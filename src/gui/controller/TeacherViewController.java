@@ -169,11 +169,7 @@ public class TeacherViewController extends Application implements Initializable,
         try {
             initializeTable();
         } catch (Exception e) {
-            try {
-                throw new Exception();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+            e.printStackTrace();
         }
     }
 
@@ -204,6 +200,12 @@ public class TeacherViewController extends Application implements Initializable,
         tcCitizenFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("ssn"));
+        try {
+            allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
+            tableViewLoadCitizens(allCitizens);
+        } catch (Exception e) {
+            throw new Exception();
+        }
 
         //Initialize the current cases table at citizen window
         tcCurrentCasesName.setCellValueFactory(new PropertyValueFactory<>("name"));
