@@ -51,6 +51,9 @@ Redefine of the background color, to a dark blue color.
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
+.table-view{
+    -fx-text-fill: black;
+}
 
 /* Keep prompt invisible when focused (above color fix overrides it) */
 .text-input:focused {

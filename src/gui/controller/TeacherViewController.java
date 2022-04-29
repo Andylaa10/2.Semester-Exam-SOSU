@@ -24,7 +24,10 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class TeacherViewController extends Application implements Initializable, IController{
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     /**
      * Top Pane
      */
