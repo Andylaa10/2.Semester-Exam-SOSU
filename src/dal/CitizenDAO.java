@@ -19,7 +19,7 @@ public class CitizenDAO {
 
     public CitizenDAO() throws IOException {
     }
-
+/*
     public List<Citizen> getCitizens() throws SQLException {
         ArrayList<Citizen> allCustomers = new ArrayList<>();
 
@@ -44,6 +44,6 @@ public class CitizenDAO {
             throwables.printStackTrace();
         }
         return allCustomers;
-    }
+    }*/
 
 }
