@@ -36,7 +36,7 @@
             </Pane>
             <Button fx:id="btnStudent" mnemonicParsing="false" onAction="#btnClickStudent" prefHeight="42.0" prefWidth="218.0" stylesheets="@css/Main.css" text="Elever">
                <graphic>
-                  <ImageView fx:id="btnStudent" fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/Student%20Icon.png" />
                      </image>
@@ -188,7 +188,7 @@
             </Button>
             <Label layoutX="337.0" layoutY="416.0" prefHeight="26.0" prefWidth="258.0" text="Dobbeltklik på borger for at se flere oplysninger" />
          </children></AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -201,21 +201,21 @@
             <Label layoutX="43.0" layoutY="219.0" text="Adresse" />
             <Label layoutX="62.0" layoutY="252.0" text="Køn" />
             <Label layoutX="14.0" layoutY="182.0" text="CPR-Nummer" />
-            <TextField layoutX="106.0" layoutY="100.0" prefHeight="26.0" prefWidth="180.0" />
-            <TextField layoutX="106.0" layoutY="140.0" prefHeight="26.0" prefWidth="180.0" />
-            <TextField layoutX="106.0" layoutY="179.0" prefHeight="26.0" prefWidth="180.0" />
-            <TextField layoutX="106.0" layoutY="215.0" prefHeight="26.0" prefWidth="180.0" />
-            <CheckBox layoutX="106.0" layoutY="252.0" mnemonicParsing="false" text="Mand" />
-            <CheckBox layoutX="169.0" layoutY="252.0" mnemonicParsing="false" text="Kvinde" />
-            <CheckBox layoutX="232.0" layoutY="252.0" mnemonicParsing="false" text="Andet" />
+            <TextField fx:id="txtFieldCitizenFirstName" layoutX="106.0" layoutY="100.0" prefHeight="26.0" prefWidth="180.0" />
+            <TextField fx:id="txtFieldCitizenLastName" layoutX="106.0" layoutY="140.0" prefHeight="26.0" prefWidth="180.0" />
+            <TextField fx:id="txtFieldSSN" layoutX="106.0" layoutY="179.0" prefHeight="26.0" prefWidth="180.0" />
+            <TextField fx:id="txtFieldAddress" layoutX="106.0" layoutY="215.0" prefHeight="26.0" prefWidth="180.0" />
+            <CheckBox fx:id="checkBoxMale" layoutX="106.0" layoutY="252.0" mnemonicParsing="false" text="Mand" />
+            <CheckBox fx:id="checkBoxFemale" layoutX="169.0" layoutY="252.0" mnemonicParsing="false" text="Kvinde" />
+            <CheckBox fx:id="checkBoxOther" layoutX="232.0" layoutY="252.0" mnemonicParsing="false" text="Andet" />
             <Label layoutX="104.0" layoutY="26.0" text="Oprettelse af borger">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
             <Label layoutX="20.0" layoutY="303.0" text="Information" />
-            <TextArea layoutX="106.0" layoutY="285.0" prefHeight="119.0" prefWidth="363.0" />
-            <Button layoutX="106.0" layoutY="415.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Borger">
+            <TextArea fx:id="txtAreaCitizenGeneralInfo" layoutX="106.0" layoutY="285.0" prefHeight="119.0" prefWidth="363.0" />
+            <Button fx:id="btnSaveCitizen" layoutX="106.0" layoutY="415.0" mnemonicParsing="false" onAction="#btnHandleSaveCitizen" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Borger">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect>
@@ -252,15 +252,15 @@
          <children>
             <TableView fx:id="tvStudent" layoutX="7.0" layoutY="8.0" prefHeight="340.0" prefWidth="594.0" style="-fx-background-color: transparent;">
               <columns>
-                  <TableColumn fx:id="tcStudentFirstName" prefWidth="131.2000093460083" text="Fornavn" />
-                <TableColumn fx:id="tcStudentLastName" prefWidth="130.40003967285156" text="Efternavn" />
-                  <TableColumn fx:id="tcStudentUsername" prefWidth="155.2000732421875" text="Username" />
-                  <TableColumn fx:id="tcStudentPassword" prefWidth="177.59991455078125" text="Password" />
+                  <TableColumn fx:id="tcStudentFirstName" minWidth="0.0" prefWidth="108.80004596710205" text="Fornavn" />
+                <TableColumn fx:id="tcStudentLastName" prefWidth="179.2000274658203" text="Efternavn" />
+                  <TableColumn fx:id="tcStudentUsername" prefWidth="191.199951171875" text="Username" />
+                  <TableColumn fx:id="tcStudentPassword" minWidth="0.0" prefWidth="109.5999755859375" text="Password" />
               </columns>
             </TableView>
-            <TextField fx:id="txtFieldFirstName" layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="118.0" promptText="Fornavn" />
-            <TextField fx:id="txtFieldUsername" layoutX="327.0" layoutY="367.0" prefHeight="26.0" prefWidth="118.0" promptText="Username" />
-            <TextField fx:id="txtFieldPassword" layoutX="478.0" layoutY="367.0" prefHeight="26.0" prefWidth="118.0" promptText="Password" />
+            <TextField fx:id="txtFieldFirstName" layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Fornavn" />
+            <TextField fx:id="txtFieldPassword" layoutX="470.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Password" />
+            <TextField fx:id="txtFieldUsername" layoutX="317.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Username" />
             <Button fx:id="btnSaveStudent" layoutX="14.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleSaveStudent" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Elev">
                <effect>
                   <ColorAdjust brightness="0.3" />
@@ -273,7 +273,7 @@
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect></Button>
-            <TextField fx:id="txtFieldLastName" layoutX="177.0" layoutY="367.0" prefHeight="26.0" prefWidth="118.0" promptText="Efternavn" />
+            <TextField fx:id="txtFieldLastName" layoutX="166.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Efternavn" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
@@ -334,7 +334,7 @@
                   <Bloom threshold="0.36" />
                </effect>
             </Label>
-            <Button fx:id="btnEditCase" layoutX="325.0" layoutY="369.0" mnemonicParsing="false" onAction="#btnGHandleEditCase" prefHeight="26.0" prefWidth="117.0" text="Rediger Sag">
+            <Button fx:id="btnEditCase" layoutX="325.0" layoutY="369.0" mnemonicParsing="false" onAction="#btnHandleEditCase" prefHeight="26.0" prefWidth="117.0" text="Rediger Sag">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect></Button>

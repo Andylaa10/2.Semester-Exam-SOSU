@@ -25,11 +25,15 @@ import java.util.ResourceBundle;
 
 public class TeacherViewController extends Application implements Initializable, IController{
 
+<<<<<<< Updated upstream
 
+=======
+    /**
+     * Top Pane
+     */
+>>>>>>> Stashed changes
     @FXML
     private AnchorPane topPane;
-    @FXML
-    private TextArea txtAreaGeneralInfo;
     @FXML
     private Button btnStudent;
     @FXML
@@ -134,10 +138,26 @@ public class TeacherViewController extends Application implements Initializable,
     /**
      * Create Citizen Pane
      */
+    @FXML
+    private TextField txtFieldCitizenFirstName;
+    @FXML
+    private TextField txtFieldCitizenLastName;
+    @FXML
+    private TextField txtFieldSSN;
+    @FXML
+    private TextField txtFieldAddress;
+    @FXML
+    private CheckBox checkBoxMale;
+    @FXML
+    private CheckBox checkBoxFemale;
+    @FXML
+    private CheckBox checkBoxOther;
+    @FXML
+    private TextArea txtAreaCitizenGeneralInfo;
+    @FXML
+    private Button btnSaveCitizen;
+
     
-
-
-
     private ObservableList<User> allStudents = FXCollections.observableArrayList();
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCases = FXCollections.observableArrayList();
@@ -302,5 +322,32 @@ public class TeacherViewController extends Application implements Initializable,
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
+    }
+
+    public void btnHandleAssignCase(ActionEvent actionEvent) {
+    }
+
+    public void btnHandleSaveCitizen(ActionEvent actionEvent) {
+    }
+
+    public void btnHandleSaveStudent(ActionEvent actionEvent) {
+    }
+
+    public void btnHandleEditStudent(ActionEvent actionEvent) {
+    }
+
+    public void btnHandleDeleteStudent(ActionEvent actionEvent) {
+    }
+
+    public void btnHandleSaveCase(ActionEvent actionEvent) {
+    }
+
+    public void btnHandleEditCase(ActionEvent actionEvent) {
+    }
+
+    public void btnHandleDeleteCase(ActionEvent actionEvent) {
+    }
+
+    public void btnHandleCopyCase(ActionEvent actionEvent) {
     }
 }

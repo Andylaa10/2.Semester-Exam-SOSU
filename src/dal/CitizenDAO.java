@@ -1,10 +1,8 @@
 package dal;
 
 import be.Citizen;
-import be.User;
-import be.enums.UserType;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,7 +19,7 @@ public class CitizenDAO {
     }
 
     public List<Citizen> getCitizens() throws SQLException {
-        ArrayList<Citizen> allCustomers = new ArrayList<>();
+        ArrayList<Citizen> allCitizens = new ArrayList<>();
 
         try (Connection connection = connector.getConnection()) {
             String sql = "SELECT * FROM Citizen;";
@@ -29,21 +27,29 @@ public class CitizenDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultset = preparedStatement.executeQuery();
             while (resultset.next()) {
-                int customerID = resultset.getInt("CustomerID");
-                String firstName = resultset.getString("Fname");
-                String lastName = resultset.getString("Lname");
-                String phoneNumber = resultset.getString("PhoneNumber");
-                String email = resultset.getString("Email");
-                String study = resultset.getString("Study");
-                String note = resultset.getString("Note");
+                int id = resultset.getInt("citizenID");
+                String firstName = resultset.getString("firstName");
+                String lastName = resultset.getString("lastName");
+                String ssn = resultset.getString("SSN");
+                String address = resultset.getString("address");
+                String sex = resultset.getString("sex");
+                int generalInfoID = resultset.getInt("generalInfoId");
+                int functionalAbilityID = resultset.getInt("functionalAbilityId");
+                int loginID = resultset.getInt("loginId");
+                int functionalLevelID = resultset.getInt("functionalLevelId");
+                int schoolID = resultset.getInt("schoolId");
 
-                Customer customer = new Customer(customerID, firstName, lastName, phoneNumber, email, study, note);
-                allCustomers.add(customer);
+                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex, generalInfoID, functionalAbilityID, loginID, functionalLevelID, schoolID);
+                allCitizens.add(citizen);
             }
+
         } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
+            throw new SQLException();
         }
-        return allCustomers;
+        return allCitizens;
     }
+
+
+
 
 }
