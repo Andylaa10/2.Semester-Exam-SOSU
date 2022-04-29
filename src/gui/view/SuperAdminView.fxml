@@ -1,14 +1,212 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="gui.controller.SuperAdminViewController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TeacherViewController">
+   <children>
+      <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: #044d39;">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="134.0" fitWidth="166.0" layoutX="9.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/Logo.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust contrast="0.15" />
+                     </effect>
+                  </ImageView>
+                  <Button fx:id="btnHome" layoutX="7.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnClickHome" prefHeight="133.0" prefWidth="172.0" style="-fx-background-color: transparent;" />
+               </children>
+            </Pane>
+            <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#btnClickLogout" prefHeight="42.0" prefWidth="218.0" text="Opret Skole">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/School%20Icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnLogOut2" mnemonicParsing="false" onAction="#btnClickLogout" prefHeight="42.0" prefWidth="218.0" text="Opret Admin">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="26.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/admin%20icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnLogOut21" mnemonicParsing="false" onAction="#btnClickLogout" prefHeight="42.0" prefWidth="218.0" text="Konfigurer Skoler">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/configure%20icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Pane prefHeight="232.0" prefWidth="182.0" />
+            <Button fx:id="btnLogOut1" mnemonicParsing="false" onAction="#btnClickLogout" prefHeight="42.0" prefWidth="218.0" text="Log Ud ">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/Logout%20Icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+      <Pane layoutX="182.0" layoutY="46.0" prefHeight="86.0" prefWidth="618.0" style="-fx-background-color: #3ce5bc;">
+         <children>
+            <Label fx:id="labelTitle" layoutX="31.0" layoutY="7.0" prefHeight="47.0" prefWidth="534.0" text="Tekst" textFill="WHITE">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelInfo" layoutX="34.0" layoutY="43.0" prefHeight="35.0" prefWidth="580.0" text="Tekst" textFill="WHITE" />
+            <Label fx:id="labelInfoNewLine" layoutX="34.0" layoutY="58.0" prefHeight="35.0" prefWidth="580.0" text="Tekst2" textFill="WHITE" />
+         </children>
+      </Pane>
+      <Label layoutX="213.0" prefHeight="47.0" prefWidth="211.0" text="Hold overblik over dine data her...">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="anchorPaneTeacher" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+         <children>
+            <Label alignment="TOP_LEFT" layoutX="2.0" layoutY="50.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="90.0" prefHeight="35.0" prefWidth="580.0" text="- Få et overblik over alle oprettede skoler, samt oprette en ny skole i systemet, redigere eller ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="140.0" prefHeight="35.0" prefWidth="586.0" text="- Få et overblik over alle oprettede admins i systemet, samt oprette nye admins, redigere eller ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="195.0" prefHeight="35.0" prefWidth="545.0" text="- Få et overblik over alle oprettede skoler, samt admins. Herefter er det muligt at tildele">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="212.0" prefHeight="35.0" prefWidth="225.0" text="admins til deres tilhørende skole">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="157.0" prefHeight="35.0" prefWidth="225.0" text="slette admins">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="107.0" prefHeight="35.0" prefWidth="225.0" text="slette skoler">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorPaneCreateSchool" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+         <children>
+            <TableView layoutX="27.0" layoutY="28.0" prefHeight="377.0" prefWidth="243.0" style="-fx-background-color: trransparent;">
+              <columns>
+                <TableColumn prefWidth="242.40001220703124" text="Skolens Navn" />
+              </columns>
+            </TableView>
+            <Button layoutX="27.0" layoutY="416.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="111.0" text="Rediger Skole">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect>
+            </Button>
+            <Button layoutX="159.0" layoutY="416.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="111.0" text="Slet Skole">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect>
+            </Button>
+            <TextField layoutX="289.0" layoutY="416.0" prefHeight="26.0" prefWidth="182.0" promptText="Skole Navn" />
+            <Button layoutX="484.0" layoutY="416.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="111.0" text="Opret/Gem Skole">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect>
+            </Button>
+            <ImageView fitHeight="292.0" fitWidth="243.0" layoutX="305.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/School%20Icon.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="326.0" layoutY="44.0" text="Oprettelse af Skole">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorPaneCreateAdmin" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+         <children>
+            <TableView layoutX="15.0" layoutY="44.0" prefHeight="307.0" prefWidth="580.0" style="-fx-background-color: transparent;">
+              <columns>
+                <TableColumn prefWidth="145.0" text="Fornavn" />
+                <TableColumn prefWidth="145.0" text="Efternavn" />
+                  <TableColumn prefWidth="145.0" text="Username" />
+                  <TableColumn prefWidth="145.0" text="Password" />
+              </columns>
+            </TableView>
+            <Label alignment="CENTER" layoutX="199.0" prefHeight="47.0" prefWidth="211.0" text="Oprettede Admins">
+               <font>
+                  <Font size="23.0" />
+               </font>
+            </Label>
+            <TextField layoutX="15.0" layoutY="370.0" prefHeight="26.0" prefWidth="166.0" promptText="Fornavn" />
+            <TextField layoutX="198.0" layoutY="370.0" prefHeight="26.0" prefWidth="166.0" promptText="Efternavn" />
+            <TextField layoutX="14.0" layoutY="407.0" prefHeight="26.0" prefWidth="166.0" promptText="Username" />
+            <TextField layoutX="199.0" layoutY="407.0" prefHeight="26.0" prefWidth="166.0" promptText="Password" />
+            <Button layoutX="375.0" layoutY="370.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="218.0" text="Opret/Gem Admin">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect>
+            </Button>
+            <Button layoutX="487.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="105.0" text="Rediger Admin">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect>
+            </Button>
+            <Button layoutX="377.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="94.0" text="Slet Admin">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" />
+   </children>
 </AnchorPane>

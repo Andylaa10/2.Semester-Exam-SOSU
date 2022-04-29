@@ -156,7 +156,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <TableView layoutX="14.0" layoutY="42.0" prefHeight="361.0" prefWidth="266.0" style="-fx-background-color: transparent;">
               <columns>
@@ -188,7 +188,7 @@
             </Button>
             <Label layoutX="337.0" layoutY="416.0" prefHeight="26.0" prefWidth="258.0" text="Dobbeltklik på borger for at se flere oplysninger" />
          </children></AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0">
          <children>
             <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -208,9 +208,9 @@
             <CheckBox layoutX="106.0" layoutY="252.0" mnemonicParsing="false" text="Mand" />
             <CheckBox layoutX="169.0" layoutY="252.0" mnemonicParsing="false" text="Kvinde" />
             <CheckBox layoutX="232.0" layoutY="252.0" mnemonicParsing="false" text="Andet" />
-            <Label layoutX="106.0" layoutY="26.0" text="Oprettelse af borger">
+            <Label layoutX="104.0" layoutY="26.0" text="Oprettelse af borger">
                <font>
-                  <Font size="27.0" />
+                  <Font size="22.0" />
                </font>
             </Label>
             <Label layoutX="20.0" layoutY="303.0" text="Information" />
@@ -220,6 +220,32 @@
                   <ColorAdjust brightness="0.3" />
                </effect>
             </Button>
+            <Label layoutX="352.0" layoutY="28.0" text="Generelle Oplysninger">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="315.0" layoutY="77.0" text="Personlige Faktorer">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="469.0" layoutY="77.0" text="Omgivelses Faktorer">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="315.0" layoutY="100.0" text="- Mestring" />
+            <Label layoutX="315.0" layoutY="122.0" text="- Motivation" />
+            <Label layoutX="315.0" layoutY="143.0" text="- Ressourcer" />
+            <Label layoutX="315.0" layoutY="165.0" text="- Roller" />
+            <Label layoutX="316.0" layoutY="186.0" text="- Vaner" />
+            <Label layoutX="316.0" layoutY="208.0" text="- Uddannelse og Job" />
+            <Label layoutX="316.0" layoutY="231.0" text="- Livs Historie" />
+            <Label layoutX="316.0" layoutY="253.0" text="- Helbredsoplysninger" />
+            <Label layoutX="468.0" layoutY="103.0" text="- Hjælpemidler" />
+            <Label layoutX="468.0" layoutY="125.0" text="-  Boligens indretning" />
+            <Label layoutX="468.0" layoutY="146.0" text="- Netværk" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">

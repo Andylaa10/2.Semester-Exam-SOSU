@@ -128,7 +128,7 @@ public class TeacherViewController extends Application implements Initializable,
         Scene scene = new Scene(loader.load());
         Stage switcher = (Stage) btnLogOut.getScene().getWindow();
         switcher.setScene(scene);
-        switcher.setTitle("Student");
+        switcher.setTitle("Lærer");
         switcher.show();
     }
 
