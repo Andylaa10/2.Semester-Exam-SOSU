@@ -3,8 +3,9 @@ Redefine of the background color, to a dark blue color.
  */
 
 .root {
-    -fx-base: rgb(12, 119, 88);
-    -fx-background: rgb(169, 236, 232);
+    -fx-base: rgb(215, 84, 84);
+    -fx-background: rgb(232, 201, 201);
+
     /* make controls like buttons a little bit lighter for a relaxed design effect */
     -fx-color: derive(-fx-base, 15%);
 
@@ -15,7 +16,7 @@ Redefine of the background color, to a dark blue color.
 
     /* A bright blue for highlighting/accenting objects.  For example: selected
      * text; selected items in menus, lists, trees, and tables; progress bars */
-    -fx-accent: #044d39;
+    -fx-accent: #ab4949;
 
     /* color of non-focused yet selected elements */
     -fx-selection-bar-non-focused: rgb(255, 255, 255);
@@ -31,27 +32,28 @@ Redefine of the background color, to a dark blue color.
 
 .table-row-cell:selected {
     -fx-background-color: #ce8640;
-}
-.table-row-cell:selected .text {
-    -fx-text-fill: #000000;
+
 }
 
 .button{
-    -fx-background-color:  #044d39;
+    -fx-background-color:  rgb(215, 84, 84);
 }
 
 .button:hover{
-    -fx-background-color: rgb(0, 171, 208);
+    -fx-background-color: rgb(204, 136, 68);
+    -fx-text-fill: white;
 }
 .table-row-cell {
     -fx-background-color: transparent;
+    -fx-text-background-color: black;
 }
 
 .table-view .column-header .label {
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
-.table-view{
+
+.table-view .text-input{
     -fx-text-fill: black;
 }
 
@@ -65,11 +67,11 @@ Redefine of the background color, to a dark blue color.
 }
 
 .text-field:focused{
-    -fx-background-color: rgb(83, 208, 156);
+    -fx-background-color: rgb(204, 136, 68);
 }
 
 .text-field:hover{
-    
+
 }
 .scroll-bar{
     -fx-opacity: 0.35;

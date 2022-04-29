@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SuperAdminViewController">
+<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/SuperAdmin.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SuperAdminViewController">
    <children>
-      <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: #044d39;">
+      <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: rgb(215, 84, 84);">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -30,7 +30,7 @@
                   <Button fx:id="btnHome" layoutX="7.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnClickHome" prefHeight="133.0" prefWidth="172.0" style="-fx-background-color: transparent;" />
                </children>
             </Pane>
-            <Button fx:id="btnCreateSchool" mnemonicParsing="false" onAction="#btnClickCreateschool" prefHeight="42.0" prefWidth="218.0" text="Opret Skole">
+            <Button fx:id="btnCreateSchool" mnemonicParsing="false" onAction="#btnClickCreateschool" prefHeight="42.0" prefWidth="218.0" text="Opret Skole" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
@@ -42,7 +42,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnCreateAdmin" mnemonicParsing="false" onAction="#btnClickCreateAdmin" prefHeight="42.0" prefWidth="218.0" text="Opret Admin">
+            <Button fx:id="btnCreateAdmin" mnemonicParsing="false" onAction="#btnClickCreateAdmin" prefHeight="42.0" prefWidth="218.0" text="Opret Admin" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
@@ -54,7 +54,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnConfigureSchools" mnemonicParsing="false" onAction="#btnClickConfigureSchools" prefHeight="42.0" prefWidth="218.0" text="Konfigurer Skoler">
+            <Button fx:id="btnConfigureSchools" mnemonicParsing="false" onAction="#btnClickConfigureSchools" prefHeight="42.0" prefWidth="218.0" text="Konfigurer Skoler" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
@@ -67,7 +67,7 @@
                </graphic>
             </Button>
             <Pane prefHeight="232.0" prefWidth="182.0" />
-            <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#btnClickLogout" prefHeight="42.0" prefWidth="218.0" text="Log Ud ">
+            <Button fx:id="btnLogOut" mnemonicParsing="false" onAction="#btnClickLogout" prefHeight="42.0" prefWidth="218.0" text="Log Ud " textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -81,7 +81,7 @@
             </Button>
          </children>
       </VBox>
-      <Pane layoutX="182.0" layoutY="46.0" prefHeight="86.0" prefWidth="618.0" style="-fx-background-color: #3ce5bc;">
+      <Pane layoutX="182.0" layoutY="46.0" prefHeight="86.0" prefWidth="618.0" style="-fx-background-color: rgb(215, 84, 84);">
          <children>
             <Label fx:id="labelTitle" layoutX="31.0" layoutY="7.0" prefHeight="47.0" prefWidth="534.0" text="Tekst" textFill="WHITE">
                <font>
@@ -91,6 +91,9 @@
             <Label fx:id="labelInfo" layoutX="34.0" layoutY="43.0" prefHeight="35.0" prefWidth="580.0" text="Tekst" textFill="WHITE" />
             <Label fx:id="labelInfoNewLine" layoutX="34.0" layoutY="58.0" prefHeight="35.0" prefWidth="580.0" text="Tekst2" textFill="WHITE" />
          </children>
+         <effect>
+            <ColorAdjust brightness="0.3" />
+         </effect>
       </Pane>
       <Label layoutX="213.0" prefHeight="47.0" prefWidth="211.0" text="Hold overblik over dine data her...">
          <font>
@@ -136,7 +139,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateSchool" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+      <AnchorPane fx:id="anchorPaneCreateSchool" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
          <children>
             <TableView layoutX="27.0" layoutY="28.0" prefHeight="377.0" prefWidth="243.0" style="-fx-background-color: transparent;">
               <columns>
@@ -207,7 +210,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneConfigureSchool" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneConfigureSchool" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <TableView layoutX="14.0" layoutY="38.0" prefHeight="365.0" prefWidth="262.0" style="-fx-background-color: transparent;">
               <columns>

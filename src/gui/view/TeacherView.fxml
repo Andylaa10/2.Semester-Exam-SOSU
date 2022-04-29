@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Main.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TeacherViewController">
+<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Teacher.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TeacherViewController">
    <children>
       <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: #044d39;">
          <children>
@@ -34,7 +34,7 @@
                   <Button fx:id="btnHome" layoutX="7.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnClickHome" prefHeight="133.0" prefWidth="172.0" style="-fx-background-color: transparent;" />
                </children>
             </Pane>
-            <Button fx:id="btnStudent" mnemonicParsing="false" onAction="#btnClickStudent" prefHeight="42.0" prefWidth="218.0" stylesheets="@css/Main.css" text="Elever">
+            <Button fx:id="btnStudent" mnemonicParsing="false" onAction="#btnClickStudent" prefHeight="42.0" prefWidth="218.0" stylesheets="@css/Teacher.css" text="Elever">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -248,7 +248,7 @@
             <Label layoutX="468.0" layoutY="146.0" text="- Netværk" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <TableView fx:id="tvStudent" layoutX="7.0" layoutY="8.0" prefHeight="340.0" prefWidth="594.0" style="-fx-background-color: transparent;">
               <columns>

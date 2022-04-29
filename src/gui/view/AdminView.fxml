@@ -17,9 +17,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminViewController">
+<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Admin.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminViewController">
    <children>
-      <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: #044d39;">
+      <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: rgb(234, 131, 48);">
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
@@ -34,7 +34,7 @@
                   <Button fx:id="btnHome" layoutX="7.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnClickHome" prefHeight="133.0" prefWidth="172.0" style="-fx-background-color: transparent;" />
                </children>
             </Pane>
-            <Button fx:id="btnCreateTeacher" mnemonicParsing="false" onAction="#btnClickCreateTeacher" prefHeight="42.0" prefWidth="218.0" stylesheets="@css/Main.css" text="Opret Lærer">
+            <Button fx:id="btnCreateTeacher" mnemonicParsing="false" onAction="#btnClickCreateTeacher" prefHeight="42.0" prefWidth="218.0" text="Opret Lærer">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -46,7 +46,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnStudent" mnemonicParsing="false" onAction="#btnClickStudent" prefHeight="42.0" prefWidth="218.0" stylesheets="@css/Main.css" text="Elever">
+            <Button fx:id="btnStudent" mnemonicParsing="false" onAction="#btnClickStudent" prefHeight="42.0" prefWidth="218.0" text="Elever">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -109,7 +109,7 @@
             </Button>
          </children>
       </VBox>
-      <Pane layoutX="182.0" layoutY="46.0" prefHeight="86.0" prefWidth="618.0" style="-fx-background-color: #3ce5bc;">
+      <Pane layoutX="182.0" layoutY="46.0" prefHeight="86.0" prefWidth="618.0" style="-fx-background-color: rgb(234, 131, 48);">
          <children>
             <Label fx:id="labelTitle" layoutX="31.0" layoutY="7.0" prefHeight="47.0" prefWidth="534.0" text="Tekst" textFill="WHITE">
                <font>
@@ -119,6 +119,9 @@
             <Label fx:id="labelInfo" layoutX="34.0" layoutY="43.0" prefHeight="35.0" prefWidth="580.0" text="Tekst" textFill="WHITE" />
             <Label fx:id="labelInfoNewLine" layoutX="34.0" layoutY="58.0" prefHeight="35.0" prefWidth="580.0" text="Tekst2" textFill="WHITE" />
          </children>
+         <effect>
+            <ColorAdjust brightness="0.3" />
+         </effect>
       </Pane>
       <Label layoutX="213.0" prefHeight="47.0" prefWidth="211.0" text="Hold overblik over dine data her...">
          <font>
@@ -152,22 +155,22 @@
             <TextField layoutX="373.0" layoutY="199.0" />
             <Button layoutX="415.0" layoutY="246.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Gem lærer">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
             <Button layoutX="14.0" layoutY="416.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Rediger Lærer">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
             <Button layoutX="133.0" layoutY="416.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Slet lærer">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
             <Button layoutX="251.0" layoutY="416.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="107.0" text="Kopier Lærer">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
             <Label layoutX="116.0" layoutY="14.0" text="Oprettede Lærere">
@@ -253,7 +256,7 @@
             </Label>
             <Button layoutX="14.0" layoutY="416.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="137.0" text="Tildel Sag til Borger">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
             <Label layoutX="337.0" layoutY="416.0" prefHeight="26.0" prefWidth="258.0" text="Dobbeltklik på borger for at se flere oplysninger" />
@@ -288,7 +291,7 @@
             <TextArea layoutX="106.0" layoutY="285.0" prefHeight="119.0" prefWidth="363.0" />
             <Button layoutX="106.0" layoutY="415.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Borger">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
             <Label layoutX="350.0" layoutY="28.0" text="Generelle Oplysninger">
@@ -333,17 +336,17 @@
             <TextField layoutX="216.0" layoutY="367.0" prefHeight="26.0" prefWidth="180.0" promptText="Username" />
             <Button layoutX="14.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Elev">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
             <Button layoutX="216.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Rediger Elev">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
             <Button layoutX="416.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Slet Elev">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
          </children>
@@ -396,7 +399,7 @@
             </TableView>
             <Button layoutX="63.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="232.0" text="Opret/Gem Sag">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
             <Label layoutX="354.0" layoutY="22.0" text="Nuværende Sager" textFill="#1d5e3f">
@@ -409,17 +412,17 @@
             </Label>
             <Button layoutX="325.0" layoutY="369.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" text="Rediger Sag">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
             <Button layoutX="456.0" layoutY="368.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" text="Slet Sag">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
             <Button layoutX="325.0" layoutY="405.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="250.0" text="Kopier Sag">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
          </children>
