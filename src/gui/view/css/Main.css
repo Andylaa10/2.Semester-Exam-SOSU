@@ -64,6 +64,10 @@ Redefine of the background color, to a dark blue color.
 .text-field:focused{
     -fx-background-color: rgb(83, 208, 156);
 }
+
+.text-field:hover{
+    
+}
 .scroll-bar{
     -fx-opacity: 0.35;
 }

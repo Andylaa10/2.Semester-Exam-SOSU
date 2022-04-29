@@ -1,17 +1,21 @@
 package gui.controller;
 
+import be.Case;
+import be.Citizen;
 import be.User;
+import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -44,20 +48,166 @@ public class TeacherViewController extends Application implements Initializable,
     @FXML
     private Label labelInfoNewLine;
     @FXML
-    private AnchorPane anchorPaneStudent;
-    @FXML
     private AnchorPane anchorPaneCitizen;
     @FXML
     private AnchorPane anchorPaneCreateCitizen;
     @FXML
+    private AnchorPane anchorPaneTeacher;
+
+    /**
+     * Student pane
+     */
+    @FXML
+    private AnchorPane anchorPaneStudent;
+    @FXML
+    private TableView<User> tvStudent;
+    @FXML
+    private TableColumn<User, String> tcStudentFirstName;
+    @FXML
+    private TableColumn<User, String> tcStudentLastName;
+    @FXML
+    private TableColumn<User, String> tcStudentUsername;
+    @FXML
+    private TableColumn<User, String> tcStudentPassword;
+    @FXML
+    private Button btnSaveStudent;
+    @FXML
+    private Button btnEditStudent;
+    @FXML
+    private Button btnDeleteStudent;
+    @FXML
+    private TextField txtFieldFirstName;
+    @FXML
+    private TextField txtFieldLastName;
+    @FXML
+    private TextField txtFieldUsername;
+    @FXML
+    private TextField txtFieldPassword;
+
+    /**
+     * CasePane
+     */
+    @FXML
     private AnchorPane anchorPaneCase;
     @FXML
-    private AnchorPane anchorPaneTeacher;
+    private TableView<Case> tvCases;
+    @FXML
+    private TableColumn<Case, String> tcCasesName;
+    @FXML
+    private TableColumn<Case, String> tcCasesDate;
+    @FXML
+    private Button btnSaveCase;
+    @FXML
+    private Button btnEditCase;
+    @FXML
+    private Button btnDeleteCase;
+    @FXML
+    private Button btnCopyCase;
+    @FXML
+    private TextField txtFieldName;
+    @FXML
+    private TextField txtFieldDate;
+    @FXML
+    private TextArea txtAreaInfo;
+
+    /**
+     * CitizenPane
+     */
+    @FXML
+    private TableView<Case> tvCurrentCases;
+    @FXML
+    private TableView<Citizen> tvCitizens;
+    @FXML
+    private TableColumn<Case, String> tcCurrentCasesName;
+    @FXML
+    private TableColumn<Case, String> tcCurrentCasesDate;
+    @FXML
+    private TableColumn<Citizen, String> tcCitizenFirstName;
+    @FXML
+    private TableColumn<Citizen, String> tcCitizenLastName;
+    @FXML
+    private TableColumn<Citizen, String> tcCitizenSSN;
+    @FXML
+    private Button btnAssignCase;
+
+    /**
+     * Create Citizen Pane
+     */
+    
+
+
+
+    private ObservableList<User> allStudents = FXCollections.observableArrayList();
+    private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
+    private ObservableList<Case> allCases = FXCollections.observableArrayList();
+    private ObservableList<Case> allCurrentCases = FXCollections.observableArrayList();
+
+    private DataModelFacade dataModelFacade;
+
+    public TeacherViewController() throws IOException {
+        this.dataModelFacade = new DataModelFacade();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setAnchorPanesVisibility();
+        initializeTable();
     }
+
+    private void initializeTable() {
+        //Initialize the students table
+        tcStudentFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        tcStudentLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        tcStudentUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
+        tcStudentPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
+
+        //Initialize the cases table
+        tcCasesName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tcCasesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        //Initialize the citizens table
+        tcCitizenFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        tcCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        tcCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("ssn"));
+
+        //Initialize the current cases table at citizen window
+        tcCurrentCasesName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tcCurrentCasesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+    }
+
+
+    private void tableViewLoadStudents(ObservableList<User> allStudents) {
+        tvStudent.setItems(getStudentData());
+    }
+
+    private ObservableList<User> getStudentData() {
+        return allStudents;
+    }
+
+    private void tableViewLoadCases(ObservableList<Case> allCases) {
+        tvCases.setItems(getCaseData());
+    }
+
+    private ObservableList<Case> getCaseData() {
+        return allCases;
+    }
+
+    private void tableViewLoadCitizens(ObservableList<Citizen> allCitizens) {
+        tvCitizens.setItems(getCitizenData());
+    }
+
+    private ObservableList<Citizen> getCitizenData() {
+        return allCitizens;
+    }
+
+    private void tableViewLoadCurrentCases(ObservableList<Case> allCurrentCases) {
+        tvCurrentCases.setItems(getCurrentCasesData());
+    }
+
+    private ObservableList<Case> getCurrentCasesData() {
+        return allCurrentCases;
+    }
+
 
     private void setAnchorPanesVisibility(){
         labelInfoNewLine.setText("");
@@ -68,7 +218,7 @@ public class TeacherViewController extends Application implements Initializable,
         anchorPaneCase.setVisible(false);
     }
 
-    public void btnClickStudent(ActionEvent actionEvent) {
+    public void btnClickStudent() {
         labelTitle.setText("Elever");
         labelInfo.setText("Overblik over alle oprettede elever");
         labelInfoNewLine.setText("");
@@ -79,7 +229,7 @@ public class TeacherViewController extends Application implements Initializable,
         anchorPaneStudent.setVisible(true);
     }
 
-    public void btnClickCase(ActionEvent actionEvent) {
+    public void btnClickCase() {
         labelTitle.setText("Sager");
         labelInfo.setText("Overblik over alle oprettede sager. Opret nye sager, eller og kopier sager");
         labelInfoNewLine.setText("");
@@ -90,7 +240,7 @@ public class TeacherViewController extends Application implements Initializable,
         anchorPaneCitizen.setVisible(false);
     }
 
-    public void btnClickSeeCitizens(ActionEvent actionEvent){
+    public void btnClickSeeCitizens(){
         labelTitle.setText("Borgere");
         labelInfo.setText("Overblik over alle oprettede borgere. Tildel en sag til en borger, se yderligere informationer,");
         labelInfoNewLine.setText( "rediger eller slet borger.");
@@ -101,7 +251,7 @@ public class TeacherViewController extends Application implements Initializable,
         anchorPaneCitizen.setVisible(true);
     }
 
-    public void btnClickCitizen(ActionEvent actionEvent) {
+    public void btnClickCitizen() {
         labelTitle.setText("Opret Borger");
         labelInfo.setText("Oprettelses vindue til borger");
         labelInfoNewLine.setText("");
