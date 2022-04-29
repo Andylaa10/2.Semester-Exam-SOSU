@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class LoginMenuController{
+public class LoginViewController {
 
     @FXML
     private Button btnLogin;
@@ -26,7 +26,7 @@ public class LoginMenuController{
 
     private DataModelFacade facade;
 
-    public LoginMenuController() throws IOException {
+    public LoginViewController() throws IOException {
         facade = new DataModelFacade();
     }
 

@@ -207,6 +207,26 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" />
+      <AnchorPane layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
+         <children>
+            <TableView layoutX="14.0" layoutY="38.0" prefHeight="365.0" prefWidth="262.0" style="-fx-background-color: transparent;">
+              <columns>
+                <TableColumn prefWidth="260.0" text="Skolens Navn" />
+              </columns>
+            </TableView>
+            <TableView layoutX="305.0" layoutY="38.0" prefHeight="401.0" prefWidth="295.0" style="-fx-background-color: transparent;">
+               <columns>
+                  <TableColumn text="Fornavn" />
+                  <TableColumn text="Efternavn" />
+                  <TableColumn prefWidth="143.99998779296874" text="Username" />
+               </columns>
+            </TableView>
+            <Button layoutX="14.0" layoutY="414.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="131.0" text="Tildel Admin til Skole">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

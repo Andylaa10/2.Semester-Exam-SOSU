@@ -124,7 +124,7 @@ public class TeacherViewController extends Application implements Initializable,
     }
 
     public void btnClickLogout(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
         Scene scene = new Scene(loader.load());
         Stage switcher = (Stage) btnLogOut.getScene().getWindow();
         switcher.setScene(scene);
