@@ -150,6 +150,6 @@ public class Citizen {
                 ", functionalLevelID=" + functionalLevelID +
                 ", loginID=" + loginID +
                 ", schoolID=" + schoolID +
-                '}';
+                '}' + "\n";
     }
 }

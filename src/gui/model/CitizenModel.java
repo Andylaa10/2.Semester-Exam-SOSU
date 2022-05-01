@@ -23,4 +23,36 @@ public class CitizenModel {
     public List<Citizen> getCitizens() throws SQLException {
         return citizenManager.getCitizens();
     }
+
+    /**
+     * Creates a case using the createCitizen method from citizenManager
+     * @param firstname
+     * @param lastName
+     * @param SSN
+     * @param address
+     * @param sex
+     * @return
+     * @throws SQLException
+     */
+    public Citizen createCitizen(String firstname, String lastName, String SSN, String address, String sex) throws SQLException {
+        return citizenManager.createCitizen(firstname, lastName, SSN, address, sex);
+    }
+
+    /**
+     * Deletes a citizen using the deleteCitizen method from citizenDAO
+     * @param id
+     * @throws Exception
+     */
+    public void deleteCitizen(int id) throws Exception {
+        citizenManager.deleteCitizen(id);
+    }
+
+    /**
+     * Edits a citizen using the editCitizen method in citizenDAO
+     * @param citizen
+     * @throws Exception
+     */
+    public void editCitizen(Citizen citizen) throws Exception {
+        citizenManager.editCitizen(citizen);
+    }
 }

@@ -15,6 +15,10 @@ public class CitizenDAO {
     public CitizenDAO() throws IOException {
     }
 
+    /**
+     * Making a citizens list, connecting to the database and adding the results to our ArrayList.
+     * @return a list of citizens or an empty list of citizens.
+     */
     public List<Citizen> getCitizens() throws SQLException {
         ArrayList<Citizen> allCitizens = new ArrayList<>();
 
@@ -47,34 +51,84 @@ public class CitizenDAO {
     }
 
 
+    /**
+     * Creates a citizen, by inserting firstName, lastName, SSN, address and sex
+     * @param firstName
+     * @param lastName
+     * @param SSN
+     * @param address
+     * @param sex
+     * @return
+     * @throws SQLException
+     */
     //TODO GeneralInfo
     public Citizen createCitizen(String firstName, String lastName, String SSN, String address, String sex) throws SQLException {
-        try(Connection connection = connector.getConnection()) {
-            String sql = "INSERT INTO Citizen (firstName, lastName, SSN, address, sex) VALUES (?,?,?,?,?);";
-            try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                preparedStatement.setString(1,firstName);
-                preparedStatement.setString(2,lastName);
-                preparedStatement.setString(3,SSN);
-                preparedStatement.setString(4,address);
-                preparedStatement.setString(5,sex);
-
+        try (Connection connection = connector.getConnection()) {
+            String sql = "INSERT INTO Citizen (firstName, lastName , SSN, address, sex) VALUES (?,?,?,?,?);";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                preparedStatement.setString(1, firstName);
+                preparedStatement.setString(2, lastName);
+                preparedStatement.setString(3, SSN);
+                preparedStatement.setString(4, address);
+                preparedStatement.setString(5, sex);
+                preparedStatement.execute();
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 int id = 0;
-                if (resultSet.next()){
+                if (resultSet.next()) {
                     id = resultSet.getInt(1);
                 }
+
                 Citizen citizen = new Citizen(id, firstName, lastName, SSN, address, sex);
                 return citizen;
             }
-
         } catch (SQLServerException throwables) {
+            throw new SQLException();
+        }
+    }
+
+    /**
+     * Deletes a citizen by taken the id
+     * @param id
+     * @throws Exception
+     */
+    public void deleteCitizen(int id) throws Exception {
+        try (Connection connection = connector.getConnection()) {
+            String sql = "DELETE FROM Citizen WHERE citizenID =?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            if (preparedStatement.executeUpdate() != 1) {
+                throw new Exception();
+            }
+        } catch (SQLException throwables) {
+            throw new SQLException();
+        }
+    }
+
+    /**
+     * Edit a citizen if a match is found
+     * @param citizen
+     */
+    public void editCitizen(Citizen citizen) throws Exception {
+        try (Connection connection = connector.getConnection()) {
+            String sql = "UPDATE Citizen SET firstName=?, lastName=?, SNN=?, address=?, sex=? WHERE citizenID=?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, citizen.getFirstName());
+            preparedStatement.setString(2, citizen.getLastName());
+            preparedStatement.setString(1, citizen.getSsn());
+            preparedStatement.setString(1, citizen.getAddress());
+            preparedStatement.setString(1, citizen.getSex());
+            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate() != 1) {
+                throw new Exception("Could not edit case");
+            }
+        } catch (SQLException e) {
             throw new SQLException();
         }
     }
 
     public static void main(String[] args) throws Exception {
         CitizenDAO citizenDAO = new CitizenDAO();
-        //citizenDAO.createCitizen("Henrik", "Henriksen", "120300-2319", "Hulemands Allé 12", "Male");
+        //citizenDAO.createCitizen("Joe", "Mama", "040119-2311", "Bjergberg Allé 205", "Male");
         System.out.println(citizenDAO.getCitizens());
     }
 

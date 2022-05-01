@@ -100,6 +100,7 @@ public class CaseDAO {
             preparedStatement.setString(1, aCase.getName());
             preparedStatement.setString(2, aCase.getDate());
             preparedStatement.setString(3, aCase.getInfo());
+            preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception("Could not edit case");
             }

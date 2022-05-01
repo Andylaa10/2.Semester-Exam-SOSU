@@ -56,6 +56,7 @@ public class SuperAdminDAO {
             preparedStatement.setString(1, superAdmin.getUsername());
             preparedStatement.setString(2, superAdmin.getPassword());
             preparedStatement.setInt(3, superAdmin.getId());
+            preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception("Could not edit super admin");
             }

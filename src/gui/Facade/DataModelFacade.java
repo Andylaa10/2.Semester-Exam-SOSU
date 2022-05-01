@@ -271,5 +271,37 @@ public class DataModelFacade {
         return citizenModel.getCitizens();
     }
 
+    /**
+     * Creates a case using the createCitizen method from citizenModel
+     * @param firstname
+     * @param lastName
+     * @param SSN
+     * @param address
+     * @param sex
+     * @return
+     * @throws SQLException
+     */
+    public Citizen createCitizen(String firstname, String lastName, String SSN, String address, String sex) throws SQLException {
+        return citizenModel.createCitizen(firstname, lastName, SSN, address, sex);
+    }
+
+    /**
+     * Deletes a citizen using the deleteCitizen method from citizenModel
+     * @param id
+     * @throws Exception
+     */
+    public void deleteCitizen(int id) throws Exception {
+        citizenModel.deleteCitizen(id);
+    }
+
+    /**
+     * Edits a citizen using the editCitizen method in citizenModel
+     * @param citizen
+     * @throws Exception
+     */
+    public void editCitizen(Citizen citizen) throws Exception {
+        citizenModel.editCitizen(citizen);
+    }
+
 
 }

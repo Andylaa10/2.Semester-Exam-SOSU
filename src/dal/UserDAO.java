@@ -314,7 +314,7 @@ public class UserDAO {
             preparedStatement.setString(4, admin.getPassword());
             preparedStatement.setInt(5, admin.getId());
             preparedStatement.setString(6, String.valueOf(UserType.ADMINISTRATOR));
-
+            preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception("Could not edit admin");
             }
