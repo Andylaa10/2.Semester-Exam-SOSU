@@ -45,6 +45,7 @@ public class LoginViewController {
             controller.setUser(user);
             switcher.setTitle("Student");
             switcher.show();
+            switcher.centerOnScreen();
         } else if (user != null && user.getUsertype() == UserType.TEACHER){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/TeacherView.fxml"));
             Scene scene = new Scene(loader.load());
@@ -54,6 +55,7 @@ public class LoginViewController {
             controller.setUser(user);
             switcher.setTitle("Teacher");
             switcher.show();
+            switcher.centerOnScreen();
         } else if (user != null && user.getUsertype() == UserType.ADMINISTRATOR) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/AdminView.fxml"));
             Scene scene = new Scene(loader.load());
@@ -63,6 +65,7 @@ public class LoginViewController {
             controller.setUser(user);
             switcher.setTitle("Admin");
             switcher.show();
+            switcher.centerOnScreen();
         } else if (superAdmin != null){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/SuperAdminView.fxml"));
             Scene scene = new Scene(loader.load());
@@ -70,6 +73,7 @@ public class LoginViewController {
             switcher.setScene(scene);
             switcher.setTitle("Super Admin");
             switcher.show();
+            switcher.centerOnScreen();
         } else {
             //TODO ADD PROPER ERROR HANDLING
             System.out.println("Something probably went wrong lol");
