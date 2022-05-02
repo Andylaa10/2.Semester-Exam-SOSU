@@ -3,6 +3,7 @@ package gui.controller;
 import be.Case;
 import be.Citizen;
 import be.User;
+import be.enums.UserType;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.application.Application;
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class TeacherViewController extends Application implements Initializable, IController{
@@ -83,6 +85,8 @@ public class TeacherViewController extends Application implements Initializable,
     private TextField txtFieldUsername;
     @FXML
     private TextField txtFieldPassword;
+    @FXML
+    private TextField txtFieldStudentID;
 
     /**
      * CasePane
@@ -157,6 +161,8 @@ public class TeacherViewController extends Application implements Initializable,
     private ObservableList<Case> allCases = FXCollections.observableArrayList();
     private ObservableList<Case> allCurrentCases = FXCollections.observableArrayList();
 
+    private User selectedStudent;
+
     private DataModelFacade dataModelFacade;
 
     public TeacherViewController() throws IOException {
@@ -171,6 +177,7 @@ public class TeacherViewController extends Application implements Initializable,
         } catch (Exception e) {
             e.printStackTrace();
         }
+        selectedStudent();
     }
 
     private void initializeTable() throws Exception {
@@ -346,30 +353,119 @@ public class TeacherViewController extends Application implements Initializable,
         primaryStage.show();
     }
 
-    public void btnHandleAssignCase(ActionEvent actionEvent) {
+    public void btnHandleAssignCase() {
     }
 
-    public void btnHandleSaveCitizen(ActionEvent actionEvent) {
+    public void btnHandleSaveCitizen() throws SQLException {
+
+
     }
 
-    public void btnHandleSaveStudent(ActionEvent actionEvent) {
+    public void btnHandleSaveStudent() throws SQLException {
+        if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()){
+            String firstName = txtFieldFirstName.getText();
+            String lastName = txtFieldLastName.getText();
+            String userName = txtFieldUsername.getText();
+            String password = txtFieldPassword.getText();
+
+            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT);
+            reloadStudentTable();
+        } else{
+            System.out.println("NOOO");
+        }
     }
 
-    public void btnHandleEditStudent(ActionEvent actionEvent) {
+    public void btnHandleEditStudent() throws Exception {
+        if (this.selectedStudent != null){
+            if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
+                int id = Integer.parseInt(txtFieldStudentID.getText());;
+                String firstName = txtFieldFirstName.getText();
+                String lastName = txtFieldLastName.getText();
+                String userName = txtFieldUsername.getText();
+                String password = txtFieldPassword.getText();
+
+                User student = new User(id, firstName, lastName, userName, password, UserType.STUDENT);
+                dataModelFacade.editStudent(student);
+                reloadStudentTable();
+                btnSaveStudent.setDisable(false);
+                clearStudentTxtField();
+            }else{
+                System.out.println("Noo");
+            }
+        }
     }
 
-    public void btnHandleDeleteStudent(ActionEvent actionEvent) {
+    public void clearStudentTxtField(){
+        txtFieldStudentID.clear();
+        txtFieldFirstName.clear();
+        txtFieldLastName.clear();
+        txtFieldUsername.clear();
+        txtFieldPassword.clear();
     }
 
-    public void btnHandleSaveCase(ActionEvent actionEvent) {
+    public void btnHandleDeleteStudent() throws SQLException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("WARNING MESSAGE");
+        alert.setHeaderText("Warning before you delete student");
+        alert.setContentText("Joe");
+        if (selectedStudent != null) {
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                selectedStudent();
+                dataModelFacade.deleteStudent(selectedStudent.getId(), UserType.STUDENT);
+                reloadStudentTable();
+            }
+        } else {
+            return;
+        }
     }
 
-    public void btnHandleEditCase(ActionEvent actionEvent) {
+    public void btnHandleSaveCase() {
     }
 
-    public void btnHandleDeleteCase(ActionEvent actionEvent) {
+    public void btnHandleEditCase() {
     }
 
-    public void btnHandleCopyCase(ActionEvent actionEvent) {
+    public void btnHandleDeleteCase() {
+    }
+
+    public void btnHandleCopyCase() {
+    }
+
+    /**
+     * Makes you able to select a student from the table
+     */
+    private void selectedStudent() {
+        this.tvStudent.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((User) newValue != null) {
+                this.selectedStudent = (User) newValue;
+                setSelectedStudent(newValue);
+                btnSaveStudent.setDisable(true);
+            }
+        }));
+    }
+    /**
+     * Reloads the student table
+     */
+    private void reloadStudentTable() {
+        try {
+            int index = tvStudent.getSelectionModel().getFocusedIndex();
+            this.tvStudent.setItems(FXCollections.observableList(dataModelFacade.getStudents()));
+            tvStudent.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    /**
+     * Sets the selected event
+     * @param student
+     */
+    public void setSelectedStudent(User student) {
+            txtFieldStudentID.setText(String.valueOf(student.getId()));
+            txtFieldFirstName.setText(student.getFirstName());
+            txtFieldLastName.setText(student.getLastName());
+            txtFieldUsername.setText(student.getUsername());
+            txtFieldPassword.setText(student.getPassword());
     }
 }

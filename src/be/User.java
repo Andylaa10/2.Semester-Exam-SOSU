@@ -53,6 +53,22 @@ public class User implements ILogin {
     }
 
     /**
+     * Overloaded constructor with firstName, lastName, userName and password
+     * @param firstName
+     * @param lastName
+     * @param username
+     * @param password
+     * @param userType
+     */
+    public User(String firstName, String lastName, String username, String password, UserType userType) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.userType = userType;
+    }
+
+    /**
      * Gets the id
      * @return
      */

@@ -273,7 +273,7 @@ public class UserDAO {
             preparedStatement.setInt(5, student.getId());
             preparedStatement.setString(6, String.valueOf(UserType.STUDENT));
             if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception("Could not edit student");
+                new Exception("Could not edit student").printStackTrace();
             }
         }
     }
@@ -357,11 +357,13 @@ public class UserDAO {
         return null;
     }
 
-    public static void main(String[] args) throws IOException, SQLException {
+    public static void main(String[] args) throws Exception {
         UserDAO dao = new UserDAO();
         dao.createAdmin("John", "Johnson", "Admin", "1", UserType.ADMINISTRATOR);
         dao.createTeacher("Kim", "Larsen", "Teacher", "1", UserType.TEACHER);
         dao.createStudent("andy", "lam", "Student", "1", UserType.STUDENT);
+        dao.createAdmin("John", "Johnson", "John", "1", UserType.ADMINISTRATOR);
+        //dao.createTeacher("Kim", "Larsen", "Kim", "1", UserType.TEACHER);
         //dao.createStudent("Kristian", "Hollænder", "kris",  "1", UserType.STUDENT);
         System.out.println(dao.getAdmins());
         System.out.println(dao.getStudents());
