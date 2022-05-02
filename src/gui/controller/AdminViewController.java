@@ -179,7 +179,7 @@ public class AdminViewController extends Application implements Initializable, I
         //Initialize the citizens table
         tcCurrentCitizenFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcCurrentCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        tcCurrentCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSNJoh"));
+        tcCurrentCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
         try {
             allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
             tableViewLoadCitizens(allCitizens);
