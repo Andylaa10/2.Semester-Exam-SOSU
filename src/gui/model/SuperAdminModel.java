@@ -3,8 +3,11 @@ package gui.model;
 import be.School;
 import be.SuperAdmin;
 import bll.SuperAdminManager;
+import dal.SuperAdminDAO;
+
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class SuperAdminModel {
 
@@ -57,12 +60,16 @@ public class SuperAdminModel {
         return superAdminManager.superAdminLogin(username, password);
     }
 
-    /**
-     * Creates a school using the createSchool method from superAdminManager
-     * @param schoolName
-     * @return
-     * @throws SQLException
-     */
+    public List<School> getSchools() throws SQLException {
+        return superAdminManager.getSchools();
+    }
+
+        /**
+         * Creates a school using the createSchool method from superAdminManager
+         * @param schoolName
+         * @return
+         * @throws SQLException
+         */
     public School createSchool(String schoolName) throws SQLException {
         return superAdminManager.createSchool(schoolName);
     }
