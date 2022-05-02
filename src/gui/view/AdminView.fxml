@@ -130,11 +130,11 @@
       </Label>
       <AnchorPane fx:id="anchorPaneCreateTeacher" layoutX="186.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
-            <TableView layoutX="14.0" layoutY="45.0" prefHeight="362.0" prefWidth="344.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvTeachers" layoutX="14.0" layoutY="45.0" prefHeight="362.0" prefWidth="344.0" style="-fx-background-color: transparent;">
               <columns>
-                <TableColumn prefWidth="100.0" text="Lærer" />
-                <TableColumn prefWidth="125.0" text="Username" />
-                  <TableColumn prefWidth="125.0" text="Password" />
+                <TableColumn fx:id="tcTeacherFirstName" prefWidth="100.0" text="Fornavn" />
+                  <TableColumn fx:id="tcTeacherLastName" prefWidth="119.20001220703125" text="Efternavn" />
+                <TableColumn fx:id="tcTeacherUserName" prefWidth="120.00006103515625" text="Username" />
               </columns>
             </TableView>
             <TextField layoutX="373.0" layoutY="126.0" />
@@ -229,19 +229,19 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <TableView layoutX="14.0" layoutY="42.0" prefHeight="361.0" prefWidth="266.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvCurrentCases" layoutX="14.0" layoutY="42.0" prefHeight="361.0" prefWidth="266.0" style="-fx-background-color: transparent;">
                <columns>
-                  <TableColumn prefWidth="132.0" text="Navn" />
-                  <TableColumn prefWidth="132.79998779296875" text="Dato" />
+                  <TableColumn fx:id="tcCurrentCaseName" prefWidth="132.0" text="Navn" />
+                  <TableColumn fx:id="tcCurrentCaseDate" prefWidth="132.79998779296875" text="Dato" />
                </columns>
             </TableView>
-            <TableView layoutX="329.0" layoutY="42.0" prefHeight="362.0" prefWidth="266.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvCurrentCitizens" layoutX="329.0" layoutY="42.0" prefHeight="362.0" prefWidth="266.0" style="-fx-background-color: transparent;">
                <columns>
-                  <TableColumn prefWidth="75.0" text="Fornavn" />
-                  <TableColumn prefWidth="79.9998779296875" text="Efternavn" />
-                  <TableColumn prefWidth="111.2000732421875" text="CPR-Nummer" />
+                  <TableColumn fx:id="tcCurrentCitizenFirstName" prefWidth="75.0" text="Fornavn" />
+                  <TableColumn fx:id="tcCurrentCitizenLastName" prefWidth="79.9998779296875" text="Efternavn" />
+                  <TableColumn fx:id="tcCurrentCitizenSSN" prefWidth="111.2000732421875" text="CPR-Nummer" />
                </columns>
             </TableView>
             <Label layoutX="75.0" layoutY="9.0" text="Nuværende Sager">
@@ -254,7 +254,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="14.0" layoutY="416.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="137.0" text="Tildel Sag til Borger">
+            <Button fx:id="btnAssignCaseToCitizen" layoutX="14.0" layoutY="416.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="137.0" text="Tildel Sag til Borger">
                <effect>
                   <ColorAdjust brightness="0.2" />
                </effect>
@@ -262,7 +262,7 @@
             <Label layoutX="337.0" layoutY="416.0" prefHeight="26.0" prefWidth="258.0" text="Dobbeltklik på borger for at se flere oplysninger" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -324,11 +324,11 @@
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <TableView layoutX="7.0" layoutY="8.0" prefHeight="340.0" prefWidth="594.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvStudents" layoutX="7.0" layoutY="8.0" prefHeight="340.0" prefWidth="594.0" style="-fx-background-color: transparent;">
                <columns>
-                  <TableColumn prefWidth="188.7999849319458" text="Navn" />
-                  <TableColumn prefWidth="207.2000274658203" text="Username" />
-                  <TableColumn prefWidth="196.79998779296875" text="Password" />
+                  <TableColumn fx:id="tcStudentFirstName" prefWidth="188.7999849319458" text="Fornavn" />
+                  <TableColumn fx:id="tcStudentLastName" prefWidth="196.79998779296875" text="Efternavn" />
+                  <TableColumn fx:id="tcStudentUserName" prefWidth="207.2000274658203" text="Username" />
                </columns>
             </TableView>
             <TextField layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="180.0" promptText="Navn" />
@@ -361,17 +361,22 @@
                   <Bloom threshold="0.36" />
                </effect>
             </Label>
-            <TextField layoutX="63.0" layoutY="75.0" prefHeight="26.0" prefWidth="232.0">
-               <effect>
-                  <DropShadow height="2.5" radius="0.75" width="2.5" />
-               </effect>
-            </TextField>
             <Label layoutX="14.0" layoutY="76.0" text="Navn">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextArea layoutX="63.0" layoutY="163.0" prefHeight="235.0" prefWidth="232.0">
+            <TextField fx:id="txtFieldCaseName" layoutX="63.0" layoutY="75.0" prefHeight="26.0" prefWidth="232.0">
+               <effect>
+                  <DropShadow height="2.5" radius="0.75" width="2.5" />
+               </effect>
+            </TextField>
+            <TextField fx:id="txtFieldCaseDate" layoutX="63.0" layoutY="120.0" prefHeight="26.0" prefWidth="232.0" style="fx-text-fill: black;">
+               <effect>
+                  <DropShadow height="2.5" radius="0.6949999999999998" width="2.28" />
+               </effect>
+            </TextField>
+            <TextArea fx:id="TxtAreaCaseInfo" layoutX="63.0" layoutY="163.0" prefHeight="235.0" prefWidth="232.0">
                <effect>
                   <DropShadow height="1.0" radius="0.25" width="2.0" />
                </effect>
@@ -386,18 +391,13 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField layoutX="63.0" layoutY="120.0" prefHeight="26.0" prefWidth="232.0" style="fx-text-fill: black;">
-               <effect>
-                  <DropShadow height="2.5" radius="0.6949999999999998" width="2.28" />
-               </effect>
-            </TextField>
-            <TableView layoutX="325.0" layoutY="73.0" prefHeight="289.0" prefWidth="249.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvCases" layoutX="325.0" layoutY="73.0" prefHeight="289.0" prefWidth="249.0" style="-fx-background-color: transparent;">
                <columns>
-                  <TableColumn prefWidth="116.0" text="Navn" />
-                  <TableColumn prefWidth="132.79998779296875" text="Dato" />
+                  <TableColumn fx:id="tcCaseName" prefWidth="116.0" text="Navn" />
+                  <TableColumn fx:id="tcCaseDate" prefWidth="132.79998779296875" text="Dato" />
                </columns>
             </TableView>
-            <Button layoutX="63.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="232.0" text="Opret/Gem Sag">
+            <Button fx:id="btnSaveCase" layoutX="63.0" layoutY="407.0" mnemonicParsing="false" onAction="#onActionSaveCase" prefHeight="26.0" prefWidth="232.0" text="Opret/Gem Sag">
                <effect>
                   <ColorAdjust brightness="0.2" />
                </effect>
@@ -410,17 +410,17 @@
                   <Bloom threshold="0.36" />
                </effect>
             </Label>
-            <Button layoutX="325.0" layoutY="369.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" text="Rediger Sag">
+            <Button fx:id="btnEditCase" layoutX="325.0" layoutY="369.0" mnemonicParsing="false" onAction="#OnActionEditCase" prefHeight="26.0" prefWidth="117.0" text="Rediger Sag">
                <effect>
                   <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
-            <Button layoutX="456.0" layoutY="368.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="118.0" text="Slet Sag">
+            <Button fx:id="btnDeleteCase" layoutX="456.0" layoutY="368.0" mnemonicParsing="false" onAction="#onActionDeleteCase" prefHeight="26.0" prefWidth="118.0" text="Slet Sag">
                <effect>
                   <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
-            <Button layoutX="325.0" layoutY="405.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="250.0" text="Kopier Sag">
+            <Button fx:id="btnCopyCase" layoutX="325.0" layoutY="405.0" mnemonicParsing="false" onAction="#OnActionCopyCase" prefHeight="26.0" prefWidth="250.0" text="Kopier Sag">
                <effect>
                   <ColorAdjust brightness="0.2" />
                </effect>

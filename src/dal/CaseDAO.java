@@ -112,8 +112,8 @@ public class CaseDAO {
 
     public static void main(String[] args) throws Exception {
         CaseDAO caseDAO = new CaseDAO();
-        caseDAO.deleteCase(2);
-        //caseDAO.createCase("Brækket ben", "28-04-2022", "Hjælp med at indtaste informationer");
+        //caseDAO.deleteCase(2);
+        caseDAO.createCase("Brækket ben", "28-04-2022", "Hjælp med at indtaste informationer");
         System.out.println(caseDAO.getCases());
     }
 }
