@@ -46,17 +46,15 @@ public class CaseDAO {
     /**
      * Creates a case, by inserting name, date and info
      * @param name
-     * @param date
      * @param info
      * @return a new case
      */
-    public Case createCase (String name, String date, String info) throws SQLException {
+    public Case createCase (String name, String info) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "INSERT INTO Cases (name, date , info) VALUES (?,?,?);";
+            String sql = "INSERT INTO Cases (name, info) VALUES (?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setString(1, name);
-                preparedStatement.setString(2, date);
-                preparedStatement.setString(3, info);
+                preparedStatement.setString(2, info);
                 preparedStatement.execute();
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 int id = 0;
@@ -64,7 +62,7 @@ public class CaseDAO {
                     id = resultSet.getInt(1);
                 }
 
-                Case aCase = new Case(id, name, date, info);
+                Case aCase = new Case(id, name, info);
                 return aCase;
             }
         } catch (SQLServerException throwables) {
@@ -113,7 +111,7 @@ public class CaseDAO {
     public static void main(String[] args) throws Exception {
         CaseDAO caseDAO = new CaseDAO();
         //caseDAO.deleteCase(2);
-        caseDAO.createCase("Brækket ben", "28-04-2022", "Hjælp med at indtaste informationer");
+        caseDAO.createCase("Brækket ben", "Hjælp med at indtaste informationer");
         System.out.println(caseDAO.getCases());
     }
 }

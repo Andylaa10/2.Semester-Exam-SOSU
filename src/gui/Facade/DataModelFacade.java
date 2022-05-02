@@ -239,13 +239,12 @@ public class DataModelFacade {
     /**
      * Creates a case using the createCase method from caseModel
      * @param name
-     * @param date
      * @param info
      * @return
      * @throws SQLException
      */
-    public Case createCase(String name, String date, String info) throws SQLException {
-        return caseModel.createCase(name, date, info);
+    public Case createCase(String name, String info) throws SQLException {
+        return caseModel.createCase(name, info);
     }
 
     /**

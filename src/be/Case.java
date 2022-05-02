@@ -27,6 +27,12 @@ public class Case {
         this.info = info;
     }
 
+    public Case(int id, String name, String info) {
+        this.id = id;
+        this.name = name;
+        this.info = info;
+    }
+
     /**
      * Gets the id
      * @return

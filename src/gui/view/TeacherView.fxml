@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
@@ -193,7 +188,7 @@
             </Button>
             <Label layoutX="337.0" layoutY="416.0" prefHeight="26.0" prefWidth="258.0" text="Dobbeltklik på borger for at se flere oplysninger" />
          </children></AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -219,7 +214,7 @@
                </font>
             </Label>
             <Label layoutX="20.0" layoutY="303.0" text="Information" />
-            <TextArea fx:id="txtAreaCitizenGeneralInfo" layoutX="106.0" layoutY="285.0" prefHeight="119.0" prefWidth="363.0" text="-Mestring:&#10;-Motivation:&#10;-Ressourcer:&#10;-Roller: &#10;-Vaner:&#10;-Uddannelse og Job:&#10;-Livs Historie: &#10;-Helbredsoplysninger:&#10;&#10;-Hjælpemidler:&#10;-Boligens indretning:&#10;-Netværk: " />
+            <TextArea fx:id="txtAreaCitizenGeneralInfo" layoutX="106.0" layoutY="285.0" prefHeight="119.0" prefWidth="363.0" />
             <Button fx:id="btnSaveCitizen" layoutX="106.0" layoutY="415.0" mnemonicParsing="false" onAction="#btnHandleSaveCitizen" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Borger">
                <effect>
                   <ColorAdjust brightness="0.3" />
@@ -249,7 +244,7 @@
             <Label layoutX="316.0" layoutY="231.0" text="- Livs Historie" />
             <Label layoutX="316.0" layoutY="253.0" text="- Helbredsoplysninger" />
             <Label layoutX="468.0" layoutY="103.0" text="- Hjælpemidler" />
-            <Label layoutX="468.0" layoutY="125.0" text="- Boligens indretning" />
+            <Label layoutX="468.0" layoutY="125.0" text="-  Boligens indretning" />
             <Label layoutX="468.0" layoutY="146.0" text="- Netværk" />
          </children>
       </AnchorPane>
@@ -257,17 +252,15 @@
          <children>
             <TableView fx:id="tvStudent" layoutX="7.0" layoutY="8.0" prefHeight="340.0" prefWidth="594.0" style="-fx-background-color: transparent;">
               <columns>
-                  <TableColumn fx:id="tcStudentFirstName" minWidth="0.0" prefWidth="108.80004596710205" text="Fornavn" />
-                <TableColumn fx:id="tcStudentLastName" prefWidth="179.2000274658203" text="Efternavn" />
-                  <TableColumn fx:id="tcStudentUsername" prefWidth="191.199951171875" text="Username" />
-                  <TableColumn fx:id="tcStudentPassword" minWidth="0.0" prefWidth="109.5999755859375" text="Password" />
+                  <TableColumn fx:id="tcStudentFirstName" minWidth="0.0" prefWidth="147.20007038116455" text="Fornavn" />
+                <TableColumn fx:id="tcStudentLastName" prefWidth="183.19996643066406" text="Efternavn" />
+                  <TableColumn fx:id="tcStudentUsername" prefWidth="264.7999267578125" text="Username" />
               </columns>
             </TableView>
             <TextField fx:id="txtFieldFirstName" layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Fornavn" />
             <TextField fx:id="txtFieldLastName" layoutX="166.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Efternavn" />
             <TextField fx:id="txtFieldUsername" layoutX="317.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Username" />
             <TextField fx:id="txtFieldPassword" layoutX="470.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Password" />
-            <TextField fx:id="txtFieldStudentID" layoutX="14.0" layoutY="336.0" prefHeight="26.0" prefWidth="6.0" visible="false" />
             <Button fx:id="btnSaveStudent" layoutX="14.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleSaveStudent" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Elev">
                <effect>
                   <ColorAdjust brightness="0.3" />
@@ -280,9 +273,10 @@
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect></Button>
+            <TextField fx:id="txtFieldStudentID" layoutY="394.0" prefHeight="26.0" prefWidth="12.0" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Label layoutX="111.0" layoutY="22.0" text="Opret ny sag" textFill="#1d5e3f">
                <font>
@@ -302,26 +296,16 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextArea fx:id="txtAreaInfo" layoutX="63.0" layoutY="163.0" prefHeight="235.0" prefWidth="232.0">
+            <TextArea fx:id="txtAreaInfo" layoutX="63.0" layoutY="121.0" prefHeight="277.0" prefWidth="232.0">
                <effect>
                   <DropShadow height="1.0" radius="0.25" width="2.0" />
                </effect>
             </TextArea>
-            <Label layoutX="16.0" layoutY="162.0" text="Info">
+            <Label layoutX="18.0" layoutY="121.0" text="Info">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label layoutX="14.0" layoutY="122.0" text="Dato">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtFieldDate" layoutX="63.0" layoutY="120.0" prefHeight="26.0" prefWidth="232.0" style="fx-text-fill: black;">
-               <effect>
-                  <DropShadow height="2.5" radius="0.6949999999999998" width="2.28" />
-               </effect>
-            </TextField>
             <TableView fx:id="tvCases" layoutX="325.0" layoutY="73.0" prefHeight="289.0" prefWidth="249.0" style="-fx-background-color: transparent;">
               <columns>
                 <TableColumn fx:id="tcCasesName" prefWidth="116.0" text="Navn" />

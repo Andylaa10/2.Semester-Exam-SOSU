@@ -16,12 +16,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -110,8 +116,6 @@ public class TeacherViewController extends Application implements Initializable,
     @FXML
     private TextField txtFieldName;
     @FXML
-    private TextField txtFieldDate;
-    @FXML
     private TextArea txtAreaInfo;
 
     /**
@@ -162,6 +166,7 @@ public class TeacherViewController extends Application implements Initializable,
     private ObservableList<Case> allCurrentCases = FXCollections.observableArrayList();
 
     private User selectedStudent;
+    private Case selectedCase;
 
     private DataModelFacade dataModelFacade;
 
@@ -185,7 +190,6 @@ public class TeacherViewController extends Application implements Initializable,
         tcStudentFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcStudentLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcStudentUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
-        tcStudentPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
         try {
             allStudents = FXCollections.observableList(dataModelFacade.getStudents());
             tableViewLoadStudents(allStudents);
@@ -389,6 +393,7 @@ public class TeacherViewController extends Application implements Initializable,
                 reloadStudentTable();
                 btnSaveStudent.setDisable(false);
                 clearStudentTxtField();
+                tvStudent.getSelectionModel().clearSelection();
             }else{
                 System.out.println("Noo");
             }
@@ -418,18 +423,6 @@ public class TeacherViewController extends Application implements Initializable,
         } else {
             return;
         }
-    }
-
-    public void btnHandleSaveCase() {
-    }
-
-    public void btnHandleEditCase() {
-    }
-
-    public void btnHandleDeleteCase() {
-    }
-
-    public void btnHandleCopyCase() {
     }
 
     /**
@@ -467,5 +460,31 @@ public class TeacherViewController extends Application implements Initializable,
             txtFieldLastName.setText(student.getLastName());
             txtFieldUsername.setText(student.getUsername());
             txtFieldPassword.setText(student.getPassword());
+    }
+
+    //TODO self selection inc
+    public void btnHandleSaveCase() throws SQLException {
+        if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()){
+            String name = txtFieldName.getText();
+            String area = txtAreaInfo.getText();
+            dataModelFacade.createCase(name, area);
+            Date caseDate = new Date(System.currentTimeMillis());
+            String pattern = "dd/MM/yyyy  HH:mm:ss";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String date = simpleDateFormat.format(caseDate);
+            selectedCase.setDate(date);
+            reloadStudentTable();
+        } else{
+            System.out.println("NOOO");
+        }
+    }
+
+    public void btnHandleEditCase() {
+    }
+
+    public void btnHandleDeleteCase() {
+    }
+
+    public void btnHandleCopyCase() {
     }
 }
