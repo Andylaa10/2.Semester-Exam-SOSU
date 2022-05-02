@@ -199,7 +199,7 @@ public class TeacherViewController extends Application implements Initializable,
         //Initialize the citizens table
         tcCitizenFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        tcCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("ssn"));
+        tcCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
         try {
             allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
             tableViewLoadCitizens(allCitizens);
