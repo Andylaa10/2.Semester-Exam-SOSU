@@ -170,6 +170,34 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
+    @FXML
+    private void onActionEditSchool(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void onActionDeleteSchool(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void onActionCreateSchool(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void onActionCreateAdmin(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void onActionEditAdmin(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void OnActionDeleteAdmin(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void onActionAssignAdminToSchool(ActionEvent actionEvent) {
+    }
+
     private void tableViewLoadSchools(ObservableList<School> allSchools) {
         tvSchools.setItems(getSchoolData());
     }
@@ -204,6 +232,7 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
 
+
     private void setAnchorPanesVisibility(){
         labelInfoNewLine.setText("");
         anchorPaneSuperAdmin.setVisible(true);
@@ -211,8 +240,6 @@ public class SuperAdminViewController implements Initializable, IController {
         anchorPaneCreateAdmin.setVisible(false);
         anchorPaneConfigureSchool.setVisible(false);
     }
-
-
 
 
     @FXML
@@ -276,31 +303,5 @@ public class SuperAdminViewController implements Initializable, IController {
         labelInfoNewLine.setText("");
     }
 
-    @FXML
-    private void onActionEditSchool(ActionEvent actionEvent) {
-    }
 
-    @FXML
-    private void onActionDeleteSchool(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    private void onActionCreateSchool(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    private void onActionCreateAdmin(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    private void onActionEditAdmin(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    private void OnActionDeleteAdmin(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    private void onActionAssignAdminToSchool(ActionEvent actionEvent) {
-    }
 }

@@ -5,7 +5,6 @@ import be.Citizen;
 import be.User;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,7 +20,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class AdminViewController extends Application implements Initializable, IController{
+public class AdminViewController implements Initializable, IController{
 
     @FXML
     private TableView<User> tvTeachers;
@@ -73,7 +72,7 @@ public class AdminViewController extends Application implements Initializable, I
     private TableColumn<Case, String> tcCaseName;
     @FXML
     private TableColumn<Case, String> tcCaseDate;
-    
+
     @FXML
     private Button btnEditCase;
     @FXML
@@ -170,10 +169,6 @@ public class AdminViewController extends Application implements Initializable, I
         this.dataModelFacade = new DataModelFacade();
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -332,7 +327,8 @@ public class AdminViewController extends Application implements Initializable, I
         anchorPaneCreateTeacher.setVisible(false);
     }
 
-    public void btnClickCreateTeacher(){
+    @FXML
+    private void btnClickCreateTeacher(){
         labelTitle.setText("Lærere");
         labelInfo.setText("Overblik over alle oprettede lærere, hvor du kan oprette nye lærere, redigere eller slette");
         labelInfoNewLine.setText("");
@@ -345,7 +341,8 @@ public class AdminViewController extends Application implements Initializable, I
 
     }
 
-    public void btnClickStudent() {
+    @FXML
+    private void btnClickStudent() {
         labelTitle.setText("Elever");
         labelInfo.setText("Overblik over alle oprettede elever");
         labelInfoNewLine.setText("");
@@ -357,7 +354,8 @@ public class AdminViewController extends Application implements Initializable, I
         anchorPaneCreateTeacher.setVisible(false);
     }
 
-    public void btnClickCase() {
+    @FXML
+    private void btnClickCase() {
         labelTitle.setText("Sager");
         labelInfo.setText("Overblik over alle oprettede sager. Opret nye sager, eller og kopier sager");
         labelInfoNewLine.setText("");
@@ -369,7 +367,8 @@ public class AdminViewController extends Application implements Initializable, I
         anchorPaneCreateTeacher.setVisible(false);
     }
 
-    public void btnClickSeeCitizens(){
+    @FXML
+    private void btnClickSeeCitizens(){
         labelTitle.setText("Borgere");
         labelInfo.setText("Overblik over alle oprettede borgere. Tildel en sag til en borger, se yderligere informationer,");
         labelInfoNewLine.setText( "rediger eller slet borger.");
@@ -381,7 +380,8 @@ public class AdminViewController extends Application implements Initializable, I
         anchorPaneCreateTeacher.setVisible(false);
     }
 
-    public void btnClickCitizen() {
+    @FXML
+    private void btnClickCitizen() {
         labelTitle.setText("Opret Borger");
         labelInfo.setText("Oprettelses vindue til borger");
         labelInfoNewLine.setText("");
@@ -393,7 +393,8 @@ public class AdminViewController extends Application implements Initializable, I
         anchorPaneCreateTeacher.setVisible(false);
     }
 
-    public void btnClickHome(){
+    @FXML
+    private void btnClickHome(){
         labelTitle.setText("Admin");
         labelInfo.setText("Logget ind som Admin");
         labelInfoNewLine.setText("");
@@ -405,7 +406,8 @@ public class AdminViewController extends Application implements Initializable, I
         anchorPaneCreateTeacher.setVisible(false);
     }
 
-    public void btnClickLogout() throws IOException {
+    @FXML
+    private void btnClickLogout() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
         Scene scene = new Scene(loader.load());
         Stage switcher = (Stage) btnLogOut.getScene().getWindow();

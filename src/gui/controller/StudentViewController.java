@@ -20,7 +20,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class StudentViewController extends Application implements IController, Initializable {
+public class StudentViewController implements IController, Initializable {
 
 
     @FXML
@@ -191,17 +191,4 @@ public class StudentViewController extends Application implements IController, I
         switcher.show();
     }
 
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/StudentView.fxml"));
-        primaryStage.setTitle("SOSU Simulation");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
