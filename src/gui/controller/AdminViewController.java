@@ -8,7 +8,6 @@ import gui.controller.Interface.IController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,61 +24,104 @@ import java.util.ResourceBundle;
 public class AdminViewController extends Application implements Initializable, IController{
 
     @FXML
-    public TableView<User> tvTeachers;
+    private TableView<User> tvTeachers;
     @FXML
-    public TableColumn<User, String> tcTeacherFirstName;
+    private TableColumn<User, String> tcTeacherFirstName;
     @FXML
-    public TableColumn<User, String> tcTeacherLastName;
+    private TableColumn<User, String> tcTeacherLastName;
     @FXML
-    public TableColumn<User, String> tcTeacherUserName;
+    private TableColumn<User, String> tcTeacherUserName;
 
     @FXML
-    public TableView<Case> tvCurrentCases;
+    private TableView<Case> tvCurrentCases;
     @FXML
-    public TableColumn<Case, String> tcCurrentCaseName;
+    private TableColumn<Case, String> tcCurrentCaseName;
     @FXML
-    public TableColumn<Case, String> tcCurrentCaseDate;
+    private TableColumn<Case, String> tcCurrentCaseDate;
 
     @FXML
-    public TableView<Citizen> tvCurrentCitizens;
+    private TableView<Citizen> tvCurrentCitizens;
     @FXML
-    public TableColumn<Citizen, String> tcCurrentCitizenFirstName;
+    private TableColumn<Citizen, String> tcCurrentCitizenFirstName;
     @FXML
-    public TableColumn<Citizen, String> tcCurrentCitizenLastName;
+    private TableColumn<Citizen, String> tcCurrentCitizenLastName;
     @FXML
-    public TableColumn<Citizen, String> tcCurrentCitizenSSN;
+    private TableColumn<Citizen, String> tcCurrentCitizenSSN;
     @FXML
-    public Button btnAssignCaseToCitizen;
+    private Button btnAssignCaseToCitizen;
 
     @FXML
-    public TableView<User> tvStudents;
+    private TableView<User> tvStudents;
     @FXML
-    public TableColumn<User, String> tcStudentFirstName;
+    private TableColumn<User, String> tcStudentFirstName;
     @FXML
-    public TableColumn<User, String> tcStudentLastName;
+    private TableColumn<User, String> tcStudentLastName;
     @FXML
-    public TableColumn<User, String> tcStudentUserName;
+    private TableColumn<User, String> tcStudentUserName;
 
     @FXML
-    public TextField txtFieldCaseName;
+    private TextField txtFieldCaseName;
     @FXML
-    public TextField txtFieldCaseDate;
+    private TextField txtFieldCaseDate;
     @FXML
-    public TextArea TxtAreaCaseInfo;
+    private TextArea TxtAreaCaseInfo;
     @FXML
-    public Button btnSaveCase;
+    private Button btnSaveCase;
     @FXML
-    public TableView<Case> tvCases;
+    private TableView<Case> tvCases;
     @FXML
-    public TableColumn<Case, String> tcCaseName;
+    private TableColumn<Case, String> tcCaseName;
     @FXML
-    public TableColumn<Case, String> tcCaseDate;
+    private TableColumn<Case, String> tcCaseDate;
+    
     @FXML
-    public Button btnEditCase;
+    private Button btnEditCase;
     @FXML
-    public Button btnDeleteCase;
+    private Button btnDeleteCase;
     @FXML
-    public Button btnCopyCase;
+    private Button btnCopyCase;
+    @FXML
+    private Button btnCreateTeacherPane;
+    @FXML
+    private Button btnStudentPane;
+    @FXML
+    private Button btnCasePane;
+    @FXML
+    private Button btnCitizensPane;
+    @FXML
+    private Button btnCreateCitizenPane;
+
+    @FXML
+    private TextField txtFieldTeacherName;
+    @FXML
+    private TextField txtFieldTeacherUsername;
+    @FXML
+    private TextField txtFieldTeacherPassword;
+
+    @FXML
+    private Button btnEditTeacher;
+    @FXML
+    private Button btnDeleteTeacher;
+    @FXML
+    private Button btnCopyTeacher;
+
+    @FXML
+    private TextField txtFieldCitizenFirstName;
+    @FXML
+    private TextField txtFieldCitizenLastName;
+    @FXML
+    private TextField txtFieldCitizenSSN;
+    @FXML
+    private TextField txtFieldCitizenAddress;
+    @FXML
+    private TextArea txtAreaGenerelInformation;
+
+    @FXML
+    private CheckBox checkBoxMale;
+    @FXML
+    private CheckBox checkBoxFemale;
+    @FXML
+    private CheckBox checkBoxOther;
 
     @FXML
     private AnchorPane topPane;
@@ -241,19 +283,43 @@ public class AdminViewController extends Application implements Initializable, I
 
 
     @FXML
-    private void onActionSaveCase(ActionEvent actionEvent) {
+    private void onActionSaveCase() {
     }
 
     @FXML
-    private void OnActionEditCase(ActionEvent actionEvent) {
+    private void OnActionEditCase() {
     }
 
     @FXML
-    private void onActionDeleteCase(ActionEvent actionEvent) {
+    private void onActionDeleteCase() {
     }
 
     @FXML
-    private void OnActionCopyCase(ActionEvent actionEvent) {
+    private void OnActionCopyCase() {
+    }
+
+    @FXML
+    private void onActionCreateTeacher() {
+    }
+
+    @FXML
+    private void onActionEditTeacher() {
+    }
+
+    @FXML
+    private void onActionDeleteTeacher() {
+    }
+
+    @FXML
+    private void onActionCopyTeacher() {
+    }
+
+    @FXML
+    private void onActionCreateCitizen() {
+    }
+
+    @FXML
+    private void onActionAssignCaseToCitizen() {
     }
 
     private void setAnchorPanesVisibility(){
@@ -266,7 +332,7 @@ public class AdminViewController extends Application implements Initializable, I
         anchorPaneCreateTeacher.setVisible(false);
     }
 
-    public void btnClickCreateTeacher(ActionEvent actionEvent){
+    public void btnClickCreateTeacher(){
         labelTitle.setText("Lærere");
         labelInfo.setText("Overblik over alle oprettede lærere, hvor du kan oprette nye lærere, redigere eller slette");
         labelInfoNewLine.setText("");
@@ -279,7 +345,7 @@ public class AdminViewController extends Application implements Initializable, I
 
     }
 
-    public void btnClickStudent(ActionEvent actionEvent) {
+    public void btnClickStudent() {
         labelTitle.setText("Elever");
         labelInfo.setText("Overblik over alle oprettede elever");
         labelInfoNewLine.setText("");
@@ -291,7 +357,7 @@ public class AdminViewController extends Application implements Initializable, I
         anchorPaneCreateTeacher.setVisible(false);
     }
 
-    public void btnClickCase(ActionEvent actionEvent) {
+    public void btnClickCase() {
         labelTitle.setText("Sager");
         labelInfo.setText("Overblik over alle oprettede sager. Opret nye sager, eller og kopier sager");
         labelInfoNewLine.setText("");
@@ -303,7 +369,7 @@ public class AdminViewController extends Application implements Initializable, I
         anchorPaneCreateTeacher.setVisible(false);
     }
 
-    public void btnClickSeeCitizens(ActionEvent actionEvent){
+    public void btnClickSeeCitizens(){
         labelTitle.setText("Borgere");
         labelInfo.setText("Overblik over alle oprettede borgere. Tildel en sag til en borger, se yderligere informationer,");
         labelInfoNewLine.setText( "rediger eller slet borger.");
@@ -315,7 +381,7 @@ public class AdminViewController extends Application implements Initializable, I
         anchorPaneCreateTeacher.setVisible(false);
     }
 
-    public void btnClickCitizen(ActionEvent actionEvent) {
+    public void btnClickCitizen() {
         labelTitle.setText("Opret Borger");
         labelInfo.setText("Oprettelses vindue til borger");
         labelInfoNewLine.setText("");
@@ -327,7 +393,7 @@ public class AdminViewController extends Application implements Initializable, I
         anchorPaneCreateTeacher.setVisible(false);
     }
 
-    public void btnClickHome(ActionEvent actionEvent){
+    public void btnClickHome(){
         labelTitle.setText("Admin");
         labelInfo.setText("Logget ind som Admin");
         labelInfoNewLine.setText("");
@@ -339,7 +405,7 @@ public class AdminViewController extends Application implements Initializable, I
         anchorPaneCreateTeacher.setVisible(false);
     }
 
-    public void btnClickLogout(ActionEvent actionEvent) throws IOException {
+    public void btnClickLogout() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
         Scene scene = new Scene(loader.load());
         Stage switcher = (Stage) btnLogOut.getScene().getWindow();
