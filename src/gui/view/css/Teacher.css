@@ -1,0 +1,114 @@
+/**
+Redefine of the background color, to a dark blue color.
+ */
+
+.root {
+    -fx-base: rgb(12, 119, 88);
+    -fx-background: rgb(169, 236, 232);
+
+    /* make controls like buttons a little bit lighter for a relaxed design effect */
+    -fx-color: derive(-fx-base, 15%);
+
+    /* text fields and table rows background */
+    -fx-control-inner-background: transparent;
+    /* version of -fx-control-inner-background for alternative rows */
+    -fx-control-inner-background-alt: derive(-fx-control-inner-background, 2.5%);
+
+    /* A bright blue for highlighting/accenting objects.  For example: selected
+     * text; selected items in menus, lists, trees, and tables; progress bars */
+    -fx-accent: #044d39;
+
+    /* color of non-focused yet selected elements */
+    -fx-selection-bar-non-focused: rgb(255, 255, 255);
+}
+
+.text-area{
+    -fx-control-inner-background: rgb(138, 192, 189);
+    -fx-wrap-text: true;
+}
+.text-area:focused{
+    -fx-control-inner-background: rgb(83, 208, 156);
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #ce8640;
+
+}
+
+.button{
+    -fx-background-color:  #044d39;
+}
+
+.button:hover{
+    -fx-background-color: rgb(0, 171, 208);
+}
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-text-background-color: black;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.table-view .text-input{
+    -fx-text-fill: black;
+}
+
+/* Keep prompt invisible when focused (above color fix overrides it) */
+.text-input:focused {
+    -fx-prompt-text-fill: rgb(24, 49, 76);
+}
+.text-field{
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.50);
+    -fx-text-fill: black;
+}
+
+.text-field:focused{
+    -fx-background-color: rgb(83, 208, 156);
+}
+
+.text-field:hover{
+    
+}
+.scroll-bar{
+    -fx-opacity: 0.35;
+}
+
+
+/* Fix scroll bar buttons arrows colors */
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, rgb(220, 220, 220);
+
+}
+
+.scroll-bar > .increment-button:hover > .increment-arrow,
+.scroll-bar > .decrement-button:hover > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, rgb(240, 240, 240);
+}
+
+.scroll-bar > .increment-button:pressed > .increment-arrow,
+.scroll-bar > .decrement-button:pressed > .decrement-arrow {
+    -fx-background-color: -fx-mark-highlight-color, rgb(255, 255, 255);
+}
+#textInfo{
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+#tcAbsence{
+    /* -fx-alignment: center-right; */
+    -fx-alignment: center;
+}
+#tcTotal{
+    -fx-alignment: center;
+}
+#tcPresent{
+    -fx-alignment: center;
+}
+
+#Name{
+    -fx-font-family: 'Lobster Two', cursive;
+    -fx-font-size: 60;
+}

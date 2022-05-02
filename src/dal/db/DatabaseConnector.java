@@ -15,7 +15,7 @@ public class DatabaseConnector {
     private final SQLServerDataSource dataSource;
 
     /**
-     * Constructor for the database, plugging in the details of our SQL server / login
+     * Constructor for the database, plugging in the details of our SQL server / userLogin
      */
     public DatabaseConnector() throws IOException {
         Properties settings = new Properties();
