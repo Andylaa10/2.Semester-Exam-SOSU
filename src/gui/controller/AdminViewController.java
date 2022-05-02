@@ -3,6 +3,7 @@ package gui.controller;
 import be.Case;
 import be.Citizen;
 import be.User;
+import be.enums.UserType;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
@@ -21,6 +22,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AdminViewController implements Initializable, IController{
+
 
     @FXML
     private TableView<User> tvTeachers;
@@ -91,7 +93,9 @@ public class AdminViewController implements Initializable, IController{
     private Button btnCreateCitizenPane;
 
     @FXML
-    private TextField txtFieldTeacherName;
+    private TextField txtFieldTeacherFirstName;
+    @FXML
+    private TextField txtFieldTeacherLastName;
     @FXML
     private TextField txtFieldTeacherUsername;
     @FXML
@@ -294,7 +298,19 @@ public class AdminViewController implements Initializable, IController{
     }
 
     @FXML
-    private void onActionCreateTeacher() {
+    private void onActionCreateTeacher() throws SQLException {
+        if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()){
+            String firstName = txtFieldTeacherFirstName.getText();
+            String lastName = txtFieldTeacherLastName.getText();
+            String userName = txtFieldTeacherUsername.getText();
+            String password = txtFieldTeacherPassword.getText();
+
+            dataModelFacade.createTeacher(firstName, lastName, userName, password, UserType.TEACHER);
+            reloadTeacherTable();
+        } else{
+            System.out.println("Couldn't create teacher");
+            //TODO Make proper errorhandling
+        }
     }
 
     @FXML
@@ -315,6 +331,19 @@ public class AdminViewController implements Initializable, IController{
 
     @FXML
     private void onActionAssignCaseToCitizen() {
+    }
+
+    /**
+     * Reloads the teacher table
+     */
+    private void reloadTeacherTable() {
+        try {
+            int index = tvTeachers.getSelectionModel().getFocusedIndex();
+            this.tvTeachers.setItems(FXCollections.observableList(dataModelFacade.getTeachers()));
+            tvTeachers.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     private void setAnchorPanesVisibility(){

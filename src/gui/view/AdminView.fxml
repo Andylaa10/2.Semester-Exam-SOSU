@@ -129,7 +129,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="anchorPaneCreateTeacher" layoutX="186.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+      <AnchorPane fx:id="anchorPaneCreateTeacher" layoutX="186.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
          <children>
             <TableView fx:id="tvTeachers" layoutX="14.0" layoutY="45.0" prefHeight="362.0" prefWidth="344.0" style="-fx-background-color: transparent;">
               <columns>
@@ -138,23 +138,24 @@
                 <TableColumn fx:id="tcTeacherUserName" prefWidth="120.00006103515625" text="Username" />
               </columns>
             </TableView>
-            <TextField fx:id="txtFieldTeacherName" layoutX="373.0" layoutY="126.0" />
-            <ImageView fitHeight="96.0" fitWidth="62.0" layoutX="373.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="96.0" fitWidth="62.0" layoutX="378.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/teacherIcon.png" />
                </image>
             </ImageView>
-            <Label layoutX="448.0" layoutY="59.0" text="Opret lærer">
+            <Label layoutX="447.0" layoutY="76.0" text="Opret lærer">
                <font>
                   <Font size="23.0" />
                </font>
             </Label>
-            <Label layoutX="538.0" layoutY="130.0" prefHeight="18.0" prefWidth="33.0" text="Navn" />
-            <Label layoutX="539.0" layoutY="202.0" prefHeight="18.0" prefWidth="54.0" text="Password" />
-            <Label layoutX="537.0" layoutY="166.0" prefHeight="18.0" prefWidth="58.0" text="Username" />
-            <TextField fx:id="txtFieldTeacherUsername" layoutX="373.0" layoutY="163.0" />
-            <TextField fx:id="txtFieldTeacherPassword" layoutX="373.0" layoutY="199.0" />
-            <Button fx:id="btnCreateTeacher" layoutX="394.0" layoutY="234.0" mnemonicParsing="false" onAction="#onActionCreateTeacher" prefHeight="26.0" prefWidth="107.0" text="Opret lærer">
+            <Label layoutX="538.0" layoutY="130.0" prefHeight="18.0" prefWidth="50.0" text="Fornavn" />
+            <Label layoutX="539.0" layoutY="231.0" prefHeight="18.0" prefWidth="54.0" text="Password" />
+            <Label layoutX="537.0" layoutY="197.0" prefHeight="18.0" prefWidth="58.0" text="Username" />
+            <TextField fx:id="txtFieldTeacherFirstName" layoutX="378.0" layoutY="126.0" />
+            <TextField fx:id="txtFieldTeacherLastName" layoutX="378.0" layoutY="161.0" />
+            <TextField fx:id="txtFieldTeacherUsername" layoutX="378.0" layoutY="194.0" />
+            <TextField fx:id="txtFieldTeacherPassword" layoutX="378.0" layoutY="228.0" />
+            <Button fx:id="btnCreateTeacher" layoutX="399.0" layoutY="263.0" mnemonicParsing="false" onAction="#onActionCreateTeacher" prefHeight="26.0" prefWidth="107.0" text="Opret lærer">
                <effect>
                   <ColorAdjust brightness="0.2" />
                </effect>
@@ -179,6 +180,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <Label layoutX="538.0" layoutY="164.0" prefHeight="18.0" prefWidth="56.0" text="Efternavn" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneAdmin" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
