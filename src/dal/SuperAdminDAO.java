@@ -1,22 +1,25 @@
 package dal;
 
+import be.Case;
 import be.School;
 import be.SuperAdmin;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SuperAdminDAO {
 
-    private final DatabaseConnector connector = DatabaseConnector.getInstance();
+    private final DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
 
 
     public SuperAdminDAO() throws IOException {
     }
 
     public SuperAdmin createSuperAdmin (String username, String password) throws SQLException {
-        try (Connection connection = connector.getConnection()) {
+        try (Connection connection = databaseConnector.getConnection()) {
             String sql = "INSERT INTO SuperAdmin (username, password) VALUES (?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setString(1, username);
@@ -39,7 +42,7 @@ public class SuperAdminDAO {
 
 
     public void deleteSuperAdmin(int id) throws SQLException {
-        try (Connection connection = connector.getConnection()) {
+        try (Connection connection = databaseConnector.getConnection()) {
             String sql = "DELETE FROM SuperAdmin WHERE superAdminID =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
@@ -50,7 +53,7 @@ public class SuperAdminDAO {
     }
 
     public void editSuperAdmin(SuperAdmin superAdmin) throws Exception {
-        try (Connection connection = connector.getConnection()) {
+        try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE SuperAdmin SET username=?, password=? WHERE superAdminID=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, superAdmin.getUsername());
@@ -66,7 +69,7 @@ public class SuperAdminDAO {
 
     public SuperAdmin superAdminLogin(String user, String pass) throws SQLException {
         String sql = "SELECT * FROM SuperAdmin WHERE username =? AND password =?;";
-        try(Connection connection = connector.getConnection()){
+        try(Connection connection = databaseConnector.getConnection()){
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, user);
             st.setString(2, pass);
@@ -84,8 +87,29 @@ public class SuperAdminDAO {
         }
     }
 
+    public List<School> getSchools() throws SQLException {
+        ArrayList<School> allSchools = new ArrayList<>();
+
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT * FROM School;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultset = preparedStatement.executeQuery();
+            while (resultset.next()) {
+                int id = resultset.getInt("schoolID");
+                String name = resultset.getString("name");
+
+                School school = new School(id, name);
+                allSchools.add(school);
+            }
+        } catch (SQLException sqlException) {
+            throw new SQLException();
+        }
+        return allSchools;
+    }
+
     public School createSchool(String schoolName) throws SQLException {
-        try (Connection connection = connector.getConnection()) {
+        try (Connection connection = databaseConnector.getConnection()) {
             String sql = "INSERT INTO School (name) VALUES (?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setString(1, schoolName);
@@ -106,7 +130,7 @@ public class SuperAdminDAO {
     }
 
     public void deleteSchool(int schoolID) throws SQLException {
-        try (Connection connection = connector.getConnection()) {
+        try (Connection connection = databaseConnector.getConnection()) {
             String sql = "DELETE FROM School WHERE schoolID =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, schoolID);
@@ -117,7 +141,7 @@ public class SuperAdminDAO {
     }
 
     public void editSchool(School school) throws Exception {
-        try (Connection connection = connector.getConnection()) {
+        try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE School SET name=? WHERE schoolID=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, school.getSchoolName());
@@ -139,8 +163,9 @@ public class SuperAdminDAO {
     public static void main(String[] args) throws IOException, SQLException {
         SuperAdminDAO superAdminDAO = new SuperAdminDAO();
         //superAdminDAO.createSchool("SOSU Esbjerg");
+        System.out.println(superAdminDAO.getSchools());
         //superAdminDAO.deleteSchool(1);
-        superAdminDAO.createSuperAdmin("superadmin", "superadmin");
+        //superAdminDAO.createSuperAdmin("superadmin", "superadmin");
         //superAdminDAO.deleteSuperAdmin(1);
     }
 
