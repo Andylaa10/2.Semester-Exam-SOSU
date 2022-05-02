@@ -8,6 +8,7 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -61,6 +62,22 @@ public class AdminViewController implements Initializable, IController{
     private TableColumn<User, String> tcStudentLastName;
     @FXML
     private TableColumn<User, String> tcStudentUserName;
+    @FXML
+    private TextField txtFieldStudentID;
+    @FXML
+    private TextField txtFieldStudentFirstName;
+    @FXML
+    private TextField txtFieldStudentLastname;
+    @FXML
+    private TextField txtFieldStudentUsername;
+    @FXML
+    private TextField txtFieldStudentPassword;
+    @FXML
+    private Button btnCreateStudent;
+    @FXML
+    private Button btnEditStudent;
+    @FXML
+    private Button btnDeleteStudent;
 
     @FXML
     private TextField txtFieldCaseName;
@@ -175,7 +192,7 @@ public class AdminViewController implements Initializable, IController{
     private DataModelFacade dataModelFacade;
 
     private User selectedTeacher;
-
+    private User selectedStudent;
 
     public AdminViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
@@ -191,6 +208,7 @@ public class AdminViewController implements Initializable, IController{
             e.printStackTrace();
         }
         selectedTeacher();
+        selectedStudent();
     }
 
     private void initializeTables() throws Exception {
@@ -318,7 +336,7 @@ public class AdminViewController implements Initializable, IController{
             reloadTeacherTable();
         } else{
             System.out.println("Couldn't create teacher");
-            //TODO Make proper errorhandling
+            //TODO Make proper errorhandler
         }
     }
 
@@ -339,7 +357,7 @@ public class AdminViewController implements Initializable, IController{
                 tvTeachers.getSelectionModel().clearSelection();
             }else{
                 System.out.println("Probably didn't select a teacher");
-                //TODO errorhandling
+                //TODO errorhandler
             }
         }
     }
@@ -374,6 +392,62 @@ public class AdminViewController implements Initializable, IController{
     private void onActionAssignCaseToCitizen() {
     }
 
+    @FXML
+    private void onActionCreateStudent() throws SQLException {
+        if (!txtFieldStudentFirstName.getText().isEmpty() && !txtFieldStudentLastname.getText().isEmpty() && !txtFieldStudentUsername.getText().isEmpty() && !txtFieldStudentPassword.getText().isEmpty()){
+            String firstName = txtFieldStudentFirstName.getText();
+            String lastName = txtFieldTeacherLastName.getText();
+            String userName = txtFieldStudentUsername.getText();
+            String password = txtFieldStudentPassword.getText();
+
+            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT);
+            reloadStudentTable();
+        } else{
+            System.out.println("Something went wrong with creation");
+            //TODO make errorhandler
+        }
+    }
+
+    @FXML
+    private void onActionEditStudent() throws Exception {
+        if (this.selectedStudent != null){
+            if (!txtFieldStudentFirstName.getText().isEmpty() && !txtFieldStudentLastname.getText().isEmpty() && !txtFieldStudentUsername.getText().isEmpty() && !txtFieldStudentPassword.getText().isEmpty()) {
+                int id = Integer.parseInt(txtFieldStudentID.getText());;
+                String firstName = txtFieldStudentFirstName.getText();
+                String lastName = txtFieldStudentLastname.getText();
+                String userName = txtFieldStudentUsername.getText();
+                String password = txtFieldTeacherPassword.getText();
+
+                User student = new User(id, firstName, lastName, userName, password, UserType.STUDENT);
+                dataModelFacade.editStudent(student);
+                reloadStudentTable();
+                clearStudentTxtField();
+                tvStudents.getSelectionModel().clearSelection();
+            }else{
+                System.out.println("Something went wrong");
+                //TODO make errorhandler
+            }
+        }
+    }
+
+    @FXML
+    private void onActionDeleteStudent() throws SQLException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("WARNING MESSAGE");
+        alert.setHeaderText("Warning before you delete student");
+        alert.setContentText("Joe");
+        if (selectedStudent != null) {
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                selectedStudent();
+                dataModelFacade.deleteStudent(selectedStudent.getId(), UserType.STUDENT);
+                reloadStudentTable();
+            }
+        } else {
+            return;
+        }
+    }
+
     /**
      * Makes you able to select a teacher from the table
      * @param
@@ -387,12 +461,32 @@ public class AdminViewController implements Initializable, IController{
         }));
     }
 
+    /**
+     * Makes you able to select a student from the table
+     */
+    private void selectedStudent() {
+        this.tvStudents.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((User) newValue != null) {
+                this.selectedStudent = (User) newValue;
+                setSelectedStudent(newValue);
+            }
+        }));
+    }
+
     public void setSelectedTeacher(User teacher) {
         txtFieldTeacherID.setText(String.valueOf(teacher.getId()));
         txtFieldTeacherFirstName.setText(teacher.getFirstName());
         txtFieldTeacherLastName.setText(teacher.getLastName());
         txtFieldTeacherUsername.setText(teacher.getUsername());
         txtFieldTeacherPassword.setText(teacher.getPassword());
+    }
+
+    public void setSelectedStudent(User student) {
+        txtFieldStudentID.setText(String.valueOf(student.getId()));
+        txtFieldStudentFirstName.setText(student.getFirstName());
+        txtFieldStudentLastname.setText(student.getLastName());
+        txtFieldStudentUsername.setText(student.getUsername());
+        txtFieldStudentPassword.setText(student.getPassword());
     }
 
     /**
@@ -408,12 +502,33 @@ public class AdminViewController implements Initializable, IController{
         }
     }
 
+    /**
+     * Reloads the student table
+     */
+    private void reloadStudentTable() {
+        try {
+            int index = tvStudents.getSelectionModel().getFocusedIndex();
+            this.tvStudents.setItems(FXCollections.observableList(dataModelFacade.getStudents()));
+            tvStudents.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
     public void clearTeacherTxtField() {
         txtFieldTeacherID.clear();
         txtFieldTeacherFirstName.clear();
         txtFieldTeacherLastName.clear();
         txtFieldTeacherUsername.clear();
         txtFieldTeacherPassword.clear();
+    }
+
+    public void clearStudentTxtField(){
+        txtFieldStudentID.clear();
+        txtFieldStudentFirstName.clear();
+        txtFieldStudentLastname.clear();
+        txtFieldStudentUsername.clear();
+        txtFieldStudentPassword.clear();
     }
 
     private void setAnchorPanesVisibility(){
@@ -521,6 +636,5 @@ public class AdminViewController implements Initializable, IController{
         labelInfo.setText("Du er nu logget ind som Admin: " + user.getFirstName() + user.getLastName());
         labelInfoNewLine.setText("");
     }
-
 
 }

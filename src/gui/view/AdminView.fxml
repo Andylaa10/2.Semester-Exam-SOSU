@@ -129,7 +129,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="anchorPaneCreateTeacher" layoutX="186.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneCreateTeacher" layoutX="186.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <TableView fx:id="tvTeachers" layoutX="14.0" layoutY="45.0" prefHeight="362.0" prefWidth="344.0" style="-fx-background-color: transparent;">
               <columns>
@@ -330,7 +330,7 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <TableView fx:id="tvStudents" layoutX="7.0" layoutY="8.0" prefHeight="340.0" prefWidth="594.0" style="-fx-background-color: transparent;">
                <columns>
@@ -339,24 +339,26 @@
                   <TableColumn fx:id="tcStudentUserName" prefWidth="207.2000274658203" text="Username" />
                </columns>
             </TableView>
-            <TextField layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="180.0" promptText="Navn" />
-            <TextField layoutX="416.0" layoutY="367.0" prefHeight="26.0" prefWidth="180.0" promptText="Password" />
-            <TextField layoutX="216.0" layoutY="367.0" prefHeight="26.0" prefWidth="180.0" promptText="Username" />
-            <Button layoutX="14.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Elev">
+            <TextField fx:id="txtFieldStudentFirstName" layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="148.0" promptText="Fornavn" />
+            <TextField fx:id="txtFieldStudentLastname" layoutX="168.0" layoutY="367.0" prefHeight="26.0" prefWidth="148.0" promptText="Efternavn" />
+            <TextField fx:id="txtFieldStudentUsername" layoutX="323.0" layoutY="367.0" prefHeight="26.0" prefWidth="137.0" promptText="Username" />
+            <TextField fx:id="txtFieldStudentPassword" layoutX="463.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Password" />
+            <Button fx:id="btnCreateStudent" layoutX="14.0" layoutY="407.0" mnemonicParsing="false" onAction="#onActionCreateStudent" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Elev">
                <effect>
                   <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
-            <Button layoutX="216.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Rediger Elev">
+            <Button fx:id="btnEditStudent" layoutX="216.0" layoutY="407.0" mnemonicParsing="false" onAction="#onActionEditStudent" prefHeight="26.0" prefWidth="180.0" text="Rediger Elev">
                <effect>
                   <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
-            <Button layoutX="416.0" layoutY="407.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="180.0" text="Slet Elev">
+            <Button fx:id="btnDeleteStudent" layoutX="416.0" layoutY="407.0" mnemonicParsing="false" onAction="#onActionDeleteStudent" prefHeight="26.0" prefWidth="180.0" text="Slet Elev">
                <effect>
                   <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
+            <TextField fx:id="txtFieldStudentID" layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="21.0" visible="false" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
