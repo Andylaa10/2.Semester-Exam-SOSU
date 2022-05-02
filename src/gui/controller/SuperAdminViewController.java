@@ -13,21 +13,44 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class SuperAdminViewController extends Application implements Initializable, IController {
+public class SuperAdminViewController implements Initializable, IController {
+
+    @FXML
+    private Button btnCreateSchoolOnAssignPane;
+    @FXML
+    private Button btnCreateAdminOnAssignPage;
+
+    @FXML
+    private Button btnEditSchool;
+    @FXML
+    private Button btnDeleteSchool;
+
+    @FXML
+    private TextField txtFieldSchoolName;
+    @FXML
+    private TextField txtFieldAdminFirstName;
+    @FXML
+    private TextField txtFieldAdminLastName;
+    @FXML
+    private TextField txtFieldAdminUsername;
+    @FXML
+    private TextField txtFieldAdminPassword;
+
+    @FXML
+    private Button btnEditAdmin;
+    @FXML
+    private Button btnDeleteAdmin;
+    @FXML
+    private Button btnAssignAdminToSchool;
 
     @FXML
     private TableView<School> tvSchools;
@@ -247,22 +270,37 @@ public class SuperAdminViewController extends Application implements Initializab
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/SuperAdminView.fxml"));
-        primaryStage.setTitle("SOSU Simulation");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
     public void setUser(User user) throws SQLException, IOException {
         labelTitle.setText("Super Admin");
         labelInfo.setText("Du er nu logget ind som Super Admin: " + user.getFirstName() + user.getLastName());
         labelInfoNewLine.setText("");
+    }
+
+    @FXML
+    private void onActionEditSchool(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void onActionDeleteSchool(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void onActionCreateSchool(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void onActionCreateAdmin(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void onActionEditAdmin(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void OnActionDeleteAdmin(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void onActionAssignAdminToSchool(ActionEvent actionEvent) {
     }
 }
