@@ -19,9 +19,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AdminViewController implements Initializable, IController{
+
 
 
     @FXML
@@ -93,6 +95,8 @@ public class AdminViewController implements Initializable, IController{
     private Button btnCreateCitizenPane;
 
     @FXML
+    private TextField txtFieldTeacherID;
+    @FXML
     private TextField txtFieldTeacherFirstName;
     @FXML
     private TextField txtFieldTeacherLastName;
@@ -100,6 +104,7 @@ public class AdminViewController implements Initializable, IController{
     private TextField txtFieldTeacherUsername;
     @FXML
     private TextField txtFieldTeacherPassword;
+
 
     @FXML
     private Button btnEditTeacher;
@@ -169,6 +174,9 @@ public class AdminViewController implements Initializable, IController{
 
     private DataModelFacade dataModelFacade;
 
+    private User selectedTeacher;
+
+
     public AdminViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
     }
@@ -182,6 +190,7 @@ public class AdminViewController implements Initializable, IController{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        selectedTeacher();
     }
 
     private void initializeTables() throws Exception {
@@ -314,11 +323,43 @@ public class AdminViewController implements Initializable, IController{
     }
 
     @FXML
-    private void onActionEditTeacher() {
+    private void onActionEditTeacher() throws Exception {
+        if (this.selectedTeacher != null){
+            if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()) {
+                int id = Integer.parseInt(txtFieldTeacherID.getText());;
+                String firstName = txtFieldTeacherFirstName.getText();
+                String lastName = txtFieldTeacherLastName.getText();
+                String userName = txtFieldTeacherUsername.getText();
+                String password = txtFieldTeacherPassword.getText();
+
+                User teacher = new User(id, firstName, lastName, userName, password, UserType.TEACHER);
+                dataModelFacade.editTeacher(teacher);
+                reloadTeacherTable();
+                clearTeacherTxtField();
+                tvTeachers.getSelectionModel().clearSelection();
+            }else{
+                System.out.println("Probably didn't select a teacher");
+                //TODO errorhandling
+            }
+        }
     }
 
     @FXML
-    private void onActionDeleteTeacher() {
+    private void onActionDeleteTeacher() throws SQLException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("WARNING MESSAGE");
+        alert.setHeaderText("Warning before you delete teacher");
+        alert.setContentText("Joe");
+        if (selectedTeacher != null) {
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                selectedTeacher();
+                dataModelFacade.deleteTeacher(selectedTeacher.getId(), UserType.TEACHER);
+                reloadTeacherTable();
+            }
+        } else {
+            return;
+        }
     }
 
     @FXML
@@ -334,6 +375,27 @@ public class AdminViewController implements Initializable, IController{
     }
 
     /**
+     * Makes you able to select a teacher from the table
+     * @param
+     */
+    private void selectedTeacher() {
+        this.tvTeachers.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((User) newValue != null) {
+                this.selectedTeacher = (User) newValue;
+                setSelectedTeacher(newValue);
+            }
+        }));
+    }
+
+    public void setSelectedTeacher(User teacher) {
+        txtFieldTeacherID.setText(String.valueOf(teacher.getId()));
+        txtFieldTeacherFirstName.setText(teacher.getFirstName());
+        txtFieldTeacherLastName.setText(teacher.getLastName());
+        txtFieldTeacherUsername.setText(teacher.getUsername());
+        txtFieldTeacherPassword.setText(teacher.getPassword());
+    }
+
+    /**
      * Reloads the teacher table
      */
     private void reloadTeacherTable() {
@@ -344,6 +406,14 @@ public class AdminViewController implements Initializable, IController{
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+    }
+
+    public void clearTeacherTxtField() {
+        txtFieldTeacherID.clear();
+        txtFieldTeacherFirstName.clear();
+        txtFieldTeacherLastName.clear();
+        txtFieldTeacherUsername.clear();
+        txtFieldTeacherPassword.clear();
     }
 
     private void setAnchorPanesVisibility(){

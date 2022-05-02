@@ -181,6 +181,7 @@
                </font>
             </Label>
             <Label layoutX="538.0" layoutY="164.0" prefHeight="18.0" prefWidth="56.0" text="Efternavn" />
+            <TextField fx:id="txtFieldTeacherID" layoutX="453.0" layoutY="417.0" prefHeight="25.0" prefWidth="21.0" visible="false" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneAdmin" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
