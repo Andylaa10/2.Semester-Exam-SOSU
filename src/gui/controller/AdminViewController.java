@@ -120,6 +120,7 @@ public class AdminViewController extends Application implements Initializable, I
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCases = FXCollections.observableArrayList();
     private ObservableList<Case> allCurrentCases = FXCollections.observableArrayList();
+    private ObservableList<User> allTeachers = FXCollections.observableArrayList();
 
     private DataModelFacade dataModelFacade;
 
@@ -144,6 +145,15 @@ public class AdminViewController extends Application implements Initializable, I
 
     private void initializeTables() throws Exception {
         //Initialize the teachers table
+        tcTeacherFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        tcTeacherLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        tcTeacherUserName.setCellValueFactory(new PropertyValueFactory<>("username"));
+        try {
+            allTeachers = FXCollections.observableList(dataModelFacade.getTeachers());
+            tableViewLoadTeachers(allTeachers);
+        } catch (Exception e) {
+            throw new Exception();
+        }
 
         //Initialize the students table
         tcStudentFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -169,7 +179,7 @@ public class AdminViewController extends Application implements Initializable, I
         //Initialize the citizens table
         tcCurrentCitizenFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcCurrentCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        tcCurrentCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("ssn"));
+        tcCurrentCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSNJoh"));
         try {
             allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
             tableViewLoadCitizens(allCitizens);
@@ -187,6 +197,15 @@ public class AdminViewController extends Application implements Initializable, I
             throw new Exception();
         }
     }
+
+    private void tableViewLoadTeachers(ObservableList<User> allTeachers) {
+        tvTeachers.setItems(getTeacherData());
+    }
+
+    private ObservableList<User> getTeacherData() {
+        return allTeachers;
+    }
+
 
     private void tableViewLoadStudents(ObservableList<User> allStudents) {
         tvStudents.setItems(getStudentData());
