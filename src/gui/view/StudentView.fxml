@@ -33,7 +33,7 @@
                   <Button fx:id="btnHome" layoutX="7.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnClickHome" prefHeight="133.0" prefWidth="172.0" style="-fx-background-color: transparent;" />
                </children>
             </Pane>
-            <Button fx:id="btnCitizens" mnemonicParsing="false" onAction="#btnClickStudent" prefHeight="42.0" prefWidth="218.0" text="Borgere">
+            <Button fx:id="btnCitizens" mnemonicParsing="false" onAction="#btnClickCitizensAndCases" prefHeight="42.0" prefWidth="218.0" text="Sager - Borger">
                <graphic>
                   <ImageView fitHeight="28.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -45,7 +45,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnFS3" mnemonicParsing="false" onAction="#btnClickSeeCitizens" prefHeight="42.0" prefWidth="218.0" text="Rapporter FSIII">
+            <Button fx:id="btnFS3" mnemonicParsing="false" onAction="#btnClickFS3" prefHeight="42.0" prefWidth="218.0" text="Rapporter FSIII">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -72,15 +72,15 @@
             </Button>
          </children>
       </VBox>
-      <Pane layoutX="182.0" layoutY="46.0" prefHeight="86.0" prefWidth="1170.0" style="-fx-background-color: rgb(81, 83, 222);">
+      <Pane layoutX="182.0" layoutY="35.0" prefHeight="97.0" prefWidth="1170.0" style="-fx-background-color: rgb(81, 83, 222);">
          <children>
-            <Label fx:id="labelTitle" layoutX="31.0" layoutY="7.0" prefHeight="47.0" prefWidth="534.0" text="Tekst" textFill="WHITE">
+            <Label fx:id="labelTitle" layoutX="31.0" layoutY="1.0" prefHeight="47.0" prefWidth="1098.0" text="Tekst" textFill="WHITE">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
-            <Label fx:id="labelInfo" layoutX="34.0" layoutY="43.0" prefHeight="35.0" prefWidth="580.0" text="Tekst" textFill="WHITE" />
-            <Label fx:id="labelInfoNewLine" layoutX="34.0" layoutY="58.0" prefHeight="35.0" prefWidth="580.0" text="Tekst2" textFill="WHITE" />
+            <Label fx:id="labelInfo" layoutX="34.0" layoutY="42.0" prefHeight="35.0" prefWidth="1098.0" text="Tekst" textFill="WHITE" />
+            <Label fx:id="labelInfoNewLine" layoutX="34.0" layoutY="61.0" prefHeight="35.0" prefWidth="1098.0" text="Tekst2" textFill="WHITE" />
          </children>
          <effect>
             <ColorAdjust brightness="0.3" />
@@ -124,7 +124,7 @@
          <children>
             <Pane prefHeight="42.0" prefWidth="1158.0" style="-fx-background-color: transparent;">
                <children>
-                  <Button layoutX="13.0" layoutY="3.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="261.0" text="Generelle Informationer">
+                  <Button fx:id="btnGeneralInformation" layoutX="13.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnClickGeneralInformation" prefHeight="35.0" prefWidth="261.0" text="Generelle Informationer">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -132,7 +132,7 @@
                         <ColorAdjust brightness="0.34" />
                      </effect>
                   </Button>
-                  <Button layoutX="291.0" layoutY="3.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="261.0" text="Helbredstilstande">
+                  <Button fx:id="btnHealthCondition" layoutX="291.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnClickHealthCondition" prefHeight="35.0" prefWidth="261.0" text="Helbredstilstande">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -140,7 +140,7 @@
                         <ColorAdjust brightness="0.34" />
                      </effect>
                   </Button>
-                  <Button layoutX="569.0" layoutY="3.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="261.0" text="Funktions Tilstand">
+                  <Button fx:id="btnFunctionalCondition" layoutX="569.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnClickFunctionalCondition" prefHeight="35.0" prefWidth="261.0" text="Funktions Tilstand">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -148,7 +148,7 @@
                         <ColorAdjust brightness="0.34" />
                      </effect>
                   </Button>
-                  <ComboBox layoutX="944.0" layoutY="8.0" prefHeight="25.0" prefWidth="200.0" visibleRowCount="20">
+                  <ComboBox fx:id="comboBoxCitizen" layoutX="944.0" layoutY="8.0" prefHeight="25.0" prefWidth="200.0" visibleRowCount="20">
                      <effect>
                         <ColorAdjust brightness="0.2" />
                      </effect>
@@ -278,7 +278,7 @@
                   <Button layoutX="766.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
+            <AnchorPane fx:id="anchorPaneFunctionalAbility" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
                <children>
                   <ImageView fitHeight="329.0" fitWidth="777.0" layoutX="14.0" layoutY="91.0" pickOnBounds="true">
                      <image>
@@ -315,7 +315,7 @@
                         <Font size="18.0" />
                      </font>
                   </CheckBox>
-                  <Label layoutX="336.0" layoutY="28.0" text="Borgerens Funktionsevne Tilstand- FSIII">
+                  <Label layoutX="280.0" layoutY="29.0" text="Borgerens Funktionsevne Tilstand- FSIII">
                      <font>
                         <Font size="33.0" />
                      </font>
@@ -335,16 +335,61 @@
                   <Button layoutX="967.0" layoutY="484.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="Gem" />
                </children>
             </AnchorPane>
+            <AnchorPane fx:id="anchorPaneOBS" layoutX="825.0" layoutY="51.0" prefHeight="302.0" prefWidth="326.0" visible="false">
+               <children>
+                  <Label layoutX="91.0" layoutY="108.0" text="OBS!!">
+                     <font>
+                        <Font size="59.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="17.0" layoutY="82.0" text="Vælg en borger for at starte simulationen">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="94.0" fitWidth="129.0" layoutX="101.0" pickOnBounds="true" preserveRatio="true" rotate="-75.8">
+                     <image>
+                        <Image url="@img/arrow%20icon.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="94.0" fitWidth="129.0" layoutX="187.0" pickOnBounds="true" preserveRatio="true" rotate="-88.4">
+                     <image>
+                        <Image url="@img/arrow%20icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizens" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1152.0" visible="false">
+      <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0" visible="false">
          <children>
-            <TableView layoutX="21.0" layoutY="44.0" prefHeight="200.0" prefWidth="200.0">
+            <TableView layoutX="24.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn prefWidth="184.80003356933594" text="Navn" />
+                  <TableColumn prefWidth="128.79998779296875" text="Dato" />
+                  <TableColumn prefWidth="190.4000244140625" text="Info" />
               </columns>
             </TableView>
+            <TableView layoutX="605.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0">
+               <columns>
+                  <TableColumn prefWidth="108.0" text="Fornavn" />
+                  <TableColumn prefWidth="110.39996337890625" text="Efternavn" />
+                  <TableColumn prefWidth="124.79998779296875" text="CPR-Nummer" />
+                  <TableColumn prefWidth="106.39990234375" text="Addresse" />
+                  <TableColumn prefWidth="78.4000244140625" text="Køn" />
+               </columns>
+            </TableView>
+            <Label layoutX="246.0" layoutY="14.0" text="Sager">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Label layoutX="749.0" layoutY="14.0" text="Borgerens Sager">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnBack" layoutX="982.0" layoutY="577.0" mnemonicParsing="false" onAction="#btnClickBack" prefHeight="27.0" prefWidth="150.0" text="Tilbage" />
          </children>
       </AnchorPane>
    </children>
