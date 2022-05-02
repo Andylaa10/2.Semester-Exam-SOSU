@@ -138,9 +138,9 @@ public class SuperAdminDAO {
      */
     public static void main(String[] args) throws IOException, SQLException {
         SuperAdminDAO superAdminDAO = new SuperAdminDAO();
-        superAdminDAO.createSchool("SOSU Esbjerg");
+        //superAdminDAO.createSchool("SOSU Esbjerg");
         //superAdminDAO.deleteSchool(1);
-        //superAdminDAO.createSuperAdmin("superadmin", "superadmin");
+        superAdminDAO.createSuperAdmin("superadmin", "superadmin");
         //superAdminDAO.deleteSuperAdmin(1);
     }
 

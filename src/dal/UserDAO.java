@@ -359,9 +359,9 @@ public class UserDAO {
 
     public static void main(String[] args) throws IOException, SQLException {
         UserDAO dao = new UserDAO();
-        //dao.createAdmin("John", "Johnson", "John", "1", UserType.ADMINISTRATOR);
-        //dao.createTeacher("Kim", "Larsen", "Kim", "1", UserType.TEACHER);
-        //dao.createStudent("andy", "lam", "Andy", "1", UserType.STUDENT);
+        dao.createAdmin("John", "Johnson", "John", "1", UserType.ADMINISTRATOR);
+        dao.createTeacher("Kim", "Larsen", "Kim", "1", UserType.TEACHER);
+        dao.createStudent("andy", "lam", "Andy", "1", UserType.STUDENT);
         //dao.createStudent("Kristian", "Hollænder", "kris",  "1", UserType.STUDENT);
         System.out.println(dao.getAdmins());
         System.out.println(dao.getStudents());

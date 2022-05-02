@@ -37,10 +37,9 @@ public class CitizenDAO {
                 int generalInfoID = resultset.getInt("generalInfoId");
                 int functionalAbilityID = resultset.getInt("functionalAbilityId");
                 int loginID = resultset.getInt("loginId");
-                int functionalLevelID = resultset.getInt("functionalLevelId");
                 int schoolID = resultset.getInt("schoolId");
 
-                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex, generalInfoID, functionalAbilityID, loginID, functionalLevelID, schoolID);
+                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex, generalInfoID, functionalAbilityID, loginID, schoolID);
                 allCitizens.add(citizen);
             }
 
@@ -114,7 +113,7 @@ public class CitizenDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, citizen.getFirstName());
             preparedStatement.setString(2, citizen.getLastName());
-            preparedStatement.setString(1, citizen.getSsn());
+            preparedStatement.setString(1, citizen.getSSN());
             preparedStatement.setString(1, citizen.getAddress());
             preparedStatement.setString(1, citizen.getSex());
             preparedStatement.executeUpdate();
