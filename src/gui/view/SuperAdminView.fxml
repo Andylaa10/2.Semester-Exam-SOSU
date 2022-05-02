@@ -167,9 +167,10 @@
                   <Image url="@img/School%20Icon.png" />
                </image>
             </ImageView>
+            <TextField fx:id="txtFieldSchoolID" layoutX="-1.0" layoutY="416.0" prefHeight="26.0" prefWidth="30.0" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateAdmin" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+      <AnchorPane fx:id="anchorPaneCreateAdmin" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
          <children>
             <TableView fx:id="tvAdmins" layoutX="15.0" layoutY="44.0" prefHeight="307.0" prefWidth="580.0" style="-fx-background-color: transparent;">
               <columns>
@@ -187,6 +188,7 @@
             <TextField fx:id="txtFieldAdminLastName" layoutX="198.0" layoutY="370.0" prefHeight="26.0" prefWidth="166.0" promptText="Efternavn" />
             <TextField fx:id="txtFieldAdminUsername" layoutX="14.0" layoutY="407.0" prefHeight="26.0" prefWidth="166.0" promptText="Username" />
             <TextField fx:id="txtFieldAdminPassword" layoutX="199.0" layoutY="407.0" prefHeight="26.0" prefWidth="166.0" promptText="Password" />
+            <TextField fx:id="txtFieldAdminID" layoutX="190.0" layoutY="395.0" prefHeight="25.0" prefWidth="17.0" visible="false" />
             <Button fx:id="btnCreateAdmin" layoutX="375.0" layoutY="370.0" mnemonicParsing="false" onAction="#onActionCreateAdmin" prefHeight="26.0" prefWidth="218.0" text="Opret/Gem Admin">
                <effect>
                   <ColorAdjust brightness="0.3" />

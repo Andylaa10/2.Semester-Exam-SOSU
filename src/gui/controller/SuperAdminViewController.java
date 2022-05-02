@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.School;
 import be.User;
+import be.enums.UserType;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.application.Application;
@@ -20,9 +21,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SuperAdminViewController implements Initializable, IController {
+
+
 
     @FXML
     private Button btnCreateSchoolOnAssignPane;
@@ -35,7 +39,12 @@ public class SuperAdminViewController implements Initializable, IController {
     private Button btnDeleteSchool;
 
     @FXML
+    private TextField txtFieldSchoolID;
+    @FXML
     private TextField txtFieldSchoolName;
+
+    @FXML
+    private TextField txtFieldAdminID;
     @FXML
     private TextField txtFieldAdminFirstName;
     @FXML
@@ -59,6 +68,7 @@ public class SuperAdminViewController implements Initializable, IController {
 
     @FXML
     private TableView<User> tvAdmins;
+
     @FXML
     private TableColumn<User, String> tcAdminFirstName;
     @FXML
@@ -114,6 +124,10 @@ public class SuperAdminViewController implements Initializable, IController {
 
     DataModelFacade dataModelFacade;
 
+    private School selectedSchool;
+    private User selectedAdmin;
+
+
     public SuperAdminViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
     }
@@ -126,6 +140,8 @@ public class SuperAdminViewController implements Initializable, IController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        selectedSchool();
+        selectedAdmin();
     }
 
     private void initializeTables() throws Exception {
@@ -171,31 +187,117 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     @FXML
-    private void onActionEditSchool(ActionEvent actionEvent) {
+    private void onActionCreateSchool() throws SQLException {
+        if (!txtFieldSchoolName.getText().isEmpty()){
+            String schoolName = txtFieldSchoolName.getText();
+
+            dataModelFacade.createSchool(schoolName);
+            reloadSchoolTable();
+        } else{
+            System.out.println("Something is wrong");
+            //TODO add errorHandler
+        }
     }
 
     @FXML
-    private void onActionDeleteSchool(ActionEvent actionEvent) {
+    private void onActionEditSchool() throws Exception {
+        if (this.selectedSchool != null){
+            if (!txtFieldSchoolName.getText().isEmpty()) {
+                int id = Integer.parseInt(txtFieldSchoolID.getText());;
+                String schoolName = txtFieldSchoolName.getText();
+
+                School school = new School(id, schoolName);
+                dataModelFacade.editSchool(school);
+                reloadSchoolTable();
+                clearSchoolTxtField();
+                tvSchools.getSelectionModel().clearSelection();
+            }else{
+                System.out.println("Something is wrong");
+                //TODO add errorhandler
+            }
+        }
     }
 
     @FXML
-    private void onActionCreateSchool(ActionEvent actionEvent) {
+    private void onActionDeleteSchool() throws SQLException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("WARNING MESSAGE");
+        alert.setHeaderText("Warning before you delete a school");
+        alert.setContentText("Joe");
+        if (selectedSchool != null) {
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                selectedSchool();
+                dataModelFacade.deleteSchool(selectedSchool.getId());
+                reloadSchoolTable();
+            }
+        } else {
+            return;
+        }
     }
 
     @FXML
-    private void onActionCreateAdmin(ActionEvent actionEvent) {
+    private void onActionCreateAdmin() throws SQLException {
+        if (!txtFieldAdminFirstName.getText().isEmpty() && !txtFieldAdminLastName.getText().isEmpty() && !txtFieldAdminUsername.getText().isEmpty() && !txtFieldAdminPassword.getText().isEmpty()){
+            String firstName = txtFieldAdminFirstName.getText();
+            String lastName = txtFieldAdminLastName.getText();
+            String userName = txtFieldAdminUsername.getText();
+            String password = txtFieldAdminPassword.getText();
+
+            dataModelFacade.createAdmin(firstName, lastName, userName, password, UserType.ADMINISTRATOR);
+            clearAdminTxtField();
+            tvAdmins.getSelectionModel().clearSelection();
+            reloadAdminTable();
+        } else{
+            System.out.println("Couldn't create admin");
+            //TODO Make proper errorhandler
+        }
     }
 
     @FXML
-    private void onActionEditAdmin(ActionEvent actionEvent) {
+    private void onActionEditAdmin() throws Exception {
+        if (this.selectedAdmin != null){
+            if (!txtFieldAdminFirstName.getText().isEmpty() && !txtFieldAdminLastName.getText().isEmpty() && !txtFieldAdminUsername.getText().isEmpty() && !txtFieldAdminPassword.getText().isEmpty()) {
+                int id = Integer.parseInt(txtFieldAdminID.getText());;
+                String firstName = txtFieldAdminFirstName.getText();
+                String lastName = txtFieldAdminLastName.getText();
+                String userName = txtFieldAdminUsername.getText();
+                String password = txtFieldAdminPassword.getText();
+
+                User admin = new User(id, firstName, lastName, userName, password, UserType.STUDENT);
+                dataModelFacade.editAdmin(admin);
+                reloadAdminTable();
+                clearAdminTxtField();
+                tvAdmins.getSelectionModel().clearSelection();
+            }else{
+                System.out.println("Something went wrong");
+                //TODO ADD ERRORHANDLER
+            }
+        }
     }
 
     @FXML
-    private void OnActionDeleteAdmin(ActionEvent actionEvent) {
+    private void OnActionDeleteAdmin() throws SQLException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("WARNING MESSAGE");
+        alert.setHeaderText("Warning before you delete admin");
+        alert.setContentText("Joe");
+        if (selectedAdmin != null) {
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                selectedSchool();
+                dataModelFacade.deleteAdmin(selectedAdmin.getId(), UserType.ADMINISTRATOR);
+                reloadAdminTable();
+                clearAdminTxtField();
+            }
+        } else {
+            return;
+        }
     }
 
     @FXML
-    private void onActionAssignAdminToSchool(ActionEvent actionEvent) {
+    private void onActionAssignAdminToSchool() {
+
     }
 
     private void tableViewLoadSchools(ObservableList<School> allSchools) {
@@ -231,6 +333,69 @@ public class SuperAdminViewController implements Initializable, IController {
         return allAssignedSchools;
     }
 
+    private void reloadSchoolTable() {
+        try {
+            int index = tvSchools.getSelectionModel().getFocusedIndex();
+            this.tvSchools.setItems(FXCollections.observableList(dataModelFacade.getSchools()));
+            tvSchools.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    private void reloadAdminTable() {
+        try {
+            int index = tvAdmins.getSelectionModel().getFocusedIndex();
+            this.tvAdmins.setItems(FXCollections.observableList(dataModelFacade.getAdmins()));
+            tvAdmins.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void clearSchoolTxtField(){
+        txtFieldSchoolID.clear();
+        txtFieldSchoolName.clear();
+    }
+
+    public void clearAdminTxtField() {
+        txtFieldAdminID.clear();
+        txtFieldAdminFirstName.clear();
+        txtFieldAdminLastName.clear();
+        txtFieldAdminUsername.clear();
+        txtFieldAdminPassword.clear();
+    }
+
+    public void setSelectedSchool(School school) {
+        txtFieldSchoolID.setText(String.valueOf(school.getId()));
+        txtFieldSchoolName.setText(school.getSchoolName());
+    }
+
+    private void setSelectedAdmin(User admin) {
+        txtFieldAdminID.setText(String.valueOf(admin.getId()));
+        txtFieldAdminFirstName.setText(admin.getFirstName());
+        txtFieldAdminLastName.setText(admin.getLastName());
+        txtFieldAdminUsername.setText(admin.getUsername());
+        txtFieldAdminPassword.setText(admin.getPassword());
+    }
+
+    private void selectedSchool() {
+        this.tvSchools.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((School) newValue != null) {
+                this.selectedSchool = (School) newValue;
+                setSelectedSchool(newValue);
+            }
+        }));
+    }
+
+    private void selectedAdmin() {
+        this.tvAdmins.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((User) newValue != null) {
+                this.selectedAdmin = (User) newValue;
+                setSelectedAdmin(newValue);
+            }
+        }));
+    }
 
 
     private void setAnchorPanesVisibility(){
@@ -240,7 +405,6 @@ public class SuperAdminViewController implements Initializable, IController {
         anchorPaneCreateAdmin.setVisible(false);
         anchorPaneConfigureSchool.setVisible(false);
     }
-
 
     @FXML
     private void btnClickHome() {
