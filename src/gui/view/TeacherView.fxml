@@ -5,7 +5,24 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Teacher.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TeacherViewController">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Teacher.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TeacherViewController">
    <children>
       <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: #044d39;">
          <children>
@@ -247,8 +264,10 @@
               </columns>
             </TableView>
             <TextField fx:id="txtFieldFirstName" layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Fornavn" />
-            <TextField fx:id="txtFieldPassword" layoutX="470.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Password" />
+            <TextField fx:id="txtFieldLastName" layoutX="166.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Efternavn" />
             <TextField fx:id="txtFieldUsername" layoutX="317.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Username" />
+            <TextField fx:id="txtFieldPassword" layoutX="470.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Password" />
+            <TextField fx:id="txtFieldStudentID" layoutX="14.0" layoutY="336.0" prefHeight="26.0" prefWidth="6.0" visible="false" />
             <Button fx:id="btnSaveStudent" layoutX="14.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleSaveStudent" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Elev">
                <effect>
                   <ColorAdjust brightness="0.3" />
@@ -261,7 +280,6 @@
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect></Button>
-            <TextField fx:id="txtFieldLastName" layoutX="166.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Efternavn" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">

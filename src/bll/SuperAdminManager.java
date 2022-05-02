@@ -5,6 +5,7 @@ import be.SuperAdmin;
 import dal.SuperAdminDAO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class SuperAdminManager {
 
@@ -55,6 +56,10 @@ public class SuperAdminManager {
      */
     public SuperAdmin superAdminLogin(String username, String password) throws SQLException {
         return superAdminDAO.superAdminLogin(username, password);
+    }
+
+    public List<School> getSchools() throws SQLException {
+        return superAdminDAO.getSchools();
     }
 
     /**

@@ -196,6 +196,10 @@ public class DataModelFacade {
         return superAdminModel.superAdminLogin(username, password);
     }
 
+    public List<School> getSchools() throws SQLException {
+        return superAdminModel.getSchools();
+    }
+
     /**
      * Creates a school using the createSchool method from superAdminModel
      * @param schoolName
