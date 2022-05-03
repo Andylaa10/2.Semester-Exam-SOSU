@@ -330,7 +330,7 @@
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <TableView fx:id="tvStudents" layoutX="7.0" layoutY="8.0" prefHeight="340.0" prefWidth="594.0" style="-fx-background-color: transparent;">
                <columns>
@@ -361,7 +361,7 @@
             <TextField fx:id="txtFieldStudentID" layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="21.0" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Label layoutX="111.0" layoutY="22.0" text="Opret ny sag" textFill="#1d5e3f">
                <font>
@@ -405,6 +405,7 @@
                <columns>
                   <TableColumn fx:id="tcCaseName" prefWidth="116.0" text="Navn" />
                   <TableColumn fx:id="tcCaseDate" prefWidth="132.79998779296875" text="Dato" />
+                  <TableColumn fx:id="tcCaseInfo" prefWidth="132.79998779296875" text="Info" visible="false" />
                </columns>
             </TableView>
             <Button fx:id="btnSaveCase" layoutX="63.0" layoutY="407.0" mnemonicParsing="false" onAction="#onActionSaveCase" prefHeight="26.0" prefWidth="232.0" text="Opret/Gem Sag">
