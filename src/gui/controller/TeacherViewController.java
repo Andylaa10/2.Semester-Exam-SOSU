@@ -379,6 +379,7 @@ public class TeacherViewController implements Initializable, IController{
         if (selectedCurrentCase != null && selectedCitizen != null) {
             try {
                 dataModelFacade.assignCaseToCitizen(selectedCurrentCase.getId(), selectedCitizen.getId());
+                seeCasesOnCitizen();
             } catch (Exception e) {
                 e.printStackTrace();
             }
