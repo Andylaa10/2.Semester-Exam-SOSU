@@ -199,6 +199,7 @@ public class TeacherViewController implements Initializable, IController {
         selectedCurrentCase();
         selectedCitizenOnCase();
         selectedCitizen();
+        selectedCase();
     }
 
     private void initializeTable() throws Exception {
@@ -576,7 +577,6 @@ public class TeacherViewController implements Initializable, IController {
                 seeCasesOnCitizen();
             }
         }));
-
     }
 
     /**
@@ -652,6 +652,7 @@ public class TeacherViewController implements Initializable, IController {
         this.tvCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((Case) newValue != null) {
                 this.selectedCase = (Case) newValue;
+                setSelectedCase(newValue);
             }
         }));
     }
@@ -667,6 +668,17 @@ public class TeacherViewController implements Initializable, IController {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+    }
+
+
+    /**
+     * Sets the selected event
+     *
+     * @param aCase
+     */
+    public void setSelectedCase(Case aCase) {
+        txtFieldName.setText(aCase.getName());
+        txtAreaInfo.setText(aCase.getInfo());
     }
 
     //TODO self selection inc
@@ -716,6 +728,7 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
-    public void btnHandleCopyCase() {
+    public void btnHandleCopyCase() throws Exception {
+        btnHandleSaveCase();
     }
 }
