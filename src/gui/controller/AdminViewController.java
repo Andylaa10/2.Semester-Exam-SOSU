@@ -8,6 +8,7 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,6 +26,10 @@ import java.util.ResourceBundle;
 
 public class AdminViewController implements Initializable, IController {
 
+    public Button btnEditStudentSave;
+    public Button btnEditStudentCancel;
+    public Button btnEditTeacherSave;
+    public Button btnEditTeacherCancel;
     @FXML
     private TableView<User> tvTeachers;
     @FXML
@@ -377,11 +382,21 @@ public class AdminViewController implements Initializable, IController {
     }
 
     @FXML
-    private void onActionEditTeacher() throws Exception {
+    private void onActionEditTeacher(){
+        setSelectedTeacher(selectedTeacher);
+        btnCopyTeacher.setDisable(true);
+        btnDeleteTeacher.setDisable(true);
+        btnEditTeacher.setDisable(true);
+        btnCreateTeacher.setVisible(false);
+        btnEditTeacherSave.setVisible(true);
+        btnEditTeacherCancel.setVisible(true);
+    }
+
+    public void onActionEditTeacherSave() throws Exception {
         if (this.selectedTeacher != null) {
             if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldTeacherID.getText());
-                ;
+
                 String firstName = txtFieldTeacherFirstName.getText();
                 String lastName = txtFieldTeacherLastName.getText();
                 String userName = txtFieldTeacherUsername.getText();
@@ -392,11 +407,29 @@ public class AdminViewController implements Initializable, IController {
                 reloadTeacherTable();
                 clearTeacherTxtField();
                 tvTeachers.getSelectionModel().clearSelection();
+                btnCopyTeacher.setDisable(false);
+                btnDeleteTeacher.setDisable(false);
+                btnEditTeacher.setDisable(false);
+                btnCreateTeacher.setVisible(true);
+                btnEditTeacherSave.setVisible(false);
+                btnEditTeacherCancel.setVisible(false);
             } else {
                 System.out.println("Probably didn't select a teacher");
                 //TODO errorhandler
             }
         }
+    }
+
+    public void onActionEditTeacherCancel() {
+        reloadTeacherTable();
+        clearTeacherTxtField();
+        tvTeachers.getSelectionModel().clearSelection();
+        btnCopyTeacher.setDisable(false);
+        btnDeleteTeacher.setDisable(false);
+        btnEditTeacher.setDisable(false);
+        btnCreateTeacher.setVisible(true);
+        btnEditTeacherSave.setVisible(false);
+        btnEditTeacherCancel.setVisible(false);
     }
 
     @FXML
@@ -500,26 +533,50 @@ public class AdminViewController implements Initializable, IController {
     }
 
     @FXML
-    private void onActionEditStudent() throws Exception {
+    private void onActionEditStudent()  {
+        setSelectedStudent(selectedStudent);
+        btnEditStudent.setVisible(false);
+        btnEditStudentSave.setVisible(true);
+        btnEditStudentCancel.setVisible(true);
+        btnDeleteStudent.setVisible(false);
+        btnCreateStudent.setDisable(true);
+    }
+
+    public void onActionEditStudentSave() throws Exception {
         if (this.selectedStudent != null) {
-            if (!txtFieldStudentFirstName.getText().isEmpty() && !txtFieldStudentLastname.getText().isEmpty() && !txtFieldStudentUsername.getText().isEmpty() && !txtFieldStudentPassword.getText().isEmpty()) {
+            if (!txtFieldStudentFirstName.getText().isEmpty() && !txtFieldStudentLastname.getText().isEmpty() && !txtFieldStudentFirstName.getText().isEmpty() && !txtFieldStudentPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldStudentID.getText());
-                ;
                 String firstName = txtFieldStudentFirstName.getText();
                 String lastName = txtFieldStudentLastname.getText();
                 String userName = txtFieldStudentUsername.getText();
-                String password = txtFieldTeacherPassword.getText();
+                String password = txtFieldStudentPassword.getText();
 
                 User student = new User(id, firstName, lastName, userName, password, UserType.STUDENT);
                 dataModelFacade.editStudent(student);
                 reloadStudentTable();
                 clearStudentTxtField();
                 tvStudents.getSelectionModel().clearSelection();
+                btnEditStudent.setVisible(true);
+                btnEditStudentSave.setVisible(false);
+                btnEditStudentCancel.setVisible(false);
+                btnDeleteStudent.setVisible(true);
+                btnCreateStudent.setDisable(false);
             } else {
                 System.out.println("Something went wrong");
                 //TODO make errorhandler
             }
         }
+    }
+
+    public void onActionEditStudentCancel() {
+        reloadStudentTable();
+        clearStudentTxtField();
+        tvStudents.getSelectionModel().clearSelection();
+        btnEditStudent.setVisible(true);
+        btnEditStudentSave.setVisible(false);
+        btnEditStudentCancel.setVisible(false);
+        btnDeleteStudent.setVisible(true);
+        btnCreateStudent.setDisable(false);
     }
 
     @FXML
@@ -549,7 +606,6 @@ public class AdminViewController implements Initializable, IController {
         this.tvTeachers.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((User) newValue != null) {
                 this.selectedTeacher = (User) newValue;
-                setSelectedTeacher(newValue);
             }
         }));
     }
@@ -561,7 +617,6 @@ public class AdminViewController implements Initializable, IController {
         this.tvStudents.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((User) newValue != null) {
                 this.selectedStudent = (User) newValue;
-                setSelectedStudent(newValue);
             }
         }));
     }
@@ -729,5 +784,4 @@ public class AdminViewController implements Initializable, IController {
         labelInfo.setText("Du er nu logget ind som Admin: " + user.getFirstName() + user.getLastName());
         labelInfoNewLine.setText("");
     }
-
 }

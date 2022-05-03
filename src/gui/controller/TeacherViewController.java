@@ -39,6 +39,8 @@ public class TeacherViewController implements Initializable, IController {
     @FXML
     private Button btnCreateCitizen;
     @FXML
+    private Button btnSaveCitizen;
+    @FXML
     private Button btnCase;
     @FXML
     private Button btnHome;
@@ -171,8 +173,6 @@ public class TeacherViewController implements Initializable, IController {
     @FXML
     private CheckBox checkBoxOther;
 
-    @FXML
-    private Button btnSaveCitizen;
 
     private ObservableList<User> allStudents = FXCollections.observableArrayList();
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
@@ -194,12 +194,8 @@ public class TeacherViewController implements Initializable, IController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initializeTable();
         setAnchorPanesVisibility();
-        try {
-            initializeTable();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         selectedStudent();
         selectedCurrentCase();
         selectedCitizenOnCase();
@@ -207,7 +203,7 @@ public class TeacherViewController implements Initializable, IController {
         selectedCase();
     }
 
-    private void initializeTable() throws Exception {
+    private void initializeTable() {
         //Initialize the students table
         tcStudentFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcStudentLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -216,7 +212,7 @@ public class TeacherViewController implements Initializable, IController {
             allStudents = FXCollections.observableList(dataModelFacade.getStudents());
             tableViewLoadStudents(allStudents);
         } catch (Exception e) {
-            throw new Exception();
+            e.printStackTrace();
         }
 
         //Initialize the cases table
@@ -226,7 +222,7 @@ public class TeacherViewController implements Initializable, IController {
             allCases = FXCollections.observableList(dataModelFacade.getCases());
             tableViewLoadCases(allCases);
         } catch (Exception e) {
-            throw new Exception();
+            e.printStackTrace();
         }
 
         //Initialize the citizens table
@@ -238,7 +234,7 @@ public class TeacherViewController implements Initializable, IController {
             allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
             tableViewLoadCitizens(allCitizens);
         } catch (Exception e) {
-            throw new Exception();
+            e.printStackTrace();
         }
 
         //Initialize the current cases table at citizen window
@@ -249,13 +245,14 @@ public class TeacherViewController implements Initializable, IController {
             allCurrentCases = FXCollections.observableList(dataModelFacade.getCases());
             tableViewLoadCurrentCases(allCurrentCases);
         } catch (Exception e) {
-            throw new Exception();
+            e.printStackTrace();
         }
     }
 
 
     /**
      * loads the students tableview.
+     *
      * @param allStudents
      */
     private void tableViewLoadStudents(ObservableList<User> allStudents) {
@@ -264,6 +261,7 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * gets the data for students.
+     *
      * @return ObservableList<User>
      */
     private ObservableList<User> getStudentData() {
@@ -272,6 +270,7 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * loads the cases TableView.
+     *
      * @param allCases
      */
     private void tableViewLoadCases(ObservableList<Case> allCases) {
@@ -280,6 +279,7 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * Gets the data for case
+     *
      * @return ObservableList<Case>
      */
     private ObservableList<Case> getCaseData() {
@@ -288,6 +288,7 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * loads the Citizens table view
+     *
      * @param allCitizens
      */
     private void tableViewLoadCitizens(ObservableList<Citizen> allCitizens) {
@@ -481,11 +482,11 @@ public class TeacherViewController implements Initializable, IController {
         String address = txtFieldCitizenAddress.getText();
         String info = txtAreaCitizenGeneralInfo.getText();
         String sex = null;
-        if(checkBoxMale.isSelected()){
+        if (checkBoxMale.isSelected()) {
             sex = "Male";
-        }else if(checkBoxFemale.isSelected()){
+        } else if (checkBoxFemale.isSelected()) {
             sex = "Female";
-        }else if (checkBoxOther.isSelected()){
+        } else if (checkBoxOther.isSelected()) {
             sex = "Other";
         }
         dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex, info);
@@ -519,7 +520,17 @@ public class TeacherViewController implements Initializable, IController {
      * @throws Exception
      */
 
-    public void btnHandleEditStudent() throws Exception {
+    public void btnHandleEditStudent() {
+        setSelectedStudent(selectedStudent);
+        btnEditStudent.setVisible(false);
+        btnEditSave.setVisible(true);
+        btnEditCancel.setVisible(true);
+        btnDeleteStudent.setVisible(false);
+        btnSaveStudent.setDisable(true);
+
+    }
+
+    public void btnHandleEditSave() throws Exception {
         if (this.selectedStudent != null) {
             if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldStudentID.getText());
@@ -534,10 +545,9 @@ public class TeacherViewController implements Initializable, IController {
                 clearStudentTxtField();
                 tvStudent.getSelectionModel().clearSelection();
                 btnSaveStudent.setDisable(false);
-
+                btnEditCancel.setVisible(false);
                 btnEditStudent.setVisible(true);
                 btnEditSave.setVisible(false);
-                btnEditCancel.setVisible(false);
                 btnDeleteStudent.setVisible(true);
             } else {
                 System.out.println("Noo");
@@ -545,7 +555,7 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
-    public void btnHandleEditCancel(ActionEvent actionEvent) {
+    public void btnHandleEditCancel() {
         reloadStudentTable();
         clearStudentTxtField();
         tvStudent.getSelectionModel().clearSelection();
@@ -590,18 +600,12 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     /**
-     * Makes you able to select a student from the table
+     * Selects a student from the student tableView
      */
-    private void selectedStudent() {
+    public void selectedStudent() {
         this.tvStudent.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((User) newValue != null) {
                 this.selectedStudent = (User) newValue;
-                setSelectedStudent(newValue);
-                btnEditStudent.setVisible(false);
-                btnEditSave.setVisible(true);
-                btnEditCancel.setVisible(true);
-                btnDeleteStudent.setVisible(false);
-                btnSaveStudent.setDisable(true);
             }
         }));
     }
@@ -641,6 +645,19 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     /**
+     * Sets the selected student
+     *
+     * @param student
+     */
+    public void setSelectedStudent(User student) {
+        txtFieldStudentID.setText(String.valueOf(student.getId()));
+        txtFieldFirstName.setText(student.getFirstName());
+        txtFieldLastName.setText(student.getLastName());
+        txtFieldUsername.setText(student.getUsername());
+        txtFieldPassword.setText(student.getPassword());
+    }
+
+    /**
      * Reloads the student table
      */
     private void reloadStudentTable() {
@@ -672,19 +689,6 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     /**
-     * Sets the selected event
-     *
-     * @param student
-     */
-    public void setSelectedStudent(User student) {
-        txtFieldStudentID.setText(String.valueOf(student.getId()));
-        txtFieldFirstName.setText(student.getFirstName());
-        txtFieldLastName.setText(student.getLastName());
-        txtFieldUsername.setText(student.getUsername());
-        txtFieldPassword.setText(student.getPassword());
-    }
-
-    /**
      * Makes you able to select a student from the table
      */
     private void selectedCase() {
@@ -709,7 +713,6 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
-
     /**
      * Sets the selected event
      *
@@ -719,23 +722,24 @@ public class TeacherViewController implements Initializable, IController {
         txtFieldName.setText(aCase.getName());
         txtAreaInfo.setText(aCase.getInfo());
     }
+
     //TODO self selection inc
 
     public void btnHandleSaveCase() throws Exception {
-        if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()){
+        if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
             String name = txtFieldName.getText();
             String area = txtAreaInfo.getText();
             allCases.add(dataModelFacade.createCase(name, area));
             assignDate();
             reloadCaseTable();
-        } else{
+        } else {
             System.out.println("NOOO");
         }
     }
 
     public void assignDate() throws Exception {
-        Case aCase = allCurrentCases.get(allCurrentCases.size()-1);
-        if (aCase != null){
+        Case aCase = allCurrentCases.get(allCurrentCases.size() - 1);
+        if (aCase != null) {
             Date caseDate = new Date(System.currentTimeMillis());
             String pattern = "dd/MM/yyyy  HH:mm:ss";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -745,9 +749,6 @@ public class TeacherViewController implements Initializable, IController {
         }
         txtFieldName.clear();
         txtAreaInfo.clear();
-    }
-
-    public void btnHandleEditCase() {
     }
 
     public void btnHandleDeleteCase() throws Exception {
@@ -765,6 +766,9 @@ public class TeacherViewController implements Initializable, IController {
         } else {
             return;
         }
+    }
+
+    public void btnHandleEditCase() {
     }
 
     public void btnHandleCopyCase() throws Exception {

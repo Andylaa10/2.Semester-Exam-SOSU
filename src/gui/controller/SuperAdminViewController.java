@@ -7,6 +7,7 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,6 +33,10 @@ public class SuperAdminViewController implements Initializable, IController {
     @FXML
     private Button btnEditSchool;
     @FXML
+    private Button btnEditSave;
+    @FXML
+    private Button btnEditCancel;
+    @FXML
     private Button btnDeleteSchool;
 
     @FXML
@@ -52,6 +57,10 @@ public class SuperAdminViewController implements Initializable, IController {
 
     @FXML
     private Button btnEditAdmin;
+    @FXML
+    private Button btnEditSaveAdmin;
+    @FXML
+    private Button btnEditAdminCancel;
     @FXML
     private Button btnDeleteAdmin;
     @FXML
@@ -208,7 +217,16 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     @FXML
-    private void onActionEditSchool() throws Exception {
+    private void onActionEditSchool() {
+        setSelectedSchool(selectedSchool);
+        btnEditSchool.setDisable(true);
+        btnEditSave.setVisible(true);
+        btnEditCancel.setVisible(true);
+        btnDeleteSchool.setVisible(false);
+        btnCreateSchool.setVisible(false);
+    }
+
+    public void onActionEditSaveSchool(ActionEvent actionEvent) throws Exception {
         if (this.selectedSchool != null){
             if (!txtFieldSchoolName.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldSchoolID.getText());;
@@ -219,11 +237,27 @@ public class SuperAdminViewController implements Initializable, IController {
                 reloadSchoolTable();
                 clearSchoolTxtField();
                 tvSchools.getSelectionModel().clearSelection();
+                btnEditSchool.setDisable(false);
+                btnEditSave.setVisible(false);
+                btnDeleteSchool.setVisible(true);
+                btnCreateSchool.setVisible(true);
+                btnEditCancel.setVisible(false);
             }else{
                 System.out.println("Something is wrong");
                 //TODO add errorhandler
             }
         }
+    }
+
+    public void onActionEditCancel() {
+        reloadSchoolTable();
+        clearSchoolTxtField();
+        tvSchools.getSelectionModel().clearSelection();
+        btnEditSchool.setDisable(false);
+        btnEditSave.setVisible(false);
+        btnDeleteSchool.setVisible(true);
+        btnCreateSchool.setVisible(true);
+        btnEditCancel.setVisible(false);
     }
 
     @FXML
@@ -263,7 +297,17 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     @FXML
-    private void onActionEditAdmin() throws Exception {
+    private void onActionEditAdmin(){
+        setSelectedAdmin(selectedAdmin);
+        btnEditAdmin.setDisable(true);
+        btnEditSaveAdmin.setVisible(true);
+        btnEditAdminCancel.setVisible(true);
+        btnCreateAdmin.setVisible(false);
+        btnDeleteAdmin.setVisible(false);
+    }
+
+    @FXML
+    private void onActionEditAdminSave() throws Exception {
         if (this.selectedAdmin != null){
             if (!txtFieldAdminFirstName.getText().isEmpty() && !txtFieldAdminLastName.getText().isEmpty() && !txtFieldAdminUsername.getText().isEmpty() && !txtFieldAdminPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldAdminID.getText());;
@@ -277,11 +321,28 @@ public class SuperAdminViewController implements Initializable, IController {
                 reloadAdminTable();
                 clearAdminTxtField();
                 tvAdmins.getSelectionModel().clearSelection();
+                btnEditAdmin.setDisable(false);
+                btnEditSaveAdmin.setVisible(false);
+                btnEditAdminCancel.setVisible(false);
+                btnCreateAdmin.setVisible(true);
+                btnDeleteAdmin.setVisible(true);
             }else{
                 System.out.println("Something went wrong");
                 //TODO ADD ERRORHANDLER
             }
         }
+    }
+
+    @FXML
+    private void onActionEditAdminCancel(){
+        reloadAdminTable();
+        clearAdminTxtField();
+        tvAdmins.getSelectionModel().clearSelection();
+        btnEditAdmin.setDisable(false);
+        btnEditSaveAdmin.setVisible(false);
+        btnEditAdminCancel.setVisible(false);
+        btnCreateAdmin.setVisible(true);
+        btnDeleteAdmin.setVisible(true);
     }
 
     @FXML
@@ -401,7 +462,6 @@ public class SuperAdminViewController implements Initializable, IController {
         this.tvSchools.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((School) newValue != null) {
                 this.selectedSchool = (School) newValue;
-                setSelectedSchool(newValue);
             }
         }));
     }
@@ -410,7 +470,6 @@ public class SuperAdminViewController implements Initializable, IController {
         this.tvAdmins.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((User) newValue != null) {
                 this.selectedAdmin = (User) newValue;
-                setSelectedAdmin(newValue);
             }
         }));
     }
@@ -499,6 +558,5 @@ public class SuperAdminViewController implements Initializable, IController {
         labelInfo.setText("Du er nu logget ind som Super Admin: " + user.getFirstName() + user.getLastName());
         labelInfoNewLine.setText("");
     }
-
 
 }
