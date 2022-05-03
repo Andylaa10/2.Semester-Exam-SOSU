@@ -155,17 +155,18 @@ public class TeacherViewController implements Initializable, IController {
     @FXML
     private TextField txtFieldCitizenLastName;
     @FXML
-    private TextField txtFieldSSN;
+    private TextField txtFieldCitizenSSN;
     @FXML
-    private TextField txtFieldAddress;
+    private TextField txtFieldCitizenAddress;
+    @FXML
+    private TextArea txtAreaCitizenGeneralInfo;
     @FXML
     private CheckBox checkBoxMale;
     @FXML
     private CheckBox checkBoxFemale;
     @FXML
     private CheckBox checkBoxOther;
-    @FXML
-    private TextArea txtAreaCitizenGeneralInfo;
+
     @FXML
     private Button btnSaveCitizen;
 
@@ -470,7 +471,20 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     public void btnHandleSaveCitizen() throws SQLException {
-
+        String firstName = txtFieldCitizenFirstName.getText();
+        String lastName = txtFieldCitizenLastName.getText();
+        String SSN = txtFieldCitizenSSN.getText();
+        String address = txtFieldCitizenAddress.getText();
+        String info = txtAreaCitizenGeneralInfo.getText();
+        String sex = null;
+        if(checkBoxMale.isSelected()){
+            sex = "Male";
+        }else if(checkBoxFemale.isSelected()){
+            sex = "Female";
+        }else if (checkBoxOther.isSelected()){
+            sex = "Other";
+        }
+        dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex, info);
     }
 
     /**
