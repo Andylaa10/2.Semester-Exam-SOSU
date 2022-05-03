@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Teacher.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TeacherViewController">
+<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Teacher.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TeacherViewController">
    <children>
       <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: #044d39;">
          <children>
@@ -188,7 +188,7 @@
             </Button>
             <Label layoutX="337.0" layoutY="416.0" prefHeight="26.0" prefWidth="258.0" text="Dobbeltklik på borger for at se flere oplysninger" />
          </children></AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0">
          <children>
             <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -214,7 +214,7 @@
                </font>
             </Label>
             <Label layoutX="20.0" layoutY="303.0" text="Information" />
-            <TextArea fx:id="txtAreaCitizenGeneralInfo" layoutX="106.0" layoutY="285.0" prefHeight="119.0" prefWidth="363.0" />
+            <TextArea fx:id="txtAreaCitizenGeneralInfo" layoutX="106.0" layoutY="285.0" prefHeight="119.0" prefWidth="363.0" text="-Mestring: &#10;-Motivation:&#10;-Ressourcer:&#10;-Roller: &#10;-Vaner:&#10;-Uddannelse og Job:&#10;-Livs Historie: &#10;-Helbredsoplysninger:&#10;&#10;-Hjælpemidler:&#10;-Boligens indretning:&#10;-Netværk: " />
             <Button fx:id="btnSaveCitizen" layoutX="106.0" layoutY="415.0" mnemonicParsing="false" onAction="#btnHandleSaveCitizen" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Borger">
                <effect>
                   <ColorAdjust brightness="0.3" />
@@ -276,7 +276,7 @@
             <TextField fx:id="txtFieldStudentID" layoutY="394.0" prefHeight="26.0" prefWidth="12.0" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Label layoutX="111.0" layoutY="22.0" text="Opret ny sag" textFill="#1d5e3f">
                <font>
