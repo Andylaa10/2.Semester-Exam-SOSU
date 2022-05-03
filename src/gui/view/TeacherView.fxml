@@ -203,7 +203,7 @@
                </font>
             </Label>
          </children></AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -263,7 +263,7 @@
             <Label layoutX="468.0" layoutY="146.0" text="- Netværk" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <TableView fx:id="tvStudent" layoutX="7.0" layoutY="8.0" prefHeight="340.0" prefWidth="594.0" style="-fx-background-color: transparent;">
               <columns>
@@ -276,7 +276,7 @@
             <TextField fx:id="txtFieldLastName" layoutX="166.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Efternavn" />
             <TextField fx:id="txtFieldUsername" layoutX="317.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Username" />
             <TextField fx:id="txtFieldPassword" layoutX="470.0" layoutY="367.0" prefHeight="26.0" prefWidth="126.0" promptText="Password" />
-            <Button fx:id="btnSaveStudent" layoutX="14.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleSaveStudent" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Elev">
+            <Button fx:id="btnSaveStudent" layoutX="14.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleSaveStudent" prefHeight="26.0" prefWidth="180.0" text="Opret Elev">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect></Button>
@@ -284,10 +284,20 @@
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect></Button>
+            <Button fx:id="btnEditSave" layoutX="215.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleEditStudent" prefHeight="26.0" prefWidth="180.0" text="Gem Redigering" visible="false">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect>
+            </Button>
             <Button fx:id="btnDeleteStudent" layoutX="416.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleDeleteStudent" prefHeight="26.0" prefWidth="180.0" text="Slet Elev">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect></Button>
+            <Button fx:id="btnEditCancel" layoutX="416.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleEditCancel" prefHeight="26.0" prefWidth="180.0" text="Annuller" visible="false">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect>
+            </Button>
             <TextField fx:id="txtFieldStudentID" layoutY="394.0" prefHeight="26.0" prefWidth="12.0" visible="false" />
          </children>
       </AnchorPane>

@@ -77,6 +77,10 @@ public class TeacherViewController implements Initializable, IController {
     @FXML
     private Button btnEditStudent;
     @FXML
+    private Button btnEditSave;
+    @FXML
+    private Button btnEditCancel;
+    @FXML
     private Button btnDeleteStudent;
     @FXML
     private TextField txtFieldFirstName;
@@ -501,6 +505,8 @@ public class TeacherViewController implements Initializable, IController {
 
             dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT);
             reloadStudentTable();
+            clearStudentTxtField();
+            tvStudent.getSelectionModel().clearSelection();
         } else {
             System.out.println("NOOO");
         }
@@ -517,7 +523,6 @@ public class TeacherViewController implements Initializable, IController {
         if (this.selectedStudent != null) {
             if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldStudentID.getText());
-                ;
                 String firstName = txtFieldFirstName.getText();
                 String lastName = txtFieldLastName.getText();
                 String userName = txtFieldUsername.getText();
@@ -526,13 +531,29 @@ public class TeacherViewController implements Initializable, IController {
                 User student = new User(id, firstName, lastName, userName, password, UserType.STUDENT);
                 dataModelFacade.editStudent(student);
                 reloadStudentTable();
-                btnSaveStudent.setDisable(false);
                 clearStudentTxtField();
                 tvStudent.getSelectionModel().clearSelection();
+                btnSaveStudent.setDisable(false);
+
+                btnEditStudent.setVisible(true);
+                btnEditSave.setVisible(false);
+                btnEditCancel.setVisible(false);
+                btnDeleteStudent.setVisible(true);
             } else {
                 System.out.println("Noo");
             }
         }
+    }
+
+    public void btnHandleEditCancel(ActionEvent actionEvent) {
+        reloadStudentTable();
+        clearStudentTxtField();
+        tvStudent.getSelectionModel().clearSelection();
+        btnSaveStudent.setDisable(false);
+        btnEditStudent.setVisible(true);
+        btnDeleteStudent.setVisible(true);
+        btnEditSave.setVisible(false);
+        btnEditCancel.setVisible(false);
     }
 
     /**
@@ -576,6 +597,10 @@ public class TeacherViewController implements Initializable, IController {
             if ((User) newValue != null) {
                 this.selectedStudent = (User) newValue;
                 setSelectedStudent(newValue);
+                btnEditStudent.setVisible(false);
+                btnEditSave.setVisible(true);
+                btnEditCancel.setVisible(true);
+                btnDeleteStudent.setVisible(false);
                 btnSaveStudent.setDisable(true);
             }
         }));
@@ -694,8 +719,8 @@ public class TeacherViewController implements Initializable, IController {
         txtFieldName.setText(aCase.getName());
         txtAreaInfo.setText(aCase.getInfo());
     }
-
     //TODO self selection inc
+
     public void btnHandleSaveCase() throws Exception {
         if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()){
             String name = txtFieldName.getText();
