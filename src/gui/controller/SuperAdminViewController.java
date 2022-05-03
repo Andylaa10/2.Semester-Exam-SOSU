@@ -79,10 +79,14 @@ public class SuperAdminViewController implements Initializable, IController {
     @FXML
     private TableView<School> tvAssignedSchool;
     @FXML
+    private TableColumn<School, Integer> tcAssignedSchoolID;
+    @FXML
     private TableColumn<School, String> tcAssignedSchoolName;
 
     @FXML
     private TableView<User> tvAssignAdmin;
+    @FXML
+    private TableColumn<User, Integer> tcAssignedAdminID;
     @FXML
     private TableColumn<User, String> tcAssignAdminFirstName;
     @FXML
@@ -126,6 +130,9 @@ public class SuperAdminViewController implements Initializable, IController {
 
     private School selectedSchool;
     private User selectedAdmin;
+    
+    private School selectedSchoolToAssign;
+    private User selectedAdminToAssign;
 
 
     public SuperAdminViewController() throws IOException {
@@ -142,7 +149,10 @@ public class SuperAdminViewController implements Initializable, IController {
         }
         selectedSchool();
         selectedAdmin();
+        selectedSchoolToAssign();
+        selectedAdminToAssign();
     }
+
 
     private void initializeTables() throws Exception {
         //Initialize the school table
@@ -166,6 +176,7 @@ public class SuperAdminViewController implements Initializable, IController {
         }
 
         //Initialize the admins table on the assign pane
+        tcAssignedAdminID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcAssignAdminFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcAssignAdminLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcAssignAdminUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -177,6 +188,7 @@ public class SuperAdminViewController implements Initializable, IController {
         }
 
         //Initialize the school table on the assign pane
+        tcAssignedSchoolID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcAssignedSchoolName.setCellValueFactory(new PropertyValueFactory<>("schoolName"));
         try {
             allAssignedSchools = FXCollections.observableList(dataModelFacade.getSchools());
@@ -297,9 +309,9 @@ public class SuperAdminViewController implements Initializable, IController {
 
     @FXML
     private void onActionAssignAdminToSchool() {
-        if (selectedAdmin != null && selectedSchool != null) {
+        if (selectedSchoolToAssign != null && selectedAdminToAssign != null) {
             try {
-                dataModelFacade.addAdminToSchool(selectedAdmin.getId(), selectedSchool.getId());
+                dataModelFacade.addAdminToSchool(selectedAdminToAssign.getId(), selectedSchoolToAssign.getId());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -388,6 +400,7 @@ public class SuperAdminViewController implements Initializable, IController {
         txtFieldAdminPassword.setText(admin.getPassword());
     }
 
+
     private void selectedSchool() {
         this.tvSchools.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((School) newValue != null) {
@@ -406,6 +419,21 @@ public class SuperAdminViewController implements Initializable, IController {
         }));
     }
 
+    private void selectedSchoolToAssign() {
+        this.tvAssignedSchool.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((School) newValue != null) {
+                this.selectedSchoolToAssign = (School) newValue;
+            }
+        }));
+    }
+
+    private void selectedAdminToAssign() {
+        this.tvAssignAdmin.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((User) newValue != null) {
+                this.selectedAdminToAssign = (User) newValue;
+            }
+        }));
+    }
 
     private void setAnchorPanesVisibility(){
         labelInfoNewLine.setText("");
