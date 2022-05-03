@@ -89,4 +89,8 @@ public class SuperAdminManager {
         superAdminDAO.editSchool(school);
     }
 
+    public void addAdminToSchool(int loginId, int schoolId) {
+        superAdminDAO.addAdminToSchool(loginId, schoolId);
+    }
+
 }

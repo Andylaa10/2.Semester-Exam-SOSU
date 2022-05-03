@@ -91,6 +91,8 @@ public class SuperAdminModel {
         superAdminManager.editSchool(school);
     }
 
-
+    public void addAdminToSchool(int loginId, int schoolId) {
+        superAdminManager.addAdminToSchool(loginId, schoolId);
+    }
 
 }

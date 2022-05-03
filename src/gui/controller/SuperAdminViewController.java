@@ -297,7 +297,16 @@ public class SuperAdminViewController implements Initializable, IController {
 
     @FXML
     private void onActionAssignAdminToSchool() {
-
+        if (selectedAdmin != null && selectedSchool != null) {
+            try {
+                dataModelFacade.addAdminToSchool(selectedAdmin.getId(), selectedSchool.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Something went wrong");
+            //TODO add errorHandler
+        }
     }
 
     private void tableViewLoadSchools(ObservableList<School> allSchools) {

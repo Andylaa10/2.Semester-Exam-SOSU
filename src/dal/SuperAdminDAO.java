@@ -153,6 +153,19 @@ public class SuperAdminDAO {
     }
 
 
+    public void addAdminToSchool(int loginId, int schoolId){
+        String sql = "INSERT INTO UserOnSchool (loginId, schoolId) VALUES (?,?);";
+        try (Connection con = databaseConnector.getConnection();
+             PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            st.setInt(1, loginId);
+            st.setInt(2, schoolId);
+            st.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+
 
     /**
      * Main used for testing the DAO methods
@@ -162,10 +175,10 @@ public class SuperAdminDAO {
      */
     public static void main(String[] args) throws IOException, SQLException {
         SuperAdminDAO superAdminDAO = new SuperAdminDAO();
-        //superAdminDAO.createSchool("SOSU Esbjerg");
+        superAdminDAO.createSchool("SOSU Esbjerg");
         //System.out.println(superAdminDAO.getSchools());
         //superAdminDAO.deleteSchool(1);
-        superAdminDAO.createSuperAdmin("superadmin", "1");
+        //superAdminDAO.createSuperAdmin("superadmin", "1");
         //superAdminDAO.deleteSuperAdmin(1);
     }
 

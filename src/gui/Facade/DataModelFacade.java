@@ -306,5 +306,9 @@ public class DataModelFacade {
         citizenModel.editCitizen(citizen);
     }
 
+    public void addAdminToSchool(int loginId, int schoolId) {
+        superAdminModel.addAdminToSchool(loginId, schoolId);
+    }
+
 
 }
