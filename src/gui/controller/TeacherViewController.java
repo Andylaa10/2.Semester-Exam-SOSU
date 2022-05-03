@@ -659,27 +659,75 @@ public class TeacherViewController implements Initializable, IController {
         txtFieldPassword.setText(student.getPassword());
     }
 
+    /**
+     * Makes you able to select a student from the table
+     */
+    private void selectedCase() {
+        this.tvCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((Case) newValue != null) {
+                this.selectedCase = (Case) newValue;
+            }
+        }));
+    }
+
+    /**
+     * Reloads the student table
+     */
+    private void reloadCaseTable() {
+        try {
+            int index = tvCases.getSelectionModel().getFocusedIndex();
+            this.tvCases.setItems(FXCollections.observableList(dataModelFacade.getCases()));
+            tvCases.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
     //TODO self selection inc
-    public void btnHandleSaveCase() throws SQLException {
-        if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
+    public void btnHandleSaveCase() throws Exception {
+        if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()){
             String name = txtFieldName.getText();
             String area = txtAreaInfo.getText();
-            dataModelFacade.createCase(name, area);
+            allCases.add(dataModelFacade.createCase(name, area));
+            assignDate();
+            reloadCaseTable();
+        } else{
+            System.out.println("NOOO");
+        }
+    }
+
+    public void assignDate() throws Exception {
+        Case aCase = allCurrentCases.get(allCurrentCases.size()-1);
+        if (aCase != null){
             Date caseDate = new Date(System.currentTimeMillis());
             String pattern = "dd/MM/yyyy  HH:mm:ss";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             String date = simpleDateFormat.format(caseDate);
-            selectedCase.setDate(date);
-            reloadStudentTable();
-        } else {
-            System.out.println("NOOO");
+            aCase.setDate(date);
+            dataModelFacade.editCase(aCase);
         }
+        txtFieldName.clear();
+        txtAreaInfo.clear();
     }
 
     public void btnHandleEditCase() {
     }
 
-    public void btnHandleDeleteCase() {
+    public void btnHandleDeleteCase() throws Exception {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("WARNING MESSAGE");
+        alert.setHeaderText("Warning before you delete case");
+        alert.setContentText("Joe");
+        if (selectedCase != null) {
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                selectedCase();
+                dataModelFacade.deleteCase(selectedCase.getId());
+                reloadCaseTable();
+            }
+        } else {
+            return;
+        }
     }
 
     public void btnHandleCopyCase() {
