@@ -8,7 +8,6 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,15 +16,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AdminViewController implements Initializable, IController{
-
-
+public class AdminViewController implements Initializable, IController {
 
     @FXML
     private TableView<User> tvTeachers;
@@ -93,6 +91,18 @@ public class AdminViewController implements Initializable, IController{
     private TableColumn<Case, String> tcCaseName;
     @FXML
     private TableColumn<Case, String> tcCaseDate;
+    @FXML
+    private TableColumn<Case, String> tcCaseInfo;
+    @FXML
+    private TableView<Citizen> tvCitizensOnCase;
+    @FXML
+    private TableColumn<Citizen, String> tcCitizenOnCaseID;
+    @FXML
+    private TableColumn<Citizen, String> tcCitizenOnCaseFirstName;
+    @FXML
+    private TableColumn<Citizen, String> tcCitizenOnCaseSSN;
+    @FXML
+    private TableColumn<Citizen, String> tcCitizenOnCaseLastName;
 
     @FXML
     private Button btnEditCase;
@@ -185,14 +195,20 @@ public class AdminViewController implements Initializable, IController{
 
     private ObservableList<User> allStudents = FXCollections.observableArrayList();
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
+    private ObservableList<Citizen> allCitizensOnCase = FXCollections.observableArrayList();
     private ObservableList<Case> allCases = FXCollections.observableArrayList();
     private ObservableList<Case> allCurrentCases = FXCollections.observableArrayList();
     private ObservableList<User> allTeachers = FXCollections.observableArrayList();
+
 
     private DataModelFacade dataModelFacade;
 
     private User selectedTeacher;
     private User selectedStudent;
+    private Case selectedCase;
+    private Case selectedCurrentCase;
+    private Citizen selectedCitizen;
+    private Citizen selectedCitizenOnCase;
 
     public AdminViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
@@ -209,6 +225,9 @@ public class AdminViewController implements Initializable, IController{
         }
         selectedTeacher();
         selectedStudent();
+        selectedCurrentCase();
+        selectedCitizenOnCase();
+        selectedCitizen();
     }
 
     private void initializeTables() throws Exception {
@@ -307,6 +326,23 @@ public class AdminViewController implements Initializable, IController{
         return allCurrentCases;
     }
 
+    /**
+     * loads the citizensOnCase tableview.
+     *
+     * @param allCitizensOnCase
+     */
+    private void tableViewLoadCitizensOnCase(ObservableList<Citizen> allCitizensOnCase) {
+        tvCitizensOnCase.setItems(getCitizensOnCaseData());
+    }
+
+    /**
+     * Get the data for citizensOnCase
+     *
+     * @return ObservableList<Citizen>
+     */
+    private ObservableList<Citizen> getCitizensOnCaseData() {
+        return allCitizensOnCase;
+    }
 
     @FXML
     private void onActionSaveCase() {
@@ -326,7 +362,7 @@ public class AdminViewController implements Initializable, IController{
 
     @FXML
     private void onActionCreateTeacher() throws SQLException {
-        if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()){
+        if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()) {
             String firstName = txtFieldTeacherFirstName.getText();
             String lastName = txtFieldTeacherLastName.getText();
             String userName = txtFieldTeacherUsername.getText();
@@ -334,7 +370,7 @@ public class AdminViewController implements Initializable, IController{
 
             dataModelFacade.createTeacher(firstName, lastName, userName, password, UserType.TEACHER);
             reloadTeacherTable();
-        } else{
+        } else {
             System.out.println("Couldn't create teacher");
             //TODO Make proper errorhandler
         }
@@ -342,9 +378,10 @@ public class AdminViewController implements Initializable, IController{
 
     @FXML
     private void onActionEditTeacher() throws Exception {
-        if (this.selectedTeacher != null){
+        if (this.selectedTeacher != null) {
             if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()) {
-                int id = Integer.parseInt(txtFieldTeacherID.getText());;
+                int id = Integer.parseInt(txtFieldTeacherID.getText());
+                ;
                 String firstName = txtFieldTeacherFirstName.getText();
                 String lastName = txtFieldTeacherLastName.getText();
                 String userName = txtFieldTeacherUsername.getText();
@@ -355,7 +392,7 @@ public class AdminViewController implements Initializable, IController{
                 reloadTeacherTable();
                 clearTeacherTxtField();
                 tvTeachers.getSelectionModel().clearSelection();
-            }else{
+            } else {
                 System.out.println("Probably didn't select a teacher");
                 //TODO errorhandler
             }
@@ -380,6 +417,60 @@ public class AdminViewController implements Initializable, IController{
         }
     }
 
+
+    /**
+     * Selects a case from the currentCase tableView
+     */
+    private void selectedCurrentCase() {
+        this.tvCurrentCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((Case) newValue != null) {
+                this.selectedCurrentCase = (Case) newValue;
+                seeCasesOnCitizen();
+            }
+        }));
+
+    }
+
+    /**
+     * Selects a citizen from the citizensOnCase tableview
+     */
+    private void selectedCitizenOnCase() {
+        this.tvCitizensOnCase.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((Citizen) newValue != null) {
+                this.selectedCitizenOnCase = (Citizen) newValue;
+            }
+        }));
+    }
+
+    /**
+     * Selects a citizen from the citizens TableView
+     */
+    private void selectedCitizen() {
+        this.tvCurrentCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((Citizen) newValue != null) {
+                this.selectedCitizen = (Citizen) newValue;
+            }
+        }));
+    }
+
+    /**
+     * Loads all data in tableview, from the selected current case ID.
+     */
+    public void seeCasesOnCitizen() {
+        //Initialize the citizens on cases table at citizen window
+        tcCitizenOnCaseID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcCitizenOnCaseFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        tcCitizenOnCaseLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        tcCitizenOnCaseSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+        try {
+            allCitizensOnCase = FXCollections.observableList(dataModelFacade.getCitizensOnCases(selectedCurrentCase.getId()));
+            tableViewLoadCitizensOnCase(allCitizensOnCase);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @FXML
     private void onActionCopyTeacher() {
     }
@@ -394,7 +485,7 @@ public class AdminViewController implements Initializable, IController{
 
     @FXML
     private void onActionCreateStudent() throws SQLException {
-        if (!txtFieldStudentFirstName.getText().isEmpty() && !txtFieldStudentLastname.getText().isEmpty() && !txtFieldStudentUsername.getText().isEmpty() && !txtFieldStudentPassword.getText().isEmpty()){
+        if (!txtFieldStudentFirstName.getText().isEmpty() && !txtFieldStudentLastname.getText().isEmpty() && !txtFieldStudentUsername.getText().isEmpty() && !txtFieldStudentPassword.getText().isEmpty()) {
             String firstName = txtFieldStudentFirstName.getText();
             String lastName = txtFieldTeacherLastName.getText();
             String userName = txtFieldStudentUsername.getText();
@@ -402,7 +493,7 @@ public class AdminViewController implements Initializable, IController{
 
             dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT);
             reloadStudentTable();
-        } else{
+        } else {
             System.out.println("Something went wrong with creation");
             //TODO make errorhandler
         }
@@ -410,9 +501,10 @@ public class AdminViewController implements Initializable, IController{
 
     @FXML
     private void onActionEditStudent() throws Exception {
-        if (this.selectedStudent != null){
+        if (this.selectedStudent != null) {
             if (!txtFieldStudentFirstName.getText().isEmpty() && !txtFieldStudentLastname.getText().isEmpty() && !txtFieldStudentUsername.getText().isEmpty() && !txtFieldStudentPassword.getText().isEmpty()) {
-                int id = Integer.parseInt(txtFieldStudentID.getText());;
+                int id = Integer.parseInt(txtFieldStudentID.getText());
+                ;
                 String firstName = txtFieldStudentFirstName.getText();
                 String lastName = txtFieldStudentLastname.getText();
                 String userName = txtFieldStudentUsername.getText();
@@ -423,7 +515,7 @@ public class AdminViewController implements Initializable, IController{
                 reloadStudentTable();
                 clearStudentTxtField();
                 tvStudents.getSelectionModel().clearSelection();
-            }else{
+            } else {
                 System.out.println("Something went wrong");
                 //TODO make errorhandler
             }
@@ -450,6 +542,7 @@ public class AdminViewController implements Initializable, IController{
 
     /**
      * Makes you able to select a teacher from the table
+     *
      * @param
      */
     private void selectedTeacher() {
@@ -523,7 +616,7 @@ public class AdminViewController implements Initializable, IController{
         txtFieldTeacherPassword.clear();
     }
 
-    public void clearStudentTxtField(){
+    public void clearStudentTxtField() {
         txtFieldStudentID.clear();
         txtFieldStudentFirstName.clear();
         txtFieldStudentLastname.clear();
@@ -531,7 +624,7 @@ public class AdminViewController implements Initializable, IController{
         txtFieldStudentPassword.clear();
     }
 
-    private void setAnchorPanesVisibility(){
+    private void setAnchorPanesVisibility() {
         labelInfoNewLine.setText("");
         anchorPaneAdmin.setVisible(true);
         anchorPaneCreateCitizen.setVisible(false);
@@ -542,7 +635,7 @@ public class AdminViewController implements Initializable, IController{
     }
 
     @FXML
-    private void btnClickCreateTeacher(){
+    private void btnClickCreateTeacher() {
         labelTitle.setText("Lærere");
         labelInfo.setText("Overblik over alle oprettede lærere, hvor du kan oprette nye lærere, redigere eller slette");
         labelInfoNewLine.setText("");
@@ -582,10 +675,10 @@ public class AdminViewController implements Initializable, IController{
     }
 
     @FXML
-    private void btnClickSeeCitizens(){
+    private void btnClickSeeCitizens() {
         labelTitle.setText("Borgere");
         labelInfo.setText("Overblik over alle oprettede borgere. Tildel en sag til en borger, se yderligere informationer,");
-        labelInfoNewLine.setText( "rediger eller slet borger.");
+        labelInfoNewLine.setText("rediger eller slet borger.");
         anchorPaneCitizen.setVisible(true);
         anchorPaneCreateCitizen.setVisible(false);
         anchorPaneAdmin.setVisible(false);
@@ -608,7 +701,7 @@ public class AdminViewController implements Initializable, IController{
     }
 
     @FXML
-    private void btnClickHome(){
+    private void btnClickHome() {
         labelTitle.setText("Admin");
         labelInfo.setText("Logget ind som Admin");
         labelInfoNewLine.setText("");

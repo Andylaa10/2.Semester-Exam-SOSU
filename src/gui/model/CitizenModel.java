@@ -44,8 +44,8 @@ public class CitizenModel {
      * @return
      * @throws SQLException
      */
-    public Citizen createCitizen(String firstname, String lastName, String SSN, String address, String sex) throws SQLException {
-        return citizenManager.createCitizen(firstname, lastName, SSN, address, sex);
+    public Citizen createCitizen(String firstname, String lastName, String SSN, String address, String sex, String info) throws SQLException {
+        return citizenManager.createCitizen(firstname, lastName, SSN, address, sex, info);
     }
 
     /**

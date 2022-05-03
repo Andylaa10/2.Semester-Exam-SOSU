@@ -51,7 +51,6 @@ public class CitizenDAO {
 
 
 
-
     /**
      * Creates a citizen, by inserting firstName, lastName, SSN, address and sex
      * @param firstName
@@ -63,15 +62,16 @@ public class CitizenDAO {
      * @throws SQLException
      */
     //TODO GeneralInfo
-    public Citizen createCitizen(String firstName, String lastName, String SSN, String address, String sex) throws SQLException {
+    public Citizen createCitizen(String firstName, String lastName, String SSN, String address, String sex, String info) throws SQLException {
         try (Connection connection = connector.getConnection()) {
-            String sql = "INSERT INTO Citizen (firstName, lastName , SSN, address, sex) VALUES (?,?,?,?,?);";
+            String sql = "INSERT INTO Citizen (firstName, lastName , SSN, address, sex, info) VALUES (?,?,?,?,?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setString(1, firstName);
                 preparedStatement.setString(2, lastName);
                 preparedStatement.setString(3, SSN);
                 preparedStatement.setString(4, address);
                 preparedStatement.setString(5, sex);
+                preparedStatement.setString(6, info);
                 preparedStatement.execute();
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 int id = 0;
@@ -164,7 +164,7 @@ public class CitizenDAO {
     public static void main(String[] args) throws Exception {
         CitizenDAO citizenDAO = new CitizenDAO();
         //citizenDAO.createCitizen("Joe", "Mama", "040119-2311", "Bjergberg Allé 205", "Male");
-        System.out.println(citizenDAO.getCitizensOnCase(1));
+        System.out.println(citizenDAO.getCitizens());
     }
 
 
