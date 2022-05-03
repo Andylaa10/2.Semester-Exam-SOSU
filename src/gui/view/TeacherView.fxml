@@ -156,27 +156,29 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <TableView fx:id="tvCurrentCases" layoutX="14.0" layoutY="42.0" prefHeight="361.0" prefWidth="266.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvCurrentCases" layoutX="13.0" layoutY="23.0" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
               <columns>
+                  <TableColumn fx:id="tcCurrentCasesID" prefWidth="132.0" text="ID" visible="false" />
                 <TableColumn fx:id="tcCurrentCasesName" prefWidth="132.0" text="Navn" />
                 <TableColumn fx:id="tcCurrentCasesDate" prefWidth="132.79998779296875" text="Dato" />
               </columns>
             </TableView>
-            <TableView fx:id="tvCitizens" layoutX="329.0" layoutY="42.0" prefHeight="362.0" prefWidth="266.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvCitizens" layoutX="314.0" layoutY="24.0" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
                <columns>
+                  <TableColumn fx:id="tcCitizenID" prefWidth="75.0" text="ID" visible="false" />
                   <TableColumn fx:id="tcCitizenFirstName" prefWidth="75.0" text="Fornavn" />
                   <TableColumn fx:id="tcCitizenLastName" prefWidth="79.9998779296875" text="Efternavn" />
-                  <TableColumn fx:id="tcCitizenSSN" prefWidth="111.2000732421875" text="CPR-Nummer" />
+                  <TableColumn fx:id="tcCitizenSSN" prefWidth="108.800048828125" text="CPR-Nummer" />
                </columns>
             </TableView>
-            <Label layoutX="75.0" layoutY="9.0" text="Nuværende Sager">
+            <Label layoutX="75.0" text="Nuværende Sager">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="381.0" layoutY="9.0" text="Nuværende Borgere">
+            <Label layoutX="378.0" text="Nuværende Borgere">
                <font>
                   <Font size="18.0" />
                </font>
@@ -187,6 +189,19 @@
                </effect>
             </Button>
             <Label layoutX="337.0" layoutY="416.0" prefHeight="26.0" prefWidth="258.0" text="Dobbeltklik på borger for at se flere oplysninger" />
+            <TableView fx:id="tvCitizensOnCase" layoutX="14.0" layoutY="258.0" prefHeight="150.0" prefWidth="563.0" style="-fx-background-color: transparent;">
+              <columns>
+                  <TableColumn fx:id="tcCitizenOnCaseID" minWidth="0.0" prefWidth="190.0" text="ID" visible="false" />
+                  <TableColumn fx:id="tcCitizenOnCaseFirstName" minWidth="0.0" prefWidth="190.0" text="Fornavn" />
+                <TableColumn fx:id="tcCitizenOnCaseLastName" minWidth="0.0" prefWidth="190.0" text="Efternavn" />
+                  <TableColumn fx:id="tcCitizenOnCaseSSN" minWidth="0.0" prefWidth="176.800048828125" text="CPR-Nummer" />
+              </columns>
+            </TableView>
+            <Label layoutX="15.0" layoutY="227.0" text="Borgere tildelt den valgte sag">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children></AnchorPane>
       <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
@@ -276,7 +291,7 @@
             <TextField fx:id="txtFieldStudentID" layoutY="394.0" prefHeight="26.0" prefWidth="12.0" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Label layoutX="111.0" layoutY="22.0" text="Opret ny sag" textFill="#1d5e3f">
                <font>

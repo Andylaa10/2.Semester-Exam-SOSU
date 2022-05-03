@@ -52,5 +52,9 @@ public class CaseManager {
         caseDAO.editCase(aCase);
     }
 
+    public void assignCaseToCitizen(int caseId, int citizenId){
+        caseDAO.assignCaseToCitizen(caseId, citizenId);
+    }
+
 
 }

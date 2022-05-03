@@ -107,6 +107,18 @@ public class CaseDAO {
         }
     }
 
+    public void assignCaseToCitizen(int casesId, int citizenId){
+        String sql = "INSERT INTO CasesOnCitizen (casesId, citizenId) VALUES (?,?);";
+        try (Connection con = databaseConnector.getConnection();
+             PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            st.setInt(1, casesId);
+            st.setInt(2, citizenId);
+            st.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
 
     public static void main(String[] args) throws Exception {
         CaseDAO caseDAO = new CaseDAO();

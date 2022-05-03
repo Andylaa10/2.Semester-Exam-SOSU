@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class TeacherViewController extends Application implements Initializable, IController{
+public class TeacherViewController implements Initializable, IController{
     /**
      * Top Pane
      */
@@ -126,15 +126,29 @@ public class TeacherViewController extends Application implements Initializable,
     @FXML
     private TableView<Citizen> tvCitizens;
     @FXML
+    private TableView<Citizen> tvCitizensOnCase;
+    @FXML
+    private TableColumn<Case, String> tcCurrentCasesID;
+    @FXML
     private TableColumn<Case, String> tcCurrentCasesName;
     @FXML
     private TableColumn<Case, String> tcCurrentCasesDate;
+    @FXML
+    private TableColumn<Citizen, Integer> tcCitizenID;
     @FXML
     private TableColumn<Citizen, String> tcCitizenFirstName;
     @FXML
     private TableColumn<Citizen, String> tcCitizenLastName;
     @FXML
     private TableColumn<Citizen, String> tcCitizenSSN;
+    @FXML
+    private TableColumn<Citizen, Integer> tcCitizenOnCaseID;
+    @FXML
+    private TableColumn<Citizen, String> tcCitizenOnCaseFirstName;
+    @FXML
+    private TableColumn<Citizen, String> tcCitizenOnCaseLastName;
+    @FXML
+    private TableColumn<Citizen, String> tcCitizenOnCaseSSN;
     @FXML
     private Button btnAssignCase;
 
@@ -164,9 +178,13 @@ public class TeacherViewController extends Application implements Initializable,
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCases = FXCollections.observableArrayList();
     private ObservableList<Case> allCurrentCases = FXCollections.observableArrayList();
+    private ObservableList<Citizen> allCitizensOnCase = FXCollections.observableArrayList();
 
     private User selectedStudent;
     private Case selectedCase;
+    private Citizen selectedCitizen;
+    private Case selectedCurrentCase;
+    private Citizen selectedCitizenOnCase;
 
     private DataModelFacade dataModelFacade;
 
@@ -183,6 +201,9 @@ public class TeacherViewController extends Application implements Initializable,
             e.printStackTrace();
         }
         selectedStudent();
+        selectedCurrentCase();
+        selectedCitizenOnCase();
+        selectedCitizen();
     }
 
     private void initializeTable() throws Exception {
@@ -208,6 +229,7 @@ public class TeacherViewController extends Application implements Initializable,
         }
 
         //Initialize the citizens table
+        tcCitizenID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcCitizenFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
@@ -219,6 +241,7 @@ public class TeacherViewController extends Application implements Initializable,
         }
 
         //Initialize the current cases table at citizen window
+        tcCurrentCasesID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcCurrentCasesName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcCurrentCasesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         try {
@@ -260,6 +283,13 @@ public class TeacherViewController extends Application implements Initializable,
 
     private ObservableList<Case> getCurrentCasesData() {
         return allCurrentCases;
+    }
+
+    private void tableViewLoadCitizensOnCase(ObservableList<Citizen> allCitizensOnCase){
+        tvCitizensOnCase.setItems(getCitizensOnCaseData());
+    }
+    private ObservableList<Citizen> getCitizensOnCaseData(){
+        return allCitizensOnCase;
     }
 
 
@@ -345,23 +375,20 @@ public class TeacherViewController extends Application implements Initializable,
     }
 
 
-
-    public static void main(String[] args) {launch(args);}
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/TeacherView.fxml"));
-        primaryStage.setTitle("SOSU Simulation");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        primaryStage.show();
-    }
-
     public void btnHandleAssignCase() {
+        if (selectedCurrentCase != null && selectedCitizen != null) {
+            try {
+                dataModelFacade.assignCaseToCitizen(selectedCurrentCase.getId(), selectedCitizen.getId());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Something went wrong");
+            //TODO add errorHandler
+        }
     }
 
     public void btnHandleSaveCitizen() throws SQLException {
-
 
     }
 
@@ -437,6 +464,33 @@ public class TeacherViewController extends Application implements Initializable,
             }
         }));
     }
+
+    private void selectedCurrentCase(){
+        this.tvCurrentCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((Case) newValue != null){
+                this.selectedCurrentCase = (Case) newValue;
+                seeCasesOnCitizen();
+            }
+        }));
+
+    }
+
+    private void selectedCitizenOnCase(){
+        this.tvCitizensOnCase.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((Citizen) newValue != null){
+                this.selectedCitizenOnCase = (Citizen) newValue;
+            }
+        }));
+    }
+
+    private void selectedCitizen(){
+        this.tvCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((Citizen) newValue != null){
+                this.selectedCitizen = (Citizen) newValue;
+            }
+        }));
+    }
+
     /**
      * Reloads the student table
      */
@@ -447,6 +501,21 @@ public class TeacherViewController extends Application implements Initializable,
             tvStudent.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
+        }
+    }
+
+
+    public void seeCasesOnCitizen() {
+        //Initialize the citizens on cases table at citizen window
+        tcCitizenOnCaseID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcCitizenOnCaseFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        tcCitizenOnCaseLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        tcCitizenOnCaseSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+        try {
+            allCitizensOnCase = FXCollections.observableList(dataModelFacade.getCitizensOnCases(selectedCurrentCase.getId()));
+            tableViewLoadCitizensOnCase(allCitizensOnCase);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

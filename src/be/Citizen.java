@@ -62,6 +62,13 @@ public class Citizen {
         this.sex = sex;
     }
 
+    public Citizen(int id, String firstName, String lastName, String SSN) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.SSN = SSN;
+    }
+
     /**
      * Gets the id
      * @return

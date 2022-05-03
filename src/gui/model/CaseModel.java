@@ -51,4 +51,8 @@ public class CaseModel {
     public void editCase(Case aCase) throws Exception {
         caseManager.editCase(aCase);
     }
+
+    public void assignCaseToCitizen(int caseId, int citizenId){
+        caseManager.assignCaseToCitizen(caseId, citizenId);
+    }
 }

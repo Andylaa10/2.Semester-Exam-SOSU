@@ -23,6 +23,10 @@ public class CitizenManager {
         return citizenDAO.getCitizens();
     }
 
+    public List<Citizen> getCitizensOnCases(int caseId) throws SQLException {
+        return citizenDAO.getCitizensOnCase(caseId);
+    }
+
     /**
      * Creates a case using the createCitizen method from citizenDAO
      * @param firstname

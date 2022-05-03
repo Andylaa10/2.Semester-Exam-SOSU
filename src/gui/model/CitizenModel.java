@@ -24,6 +24,10 @@ public class CitizenModel {
         return citizenManager.getCitizens();
     }
 
+    public List<Citizen> getCitizensOnCases(int caseId) throws SQLException {
+        return citizenManager.getCitizensOnCases(caseId);
+    }
+
     /**
      * Creates a case using the createCitizen method from citizenManager
      * @param firstname
