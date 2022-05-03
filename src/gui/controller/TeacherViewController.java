@@ -6,23 +6,18 @@ import be.User;
 import be.enums.UserType;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -31,7 +26,7 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class TeacherViewController implements Initializable, IController{
+public class TeacherViewController implements Initializable, IController {
     /**
      * Top Pane
      */
@@ -253,47 +248,97 @@ public class TeacherViewController implements Initializable, IController{
     }
 
 
+    /**
+     * loads the students tableview.
+     * @param allStudents
+     */
     private void tableViewLoadStudents(ObservableList<User> allStudents) {
         tvStudent.setItems(getStudentData());
     }
 
+    /**
+     * gets the data for students.
+     * @return ObservableList<User>
+     */
     private ObservableList<User> getStudentData() {
         return allStudents;
     }
 
+    /**
+     * loads the cases TableView.
+     * @param allCases
+     */
     private void tableViewLoadCases(ObservableList<Case> allCases) {
         tvCases.setItems(getCaseData());
     }
 
+    /**
+     * Gets the data for case
+     * @return ObservableList<Case>
+     */
     private ObservableList<Case> getCaseData() {
         return allCases;
     }
 
+    /**
+     * loads the Citizens table view
+     * @param allCitizens
+     */
     private void tableViewLoadCitizens(ObservableList<Citizen> allCitizens) {
         tvCitizens.setItems(getCitizenData());
     }
 
+    /**
+     * Gets the data for citizens
+     *
+     * @return ObservableList<Citizen>
+     */
     private ObservableList<Citizen> getCitizenData() {
         return allCitizens;
     }
 
+    /**
+     * loads the CurrentCases tableview.
+     *
+     * @param allCurrentCases
+     */
     private void tableViewLoadCurrentCases(ObservableList<Case> allCurrentCases) {
         tvCurrentCases.setItems(getCurrentCasesData());
     }
 
+    /**
+     * Gets the data for the currentCases.
+     *
+     * @return ObservableList<Case>
+     */
     private ObservableList<Case> getCurrentCasesData() {
         return allCurrentCases;
     }
 
-    private void tableViewLoadCitizensOnCase(ObservableList<Citizen> allCitizensOnCase){
+    /**
+     * loads the citizensOnCase tableview.
+     *
+     * @param allCitizensOnCase
+     */
+    private void tableViewLoadCitizensOnCase(ObservableList<Citizen> allCitizensOnCase) {
         tvCitizensOnCase.setItems(getCitizensOnCaseData());
     }
-    private ObservableList<Citizen> getCitizensOnCaseData(){
+
+    /**
+     * Get the data for citizensOnCase
+     *
+     * @return ObservableList<Citizen>
+     */
+    private ObservableList<Citizen> getCitizensOnCaseData() {
         return allCitizensOnCase;
     }
 
 
-    private void setAnchorPanesVisibility(){
+    /**
+     * Method for showing the right anchorpane when opening the program, sets the main view visible and not relevant
+     * anchorpanes not visible
+     */
+    private void setAnchorPanesVisibility() {
         labelInfoNewLine.setText("");
         anchorPaneTeacher.setVisible(true);
         anchorPaneCreateCitizen.setVisible(false);
@@ -302,6 +347,9 @@ public class TeacherViewController implements Initializable, IController{
         anchorPaneCase.setVisible(false);
     }
 
+    /**
+     * Loads the student overview anchorpane when clicked.
+     */
     public void btnClickStudent() {
         labelTitle.setText("Elever");
         labelInfo.setText("Overblik over alle oprettede elever");
@@ -313,6 +361,9 @@ public class TeacherViewController implements Initializable, IController{
         anchorPaneStudent.setVisible(true);
     }
 
+    /**
+     * Loads the cases overview anchorpane when clicked.
+     */
     public void btnClickCase() {
         labelTitle.setText("Sager");
         labelInfo.setText("Overblik over alle oprettede sager. Opret nye sager, eller og kopier sager");
@@ -324,10 +375,13 @@ public class TeacherViewController implements Initializable, IController{
         anchorPaneCitizen.setVisible(false);
     }
 
-    public void btnClickSeeCitizens(){
+    /**
+     * Loads the citizen overview anchorpane when clicked.
+     */
+    public void btnClickSeeCitizens() {
         labelTitle.setText("Borgere");
         labelInfo.setText("Overblik over alle oprettede borgere. Tildel en sag til en borger, se yderligere informationer,");
-        labelInfoNewLine.setText( "rediger eller slet borger.");
+        labelInfoNewLine.setText("rediger eller slet borger.");
         anchorPaneCreateCitizen.setVisible(false);
         anchorPaneTeacher.setVisible(false);
         anchorPaneStudent.setVisible(false);
@@ -335,6 +389,9 @@ public class TeacherViewController implements Initializable, IController{
         anchorPaneCitizen.setVisible(true);
     }
 
+    /**
+     * Loads the create citizen anchorpane when clicked.
+     */
     public void btnClickCitizen() {
         labelTitle.setText("Opret Borger");
         labelInfo.setText("Oprettelses vindue til borger");
@@ -346,7 +403,12 @@ public class TeacherViewController implements Initializable, IController{
         anchorPaneCitizen.setVisible(false);
     }
 
-    public void btnClickHome(ActionEvent actionEvent){
+    /**
+     * Action event for home button, that loads the main home screen.
+     *
+     * @param actionEvent
+     */
+    public void btnClickHome(ActionEvent actionEvent) {
         labelTitle.setText("Lærer");
         labelInfo.setText("Logget ind som lærer");
         labelInfoNewLine.setText("");
@@ -357,6 +419,13 @@ public class TeacherViewController implements Initializable, IController{
         anchorPaneCreateCitizen.setVisible(false);
     }
 
+    /**
+     * Action event for logout button, that gets the login view and loads that when pressed.
+     * Closes current stage
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void btnClickLogout(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
         Scene scene = new Scene(loader.load());
@@ -367,6 +436,13 @@ public class TeacherViewController implements Initializable, IController{
     }
 
 
+    /**
+     * Sets text labels with the user that has logged in.
+     *
+     * @param user
+     * @throws SQLException
+     * @throws IOException
+     */
     @Override
     public void setUser(User user) throws SQLException, IOException {
         labelTitle.setText("Lærer");
@@ -375,6 +451,9 @@ public class TeacherViewController implements Initializable, IController{
     }
 
 
+    /**
+     * Assigns case to citizen, with current case that is selected and citizen selected.
+     */
     public void btnHandleAssignCase() {
         if (selectedCurrentCase != null && selectedCitizen != null) {
             try {
@@ -393,8 +472,13 @@ public class TeacherViewController implements Initializable, IController{
 
     }
 
+    /**
+     * Action event for save student button. Gets the text from all the textfields and creates a new student when pressed.
+     *
+     * @throws SQLException
+     */
     public void btnHandleSaveStudent() throws SQLException {
-        if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()){
+        if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
             String firstName = txtFieldFirstName.getText();
             String lastName = txtFieldLastName.getText();
             String userName = txtFieldUsername.getText();
@@ -402,15 +486,23 @@ public class TeacherViewController implements Initializable, IController{
 
             dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT);
             reloadStudentTable();
-        } else{
+        } else {
             System.out.println("NOOO");
         }
     }
 
+    /**
+     * Action Event for the edit student button. Fills all textfields, with data from the selected student.
+     * Edits the student using the ID.
+     *
+     * @throws Exception
+     */
+
     public void btnHandleEditStudent() throws Exception {
-        if (this.selectedStudent != null){
+        if (this.selectedStudent != null) {
             if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
-                int id = Integer.parseInt(txtFieldStudentID.getText());;
+                int id = Integer.parseInt(txtFieldStudentID.getText());
+                ;
                 String firstName = txtFieldFirstName.getText();
                 String lastName = txtFieldLastName.getText();
                 String userName = txtFieldUsername.getText();
@@ -422,13 +514,16 @@ public class TeacherViewController implements Initializable, IController{
                 btnSaveStudent.setDisable(false);
                 clearStudentTxtField();
                 tvStudent.getSelectionModel().clearSelection();
-            }else{
+            } else {
                 System.out.println("Noo");
             }
         }
     }
 
-    public void clearStudentTxtField(){
+    /**
+     * Clears all textfields in the student view
+     */
+    public void clearStudentTxtField() {
         txtFieldStudentID.clear();
         txtFieldFirstName.clear();
         txtFieldLastName.clear();
@@ -436,6 +531,11 @@ public class TeacherViewController implements Initializable, IController{
         txtFieldPassword.clear();
     }
 
+    /**
+     * Action event for button to delete selected student.
+     *
+     * @throws SQLException
+     */
     public void btnHandleDeleteStudent() throws SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("WARNING MESSAGE");
@@ -466,9 +566,12 @@ public class TeacherViewController implements Initializable, IController{
         }));
     }
 
-    private void selectedCurrentCase(){
+    /**
+     * Selects a case from the currentCase tableView
+     */
+    private void selectedCurrentCase() {
         this.tvCurrentCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((Case) newValue != null){
+            if ((Case) newValue != null) {
                 this.selectedCurrentCase = (Case) newValue;
                 seeCasesOnCitizen();
             }
@@ -476,17 +579,23 @@ public class TeacherViewController implements Initializable, IController{
 
     }
 
-    private void selectedCitizenOnCase(){
+    /**
+     * Selects a citizen from the citizensOnCase tableview
+     */
+    private void selectedCitizenOnCase() {
         this.tvCitizensOnCase.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((Citizen) newValue != null){
+            if ((Citizen) newValue != null) {
                 this.selectedCitizenOnCase = (Citizen) newValue;
             }
         }));
     }
 
-    private void selectedCitizen(){
+    /**
+     * Selects a citizen from the citizens TableView
+     */
+    private void selectedCitizen() {
         this.tvCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((Citizen) newValue != null){
+            if ((Citizen) newValue != null) {
                 this.selectedCitizen = (Citizen) newValue;
             }
         }));
@@ -506,6 +615,9 @@ public class TeacherViewController implements Initializable, IController{
     }
 
 
+    /**
+     * Loads all data in tableview, from the selected current case ID.
+     */
     public void seeCasesOnCitizen() {
         //Initialize the citizens on cases table at citizen window
         tcCitizenOnCaseID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -522,19 +634,20 @@ public class TeacherViewController implements Initializable, IController{
 
     /**
      * Sets the selected event
+     *
      * @param student
      */
     public void setSelectedStudent(User student) {
-            txtFieldStudentID.setText(String.valueOf(student.getId()));
-            txtFieldFirstName.setText(student.getFirstName());
-            txtFieldLastName.setText(student.getLastName());
-            txtFieldUsername.setText(student.getUsername());
-            txtFieldPassword.setText(student.getPassword());
+        txtFieldStudentID.setText(String.valueOf(student.getId()));
+        txtFieldFirstName.setText(student.getFirstName());
+        txtFieldLastName.setText(student.getLastName());
+        txtFieldUsername.setText(student.getUsername());
+        txtFieldPassword.setText(student.getPassword());
     }
 
     //TODO self selection inc
     public void btnHandleSaveCase() throws SQLException {
-        if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()){
+        if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
             String name = txtFieldName.getText();
             String area = txtAreaInfo.getText();
             dataModelFacade.createCase(name, area);
@@ -544,7 +657,7 @@ public class TeacherViewController implements Initializable, IController{
             String date = simpleDateFormat.format(caseDate);
             selectedCase.setDate(date);
             reloadStudentTable();
-        } else{
+        } else {
             System.out.println("NOOO");
         }
     }

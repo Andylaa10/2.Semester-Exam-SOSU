@@ -127,6 +127,13 @@ public class CitizenDAO {
         }
     }
 
+
+    /**
+     * Read what cases a citizen is assigned to
+     * @param caseId
+     * @return
+     * @throws SQLException
+     */
     public List<Citizen> getCitizensOnCase(int caseId) throws SQLException {
         ArrayList<Citizen> allCitizens = new ArrayList<>();
         try (Connection connection = connector.getConnection()) {
