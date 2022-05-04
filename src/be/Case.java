@@ -96,4 +96,14 @@ public class Case {
     public void setInfo(String info) {
         this.info = info;
     }
+
+    @Override
+    public String toString() {
+        return "Case{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", date='" + date + '\'' +
+                ", info='" + info + '\'' +
+                '}';
+    }
 }

@@ -1,6 +1,7 @@
 package bll;
 
 import be.Case;
+import be.Citizen;
 import dal.CaseDAO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -54,6 +55,10 @@ public class CaseManager {
 
     public void assignCaseToCitizen(int caseId, int citizenId){
         caseDAO.assignCaseToCitizen(caseId, citizenId);
+    }
+
+    public List<Case> getCasesOnCitizen(int citizenId) throws SQLException {
+        return caseDAO.getCasesOnCitizen(citizenId);
     }
 
 

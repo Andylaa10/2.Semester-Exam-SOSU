@@ -1,6 +1,7 @@
 package dal;
 
 import be.Case;
+import be.Citizen;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 import java.io.IOException;
@@ -120,11 +121,43 @@ public class CaseDAO {
         }
     }
 
+    /**
+     * Read what cases a citizen is assigned to
+     * @param
+     * @return
+     * @throws SQLException
+     */
+    public List<Case> getCasesOnCitizen(int citizenId) throws SQLException {
+        ArrayList<Case> allCases = new ArrayList<>();
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT Cases.casesID, name, date, info FROM Cases INNER JOIN CasesOnCitizen ON CasesOnCitizen.casesId = Cases.casesID WHERE CasesOnCitizen.citizenId = ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setInt(1, citizenId);
+            preparedStatement.execute();
+            ResultSet resultset = preparedStatement.executeQuery();
+            while (resultset.next()) {
+                int id = resultset.getInt("casesID");
+                String name = resultset.getString("name");
+                String date = resultset.getString("date");
+                String info = resultset.getString("info");
+
+
+                Case aCase = new Case(id, name, date, info);
+                allCases.add(aCase);
+            }
+
+        } catch (SQLServerException throwables) {
+            throw new SQLException();
+        }
+        return allCases;
+    }
 
     public static void main(String[] args) throws Exception {
         CaseDAO caseDAO = new CaseDAO();
         //caseDAO.deleteCase(2);
-        caseDAO.createCase("Brækket ben", "Hjælp med at indtaste informationer");
-        System.out.println(caseDAO.getCases());
+        //caseDAO.createCase("Brækket ben", "Hjælp med at indtaste informationer");
+        System.out.println(caseDAO.getCasesOnCitizen(1).toString());
     }
 }

@@ -55,4 +55,8 @@ public class CaseModel {
     public void assignCaseToCitizen(int caseId, int citizenId){
         caseManager.assignCaseToCitizen(caseId, citizenId);
     }
+
+    public List<Case> getCasesOnCitizen(int citizenId) throws SQLException {
+        return caseManager.getCasesOnCitizen(citizenId);
+    }
 }

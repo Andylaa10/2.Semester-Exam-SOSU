@@ -346,7 +346,7 @@
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBoxCitizen1" layoutX="802.0" layoutY="129.0" prefHeight="25.0" prefWidth="200.0" visibleRowCount="20">
+                  <ComboBox fx:id="comboBox" layoutX="802.0" layoutY="129.0" prefHeight="25.0" prefWidth="200.0" visibleRowCount="20">
                      <effect>
                         <ColorAdjust brightness="0.2" />
                      </effect>

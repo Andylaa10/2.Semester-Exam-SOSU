@@ -189,15 +189,15 @@
                </effect>
             </Button>
             <Label layoutX="337.0" layoutY="416.0" prefHeight="26.0" prefWidth="258.0" text="Dobbeltklik på borger for at se flere oplysninger" />
-            <TableView fx:id="tvCitizensOnCase" layoutX="14.0" layoutY="258.0" prefHeight="150.0" prefWidth="563.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvCasesOnCitizen" layoutX="14.0" layoutY="258.0" prefHeight="150.0" prefWidth="563.0" style="-fx-background-color: transparent;">
               <columns>
                   <TableColumn fx:id="tcCitizenOnCaseID" minWidth="0.0" prefWidth="190.0" text="ID" visible="false" />
-                  <TableColumn fx:id="tcCitizenOnCaseFirstName" minWidth="0.0" prefWidth="190.0" text="Fornavn" />
-                <TableColumn fx:id="tcCitizenOnCaseLastName" minWidth="0.0" prefWidth="190.0" text="Efternavn" />
-                  <TableColumn fx:id="tcCitizenOnCaseSSN" minWidth="0.0" prefWidth="176.800048828125" text="CPR-Nummer" />
+                  <TableColumn fx:id="tcCasesOnCitizenName" minWidth="0.0" prefWidth="190.0" text="Navn" />
+                <TableColumn fx:id="tcCasesOnCitizenDate" minWidth="0.0" prefWidth="190.0" text="Dato" />
+                  <TableColumn fx:id="tcCasesOnCitizenInfo" minWidth="0.0" prefWidth="176.800048828125" text="Info" />
               </columns>
             </TableView>
-            <Label layoutX="15.0" layoutY="227.0" text="Borgere tildelt den valgte sag">
+            <Label layoutX="15.0" layoutY="227.0" text="Sager tildelt den valgte borger">
                <font>
                   <Font size="18.0" />
                </font>
@@ -263,7 +263,7 @@
             <Label layoutX="468.0" layoutY="146.0" text="- Netværk" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <TableView fx:id="tvStudent" layoutX="7.0" layoutY="8.0" prefHeight="340.0" prefWidth="594.0" style="-fx-background-color: transparent;">
               <columns>
@@ -301,7 +301,7 @@
             <TextField fx:id="txtFieldStudentID" layoutY="394.0" prefHeight="26.0" prefWidth="12.0" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Label layoutX="111.0" layoutY="22.0" text="Opret ny sag" textFill="#1d5e3f">
                <font>
@@ -338,7 +338,7 @@
                   <TableColumn fx:id="tcCasesInfo" prefWidth="132.79998779296875" text="Info" visible="false" />
               </columns>
             </TableView>
-            <Button fx:id="btnSaveCase" layoutX="63.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleSaveCase" prefHeight="26.0" prefWidth="232.0" text="Opret/Gem Sag">
+            <Button fx:id="btnSaveCase" layoutX="63.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleSaveCase" prefHeight="26.0" prefWidth="232.0" text="Gem Sag">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect></Button>
