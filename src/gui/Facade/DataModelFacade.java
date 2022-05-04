@@ -2,10 +2,8 @@ package gui.Facade;
 
 import be.*;
 import be.enums.UserType;
-import gui.model.CaseModel;
-import gui.model.CitizenModel;
-import gui.model.SuperAdminModel;
-import gui.model.UserModel;
+import gui.model.*;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,12 +14,14 @@ public class DataModelFacade {
     private UserModel userModel;
     private SuperAdminModel superAdminModel;
     private CaseModel caseModel;
+    private HealthConditionsModel healthConditionsModel;
 
     public DataModelFacade() throws IOException {
         citizenModel = new CitizenModel();
         userModel = new UserModel();
         superAdminModel = new SuperAdminModel();
         caseModel = new CaseModel();
+        healthConditionsModel = new HealthConditionsModel();
     }
 
     /**
@@ -49,6 +49,14 @@ public class DataModelFacade {
      */
     public List<User> getAdmins() throws SQLException {
         return userModel.getAdmins();
+    }
+
+    public List<HealthCondition> getHealthConditions() throws SQLException {
+        return healthConditionsModel.getHealthConditions();
+    }
+
+    public List<SubCategory> getSubCategories(int categoryId) throws SQLException {
+        return healthConditionsModel.getSubCategories(categoryId);
     }
 
     /**

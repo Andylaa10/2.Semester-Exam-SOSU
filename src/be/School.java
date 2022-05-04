@@ -13,8 +13,6 @@ public class School {
 
     /**
      * Overloaded constructor with id and schoolName
-     * @param id
-     * @param schoolName
      */
     public School(int id, String schoolName) {
         this.id = id;

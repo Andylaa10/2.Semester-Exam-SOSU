@@ -30,11 +30,11 @@ public class StudentViewController implements IController, Initializable {
     private TableColumn<HealthCondition, String> tcHealthConditionName;
 
     @FXML
-    private TableView<SubCategories> tvSubCategories;
+    private TableView<SubCategory> tvSubCategories;
     @FXML
-    private TableColumn<SubCategories, Integer> tcSubCategoriesID;
+    private TableColumn<SubCategory, Integer> tcSubCategoriesID;
     @FXML
-    private TableColumn<SubCategories, String> tcSubCategoriesName;
+    private TableColumn<SubCategory, String> tcSubCategoriesName;
 
     //Cases table
     @FXML
@@ -115,13 +115,14 @@ public class StudentViewController implements IController, Initializable {
 
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
-
-    private ObservableList<HealthCondition> healthConditions = FXCollections.observableArrayList();
-    private ObservableList<SubCategories> subCategories = FXCollections.observableArrayList();
+    private ObservableList<HealthCondition> allHealthConditions = FXCollections.observableArrayList();
+    private ObservableList<SubCategory> allSubCategories = FXCollections.observableArrayList();
 
 
     private Citizen selectedCitizen;
     private Citizen selectedCitizenOnComboBox;
+
+    private HealthCondition selectedHealthCondition;
 
     DataModelFacade dataModelFacade;
 
@@ -158,8 +159,14 @@ public class StudentViewController implements IController, Initializable {
 
         //Initialize the healthConditionsTable
         tcHealthConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tcHealthConditionName.setCellValueFactory(new PropertyValueFactory<>("healthConditionName"));
-        //TODO Need healthConditions and subcategories DAO
+        tcHealthConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        try {
+            allHealthConditions = FXCollections.observableArrayList(dataModelFacade.getHealthConditions());
+            tableViewLoadHealthConditions(allHealthConditions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -180,8 +187,15 @@ public class StudentViewController implements IController, Initializable {
     }
 
     public void seeSubCategoriesOnCategory() {
-        //Initialize the subCategoriesTable
-
+        //Initialize the subCategory table
+        tcSubCategoriesID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcSubCategoriesName.setCellValueFactory(new PropertyValueFactory<>("subCategoryName"));
+        try {
+            //allSubCategories = FXCollections.observableList(dataModelFacade.getSubCategories(selectedHealthCondition.getId()));
+            //tableViewLoadCasesOnCitizen(allCasesOnCitizen);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void initializeCitizenComboBox() throws SQLException {
@@ -231,6 +245,14 @@ public class StudentViewController implements IController, Initializable {
         return allCasesOnCitizen;
     }
 
+    private void tableViewLoadHealthConditions(ObservableList<HealthCondition> allHealthConditions) {
+        tvHealthConditions.setItems(getHealthConditionData());
+    }
+
+    private ObservableList<HealthCondition> getHealthConditionData() {
+        return allHealthConditions;
+    }
+
     /**
      * Selects a citizen from the citizens TableView
      */
@@ -248,6 +270,15 @@ public class StudentViewController implements IController, Initializable {
             if ((Citizen) newValue != null) {
                 this.selectedCitizenOnComboBox = (Citizen) newValue;
                 seeCasesOnCitizen();
+            }
+        }));
+    }
+
+    private void selectedHealthCondition() {
+        this.tvHealthConditions.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((HealthCondition) newValue != null) {
+                this.selectedHealthCondition = (HealthCondition) newValue;
+                seeSubCategoriesOnCategory();
             }
         }));
     }
