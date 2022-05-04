@@ -14,14 +14,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -353,34 +360,6 @@ public class AdminViewController implements Initializable, IController {
         return allCitizensOnCase;
     }
 
-    @FXML
-    private void handleRowSelect() {
-        Citizen selectedCitizenRow = tvCurrentCitizens.getSelectionModel().getSelectedItem();
-        if (selectedCitizenRow == null)
-            return;
-        if (selectedCitizenRow != temp) {
-            temp = selectedCitizenRow;
-            lastClickTime = new Date();
-        } else if(selectedCitizenRow == temp) {
-            Date now = new Date();
-            long diff = now.getTime() - lastClickTime.getTime();
-            if (diff < 300){ //another click registered in 300 millis
-                FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
-                Scene mainWindowScene = null;
-                try {
-                    mainWindowScene = new Scene(parent.load());
-                } catch (IOException exception) {
-                    exception.printStackTrace();
-                }
-                Stage viewCitizenStage;
-                viewCitizenStage = new Stage();
-                viewCitizenStage.setScene(mainWindowScene);
-                viewCitizenStage.show();
-            } else {
-                lastClickTime = new Date();
-            }
-        }
-    }
 
     @FXML
     private void onActionSaveCase() {
@@ -506,6 +485,27 @@ public class AdminViewController implements Initializable, IController {
                 this.selectedCitizenOnCase = (Citizen) newValue;
             }
         }));
+
+        this.tvCurrentCitizens.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && selectedCitizen != null) {
+                try {
+                    System.out.println("clicked");
+                    FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
+                    Scene mainWindowScene = null;
+                    try {
+                        mainWindowScene = new Scene(parent.load());
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
+                    }
+                    Stage viewCitizenStage;
+                    viewCitizenStage = new Stage();
+                    viewCitizenStage.setScene(mainWindowScene);
+                    viewCitizenStage.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     /**
