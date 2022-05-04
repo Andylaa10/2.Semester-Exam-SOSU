@@ -982,20 +982,7 @@ public class AdminViewController implements Initializable, IController {
         txtAreaInfo.setText(aCase.getInfo());
     }
 
-
     @FXML
-<<<<<<< Updated upstream
-    private void btnClickCreateTeacher() {
-        labelTitle.setText("Lærere");
-        labelInfo.setText("Overblik over alle oprettede lærere, hvor du kan oprette nye lærere, redigere eller slette");
-        labelInfoNewLine.setText("");
-        anchorPaneCreateTeacher.setVisible(true);
-        anchorPaneStudent.setVisible(false);
-        anchorPaneCreateCitizen.setVisible(false);
-        anchorPaneAdmin.setVisible(false);
-        anchorPaneCitizen.setVisible(false);
-        anchorPaneCase.setVisible(false);
-=======
     private void btnHandleSaveCase() throws Exception {
         if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
             String name = txtFieldName.getText();
@@ -1009,7 +996,6 @@ public class AdminViewController implements Initializable, IController {
         } else {
             System.out.println("NOOO");
         }
->>>>>>> Stashed changes
     }
 
     private void assignDate() throws Exception {
@@ -1116,5 +1102,4 @@ public class AdminViewController implements Initializable, IController {
         btnEditCaseSave.setVisible(false);
         btnEditCaseCancel.setVisible(false);
     }
-
 }
