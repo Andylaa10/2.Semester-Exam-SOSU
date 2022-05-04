@@ -120,7 +120,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0" visible="false">
+      <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0">
          <children>
             <Pane prefHeight="42.0" prefWidth="1158.0" style="-fx-background-color: transparent;">
                <children>
@@ -215,22 +215,22 @@
                      </font>
                   </Label>
                   <Button layoutX="748.0" layoutY="490.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
-                  <TextField layoutX="199.0" layoutY="127.0" prefHeight="37.0" prefWidth="286.0" text="txtFieldFirstName">
+                  <TextField fx:id="txtFieldFirstName" layoutX="199.0" layoutY="127.0" prefHeight="37.0" prefWidth="286.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="199.0" layoutY="210.0" prefHeight="37.0" prefWidth="286.0" text="txtFieldFirstName">
+                  <TextField fx:id="txtFieldLastName" layoutX="199.0" layoutY="210.0" prefHeight="37.0" prefWidth="286.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="199.0" layoutY="291.0" prefHeight="37.0" prefWidth="286.0" text="txtFieldFirstName">
+                  <TextField fx:id="txtFieldSSN" layoutX="199.0" layoutY="291.0" prefHeight="37.0" prefWidth="286.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <TextField layoutX="199.0" layoutY="373.0" prefHeight="37.0" prefWidth="286.0" text="txtFieldFirstName">
+                  <TextField fx:id="txtFieldAddress" layoutX="199.0" layoutY="373.0" prefHeight="37.0" prefWidth="286.0">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -353,7 +353,7 @@
                   </ComboBox>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneCitizenAssessment" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
+            <AnchorPane fx:id="anchorPaneCitizenAssessment" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
                <children>
                   <Label layoutX="229.0" text="Funktions Tilstand - Borgerens Egen Vurdering">
                      <font>
@@ -448,7 +448,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0">
+      <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0" visible="false">
          <children>
             <TableView fx:id="tvCases" layoutX="606.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0">
               <columns>

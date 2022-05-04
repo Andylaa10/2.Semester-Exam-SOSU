@@ -110,8 +110,10 @@ public class StudentViewController implements IController, Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setAnchorPanesVisibility();
         selectedCitizen();
+
         try {
             initializeTables();
+            initializeCitizenComboBox();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -148,6 +150,13 @@ public class StudentViewController implements IController, Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void initializeCitizenComboBox() throws SQLException {
+        //Initialize the citizens in the dropdown menu
+        allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
+        tableViewLoadCitizens(allCitizens);
+        comboBoxCitizen.setItems(allCitizens);
     }
 
     /**
