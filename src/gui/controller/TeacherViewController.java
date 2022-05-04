@@ -793,6 +793,7 @@ public class TeacherViewController implements Initializable, IController {
             allCases.add(dataModelFacade.createCase(name, area));
             assignDate();
             reloadCaseTable();
+            reloadCurrentCasesTable();
             txtFieldName.clear();
             txtAreaInfo.clear();
         } else {
