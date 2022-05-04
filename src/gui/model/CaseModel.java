@@ -56,6 +56,10 @@ public class CaseModel {
         caseManager.assignCaseToCitizen(caseId, citizenId);
     }
 
+    public void deleteCaseFromCitizen(int caseId, int citizenId){
+        caseManager.deleteCaseFromCitizen(caseId, citizenId);
+    }
+
     public List<Case> getCasesOnCitizen(int citizenId) throws SQLException {
         return caseManager.getCasesOnCitizen(citizenId);
     }
