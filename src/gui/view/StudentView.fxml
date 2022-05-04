@@ -148,7 +148,7 @@
                         <ColorAdjust brightness="0.34" />
                      </effect>
                   </Button>
-                  <ComboBox fx:id="comboBoxCitizen" layoutX="944.0" layoutY="8.0" prefHeight="25.0" prefWidth="200.0" visibleRowCount="20">
+                  <ComboBox fx:id="comboBoxCitizen" layoutX="944.0" layoutY="8.0" onAction="#onActionComboClicked" prefHeight="25.0" prefWidth="200.0" visibleRowCount="20">
                      <effect>
                         <ColorAdjust brightness="0.2" />
                      </effect>
@@ -446,6 +446,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
+            <TextField fx:id="txtFieldCitizenID" layoutX="970.0" layoutY="29.0" visible="false" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0" visible="false">

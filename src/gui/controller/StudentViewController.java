@@ -51,7 +51,9 @@ public class StudentViewController implements IController, Initializable {
     private TableColumn<Citizen, String> tcCitizenSex;
 
     @FXML
-    private ComboBox comboBoxCitizen;
+    private ComboBox<Citizen> comboBoxCitizen;
+    @FXML
+    private TextField txtFieldCitizenID;
     @FXML
     private Button btnGeneralInformation;
     @FXML
@@ -99,6 +101,7 @@ public class StudentViewController implements IController, Initializable {
     private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
 
     private Citizen selectedCitizen;
+    private Citizen selectedCitizenOnComboBox;
 
     DataModelFacade dataModelFacade;
 
@@ -110,7 +113,6 @@ public class StudentViewController implements IController, Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setAnchorPanesVisibility();
         selectedCitizen();
-
         try {
             initializeTables();
             initializeCitizenComboBox();
@@ -159,6 +161,13 @@ public class StudentViewController implements IController, Initializable {
         comboBoxCitizen.setItems(allCitizens);
     }
 
+    @FXML
+    private void onActionComboClicked(ActionEvent actionEvent) {
+        Citizen comboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
+        txtFieldCitizenID.setText(String.valueOf(comboBox.getId()));
+
+    }
+
     /**
      * loads the Citizens table view
      * @param allCitizens
@@ -200,6 +209,15 @@ public class StudentViewController implements IController, Initializable {
         this.tvCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((Citizen) newValue != null) {
                 this.selectedCitizen = (Citizen) newValue;
+                seeCasesOnCitizen();
+            }
+        }));
+    }
+
+    private void selectedCitizenOnComboBox() {
+        this.comboBoxCitizen.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((Citizen) newValue != null) {
+                this.selectedCitizenOnComboBox = (Citizen) newValue;
                 seeCasesOnCitizen();
             }
         }));
@@ -343,4 +361,6 @@ public class StudentViewController implements IController, Initializable {
         switcher.setTitle("Login");
         switcher.show();
     }
+
+
 }
