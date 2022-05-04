@@ -8,7 +8,6 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -114,6 +113,12 @@ public class TeacherViewController implements Initializable, IController {
     private Button btnDeleteCase;
     @FXML
     private Button btnCopyCase;
+    @FXML
+    private Button btnEditCaseSave;
+    @FXML
+    private Button btnEditCaseCancel;
+    @FXML
+    private TextField txtFieldCaseID;
     @FXML
     private TextField txtFieldName;
     @FXML
@@ -412,9 +417,9 @@ public class TeacherViewController implements Initializable, IController {
     /**
      * Action event for home button, that loads the main home screen.
      *
-     * @param actionEvent
+     * @param
      */
-    public void btnClickHome(ActionEvent actionEvent) {
+    public void btnClickHome( ) {
         labelTitle.setText("Lærer");
         labelInfo.setText("Logget ind som lærer");
         labelInfoNewLine.setText("");
@@ -429,10 +434,10 @@ public class TeacherViewController implements Initializable, IController {
      * Action event for logout button, that gets the login view and loads that when pressed.
      * Closes current stage
      *
-     * @param actionEvent
+     * @param
      * @throws IOException
      */
-    public void btnClickLogout(ActionEvent actionEvent) throws IOException {
+    public void btnClickLogout( ) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
         Scene scene = new Scene(loader.load());
         Stage switcher = (Stage) btnLogOut.getScene().getWindow();
@@ -684,7 +689,6 @@ public class TeacherViewController implements Initializable, IController {
         this.tvCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((Case) newValue != null) {
                 this.selectedCase = (Case) newValue;
-                setSelectedCase(newValue);
             }
         }));
     }
@@ -708,12 +712,13 @@ public class TeacherViewController implements Initializable, IController {
      * @param aCase
      */
     public void setSelectedCase(Case aCase) {
+        txtFieldCaseID.setText(String.valueOf(aCase.getId()));
         txtFieldName.setText(aCase.getName());
         txtAreaInfo.setText(aCase.getInfo());
     }
 
-    //TODO self selection inc
 
+    //TODO self selection inc
     public void btnHandleSaveCase() throws Exception {
         if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
             String name = txtFieldName.getText();
@@ -758,6 +763,49 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     public void btnHandleEditCase() {
+        setSelectedCase(selectedCase);
+        btnEditCase.setDisable(true);
+        btnCopyCase.setDisable(true);
+        btnSaveCase.setVisible(false);
+        btnDeleteCase.setVisible(false);
+        btnEditCaseSave.setVisible(true);
+        btnEditCaseCancel.setVisible(true);
+    }
+
+    public void btnHandleEditCaseSave() throws Exception {
+        if(this.selectedCase != null) {
+            if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
+                int id = Integer.parseInt(txtFieldCaseID.getText());
+                String name = txtFieldName.getText();
+                String date = selectedCase.getDate();
+                String info = txtAreaInfo.getText();
+                Case aCase = new Case(id, name, date, info);
+                dataModelFacade.editCase(aCase);
+                reloadCaseTable();
+                txtFieldName.clear();
+                txtAreaInfo.clear();
+                btnEditCase.setDisable(false);
+                btnCopyCase.setDisable(false);
+                btnSaveCase.setVisible(true);
+                btnDeleteCase.setVisible(true);
+                btnEditCaseSave.setVisible(false);
+                btnEditCaseCancel.setVisible(false);
+            } else {
+                System.out.println("NOOO");
+            }
+        }
+    }
+
+    public void btnHandleEditCaseCancel() {
+        reloadCaseTable();
+        txtFieldName.clear();
+        txtAreaInfo.clear();
+        btnEditCase.setDisable(false);
+        btnCopyCase.setDisable(false);
+        btnSaveCase.setVisible(true);
+        btnDeleteCase.setVisible(true);
+        btnEditCaseSave.setVisible(false);
+        btnEditCaseCancel.setVisible(false);
     }
 
     public void btnHandleCopyCase() throws Exception {
