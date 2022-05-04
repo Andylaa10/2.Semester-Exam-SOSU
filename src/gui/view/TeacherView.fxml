@@ -156,7 +156,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <TableView fx:id="tvCurrentCases" layoutX="13.0" layoutY="23.0" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
               <columns>
@@ -184,6 +184,11 @@
                </font>
             </Label>
             <Button fx:id="btnAssignCase" layoutX="14.0" layoutY="416.0" mnemonicParsing="false" onAction="#btnHandleAssignCase" prefHeight="26.0" prefWidth="137.0" text="Tildel Sag til Borger">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect>
+            </Button>
+            <Button fx:id="btnDeleteCaseFromCitizen" layoutX="158.0" layoutY="416.0" mnemonicParsing="false" onAction="#onActionDeleteCaseFromCitizen" prefHeight="26.0" prefWidth="137.0" text="Fjern Sag fra Borger">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect>
@@ -263,7 +268,7 @@
             <Label layoutX="468.0" layoutY="146.0" text="- Netværk" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <TableView fx:id="tvStudent" layoutX="7.0" layoutY="8.0" prefHeight="340.0" prefWidth="594.0" style="-fx-background-color: transparent;">
               <columns>

@@ -183,14 +183,13 @@ public class TeacherViewController implements Initializable, IController {
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCases = FXCollections.observableArrayList();
     private ObservableList<Case> allCurrentCases = FXCollections.observableArrayList();
-    private ObservableList<Citizen> allCitizensOnCase = FXCollections.observableArrayList();
     private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
 
-    private User selectedStudent;
     private Case selectedCase;
-    private Citizen selectedCitizen;
-    private Citizen selectedCitizenOnCase;
+    private Case selectedCaseOnCitizen;
     private Case selectedCurrentCase;
+    private User selectedStudent;
+    private Citizen selectedCitizen;
 
     private DataModelFacade dataModelFacade;
 
@@ -206,6 +205,7 @@ public class TeacherViewController implements Initializable, IController {
         selectedCurrentCase();
         selectedCitizen();
         selectedCase();
+        selectedCaseOnCitizen();
     }
 
     private void initializeTable() {
@@ -328,16 +328,16 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     /**
-     * loads the citizensOnCase tableview.
+     * loads the casesOnCitizen tableview.
      *
-     * @param allCitizensOnCase
+     * @param allCasesOnCitizen
      */
-    private void tableViewLoadCasesOnCitizen(ObservableList<Case> allCitizensOnCase) {
+    private void tableViewLoadCasesOnCitizen(ObservableList<Case> allCasesOnCitizen) {
         tvCasesOnCitizen.setItems(getCasesOnCitizenData());
     }
 
     /**
-     * Get the data for citizensOnCase
+     * Get the data for casesOnCitizens
      *
      * @return ObservableList<Citizen>
      */
@@ -482,9 +482,9 @@ public class TeacherViewController implements Initializable, IController {
 
     @FXML
     private void onActionDeleteCaseFromCitizen() {
-        if (selectedCurrentCase != null && selectedCitizenOnCase != null) {
+        if (selectedCaseOnCitizen != null && selectedCitizen != null) {
             try {
-                dataModelFacade.deleteCaseFromCitizen(selectedCurrentCase.getId(), selectedCitizenOnCase.getId());
+                dataModelFacade.deleteCaseFromCitizen(selectedCaseOnCitizen.getId(), selectedCitizen.getId());
                 seeCasesOnCitizen();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -726,6 +726,14 @@ public class TeacherViewController implements Initializable, IController {
         this.tvCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((Case) newValue != null) {
                 this.selectedCase = (Case) newValue;
+            }
+        }));
+    }
+
+    private void selectedCaseOnCitizen() {
+        this.tvCasesOnCitizen.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((Case) newValue != null) {
+                this.selectedCaseOnCitizen = (Case) newValue;
             }
         }));
     }
