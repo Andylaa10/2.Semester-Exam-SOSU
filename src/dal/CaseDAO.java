@@ -109,8 +109,20 @@ public class CaseDAO {
         }
     }
 
-    public void assignCaseToCitizen(int casesId, int citizenId){
+    public void assignCaseToCitizen(int casesId, int citizenId) {
         String sql = "INSERT INTO CasesOnCitizen (casesId, citizenId) VALUES (?,?);";
+        try (Connection con = databaseConnector.getConnection();
+             PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            st.setInt(1, casesId);
+            st.setInt(2, citizenId);
+            st.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void deleteCaseFromCitizen(int casesId, int citizenId) {
+        String sql = "DELETE FROM CasesOnCitizen WHERE casesId = ? AND citizenId = ?;";
         try (Connection con = databaseConnector.getConnection();
              PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             st.setInt(1, casesId);
@@ -156,8 +168,8 @@ public class CaseDAO {
 
     public static void main(String[] args) throws Exception {
         CaseDAO caseDAO = new CaseDAO();
-        //caseDAO.deleteCase(2);
+        caseDAO.deleteCaseFromCitizen(107, 2);
         //caseDAO.createCase("Brækket ben", "Hjælp med at indtaste informationer");
-        System.out.println(caseDAO.getCasesOnCitizen(1).toString());
+        //System.out.println(caseDAO.getCasesOnCitizen(1).toString());
     }
 }
