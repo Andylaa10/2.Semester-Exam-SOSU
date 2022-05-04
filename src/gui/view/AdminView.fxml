@@ -178,7 +178,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateTeacher" layoutX="186.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneCreateTeacher" layoutX="186.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <TableView fx:id="tvTeachers" layoutX="14.0" layoutY="45.0" prefHeight="362.0" prefWidth="344.0" style="-fx-background-color: transparent;">
               <columns>
@@ -243,7 +243,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <TableView fx:id="tvCurrentCases" layoutX="13.0" layoutY="22.0" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
                <columns>
@@ -251,7 +251,7 @@
                   <TableColumn fx:id="tcCurrentCaseDate" prefWidth="132.79998779296875" text="Dato" />
                </columns>
             </TableView>
-            <TableView fx:id="tvCurrentCitizens" layoutX="328.0" layoutY="22.0" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvCurrentCitizens" layoutX="328.0" layoutY="22.0" onMouseClicked="#handleRowSelect" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
                <columns>
                   <TableColumn fx:id="tcCurrentCitizenFirstName" prefWidth="75.0" text="Fornavn" />
                   <TableColumn fx:id="tcCurrentCitizenLastName" prefWidth="79.9998779296875" text="Efternavn" />
