@@ -546,6 +546,32 @@ public class AdminViewController implements Initializable, IController {
 
     @FXML
     private void onActionAssignCaseToCitizen() {
+        if (selectedCurrentCase != null && selectedCitizen != null) {
+            try {
+                dataModelFacade.assignCaseToCitizen(selectedCurrentCase.getId(), selectedCitizen.getId());
+                seeCasesOnCitizen();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Something went wrong");
+            //TODO add errorHandler
+        }
+    }
+
+    @FXML
+    private void onActionDeleteCaseFromCitizen() {
+        if (selectedCurrentCase != null && selectedCitizenOnCase != null) {
+            try {
+                dataModelFacade.deleteCaseFromCitizen(selectedCurrentCase.getId(), selectedCitizenOnCase.getId());
+                seeCasesOnCitizen();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Something went wrong");
+            //TODO add errorHandler
+        }
     }
 
     @FXML
@@ -816,6 +842,7 @@ public class AdminViewController implements Initializable, IController {
         labelInfo.setText("Du er nu logget ind som Admin: " + user.getFirstName() + user.getLastName());
         labelInfoNewLine.setText("");
     }
+
 
 
 }
