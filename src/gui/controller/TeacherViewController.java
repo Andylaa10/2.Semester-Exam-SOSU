@@ -762,6 +762,16 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
+    private void reloadCurrentCasesTable() {
+        try {
+            int index = tvCurrentCases.getSelectionModel().getFocusedIndex();
+            this.tvCurrentCases.setItems(FXCollections.observableList(dataModelFacade.getCases()));
+            tvCurrentCases.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
     /**
      * Sets the selected event
      *
@@ -814,6 +824,7 @@ public class TeacherViewController implements Initializable, IController {
                 selectedCase();
                 dataModelFacade.deleteCase(selectedCase.getId());
                 reloadCaseTable();
+                reloadCurrentCasesTable();
             }
         } else {
             return;
