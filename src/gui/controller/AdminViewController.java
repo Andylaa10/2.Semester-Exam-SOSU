@@ -489,7 +489,6 @@ public class AdminViewController implements Initializable, IController {
         this.tvCurrentCitizens.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && selectedCitizen != null) {
                 try {
-                    System.out.println("clicked");
                     FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
                     Scene mainWindowScene = null;
                     try {

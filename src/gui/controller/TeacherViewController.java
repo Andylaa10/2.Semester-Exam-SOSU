@@ -631,6 +631,26 @@ public class TeacherViewController implements Initializable, IController {
                 seeCasesOnCitizen();
             }
         }));
+
+        this.tvCitizens.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && selectedCitizen != null) {
+                try {
+                    FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
+                    Scene mainWindowScene = null;
+                    try {
+                        mainWindowScene = new Scene(parent.load());
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
+                    }
+                    Stage viewCitizenStage;
+                    viewCitizenStage = new Stage();
+                    viewCitizenStage.setScene(mainWindowScene);
+                    viewCitizenStage.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     /**
