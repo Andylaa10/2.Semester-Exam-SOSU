@@ -8,6 +8,7 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +24,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -57,13 +60,21 @@ public class AdminViewController implements Initializable, IController {
     private AnchorPane topPane;
     @FXML
     private AnchorPane anchorPaneAdmin;
+    @FXML
+    private AnchorPane anchorPaneCitizen;
+    @FXML
+    private AnchorPane anchorPaneCreateTeacher;
+    @FXML
+    private AnchorPane anchorPaneCase;
+    @FXML
+    private AnchorPane anchorPaneStudent;
+    @FXML
+    private AnchorPane anchorPaneCreateCitizen;
 
 
     /**
      * Create teacher pane
      */
-    @FXML
-    private AnchorPane anchorPaneCreateTeacher;
     @FXML
     private TableView<User> tvTeachers;
     @FXML
@@ -97,48 +108,48 @@ public class AdminViewController implements Initializable, IController {
 
 
     /**
-     * Citizen pane
+     * Student pane
      */
     @FXML
-    private TableView<Case> tvCurrentCases;
+    private TableView<User> tvStudent;
     @FXML
-    private TableView<Citizen> tvCurrentCitizens;
+    private TableColumn<User, String> tcStudentFirstName;
     @FXML
-    private TableView<Case> tvCasesOnCitizens;
+    private TableColumn<User, String> tcStudentLastName;
     @FXML
-    private TableColumn<Case, String> tcCurrentCaseName;
+    private TableColumn<User, String> tcStudentUsername;
     @FXML
-    private TableColumn<Case, String> tcCurrentCaseDate;
+    private TableColumn<User, String> tcStudentPassword;
     @FXML
-    private TableColumn<Citizen, String> tcCurrentCitizenFirstName;
+    private Button btnSaveStudent;
     @FXML
-    private TableColumn<Citizen, String> tcCurrentCitizenLastName;
+    private Button btnEditStudent;
     @FXML
-    private TableColumn<Citizen, String> tcCurrentCitizenSSN;
+    private Button btnEditSave;
     @FXML
-    private TableColumn<Case, String> tcCaseOnCitizenID;
+    private Button btnEditCancel;
     @FXML
-    private TableColumn<Case, String> tcCaseOnCitizenName;
+    private Button btnDeleteStudent;
     @FXML
-    private TableColumn<Case, String> tcCaseOnCitizenDate;
+    private TextField txtFieldFirstName;
     @FXML
-    private TableColumn<Case, String> tcCaseOnCitizenInfo;
+    private TextField txtFieldLastName;
     @FXML
-    private Button btnDeleteCaseFromCitizen;
+    private TextField txtFieldUsername;
     @FXML
-    private Button btnAssignCaseToCitizen;
+    private TextField txtFieldPassword;
     @FXML
-    private AnchorPane anchorPaneCitizen;
+    private TextField txtFieldStudentID;
 
     /**
-     * Case pane
+     * CasePane
      */
     @FXML
     private TableView<Case> tvCases;
     @FXML
-    private TableColumn<Case, String> tcCaseName;
+    private TableColumn<Case, String> tcCasesName;
     @FXML
-    private TableColumn<Case, String> tcCaseDate;
+    private TableColumn<Case, String> tcCasesDate;
     @FXML
     private Button btnSaveCase;
     @FXML
@@ -148,47 +159,51 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private Button btnCopyCase;
     @FXML
-    private TextField txtFieldCaseName;
+    private Button btnEditCaseSave;
     @FXML
-    private TextField txtFieldCaseDate;
+    private Button btnEditCaseCancel;
     @FXML
-    private TextArea txtAreaCaseInfo;
+    private TextField txtFieldCaseID;
     @FXML
-    private AnchorPane anchorPaneCase;
+    private TextField txtFieldName;
+    @FXML
+    private TextArea txtAreaInfo;
 
     /**
-     * Student pane
+     * CitizenPane
      */
     @FXML
-    private TableView<User> tvStudents;
+    private TableView<Case> tvCurrentCases;
     @FXML
-    private TableColumn<User, String> tcStudentFirstName;
+    private TableView<Citizen> tvCitizens;
     @FXML
-    private TableColumn<User, String> tcStudentLastName;
+    private TableView<Case> tvCasesOnCitizen;
     @FXML
-    private TableColumn<User, String> tcStudentUserName;
+    private TableColumn<Case, String> tcCurrentCasesID;
     @FXML
-    private TextField txtFieldStudentID;
+    private TableColumn<Case, String> tcCurrentCasesName;
     @FXML
-    private TextField txtFieldStudentFirstName;
+    private TableColumn<Case, String> tcCurrentCasesDate;
     @FXML
-    private TextField txtFieldStudentLastname;
+    private TableColumn<Citizen, Integer> tcCitizenID;
     @FXML
-    private TextField txtFieldStudentUsername;
+    private TableColumn<Citizen, String> tcCitizenFirstName;
     @FXML
-    private TextField txtFieldStudentPassword;
+    private TableColumn<Citizen, String> tcCitizenLastName;
     @FXML
-    private Button btnCreateStudent;
+    private TableColumn<Citizen, String> tcCitizenSSN;
     @FXML
-    private Button btnEditStudent;
+    private TableColumn<Case, Integer> tcCitizenOnCaseID;
     @FXML
-    private Button btnDeleteStudent;
+    private TableColumn<Case, String> tcCasesOnCitizenName;
     @FXML
-    private Button btnEditStudentSave;
+    private TableColumn<Case, String> tcCasesOnCitizenDate;
     @FXML
-    private Button btnEditStudentCancel;
+    private TableColumn<Case, String> tcCasesOnCitizenInfo;
     @FXML
-    private AnchorPane anchorPaneStudent;
+    private Button btnAssignCase;
+    @FXML
+    private Button btnCopySave;
 
     /**
      * Create Citizen Pane
@@ -202,30 +217,29 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private TextField txtFieldCitizenAddress;
     @FXML
+    private TextArea txtAreaCitizenGeneralInfo;
+    @FXML
     private CheckBox checkBoxMale;
     @FXML
     private CheckBox checkBoxFemale;
     @FXML
     private CheckBox checkBoxOther;
-    @FXML
-    private TextArea txtAreaGeneralInformation;
-    @FXML
-    private AnchorPane anchorPaneCreateCitizen;
 
     private ObservableList<User> allStudents = FXCollections.observableArrayList();
-    private ObservableList<User> allTeachers = FXCollections.observableArrayList();
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
-    private ObservableList<Case> allCasesOnCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCases = FXCollections.observableArrayList();
     private ObservableList<Case> allCurrentCases = FXCollections.observableArrayList();
+    private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
+    private ObservableList<User> allTeachers = FXCollections.observableArrayList();
+
+    private Case selectedCase;
+    private Case selectedCaseOnCitizen;
+    private Case selectedCurrentCase;
+    private User selectedStudent;
+    private User selectedTeacher;
+    private Citizen selectedCitizen;
 
     private DataModelFacade dataModelFacade;
-
-    private User selectedTeacher;
-    private User selectedStudent;
-    private Case selectedCurrentCase;
-    private Citizen selectedCitizen;
-    private Case selectedCaseOnCitizen;
 
     public AdminViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
@@ -234,20 +248,17 @@ public class AdminViewController implements Initializable, IController {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setAnchorPanesVisibility();
-        try {
-            initializeTables();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        selectedTeacher();
+        initializeTable();
+        setAnchorPanesVisibility();
         selectedStudent();
         selectedCurrentCase();
-        selectedCaseOnCitizen();
         selectedCitizen();
+        selectedCase();
+        selectedCaseOnCitizen();
     }
 
-    private void initializeTables() throws Exception {
-        //Initialize the teachers table
+    private void initializeTable() {
+        //Initialize the teacher table
         tcTeacherFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcTeacherLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcTeacherUserName.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -255,126 +266,288 @@ public class AdminViewController implements Initializable, IController {
             allTeachers = FXCollections.observableList(dataModelFacade.getTeachers());
             tableViewLoadTeachers(allTeachers);
         } catch (Exception e) {
-            throw new Exception();
+            e.printStackTrace();
         }
-
         //Initialize the students table
         tcStudentFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcStudentLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        tcStudentUserName.setCellValueFactory(new PropertyValueFactory<>("username"));
+        tcStudentUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         try {
             allStudents = FXCollections.observableList(dataModelFacade.getStudents());
             tableViewLoadStudents(allStudents);
         } catch (Exception e) {
-            throw new Exception();
+            e.printStackTrace();
         }
 
         //Initialize the cases table
-        tcCaseName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        tcCaseDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        tcCasesName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tcCasesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         try {
             allCases = FXCollections.observableList(dataModelFacade.getCases());
             tableViewLoadCases(allCases);
         } catch (Exception e) {
-            throw new Exception();
+            e.printStackTrace();
         }
 
         //Initialize the citizens table
-        tcCurrentCitizenFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        tcCurrentCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        tcCurrentCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+        tcCitizenID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcCitizenFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        tcCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        tcCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
         try {
             allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
             tableViewLoadCitizens(allCitizens);
         } catch (Exception e) {
-            throw new Exception();
+            e.printStackTrace();
         }
 
         //Initialize the current cases table at citizen window
-        tcCurrentCaseName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        tcCurrentCaseDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        tcCurrentCasesID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcCurrentCasesName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tcCurrentCasesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         try {
             allCurrentCases = FXCollections.observableList(dataModelFacade.getCases());
             tableViewLoadCurrentCases(allCurrentCases);
         } catch (Exception e) {
-            throw new Exception();
+            e.printStackTrace();
         }
     }
 
+    /**
+     * loads the teacher view
+     * @param allTeachers
+     */
     private void tableViewLoadTeachers(ObservableList<User> allTeachers) {
         tvTeachers.setItems(getTeacherData());
     }
 
+    /**
+     * loads the students tableview.
+     *
+     * @param allStudents
+     */
+    private void tableViewLoadStudents(ObservableList<User> allStudents) {
+        tvStudent.setItems(getStudentData());
+    }
+
+    /**
+     * gets the data for teachers
+     * @return
+     */
     private ObservableList<User> getTeacherData() {
         return allTeachers;
     }
 
-
-    private void tableViewLoadStudents(ObservableList<User> allStudents) {
-        tvStudents.setItems(getStudentData());
-    }
-
+    /**
+     * gets the data for students.
+     *
+     * @return ObservableList<User>
+     */
     private ObservableList<User> getStudentData() {
         return allStudents;
     }
 
+    /**
+     * loads the cases TableView.
+     *
+     * @param allCases
+     */
     private void tableViewLoadCases(ObservableList<Case> allCases) {
         tvCases.setItems(getCaseData());
     }
 
+    /**
+     * Gets the data for case
+     *
+     * @return ObservableList<Case>
+     */
     private ObservableList<Case> getCaseData() {
         return allCases;
     }
 
+    /**
+     * loads the Citizens table view
+     *
+     * @param allCitizens
+     */
     private void tableViewLoadCitizens(ObservableList<Citizen> allCitizens) {
-        tvCurrentCitizens.setItems(getCitizenData());
+        tvCitizens.setItems(getCitizenData());
     }
 
+    /**
+     * Gets the data for citizens
+     *
+     * @return ObservableList<Citizen>
+     */
     private ObservableList<Citizen> getCitizenData() {
         return allCitizens;
     }
 
+    /**
+     * loads the CurrentCases tableview.
+     *
+     * @param allCurrentCases
+     */
     private void tableViewLoadCurrentCases(ObservableList<Case> allCurrentCases) {
         tvCurrentCases.setItems(getCurrentCasesData());
     }
 
+    /**
+     * Gets the data for the currentCases.
+     *
+     * @return ObservableList<Case>
+     */
     private ObservableList<Case> getCurrentCasesData() {
         return allCurrentCases;
     }
 
     /**
-     * loads the citizensOnCase tableview.
+     * loads the casesOnCitizen tableview.
      *
-     * @param
+     * @param allCasesOnCitizen
      */
     private void tableViewLoadCasesOnCitizen(ObservableList<Case> allCasesOnCitizen) {
-        tvCasesOnCitizens.setItems(getCasesOnCitizensData());
+        tvCasesOnCitizen.setItems(getCasesOnCitizenData());
     }
 
     /**
-     * Get the data for citizensOnCase
+     * Get the data for casesOnCitizens
      *
      * @return ObservableList<Citizen>
      */
-    private ObservableList<Case> getCasesOnCitizensData() {
-        return allCasesOnCitizens;
+    private ObservableList<Case> getCasesOnCitizenData() {
+        return allCasesOnCitizen;
     }
 
 
-    @FXML
-    private void onActionSaveCase() {
+    /**
+     * Method for showing the right anchorpane when opening the program, sets the main view visible and not relevant
+     * anchorpanes not visible
+     */
+    private void setAnchorPanesVisibility() {
+        labelInfoNewLine.setText("");
+        anchorPaneAdmin.setVisible(true);
+        anchorPaneCreateCitizen.setVisible(false);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCitizen.setVisible(false);
+        anchorPaneCase.setVisible(false);
+        anchorPaneCreateTeacher.setVisible(false);
     }
 
     @FXML
-    private void OnActionEditCase() {
+    private void btnClickCreateTeacher() {
+        labelTitle.setText("Lærere");
+        labelInfo.setText("Overblik over alle oprettede lærere, hvor du kan oprette nye lærere, redigere eller slette");
+        labelInfoNewLine.setText("");
+        anchorPaneCreateTeacher.setVisible(true);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCreateCitizen.setVisible(false);
+        anchorPaneAdmin.setVisible(false);
+        anchorPaneCitizen.setVisible(false);
+        anchorPaneCase.setVisible(false);
+    }
+
+    /**
+     * Loads the student overview anchorpane when clicked.
+     */
+    @FXML
+    private void btnClickStudent() {
+        labelTitle.setText("Elever");
+        labelInfo.setText("Overblik over alle oprettede elever");
+        labelInfoNewLine.setText("");
+        anchorPaneStudent.setVisible(true);
+        anchorPaneCreateCitizen.setVisible(false);
+        anchorPaneAdmin.setVisible(false);
+        anchorPaneCitizen.setVisible(false);
+        anchorPaneCase.setVisible(false);
+        anchorPaneCreateTeacher.setVisible(false);
+    }
+
+    /**
+     * Loads the cases overview anchorpane when clicked.
+     */
+    @FXML
+    private void btnClickCase() {
+        labelTitle.setText("Sager");
+        labelInfo.setText("Overblik over alle oprettede sager. Opret nye sager, eller og kopier sager");
+        labelInfoNewLine.setText("");
+        anchorPaneCase.setVisible(true);
+        anchorPaneCreateCitizen.setVisible(false);
+        anchorPaneAdmin.setVisible(false);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCitizen.setVisible(false);
+        anchorPaneCreateTeacher.setVisible(false);
     }
 
     @FXML
-    private void onActionDeleteCase() {
+    private void btnClickSeeCitizens() {
+        labelTitle.setText("Borgere");
+        labelInfo.setText("Overblik over alle oprettede borgere. Tildel en sag til en borger, se yderligere informationer,");
+        labelInfoNewLine.setText("rediger eller slet borger.");
+        anchorPaneCitizen.setVisible(true);
+        anchorPaneCreateCitizen.setVisible(false);
+        anchorPaneAdmin.setVisible(false);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCase.setVisible(false);
+        anchorPaneCreateTeacher.setVisible(false);
     }
 
     @FXML
-    private void OnActionCopyCase() {
+    private void btnClickCitizen() {
+        labelTitle.setText("Opret Borger");
+        labelInfo.setText("Oprettelses vindue til borger");
+        labelInfoNewLine.setText("");
+        anchorPaneCreateCitizen.setVisible(true);
+        anchorPaneAdmin.setVisible(false);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCase.setVisible(false);
+        anchorPaneCitizen.setVisible(false);
+        anchorPaneCreateTeacher.setVisible(false);
+    }
+
+    @FXML
+    private void btnClickHome() {
+        labelTitle.setText("Admin");
+        labelInfo.setText("Logget ind som Admin");
+        labelInfoNewLine.setText("");
+        anchorPaneAdmin.setVisible(true);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCase.setVisible(false);
+        anchorPaneCitizen.setVisible(false);
+        anchorPaneCreateCitizen.setVisible(false);
+        anchorPaneCreateTeacher.setVisible(false);
+    }
+
+    /**
+     * Action event for logout button, that gets the login view and loads that when pressed.
+     * Closes current stage
+     *
+     * @param
+     * @throws IOException
+     */
+    @FXML
+    private void btnClickLogout( ) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage switcher = (Stage) btnLogOut.getScene().getWindow();
+        switcher.setScene(scene);
+        switcher.setTitle("Lærer");
+        switcher.show();
+    }
+
+
+    /**
+     * Sets text labels with the user that has logged in.
+     *
+     * @param user
+     * @throws SQLException
+     * @throws IOException
+     */
+    @Override
+    public void setUser(User user) throws SQLException, IOException {
+        labelTitle.setText("Admin");
+        labelInfo.setText("Du er nu logget ind som admin: " + user.getFirstName() + user.getLastName());
+        labelInfoNewLine.setText("");
     }
 
     @FXML
@@ -432,18 +605,6 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
-    public void onActionEditTeacherCancel() {
-        reloadTeacherTable();
-        clearTeacherTxtField();
-        tvTeachers.getSelectionModel().clearSelection();
-        btnCopyTeacher.setDisable(false);
-        btnDeleteTeacher.setDisable(false);
-        btnEditTeacher.setDisable(false);
-        btnCreateTeacher.setVisible(true);
-        btnEditTeacherSave.setVisible(false);
-        btnEditTeacherCancel.setVisible(false);
-    }
-
     @FXML
     private void onActionDeleteTeacher() throws SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -462,6 +623,223 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    public void onActionCopyTeacher(ActionEvent actionEvent) {
+    }
+
+    public void onActionEditTeacherCancel(ActionEvent actionEvent) {
+    }
+
+    /**
+     * Makes you able to select a teacher from the table
+     *
+     * @param
+     */
+    private void selectedTeacher() {
+        this.tvTeachers.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((User) newValue != null) {
+                this.selectedTeacher = (User) newValue;
+            }
+        }));
+    }
+    public void setSelectedTeacher(User teacher) {
+        txtFieldTeacherID.setText(String.valueOf(teacher.getId()));
+        txtFieldTeacherFirstName.setText(teacher.getFirstName());
+        txtFieldTeacherLastName.setText(teacher.getLastName());
+        txtFieldTeacherUsername.setText(teacher.getUsername());
+        txtFieldTeacherPassword.setText(teacher.getPassword());
+    }
+    /**
+     * Reloads the teacher table
+     */
+    private void reloadTeacherTable() {
+        try {
+            int index = tvTeachers.getSelectionModel().getFocusedIndex();
+            this.tvTeachers.setItems(FXCollections.observableList(dataModelFacade.getTeachers()));
+            tvTeachers.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+    public void clearTeacherTxtField() {
+        txtFieldTeacherID.clear();
+        txtFieldTeacherFirstName.clear();
+        txtFieldTeacherLastName.clear();
+        txtFieldTeacherUsername.clear();
+        txtFieldTeacherPassword.clear();
+    }
+
+    /**
+     * Assigns case to citizen, with current case that is selected and citizen selected.
+     */
+    @FXML
+    private void btnHandleAssignCase() {
+        if (selectedCurrentCase != null && selectedCitizen != null) {
+            try {
+                dataModelFacade.assignCaseToCitizen(selectedCurrentCase.getId(), selectedCitizen.getId());
+                seeCasesOnCitizen();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Something went wrong");
+            //TODO add errorHandler
+        }
+    }
+
+    @FXML
+    private void onActionDeleteCaseFromCitizen() {
+        if (selectedCaseOnCitizen != null && selectedCitizen != null) {
+            try {
+                dataModelFacade.deleteCaseFromCitizen(selectedCaseOnCitizen.getId(), selectedCitizen.getId());
+                seeCasesOnCitizen();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Something went wrong");
+            //TODO add errorHandler
+        }
+    }
+
+    @FXML
+    private void btnHandleSaveCitizen() throws SQLException {
+        String firstName = txtFieldCitizenFirstName.getText();
+        String lastName = txtFieldCitizenLastName.getText();
+        String SSN = txtFieldCitizenSSN.getText();
+        String address = txtFieldCitizenAddress.getText();
+        String info = txtAreaCitizenGeneralInfo.getText();
+        String sex = null;
+        if (checkBoxMale.isSelected()) {
+            sex = "Male";
+        } else if (checkBoxFemale.isSelected()) {
+            sex = "Female";
+        } else if (checkBoxOther.isSelected()) {
+            sex = "Other";
+        }
+        dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex, info);
+    }
+
+    /**
+     * Action event for save student button. Gets the text from all the textFields and creates a new student when pressed.
+     *
+     * @throws SQLException
+     */
+    @FXML
+    private void btnHandleSaveStudent() throws SQLException {
+        if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
+            String firstName = txtFieldFirstName.getText();
+            String lastName = txtFieldLastName.getText();
+            String userName = txtFieldUsername.getText();
+            String password = txtFieldPassword.getText();
+
+            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT);
+            reloadStudentTable();
+            clearStudentTxtField();
+            tvStudent.getSelectionModel().clearSelection();
+        } else {
+            System.out.println("NOOO");
+        }
+    }
+
+    /**
+     * Action Event for the edit student button. Fills all textFields, with data from the selected student.
+     * Edits the student using the ID.
+     *
+     * @throws Exception
+     */
+    @FXML
+    private void btnHandleEditStudent() {
+        setSelectedStudent(selectedStudent);
+        btnEditStudent.setVisible(false);
+        btnEditSave.setVisible(true);
+        btnEditCancel.setVisible(true);
+        btnDeleteStudent.setVisible(false);
+        btnSaveStudent.setDisable(true);
+
+    }
+
+    @FXML
+    private void btnHandleEditSave() throws Exception {
+        if (this.selectedStudent != null) {
+            if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
+                int id = Integer.parseInt(txtFieldStudentID.getText());
+                String firstName = txtFieldFirstName.getText();
+                String lastName = txtFieldLastName.getText();
+                String userName = txtFieldUsername.getText();
+                String password = txtFieldPassword.getText();
+
+                User student = new User(id, firstName, lastName, userName, password, UserType.STUDENT);
+                dataModelFacade.editStudent(student);
+                reloadStudentTable();
+                clearStudentTxtField();
+                tvStudent.getSelectionModel().clearSelection();
+                btnSaveStudent.setDisable(false);
+                btnEditCancel.setVisible(false);
+                btnEditStudent.setVisible(true);
+                btnEditSave.setVisible(false);
+                btnDeleteStudent.setVisible(true);
+            } else {
+                System.out.println("Noo");
+            }
+        }
+    }
+
+    @FXML
+    private void btnHandleEditCancel() {
+        reloadStudentTable();
+        clearStudentTxtField();
+        tvStudent.getSelectionModel().clearSelection();
+        btnSaveStudent.setDisable(false);
+        btnEditStudent.setVisible(true);
+        btnDeleteStudent.setVisible(true);
+        btnEditSave.setVisible(false);
+        btnEditCancel.setVisible(false);
+    }
+
+    /**
+     * Clears all textfields in the student view
+     */
+    private void clearStudentTxtField() {
+        txtFieldStudentID.clear();
+        txtFieldFirstName.clear();
+        txtFieldLastName.clear();
+        txtFieldUsername.clear();
+        txtFieldPassword.clear();
+    }
+
+    /**
+     * Action event for button to delete selected student.
+     *
+     * @throws SQLException
+     */
+    @FXML
+    private void btnHandleDeleteStudent() throws SQLException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("WARNING MESSAGE");
+        alert.setHeaderText("Warning before you delete student");
+        alert.setContentText("Joe");
+        if (selectedStudent != null) {
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                selectedStudent();
+                dataModelFacade.deleteStudent(selectedStudent.getId(), UserType.STUDENT);
+                reloadStudentTable();
+            }
+        } else {
+            return;
+        }
+    }
+
+    /**
+     * Selects a student from the student tableView
+     */
+    private void selectedStudent() {
+        this.tvStudent.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((User) newValue != null) {
+                this.selectedStudent = (User) newValue;
+            }
+        }));
+    }
 
     /**
      * Selects a case from the currentCase tableView
@@ -472,33 +850,21 @@ public class AdminViewController implements Initializable, IController {
                 this.selectedCurrentCase = (Case) newValue;
             }
         }));
-
     }
 
-    /**
-     * Selects a citizen from the citizensOnCase tableview
-     */
-    private void selectedCaseOnCitizen() {
-        this.tvCasesOnCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((Case) newValue != null) {
-                this.selectedCaseOnCitizen = (Case) newValue;
-            }
-        }));
-
-    }
 
     /**
      * Selects a citizen from the citizens TableView
      */
     private void selectedCitizen() {
-        this.tvCurrentCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+        this.tvCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((Citizen) newValue != null) {
                 this.selectedCitizen = (Citizen) newValue;
                 seeCasesOnCitizen();
             }
         }));
 
-        this.tvCurrentCitizens.setOnMouseClicked(event -> {
+        this.tvCitizens.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && selectedCitizen != null) {
                 try {
                     FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
@@ -520,193 +886,16 @@ public class AdminViewController implements Initializable, IController {
     }
 
     /**
-     * Loads all data in tableview, from the selected current case ID.
-     */
-    public void seeCasesOnCitizen() {
-        //Initialize the citizens on cases table at citizen window
-        tcCaseOnCitizenID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tcCaseOnCitizenName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        tcCaseOnCitizenDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        tcCaseOnCitizenInfo.setCellValueFactory(new PropertyValueFactory<>("info"));
-        try {
-            allCasesOnCitizens = FXCollections.observableList(dataModelFacade.getCasesOnCitizen(selectedCitizen.getId()));
-            tableViewLoadCasesOnCitizen(allCasesOnCitizens);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    @FXML
-    private void onActionCopyTeacher() {
-    }
-
-    @FXML
-    private void onActionCreateCitizen() {
-    }
-
-    @FXML
-    private void onActionAssignCaseToCitizen() {
-        if (selectedCurrentCase != null && selectedCitizen != null) {
-            try {
-                dataModelFacade.assignCaseToCitizen(selectedCurrentCase.getId(), selectedCitizen.getId());
-                seeCasesOnCitizen();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Something went wrong");
-            //TODO add errorHandler
-        }
-    }
-
-    @FXML
-    private void onActionDeleteCaseFromCitizen() {
-        if (selectedCurrentCase != null && selectedCaseOnCitizen != null) {
-            try {
-                dataModelFacade.deleteCaseFromCitizen(selectedCaseOnCitizen.getId(), selectedCitizen.getId());
-                seeCasesOnCitizen();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Something went wrong");
-            //TODO add errorHandler
-        }
-    }
-
-    @FXML
-    private void onActionCreateStudent() throws SQLException {
-        if (!txtFieldStudentFirstName.getText().isEmpty() && !txtFieldStudentLastname.getText().isEmpty() && !txtFieldStudentUsername.getText().isEmpty() && !txtFieldStudentPassword.getText().isEmpty()) {
-            String firstName = txtFieldStudentFirstName.getText();
-            String lastName = txtFieldStudentLastname.getText();
-            String userName = txtFieldStudentUsername.getText();
-            String password = txtFieldStudentPassword.getText();
-
-            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT);
-            reloadStudentTable();
-        } else {
-            System.out.println("Something went wrong with creation");
-            //TODO make errorhandler
-        }
-    }
-
-    @FXML
-    private void onActionEditStudent()  {
-        setSelectedStudent(selectedStudent);
-        btnEditStudent.setVisible(false);
-        btnEditStudentSave.setVisible(true);
-        btnEditStudentCancel.setVisible(true);
-        btnDeleteStudent.setVisible(false);
-        btnCreateStudent.setDisable(true);
-    }
-
-    public void onActionEditStudentSave() throws Exception {
-        if (this.selectedStudent != null) {
-            if (!txtFieldStudentFirstName.getText().isEmpty() && !txtFieldStudentLastname.getText().isEmpty() && !txtFieldStudentFirstName.getText().isEmpty() && !txtFieldStudentPassword.getText().isEmpty()) {
-                int id = Integer.parseInt(txtFieldStudentID.getText());
-                String firstName = txtFieldStudentFirstName.getText();
-                String lastName = txtFieldStudentLastname.getText();
-                String userName = txtFieldStudentUsername.getText();
-                String password = txtFieldStudentPassword.getText();
-
-                User student = new User(id, firstName, lastName, userName, password, UserType.STUDENT);
-                dataModelFacade.editStudent(student);
-                reloadStudentTable();
-                clearStudentTxtField();
-                tvStudents.getSelectionModel().clearSelection();
-                btnEditStudent.setVisible(true);
-                btnEditStudentSave.setVisible(false);
-                btnEditStudentCancel.setVisible(false);
-                btnDeleteStudent.setVisible(true);
-                btnCreateStudent.setDisable(false);
-            } else {
-                System.out.println("Something went wrong");
-                //TODO make errorhandler
-            }
-        }
-    }
-
-    public void onActionEditStudentCancel() {
-        reloadStudentTable();
-        clearStudentTxtField();
-        tvStudents.getSelectionModel().clearSelection();
-        btnEditStudent.setVisible(true);
-        btnEditStudentSave.setVisible(false);
-        btnEditStudentCancel.setVisible(false);
-        btnDeleteStudent.setVisible(true);
-        btnCreateStudent.setDisable(false);
-    }
-
-    @FXML
-    private void onActionDeleteStudent() throws SQLException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("WARNING MESSAGE");
-        alert.setHeaderText("Warning before you delete student");
-        alert.setContentText("Joe");
-        if (selectedStudent != null) {
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                selectedStudent();
-                dataModelFacade.deleteStudent(selectedStudent.getId(), UserType.STUDENT);
-                reloadStudentTable();
-            }
-        } else {
-            return;
-        }
-    }
-
-    /**
-     * Makes you able to select a teacher from the table
+     * Sets the selected student
      *
-     * @param
+     * @param student
      */
-    private void selectedTeacher() {
-        this.tvTeachers.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((User) newValue != null) {
-                this.selectedTeacher = (User) newValue;
-            }
-        }));
-    }
-
-    /**
-     * Makes you able to select a student from the table
-     */
-    private void selectedStudent() {
-        this.tvStudents.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((User) newValue != null) {
-                this.selectedStudent = (User) newValue;
-            }
-        }));
-    }
-
-    public void setSelectedTeacher(User teacher) {
-        txtFieldTeacherID.setText(String.valueOf(teacher.getId()));
-        txtFieldTeacherFirstName.setText(teacher.getFirstName());
-        txtFieldTeacherLastName.setText(teacher.getLastName());
-        txtFieldTeacherUsername.setText(teacher.getUsername());
-        txtFieldTeacherPassword.setText(teacher.getPassword());
-    }
-
-    public void setSelectedStudent(User student) {
+    private void setSelectedStudent(User student) {
         txtFieldStudentID.setText(String.valueOf(student.getId()));
-        txtFieldStudentFirstName.setText(student.getFirstName());
-        txtFieldStudentLastname.setText(student.getLastName());
-        txtFieldStudentUsername.setText(student.getUsername());
-        txtFieldStudentPassword.setText(student.getPassword());
-    }
-
-    /**
-     * Reloads the teacher table
-     */
-    private void reloadTeacherTable() {
-        try {
-            int index = tvTeachers.getSelectionModel().getFocusedIndex();
-            this.tvTeachers.setItems(FXCollections.observableList(dataModelFacade.getTeachers()));
-            tvTeachers.getSelectionModel().select(index);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
+        txtFieldFirstName.setText(student.getFirstName());
+        txtFieldLastName.setText(student.getLastName());
+        txtFieldUsername.setText(student.getUsername());
+        txtFieldPassword.setText(student.getPassword());
     }
 
     /**
@@ -714,41 +903,88 @@ public class AdminViewController implements Initializable, IController {
      */
     private void reloadStudentTable() {
         try {
-            int index = tvStudents.getSelectionModel().getFocusedIndex();
-            this.tvStudents.setItems(FXCollections.observableList(dataModelFacade.getStudents()));
-            tvStudents.getSelectionModel().select(index);
+            int index = tvStudent.getSelectionModel().getFocusedIndex();
+            this.tvStudent.setItems(FXCollections.observableList(dataModelFacade.getStudents()));
+            tvStudent.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
 
-    public void clearTeacherTxtField() {
-        txtFieldTeacherID.clear();
-        txtFieldTeacherFirstName.clear();
-        txtFieldTeacherLastName.clear();
-        txtFieldTeacherUsername.clear();
-        txtFieldTeacherPassword.clear();
+
+    /**
+     * Loads all data in tableview, from the selected current case ID.
+     */
+    private void seeCasesOnCitizen() {
+        //Initialize the citizens on cases table at citizen window
+        tcCitizenOnCaseID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcCasesOnCitizenName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tcCasesOnCitizenDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        tcCasesOnCitizenInfo.setCellValueFactory(new PropertyValueFactory<>("info"));
+        try {
+            allCasesOnCitizen = FXCollections.observableList(dataModelFacade.getCasesOnCitizen(selectedCitizen.getId()));
+            tableViewLoadCasesOnCitizen(allCasesOnCitizen);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void clearStudentTxtField() {
-        txtFieldStudentID.clear();
-        txtFieldStudentFirstName.clear();
-        txtFieldStudentLastname.clear();
-        txtFieldStudentUsername.clear();
-        txtFieldStudentPassword.clear();
+    /**
+     * Makes you able to select a student from the table
+     */
+    private void selectedCase() {
+        this.tvCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((Case) newValue != null) {
+                this.selectedCase = (Case) newValue;
+            }
+        }));
     }
 
-    private void setAnchorPanesVisibility() {
-        labelInfoNewLine.setText("");
-        anchorPaneAdmin.setVisible(true);
-        anchorPaneCreateCitizen.setVisible(false);
-        anchorPaneStudent.setVisible(false);
-        anchorPaneCitizen.setVisible(false);
-        anchorPaneCase.setVisible(false);
-        anchorPaneCreateTeacher.setVisible(false);
+    private void selectedCaseOnCitizen() {
+        this.tvCasesOnCitizen.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((Case) newValue != null) {
+                this.selectedCaseOnCitizen = (Case) newValue;
+            }
+        }));
     }
+
+    /**
+     * Reloads the student table
+     */
+    private void reloadCaseTable() {
+        try {
+            int index = tvCases.getSelectionModel().getFocusedIndex();
+            this.tvCases.setItems(FXCollections.observableList(dataModelFacade.getCases()));
+            tvCases.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    private void reloadCurrentCasesTable() {
+        try {
+            int index = tvCurrentCases.getSelectionModel().getFocusedIndex();
+            this.tvCurrentCases.setItems(FXCollections.observableList(dataModelFacade.getCases()));
+            tvCurrentCases.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    /**
+     * Sets the selected event
+     *
+     * @param aCase
+     */
+    private void setSelectedCase(Case aCase) {
+        txtFieldCaseID.setText(String.valueOf(aCase.getId()));
+        txtFieldName.setText(aCase.getName());
+        txtAreaInfo.setText(aCase.getInfo());
+    }
+
 
     @FXML
+<<<<<<< Updated upstream
     private void btnClickCreateTeacher() {
         labelTitle.setText("Lærere");
         labelInfo.setText("Overblik over alle oprettede lærere, hvor du kan oprette nye lærere, redigere eller slette");
@@ -759,90 +995,126 @@ public class AdminViewController implements Initializable, IController {
         anchorPaneAdmin.setVisible(false);
         anchorPaneCitizen.setVisible(false);
         anchorPaneCase.setVisible(false);
+=======
+    private void btnHandleSaveCase() throws Exception {
+        if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
+            String name = txtFieldName.getText();
+            String area = txtAreaInfo.getText();
+            allCases.add(dataModelFacade.createCase(name, area));
+            assignDate();
+            reloadCaseTable();
+            reloadCurrentCasesTable();
+            txtFieldName.clear();
+            txtAreaInfo.clear();
+        } else {
+            System.out.println("NOOO");
+        }
+>>>>>>> Stashed changes
+    }
+
+    private void assignDate() throws Exception {
+        selectedCase = allCases.get(allCases.size() -1);
+        if (selectedCase != null) {
+            Date caseDate = new Date(System.currentTimeMillis());
+            String pattern = "dd/MM/yyyy  HH:mm:ss";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String date = simpleDateFormat.format(caseDate);
+            selectedCase.setDate(date);
+            dataModelFacade.editCase(selectedCase);
+        }
     }
 
     @FXML
-    private void btnClickStudent() {
-        labelTitle.setText("Elever");
-        labelInfo.setText("Overblik over alle oprettede elever");
-        labelInfoNewLine.setText("");
-        anchorPaneStudent.setVisible(true);
-        anchorPaneCreateCitizen.setVisible(false);
-        anchorPaneAdmin.setVisible(false);
-        anchorPaneCitizen.setVisible(false);
-        anchorPaneCase.setVisible(false);
-        anchorPaneCreateTeacher.setVisible(false);
+    private void btnHandleDeleteCase() throws Exception {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("WARNING MESSAGE");
+        alert.setHeaderText("Warning before you delete case");
+        alert.setContentText("Joe");
+        if (selectedCase != null) {
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                selectedCase();
+                dataModelFacade.deleteCase(selectedCase.getId());
+                reloadCaseTable();
+                reloadCurrentCasesTable();
+            }
+        } else {
+            return;
+        }
     }
 
     @FXML
-    private void btnClickCase() {
-        labelTitle.setText("Sager");
-        labelInfo.setText("Overblik over alle oprettede sager. Opret nye sager, eller og kopier sager");
-        labelInfoNewLine.setText("");
-        anchorPaneCase.setVisible(true);
-        anchorPaneCreateCitizen.setVisible(false);
-        anchorPaneAdmin.setVisible(false);
-        anchorPaneStudent.setVisible(false);
-        anchorPaneCitizen.setVisible(false);
-        anchorPaneCreateTeacher.setVisible(false);
+    private void btnHandleEditCase() {
+        setSelectedCase(selectedCase);
+        btnEditCase.setDisable(true);
+        btnCopyCase.setDisable(true);
+        btnSaveCase.setVisible(false);
+        btnDeleteCase.setVisible(false);
+        btnEditCaseSave.setVisible(true);
+        btnEditCaseCancel.setVisible(true);
     }
 
     @FXML
-    private void btnClickSeeCitizens() {
-        labelTitle.setText("Borgere");
-        labelInfo.setText("Overblik over alle oprettede borgere. Tildel en sag til en borger, se yderligere informationer,");
-        labelInfoNewLine.setText("rediger eller slet borger.");
-        anchorPaneCitizen.setVisible(true);
-        anchorPaneCreateCitizen.setVisible(false);
-        anchorPaneAdmin.setVisible(false);
-        anchorPaneStudent.setVisible(false);
-        anchorPaneCase.setVisible(false);
-        anchorPaneCreateTeacher.setVisible(false);
+    private void btnHandleEditCaseSave() throws Exception {
+        if (this.selectedCase != null) {
+            if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
+                int id = Integer.parseInt(txtFieldCaseID.getText());
+                String name = txtFieldName.getText();
+                String date = selectedCase.getDate();
+                String info = txtAreaInfo.getText();
+                Case aCase = new Case(id, name, date, info);
+                dataModelFacade.editCase(aCase);
+
+                reloadCaseTable();
+
+                txtFieldName.clear();
+                txtAreaInfo.clear();
+
+                setCaseBtnVisibility();
+            } else {
+                System.out.println("Something went wrong");
+            }
+        }
     }
 
     @FXML
-    private void btnClickCitizen() {
-        labelTitle.setText("Opret Borger");
-        labelInfo.setText("Oprettelses vindue til borger");
-        labelInfoNewLine.setText("");
-        anchorPaneCreateCitizen.setVisible(true);
-        anchorPaneAdmin.setVisible(false);
-        anchorPaneStudent.setVisible(false);
-        anchorPaneCase.setVisible(false);
-        anchorPaneCitizen.setVisible(false);
-        anchorPaneCreateTeacher.setVisible(false);
+    private void btnHandleEditCaseCancel() {
+        reloadCaseTable();
+        txtFieldName.clear();
+        txtAreaInfo.clear();
+        setCaseBtnVisibility();
     }
 
     @FXML
-    private void btnClickHome() {
-        labelTitle.setText("Admin");
-        labelInfo.setText("Logget ind som Admin");
-        labelInfoNewLine.setText("");
-        anchorPaneAdmin.setVisible(true);
-        anchorPaneStudent.setVisible(false);
-        anchorPaneCase.setVisible(false);
-        anchorPaneCitizen.setVisible(false);
-        anchorPaneCreateCitizen.setVisible(false);
-        anchorPaneCreateTeacher.setVisible(false);
+    private void btnHandleCopyCase() throws Exception {
+        if (this.selectedCase != null) {
+            txtFieldName.setText(selectedCase.getName());
+            txtAreaInfo.setText(selectedCase.getInfo());
+            setSelectedCase(selectedCase);
+            btnEditCase.setDisable(true);
+            btnCopyCase.setDisable(true);
+            btnSaveCase.setVisible(false);
+            btnDeleteCase.setVisible(false);
+            btnCopySave.setVisible(true);
+            btnEditCaseCancel.setVisible(true);
+        }
+
     }
 
-    @FXML
-    private void btnClickLogout() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
-        Scene scene = new Scene(loader.load());
-        Stage switcher = (Stage) btnLogOut.getScene().getWindow();
-        switcher.setScene(scene);
-        switcher.setTitle("Log In");
-        switcher.show();
+    public void btnHandleCopySave() throws Exception {
+        if (selectedCase != null){
+            btnHandleSaveCase();
+            setCaseBtnVisibility();
+        }
     }
 
-    @Override
-    public void setUser(User user) throws SQLException, IOException {
-        labelTitle.setText("Admin");
-        labelInfo.setText("Du er nu logget ind som Admin: " + user.getFirstName() + user.getLastName());
-        labelInfoNewLine.setText("");
+    public void setCaseBtnVisibility(){
+        btnEditCase.setDisable(false);
+        btnCopyCase.setDisable(false);
+        btnSaveCase.setVisible(true);
+        btnDeleteCase.setVisible(true);
+        btnEditCaseSave.setVisible(false);
+        btnEditCaseCancel.setVisible(false);
     }
-
-
 
 }

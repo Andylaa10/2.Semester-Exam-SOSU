@@ -57,12 +57,14 @@ public class TeacherViewController implements Initializable, IController {
     private AnchorPane anchorPaneCreateCitizen;
     @FXML
     private AnchorPane anchorPaneTeacher;
+    @FXML
+    private AnchorPane anchorPaneCase;
+    @FXML
+    private AnchorPane anchorPaneStudent;
 
     /**
      * Student pane
      */
-    @FXML
-    private AnchorPane anchorPaneStudent;
     @FXML
     private TableView<User> tvStudent;
     @FXML
@@ -97,8 +99,6 @@ public class TeacherViewController implements Initializable, IController {
     /**
      * CasePane
      */
-    @FXML
-    private AnchorPane anchorPaneCase;
     @FXML
     private TableView<Case> tvCases;
     @FXML
@@ -897,7 +897,7 @@ public class TeacherViewController implements Initializable, IController {
             setCaseBtnVisibility();
         }
     }
-    
+
     public void setCaseBtnVisibility(){
         btnEditCase.setDisable(false);
         btnCopyCase.setDisable(false);
