@@ -189,6 +189,7 @@ public class TeacherViewController implements Initializable, IController {
     private User selectedStudent;
     private Case selectedCase;
     private Citizen selectedCitizen;
+    private Citizen selectedCitizenOnCase;
     private Case selectedCurrentCase;
 
     private DataModelFacade dataModelFacade;
@@ -478,6 +479,22 @@ public class TeacherViewController implements Initializable, IController {
             //TODO add errorHandler
         }
     }
+
+    @FXML
+    private void onActionDeleteCaseFromCitizen() {
+        if (selectedCurrentCase != null && selectedCitizenOnCase != null) {
+            try {
+                dataModelFacade.deleteCaseFromCitizen(selectedCurrentCase.getId(), selectedCitizenOnCase.getId());
+                seeCasesOnCitizen();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Something went wrong");
+            //TODO add errorHandler
+        }
+    }
+
 
     public void btnHandleSaveCitizen() throws SQLException {
         String firstName = txtFieldCitizenFirstName.getText();

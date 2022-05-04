@@ -279,12 +279,12 @@
                </effect>
             </Button>
             <Label layoutX="337.0" layoutY="416.0" prefHeight="26.0" prefWidth="258.0" text="Dobbeltklik på borger for at se flere oplysninger" />
-            <TableView fx:id="tvCitizensOnCase" layoutX="14.0" layoutY="256.0" prefHeight="154.0" prefWidth="586.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvCasesOnCitizens" layoutX="14.0" layoutY="256.0" prefHeight="154.0" prefWidth="586.0" style="-fx-background-color: transparent;">
               <columns>
-                  <TableColumn fx:id="tcCitizenOnCaseID" prefWidth="190.0" text="ID" visible="false" />
-                <TableColumn fx:id="tcCitizenOnCaseFirstName" prefWidth="190.0" text="Fornavn" />
-                  <TableColumn fx:id="tcCitizenOnCaseLastName" prefWidth="190.0" text="Efternavn" />
-                  <TableColumn fx:id="tcCitizenOnCaseSSN" prefWidth="201.60009765625" text="CPR-Nummer" />
+                  <TableColumn fx:id="tcCaseOnCitizenID" prefWidth="190.0" text="ID" visible="false" />
+                <TableColumn fx:id="tcCaseOnCitizenName" prefWidth="190.0" text="Navn" />
+                  <TableColumn fx:id="tcCaseOnCitizenDate" prefWidth="190.0" text="Dato" />
+                  <TableColumn fx:id="tcCaseOnCitizenInfo" prefWidth="201.60009765625" text="Info" />
               </columns>
             </TableView>
             <Label layoutX="13.0" layoutY="229.0" text="Borgere tildelt den valgte sag">

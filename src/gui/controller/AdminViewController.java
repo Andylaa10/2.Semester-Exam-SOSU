@@ -108,15 +108,15 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private TableColumn<Case, String> tcCaseInfo;
     @FXML
-    private TableView<Citizen> tvCitizensOnCase;
+    private TableView<Case> tvCasesOnCitizens;
     @FXML
-    private TableColumn<Citizen, String> tcCitizenOnCaseID;
+    private TableColumn<Case, String> tcCaseOnCitizenID;
     @FXML
-    private TableColumn<Citizen, String> tcCitizenOnCaseFirstName;
+    private TableColumn<Case, String> tcCaseOnCitizenName;
     @FXML
-    private TableColumn<Citizen, String> tcCitizenOnCaseSSN;
+    private TableColumn<Case, String> tcCaseOnCitizenDate;
     @FXML
-    private TableColumn<Citizen, String> tcCitizenOnCaseLastName;
+    private TableColumn<Case, String> tcCaseOnCitizenInfo;
 
     @FXML
     private Button btnEditCase;
@@ -208,14 +208,13 @@ public class AdminViewController implements Initializable, IController {
     private AnchorPane anchorPaneCase;
 
     private ObservableList<User> allStudents = FXCollections.observableArrayList();
-    private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
-    private ObservableList<Citizen> allCitizensOnCase = FXCollections.observableArrayList();
-    private ObservableList<Case> allCases = FXCollections.observableArrayList();
-    private ObservableList<Case> allCurrentCases = FXCollections.observableArrayList();
     private ObservableList<User> allTeachers = FXCollections.observableArrayList();
 
-    Citizen temp;
-    Date lastClickTime;
+    private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
+
+    private ObservableList<Case> allCasesOnCitizens = FXCollections.observableArrayList();
+    private ObservableList<Case> allCases = FXCollections.observableArrayList();
+    private ObservableList<Case> allCurrentCases = FXCollections.observableArrayList();
 
     private DataModelFacade dataModelFacade;
 
@@ -224,12 +223,11 @@ public class AdminViewController implements Initializable, IController {
     private Case selectedCase;
     private Case selectedCurrentCase;
     private Citizen selectedCitizen;
-    private Citizen selectedCitizenOnCase;
+    private Case selectedCaseOnCitizen;
 
     public AdminViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -242,7 +240,7 @@ public class AdminViewController implements Initializable, IController {
         selectedTeacher();
         selectedStudent();
         selectedCurrentCase();
-        selectedCitizenOnCase();
+        selectedCaseOnCitizen();
         selectedCitizen();
     }
 
@@ -345,10 +343,10 @@ public class AdminViewController implements Initializable, IController {
     /**
      * loads the citizensOnCase tableview.
      *
-     * @param allCitizensOnCase
+     * @param
      */
-    private void tableViewLoadCitizensOnCase(ObservableList<Citizen> allCitizensOnCase) {
-        tvCitizensOnCase.setItems(getCitizensOnCaseData());
+    private void tableViewLoadCasesOnCitizen(ObservableList<Case> allCasesOnCitizen) {
+        tvCasesOnCitizens.setItems(getCasesOnCitizensData());
     }
 
     /**
@@ -356,8 +354,8 @@ public class AdminViewController implements Initializable, IController {
      *
      * @return ObservableList<Citizen>
      */
-    private ObservableList<Citizen> getCitizensOnCaseData() {
-        return allCitizensOnCase;
+    private ObservableList<Case> getCasesOnCitizensData() {
+        return allCasesOnCitizens;
     }
 
 
@@ -470,7 +468,6 @@ public class AdminViewController implements Initializable, IController {
         this.tvCurrentCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((Case) newValue != null) {
                 this.selectedCurrentCase = (Case) newValue;
-                seeCasesOnCitizen();
             }
         }));
 
@@ -479,10 +476,23 @@ public class AdminViewController implements Initializable, IController {
     /**
      * Selects a citizen from the citizensOnCase tableview
      */
-    private void selectedCitizenOnCase() {
-        this.tvCitizensOnCase.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+    private void selectedCaseOnCitizen() {
+        this.tvCasesOnCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((Case) newValue != null) {
+                this.selectedCaseOnCitizen = (Case) newValue;
+            }
+        }));
+
+    }
+
+    /**
+     * Selects a citizen from the citizens TableView
+     */
+    private void selectedCitizen() {
+        this.tvCurrentCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((Citizen) newValue != null) {
-                this.selectedCitizenOnCase = (Citizen) newValue;
+                this.selectedCitizen = (Citizen) newValue;
+                seeCasesOnCitizen();
             }
         }));
 
@@ -508,28 +518,17 @@ public class AdminViewController implements Initializable, IController {
     }
 
     /**
-     * Selects a citizen from the citizens TableView
-     */
-    private void selectedCitizen() {
-        this.tvCurrentCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((Citizen) newValue != null) {
-                this.selectedCitizen = (Citizen) newValue;
-            }
-        }));
-    }
-
-    /**
      * Loads all data in tableview, from the selected current case ID.
      */
     public void seeCasesOnCitizen() {
         //Initialize the citizens on cases table at citizen window
-        tcCitizenOnCaseID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tcCitizenOnCaseFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        tcCitizenOnCaseLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        tcCitizenOnCaseSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+        tcCaseOnCitizenID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcCaseOnCitizenName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tcCaseOnCitizenDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        tcCaseOnCitizenInfo.setCellValueFactory(new PropertyValueFactory<>("info"));
         try {
-            allCitizensOnCase = FXCollections.observableList(dataModelFacade.getCitizensOnCases(selectedCurrentCase.getId()));
-            tableViewLoadCitizensOnCase(allCitizensOnCase);
+            allCasesOnCitizens = FXCollections.observableList(dataModelFacade.getCasesOnCitizen(selectedCitizen.getId()));
+            tableViewLoadCasesOnCitizen(allCasesOnCitizens);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -561,9 +560,9 @@ public class AdminViewController implements Initializable, IController {
 
     @FXML
     private void onActionDeleteCaseFromCitizen() {
-        if (selectedCurrentCase != null && selectedCitizenOnCase != null) {
+        if (selectedCurrentCase != null && selectedCaseOnCitizen != null) {
             try {
-                dataModelFacade.deleteCaseFromCitizen(selectedCurrentCase.getId(), selectedCitizenOnCase.getId());
+                dataModelFacade.deleteCaseFromCitizen(selectedCaseOnCitizen.getId(), selectedCitizen.getId());
                 seeCasesOnCitizen();
             } catch (Exception e) {
                 e.printStackTrace();
