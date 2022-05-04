@@ -32,6 +32,8 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private Button btnFunctionalCondition;
     @FXML
+    private Button btnCitizenAssessment;
+    @FXML
     private Button btnHome;
     @FXML
     private Button btnCitizens;
@@ -59,6 +61,8 @@ public class StudentViewController implements IController, Initializable {
     private AnchorPane anchorPaneHealthConditions;
     @FXML
     private AnchorPane anchorPaneCitizens;
+    @FXML
+    private AnchorPane anchorPaneCitizenAssessment;
     @FXML
     private AnchorPane anchorPaneOBS;
     @FXML
@@ -90,6 +94,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalAbility.setVisible(false);
+        anchorPaneCitizenAssessment.setVisible(false);
     }
 
     @FXML
@@ -103,6 +108,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalAbility.setVisible(false);
+        anchorPaneCitizenAssessment.setVisible(false);
     }
 
     @FXML
@@ -116,6 +122,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalAbility.setVisible(false);
+        anchorPaneCitizenAssessment.setVisible(false);
     }
 
 
@@ -131,6 +138,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalAbility.setVisible(false);
+        anchorPaneCitizenAssessment.setVisible(false);
     }
 
     @FXML
@@ -145,6 +153,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(true);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalAbility.setVisible(false);
+        anchorPaneCitizenAssessment.setVisible(false);
 
     }
 
@@ -160,6 +169,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(true);
         anchorPaneFunctionalAbility.setVisible(false);
+        anchorPaneCitizenAssessment.setVisible(false);
     }
 
     @FXML
@@ -174,6 +184,22 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalAbility.setVisible(true);
+        anchorPaneCitizenAssessment.setVisible(false);
+    }
+
+    @FXML
+    private void btnClickCitizenAssessment(ActionEvent actionEvent) {
+        labelTitle.setText("Borgerens egen vurdering af funktionstilstand");
+        labelInfo.setText("Her er det muligt at rapportere på borgerens egen vurdering af sin funktionstilstand.");
+        labelInfoNewLine.setText("Der skal tages stilling til udførelse, betydningen af udførelse og borgerens ønsker og mål");
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCitizens.setVisible(false);
+        anchorPaneFS3.setVisible(true);
+        anchorPaneOBS.setVisible(false);
+        anchorPaneGeneralInformation.setVisible(false);
+        anchorPaneHealthConditions.setVisible(false);
+        anchorPaneFunctionalAbility.setVisible(false);
+        anchorPaneCitizenAssessment.setVisible(true);
     }
 
     @FXML
@@ -190,5 +216,4 @@ public class StudentViewController implements IController, Initializable {
         switcher.setTitle("Login");
         switcher.show();
     }
-
 }
