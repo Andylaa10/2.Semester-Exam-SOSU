@@ -1,8 +1,6 @@
 package gui.controller;
 
-import be.Case;
-import be.Citizen;
-import be.User;
+import be.*;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
@@ -23,7 +21,22 @@ import java.util.ResourceBundle;
 
 public class StudentViewController implements IController, Initializable {
 
+    //Health condition tables
+    @FXML
+    private TableView<HealthCondition> tvHealthConditions;
+    @FXML
+    private TableColumn<HealthCondition, Integer> tcHealthConditionID;
+    @FXML
+    private TableColumn<HealthCondition, String> tcHealthConditionName;
 
+    @FXML
+    private TableView<SubCategories> tvSubCategories;
+    @FXML
+    private TableColumn<SubCategories, Integer> tcSubCategoriesID;
+    @FXML
+    private TableColumn<SubCategories, String> tcSubCategoriesName;
+
+    //Cases table
     @FXML
     private TableView<Case> tvCases;
     @FXML
@@ -35,6 +48,7 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private TableColumn<Case, String> tcCaseInfo;
 
+    //Citizen Table
     @FXML
     private TableView<Citizen> tvCitizens;
     @FXML
@@ -50,10 +64,12 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private TableColumn<Citizen, String> tcCitizenSex;
 
+    //FS III comboBox
     @FXML
     private ComboBox<Citizen> comboBoxCitizen;
     @FXML
     private TextField txtFieldCitizenID;
+
     @FXML
     private Button btnGeneralInformation;
     @FXML
@@ -100,6 +116,10 @@ public class StudentViewController implements IController, Initializable {
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
 
+    private ObservableList<HealthCondition> healthConditions = FXCollections.observableArrayList();
+    private ObservableList<SubCategories> subCategories = FXCollections.observableArrayList();
+
+
     private Citizen selectedCitizen;
     private Citizen selectedCitizenOnComboBox;
 
@@ -135,6 +155,11 @@ public class StudentViewController implements IController, Initializable {
         } catch (Exception e) {
             throw new Exception();
         }
+
+        //Initialize the healthConditionsTable
+        tcHealthConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcHealthConditionName.setCellValueFactory(new PropertyValueFactory<>("healthConditionName"));
+        //TODO Need healthConditions and subcategories DAO
     }
 
     /**
@@ -154,6 +179,11 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
+    public void seeSubCategoriesOnCategory() {
+        //Initialize the subCategoriesTable
+
+    }
+
     public void initializeCitizenComboBox() throws SQLException {
         //Initialize the citizens in the dropdown menu
         allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
@@ -165,7 +195,6 @@ public class StudentViewController implements IController, Initializable {
     private void onActionComboClicked(ActionEvent actionEvent) {
         Citizen comboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
         txtFieldCitizenID.setText(String.valueOf(comboBox.getId()));
-
     }
 
     /**

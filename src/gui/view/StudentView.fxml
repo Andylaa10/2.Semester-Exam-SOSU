@@ -132,7 +132,7 @@
                         <ColorAdjust brightness="0.34" />
                      </effect>
                   </Button>
-                  <Button fx:id="btnHealthCondition" layoutX="229.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnClickHealthCondition" prefHeight="35.0" prefWidth="210.0" text="Helbredstilstande">
+                  <Button fx:id="btnHealthCondition" layoutX="228.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnClickHealthCondition" prefHeight="35.0" prefWidth="210.0" text="Helbredstilstande">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -239,16 +239,18 @@
                   <Button layoutX="931.0" layoutY="490.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Gem" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
+            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
                <children>
-                  <TableView layoutX="26.0" layoutY="89.0" prefHeight="423.0" prefWidth="302.0" style="-fx-background-color: transparent;">
+                  <TableView fx:id="tvHealthConditions" layoutX="26.0" layoutY="89.0" prefHeight="423.0" prefWidth="302.0" style="-fx-background-color: transparent;">
                     <columns>
-                      <TableColumn prefWidth="300.7999572753906" text="Helbreds Tilstande" />
+                      <TableColumn fx:id="tcHealthConditionID" prefWidth="300.7999572753906" text="ID" visible="false" />
+                        <TableColumn fx:id="tcHealthConditionName" prefWidth="300.7999572753906" text="Helbreds Tilstande" />
                     </columns>
                   </TableView>
-                  <TableView layoutX="355.0" layoutY="89.0" prefHeight="423.0" prefWidth="254.0" style="-fx-background-color: transparent;">
+                  <TableView fx:id="tvSubCategories" layoutX="355.0" layoutY="89.0" prefHeight="423.0" prefWidth="254.0" style="-fx-background-color: transparent;">
                      <columns>
-                        <TableColumn prefWidth="253.60001220703126" text="Underkategori(er)" />
+                        <TableColumn fx:id="tcSubCategoriesID" prefWidth="253.60001220703126" text="ID" visible="false" />
+                        <TableColumn fx:id="tcSubCategoriesName" prefWidth="253.60001220703126" text="Underkategori(er)" />
                      </columns>
                   </TableView>
                   <Label layoutX="316.0" layoutY="14.0" text="Borgerens Helbredstilstande - FSIII">

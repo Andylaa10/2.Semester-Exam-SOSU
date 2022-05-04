@@ -759,7 +759,6 @@ public class AdminViewController implements Initializable, IController {
         anchorPaneAdmin.setVisible(false);
         anchorPaneCitizen.setVisible(false);
         anchorPaneCase.setVisible(false);
-
     }
 
     @FXML
