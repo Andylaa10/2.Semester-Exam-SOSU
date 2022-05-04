@@ -362,7 +362,8 @@ public class TeacherViewController implements Initializable, IController {
     /**
      * Loads the student overview anchorpane when clicked.
      */
-    public void btnClickStudent() {
+    @FXML
+    private void btnClickStudent() {
         labelTitle.setText("Elever");
         labelInfo.setText("Overblik over alle oprettede elever");
         labelInfoNewLine.setText("");
@@ -376,7 +377,8 @@ public class TeacherViewController implements Initializable, IController {
     /**
      * Loads the cases overview anchorpane when clicked.
      */
-    public void btnClickCase() {
+    @FXML
+    private void btnClickCase() {
         labelTitle.setText("Sager");
         labelInfo.setText("Overblik over alle oprettede sager. Opret nye sager, eller og kopier sager");
         labelInfoNewLine.setText("");
@@ -390,7 +392,8 @@ public class TeacherViewController implements Initializable, IController {
     /**
      * Loads the citizen overview anchorpane when clicked.
      */
-    public void btnClickSeeCitizens() {
+    @FXML
+    private void btnClickSeeCitizens() {
         labelTitle.setText("Borgere");
         labelInfo.setText("Overblik over alle oprettede borgere. Tildel en sag til en borger, se yderligere informationer,");
         labelInfoNewLine.setText("rediger eller slet borger.");
@@ -404,7 +407,8 @@ public class TeacherViewController implements Initializable, IController {
     /**
      * Loads the create citizen anchorpane when clicked.
      */
-    public void btnClickCitizen() {
+    @FXML
+    private void btnClickCitizen() {
         labelTitle.setText("Opret Borger");
         labelInfo.setText("Oprettelses vindue til borger");
         labelInfoNewLine.setText("");
@@ -420,7 +424,8 @@ public class TeacherViewController implements Initializable, IController {
      *
      * @param
      */
-    public void btnClickHome( ) {
+    @FXML
+    private void btnClickHome( ) {
         labelTitle.setText("Lærer");
         labelInfo.setText("Logget ind som lærer");
         labelInfoNewLine.setText("");
@@ -438,7 +443,8 @@ public class TeacherViewController implements Initializable, IController {
      * @param
      * @throws IOException
      */
-    public void btnClickLogout( ) throws IOException {
+    @FXML
+    private void btnClickLogout( ) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
         Scene scene = new Scene(loader.load());
         Stage switcher = (Stage) btnLogOut.getScene().getWindow();
@@ -466,7 +472,8 @@ public class TeacherViewController implements Initializable, IController {
     /**
      * Assigns case to citizen, with current case that is selected and citizen selected.
      */
-    public void btnHandleAssignCase() {
+    @FXML
+    private void btnHandleAssignCase() {
         if (selectedCurrentCase != null && selectedCitizen != null) {
             try {
                 dataModelFacade.assignCaseToCitizen(selectedCurrentCase.getId(), selectedCitizen.getId());
@@ -495,8 +502,8 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
-
-    public void btnHandleSaveCitizen() throws SQLException {
+    @FXML
+    private void btnHandleSaveCitizen() throws SQLException {
         String firstName = txtFieldCitizenFirstName.getText();
         String lastName = txtFieldCitizenLastName.getText();
         String SSN = txtFieldCitizenSSN.getText();
@@ -514,11 +521,12 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     /**
-     * Action event for save student button. Gets the text from all the textfields and creates a new student when pressed.
+     * Action event for save student button. Gets the text from all the textFields and creates a new student when pressed.
      *
      * @throws SQLException
      */
-    public void btnHandleSaveStudent() throws SQLException {
+    @FXML
+    private void btnHandleSaveStudent() throws SQLException {
         if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
             String firstName = txtFieldFirstName.getText();
             String lastName = txtFieldLastName.getText();
@@ -535,13 +543,13 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     /**
-     * Action Event for the edit student button. Fills all textfields, with data from the selected student.
+     * Action Event for the edit student button. Fills all textFields, with data from the selected student.
      * Edits the student using the ID.
      *
      * @throws Exception
      */
-
-    public void btnHandleEditStudent() {
+    @FXML
+    private void btnHandleEditStudent() {
         setSelectedStudent(selectedStudent);
         btnEditStudent.setVisible(false);
         btnEditSave.setVisible(true);
@@ -551,7 +559,8 @@ public class TeacherViewController implements Initializable, IController {
 
     }
 
-    public void btnHandleEditSave() throws Exception {
+    @FXML
+    private void btnHandleEditSave() throws Exception {
         if (this.selectedStudent != null) {
             if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldStudentID.getText());
@@ -576,7 +585,8 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
-    public void btnHandleEditCancel() {
+    @FXML
+    private void btnHandleEditCancel() {
         reloadStudentTable();
         clearStudentTxtField();
         tvStudent.getSelectionModel().clearSelection();
@@ -590,7 +600,7 @@ public class TeacherViewController implements Initializable, IController {
     /**
      * Clears all textfields in the student view
      */
-    public void clearStudentTxtField() {
+    private void clearStudentTxtField() {
         txtFieldStudentID.clear();
         txtFieldFirstName.clear();
         txtFieldLastName.clear();
@@ -603,7 +613,8 @@ public class TeacherViewController implements Initializable, IController {
      *
      * @throws SQLException
      */
-    public void btnHandleDeleteStudent() throws SQLException {
+    @FXML
+    private void btnHandleDeleteStudent() throws SQLException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("WARNING MESSAGE");
         alert.setHeaderText("Warning before you delete student");
@@ -623,7 +634,7 @@ public class TeacherViewController implements Initializable, IController {
     /**
      * Selects a student from the student tableView
      */
-    public void selectedStudent() {
+    private void selectedStudent() {
         this.tvStudent.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((User) newValue != null) {
                 this.selectedStudent = (User) newValue;
@@ -680,7 +691,7 @@ public class TeacherViewController implements Initializable, IController {
      *
      * @param student
      */
-    public void setSelectedStudent(User student) {
+    private void setSelectedStudent(User student) {
         txtFieldStudentID.setText(String.valueOf(student.getId()));
         txtFieldFirstName.setText(student.getFirstName());
         txtFieldLastName.setText(student.getLastName());
@@ -705,7 +716,7 @@ public class TeacherViewController implements Initializable, IController {
     /**
      * Loads all data in tableview, from the selected current case ID.
      */
-    public void seeCasesOnCitizen() {
+    private void seeCasesOnCitizen() {
         //Initialize the citizens on cases table at citizen window
         tcCitizenOnCaseID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcCasesOnCitizenName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -756,7 +767,7 @@ public class TeacherViewController implements Initializable, IController {
      *
      * @param aCase
      */
-    public void setSelectedCase(Case aCase) {
+    private void setSelectedCase(Case aCase) {
         txtFieldCaseID.setText(String.valueOf(aCase.getId()));
         txtFieldName.setText(aCase.getName());
         txtAreaInfo.setText(aCase.getInfo());
@@ -764,7 +775,8 @@ public class TeacherViewController implements Initializable, IController {
 
 
     //TODO self selection inc
-    public void btnHandleSaveCase() throws Exception {
+    @FXML
+    private void btnHandleSaveCase() throws Exception {
         if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
             String name = txtFieldName.getText();
             String area = txtAreaInfo.getText();
@@ -778,7 +790,7 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
-    public void assignDate() throws Exception {
+    private void assignDate() throws Exception {
         selectedCase = allCases.get(allCases.size() -1);
         if (selectedCase != null) {
             Date caseDate = new Date(System.currentTimeMillis());
@@ -790,7 +802,8 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
-    public void btnHandleDeleteCase() throws Exception {
+    @FXML
+    private void btnHandleDeleteCase() throws Exception {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("WARNING MESSAGE");
         alert.setHeaderText("Warning before you delete case");
@@ -807,7 +820,8 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
-    public void btnHandleEditCase() {
+    @FXML
+    private void btnHandleEditCase() {
         setSelectedCase(selectedCase);
         btnEditCase.setDisable(true);
         btnCopyCase.setDisable(true);
@@ -817,8 +831,9 @@ public class TeacherViewController implements Initializable, IController {
         btnEditCaseCancel.setVisible(true);
     }
 
-    public void btnHandleEditCaseSave() throws Exception {
-        if(this.selectedCase != null) {
+    @FXML
+    private void btnHandleEditCaseSave() throws Exception {
+        if (this.selectedCase != null) {
             if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldCaseID.getText());
                 String name = txtFieldName.getText();
@@ -826,9 +841,12 @@ public class TeacherViewController implements Initializable, IController {
                 String info = txtAreaInfo.getText();
                 Case aCase = new Case(id, name, date, info);
                 dataModelFacade.editCase(aCase);
+
                 reloadCaseTable();
+
                 txtFieldName.clear();
                 txtAreaInfo.clear();
+
                 btnEditCase.setDisable(false);
                 btnCopyCase.setDisable(false);
                 btnSaveCase.setVisible(true);
@@ -836,12 +854,13 @@ public class TeacherViewController implements Initializable, IController {
                 btnEditCaseSave.setVisible(false);
                 btnEditCaseCancel.setVisible(false);
             } else {
-                System.out.println("NOOO");
+                System.out.println("Something went wrong");
             }
         }
     }
 
-    public void btnHandleEditCaseCancel() {
+    @FXML
+    private void btnHandleEditCaseCancel() {
         reloadCaseTable();
         txtFieldName.clear();
         txtAreaInfo.clear();
@@ -853,7 +872,8 @@ public class TeacherViewController implements Initializable, IController {
         btnEditCaseCancel.setVisible(false);
     }
 
-    public void btnHandleCopyCase() throws Exception {
+    @FXML
+    private void btnHandleCopyCase() throws Exception {
         btnHandleSaveCase();
     }
 }

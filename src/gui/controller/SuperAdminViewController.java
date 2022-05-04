@@ -158,7 +158,6 @@ public class SuperAdminViewController implements Initializable, IController {
         selectedAdminToAssign();
     }
 
-
     private void initializeTables() throws Exception {
         //Initialize the school table
         tcSchools.setCellValueFactory(new PropertyValueFactory<>("schoolName"));
@@ -226,7 +225,8 @@ public class SuperAdminViewController implements Initializable, IController {
         btnCreateSchool.setVisible(false);
     }
 
-    public void onActionEditSaveSchool(ActionEvent actionEvent) throws Exception {
+    @FXML
+    private void onActionEditSaveSchool() throws Exception {
         if (this.selectedSchool != null){
             if (!txtFieldSchoolName.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldSchoolID.getText());;
@@ -249,7 +249,8 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
-    public void onActionEditCancel() {
+    @FXML
+    private void onActionEditCancel() {
         reloadSchoolTable();
         clearSchoolTxtField();
         tvSchools.getSelectionModel().clearSelection();
@@ -431,12 +432,12 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
-    public void clearSchoolTxtField(){
+    private void clearSchoolTxtField(){
         txtFieldSchoolID.clear();
         txtFieldSchoolName.clear();
     }
 
-    public void clearAdminTxtField() {
+    private void clearAdminTxtField() {
         txtFieldAdminID.clear();
         txtFieldAdminFirstName.clear();
         txtFieldAdminLastName.clear();
@@ -444,7 +445,7 @@ public class SuperAdminViewController implements Initializable, IController {
         txtFieldAdminPassword.clear();
     }
 
-    public void setSelectedSchool(School school) {
+    private void setSelectedSchool(School school) {
         txtFieldSchoolID.setText(String.valueOf(school.getId()));
         txtFieldSchoolName.setText(school.getSchoolName());
     }
@@ -456,7 +457,6 @@ public class SuperAdminViewController implements Initializable, IController {
         txtFieldAdminUsername.setText(admin.getUsername());
         txtFieldAdminPassword.setText(admin.getPassword());
     }
-
 
     private void selectedSchool() {
         this.tvSchools.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
@@ -510,7 +510,7 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     @FXML
-    private void btnClickCreateschool() {
+    private void btnClickCreateSchool() {
         labelTitle.setText("Opret Skole");
         labelInfo.setText("Overblik over alle oprettede skoler, hvor du kan oprette nye skoler, redigere eller slette");
         labelInfoNewLine.setText("");

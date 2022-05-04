@@ -30,7 +30,7 @@
                   <Button fx:id="btnHome" layoutX="7.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnClickHome" prefHeight="133.0" prefWidth="172.0" style="-fx-background-color: transparent;" />
                </children>
             </Pane>
-            <Button fx:id="btnCreateSchoolOnAssignPane" mnemonicParsing="false" onAction="#btnClickCreateschool" prefHeight="42.0" prefWidth="218.0" text="Opret Skole" textFill="WHITE">
+            <Button fx:id="btnCreateSchoolOnAssignPane" mnemonicParsing="false" onAction="#btnClickCreateSchool" prefHeight="42.0" prefWidth="218.0" text="Opret Skole" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>

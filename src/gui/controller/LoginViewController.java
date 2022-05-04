@@ -31,7 +31,8 @@ public class LoginViewController {
         facade = new DataModelFacade();
     }
 
-    public void Login() throws IOException, SQLException {
+    @FXML
+    private void Login() throws IOException, SQLException {
         String username = txtFieldUsername.getText();
         String password = pField.getText();
         User user = facade.userLogin(username, password);
