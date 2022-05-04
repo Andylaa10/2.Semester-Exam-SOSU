@@ -721,23 +721,23 @@ public class TeacherViewController implements Initializable, IController {
             allCases.add(dataModelFacade.createCase(name, area));
             assignDate();
             reloadCaseTable();
+            txtFieldName.clear();
+            txtAreaInfo.clear();
         } else {
             System.out.println("NOOO");
         }
     }
 
     public void assignDate() throws Exception {
-        Case aCase = allCurrentCases.get(allCurrentCases.size() - 1);
-        if (aCase != null) {
+        selectedCase = allCases.get(allCases.size() -1);
+        if (selectedCase != null) {
             Date caseDate = new Date(System.currentTimeMillis());
             String pattern = "dd/MM/yyyy  HH:mm:ss";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             String date = simpleDateFormat.format(caseDate);
-            aCase.setDate(date);
-            dataModelFacade.editCase(aCase);
+            selectedCase.setDate(date);
+            dataModelFacade.editCase(selectedCase);
         }
-        txtFieldName.clear();
-        txtAreaInfo.clear();
     }
 
     public void btnHandleDeleteCase() throws Exception {
