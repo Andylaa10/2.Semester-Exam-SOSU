@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Admin.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminViewController">
+<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Admin.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminViewController">
    <children>
       <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: rgb(234, 131, 48);">
          <children>
@@ -204,6 +204,7 @@
             <TextField fx:id="txtFieldTeacherLastName" layoutX="378.0" layoutY="161.0" />
             <TextField fx:id="txtFieldTeacherUsername" layoutX="378.0" layoutY="194.0" />
             <TextField fx:id="txtFieldTeacherPassword" layoutX="378.0" layoutY="228.0" />
+            <TextField fx:id="txtFieldTeacherID" layoutX="453.0" layoutY="417.0" prefHeight="25.0" prefWidth="21.0" visible="false" />
             <Button fx:id="btnCreateTeacher" layoutX="399.0" layoutY="263.0" mnemonicParsing="false" onAction="#onActionCreateTeacher" prefHeight="26.0" prefWidth="107.0" text="Opret lærer">
                <effect>
                   <ColorAdjust brightness="0.2" />
@@ -224,13 +225,6 @@
                   <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
-            <Label layoutX="116.0" layoutY="14.0" text="Oprettede Lærere">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="538.0" layoutY="164.0" prefHeight="18.0" prefWidth="56.0" text="Efternavn" />
-            <TextField fx:id="txtFieldTeacherID" layoutX="453.0" layoutY="417.0" prefHeight="25.0" prefWidth="21.0" visible="false" />
             <Button fx:id="btnEditTeacherSave" layoutX="399.0" layoutY="263.0" mnemonicParsing="false" onAction="#onActionEditTeacherSave" prefHeight="26.0" prefWidth="107.0" text="Gem Ændringer" visible="false">
                <effect>
                   <ColorAdjust brightness="0.2" />
@@ -241,9 +235,15 @@
                   <ColorAdjust brightness="0.2" />
                </effect>
             </Button>
+            <Label layoutX="116.0" layoutY="14.0" text="Oprettede Lærere">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="538.0" layoutY="164.0" prefHeight="18.0" prefWidth="56.0" text="Efternavn" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <TableView fx:id="tvCurrentCases" layoutX="13.0" layoutY="22.0" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
                <columns>
@@ -319,7 +319,7 @@
                   <DropShadow height="2.5" radius="0.6949999999999998" width="2.28" />
                </effect>
             </TextField>
-            <TextArea fx:id="TxtAreaCaseInfo" layoutX="63.0" layoutY="163.0" prefHeight="235.0" prefWidth="232.0">
+            <TextArea fx:id="txtAreaCaseInfo" layoutX="63.0" layoutY="163.0" prefHeight="235.0" prefWidth="232.0">
                <effect>
                   <DropShadow height="1.0" radius="0.25" width="2.0" />
                </effect>
@@ -338,7 +338,6 @@
                <columns>
                   <TableColumn fx:id="tcCaseName" prefWidth="116.0" text="Navn" />
                   <TableColumn fx:id="tcCaseDate" prefWidth="132.79998779296875" text="Dato" />
-                  <TableColumn fx:id="tcCaseInfo" prefWidth="132.79998779296875" text="Info" visible="false" />
                </columns>
             </TableView>
             <Button fx:id="btnSaveCase" layoutX="63.0" layoutY="407.0" mnemonicParsing="false" onAction="#onActionSaveCase" prefHeight="26.0" prefWidth="232.0" text="Opret/Gem Sag">
@@ -412,7 +411,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0">
          <children>
             <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -435,7 +434,7 @@
                </font>
             </Label>
             <Label layoutX="20.0" layoutY="303.0" text="Information" />
-            <TextArea fx:id="txtAreaGenerelInformation" layoutX="106.0" layoutY="285.0" prefHeight="119.0" prefWidth="363.0" text="-Mestring: &#10;-Motivation:&#10;-Ressourcer:&#10;-Roller: &#10;-Vaner:&#10;-Uddannelse og Job:&#10;-Livs Historie: &#10;-Helbredsoplysninger:&#10;&#10;-Hjælpemidler:&#10;-Boligens indretning:&#10;-Netværk: " />
+            <TextArea fx:id="txtAreaGeneralInformation" layoutX="106.0" layoutY="285.0" prefHeight="119.0" prefWidth="363.0" text="-Mestring: &#10;-Motivation:&#10;-Ressourcer:&#10;-Roller: &#10;-Vaner:&#10;-Uddannelse og Job:&#10;-Livs Historie: &#10;-Helbredsoplysninger:&#10;&#10;-Hjælpemidler:&#10;-Boligens indretning:&#10;-Netværk: " />
             <Button fx:id="btnCreateCitizen" layoutX="106.0" layoutY="415.0" mnemonicParsing="false" onAction="#onActionCreateCitizen" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Borger">
                <effect>
                   <ColorAdjust brightness="0.2" />

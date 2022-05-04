@@ -8,7 +8,6 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,26 +18,52 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AdminViewController implements Initializable, IController {
 
-    public Button btnEditStudentSave;
-    public Button btnEditStudentCancel;
-    public Button btnEditTeacherSave;
-    public Button btnEditTeacherCancel;
+    /**
+     * Top Pane
+     */
+    @FXML
+    private Button btnCreateCitizen;
+    @FXML
+    private Button btnCreateTeacherPane;
+    @FXML
+    private Button btnStudentPane;
+    @FXML
+    private Button btnCasePane;
+    @FXML
+    private Button btnCitizensPane;
+    @FXML
+    private Button btnCreateCitizenPane;
+    @FXML
+    private Button btnHome;
+    @FXML
+    private Button btnLogOut;
+    @FXML
+    private Label labelTitle;
+    @FXML
+    private Label labelInfo;
+    @FXML
+    private Label labelInfoNewLine;
+    @FXML
+    private AnchorPane topPane;
+    @FXML
+    private AnchorPane anchorPaneAdmin;
+
+
+    /**
+     * Create teacher pane
+     */
+    @FXML
+    private AnchorPane anchorPaneCreateTeacher;
     @FXML
     private TableView<User> tvTeachers;
     @FXML
@@ -47,16 +72,43 @@ public class AdminViewController implements Initializable, IController {
     private TableColumn<User, String> tcTeacherLastName;
     @FXML
     private TableColumn<User, String> tcTeacherUserName;
+    @FXML
+    private Button btnCreateTeacher;
+    @FXML
+    private Button btnEditTeacher;
+    @FXML
+    private Button btnDeleteTeacher;
+    @FXML
+    private Button btnCopyTeacher;
+    @FXML
+    private Button btnEditTeacherSave;
+    @FXML
+    private Button btnEditTeacherCancel;
+    @FXML
+    private TextField txtFieldTeacherFirstName;
+    @FXML
+    private TextField txtFieldTeacherLastName;
+    @FXML
+    private TextField txtFieldTeacherUsername;
+    @FXML
+    private TextField txtFieldTeacherPassword;
+    @FXML
+    private TextField txtFieldTeacherID;
 
+
+    /**
+     * Citizen pane
+     */
     @FXML
     private TableView<Case> tvCurrentCases;
+    @FXML
+    private TableView<Citizen> tvCurrentCitizens;
+    @FXML
+    private TableView<Case> tvCasesOnCitizens;
     @FXML
     private TableColumn<Case, String> tcCurrentCaseName;
     @FXML
     private TableColumn<Case, String> tcCurrentCaseDate;
-
-    @FXML
-    private TableView<Citizen> tvCurrentCitizens;
     @FXML
     private TableColumn<Citizen, String> tcCurrentCitizenFirstName;
     @FXML
@@ -64,8 +116,49 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private TableColumn<Citizen, String> tcCurrentCitizenSSN;
     @FXML
+    private TableColumn<Case, String> tcCaseOnCitizenID;
+    @FXML
+    private TableColumn<Case, String> tcCaseOnCitizenName;
+    @FXML
+    private TableColumn<Case, String> tcCaseOnCitizenDate;
+    @FXML
+    private TableColumn<Case, String> tcCaseOnCitizenInfo;
+    @FXML
+    private Button btnDeleteCaseFromCitizen;
+    @FXML
     private Button btnAssignCaseToCitizen;
+    @FXML
+    private AnchorPane anchorPaneCitizen;
 
+    /**
+     * Case pane
+     */
+    @FXML
+    private TableView<Case> tvCases;
+    @FXML
+    private TableColumn<Case, String> tcCaseName;
+    @FXML
+    private TableColumn<Case, String> tcCaseDate;
+    @FXML
+    private Button btnSaveCase;
+    @FXML
+    private Button btnEditCase;
+    @FXML
+    private Button btnDeleteCase;
+    @FXML
+    private Button btnCopyCase;
+    @FXML
+    private TextField txtFieldCaseName;
+    @FXML
+    private TextField txtFieldCaseDate;
+    @FXML
+    private TextArea txtAreaCaseInfo;
+    @FXML
+    private AnchorPane anchorPaneCase;
+
+    /**
+     * Student pane
+     */
     @FXML
     private TableView<User> tvStudents;
     @FXML
@@ -90,70 +183,16 @@ public class AdminViewController implements Initializable, IController {
     private Button btnEditStudent;
     @FXML
     private Button btnDeleteStudent;
+    @FXML
+    private Button btnEditStudentSave;
+    @FXML
+    private Button btnEditStudentCancel;
+    @FXML
+    private AnchorPane anchorPaneStudent;
 
-    @FXML
-    private TextField txtFieldCaseName;
-    @FXML
-    private TextField txtFieldCaseDate;
-    @FXML
-    private TextArea TxtAreaCaseInfo;
-    @FXML
-    private Button btnSaveCase;
-    @FXML
-    private TableView<Case> tvCases;
-    @FXML
-    private TableColumn<Case, String> tcCaseName;
-    @FXML
-    private TableColumn<Case, String> tcCaseDate;
-    @FXML
-    private TableColumn<Case, String> tcCaseInfo;
-    @FXML
-    private TableView<Case> tvCasesOnCitizens;
-    @FXML
-    private TableColumn<Case, String> tcCaseOnCitizenID;
-    @FXML
-    private TableColumn<Case, String> tcCaseOnCitizenName;
-    @FXML
-    private TableColumn<Case, String> tcCaseOnCitizenDate;
-    @FXML
-    private TableColumn<Case, String> tcCaseOnCitizenInfo;
-
-    @FXML
-    private Button btnEditCase;
-    @FXML
-    private Button btnDeleteCase;
-    @FXML
-    private Button btnCopyCase;
-    @FXML
-    private Button btnCreateTeacherPane;
-    @FXML
-    private Button btnStudentPane;
-    @FXML
-    private Button btnCasePane;
-    @FXML
-    private Button btnCitizensPane;
-    @FXML
-    private Button btnCreateCitizenPane;
-
-    @FXML
-    private TextField txtFieldTeacherID;
-    @FXML
-    private TextField txtFieldTeacherFirstName;
-    @FXML
-    private TextField txtFieldTeacherLastName;
-    @FXML
-    private TextField txtFieldTeacherUsername;
-    @FXML
-    private TextField txtFieldTeacherPassword;
-
-
-    @FXML
-    private Button btnEditTeacher;
-    @FXML
-    private Button btnDeleteTeacher;
-    @FXML
-    private Button btnCopyTeacher;
-
+    /**
+     * Create Citizen Pane
+     */
     @FXML
     private TextField txtFieldCitizenFirstName;
     @FXML
@@ -163,55 +202,19 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private TextField txtFieldCitizenAddress;
     @FXML
-    private TextArea txtAreaGenerelInformation;
-
-    @FXML
     private CheckBox checkBoxMale;
     @FXML
     private CheckBox checkBoxFemale;
     @FXML
     private CheckBox checkBoxOther;
-
     @FXML
-    private AnchorPane topPane;
-    @FXML
-    private Button btnHome;
-    @FXML
-    private Button btnCreateTeacher;
-    @FXML
-    private Button btnStudent;
-    @FXML
-    private Button btnCase;
-    @FXML
-    private Button btnCitizens;
-    @FXML
-    private Button btnCreateCitizen;
-    @FXML
-    private Button btnLogOut;
-    @FXML
-    private Label labelTitle;
-    @FXML
-    private Label labelInfo;
-    @FXML
-    private Label labelInfoNewLine;
-    @FXML
-    private AnchorPane anchorPaneCreateTeacher;
-    @FXML
-    private AnchorPane anchorPaneAdmin;
-    @FXML
-    private AnchorPane anchorPaneCitizen;
+    private TextArea txtAreaGeneralInformation;
     @FXML
     private AnchorPane anchorPaneCreateCitizen;
-    @FXML
-    private AnchorPane anchorPaneStudent;
-    @FXML
-    private AnchorPane anchorPaneCase;
 
     private ObservableList<User> allStudents = FXCollections.observableArrayList();
     private ObservableList<User> allTeachers = FXCollections.observableArrayList();
-
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
-
     private ObservableList<Case> allCasesOnCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCases = FXCollections.observableArrayList();
     private ObservableList<Case> allCurrentCases = FXCollections.observableArrayList();
@@ -220,7 +223,6 @@ public class AdminViewController implements Initializable, IController {
 
     private User selectedTeacher;
     private User selectedStudent;
-    private Case selectedCase;
     private Case selectedCurrentCase;
     private Citizen selectedCitizen;
     private Case selectedCaseOnCitizen;
@@ -577,7 +579,7 @@ public class AdminViewController implements Initializable, IController {
     private void onActionCreateStudent() throws SQLException {
         if (!txtFieldStudentFirstName.getText().isEmpty() && !txtFieldStudentLastname.getText().isEmpty() && !txtFieldStudentUsername.getText().isEmpty() && !txtFieldStudentPassword.getText().isEmpty()) {
             String firstName = txtFieldStudentFirstName.getText();
-            String lastName = txtFieldTeacherLastName.getText();
+            String lastName = txtFieldStudentLastname.getText();
             String userName = txtFieldStudentUsername.getText();
             String password = txtFieldStudentPassword.getText();
 
