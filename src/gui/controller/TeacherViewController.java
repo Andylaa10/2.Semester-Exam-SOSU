@@ -157,6 +157,8 @@ public class TeacherViewController implements Initializable, IController {
     private TableColumn<Case, String> tcCasesOnCitizenInfo;
     @FXML
     private Button btnAssignCase;
+    @FXML
+    private Button btnCopySave;
 
     /**
      * Create Citizen Pane
@@ -784,7 +786,6 @@ public class TeacherViewController implements Initializable, IController {
     }
 
 
-    //TODO self selection inc
     @FXML
     private void btnHandleSaveCase() throws Exception {
         if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
@@ -859,12 +860,7 @@ public class TeacherViewController implements Initializable, IController {
                 txtFieldName.clear();
                 txtAreaInfo.clear();
 
-                btnEditCase.setDisable(false);
-                btnCopyCase.setDisable(false);
-                btnSaveCase.setVisible(true);
-                btnDeleteCase.setVisible(true);
-                btnEditCaseSave.setVisible(false);
-                btnEditCaseCancel.setVisible(false);
+                setCaseBtnVisibility();
             } else {
                 System.out.println("Something went wrong");
             }
@@ -876,16 +872,38 @@ public class TeacherViewController implements Initializable, IController {
         reloadCaseTable();
         txtFieldName.clear();
         txtAreaInfo.clear();
+        setCaseBtnVisibility();
+    }
+
+    @FXML
+    private void btnHandleCopyCase() throws Exception {
+        if (this.selectedCase != null) {
+            txtFieldName.setText(selectedCase.getName());
+            txtAreaInfo.setText(selectedCase.getInfo());
+            setSelectedCase(selectedCase);
+            btnEditCase.setDisable(true);
+            btnCopyCase.setDisable(true);
+            btnSaveCase.setVisible(false);
+            btnDeleteCase.setVisible(false);
+            btnCopySave.setVisible(true);
+            btnEditCaseCancel.setVisible(true);
+        }
+
+    }
+
+    public void btnHandleCopySave() throws Exception {
+        if (selectedCase != null){
+            btnHandleSaveCase();
+            setCaseBtnVisibility();
+        }
+    }
+    
+    public void setCaseBtnVisibility(){
         btnEditCase.setDisable(false);
         btnCopyCase.setDisable(false);
         btnSaveCase.setVisible(true);
         btnDeleteCase.setVisible(true);
         btnEditCaseSave.setVisible(false);
         btnEditCaseCancel.setVisible(false);
-    }
-
-    @FXML
-    private void btnHandleCopyCase() throws Exception {
-        btnHandleSaveCase();
     }
 }

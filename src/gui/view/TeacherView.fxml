@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Teacher.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TeacherViewController">
+<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Teacher.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TeacherViewController">
    <children>
       <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: #044d39;">
          <children>
@@ -156,7 +156,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <TableView fx:id="tvCurrentCases" layoutX="13.0" layoutY="23.0" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
               <columns>
@@ -306,7 +306,7 @@
             <TextField fx:id="txtFieldStudentID" layoutY="394.0" prefHeight="26.0" prefWidth="12.0" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Label layoutX="111.0" layoutY="22.0" text="Opret ny sag" textFill="#1d5e3f">
                <font>
@@ -343,10 +343,6 @@
                   <TableColumn fx:id="tcCasesInfo" prefWidth="132.79998779296875" text="Info" visible="false" />
               </columns>
             </TableView>
-            <Button fx:id="btnSaveCase" layoutX="63.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleSaveCase" prefHeight="26.0" prefWidth="232.0" text="Opret Sag">
-               <effect>
-                  <ColorAdjust brightness="0.3" />
-               </effect></Button>
             <Label layoutX="354.0" layoutY="22.0" text="Nuværende Sager" textFill="#1d5e3f">
                <font>
                   <Font size="24.0" />
@@ -355,6 +351,10 @@
                   <Bloom threshold="0.36" />
                </effect>
             </Label>
+            <Button fx:id="btnSaveCase" layoutX="63.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleSaveCase" prefHeight="26.0" prefWidth="232.0" text="Opret Sag">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect></Button>
             <Button fx:id="btnEditCase" layoutX="325.0" layoutY="369.0" mnemonicParsing="false" onAction="#btnHandleEditCase" prefHeight="26.0" prefWidth="117.0" text="Rediger Sag">
                <effect>
                   <ColorAdjust brightness="0.3" />
@@ -377,6 +377,7 @@
                   <ColorAdjust brightness="0.3" />
                </effect>
             </Button>
+            <Button fx:id="btnCopySave" layoutX="63.0" layoutY="406.0" mnemonicParsing="false" onAction="#btnHandleCopySave" prefHeight="26.0" prefWidth="232.0" text="Opret Kopi " visible="false" />
             <TextField fx:id="txtFieldCaseID" layoutX="21.0" layoutY="156.0" prefHeight="26.0" prefWidth="21.0" visible="false" />
          </children>
       </AnchorPane>
