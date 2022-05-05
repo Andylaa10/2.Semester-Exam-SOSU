@@ -241,4 +241,22 @@ public class GeneralInformation {
     public void setHomeLayout(String homeLayout) {
         this.homeLayout = homeLayout;
     }
+
+    @Override
+    public String toString() {
+        return "GeneralInformation{" +
+                "id=" + id +
+                ", coping='" + coping + '\'' +
+                ", motivation='" + motivation + '\'' +
+                ", resources='" + resources + '\'' +
+                ", roles='" + roles + '\'' +
+                ", habits='" + habits + '\'' +
+                ", educationAndJob='" + educationAndJob + '\'' +
+                ", lifeStory='" + lifeStory + '\'' +
+                ", network='" + network + '\'' +
+                ", healthInformation='" + healthInformation + '\'' +
+                ", equipmentAids='" + equipmentAids + '\'' +
+                ", homeLayout='" + homeLayout + '\'' +
+                '}';
+    }
 }

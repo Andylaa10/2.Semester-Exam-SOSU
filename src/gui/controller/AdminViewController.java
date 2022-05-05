@@ -778,7 +778,7 @@ public class AdminViewController implements Initializable, IController {
         txtFieldCitizenAddress.clear();
 
     }
-    
+
     /**
      * Reloads the createdCitizens table
      */

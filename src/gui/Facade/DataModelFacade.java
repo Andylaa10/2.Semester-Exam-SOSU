@@ -15,6 +15,7 @@ public class DataModelFacade {
     private SuperAdminModel superAdminModel;
     private CaseModel caseModel;
     private HealthConditionsModel healthConditionsModel;
+    private GeneralInformationModel generalInformationModel;
 
     public DataModelFacade() throws IOException {
         citizenModel = new CitizenModel();
@@ -22,6 +23,7 @@ public class DataModelFacade {
         superAdminModel = new SuperAdminModel();
         caseModel = new CaseModel();
         healthConditionsModel = new HealthConditionsModel();
+        generalInformationModel = new GeneralInformationModel();
     }
 
     /**
@@ -340,6 +342,58 @@ public class DataModelFacade {
         superAdminModel.addAdminToSchool(loginId, schoolId);
     }
 
+
+    /**
+     * Get a list of generalInformation using the getgeneralInformations method from generalInformationManager
+     * @return
+     * @throws SQLException
+     */
+    public List<GeneralInformation> getGeneralInformation() throws SQLException {
+        return generalInformationModel.getGeneralInformation();
+    }
+
+
+    /**
+     * Creates  generalInformation using the createGeneralInformation method from generalInformationManager
+     * @param coping
+     * @param motivation
+     * @param resources
+     * @param roles
+     * @param habits
+     * @param educationAndJob
+     * @param lifestory
+     * @param network
+     * @param healthInformation
+     * @param equipmentAids
+     * @param homeLayout
+     * @return
+     * @throws SQLException
+     */
+    public GeneralInformation createGeneralInformation(String coping, String motivation, String resources, String roles,
+                                                       String habits, String educationAndJob, String lifestory,
+                                                       String network, String healthInformation, String equipmentAids,
+                                                       String homeLayout) throws SQLException {
+        return generalInformationModel.createGeneralInformation(coping, motivation, resources, roles, habits,
+                educationAndJob, lifestory, network, healthInformation, equipmentAids, homeLayout);
+    }
+
+    /**
+     * Deletes generalInformation using the deleteGeneralInformation method from generalInformationManager
+     * @param id
+     * @throws Exception
+     */
+    public void deleteGeneralInformation(int id) throws Exception {
+        generalInformationModel.deleteGeneralInformation(id);
+    }
+
+    /**
+     * Edits generalInformation using the editGeneralInformation method in generalInformationManager
+     * @param generalInformation
+     * @throws Exception
+     */
+    public void editGeneralInformation(GeneralInformation generalInformation) throws Exception {
+        generalInformationModel.editGeneralInformation(generalInformation);
+    }
 
 
 }
