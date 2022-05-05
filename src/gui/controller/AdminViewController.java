@@ -1233,4 +1233,7 @@ public class AdminViewController implements Initializable, IController {
         btnEditCaseSave.setVisible(false);
         btnEditCaseCancel.setVisible(false);
     }
+
+    public void btnHandle(ActionEvent actionEvent) {
+    }
 }

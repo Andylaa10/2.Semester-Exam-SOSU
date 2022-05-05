@@ -60,7 +60,6 @@ public class CitizenDAO {
      * @return
      * @throws SQLException
      */
-    //TODO GeneralInfo
     public Citizen createCitizen(String firstName, String lastName, String SSN, String address, String sex) throws SQLException {
         try (Connection connection = connector.getConnection()) {
             String sql = "INSERT INTO Citizen (firstName, lastName , SSN, address, sex) VALUES (?,?,?,?,?);";

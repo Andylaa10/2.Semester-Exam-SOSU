@@ -17,7 +17,7 @@ public class GeneralInformationDAO {
     }
 
     public GeneralInformation createGeneralInformation(String coping, String motivation, String resources, String roles,
-                                                       String habits, String educationAndJob, String lifestory,
+                                                       String habits, String educationAndJob, String lifeStory,
                                                        String network, String healthInformation, String equipmentAids,
                                                        String homeLayout) throws SQLException {
 
@@ -31,7 +31,7 @@ public class GeneralInformationDAO {
                 preparedStatement.setString(4, roles);
                 preparedStatement.setString(5, habits);
                 preparedStatement.setString(6, educationAndJob);
-                preparedStatement.setString(7, lifestory);
+                preparedStatement.setString(7, lifeStory);
                 preparedStatement.setString(8, network);
                 preparedStatement.setString(9, healthInformation);
                 preparedStatement.setString(10, equipmentAids);
@@ -44,7 +44,7 @@ public class GeneralInformationDAO {
                 }
 
                 GeneralInformation generalInformation = new GeneralInformation(id, coping, motivation, resources,
-                        roles, habits, educationAndJob, lifestory, network, healthInformation, equipmentAids,
+                        roles, habits, educationAndJob, lifeStory, network, healthInformation, equipmentAids,
                         homeLayout);
                 return generalInformation;
             }
