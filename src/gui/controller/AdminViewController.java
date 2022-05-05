@@ -219,11 +219,11 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private TextArea txtAreaCitizenGeneralInfo;
     @FXML
-    private CheckBox checkBoxMale;
+    private RadioButton radioMale;
     @FXML
-    private CheckBox checkBoxFemale;
+    private RadioButton radioFemale;
     @FXML
-    private CheckBox checkBoxOther;
+    private RadioButton radioOther;
 
     private ObservableList<User> allStudents = FXCollections.observableArrayList();
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
@@ -247,6 +247,7 @@ public class AdminViewController implements Initializable, IController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setToggleGroup();
         setAnchorPanesVisibility();
         initializeTable();
         setAnchorPanesVisibility();
@@ -311,6 +312,13 @@ public class AdminViewController implements Initializable, IController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setToggleGroup(){
+        ToggleGroup group = new ToggleGroup();
+        radioMale.setToggleGroup(group);
+        radioFemale.setToggleGroup(group);
+        radioOther.setToggleGroup(group);
     }
 
     /**
@@ -707,16 +715,24 @@ public class AdminViewController implements Initializable, IController {
         String lastName = txtFieldCitizenLastName.getText();
         String SSN = txtFieldCitizenSSN.getText();
         String address = txtFieldCitizenAddress.getText();
-        String info = txtAreaCitizenGeneralInfo.getText();
         String sex = null;
-        if (checkBoxMale.isSelected()) {
+        if (radioMale.isSelected()) {
             sex = "Male";
-        } else if (checkBoxFemale.isSelected()) {
+        } else if (radioFemale.isSelected()) {
             sex = "Female";
-        } else if (checkBoxOther.isSelected()) {
+        } else if (radioOther.isSelected()) {
             sex = "Other";
         }
         dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex);
+        clearTextFieldCreate();
+    }
+
+    public void clearTextFieldCreate(){
+        txtFieldCitizenFirstName.clear();
+        txtFieldCitizenLastName.clear();
+        txtFieldCitizenSSN.clear();
+        txtFieldCitizenAddress.clear();
+
     }
 
     /**
