@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Admin.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminViewController">
+<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Admin.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AdminViewController">
    <children>
       <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: rgb(234, 131, 48);">
          <children>
@@ -206,32 +206,32 @@
             <TextField fx:id="txtFieldTeacherID" layoutX="453.0" layoutY="417.0" prefHeight="25.0" prefWidth="21.0" visible="false" />
             <Button fx:id="btnCreateTeacher" layoutX="399.0" layoutY="263.0" mnemonicParsing="false" onAction="#onActionCreateTeacher" prefHeight="26.0" prefWidth="107.0" text="Opret lærer">
                <effect>
-                  <ColorAdjust brightness="0.2" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Button fx:id="btnEditTeacher" layoutX="14.0" layoutY="416.0" mnemonicParsing="false" onAction="#onActionEditTeacher" prefHeight="26.0" prefWidth="107.0" text="Rediger Lærer">
                <effect>
-                  <ColorAdjust brightness="0.2" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Button fx:id="btnDeleteTeacher" layoutX="133.0" layoutY="416.0" mnemonicParsing="false" onAction="#onActionDeleteTeacher" prefHeight="26.0" prefWidth="107.0" text="Slet lærer">
                <effect>
-                  <ColorAdjust brightness="0.2" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Button fx:id="btnCopyTeacher" layoutX="251.0" layoutY="416.0" mnemonicParsing="false" onAction="#onActionCopyTeacher" prefHeight="26.0" prefWidth="107.0" text="Kopier Lærer">
                <effect>
-                  <ColorAdjust brightness="0.2" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Button fx:id="btnEditTeacherSave" layoutX="399.0" layoutY="263.0" mnemonicParsing="false" onAction="#onActionEditTeacherSave" prefHeight="26.0" prefWidth="107.0" text="Gem Ændringer" visible="false">
                <effect>
-                  <ColorAdjust brightness="0.2" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Button fx:id="btnEditTeacherCancel" layoutX="399.0" layoutY="299.0" mnemonicParsing="false" onAction="#onActionEditTeacherCancel" prefHeight="26.0" prefWidth="107.0" text="Annuller" visible="false">
                <effect>
-                  <ColorAdjust brightness="0.2" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Label layoutX="116.0" layoutY="14.0" text="Oprettede Lærere">
@@ -257,24 +257,24 @@
             <TextField fx:id="txtFieldPassword" layoutX="456.0" layoutY="367.0" prefHeight="26.0" prefWidth="140.0" promptText="Password" />
             <Button fx:id="btnSaveStudent" layoutX="14.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleSaveStudent" prefHeight="26.0" prefWidth="180.0" text="Opret Elev">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect></Button>
             <Button fx:id="btnEditStudent" layoutX="216.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleEditStudent" prefHeight="26.0" prefWidth="180.0" text="Rediger Elev">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect></Button>
             <Button fx:id="btnEditSave" layoutX="215.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleEditSave" prefHeight="26.0" prefWidth="180.0" text="Gem Redigering" visible="false">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Button fx:id="btnDeleteStudent" layoutX="416.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleDeleteStudent" prefHeight="26.0" prefWidth="180.0" text="Slet Elev">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect></Button>
             <Button fx:id="btnEditCancel" layoutX="416.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleEditCancel" prefHeight="26.0" prefWidth="180.0" text="Annuller" visible="false">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <TextField fx:id="txtFieldStudentID" layoutY="394.0" prefHeight="26.0" prefWidth="12.0" visible="false" />
@@ -327,35 +327,38 @@
             </Label>
             <Button fx:id="btnSaveCase" layoutX="63.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleSaveCase" prefHeight="26.0" prefWidth="232.0" text="Opret Sag">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Button fx:id="btnEditCase" layoutX="325.0" layoutY="369.0" mnemonicParsing="false" onAction="#btnHandleEditCase" prefHeight="26.0" prefWidth="117.0" text="Rediger Sag">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Button fx:id="btnDeleteCase" layoutX="456.0" layoutY="368.0" mnemonicParsing="false" onAction="#btnHandleDeleteCase" prefHeight="26.0" prefWidth="118.0" text="Slet Sag">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Button fx:id="btnCopyCase" layoutX="325.0" layoutY="405.0" mnemonicParsing="false" onAction="#btnHandleCopyCase" prefHeight="26.0" prefWidth="250.0" text="Kopier Sag">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Button fx:id="btnEditCaseSave" layoutX="63.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleEditCaseSave" prefHeight="26.0" prefWidth="232.0" text="Gem Ændringer" visible="false">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Button fx:id="btnEditCaseCancel" layoutX="456.0" layoutY="368.0" mnemonicParsing="false" onAction="#btnHandleEditCaseCancel" prefHeight="26.0" prefWidth="118.0" text="Annuller" visible="false">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
-            <Button fx:id="btnCopySave" layoutX="63.0" layoutY="406.0" mnemonicParsing="false" onAction="#btnHandleCopySave" prefHeight="26.0" prefWidth="232.0" text="Opret Kopi " visible="false" />
+            <Button fx:id="btnCopySave" layoutX="63.0" layoutY="406.0" mnemonicParsing="false" onAction="#btnHandleCopySave" prefHeight="26.0" prefWidth="232.0" text="Opret Kopi " visible="false">
+               <effect>
+                  <ColorAdjust brightness="0.1" />
+               </effect></Button>
             <TextField fx:id="txtFieldCaseID" layoutX="21.0" layoutY="156.0" prefHeight="26.0" prefWidth="21.0" visible="false" />
          </children>
       </AnchorPane>
@@ -388,12 +391,12 @@
             </Label>
             <Button fx:id="btnAssignCase" layoutX="14.0" layoutY="416.0" mnemonicParsing="false" onAction="#btnHandleAssignCase" prefHeight="26.0" prefWidth="137.0" text="Tildel Sag til Borger">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Button fx:id="btnDeleteCaseFromCitizen" layoutX="158.0" layoutY="416.0" mnemonicParsing="false" onAction="#onActionDeleteCaseFromCitizen" prefHeight="26.0" prefWidth="137.0" text="Fjern Sag fra Borger">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Label layoutX="337.0" layoutY="416.0" prefHeight="26.0" prefWidth="258.0" text="Dobbeltklik på borger for at se flere oplysninger" />
@@ -440,7 +443,7 @@
             <TextArea fx:id="txtAreaCitizenGeneralInfo" layoutX="106.0" layoutY="285.0" prefHeight="119.0" prefWidth="363.0" text="-Mestring: &#10;-Motivation:&#10;-Ressourcer:&#10;-Roller: &#10;-Vaner:&#10;-Uddannelse og Job:&#10;-Livs Historie: &#10;-Helbredsoplysninger:&#10;&#10;-Hjælpemidler:&#10;-Boligens indretning:&#10;-Netværk: " />
             <Button fx:id="btnSaveCitizen" layoutX="106.0" layoutY="415.0" mnemonicParsing="false" onAction="#btnHandleSaveCitizen" prefHeight="26.0" prefWidth="180.0" text="Opret/Gem Borger">
                <effect>
-                  <ColorAdjust brightness="0.3" />
+                  <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
             <Label layoutX="352.0" layoutY="28.0" text="Generelle Oplysninger">
