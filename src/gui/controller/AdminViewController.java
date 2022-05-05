@@ -766,7 +766,20 @@ public class AdminViewController implements Initializable, IController {
         } else if (radioOther.isSelected()) {
             sex = "Other";
         }
+        String coping = "";
+        String motivation = "";
+        String resources = "";
+        String roles = "";
+        String habits = "";
+        String educationAndjob = "";
+        String lifeStory = "";
+        String network = "";
+        String healthInformation = "";
+        String equipmentAids = "";
+        String homeLayout = "";
         dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex);
+        dataModelFacade.createGeneralInformation(coping, motivation, resources, roles, habits, educationAndjob,
+                lifeStory, network, healthInformation, equipmentAids, homeLayout);
         clearTextFieldCreate();
         reloadCreatedCitizensTable();
     }

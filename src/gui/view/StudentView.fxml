@@ -260,8 +260,8 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button layoutX="770.0" layoutY="500.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
-                  <Button layoutX="953.0" layoutY="500.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Gem" />
+                  <Button fx:id="btnGeneralInfoCancel" layoutX="770.0" layoutY="500.0" mnemonicParsing="false" onAction="#onActionGeneralInfoCancel" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
+                  <Button fx:id="btnGeneralInfoSave" layoutX="953.0" layoutY="500.0" mnemonicParsing="false" onAction="#onActionGeneralInfoSave" prefHeight="26.0" prefWidth="170.0" text="Gem" />
                   <TextArea fx:id="txtAreaCoping" layoutX="596.0" layoutY="117.0" prefHeight="45.0" prefWidth="200.0" />
                   <TextArea fx:id="txtAreaMotivation" layoutX="596.0" layoutY="173.0" prefHeight="45.0" prefWidth="200.0" />
                   <TextArea fx:id="txtAreaResources" layoutX="596.0" layoutY="235.0" prefHeight="45.0" prefWidth="200.0" />
@@ -484,7 +484,8 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <TextField fx:id="txtFieldCitizenID" layoutX="970.0" layoutY="29.0" visible="false" />
+            <TextField fx:id="txtFieldCitizenID" layoutX="970.0" layoutY="38.0" prefHeight="26.0" prefWidth="31.0" />
+            <TextField fx:id="txtFieldCitizenGeneralInfoID" layoutX="1014.0" layoutY="38.0" prefHeight="26.0" prefWidth="31.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0" visible="false">

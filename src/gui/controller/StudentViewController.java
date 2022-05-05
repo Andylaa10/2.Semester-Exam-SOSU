@@ -22,6 +22,9 @@ import java.util.ResourceBundle;
 public class StudentViewController implements IController, Initializable {
 
 
+    public Button btnGeneralInfoCancel;
+    public Button btnGeneralInfoSave;
+    public TextField txtFieldCitizenGeneralInfoID;
     //Generel info on Citizen pane
     @FXML
     private TextField txtFieldFirstName;
@@ -267,6 +270,7 @@ public class StudentViewController implements IController, Initializable {
     private void onActionComboClicked(ActionEvent actionEvent) {
         Citizen comboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
         txtFieldCitizenID.setText(String.valueOf(comboBox.getId()));
+        txtFieldCitizenGeneralInfoID.setText(String.valueOf(comboBox.getGeneralInformationID()));
     }
 
     /**
@@ -498,4 +502,11 @@ public class StudentViewController implements IController, Initializable {
     }
 
 
+    public void onActionGeneralInfoCancel(ActionEvent actionEvent) {
+        btnClickGeneralInformation();
+    }
+
+    public void onActionGeneralInfoSave(ActionEvent actionEvent) {
+
+    }
 }
