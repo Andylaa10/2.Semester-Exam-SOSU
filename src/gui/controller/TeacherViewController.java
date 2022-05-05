@@ -182,13 +182,11 @@ public class TeacherViewController implements Initializable, IController {
     @FXML
     private TextField txtFieldCitizenAddress;
     @FXML
-    private TextArea txtAreaCitizenGeneralInfo;
+    private RadioButton radioMale;
     @FXML
-    private CheckBox checkBoxMale;
+    private RadioButton radioFemale;
     @FXML
-    private CheckBox checkBoxFemale;
-    @FXML
-    private CheckBox checkBoxOther;
+    private RadioButton radioOther;
 
 
     private ObservableList<User> allStudents = FXCollections.observableArrayList();
@@ -213,6 +211,7 @@ public class TeacherViewController implements Initializable, IController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setToggleGroup();
         initializeTable();
         setAnchorPanesVisibility();
         selectedStudent();
@@ -221,6 +220,13 @@ public class TeacherViewController implements Initializable, IController {
         selectedCreatedCitizen();
         selectedCase();
         selectedCaseOnCitizen();
+    }
+
+    public void setToggleGroup(){
+        ToggleGroup group = new ToggleGroup();
+        radioMale.setToggleGroup(group);
+        radioFemale.setToggleGroup(group);
+        radioOther.setToggleGroup(group);
     }
 
     private void initializeTable() {
@@ -553,15 +559,23 @@ public class TeacherViewController implements Initializable, IController {
         String SSN = txtFieldCitizenSSN.getText();
         String address = txtFieldCitizenAddress.getText();
         String sex = null;
-        if (checkBoxMale.isSelected()) {
+        if (radioMale.isSelected()) {
             sex = "Male";
-        } else if (checkBoxFemale.isSelected()) {
+        } else if (radioFemale.isSelected()) {
             sex = "Female";
-        } else if (checkBoxOther.isSelected()) {
+        } else if (radioOther.isSelected()) {
             sex = "Other";
         }
         dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex);
         reloadCreatedCitizensTable();
+        clearTextFieldCreate();
+    }
+
+    public void clearTextFieldCreate() {
+        txtFieldCitizenFirstName.clear();
+        txtFieldCitizenLastName.clear();
+        txtFieldCitizenSSN.clear();
+        txtFieldCitizenAddress.clear();
     }
 
     /**

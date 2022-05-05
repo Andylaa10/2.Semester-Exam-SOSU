@@ -21,6 +21,33 @@ import java.util.ResourceBundle;
 
 public class StudentViewController implements IController, Initializable {
 
+
+    //Generel info on Citizen pane
+    @FXML
+    private TextField txtFieldFirstName;
+    @FXML
+    private TextField txtFieldLastName;
+    @FXML
+    private TextField txtFieldSSN;
+    @FXML
+    private TextField txtFieldAddress;
+    @FXML
+    private ComboBox<Citizen> comboBoxChooseSex;
+
+    //Studerendes vurdering af funktionelt niveau
+    @FXML
+    private ComboBox comboBoxFunctionalAbilityExpected;
+    @FXML
+    private TextArea txtAreaFunctionAbilityNote;
+
+    //Borgerens egen vurdering på funktionel pane
+    @FXML
+    private ComboBox comboBoxCitizenOwnAbility;
+    @FXML
+    private ComboBox comboBoxCitizenLimitation;
+    @FXML
+    private TextArea txtAreaCitizenGoals;
+
     //Health condition tables
     @FXML
     private TableView<HealthCondition> tvHealthConditions;
@@ -35,6 +62,9 @@ public class StudentViewController implements IController, Initializable {
     private TableColumn<SubCategory, Integer> tcSubCategoriesID;
     @FXML
     private TableColumn<SubCategory, String> tcSubCategoriesName;
+    @FXML
+    private TextArea txtAreaNoteOnSubCategory;
+
 
     //Cases table
     @FXML

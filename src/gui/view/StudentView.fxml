@@ -248,6 +248,28 @@
                   <TextField fx:id="txtFieldResources" layoutX="596.0" layoutY="236.0" prefHeight="38.0" prefWidth="200.0" />
                   <TextField fx:id="txtFieldMotivation" layoutX="596.0" layoutY="174.0" prefHeight="38.0" prefWidth="200.0" />
                   <Label layoutX="622.0" layoutY="80.0" text="Personlige Faktorer">
+                  <ComboBox layoutX="199.0" layoutY="442.0" prefHeight="25.0" prefWidth="200.0" visibleRowCount="20" />
+                  <ComboBox fx:id="comboBoxChooseSex" layoutX="199.0" layoutY="449.0" prefHeight="25.0" prefWidth="200.0" visibleRowCount="20" />
+                  <Button layoutX="931.0" layoutY="490.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Gem" />
+                  <Label layoutX="527.0" layoutY="119.0" text="Mestring" />
+                  <Label layoutX="527.0" layoutY="153.0" text="Motivation" />
+                  <Label layoutX="527.0" layoutY="192.0" text="Ressourcer" />
+                  <Label layoutX="527.0" layoutY="224.0" text="Roller" />
+                  <Label layoutX="527.0" layoutY="255.0" text="Vaner" />
+                  <Label layoutX="499.0" layoutY="291.0" text="Uddannelse og Job" />
+                  <Label layoutX="527.0" layoutY="319.0" text="Livshistorie" />
+                  <Label layoutX="504.0" layoutY="455.0" text="Helbredsoplysninger" />
+                  <Label layoutX="871.0" layoutY="119.0" text="Hjælpemidler" />
+                  <Label layoutX="841.0" layoutY="153.0" text="Boligens indretning" />
+                  <Label layoutX="895.0" layoutY="194.0" text="Netværk" />
+                  <TextField layoutX="626.0" layoutY="115.0" prefHeight="26.0" prefWidth="205.0" />
+                  <TextField layoutX="627.0" layoutY="423.0" prefHeight="26.0" prefWidth="205.0" />
+                  <TextField layoutX="627.0" layoutY="368.0" prefHeight="26.0" prefWidth="205.0" />
+                  <TextField layoutX="627.0" layoutY="320.0" prefHeight="26.0" prefWidth="205.0" />
+                  <TextField layoutX="627.0" layoutY="228.0" prefHeight="26.0" prefWidth="205.0" />
+                  <TextField layoutX="627.0" layoutY="189.0" prefHeight="26.0" prefWidth="205.0" />
+                  <TextField layoutX="626.0" layoutY="149.0" prefHeight="26.0" prefWidth="205.0" />
+                  <Label layoutX="652.0" layoutY="80.0" text="Personlige Faktorer">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -294,7 +316,7 @@
                         <Font size="33.0" />
                      </font>
                   </Label>
-                  <TextArea layoutX="638.0" layoutY="130.0" prefHeight="200.0" prefWidth="483.0" />
+                  <TextArea fx:id="txtAreaNoteOnSubCategory" layoutX="638.0" layoutY="130.0" prefHeight="200.0" prefWidth="483.0" />
                   <Label layoutX="638.0" layoutY="88.0" text="Beskrivelse af tilstand">
                      <font>
                         <Font size="21.0" />
@@ -371,7 +393,7 @@
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <TextArea layoutX="802.0" layoutY="219.0" prefHeight="200.0" prefWidth="315.0" />
+                  <TextArea fx:id="txtAreaFunctionAbilityNote" layoutX="802.0" layoutY="219.0" prefHeight="200.0" prefWidth="315.0" />
                   <Label layoutX="802.0" layoutY="91.0" text="Vurdering af forventet tilstand">
                      <font>
                         <Font size="21.0" />
@@ -384,7 +406,7 @@
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBox" layoutX="802.0" layoutY="129.0" prefHeight="25.0" prefWidth="200.0" visibleRowCount="20">
+                  <ComboBox fx:id="comboBoxFunctionalAbilityExpected" layoutX="802.0" layoutY="129.0" prefHeight="25.0" prefWidth="200.0" visibleRowCount="20">
                      <effect>
                         <ColorAdjust brightness="0.2" />
                      </effect>
@@ -418,9 +440,9 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="239.0" layoutY="90.0" prefHeight="31.0" prefWidth="302.0" />
-                  <ComboBox layoutX="238.0" layoutY="346.0" prefHeight="31.0" prefWidth="302.0" />
-                  <TextArea layoutX="590.0" layoutY="268.0" prefHeight="200.0" prefWidth="483.0" />
+                  <ComboBox fx:id="comboBoxCitizenOwnAbility" layoutX="239.0" layoutY="90.0" prefHeight="31.0" prefWidth="302.0" />
+                  <ComboBox fx:id="comboBoxCitizenLimitation" layoutX="238.0" layoutY="346.0" prefHeight="31.0" prefWidth="302.0" />
+                  <TextArea fx:id="txtAreaCitizenGoals" layoutX="590.0" layoutY="268.0" prefHeight="200.0" prefWidth="483.0" />
                   <Label layoutX="239.0" layoutY="134.0" text="- Udfører selv">
                      <font>
                         <Font size="25.0" />
