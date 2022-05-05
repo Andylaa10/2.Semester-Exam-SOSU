@@ -209,6 +209,16 @@ public class AdminViewController implements Initializable, IController {
      * Create Citizen Pane
      */
     @FXML
+    private TableView<Citizen> tvCreatedCitizens;
+    @FXML
+    private TableColumn<Citizen, Integer> tcCreatedCitizenID;
+    @FXML
+    private TableColumn<Citizen, String> tcCreatedCitizenFirstName;
+    @FXML
+    private TableColumn<Citizen, String> tcCreatedCitizenLastName;
+    @FXML
+    private TableColumn<Citizen, String> tcCreatedCitizenSSN;
+    @FXML
     private TextField txtFieldCitizenFirstName;
     @FXML
     private TextField txtFieldCitizenLastName;
@@ -216,8 +226,6 @@ public class AdminViewController implements Initializable, IController {
     private TextField txtFieldCitizenSSN;
     @FXML
     private TextField txtFieldCitizenAddress;
-    @FXML
-    private TextArea txtAreaCitizenGeneralInfo;
     @FXML
     private RadioButton radioMale;
     @FXML
@@ -227,6 +235,7 @@ public class AdminViewController implements Initializable, IController {
 
     private ObservableList<User> allStudents = FXCollections.observableArrayList();
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
+    private ObservableList<Citizen> allCreatedCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCases = FXCollections.observableArrayList();
     private ObservableList<Case> allCurrentCases = FXCollections.observableArrayList();
     private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
@@ -238,6 +247,7 @@ public class AdminViewController implements Initializable, IController {
     private User selectedStudent;
     private User selectedTeacher;
     private Citizen selectedCitizen;
+    private Citizen selectedCreatedCitizen;
 
     private DataModelFacade dataModelFacade;
 
@@ -254,6 +264,7 @@ public class AdminViewController implements Initializable, IController {
         selectedStudent();
         selectedCurrentCase();
         selectedCitizen();
+        selectedCreatedCitizen();
         selectedCase();
         selectedCaseOnCitizen();
     }
@@ -309,6 +320,18 @@ public class AdminViewController implements Initializable, IController {
         try {
             allCurrentCases = FXCollections.observableList(dataModelFacade.getCases());
             tableViewLoadCurrentCases(allCurrentCases);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //Initialize the citizens table
+        tcCreatedCitizenID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcCreatedCitizenFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        tcCreatedCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        tcCreatedCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+        try {
+            allCreatedCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
+            tableViewLoadCreatedCitizens(allCreatedCitizens);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -425,6 +448,24 @@ public class AdminViewController implements Initializable, IController {
      */
     private ObservableList<Case> getCasesOnCitizenData() {
         return allCasesOnCitizen;
+    }
+
+    /**
+     * loads the Citizens table view
+     *
+     * @param allCreatedCitizens
+     */
+    private void tableViewLoadCreatedCitizens(ObservableList<Citizen> allCreatedCitizens) {
+        tvCreatedCitizens.setItems(getCreatedCitizenData());
+    }
+
+    /**
+     * Gets the data for citizens
+     *
+     * @return ObservableList<Citizen>
+     */
+    private ObservableList<Citizen> getCreatedCitizenData() {
+        return allCreatedCitizens;
     }
 
 
@@ -649,6 +690,8 @@ public class AdminViewController implements Initializable, IController {
             }
         }));
     }
+
+
     public void setSelectedTeacher(User teacher) {
         txtFieldTeacherID.setText(String.valueOf(teacher.getId()));
         txtFieldTeacherFirstName.setText(teacher.getFirstName());
@@ -725,6 +768,7 @@ public class AdminViewController implements Initializable, IController {
         }
         dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex);
         clearTextFieldCreate();
+        reloadCreatedCitizensTable();
     }
 
     public void clearTextFieldCreate(){
@@ -733,6 +777,19 @@ public class AdminViewController implements Initializable, IController {
         txtFieldCitizenSSN.clear();
         txtFieldCitizenAddress.clear();
 
+    }
+    
+    /**
+     * Reloads the createdCitizens table
+     */
+    private void reloadCreatedCitizensTable() {
+        try {
+            int index = tvCreatedCitizens.getSelectionModel().getFocusedIndex();
+            this.tvCreatedCitizens.setItems(FXCollections.observableList(dataModelFacade.getCitizens()));
+            tvCreatedCitizens.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     /**
@@ -882,6 +939,37 @@ public class AdminViewController implements Initializable, IController {
 
         this.tvCitizens.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && selectedCitizen != null) {
+                try {
+                    FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
+                    Scene mainWindowScene = null;
+                    try {
+                        mainWindowScene = new Scene(parent.load());
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
+                    }
+                    Stage viewCitizenStage;
+                    viewCitizenStage = new Stage();
+                    viewCitizenStage.setScene(mainWindowScene);
+                    viewCitizenStage.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Selects a citizen from the citizens TableView
+     */
+    private void selectedCreatedCitizen() {
+        this.tvCreatedCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((Citizen) newValue != null) {
+                this.selectedCreatedCitizen = (Citizen) newValue;
+            }
+        }));
+
+        this.tvCreatedCitizens.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && selectedCreatedCitizen != null) {
                 try {
                     FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
                     Scene mainWindowScene = null;
