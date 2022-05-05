@@ -716,7 +716,7 @@ public class AdminViewController implements Initializable, IController {
         } else if (checkBoxOther.isSelected()) {
             sex = "Other";
         }
-        dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex, info);
+        dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex);
     }
 
     /**

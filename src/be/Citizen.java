@@ -71,12 +71,12 @@ public class Citizen {
         this.SSN = SSN;
     }
 
-    public Citizen(String firstName, String lastName, String SSN, String address, String info) {
+    public Citizen(String firstName, String lastName, String SSN, String address, String sex) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.SSN = SSN;
         this.address = address;
-        this.info = info;
+        this.sex = sex;
     }
 
     public Citizen(String firstName, String lastName, String SSN, String address, String sex, String info) {

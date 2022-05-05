@@ -171,75 +171,103 @@
                   <ColorAdjust brightness="-0.24" contrast="0.17" />
                </effect>
             </Pane>
-            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="14.0" layoutY="51.0" prefHeight="545.0" prefWidth="1136.0" visible="false">
+            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="14.0" layoutY="51.0" prefHeight="545.0" prefWidth="1136.0">
                <children>
-                  <ImageView fitHeight="102.0" fitWidth="140.0" layoutX="68.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="102.0" fitWidth="140.0" layoutX="68.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/Citizen%20Icon.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="85.0" layoutY="126.0" text="Fornavn:">
+                  <Label layoutX="85.0" layoutY="119.0" text="Fornavn:">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label layoutX="316.0" layoutY="14.0" text="Generelle Informationer for Borger">
-                     <font>
-                        <Font size="33.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="70.0" layoutY="210.0" text="Efternavn:">
+                  <Label layoutX="197.0" layoutY="38.0" text="Generelle Informationer for Borger">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label layoutX="21.0" layoutY="292.0" text="CPR-Nummer:">
+                  <Label layoutX="70.0" layoutY="203.0" text="Efternavn:">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label layoutX="85.0" layoutY="374.0" text="Adresse:">
+                  <Label layoutX="21.0" layoutY="285.0" text="CPR-Nummer:">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label layoutX="125.0" layoutY="444.0" text="Køn:">
+                  <Label layoutX="85.0" layoutY="367.0" text="Adresse:">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <TextArea layoutX="522.0" layoutY="129.0" prefHeight="346.0" prefWidth="580.0" text="-Mestring: &#10;&#10;-Motivation:&#10;&#10;-Ressourcer:&#10;&#10;-Roller: &#10;&#10;-Vaner:&#10;&#10;-Uddannelse og Job:&#10;&#10;-Livs Historie: &#10;&#10;-Helbredsoplysninger:&#10;&#10;&#10;-Hjælpemidler:&#10;&#10;-Boligens indretning:&#10;&#10;-Netværk: " />
-                  <Label layoutX="618.0" layoutY="81.0" text="Personlige- og Omgivelses faktorer">
+                  <Label layoutX="125.0" layoutY="437.0" text="Køn:">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="711.0" layoutY="39.0" text="Generelle Oplysninger">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
                   <Button layoutX="748.0" layoutY="490.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
-                  <TextField fx:id="txtFieldFirstName" layoutX="199.0" layoutY="127.0" prefHeight="37.0" prefWidth="286.0">
+                  <TextField fx:id="txtFieldFirstName" layoutX="199.0" layoutY="120.0" prefHeight="37.0" prefWidth="286.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtFieldLastName" layoutX="199.0" layoutY="210.0" prefHeight="37.0" prefWidth="286.0">
+                  <TextField fx:id="txtFieldLastName" layoutX="199.0" layoutY="203.0" prefHeight="37.0" prefWidth="286.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtFieldSSN" layoutX="199.0" layoutY="291.0" prefHeight="37.0" prefWidth="286.0">
+                  <TextField fx:id="txtFieldSSN" layoutX="199.0" layoutY="284.0" prefHeight="37.0" prefWidth="286.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="txtFieldAddress" layoutX="199.0" layoutY="373.0" prefHeight="37.0" prefWidth="286.0">
+                  <TextField fx:id="txtFieldAddress" layoutX="199.0" layoutY="366.0" prefHeight="37.0" prefWidth="286.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <ComboBox layoutX="199.0" layoutY="449.0" prefHeight="25.0" prefWidth="200.0" visibleRowCount="20" />
+                  <ComboBox layoutX="199.0" layoutY="442.0" prefHeight="25.0" prefWidth="200.0" visibleRowCount="20" />
                   <Button layoutX="931.0" layoutY="490.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Gem" />
+                  <Label layoutX="527.0" layoutY="119.0" text="Mestring" />
+                  <Label layoutX="527.0" layoutY="153.0" text="Motivation" />
+                  <Label layoutX="527.0" layoutY="192.0" text="Ressourcer" />
+                  <Label layoutX="527.0" layoutY="224.0" text="Roller" />
+                  <Label layoutX="527.0" layoutY="255.0" text="Vaner" />
+                  <Label layoutX="499.0" layoutY="291.0" text="Uddannelse og Job" />
+                  <Label layoutX="527.0" layoutY="319.0" text="Livshistorie" />
+                  <Label layoutX="504.0" layoutY="455.0" text="Helbredsoplysninger" />
+                  <Label layoutX="871.0" layoutY="119.0" text="Hjælpemidler" />
+                  <Label layoutX="841.0" layoutY="153.0" text="Boligens indretning" />
+                  <Label layoutX="895.0" layoutY="194.0" text="Netværk" />
+                  <TextField layoutX="626.0" layoutY="115.0" prefHeight="26.0" prefWidth="205.0" />
+                  <TextField layoutX="627.0" layoutY="423.0" prefHeight="26.0" prefWidth="205.0" />
+                  <TextField layoutX="627.0" layoutY="368.0" prefHeight="26.0" prefWidth="205.0" />
+                  <TextField layoutX="627.0" layoutY="320.0" prefHeight="26.0" prefWidth="205.0" />
+                  <TextField layoutX="627.0" layoutY="228.0" prefHeight="26.0" prefWidth="205.0" />
+                  <TextField layoutX="627.0" layoutY="189.0" prefHeight="26.0" prefWidth="205.0" />
+                  <TextField layoutX="626.0" layoutY="149.0" prefHeight="26.0" prefWidth="205.0" />
+                  <Label layoutX="652.0" layoutY="80.0" text="Personlige Faktorer">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="918.0" layoutY="80.0" text="Omgivelses Faktorer">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="626.0" layoutY="271.0" prefHeight="26.0" prefWidth="205.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
+            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
                <children>
                   <TableView fx:id="tvHealthConditions" layoutX="26.0" layoutY="89.0" prefHeight="423.0" prefWidth="302.0" style="-fx-background-color: transparent;">
                     <columns>
@@ -453,7 +481,7 @@
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0" visible="false">
          <children>
-            <TableView fx:id="tvCases" layoutX="606.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0">
+            <TableView fx:id="tvCases" layoutX="606.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0" style="-fx-background-color: transparent;">
               <columns>
                   <TableColumn fx:id="tcCaseID" prefWidth="184.80003356933594" text="ID" visible="false" />
                 <TableColumn fx:id="tcCaseName" prefWidth="184.80003356933594" text="Navn" />
@@ -461,7 +489,7 @@
                   <TableColumn fx:id="tcCaseInfo" prefWidth="200.800048828125" text="Info" />
               </columns>
             </TableView>
-            <TableView fx:id="tvCitizens" layoutX="40.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0">
+            <TableView fx:id="tvCitizens" layoutX="40.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0" style="-fx-background-color: transparent;">
                <columns>
                   <TableColumn fx:id="tcCitizenID" prefWidth="108.0" text="ID" visible="false" />
                   <TableColumn fx:id="tcCitizenFirstName" prefWidth="108.0" text="Fornavn" />
