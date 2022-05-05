@@ -177,7 +177,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateTeacher" layoutX="186.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneCreateTeacher" layoutX="186.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <TableView fx:id="tvTeachers" layoutX="14.0" layoutY="45.0" prefHeight="362.0" prefWidth="344.0" style="-fx-background-color: transparent;">
               <columns>
@@ -410,7 +410,7 @@
                </font>
             </Label>
          </children></AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0">
          <children>
             <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -432,6 +432,11 @@
                </font>
             </Label>
             <Button fx:id="btnSaveCitizen" layoutX="107.0" layoutY="287.0" mnemonicParsing="false" onAction="#btnHandleSaveCitizen" prefHeight="26.0" prefWidth="180.0" text="Opret Borger">
+               <effect>
+                  <ColorAdjust brightness="0.1" />
+               </effect>
+            </Button>
+            <Button fx:id="btnDeleteCitizen" layoutX="15.0" layoutY="416.0" mnemonicParsing="false" onAction="#btnHandle" prefHeight="26.0" prefWidth="118.0" text="Slet Borger">
                <effect>
                   <ColorAdjust brightness="0.1" />
                </effect>
