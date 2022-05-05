@@ -180,7 +180,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateAdmin" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneCreateAdmin" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <TableView fx:id="tvAdmins" layoutX="15.0" layoutY="44.0" prefHeight="307.0" prefWidth="580.0" style="-fx-background-color: transparent;">
               <columns>
@@ -226,23 +226,36 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneConfigureSchool" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+      <AnchorPane fx:id="anchorPaneConfigureSchool" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
          <children>
-            <TableView fx:id="tvAssignedSchool" layoutX="14.0" layoutY="38.0" prefHeight="366.0" prefWidth="273.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvAssignedSchool" layoutX="14.0" layoutY="38.0" prefHeight="232.0" prefWidth="274.0" style="-fx-background-color: transparent;">
               <columns>
                   <TableColumn fx:id="tcAssignedSchoolID" prefWidth="75.0" text="ID" visible="false" />
                 <TableColumn fx:id="tcAssignedSchoolName" prefWidth="272.8000122070313" text="Skolens Navn" />
               </columns>
             </TableView>
-            <TableView fx:id="tvAssignAdmin" layoutX="305.0" layoutY="38.0" prefHeight="366.0" prefWidth="295.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvAssignAdmin" layoutX="305.0" layoutY="38.0" prefHeight="232.0" prefWidth="295.0" style="-fx-background-color: transparent;">
                <columns>
-                  <TableColumn fx:id="tcAssignedAdminID" prefWidth="75.0" text="ID" visible="false" />
+                  <TableColumn fx:id="tcAssignAdminID" prefWidth="75.0" text="ID" visible="false" />
                   <TableColumn fx:id="tcAssignAdminFirstName" text="Fornavn" />
                   <TableColumn fx:id="tcAssignAdminLastName" prefWidth="106.4000244140625" text="Efternavn" />
                   <TableColumn fx:id="tcAssignAdminUsername" prefWidth="107.20001220703125" text="Username" />
                </columns>
             </TableView>
+            <TableView fx:id="tvAssignedAdminsOnSchool" layoutX="14.0" layoutY="270.0" prefHeight="133.0" prefWidth="580.0" style="-fx-background-color: transparent;">
+               <columns>
+                  <TableColumn fx:id="tcAssignedAdminID" prefWidth="75.0" text="ID" visible="false" />
+                  <TableColumn fx:id="tcAssignedAdminFirstName" prefWidth="174.4000244140625" text="Fornavn" />
+                  <TableColumn fx:id="tcAssignedAdminLastName" prefWidth="201.5999755859375" text="Efternavn" />
+                  <TableColumn fx:id="tcAssignedAdminUsername" prefWidth="204.00006103515625" text="Brugernavn" />
+               </columns>
+            </TableView>
             <Button fx:id="btnAssignAdminToSchool" layoutX="14.0" layoutY="414.0" mnemonicParsing="false" onAction="#onActionAssignAdminToSchool" prefHeight="26.0" prefWidth="131.0" text="Tildel Admin til Skole">
+               <effect>
+                  <ColorAdjust brightness="0.3" />
+               </effect>
+            </Button>
+            <Button fx:id="btnDeleteAdminFromSchool" layoutX="151.0" layoutY="414.0" mnemonicParsing="false" onAction="#onActionDeleteAdminFromSchool" prefHeight="26.0" prefWidth="131.0" text="Slet Admin fra Skole">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect>

@@ -25,6 +25,18 @@ import java.util.ResourceBundle;
 public class SuperAdminViewController implements Initializable, IController {
 
 
+
+    @FXML
+    private TableView<User> tvAssignedAdminsOnSchool;
+    @FXML
+    private TableColumn<User, Integer> tcAssignedAdminID;
+    @FXML
+    private TableColumn<User, String> tcAssignedAdminFirstName;
+    @FXML
+    private TableColumn<User, String> tcAssignedAdminLastName;
+    @FXML
+    private TableColumn<User, String> tcAssignedAdminUsername;
+
     @FXML
     private Button btnCreateSchoolOnAssignPane;
     @FXML
@@ -65,6 +77,8 @@ public class SuperAdminViewController implements Initializable, IController {
     private Button btnDeleteAdmin;
     @FXML
     private Button btnAssignAdminToSchool;
+    @FXML
+    private Button btnDeleteAdminFromSchool;
 
     @FXML
     private TableView<School> tvSchools;
@@ -91,7 +105,7 @@ public class SuperAdminViewController implements Initializable, IController {
     @FXML
     private TableView<User> tvAssignAdmin;
     @FXML
-    private TableColumn<User, Integer> tcAssignedAdminID;
+    private TableColumn<User, String> tcAssignAdminID;
     @FXML
     private TableColumn<User, String> tcAssignAdminFirstName;
     @FXML
@@ -127,9 +141,11 @@ public class SuperAdminViewController implements Initializable, IController {
     private AnchorPane anchorPaneConfigureSchool;
 
     private ObservableList<User> allAdmins = FXCollections.observableArrayList();
+    private ObservableList<User> allAssignAdmins = FXCollections.observableArrayList();
     private ObservableList<User> allAssignedAdmins = FXCollections.observableArrayList();
     private ObservableList<School> allSchools = FXCollections.observableArrayList();
     private ObservableList<School> allAssignedSchools = FXCollections.observableArrayList();
+
 
     DataModelFacade dataModelFacade;
 
@@ -138,6 +154,7 @@ public class SuperAdminViewController implements Initializable, IController {
     
     private School selectedSchoolToAssign;
     private User selectedAdminToAssign;
+    private User selectedAssignedAdmin;
 
 
     public SuperAdminViewController() throws IOException {
@@ -156,6 +173,7 @@ public class SuperAdminViewController implements Initializable, IController {
         selectedAdmin();
         selectedSchoolToAssign();
         selectedAdminToAssign();
+        selectedAssignedAdmin();
     }
 
     private void initializeTables() throws Exception {
@@ -180,13 +198,13 @@ public class SuperAdminViewController implements Initializable, IController {
         }
 
         //Initialize the admins table on the assign pane
-        tcAssignedAdminID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcAssignAdminID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcAssignAdminFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcAssignAdminLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcAssignAdminUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         try {
-            allAssignedAdmins = FXCollections.observableList(dataModelFacade.getAdmins());
-            tableViewLoadAssignedAdmins(allAssignedAdmins);
+            allAssignAdmins = FXCollections.observableList(dataModelFacade.getAdmins());
+            tableViewLoadAssignAdmins(allAssignAdmins);
         } catch (Exception e) {
             throw new Exception();
         }
@@ -370,6 +388,22 @@ public class SuperAdminViewController implements Initializable, IController {
         if (selectedSchoolToAssign != null && selectedAdminToAssign != null) {
             try {
                 dataModelFacade.addAdminToSchool(selectedAdminToAssign.getId(), selectedSchoolToAssign.getId());
+                reloadAssignedAdminTable();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Something went wrong");
+            //TODO add errorHandler
+        }
+    }
+
+    @FXML
+    private void onActionDeleteAdminFromSchool() {
+        if (selectedSchoolToAssign != null && selectedAssignedAdmin != null) {
+            try {
+                dataModelFacade.deleteAdminFromSchool(selectedAssignedAdmin.getId(), selectedSchoolToAssign.getId());
+                reloadAssignedAdminTable();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -396,12 +430,12 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
 
-    private void tableViewLoadAssignedAdmins(ObservableList<User> allAssignedAdmins) {
-        tvAssignAdmin.setItems(getAssignedAdminData());
+    private void tableViewLoadAssignAdmins(ObservableList<User> allAssignAdmins) {
+        tvAssignAdmin.setItems(getAssignAdminData());
     }
 
-    private ObservableList<User> getAssignedAdminData() {
-        return allAssignedAdmins;
+    private ObservableList<User> getAssignAdminData() {
+        return allAssignAdmins;
     }
 
     private void tableViewLoadAssignedSchools(ObservableList<School> allAssignedSchools) {
@@ -410,6 +444,14 @@ public class SuperAdminViewController implements Initializable, IController {
 
     private ObservableList<School> getAssignedSchoolData() {
         return allAssignedSchools;
+    }
+
+    private void tableViewLoadAssignedAdmins(ObservableList<User> allAssignedAdmins) {
+        tvAssignedAdminsOnSchool.setItems(getAssignedAdminData());
+    }
+
+    private ObservableList<User> getAssignedAdminData() {
+        return allAssignedAdmins;
     }
 
     private void reloadSchoolTable() {
@@ -427,6 +469,16 @@ public class SuperAdminViewController implements Initializable, IController {
             int index = tvAdmins.getSelectionModel().getFocusedIndex();
             this.tvAdmins.setItems(FXCollections.observableList(dataModelFacade.getAdmins()));
             tvAdmins.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    private void reloadAssignedAdminTable() {
+        try {
+            int index = tvAssignedAdminsOnSchool.getSelectionModel().getFocusedIndex();
+            this.tvAssignedAdminsOnSchool.setItems(FXCollections.observableList(dataModelFacade.getAdminsOnSchool(selectedSchoolToAssign.getId())));
+            tvAssignedAdminsOnSchool.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -478,6 +530,7 @@ public class SuperAdminViewController implements Initializable, IController {
         this.tvAssignedSchool.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((School) newValue != null) {
                 this.selectedSchoolToAssign = (School) newValue;
+                seeAssignedAdminsOnSchool();
             }
         }));
     }
@@ -488,6 +541,28 @@ public class SuperAdminViewController implements Initializable, IController {
                 this.selectedAdminToAssign = (User) newValue;
             }
         }));
+    }
+
+    private void selectedAssignedAdmin() {
+        this.tvAssignedAdminsOnSchool.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((User) newValue != null) {
+                this.selectedAssignedAdmin = (User) newValue;
+            }
+        }));
+    }
+
+    private void seeAssignedAdminsOnSchool() {
+        //Initialize the assigned admins table on the assign admin view
+        tcAssignedSchoolID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcAssignedAdminFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        tcAssignedAdminLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        tcAssignedAdminUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
+        try {
+            allAssignedAdmins = FXCollections.observableList(dataModelFacade.getAdminsOnSchool(selectedSchoolToAssign.getId()));
+            tableViewLoadAssignedAdmins(allAssignedAdmins);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void setAnchorPanesVisibility(){
@@ -558,5 +633,6 @@ public class SuperAdminViewController implements Initializable, IController {
         labelInfo.setText("Du er nu logget ind som Super Admin: " + user.getFirstName() + user.getLastName());
         labelInfoNewLine.setText("");
     }
+
 
 }

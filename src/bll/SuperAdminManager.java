@@ -2,6 +2,7 @@ package bll;
 
 import be.School;
 import be.SuperAdmin;
+import be.User;
 import dal.SuperAdminDAO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -89,8 +90,16 @@ public class SuperAdminManager {
         superAdminDAO.editSchool(school);
     }
 
+    public List<User> getAdminsOnSchool(int schoolId) throws SQLException {
+        return superAdminDAO.getAdminsOnSchool(schoolId);
+    }
+
     public void addAdminToSchool(int loginId, int schoolId) {
         superAdminDAO.addAdminToSchool(loginId, schoolId);
+    }
+
+    public void deleteAdminFromSchool(int userId, int schoolId) {
+        superAdminDAO.deleteAdminFromSchool(userId, schoolId);
     }
 
 }

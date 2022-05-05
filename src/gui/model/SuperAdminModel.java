@@ -2,6 +2,7 @@ package gui.model;
 
 import be.School;
 import be.SuperAdmin;
+import be.User;
 import bll.SuperAdminManager;
 import dal.SuperAdminDAO;
 
@@ -91,8 +92,16 @@ public class SuperAdminModel {
         superAdminManager.editSchool(school);
     }
 
+    public List<User> getAdminsOnSchool(int schoolId) throws SQLException {
+        return superAdminManager.getAdminsOnSchool(schoolId);
+    }
+
     public void addAdminToSchool(int loginId, int schoolId) {
         superAdminManager.addAdminToSchool(loginId, schoolId);
+    }
+
+    public void deleteAdminFromSchool(int userId, int schoolId) {
+        superAdminManager.deleteAdminFromSchool(userId, schoolId);
     }
 
 }
