@@ -134,6 +134,8 @@ public class StudentViewController implements IController, Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setAnchorPanesVisibility();
         selectedCitizen();
+        selectedCitizenOnComboBox();
+        selectedHealthCondition();
         try {
             initializeTables();
             initializeCitizenComboBox();
@@ -191,8 +193,8 @@ public class StudentViewController implements IController, Initializable {
         tcSubCategoriesID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcSubCategoriesName.setCellValueFactory(new PropertyValueFactory<>("subCategoryName"));
         try {
-            //allSubCategories = FXCollections.observableList(dataModelFacade.getSubCategories(selectedHealthCondition.getId()));
-            //tableViewLoadCasesOnCitizen(allCasesOnCitizen);
+            allSubCategories = FXCollections.observableList(dataModelFacade.getSubCategories(selectedHealthCondition.getId()));
+            tableViewLoadSubCategories(allSubCategories);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -252,6 +254,15 @@ public class StudentViewController implements IController, Initializable {
     private ObservableList<HealthCondition> getHealthConditionData() {
         return allHealthConditions;
     }
+
+    private void tableViewLoadSubCategories(ObservableList<SubCategory> allSubCategories) {
+        tvSubCategories.setItems(getSubCategories());
+    }
+
+    private ObservableList<SubCategory> getSubCategories() {
+        return allSubCategories;
+    }
+
 
     /**
      * Selects a citizen from the citizens TableView
