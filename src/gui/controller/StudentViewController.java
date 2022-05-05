@@ -63,7 +63,27 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private TableColumn<SubCategory, String> tcSubCategoriesName;
     @FXML
-    private TextArea txtAreaNoteOnSubCategory;
+    private TextArea txtAreaCoping;
+    @FXML
+    private TextArea txtAreaMotivation;
+    @FXML
+    private TextArea txtAreaResources;
+    @FXML
+    private TextArea txtAreaRoles;
+    @FXML
+    private TextArea txtAreaHabits;
+    @FXML
+    private TextArea txtAreaEducationAndJobs;
+    @FXML
+    private TextArea txtAreaLifeStory;
+    @FXML
+    private TextArea txtAreaHealthInfo;
+    @FXML
+    private TextArea txtAreaEquipmentAids;
+    @FXML
+    private TextArea txtAreaHomeLayout;
+    @FXML
+    private TextArea txtAreaNetwork;
 
 
     //Cases table

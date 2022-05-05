@@ -63,6 +63,7 @@ Redefine of the background color, to a dark blue color.
 .text-field{
     -fx-prompt-text-fill: rgba(255, 255, 255, 0.50);
     -fx-text-fill: black;
+    -fx-wrap-text: true;
 }
 
 .text-field:focused{
