@@ -1,8 +1,7 @@
 package dal;
 
-import be.Case;
-import be.School;
-import be.SuperAdmin;
+import be.*;
+import be.enums.UserType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 import java.io.IOException;
@@ -152,6 +151,34 @@ public class SuperAdminDAO {
         }
     }
 
+    public List<User> getAdminsOnSchool(int schoolId) throws SQLException {
+        ArrayList<User> allAdmins = new ArrayList<>();
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT [Login].loginID, [firstName], [lastName], [username], userType FROM [Login] INNER JOIN UserOnSchool ON UserOnSchool.loginId = [Login].loginID WHERE [Login].userType = ? AND UserOnSchool.schoolId = ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setString(1, String.valueOf(UserType.ADMINISTRATOR));
+            preparedStatement.setInt(2, schoolId);
+            preparedStatement.execute();
+
+            ResultSet resultset = preparedStatement.executeQuery();
+            while (resultset.next()) {
+                int id = resultset.getInt("loginID");
+                String firstName = resultset.getString("firstName");
+                String lastName = resultset.getString("lastName");
+                String username = resultset.getString("username");
+                UserType usertype = UserType.valueOf(resultset.getString("userType"));
+
+                User admin = new User(id, firstName, lastName, username, usertype);
+                allAdmins.add(admin);
+            }
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        }
+        return allAdmins;
+    }
 
     public void addAdminToSchool(int loginId, int schoolId){
         String sql = "INSERT INTO UserOnSchool (loginId, schoolId) VALUES (?,?);";
@@ -165,8 +192,18 @@ public class SuperAdminDAO {
         }
     }
 
-
-
+    public void deleteAdminFromSchool(int userId, int schoolId) {
+        String sql = "DELETE FROM UserOnSchool WHERE loginId = ? AND schoolId = ?;";
+        try (Connection con = databaseConnector.getConnection();
+             PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            st.setInt(1, userId);
+            st.setInt(2, schoolId);
+            st.executeUpdate();
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+    
     /**
      * Main used for testing the DAO methods
      * @param args
@@ -175,7 +212,8 @@ public class SuperAdminDAO {
      */
     public static void main(String[] args) throws IOException, SQLException {
         SuperAdminDAO superAdminDAO = new SuperAdminDAO();
-        superAdminDAO.createSchool("SOSU Esbjerg");
+        //superAdminDAO.createSchool("SOSU Esbjerg");
+        System.out.println(superAdminDAO.getAdminsOnSchool(4));
         //System.out.println(superAdminDAO.getSchools());
         //superAdminDAO.deleteSchool(1);
         //superAdminDAO.createSuperAdmin("superadmin", "1");

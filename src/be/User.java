@@ -19,6 +19,13 @@ public class User implements ILogin {
     public User() {
     }
 
+    public User(int id, String firstName, String lastName, String username, UserType userType) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.userType = userType;
+    }
 
     /**
      * Overloaded constructor with id, firstName, lastName, username, password and usertype

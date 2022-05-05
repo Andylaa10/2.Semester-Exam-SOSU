@@ -338,8 +338,16 @@ public class DataModelFacade {
         citizenModel.editCitizen(citizen);
     }
 
+    public List<User> getAdminsOnSchool(int schoolId) throws SQLException {
+        return superAdminModel.getAdminsOnSchool(schoolId);
+    }
+
     public void addAdminToSchool(int loginId, int schoolId) {
         superAdminModel.addAdminToSchool(loginId, schoolId);
+    }
+
+    public void deleteAdminFromSchool(int userId, int schoolId) {
+        superAdminModel.deleteAdminFromSchool(userId, schoolId);
     }
 
 
