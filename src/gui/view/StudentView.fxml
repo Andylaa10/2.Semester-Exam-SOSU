@@ -4,6 +4,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
+<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="182.0" style="-fx-background-color: rgb(81, 83, 222);">
          <children>
@@ -233,7 +234,6 @@
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <ComboBox fx:id="comboBoxChooseSex" layoutX="177.0" layoutY="437.0" prefHeight="35.0" prefWidth="246.0" visibleRowCount="20" />
                   <Label layoutX="537.0" layoutY="131.0" text="Mestring" />
                   <Label layoutX="530.0" layoutY="187.0" text="Motivation" />
                   <Label layoutX="529.0" layoutY="249.0" text="Ressourcer" />
@@ -273,6 +273,9 @@
                   <TextArea fx:id="txtAreaEquipmentAids" layoutX="923.0" layoutY="297.0" prefHeight="45.0" prefWidth="200.0" />
                   <TextArea fx:id="txtAreaHomeLayout" layoutX="924.0" layoutY="360.0" prefHeight="45.0" prefWidth="200.0" />
                   <TextArea fx:id="txtAreaNetwork" layoutX="923.0" layoutY="425.0" prefHeight="45.0" prefWidth="200.0" />
+                  <RadioButton fx:id="radioMale" layoutX="179.0" layoutY="448.0" mnemonicParsing="false" text="Mand" />
+                  <RadioButton fx:id="radioFemale" layoutX="268.0" layoutY="448.0" mnemonicParsing="false" text="Kvinde" />
+                  <RadioButton fx:id="radioOther" layoutX="368.0" layoutY="448.0" mnemonicParsing="false" text="Andet" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">

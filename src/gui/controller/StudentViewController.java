@@ -35,7 +35,11 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private TextField txtFieldAddress;
     @FXML
-    private ComboBox<Citizen> comboBoxChooseSex;
+    private RadioButton radioMale;
+    @FXML
+    private RadioButton radioFemale;
+    @FXML
+    private RadioButton radioOther;
 
     //Studerendes vurdering af funktionelt niveau
     @FXML
@@ -178,7 +182,9 @@ public class StudentViewController implements IController, Initializable {
     private SubCategory selectedSubCategory;
     private HealthCondition selectedHealthCondition;
 
-    DataModelFacade dataModelFacade;
+    private DataModelFacade dataModelFacade;
+
+    private ToggleGroup group = new ToggleGroup();
 
     public StudentViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
@@ -268,9 +274,23 @@ public class StudentViewController implements IController, Initializable {
 
     @FXML
     private void onActionComboClicked(ActionEvent actionEvent) {
-        Citizen comboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
-        txtFieldCitizenID.setText(String.valueOf(comboBox.getId()));
-        txtFieldCitizenGeneralInfoID.setText(String.valueOf(comboBox.getGeneralInformationID()));
+        Citizen selectedCitizenComboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
+        txtFieldCitizenGeneralInfoID.setText(String.valueOf(selectedCitizenComboBox.getGeneralInformationID()));
+        txtFieldCitizenID.setText(String.valueOf(selectedCitizenComboBox.getId()));
+        txtFieldFirstName.setText(selectedCitizenComboBox.getFirstName());
+        txtFieldLastName.setText(selectedCitizenComboBox.getLastName());
+        txtFieldSSN.setText(selectedCitizenComboBox.getSSN());
+        txtFieldAddress.setText(selectedCitizenComboBox.getAddress());
+        radioMale.setToggleGroup(group);
+        radioFemale.setToggleGroup(group);
+        radioOther.setToggleGroup(group);
+        if (selectedCitizenComboBox.getSex().equals("Male")){
+            radioMale.setSelected(true);
+        }else if (selectedCitizenComboBox.getSex().equals("Female")){
+            radioFemale.setSelected(true);
+        }else if(selectedCitizenComboBox.getSex().equals("Other")){
+            radioOther.setSelected(true);
+        }
     }
 
     /**
