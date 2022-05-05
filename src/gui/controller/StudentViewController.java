@@ -11,10 +11,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import java.awt.*;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -22,9 +32,6 @@ import java.util.ResourceBundle;
 public class StudentViewController implements IController, Initializable {
 
 
-    public Button btnGeneralInfoCancel;
-    public Button btnGeneralInfoSave;
-    public TextField txtFieldCitizenGeneralInfoID;
     //Generel info on Citizen pane
     @FXML
     private TextField txtFieldFirstName;
@@ -40,6 +47,14 @@ public class StudentViewController implements IController, Initializable {
     private RadioButton radioFemale;
     @FXML
     private RadioButton radioOther;
+    @FXML
+    private Button btnGeneralInfoCancel;
+    @FXML
+    private Button btnGeneralInfoSave;
+    @FXML
+    private TextField txtFieldCitizenGeneralInfoID;
+    @FXML
+    private ImageView imageCoping;
 
     //Studerendes vurdering af funktionelt niveau
     @FXML
@@ -229,8 +244,9 @@ public class StudentViewController implements IController, Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
+
 
     /**
      * Loads all data in tableview, from the selected current citizen ID.
@@ -559,5 +575,9 @@ public class StudentViewController implements IController, Initializable {
         dataModelFacade.editCitizen(citizen);
         dataModelFacade.editGeneralInformation(generalInformation);
 
+    }
+
+    public void coupingLink(MouseEvent mouseEvent) throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("http://www.fs3.nu/filer/Dokumenter/Metode/FSIII-Guide-til-generelle-oplysninger.pdf?t=1647518630"));
     }
 }
