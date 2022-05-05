@@ -122,6 +122,7 @@ public class StudentViewController implements IController, Initializable {
     private Citizen selectedCitizen;
     private Citizen selectedCitizenOnComboBox;
 
+    private SubCategory selectedSubCategory;
     private HealthCondition selectedHealthCondition;
 
     DataModelFacade dataModelFacade;
@@ -136,6 +137,7 @@ public class StudentViewController implements IController, Initializable {
         selectedCitizen();
         selectedCitizenOnComboBox();
         selectedHealthCondition();
+        selectedSubCategory();
         try {
             initializeTables();
             initializeCitizenComboBox();
@@ -198,6 +200,10 @@ public class StudentViewController implements IController, Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void seeTxtOnSubCategory() {
+
     }
 
     public void initializeCitizenComboBox() throws SQLException {
@@ -280,7 +286,6 @@ public class StudentViewController implements IController, Initializable {
         this.comboBoxCitizen.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((Citizen) newValue != null) {
                 this.selectedCitizenOnComboBox = (Citizen) newValue;
-                seeCasesOnCitizen();
             }
         }));
     }
@@ -290,6 +295,15 @@ public class StudentViewController implements IController, Initializable {
             if ((HealthCondition) newValue != null) {
                 this.selectedHealthCondition = (HealthCondition) newValue;
                 seeSubCategoriesOnCategory();
+            }
+        }));
+    }
+
+    private void selectedSubCategory() {
+        this.tvSubCategories.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((SubCategory) newValue != null) {
+                this.selectedSubCategory = (SubCategory) newValue;
+                seeTxtOnSubCategory();
             }
         }));
     }
