@@ -49,8 +49,9 @@ public class GeneralInformationDAO {
                 return generalInformation;
             }
         } catch (SQLServerException throwables) {
-            throw new SQLException();
+            throwables.printStackTrace();
         }
+        return null;
     }
 
     /**
@@ -95,7 +96,7 @@ public class GeneralInformationDAO {
         try (Connection connection = connector.getConnection()) {
             String sql = "UPDATE GeneralInformation SET coping = ?, motivation = ?, resources = ?, roles = ?," +
                     " habits = ?,educationAndJob = ?, lifestory = ?, network = ?, healthInformation = ?," +
-                    " equipmentAids = ?, homelayout = ? WHERE generalInfoID;";
+                    " equipmentAids = ?, homelayout = ? WHERE generalInfoID = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, generalInformation.getCoping());
             preparedStatement.setString(2, generalInformation.getMotivation());
@@ -108,13 +109,14 @@ public class GeneralInformationDAO {
             preparedStatement.setString(9, generalInformation.getHealthInformation());
             preparedStatement.setString(10, generalInformation.getEquipmentAids());
             preparedStatement.setString(11, generalInformation.getHomeLayout());
+            preparedStatement.setInt(12, generalInformation.getId());
 
             preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception("Could not edit case");
             }
         } catch (SQLException e) {
-            throw new SQLException();
+            e.printStackTrace();
         }
     }
 

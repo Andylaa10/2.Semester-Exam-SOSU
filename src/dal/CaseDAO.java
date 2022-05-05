@@ -168,8 +168,8 @@ public class CaseDAO {
 
     public static void main(String[] args) throws Exception {
         CaseDAO caseDAO = new CaseDAO();
-        caseDAO.deleteCaseFromCitizen(107, 2);
-        //caseDAO.createCase("Brækket ben", "Hjælp med at indtaste informationer");
+        //caseDAO.deleteCaseFromCitizen(107, 2);
+        caseDAO.createCase("Brækket ben", "Hjælp med at indtaste informationer");
         //System.out.println(caseDAO.getCasesOnCitizen(1).toString());
     }
 }

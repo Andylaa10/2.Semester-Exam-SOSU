@@ -526,7 +526,39 @@ public class StudentViewController implements IController, Initializable {
         btnClickGeneralInformation();
     }
 
-    public void onActionGeneralInfoSave(ActionEvent actionEvent) {
+    public void onActionGeneralInfoSave(ActionEvent actionEvent) throws Exception {
+        int id = Integer.parseInt(txtFieldCitizenID.getText());
+        String citizenFirstName = txtFieldFirstName.getText();
+        String citizenLastName = txtFieldLastName.getText();
+        String citizenSSN = txtFieldSSN.getText();
+        String citizenAddress = txtFieldAddress.getText();
+        String sex = null;
+        if (radioMale.isSelected()) {
+            sex = "Male";
+        } else if (radioFemale.isSelected()) {
+            sex = "Female";
+        } else if (radioOther.isSelected()) {
+            sex = "Other";
+        }
+
+        int generalInformationId = Integer.parseInt(txtFieldCitizenID.getText());
+        String coping = txtAreaCoping.getText();
+        String motivation = txtAreaMotivation.getText();
+        String resources = txtAreaResources.getText();
+        String roles = txtAreaRoles.getText();
+        String habits = txtAreaHabits.getText();
+        String educationandjob = txtAreaEducationAndJobs.getText();
+        String lifeStory = txtAreaLifeStory.getText();
+        String network = txtAreaNetwork.getText();
+        String healthInformation = txtAreaHealthInfo.getText();
+        String equipmentAids = txtAreaEquipmentAids.getText();
+        String homeLayout = txtAreaHomeLayout.getText();
+
+        Citizen citizen = new Citizen(id, citizenFirstName, citizenLastName, citizenSSN, citizenAddress, sex);
+        GeneralInformation generalInformation = new GeneralInformation(generalInformationId,coping, motivation, resources, roles, habits, educationandjob,
+                lifeStory, network, healthInformation, equipmentAids, homeLayout);
+        dataModelFacade.editCitizen(citizen);
+        dataModelFacade.editGeneralInformation(generalInformation);
 
     }
 }

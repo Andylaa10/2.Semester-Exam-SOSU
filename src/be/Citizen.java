@@ -106,6 +106,19 @@ public class Citizen {
         this.info = info;
     }
 
+    public Citizen(int id, String firstName, String lastName, String ssn, String address, String sex, int functionalAbilityID, int loginID, int schoolID) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.SSN = SSN;
+        this.address = address;
+        this.sex = sex;
+        this.functionalAbilitiesID = functionalAbilitiesID;
+        this.loginID = loginID;
+        this.schoolID = schoolID;
+        this.info = info;
+    }
+
     /**
      * Gets the id
      * @return

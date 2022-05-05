@@ -34,17 +34,16 @@ public class CitizenDAO {
                 String ssn = resultset.getString("SSN");
                 String address = resultset.getString("address");
                 String sex = resultset.getString("sex");
-                int generalInfoID = resultset.getInt("generalInfoId");
                 int functionalAbilityID = resultset.getInt("functionalAbilityId");
                 int loginID = resultset.getInt("loginId");
                 int schoolID = resultset.getInt("schoolId");
 
-                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex, generalInfoID, functionalAbilityID, loginID, schoolID);
+                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex, functionalAbilityID, loginID, schoolID);
                 allCitizens.add(citizen);
             }
 
         } catch (SQLServerException throwables) {
-            throw new SQLException();
+            throwables.printStackTrace();
         }
         return allCitizens;
     }
@@ -110,19 +109,20 @@ public class CitizenDAO {
      */
     public void editCitizen(Citizen citizen) throws Exception {
         try (Connection connection = connector.getConnection()) {
-            String sql = "UPDATE Citizen SET firstName=?, lastName=?, SNN=?, address=?, sex=? WHERE citizenID=?;";
+            String sql = "UPDATE Citizen SET firstName=?, lastName=?, SSN=?, address=?, sex=? WHERE citizenID=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, citizen.getFirstName());
             preparedStatement.setString(2, citizen.getLastName());
-            preparedStatement.setString(1, citizen.getSSN());
-            preparedStatement.setString(1, citizen.getAddress());
-            preparedStatement.setString(1, citizen.getSex());
+            preparedStatement.setString(3, citizen.getSSN());
+            preparedStatement.setString(4, citizen.getAddress());
+            preparedStatement.setString(5, citizen.getSex());
+            preparedStatement.setInt(6, citizen.getId());
             preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception("Could not edit case");
             }
         } catch (SQLException e) {
-            throw new SQLException();
+            e.printStackTrace();
         }
     }
 
@@ -163,6 +163,8 @@ public class CitizenDAO {
     public static void main(String[] args) throws Exception {
         CitizenDAO citizenDAO = new CitizenDAO();
         //citizenDAO.createCitizen("Joe", "Mama", "040119-2311", "Bjergberg Allé 205", "Male");
+        citizenDAO.deleteCitizen(3);
+        citizenDAO.deleteCitizen(4);
         System.out.println(citizenDAO.getCitizens());
     }
 

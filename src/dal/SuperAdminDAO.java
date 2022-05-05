@@ -212,11 +212,11 @@ public class SuperAdminDAO {
      */
     public static void main(String[] args) throws IOException, SQLException {
         SuperAdminDAO superAdminDAO = new SuperAdminDAO();
-        //superAdminDAO.createSchool("SOSU Esbjerg");
-        System.out.println(superAdminDAO.getAdminsOnSchool(4));
+        superAdminDAO.createSchool("SOSU Esbjerg");
+        //System.out.println(superAdminDAO.getAdminsOnSchool(4));
         //System.out.println(superAdminDAO.getSchools());
         //superAdminDAO.deleteSchool(1);
-        //superAdminDAO.createSuperAdmin("superadmin", "1");
+        superAdminDAO.createSuperAdmin("superadmin", "1");
         //superAdminDAO.deleteSuperAdmin(1);
     }
 
