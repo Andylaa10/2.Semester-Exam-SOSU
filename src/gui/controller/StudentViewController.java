@@ -275,7 +275,6 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private void onActionComboClicked(ActionEvent actionEvent) {
         Citizen selectedCitizenComboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
-        txtFieldCitizenGeneralInfoID.setText(String.valueOf(selectedCitizenComboBox.getGeneralInformationID()));
         txtFieldCitizenID.setText(String.valueOf(selectedCitizenComboBox.getId()));
         txtFieldFirstName.setText(selectedCitizenComboBox.getFirstName());
         txtFieldLastName.setText(selectedCitizenComboBox.getLastName());

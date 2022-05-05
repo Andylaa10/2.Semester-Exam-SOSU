@@ -796,6 +796,7 @@ public class AdminViewController implements Initializable, IController {
                 lifeStory, network, healthInformation, equipmentAids, homeLayout);
         clearTextFieldCreate();
         reloadCreatedCitizensTable();
+        reloadCitizenTable();
     }
 
     public void clearTextFieldCreate(){
@@ -804,6 +805,19 @@ public class AdminViewController implements Initializable, IController {
         txtFieldCitizenSSN.clear();
         txtFieldCitizenAddress.clear();
 
+    }
+
+    /**
+     * Reloads the createdCitizens table
+     */
+    private void reloadCitizenTable() {
+        try {
+            int index = tvCitizens.getSelectionModel().getFocusedIndex();
+            this.tvCitizens.setItems(FXCollections.observableList(dataModelFacade.getCitizens()));
+            tvCitizens.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
     }
 
     /**

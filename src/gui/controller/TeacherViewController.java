@@ -452,6 +452,7 @@ public class TeacherViewController implements Initializable, IController {
         anchorPaneStudent.setVisible(false);
         anchorPaneCase.setVisible(false);
         anchorPaneCitizen.setVisible(true);
+        reloadCaseTable();
     }
 
     /**
@@ -581,6 +582,7 @@ public class TeacherViewController implements Initializable, IController {
         dataModelFacade.createGeneralInformation(coping, motivation, resources, roles, habits, educationandjob,
                 lifeStory, network, healthInformation, equipmentAids, homeLayout);
         reloadCreatedCitizensTable();
+        reloadCitizenTable();
         clearTextFieldCreate();
     }
 
@@ -872,6 +874,16 @@ public class TeacherViewController implements Initializable, IController {
             int index = tvCases.getSelectionModel().getFocusedIndex();
             this.tvCases.setItems(FXCollections.observableList(dataModelFacade.getCases()));
             tvCases.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    private void reloadCitizenTable() {
+        try {
+            int index = tvCitizens.getSelectionModel().getFocusedIndex();
+            this.tvCitizens.setItems(FXCollections.observableList(dataModelFacade.getCitizens()));
+            tvCitizens.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
