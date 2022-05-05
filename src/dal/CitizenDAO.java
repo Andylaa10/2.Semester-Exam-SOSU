@@ -162,8 +162,8 @@ public class CitizenDAO {
     public static void main(String[] args) throws Exception {
         CitizenDAO citizenDAO = new CitizenDAO();
         //citizenDAO.createCitizen("Joe", "Mama", "040119-2311", "Bjergberg Allé 205", "Male");
-        citizenDAO.deleteCitizen(3);
-        citizenDAO.deleteCitizen(4);
+        //citizenDAO.deleteCitizen(3);
+        //citizenDAO.deleteCitizen(4);
         System.out.println(citizenDAO.getCitizens());
     }
 
