@@ -231,7 +231,7 @@
             <TableView fx:id="tvAssignedSchool" layoutX="14.0" layoutY="38.0" prefHeight="232.0" prefWidth="274.0" style="-fx-background-color: transparent;">
               <columns>
                   <TableColumn fx:id="tcAssignedSchoolID" prefWidth="75.0" text="ID" visible="false" />
-                <TableColumn fx:id="tcAssignedSchoolName" prefWidth="272.8000122070313" text="Skolens Navn" />
+                <TableColumn fx:id="tcAssignedSchoolName" prefWidth="273.6000122070312" text="Skolens Navn" />
               </columns>
             </TableView>
             <TableView fx:id="tvAssignAdmin" layoutX="305.0" layoutY="38.0" prefHeight="232.0" prefWidth="295.0" style="-fx-background-color: transparent;">
@@ -239,7 +239,7 @@
                   <TableColumn fx:id="tcAssignAdminID" prefWidth="75.0" text="ID" visible="false" />
                   <TableColumn fx:id="tcAssignAdminFirstName" text="Fornavn" />
                   <TableColumn fx:id="tcAssignAdminLastName" prefWidth="106.4000244140625" text="Efternavn" />
-                  <TableColumn fx:id="tcAssignAdminUsername" prefWidth="107.20001220703125" text="Username" />
+                  <TableColumn fx:id="tcAssignAdminUsername" prefWidth="107.19999999999999" text="Username" />
                </columns>
             </TableView>
             <TableView fx:id="tvAssignedAdminsOnSchool" layoutX="14.0" layoutY="270.0" prefHeight="133.0" prefWidth="580.0" style="-fx-background-color: transparent;">
@@ -247,7 +247,7 @@
                   <TableColumn fx:id="tcAssignedAdminID" prefWidth="75.0" text="ID" visible="false" />
                   <TableColumn fx:id="tcAssignedAdminFirstName" prefWidth="174.4000244140625" text="Fornavn" />
                   <TableColumn fx:id="tcAssignedAdminLastName" prefWidth="201.5999755859375" text="Efternavn" />
-                  <TableColumn fx:id="tcAssignedAdminUsername" prefWidth="204.00006103515625" text="Brugernavn" />
+                  <TableColumn fx:id="tcAssignedAdminUsername" prefWidth="202.4000244140625" text="Brugernavn" />
                </columns>
             </TableView>
             <Button fx:id="btnAssignAdminToSchool" layoutX="14.0" layoutY="414.0" mnemonicParsing="false" onAction="#onActionAssignAdminToSchool" prefHeight="26.0" prefWidth="131.0" text="Tildel Admin til Skole">

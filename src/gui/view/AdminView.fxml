@@ -177,10 +177,11 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateTeacher" layoutX="186.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+      <AnchorPane fx:id="anchorPaneCreateTeacher" layoutX="186.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
          <children>
             <TableView fx:id="tvTeachers" layoutX="14.0" layoutY="45.0" prefHeight="362.0" prefWidth="344.0" style="-fx-background-color: transparent;">
               <columns>
+                  <TableColumn fx:id="tcTeacherID" prefWidth="100.0" text="ID" visible="false" />
                 <TableColumn fx:id="tcTeacherFirstName" prefWidth="100.0" text="Fornavn" />
                   <TableColumn fx:id="tcTeacherLastName" prefWidth="119.20001220703125" text="Efternavn" />
                 <TableColumn fx:id="tcTeacherUserName" prefWidth="120.00006103515625" text="Username" />
@@ -215,11 +216,6 @@
                </effect>
             </Button>
             <Button fx:id="btnDeleteTeacher" layoutX="133.0" layoutY="416.0" mnemonicParsing="false" onAction="#onActionDeleteTeacher" prefHeight="26.0" prefWidth="107.0" text="Slet lærer">
-               <effect>
-                  <ColorAdjust brightness="0.1" />
-               </effect>
-            </Button>
-            <Button fx:id="btnCopyTeacher" layoutX="251.0" layoutY="416.0" mnemonicParsing="false" onAction="#onActionCopyTeacher" prefHeight="26.0" prefWidth="107.0" text="Kopier Lærer">
                <effect>
                   <ColorAdjust brightness="0.1" />
                </effect>
@@ -414,7 +410,7 @@
                </font>
             </Label>
          </children></AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>

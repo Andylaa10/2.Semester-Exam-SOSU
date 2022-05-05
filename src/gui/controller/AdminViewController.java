@@ -31,6 +31,7 @@ import java.util.ResourceBundle;
 
 public class AdminViewController implements Initializable, IController {
 
+
     /**
      * Top Pane
      */
@@ -77,6 +78,8 @@ public class AdminViewController implements Initializable, IController {
      */
     @FXML
     private TableView<User> tvTeachers;
+    @FXML
+    private TableColumn<User, Integer> tcTeacherID;
     @FXML
     private TableColumn<User, String> tcTeacherFirstName;
     @FXML
@@ -261,6 +264,7 @@ public class AdminViewController implements Initializable, IController {
         setAnchorPanesVisibility();
         initializeTable();
         setAnchorPanesVisibility();
+        selectedTeacher();
         selectedStudent();
         selectedCurrentCase();
         selectedCitizen();
@@ -672,10 +676,20 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
-    public void onActionCopyTeacher(ActionEvent actionEvent) {
-    }
+    
+    @FXML
+    private void onActionEditTeacherCancel() {
+        reloadTeacherTable();
+        clearTeacherTxtField();
+        tvStudent.getSelectionModel().clearSelection();
 
-    public void onActionEditTeacherCancel(ActionEvent actionEvent) {
+        btnEditTeacher.setDisable(false);
+        btnDeleteTeacher.setDisable(false);
+        btnCopyTeacher.setDisable(false);
+
+        btnEditTeacherCancel.setVisible(false);
+        btnEditTeacherSave.setVisible(false);
+        btnCreateTeacher.setVisible(true);
     }
 
     /**
