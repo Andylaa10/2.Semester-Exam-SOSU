@@ -1,5 +1,7 @@
 package be;
 
+import java.util.Objects;
+
 public class SubCategoryText {
 
     private int id;
@@ -58,15 +60,6 @@ public class SubCategoryText {
 
     @Override
     public String toString() {
-        return getNote();
-    }
-
-    public String trimText(){
-        String note = getNote()
-                .replace(",", "")  //remove the commas
-                .replace("[", "")  //remove the right bracket
-                .replace("]", "")  //remove the left bracket
-                .trim();           //remove trailing spaces from partially initialized arrays
         return note;
     }
 }

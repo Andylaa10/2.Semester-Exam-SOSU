@@ -80,8 +80,7 @@ public class HealthConditionsDAO {
     }
 
 
-    public List<SubCategoryText> getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
-        ArrayList<SubCategoryText> textOnSubCategories = new ArrayList<>();
+    public SubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
 
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT SubCatTextOnCitizen.SubCatTextOnCitizenID, SubCatTextOnCitizen.citizenId, SubCatTextOnCitizen.subCategoryId, SubCatTextOnCitizen.Note, SubCatTextOnCitizen.Condition " +
@@ -102,12 +101,12 @@ public class HealthConditionsDAO {
                 int condition = resultSet.getInt("Condition");
 
                 SubCategoryText subCategoryText = new SubCategoryText(id, citId, subId, note, condition);
-                textOnSubCategories.add(subCategoryText);
+                return subCategoryText;
             }
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-        return textOnSubCategories;
+        return null;
     }
 
 

@@ -27,7 +27,7 @@ public class HealthConditionsManager {
         return healthConditionsDAO.getSubCategories(categoryId);
     }
 
-    public List<SubCategoryText> getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
+    public SubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
         return healthConditionsDAO.getTextOnSubCategory(citizenId, subCategoryId);
     }
 

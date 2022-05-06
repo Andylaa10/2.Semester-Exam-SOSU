@@ -26,7 +26,7 @@ public class HealthConditionsModel {
         return healthConditionsManager.getSubCategories(categoryId);
     }
 
-    public List<SubCategoryText> getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
+    public SubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
         return healthConditionsManager.getTextOnSubCategory(citizenId, subCategoryId);
     }
 

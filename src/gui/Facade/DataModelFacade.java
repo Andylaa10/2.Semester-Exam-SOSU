@@ -414,7 +414,7 @@ public class DataModelFacade {
         generalInformationModel.editGeneralInformation(generalInformation);
     }
 
-    public List<SubCategoryText> getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
+    public SubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
         return healthConditionsModel.getTextOnSubCategory(citizenId, subCategoryId);
     }
     
