@@ -2,6 +2,7 @@ package gui.Facade;
 
 import be.*;
 import be.enums.UserType;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.model.*;
 
 import java.io.IOException;
@@ -402,5 +403,12 @@ public class DataModelFacade {
         generalInformationModel.editGeneralInformation(generalInformation);
     }
 
+    public List<SubCategoryText> getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
+        return healthConditionsModel.getTextOnSubCategory(citizenId, subCategoryId);
+    }
+    
+    public void insertIntoSubCategory(int citizenId, int subCategoryId, String note, int condition) throws SQLException {
+        healthConditionsModel.insertIntoSubCategory(citizenId, subCategoryId, note, condition);
+    }
 
 }

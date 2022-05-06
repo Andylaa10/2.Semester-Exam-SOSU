@@ -3,6 +3,8 @@ package bll;
 import be.HealthCondition;
 import be.School;
 import be.SubCategory;
+import be.SubCategoryText;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.HealthConditionsDAO;
 
 import java.io.IOException;
@@ -23,5 +25,13 @@ public class HealthConditionsManager {
 
     public List<SubCategory> getSubCategories(int categoryId) throws SQLException {
         return healthConditionsDAO.getSubCategories(categoryId);
+    }
+
+    public List<SubCategoryText> getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
+        return healthConditionsDAO.getTextOnSubCategory(citizenId, subCategoryId);
+    }
+
+    public void insertIntoSubCategory(int citizenId, int subCategoryId, String note, int condition) throws SQLException {
+        healthConditionsDAO.insertIntoSubCategory(citizenId, subCategoryId, note, condition);
     }
 }

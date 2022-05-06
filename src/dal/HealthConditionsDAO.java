@@ -114,7 +114,7 @@ public class HealthConditionsDAO {
     public static void main(String[] args) throws IOException, SQLException {
         HealthConditionsDAO healthConditionsDAO = new HealthConditionsDAO();
         //healthConditionsDAO.insertIntoSubCategory(12, 3, "Gider ikke noget", 0);
-        System.out.println(healthConditionsDAO.getTextOnSubCategory(13,3));
+        //System.out.println(healthConditionsDAO.getTextOnSubCategory(13,3));
         //System.out.println(healthConditionsDAO.getSubCategories(1));
 
     }
