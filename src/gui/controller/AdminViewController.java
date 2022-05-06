@@ -899,6 +899,24 @@ public class AdminViewController implements Initializable, IController {
     }
 
     @FXML
+    private void btnHandleDeleteCitizen() throws Exception {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("WARNING MESSAGE");
+        alert.setHeaderText("Warning before you delete a citizen");
+        alert.setContentText("Joe");
+        if (selectedCreatedCitizen != null) {
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                selectedCitizen();
+                //dataModelFacade.deleteCitizen(selectedCreatedCitizen.getId());
+                reloadCitizenTable();
+            }
+        } else {
+            return;
+        }
+    }
+
+    @FXML
     private void btnHandleEditCancel() {
         reloadStudentTable();
         clearStudentTxtField();
@@ -1248,6 +1266,5 @@ public class AdminViewController implements Initializable, IController {
         btnEditCaseCancel.setVisible(false);
     }
 
-    public void btnHandle(ActionEvent actionEvent) {
-    }
+
 }

@@ -86,19 +86,25 @@ public class CitizenDAO {
 
     /**
      * Deletes a citizen by taken the id
-     * @param id
+     * @param
      * @throws Exception
      */
-    public void deleteCitizen(int id) throws Exception {
+    public void deleteCitizen(int citizenID, int citizenId, int casesId) throws Exception {
         try (Connection connection = connector.getConnection()) {
-            String sql = "DELETE FROM Citizen WHERE citizenID =?;";
+            String sql = "DELETE FROM Citizen WHERE CitizenID =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, id);
-            if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception();
-            }
+            preparedStatement.setInt(1, citizenID);
+            preparedStatement.executeUpdate();
+
+
+            String sqlDeleteCitizen = "DELETE FROM CasesOnCitizen (citizenId, casesId) VALUES (?,?);";
+            PreparedStatement statement = connection.prepareStatement(sqlDeleteCitizen);
+            statement.setInt(1, citizenID);
+            statement.setInt(2, casesId);
+            statement.execute();
+
         } catch (SQLException throwables) {
-            throw new SQLException();
+            throwables.printStackTrace();
         }
     }
 

@@ -52,8 +52,8 @@ public class CitizenManager {
      * @param id
      * @throws Exception
      */
-    public void deleteCitizen(int id) throws Exception {
-        citizenDAO.deleteCitizen(id);
+    public void deleteCitizen(int citizenID, int citizenId, int casesId) throws Exception {
+        citizenDAO.deleteCitizen(citizenID, citizenId, casesId);
     }
 
     /**

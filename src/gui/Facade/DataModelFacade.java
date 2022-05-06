@@ -322,11 +322,10 @@ public class DataModelFacade {
 
     /**
      * Deletes a citizen using the deleteCitizen method from citizenModel
-     * @param id
      * @throws Exception
      */
-    public void deleteCitizen(int id) throws Exception {
-        citizenModel.deleteCitizen(id);
+    public void deleteCitizen(int citizenID, int citizenId, int casesId) throws Exception {
+        citizenModel.deleteCitizen(citizenID, citizenId, casesId);
     }
 
     /**

@@ -436,7 +436,7 @@
                   <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
-            <Button fx:id="btnDeleteCitizen" layoutX="15.0" layoutY="416.0" mnemonicParsing="false" onAction="#btnHandle" prefHeight="26.0" prefWidth="118.0" text="Slet Borger">
+            <Button fx:id="btnDeleteCitizen" layoutX="15.0" layoutY="416.0" mnemonicParsing="false" onAction="#btnHandleDeleteCitizen" prefHeight="26.0" prefWidth="84.0" text="Slet Borger">
                <effect>
                   <ColorAdjust brightness="0.1" />
                </effect>

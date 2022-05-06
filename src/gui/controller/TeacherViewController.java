@@ -8,6 +8,7 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -672,6 +673,24 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     @FXML
+    private void btnHandleDeleteCitizen() throws Exception {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("WARNING MESSAGE");
+        alert.setHeaderText("Warning before you delete a citizen");
+        alert.setContentText("Joe");
+        if (selectedCreatedCitizen != null) {
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                selectedCitizen();
+                //dataModelFacade.deleteCitizen(selectedCreatedCitizen.getId());
+                reloadCitizenTable();
+            }
+        } else {
+            return;
+        }
+    }
+
+    @FXML
     private void btnHandleEditCancel() {
         reloadStudentTable();
         clearStudentTxtField();
@@ -1031,4 +1050,6 @@ public class TeacherViewController implements Initializable, IController {
         btnEditCaseSave.setVisible(false);
         btnEditCaseCancel.setVisible(false);
     }
+
+
 }
