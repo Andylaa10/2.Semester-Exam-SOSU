@@ -58,12 +58,15 @@ public class SubCategoryText {
 
     @Override
     public String toString() {
-        return "SubCategoryText{" +
-                "id=" + id +
-                ", citizenId=" + citizenId +
-                ", categoryId=" + categoryId +
-                ", note='" + note + '\'' +
-                ", condition=" + condition +
-                '}';
+        return getNote();
+    }
+
+    public String trimText(){
+        String note = getNote()
+                .replace(",", "")  //remove the commas
+                .replace("[", "")  //remove the right bracket
+                .replace("]", "")  //remove the left bracket
+                .trim();           //remove trailing spaces from partially initialized arrays
+        return note;
     }
 }

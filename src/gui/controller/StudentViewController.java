@@ -1,6 +1,7 @@
 package gui.controller;
 
 import be.*;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
@@ -141,7 +142,8 @@ public class StudentViewController implements IController, Initializable {
     private ComboBox<Citizen> comboBoxCitizen;
     @FXML
     private TextField txtFieldCitizenID;
-
+    @FXML
+    private TextArea txtAreaNoteOnSubCategory;
     @FXML
     private Button btnGeneralInformation;
     @FXML
@@ -277,8 +279,9 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
-    public void seeTxtOnSubCategory() {
-
+    public void seeTxtOnSubCategory() throws SQLServerException {
+        txtFieldCitizenID.getText();
+        txtAreaNoteOnSubCategory.setText(String.valueOf(dataModelFacade.getTextOnSubCategory(selectedCitizenOnComboBox.getId(), selectedSubCategory.getId())));
     }
 
     public void initializeCitizenComboBox() throws SQLException {
@@ -404,7 +407,11 @@ public class StudentViewController implements IController, Initializable {
         this.tvSubCategories.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((SubCategory) newValue != null) {
                 this.selectedSubCategory = (SubCategory) newValue;
-                seeTxtOnSubCategory();
+                try {
+                    seeTxtOnSubCategory();
+                } catch (SQLServerException e) {
+                    e.printStackTrace();
+                }
             }
         }));
     }
