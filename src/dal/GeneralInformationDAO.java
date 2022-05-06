@@ -1,5 +1,6 @@
 package dal;
 
+import be.Case;
 import be.GeneralInformation;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
@@ -92,6 +93,41 @@ public class GeneralInformationDAO {
         return allGeneralInformations;
     }
 
+    public GeneralInformation getGeneralInformationOnCitizen(int citizenId) throws SQLException {
+        try (Connection connection = connector.getConnection()) {
+            String sql = "SELECT * FROM GeneralInformation INNER JOIN Citizen ON GeneralInformation.generalInfoID = Citizen.citizenID WHERE Citizen.citizenID = ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setInt(1, citizenId);
+            preparedStatement.execute();
+            ResultSet resultset = preparedStatement.executeQuery();
+            while (resultset.next()) {
+                int id = resultset.getInt("generalInfoID");
+                String coping = resultset.getString("coping");
+                String motivation = resultset.getString("motivation");
+                String resources = resultset.getString("resources");
+                String roles = resultset.getString("roles");
+                String habits = resultset.getString("habits");
+                String educationAndJob = resultset.getString("educationAndJob");
+                String lifestory = resultset.getString("lifestory");
+                String network = resultset.getString("network");
+                String healthInformation = resultset.getString("healthInformation");
+                String equipmentAids = resultset.getString("equipmentAids");
+                String homeLayout = resultset.getString("homeLayout");
+
+
+                GeneralInformation generalInformation = new GeneralInformation(id, coping, motivation, resources, roles, habits,
+                        educationAndJob, lifestory, network, healthInformation, equipmentAids, homeLayout);
+                return generalInformation;
+            }
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
     public void editGeneralInformation(GeneralInformation generalInformation) throws Exception {
         try (Connection connection = connector.getConnection()) {
             String sql = "UPDATE GeneralInformation SET coping = ?, motivation = ?, resources = ?, roles = ?," +
@@ -135,10 +171,11 @@ public class GeneralInformationDAO {
 
     public static void main(String[] args) throws Exception {
         GeneralInformationDAO generalInformationDAO = new GeneralInformationDAO();
-        generalInformationDAO.createGeneralInformation("coping", "motivation", "resources",
-                "roles", "habits", "educationAndJob", "lifeStory", "network",
-                "healthInformation", "equipmentAids", "homeLayout");
+        //generalInformationDAO.createGeneralInformation("coping", "motivation", "resources",
+        //        "roles", "habits", "educationAndJob", "lifeStory", "network",
+        //        "healthInformation", "equipmentAids", "homeLayout");
         //generalInformationDAO.deleteGeneralInformation(1);
-        System.out.println(generalInformationDAO.getGeneralInformation());
+        System.out.println(generalInformationDAO.getGeneralInformationOnCitizen(13));
+        //System.out.println(generalInformationDAO.getGeneralInformation());
     }
 }

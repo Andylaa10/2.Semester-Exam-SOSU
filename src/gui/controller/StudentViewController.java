@@ -289,7 +289,7 @@ public class StudentViewController implements IController, Initializable {
     }
 
     @FXML
-    private void onActionComboClicked(ActionEvent actionEvent) {
+    private void onActionComboClicked(ActionEvent actionEvent) throws SQLException {
         Citizen selectedCitizenComboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
         txtFieldCitizenID.setText(String.valueOf(selectedCitizenComboBox.getId()));
         txtFieldFirstName.setText(selectedCitizenComboBox.getFirstName());
@@ -306,6 +306,18 @@ public class StudentViewController implements IController, Initializable {
         }else if(selectedCitizenComboBox.getSex().equals("Other")){
             radioOther.setSelected(true);
         }
+        GeneralInformation selectedGeneralInformation = (GeneralInformation) dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
+        txtAreaCoping.setText(selectedGeneralInformation.getCoping());
+        txtAreaMotivation.setText(selectedGeneralInformation.getMotivation());
+        txtAreaResources.setText(selectedGeneralInformation.getResources());
+        txtAreaRoles.setText(selectedGeneralInformation.getRoles());
+        txtAreaHabits.setText(selectedGeneralInformation.getHabits());
+        txtAreaEducationAndJobs.setText(selectedGeneralInformation.getEducationAndJob());
+        txtAreaLifeStory.setText(selectedGeneralInformation.getLifeStory());
+        txtAreaHealthInfo.setText(selectedGeneralInformation.getHealthInformation());
+        txtAreaEquipmentAids.setText(selectedGeneralInformation.getEquipmentAids());
+        txtAreaHomeLayout.setText(selectedGeneralInformation.getHomeLayout());
+        txtAreaNetwork.setText(selectedGeneralInformation.getNetwork());
     }
 
     /**
@@ -577,7 +589,7 @@ public class StudentViewController implements IController, Initializable {
 
     }
 
-    public void coupingLink(MouseEvent mouseEvent) throws URISyntaxException, IOException {
+    public void coupingLink(ActionEvent actionEvent) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("http://www.fs3.nu/filer/Dokumenter/Metode/FSIII-Guide-til-generelle-oplysninger.pdf?t=1647518630"));
     }
 }

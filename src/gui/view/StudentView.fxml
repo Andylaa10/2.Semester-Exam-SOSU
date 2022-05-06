@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
+<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="182.0" style="-fx-background-color: rgb(81, 83, 222);">
          <children>
@@ -237,8 +238,8 @@
                   <Label layoutX="537.0" layoutY="131.0" text="Mestring" />
                   <Label layoutX="530.0" layoutY="187.0" text="Motivation" />
                   <Label layoutX="529.0" layoutY="249.0" text="Ressourcer" />
-                  <Label layoutX="553.0" layoutY="314.0" text="Roller" />
-                  <Label layoutX="553.0" layoutY="376.0" text="Vaner" />
+                  <Label layoutX="553.0" layoutY="308.0" text="Roller" />
+                  <Label layoutX="553.0" layoutY="371.0" text="Vaner" />
                   <Label layoutX="480.0" layoutY="439.0" text="Uddannelse og Job" />
                   <Label layoutX="856.0" layoutY="127.0" text="Livshistorie" />
                   <Label layoutX="808.0" layoutY="186.0" text="Helbredsoplysninger" />
@@ -276,61 +277,138 @@
                   <RadioButton fx:id="radioMale" layoutX="179.0" layoutY="448.0" mnemonicParsing="false" text="Mand" />
                   <RadioButton fx:id="radioFemale" layoutX="268.0" layoutY="448.0" mnemonicParsing="false" text="Kvinde" />
                   <RadioButton fx:id="radioOther" layoutX="368.0" layoutY="448.0" mnemonicParsing="false" text="Andet" />
-                  <ImageView fx:id="imageLink" fitHeight="20.0" fitWidth="16.0" layoutX="800.0" layoutY="116.0" onMouseClicked="#coupingLink" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imageLink" fitHeight="20.0" fitWidth="16.0" layoutX="800.0" layoutY="173.0" onMouseClicked="#coupingLink" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imageLink" fitHeight="20.0" fitWidth="16.0" layoutX="800.0" layoutY="235.0" onMouseClicked="#coupingLink" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imageLink" fitHeight="20.0" fitWidth="16.0" layoutX="800.0" layoutY="299.0" onMouseClicked="#coupingLink" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imageLink" fitHeight="20.0" fitWidth="16.0" layoutX="800.0" layoutY="364.0" onMouseClicked="#coupingLink" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imageLink" fitHeight="20.0" fitWidth="16.0" layoutX="801.0" layoutY="428.0" onMouseClicked="#coupingLink" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imageLink" fitHeight="20.0" fitWidth="16.0" layoutX="1124.0" layoutY="112.0" onMouseClicked="#coupingLink" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imageLink" fitHeight="20.0" fitWidth="16.0" layoutX="1124.0" layoutY="299.0" onMouseClicked="#coupingLink" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imageLink" fitHeight="20.0" fitWidth="16.0" layoutX="1124.0" layoutY="173.0" onMouseClicked="#coupingLink" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imageLink" fitHeight="20.0" fitWidth="16.0" layoutX="1124.0" layoutY="358.0" onMouseClicked="#coupingLink" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imageLink" fitHeight="20.0" fitWidth="16.0" layoutX="1123.0" layoutY="422.0" onMouseClicked="#coupingLink" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
-                     </image>
-                  </ImageView>
+                  <Button fx:id="btnCoping" layoutX="557.0" layoutY="148.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip prefWidth="250.0" text="Borgerens bevidste eller ubevidste håndtering af livet/sygdommen – både udfordringer og muligheder.       -FS3" wrapText="true" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnMotivation" layoutX="557.0" layoutY="201.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip prefWidth="250.0" text="Drivkraften bag at borgeren handler på en bestemt måde eller går i gang med/opretholder en opgave/indsats.       -FS3" wrapText="true" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnResources" layoutX="557.0" layoutY="261.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip prefWidth="250.0" text="De fysiske eller mentale kræfter, som borgerenen i et vist omfang har til rådighed og kan udnytte. Fysiske kræfter kan fx være i form af fysisk sundhed og styrke. Mentale kræfter kan fx være i form af psykisk sundhed og styrke, herunder tanker og måder at forholde sig til situationer og andre mennesker på.       -FS3" width="45.0" wrapText="true" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnRoles" layoutX="557.0" layoutY="322.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip prefWidth="250.0" text="De roller som er særligt vigtige for borgeren i forhold til familie, arbejde og samfund.       -FS3" wrapText="true" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnHabits" layoutX="557.0" layoutY="384.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip prefWidth="250.0" text="Regelmæssig adfærd som borgeren har tillært gennem stadig gentagelse og udførelse helt eller delvist ubevidst. Vaner er fx døgnrytmen, måden at blive tiltalt på, kontakt med medmennesker og relationer, måde at anskue verden på.       -FS3" wrapText="true" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnEducationAndJob" layoutX="557.0" layoutY="454.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip prefWidth="250.0" text="Nuværende eller tidligere uddannelses og/eller erhvervsmæssig baggrund. Fx folkeskole, erhvervsuddannelse og videregående uddannelse.       -FS3" wrapText="true" />
+                     </tooltip>
+                  </Button>
+                  <Button layoutX="881.0" layoutY="451.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fx:id="btnNetwork" fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip prefWidth="250.0" text="Personer som er tæt på borgeren, og som giver praktisk og/ellerfølelsesmæssigt støtte og omsorg overfor borgeren. Netværk kan være offentligt eller privat. Et offentligt netværk består af personlige hjælpere, sundhedspersonale og andre professionelle primært omsorgsgivere. Privat netværk er familie, slægtning, venner og bekendtskaber.       -FS3" wrapText="true" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnHomeLayout" layoutX="881.0" layoutY="386.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip prefWidth="250.0" text="En beskrivelse af boligens fysiske rammer og omgivelser, der har betydning for borgerens hverdagsliv og funktionsevne.       -FS3" wrapText="true" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnEquipmentAids" layoutX="881.0" layoutY="326.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip prefWidth="250.0" text="Udstyr, produkter og teknologi som anvendes af borgeren i dagligeaktiviteter, inkl. sådanne som er tilpasset eller særligt fremstillet til, implanteret i, placeret på eller nær personen, som anvender dem. (Inkl. almindelige genstande og hjælpemidler og teknologi til personlig anvendelse).       -FS3 " wrapText="true" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnHealthInformation" layoutX="881.0" layoutY="202.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip prefWidth="250.0" text="Helbredsoplysninger: Aktuelle eller tidligere sygdomme og handicap der har betydning for borgerens situation. Sundhedsfaglige kontakter: Medarbejder eller enheder indenfor sundhedsvæsenet borgeren er tilknyttet, fx øjenlæge, tandlæge, fodterapeut eller afdeling/ambulatorium.       -FS3" wrapText="true" />
+                     </tooltip>
+                  </Button>
+                  <Button fx:id="btnLifeStory" layoutX="881.0" layoutY="141.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/1200px-Icon-round-Question_mark.svg.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip prefWidth="250.0" text="En beskrivelse af borgerens oplevelse af væsentlige begivenheder, interesser og gøremål igennem livet.       -FS3" wrapText="true" />
+                     </tooltip>
+                  </Button>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">

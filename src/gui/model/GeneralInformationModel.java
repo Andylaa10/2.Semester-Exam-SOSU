@@ -24,6 +24,17 @@ public class GeneralInformationModel {
         return generalInformationManager.getGeneralInformation();
     }
 
+    /**
+     * Gets a list of generalInformation that is assigned to citizen, using the getGeneralInformationsOnCitizen
+     * method from generalInformationManager
+     * @param citizenID
+     * @return
+     * @throws SQLException
+     */
+    public GeneralInformation getGeneralInformationOnCitizen(int citizenID) throws SQLException {
+        return generalInformationManager.getGeneralInformationOnCitizen(citizenID);
+    }
+
 
     /**
      * Creates  generalInformation using the createGeneralInformation method from generalInformationManager
