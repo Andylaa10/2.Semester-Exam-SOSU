@@ -56,6 +56,10 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private Label lblInfoState;
     @FXML
+    private ImageView imgViewNotSaved;
+    @FXML
+    private ImageView imgViewSaved;
+    @FXML
     private TextField txtFieldCitizenGeneralInfoID;
     @FXML
     private ImageView imageCoping;
@@ -297,6 +301,8 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private void onActionComboClicked() throws SQLException {
         lblInfoState.setText("Ændringer - Ikke Gemt");
+        imgViewNotSaved.setVisible(true);
+        imgViewSaved.setVisible(false);
         btnClickGeneralInformation();
         Citizen selectedCitizenComboBox = (Citizen) comboBoxCitizen.getSelectionModel().getSelectedItem();
         txtFieldCitizenID.setText(String.valueOf(selectedCitizenComboBox.getId()));
@@ -600,6 +606,9 @@ public class StudentViewController implements IController, Initializable {
         dataModelFacade.editCitizen(citizen);
         dataModelFacade.editGeneralInformation(generalInformation);
         lblInfoState.setText("Ændringer - Gemt");
+        imgViewNotSaved.setVisible(false);
+        imgViewSaved.setVisible(true);
+
     }
 
 
@@ -640,5 +649,7 @@ public class StudentViewController implements IController, Initializable {
         txtAreaHomeLayout.setText(selectedGeneralInformation.getHomeLayout());
         txtAreaNetwork.setText(selectedGeneralInformation.getNetwork());
         lblInfoState.setText("Ændringer - Ikke Gemt");
+        imgViewSaved.setVisible(false);
+        imgViewNotSaved.setVisible(true);
     }
 }

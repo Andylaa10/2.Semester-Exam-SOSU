@@ -409,7 +409,17 @@
                         <Tooltip prefWidth="250.0" text="En beskrivelse af borgerens oplevelse af væsentlige begivenheder, interesser og gøremål igennem livet.       -FS3" wrapText="true" />
                      </tooltip>
                   </Button>
-                  <Label fx:id="lblInfoState" alignment="CENTER_RIGHT" layoutX="561.0" layoutY="504.0" prefHeight="18.0" prefWidth="198.0" />
+                  <Label fx:id="lblInfoState" alignment="CENTER_RIGHT" layoutX="561.0" layoutY="504.0" prefHeight="18.0" prefWidth="198.0" text="Ændringer - Ikke gemt" />
+                  <ImageView fx:id="imgViewNotSaved" fitHeight="26.0" fitWidth="25.0" layoutX="606.0" layoutY="501.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@img/small%20warning%20icon.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imgViewSaved" fitHeight="26.0" fitWidth="25.0" layoutX="606.0" layoutY="501.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/small%20checkbox%20icon.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
