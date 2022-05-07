@@ -24,6 +24,10 @@ public class CitizenModel {
         return citizenManager.getCitizens();
     }
 
+    public Citizen getInfoOnCitizen(int citizenId) throws SQLException {
+        return citizenManager.getInfoOnCitizen(citizenId);
+    }
+
     /**
      * Get a list of cases assigned to citizens using getCitizensOncases method from citizenManager
      * @param caseId

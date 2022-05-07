@@ -297,6 +297,10 @@ public class DataModelFacade {
         return citizenModel.getCitizens();
     }
 
+    public Citizen getInfoOnCitizen(int citizenId) throws SQLException {
+        return citizenModel.getInfoOnCitizen(citizenId);
+    }
+
     /**
      * Get a list of cases assigned to citizen using the getCitizensOnCases method from citizenModel
      * @param caseId

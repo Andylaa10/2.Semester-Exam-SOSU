@@ -23,6 +23,10 @@ public class CitizenManager {
         return citizenDAO.getCitizens();
     }
 
+    public Citizen getInfoOnCitizen(int citizenId) throws SQLException {
+        return citizenDAO.getInfoOnCitizen(citizenId);
+    }
+
     /**
      * Get a list of cases assigned to citizen, using the getCitizensOnCase method from citizenDAO
      * @param caseId

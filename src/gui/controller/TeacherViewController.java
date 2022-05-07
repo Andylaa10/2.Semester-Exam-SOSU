@@ -8,7 +8,6 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -225,7 +224,7 @@ public class TeacherViewController implements Initializable, IController {
         selectedCaseOnCitizen();
     }
 
-    public void setToggleGroup(){
+    public void setToggleGroup() {
         ToggleGroup group = new ToggleGroup();
         radioMale.setToggleGroup(group);
         radioFemale.setToggleGroup(group);
@@ -344,6 +343,7 @@ public class TeacherViewController implements Initializable, IController {
     private ObservableList<Citizen> getCitizenData() {
         return allCitizens;
     }
+
     /**
      * loads the Citizens table view
      *
@@ -479,7 +479,7 @@ public class TeacherViewController implements Initializable, IController {
      * @param
      */
     @FXML
-    private void btnClickHome( ) {
+    private void btnClickHome() {
         labelTitle.setText("Lærer");
         labelInfo.setText("Logget ind som lærer");
         labelInfoNewLine.setText("");
@@ -498,13 +498,14 @@ public class TeacherViewController implements Initializable, IController {
      * @throws IOException
      */
     @FXML
-    private void btnClickLogout( ) throws IOException {
+    private void btnClickLogout() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
         Scene scene = new Scene(loader.load());
         Stage switcher = (Stage) btnLogOut.getScene().getWindow();
         switcher.setScene(scene);
         switcher.setTitle("Lærer");
         switcher.show();
+        switcher.centerOnScreen();
     }
 
 
@@ -775,17 +776,26 @@ public class TeacherViewController implements Initializable, IController {
         this.tvCitizens.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && selectedCitizen != null) {
                 try {
-                    FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/gui/view/StudentView.fxml"));
+
                     Scene mainWindowScene = null;
                     try {
-                        mainWindowScene = new Scene(parent.load());
+                        mainWindowScene = new Scene(fxmlLoader.load());
                     } catch (IOException exception) {
                         exception.printStackTrace();
                     }
                     Stage viewCitizenStage;
                     viewCitizenStage = new Stage();
                     viewCitizenStage.setScene(mainWindowScene);
+
+                    studentViewController = fxmlLoader.getController();
+                    studentViewController.btnClickGeneralInformation();
+                    studentViewController.setGeneralInfoFromID(String.valueOf(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId()));
+
+                    viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -821,10 +831,10 @@ public class TeacherViewController implements Initializable, IController {
 
                     studentViewController = fxmlLoader.getController();
                     studentViewController.btnClickGeneralInformation();
+                    studentViewController.setGeneralInfoFromID(String.valueOf(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId()));
 
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();
-
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -832,7 +842,6 @@ public class TeacherViewController implements Initializable, IController {
             }
         });
     }
-
 
 
     /**
@@ -960,7 +969,7 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     private void assignDate() throws Exception {
-        selectedCase = allCases.get(allCases.size() -1);
+        selectedCase = allCases.get(allCases.size() - 1);
         if (selectedCase != null) {
             Date caseDate = new Date(System.currentTimeMillis());
             String pattern = "dd/MM/yyyy  HH:mm:ss";
@@ -1049,13 +1058,13 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     public void btnHandleCopySave() throws Exception {
-        if (selectedCase != null){
+        if (selectedCase != null) {
             btnHandleSaveCase();
             setCaseBtnVisibility();
         }
     }
 
-    public void setCaseBtnVisibility(){
+    public void setCaseBtnVisibility() {
         btnEditCase.setDisable(false);
         btnCopyCase.setDisable(false);
         btnSaveCase.setVisible(true);

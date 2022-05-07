@@ -587,6 +587,7 @@ public class AdminViewController implements Initializable, IController {
         switcher.setScene(scene);
         switcher.setTitle("Lærer");
         switcher.show();
+        switcher.centerOnScreen();
     }
 
 
@@ -1000,17 +1001,26 @@ public class AdminViewController implements Initializable, IController {
         this.tvCitizens.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && selectedCitizen != null) {
                 try {
-                    FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/gui/view/StudentView.fxml"));
+
                     Scene mainWindowScene = null;
                     try {
-                        mainWindowScene = new Scene(parent.load());
+                        mainWindowScene = new Scene(fxmlLoader.load());
                     } catch (IOException exception) {
                         exception.printStackTrace();
                     }
                     Stage viewCitizenStage;
                     viewCitizenStage = new Stage();
                     viewCitizenStage.setScene(mainWindowScene);
+
+                    studentViewController = fxmlLoader.getController();
+                    studentViewController.btnClickGeneralInformation();
+                    studentViewController.setGeneralInfoFromID(String.valueOf(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId()));
+
+                    viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -1046,6 +1056,7 @@ public class AdminViewController implements Initializable, IController {
 
                     studentViewController = fxmlLoader.getController();
                     studentViewController.btnClickGeneralInformation();
+                    studentViewController.setGeneralInfoFromID(String.valueOf(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId()));
 
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();

@@ -409,6 +409,7 @@
                         <Tooltip prefWidth="250.0" text="En beskrivelse af borgerens oplevelse af væsentlige begivenheder, interesser og gøremål igennem livet.       -FS3" wrapText="true" />
                      </tooltip>
                   </Button>
+                  <Label fx:id="lblInfoState" alignment="CENTER_RIGHT" layoutX="561.0" layoutY="504.0" prefHeight="18.0" prefWidth="198.0" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">

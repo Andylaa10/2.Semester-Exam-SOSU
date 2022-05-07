@@ -21,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.IOException;
@@ -52,6 +53,8 @@ public class StudentViewController implements IController, Initializable {
     private Button btnGeneralInfoCancel;
     @FXML
     private Button btnGeneralInfoSave;
+    @FXML
+    private Label lblInfoState;
     @FXML
     private TextField txtFieldCitizenGeneralInfoID;
     @FXML
@@ -139,7 +142,7 @@ public class StudentViewController implements IController, Initializable {
 
     //FS III comboBox
     @FXML
-    private ComboBox<Citizen> comboBoxCitizen;
+    private ComboBox comboBoxCitizen;
     @FXML
     private TextField txtFieldCitizenID;
     @FXML
@@ -292,9 +295,10 @@ public class StudentViewController implements IController, Initializable {
     }
 
     @FXML
-    private void onActionComboClicked(ActionEvent actionEvent) throws SQLException {
+    private void onActionComboClicked() throws SQLException {
+        lblInfoState.setText("Ændringer - Ikke Gemt");
         btnClickGeneralInformation();
-        Citizen selectedCitizenComboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
+        Citizen selectedCitizenComboBox = (Citizen) comboBoxCitizen.getSelectionModel().getSelectedItem();
         txtFieldCitizenID.setText(String.valueOf(selectedCitizenComboBox.getId()));
         txtFieldFirstName.setText(selectedCitizenComboBox.getFirstName());
         txtFieldLastName.setText(selectedCitizenComboBox.getLastName());
@@ -387,7 +391,7 @@ public class StudentViewController implements IController, Initializable {
         }));
     }
 
-    private void selectedCitizenOnComboBox() {
+    public void selectedCitizenOnComboBox() {
         this.comboBoxCitizen.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((Citizen) newValue != null) {
                 this.selectedCitizenOnComboBox = (Citizen) newValue;
@@ -554,6 +558,7 @@ public class StudentViewController implements IController, Initializable {
         switcher.setScene(scene);
         switcher.setTitle("Login");
         switcher.show();
+        switcher.centerOnScreen();
     }
 
 
@@ -594,10 +599,46 @@ public class StudentViewController implements IController, Initializable {
                 lifeStory, network, healthInformation, equipmentAids, homeLayout);
         dataModelFacade.editCitizen(citizen);
         dataModelFacade.editGeneralInformation(generalInformation);
-
+        lblInfoState.setText("Ændringer - Gemt");
     }
 
-    public void coupingLink(ActionEvent actionEvent) throws URISyntaxException, IOException {
+
+    @FXML
+    private void coupingLink(ActionEvent actionEvent) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("http://www.fs3.nu/filer/Dokumenter/Metode/FSIII-Guide-til-generelle-oplysninger.pdf?t=1647518630"));
+    }
+
+    public void setGeneralInfoFromID(String citizenID) throws SQLException {
+        txtFieldCitizenID.setText(citizenID);
+
+        Citizen selectedCitizenInfo = dataModelFacade.getInfoOnCitizen(Integer.parseInt(txtFieldCitizenID.getText()));
+        txtFieldFirstName.setText(selectedCitizenInfo.getFirstName());
+        txtFieldLastName.setText(selectedCitizenInfo.getLastName());
+        txtFieldSSN.setText(selectedCitizenInfo.getSSN());
+        txtFieldAddress.setText(selectedCitizenInfo.getAddress());
+        radioMale.setToggleGroup(group);
+        radioFemale.setToggleGroup(group);
+        radioOther.setToggleGroup(group);
+        if (selectedCitizenInfo.getSex().equals("Male")){
+            radioMale.setSelected(true);
+        }else if (selectedCitizenInfo.getSex().equals("Female")){
+            radioFemale.setSelected(true);
+        }else if(selectedCitizenInfo.getSex().equals("Other")){
+            radioOther.setSelected(true);
+        }
+
+        GeneralInformation selectedGeneralInformation = dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
+        txtAreaCoping.setText(selectedGeneralInformation.getCoping());
+        txtAreaMotivation.setText(selectedGeneralInformation.getMotivation());
+        txtAreaResources.setText(selectedGeneralInformation.getResources());
+        txtAreaRoles.setText(selectedGeneralInformation.getRoles());
+        txtAreaHabits.setText(selectedGeneralInformation.getHabits());
+        txtAreaEducationAndJobs.setText(selectedGeneralInformation.getEducationAndJob());
+        txtAreaLifeStory.setText(selectedGeneralInformation.getLifeStory());
+        txtAreaHealthInfo.setText(selectedGeneralInformation.getHealthInformation());
+        txtAreaEquipmentAids.setText(selectedGeneralInformation.getEquipmentAids());
+        txtAreaHomeLayout.setText(selectedGeneralInformation.getHomeLayout());
+        txtAreaNetwork.setText(selectedGeneralInformation.getNetwork());
+        lblInfoState.setText("Ændringer - Ikke Gemt");
     }
 }

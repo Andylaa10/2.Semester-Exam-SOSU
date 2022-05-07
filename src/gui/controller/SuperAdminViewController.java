@@ -625,6 +625,7 @@ public class SuperAdminViewController implements Initializable, IController {
         switcher.setScene(scene);
         switcher.setTitle("Log In");
         switcher.show();
+        switcher.centerOnScreen();
     }
 
     @Override

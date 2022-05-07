@@ -1,6 +1,7 @@
 package dal;
 
 import be.Citizen;
+import be.GeneralInformation;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 import java.io.IOException;
@@ -46,6 +47,33 @@ public class CitizenDAO {
             throwables.printStackTrace();
         }
         return allCitizens;
+    }
+
+    public Citizen getInfoOnCitizen(int citizenId) throws SQLException {
+        try (Connection connection = connector.getConnection()) {
+            String sql = "SELECT * FROM Citizen WHERE citizenID = ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setInt(1, citizenId);
+            preparedStatement.execute();
+            ResultSet resultset = preparedStatement.executeQuery();
+            while (resultset.next()) {
+                int id = resultset.getInt("citizenID");
+                String firstName = resultset.getString("firstName");
+                String lastName = resultset.getString("lastName");
+                String ssn = resultset.getString("SSN");
+                String address = resultset.getString("address");
+                String sex = resultset.getString("sex");
+
+               Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex);
+                return citizen;
+            }
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
     }
 
 
@@ -170,7 +198,7 @@ public class CitizenDAO {
         //citizenDAO.createCitizen("Joe", "Mama", "040119-2311", "Bjergberg Allé 205", "Male");
         //citizenDAO.deleteCitizen(3);
         //citizenDAO.deleteCitizen(4);
-        System.out.println(citizenDAO.getCitizens());
+        System.out.println(citizenDAO.getInfoOnCitizen(8));
     }
 
 
