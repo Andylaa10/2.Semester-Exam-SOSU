@@ -293,6 +293,7 @@ public class StudentViewController implements IController, Initializable {
 
     @FXML
     private void onActionComboClicked(ActionEvent actionEvent) throws SQLException {
+        btnClickGeneralInformation();
         Citizen selectedCitizenComboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
         txtFieldCitizenID.setText(String.valueOf(selectedCitizenComboBox.getId()));
         txtFieldFirstName.setText(selectedCitizenComboBox.getFirstName());
@@ -480,7 +481,7 @@ public class StudentViewController implements IController, Initializable {
     }
 
     @FXML
-    private void btnClickGeneralInformation() {
+    void btnClickGeneralInformation() {
         labelTitle.setText("Generelle Informationer for borgeren");
         labelInfo.setText("Overblik over borgerens generelle informationer, hvor det er muligt at redigere og gemme eventuelle ændringer");
         labelInfoNewLine.setText("Her kan du se alle informationer for borgeren");

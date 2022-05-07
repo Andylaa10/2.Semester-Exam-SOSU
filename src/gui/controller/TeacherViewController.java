@@ -205,9 +205,11 @@ public class TeacherViewController implements Initializable, IController {
     private Citizen selectedCreatedCitizen;
 
     private DataModelFacade dataModelFacade;
+    private StudentViewController studentViewController;
 
     public TeacherViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
+        this.studentViewController = new StudentViewController();
     }
 
     @Override
@@ -804,23 +806,34 @@ public class TeacherViewController implements Initializable, IController {
         this.tvCreatedCitizens.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2 && selectedCreatedCitizen != null) {
                 try {
-                    FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/gui/view/StudentView.fxml"));
+
                     Scene mainWindowScene = null;
                     try {
-                        mainWindowScene = new Scene(parent.load());
+                        mainWindowScene = new Scene(fxmlLoader.load());
                     } catch (IOException exception) {
                         exception.printStackTrace();
                     }
                     Stage viewCitizenStage;
                     viewCitizenStage = new Stage();
                     viewCitizenStage.setScene(mainWindowScene);
+
+                    studentViewController = fxmlLoader.getController();
+                    studentViewController.btnClickGeneralInformation();
+
+                    viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
     }
+
+
 
     /**
      * Sets the selected student
