@@ -175,7 +175,7 @@ public class GeneralInformationDAO {
         //        "roles", "habits", "educationAndJob", "lifeStory", "network",
         //        "healthInformation", "equipmentAids", "homeLayout");
         //generalInformationDAO.deleteGeneralInformation(1);
-        System.out.println(generalInformationDAO.getGeneralInformationOnCitizen(13));
-        //System.out.println(generalInformationDAO.getGeneralInformation());
+        //System.out.println(generalInformationDAO.getGeneralInformationOnCitizen(13));
+        System.out.println(generalInformationDAO.getGeneralInformation());
     }
 }

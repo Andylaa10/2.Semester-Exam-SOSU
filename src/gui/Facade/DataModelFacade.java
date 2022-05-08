@@ -17,6 +17,7 @@ public class DataModelFacade {
     private CaseModel caseModel;
     private HealthConditionsModel healthConditionsModel;
     private GeneralInformationModel generalInformationModel;
+    private FunctionalAbilitiesModel functionalAbilitiesModel;
 
     public DataModelFacade() throws IOException {
         citizenModel = new CitizenModel();
@@ -424,6 +425,26 @@ public class DataModelFacade {
     
     public void insertIntoSubCategory(int citizenId, int subCategoryId, String note, int condition) throws SQLException {
         healthConditionsModel.insertIntoSubCategory(citizenId, subCategoryId, note, condition);
+    }
+
+    public List<FunctionalAbilities> getFunctionalAbilities() throws SQLException {
+        return functionalAbilitiesModel.getFunctionalAbilities();
+    }
+
+    public FunctionalAbilities abilitiesOnCitizen(int citizenId) throws SQLException {
+        return functionalAbilitiesModel.abilitiesOnCitizen(citizenId);
+    }
+
+    public FunctionalAbilities createFunctionalAbility(int abilityNow, String abilityExcepted) throws SQLException {
+        return functionalAbilitiesModel.createFunctionalAbility(abilityNow, abilityExcepted);
+    }
+
+    public void editAbilities(FunctionalAbilities functionalAbilities) throws SQLException {
+        functionalAbilitiesModel.editAbilities(functionalAbilities);
+    }
+
+    public void deleteAbilities(int id) throws Exception {
+        functionalAbilitiesModel.deleteAbilities(id);
     }
 
 }
