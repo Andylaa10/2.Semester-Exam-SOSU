@@ -193,6 +193,25 @@ public class StudentViewController implements IController, Initializable {
     private AnchorPane anchorPaneOBS;
     @FXML
     private AnchorPane anchorPaneFunctionalAbility;
+    @FXML
+    private RadioButton radioNotRelevant;
+    @FXML
+    private RadioButton radioPotential;
+    @FXML
+    private RadioButton radioRelevant;
+    @FXML
+    private RadioButton radio0;
+    @FXML
+    private RadioButton radio1;
+    @FXML
+    private RadioButton radio2;
+    @FXML
+    private RadioButton radio3;
+    @FXML
+    private RadioButton radio4;
+    @FXML
+    private RadioButton radio9;
+
 
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
@@ -208,7 +227,7 @@ public class StudentViewController implements IController, Initializable {
 
     private DataModelFacade dataModelFacade;
 
-    private ToggleGroup group = new ToggleGroup();
+    private ToggleGroup group;
 
     public StudentViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
@@ -254,8 +273,6 @@ public class StudentViewController implements IController, Initializable {
             e.printStackTrace();
         }
     }
-
-
 
     /**
      * Loads all data in tableview, from the selected current citizen ID.
@@ -310,6 +327,7 @@ public class StudentViewController implements IController, Initializable {
         txtFieldLastName.setText(selectedCitizenComboBox.getLastName());
         txtFieldSSN.setText(selectedCitizenComboBox.getSSN());
         txtFieldAddress.setText(selectedCitizenComboBox.getAddress());
+        group = new ToggleGroup();
         radioMale.setToggleGroup(group);
         radioFemale.setToggleGroup(group);
         radioOther.setToggleGroup(group);
@@ -332,6 +350,23 @@ public class StudentViewController implements IController, Initializable {
         txtAreaEquipmentAids.setText(selectedGeneralInformation.getEquipmentAids());
         txtAreaHomeLayout.setText(selectedGeneralInformation.getHomeLayout());
         txtAreaNetwork.setText(selectedGeneralInformation.getNetwork());
+    }
+
+    public void setupToggleFunctionCondition(){
+        group = new ToggleGroup();
+        radio0.setToggleGroup(group);
+        radio1.setToggleGroup(group);
+        radio2.setToggleGroup(group);
+        radio3.setToggleGroup(group);
+        radio4.setToggleGroup(group);
+        radio9.setToggleGroup(group);
+    }
+
+    public void setupToggleHealthCondition(){
+        group = new ToggleGroup();
+        radioNotRelevant.setToggleGroup(group);
+        radioPotential.setToggleGroup(group);
+        radioRelevant.setToggleGroup(group);
     }
 
     /**
