@@ -791,7 +791,7 @@ public class TeacherViewController implements Initializable, IController {
 
                     studentViewController = fxmlLoader.getController();
                     studentViewController.btnClickGeneralInformation();
-                    studentViewController.setGeneralInfoFromID(String.valueOf(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId()));
+                    studentViewController.setGeneralInfoFromID(String.valueOf(tvCitizens.getSelectionModel().getSelectedItem().getId()));
 
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();

@@ -30,7 +30,7 @@
                   <Button fx:id="btnHome" layoutX="7.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnClickHome" prefHeight="133.0" prefWidth="172.0" style="-fx-background-color: transparent;" />
                </children>
             </Pane>
-            <Button fx:id="btnCreateSchoolOnAssignPane" mnemonicParsing="false" onAction="#btnClickCreateSchool" prefHeight="42.0" prefWidth="218.0" text="Opret Skole" textFill="WHITE">
+            <Button fx:id="btnCreateSchoolOnAssignPane" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickCreateSchool" prefHeight="42.0" prefWidth="218.0" text="Skoler" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
@@ -42,7 +42,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnCreateAdminOnAssignPage" mnemonicParsing="false" onAction="#btnClickCreateAdmin" prefHeight="42.0" prefWidth="218.0" text="Opret Admin" textFill="WHITE">
+            <Button fx:id="btnCreateAdminOnAssignPage" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#btnClickCreateAdmin" prefHeight="42.0" prefWidth="218.0" text="Admins" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
@@ -54,7 +54,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnConfigureSchools" mnemonicParsing="false" onAction="#btnClickAssignSchools" prefHeight="42.0" prefWidth="218.0" text="Tildel Skoler" textFill="WHITE">
+            <Button fx:id="btnConfigureSchools" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#btnClickAssignSchools" prefHeight="42.0" prefWidth="218.0" text="Tildel Skoler" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
@@ -88,8 +88,8 @@
                   <Font size="32.0" />
                </font>
             </Label>
-            <Label fx:id="labelInfo" layoutX="34.0" layoutY="43.0" prefHeight="35.0" prefWidth="580.0" text="Tekst" textFill="WHITE" />
-            <Label fx:id="labelInfoNewLine" layoutX="34.0" layoutY="58.0" prefHeight="35.0" prefWidth="580.0" text="Tekst2" textFill="WHITE" />
+            <Label fx:id="labelInfo" layoutX="34.0" layoutY="43.0" prefHeight="35.0" prefWidth="580.0" textFill="WHITE" />
+            <Label fx:id="labelInfoNewLine" layoutX="34.0" layoutY="58.0" prefHeight="35.0" prefWidth="580.0" textFill="WHITE" />
          </children>
          <effect>
             <ColorAdjust brightness="0.3" />
@@ -143,7 +143,7 @@
          <children>
             <TableView fx:id="tvSchools" layoutX="21.0" layoutY="27.0" prefHeight="378.0" prefWidth="274.0" style="-fx-background-color: transparent;">
                <columns>
-                  <TableColumn fx:id="tcSchools" prefWidth="273.6000122070312" text="Schools" />
+                  <TableColumn fx:id="tcSchools" prefWidth="273.6000122070312" text="Skoler" />
                </columns>
             </TableView>
             <Button fx:id="btnEditSchool" layoutX="27.0" layoutY="416.0" mnemonicParsing="false" onAction="#onActionEditSchool" prefHeight="26.0" prefWidth="111.0" text="Rediger Skole">
@@ -186,10 +186,10 @@
               <columns>
                 <TableColumn fx:id="tcAdminFirstName" prefWidth="190.4000244140625" text="Fornavn" />
                 <TableColumn fx:id="tcAdminLastName" prefWidth="200.0" text="Efternavn" />
-                  <TableColumn fx:id="tcAdminUsername" prefWidth="188.0" text="Username" />
+                  <TableColumn fx:id="tcAdminUsername" prefWidth="188.0" text="Brugernavn" />
               </columns>
             </TableView>
-            <Label alignment="CENTER" layoutX="199.0" prefHeight="47.0" prefWidth="211.0" text="Oprettede Admins">
+            <Label alignment="CENTER" layoutX="199.0" prefHeight="47.0" prefWidth="211.0" text="Admins">
                <font>
                   <Font size="23.0" />
                </font>
@@ -231,7 +231,7 @@
             <TableView fx:id="tvAssignedSchool" layoutX="14.0" layoutY="38.0" prefHeight="232.0" prefWidth="274.0" style="-fx-background-color: transparent;">
               <columns>
                   <TableColumn fx:id="tcAssignedSchoolID" prefWidth="75.0" text="ID" visible="false" />
-                <TableColumn fx:id="tcAssignedSchoolName" prefWidth="273.6000122070312" text="Skolens Navn" />
+                <TableColumn fx:id="tcAssignedSchoolName" prefWidth="273.6000122070312" text="Skoler" />
               </columns>
             </TableView>
             <TableView fx:id="tvAssignAdmin" layoutX="305.0" layoutY="38.0" prefHeight="232.0" prefWidth="295.0" style="-fx-background-color: transparent;">
@@ -239,7 +239,7 @@
                   <TableColumn fx:id="tcAssignAdminID" prefWidth="75.0" text="ID" visible="false" />
                   <TableColumn fx:id="tcAssignAdminFirstName" text="Fornavn" />
                   <TableColumn fx:id="tcAssignAdminLastName" prefWidth="106.4000244140625" text="Efternavn" />
-                  <TableColumn fx:id="tcAssignAdminUsername" prefWidth="107.19999999999999" text="Username" />
+                  <TableColumn fx:id="tcAssignAdminUsername" prefWidth="107.19999999999999" text="Brugernavn" />
                </columns>
             </TableView>
             <TableView fx:id="tvAssignedAdminsOnSchool" layoutX="14.0" layoutY="270.0" prefHeight="133.0" prefWidth="580.0" style="-fx-background-color: transparent;">
@@ -250,12 +250,12 @@
                   <TableColumn fx:id="tcAssignedAdminUsername" prefWidth="202.4000244140625" text="Brugernavn" />
                </columns>
             </TableView>
-            <Button fx:id="btnAssignAdminToSchool" layoutX="14.0" layoutY="414.0" mnemonicParsing="false" onAction="#onActionAssignAdminToSchool" prefHeight="26.0" prefWidth="131.0" text="Tildel Admin til Skole">
+            <Button fx:id="btnAssignAdminToSchool" layoutX="14.0" layoutY="414.0" mnemonicParsing="false" onAction="#onActionAssignAdminToSchool" prefHeight="26.0" prefWidth="131.0" text="Tildel Admin">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect>
             </Button>
-            <Button fx:id="btnDeleteAdminFromSchool" layoutX="151.0" layoutY="414.0" mnemonicParsing="false" onAction="#onActionDeleteAdminFromSchool" prefHeight="26.0" prefWidth="131.0" text="Slet Admin fra Skole">
+            <Button fx:id="btnDeleteAdminFromSchool" layoutX="151.0" layoutY="414.0" mnemonicParsing="false" onAction="#onActionDeleteAdminFromSchool" prefHeight="26.0" prefWidth="131.0" text="Slet Admin">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect>

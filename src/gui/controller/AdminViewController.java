@@ -93,8 +93,6 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private Button btnDeleteTeacher;
     @FXML
-    private Button btnCopyTeacher;
-    @FXML
     private Button btnEditTeacherSave;
     @FXML
     private Button btnEditTeacherCancel;
@@ -624,7 +622,6 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private void onActionEditTeacher(){
         setSelectedTeacher(selectedTeacher);
-        btnCopyTeacher.setDisable(true);
         btnDeleteTeacher.setDisable(true);
         btnEditTeacher.setDisable(true);
         btnCreateTeacher.setVisible(false);
@@ -647,7 +644,6 @@ public class AdminViewController implements Initializable, IController {
                 reloadTeacherTable();
                 clearTeacherTxtField();
                 tvTeachers.getSelectionModel().clearSelection();
-                btnCopyTeacher.setDisable(false);
                 btnDeleteTeacher.setDisable(false);
                 btnEditTeacher.setDisable(false);
                 btnCreateTeacher.setVisible(true);
@@ -687,7 +683,6 @@ public class AdminViewController implements Initializable, IController {
 
         btnEditTeacher.setDisable(false);
         btnDeleteTeacher.setDisable(false);
-        btnCopyTeacher.setDisable(false);
 
         btnEditTeacherCancel.setVisible(false);
         btnEditTeacherSave.setVisible(false);
@@ -1016,7 +1011,7 @@ public class AdminViewController implements Initializable, IController {
 
                     studentViewController = fxmlLoader.getController();
                     studentViewController.btnClickGeneralInformation();
-                    studentViewController.setGeneralInfoFromID(String.valueOf(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId()));
+                    studentViewController.setGeneralInfoFromID(String.valueOf(tvCitizens.getSelectionModel().getSelectedItem().getId()));
 
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();

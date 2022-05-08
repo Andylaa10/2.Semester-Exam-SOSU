@@ -21,11 +21,11 @@
             <Image url="@img/Logo.png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtFieldUsername" alignment="CENTER" layoutX="309.0" layoutY="296.0" onAction="#onActionLoginWithEnter" prefHeight="37.0" prefWidth="181.0" promptText="Username">
+      <TextField fx:id="txtFieldUsername" alignment="CENTER" layoutX="309.0" layoutY="296.0" onAction="#onActionLoginWithEnter" prefHeight="37.0" prefWidth="181.0" promptText="Brugernavn">
          <effect>
             <DropShadow />
          </effect></TextField>
-      <PasswordField fx:id="pField" alignment="CENTER" layoutX="308.0" layoutY="354.0" onAction="#onActionLoginWithEnter" prefHeight="38.0" prefWidth="182.0" promptText="Password">
+      <PasswordField fx:id="pField" alignment="CENTER" layoutX="308.0" layoutY="354.0" onAction="#onActionLoginWithEnter" prefHeight="38.0" prefWidth="182.0" promptText="Adgangskode">
          <effect>
             <DropShadow />
          </effect></PasswordField>

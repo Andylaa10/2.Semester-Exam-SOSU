@@ -566,7 +566,7 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     private void setAnchorPanesVisibility(){
-        labelInfoNewLine.setText("");
+        labelTitle.setText("Superadmin");
         anchorPaneSuperAdmin.setVisible(true);
         anchorPaneCreateSchool.setVisible(false);
         anchorPaneCreateAdmin.setVisible(false);

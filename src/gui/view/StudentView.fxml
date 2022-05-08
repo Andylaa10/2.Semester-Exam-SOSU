@@ -35,7 +35,7 @@
                   <Button fx:id="btnHome" layoutX="7.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnClickHome" prefHeight="133.0" prefWidth="172.0" style="-fx-background-color: transparent;" />
                </children>
             </Pane>
-            <Button fx:id="btnCitizens" mnemonicParsing="false" onAction="#btnClickCitizensAndCases" prefHeight="42.0" prefWidth="218.0" text="Sager - Borger">
+            <Button fx:id="btnCitizens" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickCitizensAndCases" prefHeight="42.0" prefWidth="218.0" text="Sager - Borger">
                <graphic>
                   <ImageView fitHeight="28.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -47,7 +47,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnFS3" mnemonicParsing="false" onAction="#btnClickFS3" prefHeight="42.0" prefWidth="218.0" text="Rapporter FSIII">
+            <Button fx:id="btnFS3" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickFS3" prefHeight="42.0" prefWidth="218.0" text="Rapporter FSIII">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -134,7 +134,7 @@
                         <ColorAdjust brightness="0.34" />
                      </effect>
                   </Button>
-                  <Button fx:id="btnHealthCondition" layoutX="228.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnClickHealthCondition" prefHeight="35.0" prefWidth="210.0" text="Helbredstilstande">
+                  <Button fx:id="btnHealthCondition" layoutX="228.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnClickHealthCondition" prefHeight="35.0" prefWidth="210.0" text="Helbredstilstand">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -142,7 +142,7 @@
                         <ColorAdjust brightness="0.34" />
                      </effect>
                   </Button>
-                  <Button fx:id="btnFunctionalCondition" layoutX="445.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnClickFunctionalCondition" prefHeight="35.0" prefWidth="210.0" text="Funktions Tilstand">
+                  <Button fx:id="btnFunctionalCondition" layoutX="445.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnClickFunctionalCondition" prefHeight="35.0" prefWidth="210.0" text="Funktionstilstand">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -160,7 +160,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnCitizenAssessment" layoutX="661.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnClickCitizenAssessment" prefHeight="35.0" prefWidth="210.0" text="Borgerens Vurdering">
+                  <Button fx:id="btnCitizenAssessment" layoutX="661.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnClickCitizenAssessment" prefHeight="35.0" prefWidth="210.0" text="Borgerens vurdering">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -173,7 +173,7 @@
                   <ColorAdjust brightness="-0.24" contrast="0.17" />
                </effect>
             </Pane>
-            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1146.0">
+            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1146.0" visible="false">
                <children>
                   <ImageView fitHeight="102.0" fitWidth="140.0" layoutX="48.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -422,18 +422,18 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
+            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
                <children>
                   <TableView fx:id="tvHealthConditions" layoutX="26.0" layoutY="89.0" prefHeight="423.0" prefWidth="302.0" style="-fx-background-color: transparent;">
                     <columns>
                       <TableColumn fx:id="tcHealthConditionID" prefWidth="300.7999572753906" text="ID" visible="false" />
-                        <TableColumn fx:id="tcHealthConditionName" prefWidth="300.7999572753906" text="Helbreds Tilstande" />
+                        <TableColumn fx:id="tcHealthConditionName" prefWidth="300.7999572753906" text="Helbredstilstande" />
                     </columns>
                   </TableView>
                   <TableView fx:id="tvSubCategories" layoutX="355.0" layoutY="89.0" prefHeight="423.0" prefWidth="254.0" style="-fx-background-color: transparent;">
                      <columns>
                         <TableColumn fx:id="tcSubCategoriesID" prefWidth="253.60001220703126" text="ID" visible="false" />
-                        <TableColumn fx:id="tcSubCategoriesName" prefWidth="250.39996337890625" text="Underkategori(er)" />
+                        <TableColumn fx:id="tcSubCategoriesName" prefWidth="250.39996337890625" text="Underkategorier" />
                      </columns>
                   </TableView>
                   <Label layoutX="316.0" layoutY="14.0" text="Borgerens Helbredstilstande - FSIII">
@@ -462,7 +462,7 @@
                         <Font size="14.0" />
                      </font>
                   </CheckBox>
-                  <Label layoutX="638.0" layoutY="340.0" text="Vurdering af årsagens tilstand">
+                  <Label layoutX="638.0" layoutY="340.0" text="Vurdering af tilstand">
                      <font>
                         <Font size="21.0" />
                      </font>

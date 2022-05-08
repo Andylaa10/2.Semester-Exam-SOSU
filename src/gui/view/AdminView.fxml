@@ -34,7 +34,7 @@
                   <Button fx:id="btnHome" layoutX="7.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnClickHome" prefHeight="133.0" prefWidth="172.0" style="-fx-background-color: transparent;" />
                </children>
             </Pane>
-            <Button fx:id="btnCreateTeacherPane" mnemonicParsing="false" onAction="#btnClickCreateTeacher" prefHeight="42.0" prefWidth="218.0" text="Opret Lærer">
+            <Button fx:id="btnCreateTeacherPane" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickCreateTeacher" prefHeight="42.0" prefWidth="218.0" text="Lærere">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -46,7 +46,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnStudentPane" mnemonicParsing="false" onAction="#btnClickStudent" prefHeight="42.0" prefWidth="218.0" text="Elever">
+            <Button fx:id="btnStudentPane" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickStudent" prefHeight="42.0" prefWidth="218.0" text="Elever">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -58,7 +58,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnCasePane" mnemonicParsing="false" onAction="#btnClickCase" prefHeight="42.0" prefWidth="218.0" text="Sager">
+            <Button fx:id="btnCasePane" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickCase" prefHeight="42.0" prefWidth="218.0" text="Sager">
                <graphic>
                   <ImageView fitHeight="21.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -70,7 +70,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnCitizensPane" mnemonicParsing="false" onAction="#btnClickSeeCitizens" prefHeight="42.0" prefWidth="218.0" text="Borgere">
+            <Button fx:id="btnCitizensPane" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickSeeCitizens" prefHeight="42.0" prefWidth="218.0" text="Borgere">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -82,7 +82,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnCreateCitizenPane" mnemonicParsing="false" onAction="#btnClickCitizen" prefHeight="42.0" prefWidth="218.0" text="Opret Borger">
+            <Button fx:id="btnCreateCitizenPane" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickCitizen" prefHeight="42.0" prefWidth="218.0" text="Opret Borger">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -198,8 +198,8 @@
                </font>
             </Label>
             <Label layoutX="538.0" layoutY="130.0" prefHeight="18.0" prefWidth="50.0" text="Fornavn" />
-            <Label layoutX="539.0" layoutY="231.0" prefHeight="18.0" prefWidth="54.0" text="Password" />
-            <Label layoutX="537.0" layoutY="197.0" prefHeight="18.0" prefWidth="58.0" text="Username" />
+            <Label layoutX="539.0" layoutY="231.0" prefHeight="18.0" prefWidth="54.0" text="Adgangskode" />
+            <Label layoutX="537.0" layoutY="197.0" prefHeight="18.0" prefWidth="62.0" text="Brugernavn" />
             <TextField fx:id="txtFieldTeacherFirstName" layoutX="378.0" layoutY="126.0" />
             <TextField fx:id="txtFieldTeacherLastName" layoutX="378.0" layoutY="161.0" />
             <TextField fx:id="txtFieldTeacherUsername" layoutX="378.0" layoutY="194.0" />
@@ -244,13 +244,13 @@
                <columns>
                   <TableColumn fx:id="tcStudentFirstName" minWidth="0.0" prefWidth="147.20007038116455" text="Fornavn" />
                   <TableColumn fx:id="tcStudentLastName" prefWidth="183.19996643066406" text="Efternavn" />
-                  <TableColumn fx:id="tcStudentUsername" prefWidth="264.7999267578125" text="Username" />
+                  <TableColumn fx:id="tcStudentUsername" prefWidth="264.7999267578125" text="Brugernavn" />
                </columns>
             </TableView>
             <TextField fx:id="txtFieldFirstName" layoutX="14.0" layoutY="367.0" prefHeight="26.0" prefWidth="140.0" promptText="Fornavn" />
             <TextField fx:id="txtFieldLastName" layoutX="162.0" layoutY="367.0" prefHeight="26.0" prefWidth="140.0" promptText="Efternavn" />
-            <TextField fx:id="txtFieldUsername" layoutX="309.0" layoutY="367.0" prefHeight="26.0" prefWidth="140.0" promptText="Username" />
-            <TextField fx:id="txtFieldPassword" layoutX="456.0" layoutY="367.0" prefHeight="26.0" prefWidth="140.0" promptText="Password" />
+            <TextField fx:id="txtFieldUsername" layoutX="309.0" layoutY="367.0" prefHeight="26.0" prefWidth="140.0" promptText="Brugernavn" />
+            <TextField fx:id="txtFieldPassword" layoutX="456.0" layoutY="367.0" prefHeight="26.0" prefWidth="140.0" promptText="Adgangskode" />
             <Button fx:id="btnSaveStudent" layoutX="14.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleSaveStudent" prefHeight="26.0" prefWidth="180.0" text="Opret Elev">
                <effect>
                   <ColorAdjust brightness="0.1" />
@@ -358,16 +358,9 @@
             <TextField fx:id="txtFieldCaseID" layoutX="21.0" layoutY="156.0" prefHeight="26.0" prefWidth="21.0" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <TableView fx:id="tvCurrentCases" layoutX="13.0" layoutY="23.0" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
-               <columns>
-                  <TableColumn fx:id="tcCurrentCasesID" prefWidth="132.0" text="ID" visible="false" />
-                  <TableColumn fx:id="tcCurrentCasesName" prefWidth="132.0" text="Navn" />
-                  <TableColumn fx:id="tcCurrentCasesDate" prefWidth="132.79998779296875" text="Dato" />
-               </columns>
-            </TableView>
-            <TableView fx:id="tvCitizens" layoutX="314.0" layoutY="24.0" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvCitizens" layoutX="18.0" layoutY="24.0" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
                <columns>
                   <TableColumn fx:id="tcCitizenID" prefWidth="75.0" text="ID" visible="false" />
                   <TableColumn fx:id="tcCitizenFirstName" prefWidth="75.0" text="Fornavn" />
@@ -375,22 +368,29 @@
                   <TableColumn fx:id="tcCitizenSSN" prefWidth="108.800048828125" text="CPR-Nummer" />
                </columns>
             </TableView>
-            <Label layoutX="75.0" text="Nuværende Sager">
+            <TableView fx:id="tvCurrentCases" layoutX="314.0" layoutY="24.0" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
+               <columns>
+                  <TableColumn fx:id="tcCurrentCasesID" prefWidth="132.0" text="ID" visible="false" />
+                  <TableColumn fx:id="tcCurrentCasesName" prefWidth="132.0" text="Navn" />
+                  <TableColumn fx:id="tcCurrentCasesDate" prefWidth="132.79998779296875" text="Dato" />
+               </columns>
+            </TableView>
+            <Label layoutX="425.0" layoutY="1.0" text="Sager">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="378.0" text="Nuværende Borgere">
+            <Label layoutX="119.0" layoutY="1.0" text="Borgere">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="btnAssignCase" layoutX="14.0" layoutY="416.0" mnemonicParsing="false" onAction="#btnHandleAssignCase" prefHeight="26.0" prefWidth="137.0" text="Tildel Sag til Borger">
+            <Button fx:id="btnAssignCase" layoutX="14.0" layoutY="416.0" mnemonicParsing="false" onAction="#btnHandleAssignCase" prefHeight="26.0" prefWidth="137.0" text="Tildel Sag">
                <effect>
                   <ColorAdjust brightness="0.1" />
                </effect>
             </Button>
-            <Button fx:id="btnDeleteCaseFromCitizen" layoutX="158.0" layoutY="416.0" mnemonicParsing="false" onAction="#onActionDeleteCaseFromCitizen" prefHeight="26.0" prefWidth="137.0" text="Fjern Sag fra Borger">
+            <Button fx:id="btnDeleteCaseFromCitizen" layoutX="158.0" layoutY="416.0" mnemonicParsing="false" onAction="#onActionDeleteCaseFromCitizen" prefHeight="26.0" prefWidth="137.0" text="Slet Sag">
                <effect>
                   <ColorAdjust brightness="0.1" />
                </effect>
@@ -404,13 +404,13 @@
                   <TableColumn fx:id="tcCasesOnCitizenInfo" minWidth="0.0" prefWidth="176.800048828125" text="Info" />
                </columns>
             </TableView>
-            <Label layoutX="15.0" layoutY="227.0" text="Sager tildelt den valgte borger">
+            <Label layoutX="15.0" layoutY="227.0" text="Tildelte sager">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
          </children></AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="15.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
