@@ -70,11 +70,11 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnCitizensPane" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickSeeCitizens" prefHeight="42.0" prefWidth="218.0" text="Borgere">
+            <Button fx:id="btnCreateCitizenPane" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickCitizen" prefHeight="42.0" prefWidth="218.0" text="Borgere">
                <graphic>
-                  <ImageView fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@img/CitizenS%20icon.png" />
+                        <Image url="@img/CitizenS%20Icon.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -82,11 +82,11 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnCreateCitizenPane" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickCitizen" prefHeight="42.0" prefWidth="218.0" text="Opret Borger">
+            <Button fx:id="btnCitizensPane" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickSeeCitizens" prefHeight="42.0" prefWidth="218.0" text="Tildel sager">
                <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@img/Citizen%20Icon.png" />
+                        <Image url="@img/Citizen%20icon.png" />
                      </image>
                   </ImageView>
                </graphic>
