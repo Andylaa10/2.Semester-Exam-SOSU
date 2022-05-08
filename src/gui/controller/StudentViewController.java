@@ -246,8 +246,15 @@ public class StudentViewController implements IController, Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        setupToggleGender();
+        setupToggleFunctionCondition();
+        setupToggleHealthCondition();
     }
 
+    /**
+     * Inserts value from database to the different tables
+     * @throws Exception
+     */
     private void initializeTables() throws Exception {
         //Initialize the citizens table
         tcCitizenID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -291,6 +298,9 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
+    /**
+     * Takes values from the database and inserts them into the sub category tableview
+     */
     public void seeSubCategoriesOnCategory() {
         //Initialize the subCategory table
         tcSubCategoriesID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -303,11 +313,19 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
+    /**
+     * Load the tableviews with assigned health condition notes
+     * @throws SQLServerException
+     */
     public void seeTxtOnSubCategory() throws SQLServerException {
         txtFieldCitizenID.getText();
         txtAreaNoteOnSubCategory.setText(String.valueOf(dataModelFacade.getTextOnSubCategory(selectedCitizenOnComboBox.getId(), selectedSubCategory.getId())));
     }
 
+    /**
+     * Setup combobox with citizens
+     * @throws SQLException
+     */
     public void initializeCitizenComboBox() throws SQLException {
         //Initialize the citizens in the dropdown menu
         allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
@@ -315,6 +333,10 @@ public class StudentViewController implements IController, Initializable {
         comboBoxCitizen.setItems(allCitizens);
     }
 
+    /**
+     * When clicked on citizen in the combobox, the different text fields get values based on the selected citizen
+     * @throws SQLException
+     */
     @FXML
     private void onActionComboClicked() throws SQLException {
         lblInfoState.setText("Ændringer - Ikke Gemt");
@@ -327,10 +349,6 @@ public class StudentViewController implements IController, Initializable {
         txtFieldLastName.setText(selectedCitizenComboBox.getLastName());
         txtFieldSSN.setText(selectedCitizenComboBox.getSSN());
         txtFieldAddress.setText(selectedCitizenComboBox.getAddress());
-        group = new ToggleGroup();
-        radioMale.setToggleGroup(group);
-        radioFemale.setToggleGroup(group);
-        radioOther.setToggleGroup(group);
         if (selectedCitizenComboBox.getSex().equals("Male")){
             radioMale.setSelected(true);
         }else if (selectedCitizenComboBox.getSex().equals("Female")){
@@ -352,6 +370,9 @@ public class StudentViewController implements IController, Initializable {
         txtAreaNetwork.setText(selectedGeneralInformation.getNetwork());
     }
 
+    /**
+     * Method to pick only functional condition
+     */
     public void setupToggleFunctionCondition(){
         group = new ToggleGroup();
         radio0.setToggleGroup(group);
@@ -362,11 +383,24 @@ public class StudentViewController implements IController, Initializable {
         radio9.setToggleGroup(group);
     }
 
+    /**
+     * Method to only pick one health condition
+     */
     public void setupToggleHealthCondition(){
         group = new ToggleGroup();
         radioNotRelevant.setToggleGroup(group);
         radioPotential.setToggleGroup(group);
         radioRelevant.setToggleGroup(group);
+    }
+
+    /**
+     * Method to only pick one gender
+     */
+    public void setupToggleGender(){
+        group = new ToggleGroup();
+        radioMale.setToggleGroup(group);
+        radioFemale.setToggleGroup(group);
+        radioOther.setToggleGroup(group);
     }
 
     /**
@@ -403,18 +437,34 @@ public class StudentViewController implements IController, Initializable {
         return allCasesOnCitizen;
     }
 
+    /**
+     * loads the health condition tableview.
+     * @param allHealthConditions
+     */
     private void tableViewLoadHealthConditions(ObservableList<HealthCondition> allHealthConditions) {
         tvHealthConditions.setItems(getHealthConditionData());
     }
 
+    /**
+     * Gets the data for health conditions
+     * @return
+     */
     private ObservableList<HealthCondition> getHealthConditionData() {
         return allHealthConditions;
     }
 
+    /**
+     * loads the sub categories tableview.
+     * @param allSubCategories
+     */
     private void tableViewLoadSubCategories(ObservableList<SubCategory> allSubCategories) {
         tvSubCategories.setItems(getSubCategories());
     }
 
+    /**
+     * Gets the data for sub categories
+     * @return
+     */
     private ObservableList<SubCategory> getSubCategories() {
         return allSubCategories;
     }
@@ -432,6 +482,9 @@ public class StudentViewController implements IController, Initializable {
         }));
     }
 
+    /**
+     * Selects a citizen from the combobox
+     */
     public void selectedCitizenOnComboBox() {
         this.comboBoxCitizen.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((Citizen) newValue != null) {
@@ -440,6 +493,9 @@ public class StudentViewController implements IController, Initializable {
         }));
     }
 
+    /**
+     * Selects a health condition from the tableview
+     */
     private void selectedHealthCondition() {
         this.tvHealthConditions.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((HealthCondition) newValue != null) {
@@ -449,6 +505,9 @@ public class StudentViewController implements IController, Initializable {
         }));
     }
 
+    /**
+     * Selects a sub category from the tableview
+     */
     private void selectedSubCategory() {
         this.tvSubCategories.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((SubCategory) newValue != null) {
@@ -462,6 +521,12 @@ public class StudentViewController implements IController, Initializable {
         }));
     }
 
+    /**
+     * Sets the user
+     * @param user
+     * @throws SQLException
+     * @throws IOException
+     */
     @Override
     public void setUser(User user) throws SQLException, IOException {
         labelTitle.setText("Elev");
@@ -469,6 +534,9 @@ public class StudentViewController implements IController, Initializable {
         labelInfoNewLine.setText("");
     }
 
+    /**
+     * Set up the student anchor pane
+     */
     private void setAnchorPanesVisibility() {
         labelInfoNewLine.setText("");
         anchorPaneStudent.setVisible(true);
@@ -481,6 +549,10 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneCitizenAssessment.setVisible(false);
     }
 
+    /**
+     * Takes you back to the start screen/pane when clicked on logo
+     * @param actionEvent
+     */
     @FXML
     private void btnClickHome(ActionEvent actionEvent) {
         labelTitle.setText("Elev");
@@ -495,6 +567,9 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneCitizenAssessment.setVisible(false);
     }
 
+    /**
+     * Set up the citizen pane
+     */
     @FXML
     private void btnClickCitizensAndCases() {
         labelTitle.setText("Borgere og Sager");
@@ -510,6 +585,9 @@ public class StudentViewController implements IController, Initializable {
     }
 
 
+    /**
+     * Set up the FS3 pane
+     */
     @FXML
     private void btnClickFS3() {
         labelTitle.setText("Rapporter og øv Fælles Sprog 3");
@@ -525,6 +603,9 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneCitizenAssessment.setVisible(false);
     }
 
+    /**
+     * Set up the general information pane
+     */
     @FXML
     void btnClickGeneralInformation() {
         labelTitle.setText("Generelle Informationer for borgeren");
@@ -541,6 +622,9 @@ public class StudentViewController implements IController, Initializable {
 
     }
 
+    /**
+     * Set up the health condition pane
+     */
     @FXML
     private void btnClickHealthCondition() {
         labelTitle.setText("Helbreds Tilstande for borgeren");
@@ -556,6 +640,9 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneCitizenAssessment.setVisible(false);
     }
 
+    /**
+     * Set up the functional condition pane
+     */
     @FXML
     private void btnClickFunctionalCondition() {
         labelTitle.setText("Funktionstilstanden for borgeren");
@@ -571,6 +658,9 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneCitizenAssessment.setVisible(false);
     }
 
+    /**
+     * Set up the Assessment pane
+     */
     @FXML
     private void btnClickCitizenAssessment() {
         labelTitle.setText("Borgerens egen vurdering af funktionstilstand");
@@ -586,11 +676,19 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneCitizenAssessment.setVisible(true);
     }
 
+    /**
+     * When click on back it sends you back to the start pane/screen
+     * @param actionEvent
+     */
     @FXML
     private void btnClickBack(ActionEvent actionEvent) {
         btnClickHome(actionEvent);
     }
 
+    /**
+     * Logs you out when clicked
+     * @throws IOException
+     */
     @FXML
     private void btnClickLogout() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
@@ -602,11 +700,19 @@ public class StudentViewController implements IController, Initializable {
         switcher.centerOnScreen();
     }
 
-
+    /**
+     * When the general information is click it set up the general information pane
+     * @param actionEvent
+     */
     public void onActionGeneralInfoCancel(ActionEvent actionEvent) {
         btnClickGeneralInformation();
     }
 
+    /**
+     * Save the changes if there are any
+     * @param actionEvent
+     * @throws Exception
+     */
     public void onActionGeneralInfoSave(ActionEvent actionEvent) throws Exception {
         int id = Integer.parseInt(txtFieldCitizenID.getText());
         String citizenFirstName = txtFieldFirstName.getText();
@@ -646,12 +752,22 @@ public class StudentViewController implements IController, Initializable {
 
     }
 
-
+    /**
+     * When clicked on the little i-icon it sends you to the FS3 homepage
+     * @param actionEvent
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     @FXML
     private void coupingLink(ActionEvent actionEvent) throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("http://www.fs3.nu/filer/Dokumenter/Metode/FSIII-Guide-til-generelle-oplysninger.pdf?t=1647518630"));
     }
 
+    /**
+     * When a citizen is selected all values is loaded in the text fields
+     * @param citizenID
+     * @throws SQLException
+     */
     public void setGeneralInfoFromID(String citizenID) throws SQLException {
         txtFieldCitizenID.setText(citizenID);
 
