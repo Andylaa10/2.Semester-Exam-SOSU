@@ -243,6 +243,8 @@ public class StudentViewController extends Application implements IController, I
     private ComboBox comboboxMeaningOfPerformance;
     @FXML
     private TextArea txtAreaNote;
+    @FXML
+    private TextField txtFieldFunctionalAbilityID;
 
 
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
@@ -280,7 +282,7 @@ public class StudentViewController extends Application implements IController, I
         selectedCitizenOnComboBox();
         selectedHealthCondition();
         selectedSubCategory();
-        setSelectedFunctionalAbilitySubCategory();
+        SelectedFunctionalAbilitySubCategory();
         try {
             initializeTables();
             initializeCitizenComboBox();
@@ -574,11 +576,11 @@ public class StudentViewController extends Application implements IController, I
     /**
      * Selects a sub category from the tableview
      */
-    private void setSelectedFunctionalAbilitySubCategory() {
+    private void SelectedFunctionalAbilitySubCategory() {
         this.tvFunctionalConditions.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((SubFunctional) newValue != null) {
                 this.selectedFunctionalAbilitySubCategory = (SubFunctional) newValue;
-                System.out.println(selectedFunctionalAbilitySubCategory.getId());
+                txtFieldFunctionalAbilityID.setText(String.valueOf(selectedFunctionalAbilitySubCategory.getId()));
             }
         }));
     }
@@ -845,6 +847,11 @@ public class StudentViewController extends Application implements IController, I
         lblInfoState.setText("Ændringer - Ikke Gemt");
         imgViewSaved.setVisible(false);
         imgViewNotSaved.setVisible(true);
+    }
+
+    private void setFunctionalAbilityInfo(int citizenId, int functionalAbilitySubCategoryId){
+        //TODO LAV METODE HER TIL AT UDFYLDE TEKSTEN I ALLE FELTER OG COMBOBOXES PÅ FUNKTIONSTILSTANDSVIEWET!!!!!!!!!!!
+        //TODO !!!!!!!!!!!!!!!!
     }
 
     @FXML
