@@ -1,10 +1,13 @@
 package gui.controller;
 
-import be.*;
+import be.Case;
+import be.Citizen;
 import be.FunctionalAbilities.SubFunctional;
+import be.GeneralInformation;
 import be.HealthCondition.HealthCondition;
 import be.HealthCondition.SubCategory;
 import be.HealthCondition.SubCategoryText;
+import be.User;
 import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
@@ -18,11 +21,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -34,7 +37,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class StudentViewController extends Application implements IController, Initializable {
@@ -236,11 +238,11 @@ public class StudentViewController extends Application implements IController, I
     @FXML
     private ComboBox comboBoxExpectedLevel;
     @FXML
-    private TextArea txtAreaNote;
-    @FXML
     private ComboBox comboboxPerformance;
     @FXML
     private ComboBox comboboxMeaningOfPerformance;
+    @FXML
+    private TextArea txtAreaNote;
 
 
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
@@ -252,6 +254,7 @@ public class StudentViewController extends Application implements IController, I
 
     private Citizen selectedCitizen;
     private Citizen selectedCitizenOnComboBox;
+    private SubFunctional selectedFunctionalAbilitySubCategory;
 
     private SubCategory selectedSubCategory;
     private SubCategoryText subCategoryText;
@@ -277,6 +280,7 @@ public class StudentViewController extends Application implements IController, I
         selectedCitizenOnComboBox();
         selectedHealthCondition();
         selectedSubCategory();
+        setSelectedFunctionalAbilitySubCategory();
         try {
             initializeTables();
             initializeCitizenComboBox();
@@ -285,10 +289,12 @@ public class StudentViewController extends Application implements IController, I
         }
         setupToggleGender();
         setupToggleHealthCondition();
+        setFunctionalAbilityComboBoxItems();
     }
 
     /**
      * Inserts value from database to the different tables
+     *
      * @throws Exception
      */
     private void initializeTables() throws Exception {
@@ -352,6 +358,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * Load the tableviews with assigned health condition notes
+     *
      * @throws SQLServerException
      */
     public void seeTxtOnSubCategory() throws SQLServerException {
@@ -361,6 +368,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * Setup combobox with citizens
+     *
      * @throws SQLException
      */
     public void initializeCitizenComboBox() throws SQLException {
@@ -372,6 +380,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * When clicked on citizen in the combobox, the different text fields get values based on the selected citizen
+     *
      * @throws SQLException
      */
     @FXML
@@ -387,11 +396,11 @@ public class StudentViewController extends Application implements IController, I
         txtFieldLastName.setText(selectedCitizenInfo.getLastName());
         txtFieldSSN.setText(selectedCitizenInfo.getSSN());
         txtFieldAddress.setText(selectedCitizenInfo.getAddress());
-        if (selectedCitizenInfo.getSex().equals("Male")){
+        if (selectedCitizenInfo.getSex().equals("Male")) {
             radioMale.setSelected(true);
-        }else if (selectedCitizenInfo.getSex().equals("Female")){
+        } else if (selectedCitizenInfo.getSex().equals("Female")) {
             radioFemale.setSelected(true);
-        }else if(selectedCitizenInfo.getSex().equals("Other")){
+        } else if (selectedCitizenInfo.getSex().equals("Other")) {
             radioOther.setSelected(true);
         }
         GeneralInformation selectedGeneralInformation = (GeneralInformation) dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
@@ -412,7 +421,7 @@ public class StudentViewController extends Application implements IController, I
     /**
      * Method to only pick one health condition
      */
-    public void setupToggleHealthCondition(){
+    public void setupToggleHealthCondition() {
         group = new ToggleGroup();
         radioNotRelevant.setToggleGroup(group);
         radioPotential.setToggleGroup(group);
@@ -422,7 +431,7 @@ public class StudentViewController extends Application implements IController, I
     /**
      * Method to only pick one gender
      */
-    public void setupToggleGender(){
+    public void setupToggleGender() {
         group = new ToggleGroup();
         radioMale.setToggleGroup(group);
         radioFemale.setToggleGroup(group);
@@ -431,6 +440,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * loads the Citizens table view
+     *
      * @param allCitizens
      */
     private void tableViewLoadCitizens(ObservableList<Citizen> allCitizens) {
@@ -439,6 +449,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * Gets the data for citizens
+     *
      * @return ObservableList<Citizen>
      */
     private ObservableList<Citizen> getCitizenData() {
@@ -465,6 +476,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * loads the health condition tableview.
+     *
      * @param allHealthConditions
      */
     private void tableViewLoadHealthConditions(ObservableList<HealthCondition> allHealthConditions) {
@@ -473,6 +485,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * Gets the data for health conditions
+     *
      * @return
      */
     private ObservableList<HealthCondition> getHealthConditionData() {
@@ -481,6 +494,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * loads the sub categories tableview.
+     *
      * @param allSubCategories
      */
     private void tableViewLoadSubCategories(ObservableList<SubCategory> allSubCategories) {
@@ -489,13 +503,14 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * Gets the data for sub categories
+     *
      * @return
      */
     private ObservableList<SubCategory> getSubCategories() {
         return allSubCategories;
     }
 
-    private void tableViewLoadFunctionalAbilitySubCategories(ObservableList <SubFunctional> allFunctionalAbilitySubCategories){
+    private void tableViewLoadFunctionalAbilitySubCategories(ObservableList<SubFunctional> allFunctionalAbilitySubCategories) {
         tvFunctionalConditions.setItems(getFunctionalAbilitySubCategories());
     }
 
@@ -551,12 +566,26 @@ public class StudentViewController extends Application implements IController, I
                 } catch (SQLServerException e) {
                     e.printStackTrace();
                 }
+
+            }
+        }));
+    }
+
+    /**
+     * Selects a sub category from the tableview
+     */
+    private void setSelectedFunctionalAbilitySubCategory() {
+        this.tvFunctionalConditions.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if ((SubFunctional) newValue != null) {
+                this.selectedFunctionalAbilitySubCategory = (SubFunctional) newValue;
+                System.out.println(selectedFunctionalAbilitySubCategory.getId());
             }
         }));
     }
 
     /**
      * Sets the user
+     *
      * @param user
      * @throws SQLException
      * @throws IOException
@@ -584,6 +613,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * Takes you back to the start screen/pane when clicked on logo
+     *
      * @param actionEvent
      */
     @FXML
@@ -687,6 +717,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * When click on back it sends you back to the start pane/screen
+     *
      * @param actionEvent
      */
     @FXML
@@ -696,6 +727,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * Logs you out when clicked
+     *
      * @throws IOException
      */
     @FXML
@@ -711,6 +743,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * When the general information is click it set up the general information pane
+     *
      * @param actionEvent
      */
     public void onActionGeneralInfoCancel(ActionEvent actionEvent) {
@@ -719,6 +752,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * Save the changes if there are any
+     *
      * @param actionEvent
      * @throws Exception
      */
@@ -751,7 +785,7 @@ public class StudentViewController extends Application implements IController, I
         String homeLayout = txtAreaHomeLayout.getText();
 
         Citizen citizen = new Citizen(id, citizenFirstName, citizenLastName, citizenSSN, citizenAddress, sex);
-        GeneralInformation generalInformation = new GeneralInformation(generalInformationId,coping, motivation, resources, roles, habits, educationandjob,
+        GeneralInformation generalInformation = new GeneralInformation(generalInformationId, coping, motivation, resources, roles, habits, educationandjob,
                 lifeStory, network, healthInformation, equipmentAids, homeLayout);
         dataModelFacade.editCitizen(citizen);
         dataModelFacade.editGeneralInformation(generalInformation);
@@ -762,6 +796,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * When clicked on the little i-icon it sends you to the FS3 homepage
+     *
      * @param actionEvent
      * @throws URISyntaxException
      * @throws IOException
@@ -773,6 +808,7 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * When a citizen is selected all values is loaded in the text fields
+     *
      * @param citizenID
      * @throws SQLException
      */
@@ -786,11 +822,11 @@ public class StudentViewController extends Application implements IController, I
         radioMale.setToggleGroup(group);
         radioFemale.setToggleGroup(group);
         radioOther.setToggleGroup(group);
-        if (selectedCitizenInfo.getSex().equals("Male")){
+        if (selectedCitizenInfo.getSex().equals("Male")) {
             radioMale.setSelected(true);
-        }else if (selectedCitizenInfo.getSex().equals("Female")){
+        } else if (selectedCitizenInfo.getSex().equals("Female")) {
             radioFemale.setSelected(true);
-        }else if(selectedCitizenInfo.getSex().equals("Other")){
+        } else if (selectedCitizenInfo.getSex().equals("Other")) {
             radioOther.setSelected(true);
         }
 
@@ -816,13 +852,13 @@ public class StudentViewController extends Application implements IController, I
         int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
         int subCategoryId = Integer.parseInt(tcSubCategoriesID.getText());
         String note = txtAreaFunctionAbilityNote.getText();
-        if(radioNotRelevant.isSelected()){
+        if (radioNotRelevant.isSelected()) {
             int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
             dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
-        }else if (radioPotential.isSelected()){
+        } else if (radioPotential.isSelected()) {
             int conditionValue = ConditionEnum.POTENTIAL.getValue();
             dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
-        }else if(radioRelevant.isSelected()){
+        } else if (radioRelevant.isSelected()) {
             int conditionValue = ConditionEnum.RELEVANT.getValue();
             dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
         }
@@ -837,11 +873,10 @@ public class StudentViewController extends Application implements IController, I
     }
 
 
-
     public void btnLoadSelfCare(ActionEvent actionEvent) {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        try{
+        try {
             allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(1));
             tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
         } catch (SQLException throwables) {
@@ -852,7 +887,7 @@ public class StudentViewController extends Application implements IController, I
     public void btnLoadMentalFunctions(ActionEvent actionEvent) {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        try{
+        try {
             allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(2));
             tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
         } catch (SQLException throwables) {
@@ -863,7 +898,7 @@ public class StudentViewController extends Application implements IController, I
     public void btnLoadMobility(ActionEvent actionEvent) {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        try{
+        try {
             allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(3));
             tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
         } catch (SQLException throwables) {
@@ -874,7 +909,7 @@ public class StudentViewController extends Application implements IController, I
     public void btnLoadPracticalAssignments(ActionEvent actionEvent) {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        try{
+        try {
             allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(4));
             tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
         } catch (SQLException throwables) {
@@ -885,13 +920,34 @@ public class StudentViewController extends Application implements IController, I
     public void btnLoadCommunityLife(ActionEvent actionEvent) {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        try{
+        try {
             allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(5));
             tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
+
+    private void setFunctionalAbilityComboBoxItems(){
+
+        comboBoxCurrentLevel.getItems().addAll(
+                "0", "1", "2", "3", "4", "9"
+        );
+        comboBoxExpectedLevel.getItems().addAll(
+                "0", "1", "2", "3", "4", "9"
+        );
+        comboboxPerformance.getItems().addAll(
+                "Udfører selv",
+                "Udfører dele selv",
+                "Udfører ikke selv",
+                "Ikke relevant"
+        );
+        comboboxMeaningOfPerformance.getItems().addAll(
+                "Oplever ikke begrænsninger",
+                "Oplever begrænsninger"
+        );
+    }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {

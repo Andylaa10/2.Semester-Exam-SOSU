@@ -2,6 +2,8 @@ package dal;
 
 import be.FunctionalAbilities.SubFunctional;
 import be.FunctionalAbilities.FunctionalAbility;
+import be.HealthCondition.SubCategoryText;
+import be.enums.ConditionEnum;
 import be.enums.FunctionalEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
@@ -38,8 +40,10 @@ public class FunctionalAbilitiesDAO {
                 int abilityExpected = rs.getInt("abilityExpected");
                 String abilityNote = rs.getString("abilityNote");
                 String abilityNoteCitizen = rs.getString("abilityNoteCitizen");
+                String citizenPerformance = rs.getString("citizenPerformance");
+                String citizenMeaningOfPerformance = rs.getString("citizenMeaningOfPerformance");
 
-                FunctionalAbility functionalAbility = new FunctionalAbility(functionalAbilityID, citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen);
+                FunctionalAbility functionalAbility = new FunctionalAbility(functionalAbilityID, citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen, citizenPerformance, citizenMeaningOfPerformance);
                 allFunctionalAbilities.add(functionalAbility);
             }
         } catch (SQLServerException throwables) {
@@ -75,6 +79,42 @@ public class FunctionalAbilitiesDAO {
         return allFunctionalAbilitySubCategories;
     }
 
+    public SubFunctional getInfoOnSubCategory(int citizenId, int functionalAbilitySubCategoryId) throws SQLServerException {
+
+        try (Connection connection = connector.getConnection()) {
+            String sql = "SELECT FunctionalAbility.functionalAbilityID, FunctionalAbility.citizenId," +
+                    " FunctionalAbility.abilityNow, FunctionalAbility.abilityExpected, FunctionalAbility.abilityNote," +
+                    " FunctionalAbility.citizenPerfomance, FunctionalAbility.citizenMeaningOfPerfomance," +
+                    " FunctionalAbility.abilityNoteCitizen" +
+                    " FROM FunctionalAbility" +
+                    " INNER JOIN FunctionalAbilitySubCategory" +
+                    " ON FunctionalAbility.functionalAbilitySubCategoryId = FunctionalAbilitySubCategory.functionalAbilitySubCategoryID" +
+                    " WHERE FunctionalAbility.citizenId = ? AND FunctionalAbility.functionalAbilityID = ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, citizenId);
+            preparedStatement.setInt(2, functionalAbilitySubCategoryId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int functionalAbilityID = resultSet.getInt("functionalAbilityID");
+                int citId = resultSet.getInt("citizenId");
+                int abilityNow = resultSet.getInt("abilityNow");
+                int abilityExpected = resultSet.getInt("abilityExpected");
+                String abilityNote = resultSet.getString("abilityNote");
+                String citizenPerformance = resultSet.getString("citizenPerfomance");
+                String citizenMeaningOfPerformance = resultSet.getString("citizenMeaningOfPerfomance");
+                String abilityNoteCitizen = resultSet.getString("abilityNoteCitizen");
+
+                SubFunctional subFunctional = new SubFunctional(functionalAbilityID, citId, abilityNow,
+                        abilityExpected, abilityNote, citizenPerformance, citizenMeaningOfPerformance, abilityNoteCitizen);
+                return subFunctional;
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * Gets all the functional abilities on the selected citizen
      * @param citizenId
@@ -106,9 +146,9 @@ public class FunctionalAbilitiesDAO {
     }
 
 
-    public FunctionalAbility createFunctionalAbilities(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException{
+    public FunctionalAbility createFunctionalAbilities(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen, String citizenPerformance, String citizenMeaningOfPerformance) throws SQLException{
         try(Connection connection = connector.getConnection()){
-            String sql = "INSERT INTO FunctionalAbility (citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO FunctionalAbility (citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen, citizenPerformance, citizenMeaningOfPerformance) VALUES (?,?,?,?,?,?,?,?)";
 
             try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
                 preparedStatement.setInt(1, citizenId);
@@ -117,13 +157,15 @@ public class FunctionalAbilitiesDAO {
                 preparedStatement.setInt(4, abilityExpected.getValue());
                 preparedStatement.setString(5, abilityNote);
                 preparedStatement.setString(6, abilityNoteCitizen);
+                preparedStatement.setString(7, citizenPerformance);
+                preparedStatement.setString(8, citizenMeaningOfPerformance);
                 preparedStatement.execute();
                 ResultSet rs = preparedStatement.getGeneratedKeys();
                 int id = 0;
                 if (rs.next()){
                     id = rs.getInt(1);
                 }
-                FunctionalAbility functionalAbility = new FunctionalAbility(id, citizenId, functionalAbilitySubCategoryId, abilityNow.getValue(), abilityExpected.getValue(), abilityNote, abilityNoteCitizen);
+                FunctionalAbility functionalAbility = new FunctionalAbility(id, citizenId, functionalAbilitySubCategoryId, abilityNow.getValue(), abilityExpected.getValue(), abilityNote, abilityNoteCitizen, citizenPerformance, citizenMeaningOfPerformance);
 
                 return functionalAbility;
             }
@@ -161,6 +203,6 @@ public class FunctionalAbilitiesDAO {
 
     public static void main(String[] args) throws IOException, SQLException {
         FunctionalAbilitiesDAO functionalAbilitiesDAO = new FunctionalAbilitiesDAO();
-        System.out.println(functionalAbilitiesDAO.getFunctionalAbilities());
+        System.out.println(functionalAbilitiesDAO.getInfoOnSubCategory(1,1));
     }
 }

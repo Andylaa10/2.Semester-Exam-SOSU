@@ -12,6 +12,19 @@ public class FunctionalAbility {
     private String abilityNote;
     private String abilityNoteCitizen;
     private String functionalAbilitySubCategoryName;
+    private String citizenPerformance;
+    private String citizenMeaningOfPerformance;
+
+    public FunctionalAbility(int functionalAbilityID, int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String abilityNoteCitizen) {
+        this.functionalAbilityID = functionalAbilityID;
+        this.citizenId = citizenId;
+        this.functionalAbilitySubCategoryId = functionalAbilitySubCategoryId;
+        this.abilityNow = abilityNow;
+        this.abilityExcepted = abilityExpected;
+        this.abilityNote = abilityNote;
+        this.abilityNoteCitizen = abilityNoteCitizen;
+    }
+
 
     public String getFunctionalAbilitySubCategoryName() {
         return functionalAbilitySubCategoryName;
@@ -29,14 +42,6 @@ public class FunctionalAbility {
     public FunctionalAbility() {
     }
 
-    @Override
-    public String toString() {
-        return "FunctionalAbilities{" +
-                "functionalAbilityID=" + functionalAbilityID +
-                ", functionalAbilitySubCategoryName='" + functionalAbilitySubCategoryName + '\'' +
-                '}';
-    }
-
     /**
      * Overloaded constructor with functionalAbilityID, citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExcepted, abilityNote and abilityNoteCitizen
      * @param functionalAbilityID
@@ -47,7 +52,7 @@ public class FunctionalAbility {
      * @param abilityNote
      * @param abilityNoteCitizen
      */
-    public FunctionalAbility(int functionalAbilityID, int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExcepted, String abilityNote, String abilityNoteCitizen) {
+    public FunctionalAbility(int functionalAbilityID, int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExcepted, String abilityNote, String abilityNoteCitizen,  String citizenPerformance, String citizenMeaningOfPerformance) {
         this.functionalAbilityID = functionalAbilityID;
         this.citizenId = citizenId;
         this.functionalAbilitySubCategoryId = functionalAbilitySubCategoryId;
@@ -55,6 +60,8 @@ public class FunctionalAbility {
         this.abilityExcepted = abilityExcepted;
         this.abilityNote = abilityNote;
         this.abilityNoteCitizen = abilityNoteCitizen;
+        this.citizenPerformance = citizenPerformance;
+        this.citizenMeaningOfPerformance = citizenMeaningOfPerformance;
     }
 
     public FunctionalAbility(int functionalAbilityID, String functionalAbilitySubCategoryName) {
@@ -173,5 +180,13 @@ public class FunctionalAbility {
      */
     public void setAbilityNoteCitizen(String abilityNoteCitizen) {
         this.abilityNoteCitizen = abilityNoteCitizen;
+    }
+
+    @Override
+    public String toString() {
+        return "FunctionalAbilities{" +
+                "functionalAbilityID=" + functionalAbilityID +
+                ", functionalAbilitySubCategoryName='" + functionalAbilitySubCategoryName + '\'' +
+                '}';
     }
 }
