@@ -1,11 +1,11 @@
 package gui.Facade;
 
 import be.*;
-import be.FunctionalAbilities.SubFunctional;
+import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
 import be.FunctionalAbilities.FunctionalAbility;
 import be.HealthCondition.HealthCondition;
-import be.HealthCondition.SubCategory;
-import be.HealthCondition.SubCategoryText;
+import be.HealthCondition.HealthConditionSubCategory;
+import be.HealthCondition.HealthConditionSubCategoryText;
 import be.enums.FunctionalEnum;
 import be.enums.UserType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -60,7 +60,7 @@ public class DataModelFacade {
         return healthConditionsModel.getHealthConditions();
     }
 
-    public List<SubCategory> getSubCategories(int categoryId) throws SQLException {
+    public List<HealthConditionSubCategory> getSubCategories(int categoryId) throws SQLException {
         return healthConditionsModel.getSubCategories(categoryId);
     }
 
@@ -239,13 +239,6 @@ public class DataModelFacade {
     }
 
     /**
-     * Get a list of cases assigned to citizen using the getCitizensOnCases method from citizenModel
-     */
-    public List<Citizen> getCitizensOnCases(int caseId) throws SQLException {
-        return citizenModel.getCitizensOnCases(caseId);
-    }
-
-    /**
      * Creates a case using the createCitizen method from citizenModel
      */
     public Citizen createCitizen(String firstname, String lastName, String SSN, String address, String sex) throws SQLException {
@@ -320,7 +313,7 @@ public class DataModelFacade {
         generalInformationModel.editGeneralInformation(generalInformation);
     }
 
-    public SubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
+    public HealthConditionSubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
         return healthConditionsModel.getTextOnSubCategory(citizenId, subCategoryId);
     }
     
@@ -332,7 +325,7 @@ public class DataModelFacade {
         return functionalAbilitiesModel.getFunctionalAbilities();
     }
 
-    public List<SubFunctional> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
+    public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
         return functionalAbilitiesModel.getFunctionalAbilitySubCategories(functionalAbilitySubCategoryId);
     }
 

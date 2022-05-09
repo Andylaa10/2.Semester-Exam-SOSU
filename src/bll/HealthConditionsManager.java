@@ -1,8 +1,8 @@
 package bll;
 
 import be.HealthCondition.HealthCondition;
-import be.HealthCondition.SubCategory;
-import be.HealthCondition.SubCategoryText;
+import be.HealthCondition.HealthConditionSubCategory;
+import be.HealthCondition.HealthConditionSubCategoryText;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.HealthConditionsDAO;
 import java.io.IOException;
@@ -21,12 +21,12 @@ public class HealthConditionsManager {
         return healthConditionsDAO.getHealthConditions();
     }
 
-    public List<SubCategory> getSubCategories(int categoryId) throws SQLException {
+    public List<HealthConditionSubCategory> getSubCategories(int categoryId) throws SQLException {
         return healthConditionsDAO.getSubCategories(categoryId);
     }
 
-    public SubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
-        return healthConditionsDAO.getTextOnSubCategory(citizenId, subCategoryId);
+    public HealthConditionSubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
+        return healthConditionsDAO.getInfoOnSubCategory(citizenId, subCategoryId);
     }
 
     public void insertIntoSubCategory(int citizenId, int subCategoryId, String note, int condition) throws SQLException {

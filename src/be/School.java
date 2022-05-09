@@ -22,13 +22,6 @@ public class School {
         return id;
     }
 
-    /**
-     * Sets the id
-     * @param id
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 
     /**
      * Gets the schoolName

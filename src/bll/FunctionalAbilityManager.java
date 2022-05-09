@@ -1,6 +1,6 @@
 package bll;
 
-import be.FunctionalAbilities.SubFunctional;
+import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
 import be.FunctionalAbilities.FunctionalAbility;
 import be.enums.FunctionalEnum;
 import dal.FunctionalAbilitiesDAO;
@@ -20,7 +20,7 @@ public class FunctionalAbilityManager {
         return functionalAbilitiesDAO.getFunctionalAbilities();
     }
 
-    public List<SubFunctional> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
+    public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
         return functionalAbilitiesDAO.getFunctionalAbilitySubCategories(functionalAbilitySubCategoryId);
     }
 

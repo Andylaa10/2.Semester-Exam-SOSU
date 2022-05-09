@@ -1,6 +1,6 @@
 package be.FunctionalAbilities;
 
-public class SubFunctional {
+public class FunctionalAbilitySubCategoryText {
 
     private int id;
     private String name;
@@ -16,27 +16,12 @@ public class SubFunctional {
     private String abilityNoteCitizen;
 
 
-    /**
-     * Constructor
-     */
-    public SubFunctional() {
-    }
-
-    /**
-     * Overloaded constructor with id, name and functionalAbilityNameId
-     */
-    public SubFunctional(int id, String name, int functionalAbilityNameId) {
-        this.id = id;
-        this.name = name;
-        this.functionalAbilityNameId = functionalAbilityNameId;
-    }
-
-    public SubFunctional(int id, String name) {
+    public FunctionalAbilitySubCategoryText(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public SubFunctional(int functionalAbilityID, int citId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) {
+    public FunctionalAbilitySubCategoryText(int functionalAbilityID, int citId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) {
         this.functionalAbilityID = functionalAbilityID;
         this.citizenID = citId;
         this.abilityNow = abilityNow;
@@ -53,14 +38,6 @@ public class SubFunctional {
      */
     public int getId() {
         return id;
-    }
-
-    /**
-     * Sets the id
-     * @param id
-     */
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**

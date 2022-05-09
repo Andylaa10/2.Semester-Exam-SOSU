@@ -39,10 +39,6 @@ public class FunctionalAbility {
         this.citizenMeaningOfPerformance = citizenMeaningOfPerformance;
     }
 
-    public FunctionalAbility(int functionalAbilityID, String functionalAbilitySubCategoryName) {
-        this.functionalAbilityID = functionalAbilityID;
-        this.functionalAbilitySubCategoryName = functionalAbilitySubCategoryName;
-    }
 
 
     /**

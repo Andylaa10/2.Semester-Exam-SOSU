@@ -1,6 +1,6 @@
 package gui.model;
 
-import be.FunctionalAbilities.SubFunctional;
+import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
 import be.FunctionalAbilities.FunctionalAbility;
 
 import be.enums.FunctionalEnum;
@@ -22,7 +22,7 @@ public class FunctionalAbilitiesModel {
         return manager.getFunctionalAbilities();
     }
 
-    public List<SubFunctional> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
+    public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
         return manager.getFunctionalAbilitySubCategories(functionalAbilitySubCategoryId);
     }
 

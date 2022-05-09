@@ -7,19 +7,6 @@ public class Case {
     private String date;
     private String info;
 
-    /**
-     * Constructor
-     */
-    public Case() {
-    }
-
-    /**
-     * Overloaded constructor with id, name, date and info
-     * @param id
-     * @param name
-     * @param date
-     * @param info
-     */
     public Case(int id, String name, String date, String info) {
         this.id = id;
         this.name = name;
@@ -41,13 +28,6 @@ public class Case {
         return id;
     }
 
-    /**
-     * Sets the id
-     * @param id
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 
     /**
      * Gets the name

@@ -1,8 +1,8 @@
 package gui.model;
 
 import be.HealthCondition.HealthCondition;
-import be.HealthCondition.SubCategory;
-import be.HealthCondition.SubCategoryText;
+import be.HealthCondition.HealthConditionSubCategory;
+import be.HealthCondition.HealthConditionSubCategoryText;
 import bll.HealthConditionsManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
@@ -21,11 +21,11 @@ public class HealthConditionsModel {
         return healthConditionsManager.getHealthConditions();
     }
 
-    public List<SubCategory> getSubCategories(int categoryId) throws SQLException {
+    public List<HealthConditionSubCategory> getSubCategories(int categoryId) throws SQLException {
         return healthConditionsManager.getSubCategories(categoryId);
     }
 
-    public SubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
+    public HealthConditionSubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
         return healthConditionsManager.getTextOnSubCategory(citizenId, subCategoryId);
     }
 

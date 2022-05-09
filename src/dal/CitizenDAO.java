@@ -74,7 +74,6 @@ public class CitizenDAO {
     }
 
 
-
     /**
      * Creates a citizen, by inserting firstName, lastName, SSN, address and sex
      * @param firstName
@@ -149,39 +148,6 @@ public class CitizenDAO {
         }
     }
 
-
-    /**
-     * Read what cases a citizen is assigned to
-     * @param caseId
-     * @return
-     * @throws SQLException
-     */
-    public List<Citizen> getCitizensOnCase(int caseId) throws SQLException {
-        ArrayList<Citizen> allCitizens = new ArrayList<>();
-        try (Connection connection = connector.getConnection()) {
-            String sql = "SELECT Citizen.citizenID, firstName, lastName, SSN FROM Citizen INNER JOIN CasesOnCitizen ON CasesOnCitizen.citizenId = Citizen.citizenID WHERE CasesOnCitizen.casesId = ?;";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-
-            preparedStatement.setInt(1, caseId);
-            preparedStatement.execute();
-            ResultSet resultset = preparedStatement.executeQuery();
-            while (resultset.next()) {
-                int id = resultset.getInt("citizenID");
-                String firstName = resultset.getString("firstName");
-                String lastName = resultset.getString("lastName");
-                String ssn = resultset.getString("SSN");
-
-
-                Citizen citizen = new Citizen(id, firstName, lastName, ssn);
-                allCitizens.add(citizen);
-            }
-
-        } catch (SQLServerException throwables) {
-            throw new SQLException();
-        }
-        return allCitizens;
-    }
 
     public static void main(String[] args) throws Exception {
         CitizenDAO citizenDAO = new CitizenDAO();

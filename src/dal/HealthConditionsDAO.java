@@ -1,8 +1,8 @@
 package dal;
 
 import be.HealthCondition.HealthCondition;
-import be.HealthCondition.SubCategory;
-import be.HealthCondition.SubCategoryText;
+import be.HealthCondition.HealthConditionSubCategory;
+import be.HealthCondition.HealthConditionSubCategoryText;
 import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
@@ -41,8 +41,37 @@ public class HealthConditionsDAO {
         return allHealthConditions;
     }
 
-    public List<SubCategory> getSubCategories(int categoryId) throws SQLException {
-        ArrayList<SubCategory> allSubCategories = new ArrayList<>();
+    public HealthConditionSubCategoryText getInfoOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
+
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT SubCatTextOnCitizen.SubCatTextOnCitizenID, SubCatTextOnCitizen.citizenId, SubCatTextOnCitizen.subCategoryId, SubCatTextOnCitizen.Note, SubCatTextOnCitizen.Condition " +
+                    "FROM SubCatTextOnCitizen " +
+                    "INNER JOIN SubCategory " +
+                    "ON SubCatTextOnCitizen.subCategoryId = SubCategory.subCategoryID " +
+                    "WHERE SubCatTextOnCitizen.citizenId = ? AND SubCatTextOnCitizen.SubCategoryId = ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, citizenId);
+            preparedStatement.setInt(2, subCategoryId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("subCatTextOnCitizenID");
+                int citId = resultSet.getInt("citizenId");
+                int subId = resultSet.getInt("subCategoryId");
+                String note = resultSet.getString("Note");
+                ConditionEnum condition = ConditionEnum.valueOf(resultSet.getString("Condition"));
+
+                HealthConditionSubCategoryText healthConditionSubCategoryText = new HealthConditionSubCategoryText(id, citId, subId, note, condition);
+                return healthConditionSubCategoryText;
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<HealthConditionSubCategory> getSubCategories(int categoryId) throws SQLException {
+        ArrayList<HealthConditionSubCategory> allSubCategories = new ArrayList<>();
 
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT subCategoryID, subCategoryName FROM SubCategory INNER JOIN HealthCondition ON HealthCondition.healthConditionID = subCategory.healthConditionId where HealthCondition.HealthConditionID = ?;";
@@ -56,8 +85,8 @@ public class HealthConditionsDAO {
                 int id = resultset.getInt("subCategoryID");
                 String name = resultset.getString("subCategoryName");
 
-                SubCategory subCategory = new SubCategory(id, name);
-                allSubCategories.add(subCategory);
+                HealthConditionSubCategory healthConditionSubCategory = new HealthConditionSubCategory(id, name);
+                allSubCategories.add(healthConditionSubCategory);
             }
         } catch (SQLException sqlException) {
             throw new SQLException();
@@ -79,35 +108,6 @@ public class HealthConditionsDAO {
         }
     }
 
-
-    public SubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
-
-        try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT SubCatTextOnCitizen.SubCatTextOnCitizenID, SubCatTextOnCitizen.citizenId, SubCatTextOnCitizen.subCategoryId, SubCatTextOnCitizen.Note, SubCatTextOnCitizen.Condition " +
-                    "FROM SubCatTextOnCitizen " +
-                    "INNER JOIN SubCategory " +
-                    "ON SubCatTextOnCitizen.subCategoryId = SubCategory.subCategoryID " +
-                    "WHERE SubCatTextOnCitizen.citizenId = ? AND SubCatTextOnCitizen.SubCategoryId = ?;";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, citizenId);
-            preparedStatement.setInt(2, subCategoryId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("subCatTextOnCitizenID");
-                int citId = resultSet.getInt("citizenId");
-                int subId = resultSet.getInt("subCategoryId");
-                String note = resultSet.getString("Note");
-                ConditionEnum condition = ConditionEnum.valueOf(resultSet.getString("Condition"));
-
-                SubCategoryText subCategoryText = new SubCategoryText(id, citId, subId, note, condition);
-                return subCategoryText;
-            }
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-        return null;
-    }
 
 
     public static void main(String[] args) throws IOException, SQLException {

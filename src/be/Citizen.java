@@ -13,39 +13,6 @@ public class Citizen {
     private int loginID;
     private int schoolID;
 
-    /**
-     * Constructor
-     */
-    public Citizen() {
-    }
-
-
-    /**
-     * Overloaded constructor with id, firstName, lastName, ssn, address, sex and generalInformation
-     */
-    public Citizen(int id, String firstName, String lastName, String SSN, String address, String sex, int generalInformationID) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.SSN = SSN;
-        this.address = address;
-        this.sex = sex;
-        this.generalInformationID = generalInformationID;
-    }
-
-
-    public Citizen(int id, String firstName, String lastName, String SSN, String address, String sex, int generalInformationID, int functionalAbilitiesID, int loginID, int schoolID) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.SSN = SSN;
-        this.address = address;
-        this.sex = sex;
-        this.generalInformationID = generalInformationID;
-        this.functionalAbilitiesID = functionalAbilitiesID;
-        this.loginID = loginID;
-        this.schoolID = schoolID;
-    }
 
     public Citizen(int id, String firstName, String lastName, String SSN, String address, String sex) {
         this.id = id;
@@ -56,32 +23,6 @@ public class Citizen {
         this.sex = sex;
     }
 
-    public Citizen(int id, String firstName, String lastName, String SSN) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.SSN = SSN;
-    }
-
-    public Citizen(String firstName, String lastName, String SSN, String address, String sex) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.SSN = SSN;
-        this.address = address;
-        this.sex = sex;
-    }
-
-
-    public Citizen(int id, String firstName, String lastName, String SSN, String address, String sex, int functionalAbilityID, int loginID, int schoolID) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.SSN = SSN;
-        this.address = address;
-        this.sex = sex;
-        this.loginID = loginID;
-        this.schoolID = schoolID;
-    }
 
     /**
      * Gets the id
@@ -91,13 +32,6 @@ public class Citizen {
         return id;
     }
 
-    /**
-     * Set the id
-     * @param id
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
 
     /**
      * Gets the firstName

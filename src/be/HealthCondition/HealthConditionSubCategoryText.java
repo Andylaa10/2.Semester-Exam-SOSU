@@ -2,7 +2,7 @@ package be.HealthCondition;
 
 import be.enums.ConditionEnum;
 
-public class SubCategoryText {
+public class HealthConditionSubCategoryText {
 
     private int id;
     private int citizenId;
@@ -10,7 +10,7 @@ public class SubCategoryText {
     private String note;
     private ConditionEnum condition;
 
-    public SubCategoryText(int id, int citizenId, int categoryId, String note, ConditionEnum condition) {
+    public HealthConditionSubCategoryText(int id, int citizenId, int categoryId, String note, ConditionEnum condition) {
         this.id = id;
         this.citizenId = citizenId;
         this.categoryId = categoryId;

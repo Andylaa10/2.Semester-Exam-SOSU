@@ -2,11 +2,11 @@ package gui.controller;
 
 import be.Case;
 import be.Citizen;
-import be.FunctionalAbilities.SubFunctional;
+import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
 import be.GeneralInformation;
 import be.HealthCondition.HealthCondition;
-import be.HealthCondition.SubCategory;
-import be.HealthCondition.SubCategoryText;
+import be.HealthCondition.HealthConditionSubCategory;
+import be.HealthCondition.HealthConditionSubCategoryText;
 import be.User;
 import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -102,11 +102,11 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private TableColumn<HealthCondition, String> tcHealthConditionName;
     @FXML
-    private TableView<SubCategory> tvSubCategories;
+    private TableView<HealthConditionSubCategory> tvSubCategories;
     @FXML
-    private TableColumn<SubCategory, Integer> tcSubCategoriesID;
+    private TableColumn<HealthConditionSubCategory, Integer> tcSubCategoriesID;
     @FXML
-    private TableColumn<SubCategory, String> tcSubCategoriesName;
+    private TableColumn<HealthConditionSubCategory, String> tcSubCategoriesName;
     @FXML
     private TextArea txtAreaNoteOnSubCategory;
 
@@ -219,11 +219,11 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private RadioButton radio9;
     @FXML
-    private TableView<SubFunctional> tvFunctionalConditions;
+    private TableView<FunctionalAbilitySubCategoryText> tvFunctionalConditions;
     @FXML
-    private TableColumn<SubFunctional, Integer> tcFunctionalConditionID;
+    private TableColumn<FunctionalAbilitySubCategoryText, Integer> tcFunctionalConditionID;
     @FXML
-    private TableColumn<SubFunctional, String> tcFunctionalConditionName;
+    private TableColumn<FunctionalAbilitySubCategoryText, String> tcFunctionalConditionName;
 
     @FXML
     private ComboBox comboBoxCurrentLevel;
@@ -241,15 +241,15 @@ public class StudentViewController implements IController, Initializable {
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
     private ObservableList<HealthCondition> allHealthConditions = FXCollections.observableArrayList();
-    private ObservableList<SubCategory> allSubCategories = FXCollections.observableArrayList();
-    private ObservableList<SubFunctional> allFunctionalAbilitySubCategories = FXCollections.observableArrayList();
+    private ObservableList<HealthConditionSubCategory> allSubCategories = FXCollections.observableArrayList();
+    private ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories = FXCollections.observableArrayList();
 
     private Citizen selectedCitizen;
     private Citizen selectedCitizenOnComboBox;
-    private SubFunctional selectedFunctionalAbilitySubCategory;
+    private FunctionalAbilitySubCategoryText selectedFunctionalAbilitySubCategory;
 
-    private SubCategory selectedSubCategory;
-    private SubCategoryText selectedSubCategoryText;
+    private HealthConditionSubCategory selectedHealthConditionSubCategory;
+    private HealthConditionSubCategoryText selectedHealthConditionSubCategoryText;
     private HealthCondition selectedHealthCondition;
 
     private DataModelFacade dataModelFacade;
@@ -347,7 +347,7 @@ public class StudentViewController implements IController, Initializable {
      */
     private void seeTxtOnSubCategory() throws SQLServerException {
         txtFieldCitizenID.getText();
-        txtAreaNoteOnSubCategory.setText(String.valueOf(dataModelFacade.getTextOnSubCategory(selectedCitizenOnComboBox.getId(), selectedSubCategory.getId())));
+        txtAreaNoteOnSubCategory.setText(String.valueOf(dataModelFacade.getTextOnSubCategory(selectedCitizenOnComboBox.getId(), selectedHealthConditionSubCategory.getId())));
     }
 
     /**
@@ -490,22 +490,22 @@ public class StudentViewController implements IController, Initializable {
     /**
      * loads the sub categories tableview.
      */
-    private void tableViewLoadSubCategories(ObservableList<SubCategory> allSubCategories) {
+    private void tableViewLoadSubCategories(ObservableList<HealthConditionSubCategory> allSubCategories) {
         tvSubCategories.setItems(getSubCategories());
     }
 
     /**
      * Gets the data for sub categories
      */
-    private ObservableList<SubCategory> getSubCategories() {
+    private ObservableList<HealthConditionSubCategory> getSubCategories() {
         return allSubCategories;
     }
 
-    private void tableViewLoadFunctionalAbilitySubCategories(ObservableList<SubFunctional> allFunctionalAbilitySubCategories) {
+    private void tableViewLoadFunctionalAbilitySubCategories(ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories) {
         tvFunctionalConditions.setItems(getFunctionalAbilitySubCategories());
     }
 
-    private ObservableList<SubFunctional> getFunctionalAbilitySubCategories() {
+    private ObservableList<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories() {
         return allFunctionalAbilitySubCategories;
     }
 
@@ -551,7 +551,7 @@ public class StudentViewController implements IController, Initializable {
     private void selectedSubCategory() {
         this.tvSubCategories.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
-                this.selectedSubCategory = newValue;
+                this.selectedHealthConditionSubCategory = newValue;
                 try {
                     seeTxtOnSubCategory();
                 } catch (SQLServerException e) {

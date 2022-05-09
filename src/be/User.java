@@ -12,11 +12,6 @@ public class User implements ILogin {
     private String password;
     private UserType userType;
 
-    /**
-     * Constructor
-     */
-    public User() {
-    }
 
     public User(int id, String firstName, String lastName, String username, UserType userType) {
         this.id = id;
@@ -44,35 +39,6 @@ public class User implements ILogin {
         this.userType = userType;
     }
 
-    /**
-     * Constructor with id, username, and
-     * @param id
-     * @param username
-     * @param password
-     * @param userType
-     */
-    public User(int id, String username, String password, UserType userType) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.userType = userType;
-    }
-
-    /**
-     * Overloaded constructor with firstName, lastName, userName and password
-     * @param firstName
-     * @param lastName
-     * @param username
-     * @param password
-     * @param userType
-     */
-    public User(String firstName, String lastName, String username, String password, UserType userType) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.userType = userType;
-    }
 
     /**
      * Gets the id
