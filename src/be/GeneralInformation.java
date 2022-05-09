@@ -14,26 +14,9 @@ public class GeneralInformation {
     private String equipmentAids;
     private String homeLayout;
 
-    /**
-     * Constructor
-     */
-    public GeneralInformation() {
-    }
 
     /**
-     * Constructor id, coping, motivation, resources, roles, habits, educationAndJob, lifeStory, network, healthInformation, equipmentAids and homeLayout
-     * @param id
-     * @param coping
-     * @param motivation
-     * @param resources
-     * @param roles
-     * @param habits
-     * @param educationAndJob
-     * @param lifeStory
-     * @param network
-     * @param healthInformation
-     * @param equipmentAids
-     * @param homeLayout
+     * Overloaded Constructor id, coping, motivation, resources, roles, habits, educationAndJob, lifeStory, network, healthInformation, equipmentAids and homeLayout
      */
     public GeneralInformation(int id, String coping, String motivation, String resources, String roles, String habits, String educationAndJob, String lifeStory, String network, String healthInformation, String equipmentAids, String homeLayout) {
         this.id = id;

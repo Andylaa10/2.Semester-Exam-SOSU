@@ -5,7 +5,6 @@ import be.HealthCondition.SubCategory;
 import be.HealthCondition.SubCategoryText;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.HealthConditionsDAO;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;

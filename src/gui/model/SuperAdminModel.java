@@ -4,19 +4,16 @@ import be.School;
 import be.SuperAdmin;
 import be.User;
 import bll.SuperAdminManager;
-import dal.SuperAdminDAO;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class SuperAdminModel {
 
-    private SuperAdminManager superAdminManager;
+    private final SuperAdminManager superAdminManager;
 
     /**
      * Constructor
-     * @throws IOException
      */
     public SuperAdminModel() throws IOException {
         superAdminManager = new SuperAdminManager();
@@ -24,10 +21,6 @@ public class SuperAdminModel {
 
     /**
      * Creates a superAdmin using the createSuperAdmin method from superAdminManager
-     * @param username
-     * @param password
-     * @return
-     * @throws SQLException
      */
     public SuperAdmin createSuperAdmin(String username, String password) throws SQLException {
         return superAdminManager.createSuperAdmin(username, password);
@@ -35,7 +28,6 @@ public class SuperAdminModel {
 
     /**
      * Deletes a super admin using the deleteSuperAdmin method from superAdminManager
-     * @param id
      */
     public void deleteSuperAdmin(int id) throws SQLException {
         superAdminManager.deleteSuperAdmin(id);
@@ -43,8 +35,6 @@ public class SuperAdminModel {
 
     /**
      * Edits a super admin using the editSuperAdmin method from superAdminManager
-     * @param superAdmin
-     * @throws Exception
      */
     public void editSuperAdmin(SuperAdmin superAdmin) throws Exception {
         superAdminManager.editSuperAdmin(superAdmin);
@@ -52,10 +42,6 @@ public class SuperAdminModel {
 
     /**
      * Gets the super admin login using superAdmin method from superAdminManager
-     * @param username
-     * @param password
-     * @return
-     * @throws SQLException
      */
     public SuperAdmin superAdminLogin(String username, String password) throws SQLException {
         return superAdminManager.superAdminLogin(username, password);
@@ -65,19 +51,15 @@ public class SuperAdminModel {
         return superAdminManager.getSchools();
     }
 
-        /**
-         * Creates a school using the createSchool method from superAdminManager
-         * @param schoolName
-         * @return
-         * @throws SQLException
-         */
+    /**
+     * Creates a school using the createSchool method from superAdminManager
+     */
     public School createSchool(String schoolName) throws SQLException {
         return superAdminManager.createSchool(schoolName);
     }
 
     /**
      * Deletes a school using the deleteSchool method from superAdminManager
-     * @param schoolID
      */
     public void deleteSchool(int schoolID) throws SQLException {
         superAdminManager.deleteSchool(schoolID);
@@ -85,8 +67,6 @@ public class SuperAdminModel {
 
     /**
      * Edits a school using the editSchool method from superAdminManager
-     * @param school
-     * @throws Exception
      */
     public void editSchool(School school) throws Exception {
         superAdminManager.editSchool(school);

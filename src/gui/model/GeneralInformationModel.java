@@ -2,14 +2,13 @@ package gui.model;
 
 import be.GeneralInformation;
 import bll.GeneralInformationManager;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class GeneralInformationModel {
 
-    private GeneralInformationManager generalInformationManager;
+    private final GeneralInformationManager generalInformationManager;
 
     public GeneralInformationModel() throws IOException {
         generalInformationManager = new GeneralInformationManager();
@@ -17,8 +16,6 @@ public class GeneralInformationModel {
 
     /**
      * Get a list of generalInformation using the getgeneralInformations method from generalInformationManager
-     * @return
-     * @throws SQLException
      */
     public List<GeneralInformation> getGeneralInformation() throws SQLException {
         return generalInformationManager.getGeneralInformation();
@@ -27,9 +24,6 @@ public class GeneralInformationModel {
     /**
      * Gets a list of generalInformation that is assigned to citizen, using the getGeneralInformationsOnCitizen
      * method from generalInformationManager
-     * @param citizenID
-     * @return
-     * @throws SQLException
      */
     public GeneralInformation getGeneralInformationOnCitizen(int citizenID) throws SQLException {
         return generalInformationManager.getGeneralInformationOnCitizen(citizenID);
@@ -38,19 +32,6 @@ public class GeneralInformationModel {
 
     /**
      * Creates  generalInformation using the createGeneralInformation method from generalInformationManager
-     * @param coping
-     * @param motivation
-     * @param resources
-     * @param roles
-     * @param habits
-     * @param educationAndJob
-     * @param lifestory
-     * @param network
-     * @param healthInformation
-     * @param equipmentAids
-     * @param homeLayout
-     * @return
-     * @throws SQLException
      */
     public GeneralInformation createGeneralInformation(String coping, String motivation, String resources, String roles,
                                                        String habits, String educationAndJob, String lifestory,
@@ -62,8 +43,6 @@ public class GeneralInformationModel {
 
     /**
      * Deletes generalInformation using the deleteGeneralInformation method from generalInformationManager
-     * @param id
-     * @throws Exception
      */
     public void deleteGeneralInformation(int id) throws Exception {
         generalInformationManager.deleteGeneralInformation(id);
@@ -71,8 +50,6 @@ public class GeneralInformationModel {
 
     /**
      * Edits generalInformation using the editGeneralInformation method in generalInformationManager
-     * @param generalInformation
-     * @throws Exception
      */
     public void editGeneralInformation(GeneralInformation generalInformation) throws Exception {
         generalInformationManager.editGeneralInformation(generalInformation);

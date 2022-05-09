@@ -17,13 +17,13 @@ import java.util.List;
 
 public class DataModelFacade {
 
-    private CitizenModel citizenModel;
-    private UserModel userModel;
-    private SuperAdminModel superAdminModel;
-    private CaseModel caseModel;
-    private HealthConditionsModel healthConditionsModel;
-    private GeneralInformationModel generalInformationModel;
-    private FunctionalAbilitiesModel functionalAbilitiesModel;
+    private final CitizenModel citizenModel;
+    private final UserModel userModel;
+    private final SuperAdminModel superAdminModel;
+    private final CaseModel caseModel;
+    private final HealthConditionsModel healthConditionsModel;
+    private final GeneralInformationModel generalInformationModel;
+    private final FunctionalAbilitiesModel functionalAbilitiesModel;
 
     public DataModelFacade() throws IOException {
         citizenModel = new CitizenModel();
@@ -37,8 +37,6 @@ public class DataModelFacade {
 
     /**
      * Get a list of students using the getStudents method from userModel
-     * @return
-     * @throws SQLException
      */
     public List<User> getStudents() throws SQLException {
         return userModel.getStudents();
@@ -46,8 +44,6 @@ public class DataModelFacade {
 
     /**
      * Get a list of teachers using the getTeachers method from userModel
-     * @return
-     * @throws SQLException
      */
     public List<User> getTeachers() throws SQLException {
         return userModel.getTeachers();
@@ -55,8 +51,6 @@ public class DataModelFacade {
 
     /**
      * Get a list of admins using the getAdmins method from userModel
-     * @return
-     * @throws SQLException
      */
     public List<User> getAdmins() throws SQLException {
         return userModel.getAdmins();
@@ -72,13 +66,6 @@ public class DataModelFacade {
 
     /**
      * Creates a student using the createStudent method from userModel
-     * @param firstName
-     * @param lastName
-     * @param username
-     * @param password
-     * @param userType
-     * @return
-     * @throws SQLException
      */
     public User createStudent(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
         return userModel.createStudent(firstName, lastName, username, password, userType);
@@ -86,13 +73,6 @@ public class DataModelFacade {
 
     /**
      * Creates a teacher using the createTeacher method from userModel
-     * @param firstName
-     * @param lastName
-     * @param username
-     * @param password
-     * @param userType
-     * @return
-     * @throws SQLException
      */
     public User createTeacher(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
         return userModel.createTeacher(firstName, lastName, username, password, userType);
@@ -100,13 +80,6 @@ public class DataModelFacade {
 
     /**
      * Creates an admin using the createAdmin method from userModel
-     * @param firstName
-     * @param lastName
-     * @param username
-     * @param password
-     * @param userType
-     * @return
-     * @throws SQLException
      */
     public User createAdmin(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
         return userModel.createAdmin(firstName, lastName, username, password, userType);
@@ -114,10 +87,6 @@ public class DataModelFacade {
 
     /**
      * Create a super admin using the createSuperAdmin method from superAdminModel
-     * @param username
-     * @param password
-     * @return
-     * @throws SQLException
      */
     public SuperAdmin createSuperAdmin(String username, String password) throws SQLException {
         return superAdminModel.createSuperAdmin(username, password);
@@ -125,8 +94,6 @@ public class DataModelFacade {
 
     /**
      * Deletes a student using the deleteStudent method from userModel
-     * @param id
-     * @param userType
      */
     public void deleteStudent(int id, UserType userType) throws SQLException {
         userModel.deleteStudent(id, userType);
@@ -134,8 +101,6 @@ public class DataModelFacade {
 
     /**
      * Deletes a teacher using the deleteTeacher method from userModel
-     * @param id
-     * @param userType
      */
     public void deleteTeacher(int id, UserType userType) throws SQLException {
         userModel.deleteTeacher(id, userType);
@@ -143,8 +108,6 @@ public class DataModelFacade {
 
     /**
      * Deletes an admin using the deleteAdmin method from userModel
-     * @param id
-     * @param userType
      */
     public void deleteAdmin(int id, UserType userType) throws SQLException {
         userModel.deleteAdmin(id, userType);
@@ -152,7 +115,6 @@ public class DataModelFacade {
 
     /**
      * Deletes a super admin using the deleteSuperAdmin method from superAdminModel
-     * @param id
      */
     public void deleteSuperAdmin(int id) throws SQLException {
         superAdminModel.deleteSuperAdmin(id);
@@ -160,8 +122,6 @@ public class DataModelFacade {
 
     /**
      * Edits a student using the editStudent method from userModel
-     * @param student
-     * @throws Exception
      */
     public void editStudent(User student) throws Exception {
         userModel.editStudent(student);
@@ -169,8 +129,6 @@ public class DataModelFacade {
 
     /**
      * Edits a teacher using the editTeacher method from userModel
-     * @param teacher
-     * @throws Exception
      */
     public void editTeacher(User teacher) throws Exception {
         userModel.editTeacher(teacher);
@@ -178,8 +136,6 @@ public class DataModelFacade {
 
     /**
      * Edits an admin using the editAdmin method from userModel
-     * @param admin
-     * @throws Exception
      */
     public void editAdmin(User admin) throws Exception {
         userModel.editAdmin(admin);
@@ -187,8 +143,6 @@ public class DataModelFacade {
 
     /**
      * Edits a super admin using the editSuperAdmin method from superAdminModel
-     * @param superAdmin
-     * @throws Exception
      */
     public void editSuperAdmin(SuperAdmin superAdmin) throws Exception {
         superAdminModel.editSuperAdmin(superAdmin);
@@ -196,9 +150,6 @@ public class DataModelFacade {
 
     /**
      * Gets the user userLogin using the userLogin method from userModel
-     * @param username
-     * @param password
-     * @return
      */
     public User userLogin(String username, String password){
         return userModel.userLogin(username, password);
@@ -206,10 +157,6 @@ public class DataModelFacade {
 
     /**
      * Gets the super admin login using the superAdminLogin method from superAdminModel
-     * @param username
-     * @param password
-     * @return
-     * @throws SQLException
      */
     public SuperAdmin superAdminLogin(String username, String password) throws SQLException {
         return superAdminModel.superAdminLogin(username, password);
@@ -221,9 +168,6 @@ public class DataModelFacade {
 
     /**
      * Creates a school using the createSchool method from superAdminModel
-     * @param schoolName
-     * @return
-     * @throws SQLException
      */
     public School createSchool(String schoolName) throws SQLException {
         return superAdminModel.createSchool(schoolName);
@@ -231,7 +175,6 @@ public class DataModelFacade {
 
     /**
      * Deletes a school using the deleteSchool method from superAdminModel
-     * @param id
      */
     public void deleteSchool(int id) throws SQLException {
         superAdminModel.deleteSchool(id);
@@ -239,8 +182,6 @@ public class DataModelFacade {
 
     /**
      * Edits a school using the editSchool method from superAdminModel
-     * @param school
-     * @throws Exception
      */
     public void editSchool(School school) throws Exception {
         superAdminModel.editSchool(school);
@@ -248,8 +189,6 @@ public class DataModelFacade {
 
     /**
      * Get a list of case using the getCases method from caseModel
-     * @return
-     * @throws SQLException
      */
     public List<Case> getCases() throws SQLException {
         return caseModel.getCases();
@@ -257,10 +196,6 @@ public class DataModelFacade {
 
     /**
      * Creates a case using the createCase method from caseModel
-     * @param name
-     * @param info
-     * @return
-     * @throws SQLException
      */
     public Case createCase(String name, String info) throws SQLException {
         return caseModel.createCase(name, info);
@@ -268,8 +203,6 @@ public class DataModelFacade {
 
     /**
      * Deletes a case using the deleteCase method from caseModel
-     * @param id
-     * @throws Exception
      */
     public void deleteCase(int id) throws Exception {
         caseModel.deleteCase(id);
@@ -277,8 +210,6 @@ public class DataModelFacade {
 
     /**
      * Edits a case using the editCase method in caseModel
-     * @param aCase
-     * @throws Exception
      */
     public void editCase(Case aCase) throws Exception {
         caseModel.editCase(aCase);
@@ -298,8 +229,6 @@ public class DataModelFacade {
 
     /**
      * Get a list of citizen using the getCitizens method from citizenModel
-     * @return
-     * @throws SQLException
      */
     public List<Citizen> getCitizens() throws SQLException {
         return citizenModel.getCitizens();
@@ -311,9 +240,6 @@ public class DataModelFacade {
 
     /**
      * Get a list of cases assigned to citizen using the getCitizensOnCases method from citizenModel
-     * @param caseId
-     * @return
-     * @throws SQLException
      */
     public List<Citizen> getCitizensOnCases(int caseId) throws SQLException {
         return citizenModel.getCitizensOnCases(caseId);
@@ -321,13 +247,6 @@ public class DataModelFacade {
 
     /**
      * Creates a case using the createCitizen method from citizenModel
-     * @param firstname
-     * @param lastName
-     * @param SSN
-     * @param address
-     * @param sex
-     * @return
-     * @throws SQLException
      */
     public Citizen createCitizen(String firstname, String lastName, String SSN, String address, String sex) throws SQLException {
         return citizenModel.createCitizen(firstname, lastName, SSN, address, sex);
@@ -335,7 +254,6 @@ public class DataModelFacade {
 
     /**
      * Deletes a citizen using the deleteCitizen method from citizenModel
-     * @throws Exception
      */
     public void deleteCitizen(int citizenID) throws Exception {
         citizenModel.deleteCitizen(citizenID);
@@ -343,8 +261,6 @@ public class DataModelFacade {
 
     /**
      * Edits a citizen using the editCitizen method in citizenModel
-     * @param citizen
-     * @throws Exception
      */
     public void editCitizen(Citizen citizen) throws Exception {
         citizenModel.editCitizen(citizen);
@@ -365,8 +281,6 @@ public class DataModelFacade {
 
     /**
      * Get a list of generalInformation using the getgeneralInformations method from generalInformationManager
-     * @return
-     * @throws SQLException
      */
     public List<GeneralInformation> getGeneralInformation() throws SQLException {
         return generalInformationModel.getGeneralInformation();
@@ -375,9 +289,6 @@ public class DataModelFacade {
     /**
      * Gets a list of generalInformation that is assigned to citizen, using the getGeneralInformationsOnCitizen
      * method from generalInformationManager
-     * @param citizenID
-     * @return
-     * @throws SQLException
      */
     public GeneralInformation getGeneralInformationOnCitizen(int citizenID) throws SQLException {
         return generalInformationModel.getGeneralInformationOnCitizen(citizenID);
@@ -386,19 +297,6 @@ public class DataModelFacade {
 
     /**
      * Creates  generalInformation using the createGeneralInformation method from generalInformationManager
-     * @param coping
-     * @param motivation
-     * @param resources
-     * @param roles
-     * @param habits
-     * @param educationAndJob
-     * @param lifestory
-     * @param network
-     * @param healthInformation
-     * @param equipmentAids
-     * @param homeLayout
-     * @return
-     * @throws SQLException
      */
     public GeneralInformation createGeneralInformation(String coping, String motivation, String resources, String roles,
                                                        String habits, String educationAndJob, String lifestory,
@@ -410,8 +308,6 @@ public class DataModelFacade {
 
     /**
      * Deletes generalInformation using the deleteGeneralInformation method from generalInformationManager
-     * @param id
-     * @throws Exception
      */
     public void deleteGeneralInformation(int id) throws Exception {
         generalInformationModel.deleteGeneralInformation(id);
@@ -419,8 +315,6 @@ public class DataModelFacade {
 
     /**
      * Edits generalInformation using the editGeneralInformation method in generalInformationManager
-     * @param generalInformation
-     * @throws Exception
      */
     public void editGeneralInformation(GeneralInformation generalInformation) throws Exception {
         generalInformationModel.editGeneralInformation(generalInformation);
@@ -445,7 +339,6 @@ public class DataModelFacade {
     public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) throws SQLException {
         return functionalAbilitiesModel.createFunctionalAbility(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen,citizenPerformance,citizenMeaningOfPerformance);
     }
-
 
     public void editAbilities(FunctionalAbility functionalAbility) throws SQLException {
         functionalAbilitiesModel.editAbilities(functionalAbility);

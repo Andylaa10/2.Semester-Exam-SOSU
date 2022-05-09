@@ -1,7 +1,6 @@
 package bll;
 
 import be.Case;
-import be.Citizen;
 import dal.CaseDAO;
 import java.io.IOException;
 import java.sql.SQLException;

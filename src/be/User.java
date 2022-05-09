@@ -3,7 +3,6 @@ package be;
 import be.Interface.ILogin;
 import be.enums.UserType;
 
-
 public class User implements ILogin {
 
     private int id;

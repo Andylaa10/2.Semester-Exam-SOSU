@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FunctionalAbilitiesModel {
 
-    private FunctionalAbilityManager manager;
+    private final FunctionalAbilityManager manager;
 
     public FunctionalAbilitiesModel() throws IOException {
         manager = new FunctionalAbilityManager();

@@ -5,14 +5,13 @@ import be.HealthCondition.SubCategory;
 import be.HealthCondition.SubCategoryText;
 import bll.HealthConditionsManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class HealthConditionsModel {
 
-    private HealthConditionsManager healthConditionsManager;
+    private final HealthConditionsManager healthConditionsManager;
 
     public HealthConditionsModel() throws IOException {
         this.healthConditionsManager = new HealthConditionsManager();

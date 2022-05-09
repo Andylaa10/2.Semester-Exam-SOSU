@@ -24,9 +24,6 @@ public class SubFunctional {
 
     /**
      * Overloaded constructor with id, name and functionalAbilityNameId
-     * @param id
-     * @param name
-     * @param functionalAbilityNameId
      */
     public SubFunctional(int id, String name, int functionalAbilityNameId) {
         this.id = id;

@@ -2,7 +2,6 @@ package bll;
 
 import be.GeneralInformation;
 import dal.GeneralInformationDAO;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -38,19 +37,6 @@ public class GeneralInformationManager {
 
     /**
      * Creates  generalInformation using the createGeneralInformation method from generalInformationDAO
-     * @param coping
-     * @param motivation
-     * @param resources
-     * @param roles
-     * @param habits
-     * @param educationAndJob
-     * @param lifestory
-     * @param network
-     * @param healthInformation
-     * @param equipmentAids
-     * @param homeLayout
-     * @return
-     * @throws SQLException
      */
     public GeneralInformation createGeneralInformation(String coping, String motivation, String resources, String roles,
                                                        String habits, String educationAndJob, String lifestory,

@@ -6,11 +6,6 @@ public class SuperAdmin {
     private String username;
     private String password;
 
-    /**
-     * Constructor
-     */
-    public SuperAdmin() {
-    }
 
     /**
      * Overloaded constructor with id, username and password

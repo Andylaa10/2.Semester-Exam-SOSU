@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CaseModel {
 
-    private CaseManager caseManager;
+    private final CaseManager caseManager;
 
     public CaseModel() throws IOException {
         caseManager = new CaseManager();
@@ -16,8 +16,7 @@ public class CaseModel {
 
     /**
      * Get a list of case using the getCases method from caseManager
-     * @return
-     * @throws SQLException
+
      */
     public List<Case> getCases() throws SQLException {
         return caseManager.getCases();
@@ -25,10 +24,6 @@ public class CaseModel {
 
     /**
      * Creates a case using the createCase method from caseManager
-     * @param name
-     * @param info
-     * @return
-     * @throws SQLException
      */
     public Case createCase(String name, String info) throws SQLException {
         return caseManager.createCase(name, info);
@@ -36,8 +31,7 @@ public class CaseModel {
 
     /**
      * Deletes a case using the deleteCase method from caseManager
-     * @param id
-     * @throws Exception
+
      */
     public void deleteCase(int id) throws Exception {
          caseManager.deleteCase(id);
@@ -45,8 +39,7 @@ public class CaseModel {
 
     /**
      * Edits a case using the editCase method in caseManager
-     * @param aCase
-     * @throws Exception
+
      */
     public void editCase(Case aCase) throws Exception {
         caseManager.editCase(aCase);

@@ -8,10 +8,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 
 public class ErrorHandlerController {
+
     @FXML
     private TextArea textArea;
     @FXML

@@ -34,20 +34,7 @@ public class AdminViewController implements Initializable, IController {
     /**
      * Top Pane
      */
-    @FXML
-    private Button btnCreateCitizen;
-    @FXML
-    private Button btnCreateTeacherPane;
-    @FXML
-    private Button btnStudentPane;
-    @FXML
-    private Button btnCasePane;
-    @FXML
-    private Button btnCitizensPane;
-    @FXML
-    private Button btnCreateCitizenPane;
-    @FXML
-    private Button btnHome;
+
     @FXML
     private Button btnLogOut;
     @FXML
@@ -56,8 +43,6 @@ public class AdminViewController implements Initializable, IController {
     private Label labelInfo;
     @FXML
     private Label labelInfoNewLine;
-    @FXML
-    private AnchorPane topPane;
     @FXML
     private AnchorPane anchorPaneAdmin;
     @FXML
@@ -201,8 +186,6 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private TableColumn<Case, String> tcCasesOnCitizenInfo;
     @FXML
-    private Button btnAssignCase;
-    @FXML
     private Button btnCopySave;
 
     /**
@@ -258,9 +241,8 @@ public class AdminViewController implements Initializable, IController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setToggleGroup();
-        setAnchorPanesVisibility();
         initializeTable();
+        setToggleGroup();
         setAnchorPanesVisibility();
         selectedTeacher();
         selectedStudent();
@@ -339,7 +321,7 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
-    public void setToggleGroup(){
+    private void setToggleGroup(){
         ToggleGroup group = new ToggleGroup();
         radioMale.setToggleGroup(group);
         radioFemale.setToggleGroup(group);
@@ -348,7 +330,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * loads the teacher view
-     * @param allTeachers
      */
     private void tableViewLoadTeachers(ObservableList<User> allTeachers) {
         tvTeachers.setItems(getTeacherData());
@@ -356,8 +337,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * loads the students tableview.
-     *
-     * @param allStudents
      */
     private void tableViewLoadStudents(ObservableList<User> allStudents) {
         tvStudent.setItems(getStudentData());
@@ -365,7 +344,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * gets the data for teachers
-     * @return
      */
     private ObservableList<User> getTeacherData() {
         return allTeachers;
@@ -382,8 +360,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * loads the cases TableView.
-     *
-     * @param allCases
      */
     private void tableViewLoadCases(ObservableList<Case> allCases) {
         tvCases.setItems(getCaseData());
@@ -400,8 +376,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * loads the Citizens table view
-     *
-     * @param allCitizens
      */
     private void tableViewLoadCitizens(ObservableList<Citizen> allCitizens) {
         tvCitizens.setItems(getCitizenData());
@@ -418,8 +392,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * loads the CurrentCases tableview.
-     *
-     * @param allCurrentCases
      */
     private void tableViewLoadCurrentCases(ObservableList<Case> allCurrentCases) {
         tvCurrentCases.setItems(getCurrentCasesData());
@@ -437,7 +409,6 @@ public class AdminViewController implements Initializable, IController {
     /**
      * loads the casesOnCitizen tableview.
      *
-     * @param allCasesOnCitizen
      */
     private void tableViewLoadCasesOnCitizen(ObservableList<Case> allCasesOnCitizen) {
         tvCasesOnCitizen.setItems(getCasesOnCitizenData());
@@ -454,8 +425,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * loads the Citizens table view
-     *
-     * @param allCreatedCitizens
      */
     private void tableViewLoadCreatedCitizens(ObservableList<Citizen> allCreatedCitizens) {
         tvCreatedCitizens.setItems(getCreatedCitizenData());
@@ -470,137 +439,6 @@ public class AdminViewController implements Initializable, IController {
         return allCreatedCitizens;
     }
 
-
-    /**
-     * Method for showing the right anchorpane when opening the program, sets the main view visible and not relevant
-     * anchorpanes not visible
-     */
-    private void setAnchorPanesVisibility() {
-        labelInfoNewLine.setText("");
-        anchorPaneAdmin.setVisible(true);
-        anchorPaneCreateCitizen.setVisible(false);
-        anchorPaneStudent.setVisible(false);
-        anchorPaneCitizen.setVisible(false);
-        anchorPaneCase.setVisible(false);
-        anchorPaneCreateTeacher.setVisible(false);
-    }
-
-    @FXML
-    private void btnClickCreateTeacher() {
-        labelTitle.setText("Lærere");
-        labelInfo.setText("Overblik over alle oprettede lærere, hvor du kan oprette nye lærere, redigere eller slette");
-        labelInfoNewLine.setText("");
-        anchorPaneCreateTeacher.setVisible(true);
-        anchorPaneStudent.setVisible(false);
-        anchorPaneCreateCitizen.setVisible(false);
-        anchorPaneAdmin.setVisible(false);
-        anchorPaneCitizen.setVisible(false);
-        anchorPaneCase.setVisible(false);
-    }
-
-    /**
-     * Loads the student overview anchorpane when clicked.
-     */
-    @FXML
-    private void btnClickStudent() {
-        labelTitle.setText("Elever");
-        labelInfo.setText("Overblik over alle oprettede elever");
-        labelInfoNewLine.setText("");
-        anchorPaneStudent.setVisible(true);
-        anchorPaneCreateCitizen.setVisible(false);
-        anchorPaneAdmin.setVisible(false);
-        anchorPaneCitizen.setVisible(false);
-        anchorPaneCase.setVisible(false);
-        anchorPaneCreateTeacher.setVisible(false);
-    }
-
-    /**
-     * Loads the cases overview anchorpane when clicked.
-     */
-    @FXML
-    private void btnClickCase() {
-        labelTitle.setText("Sager");
-        labelInfo.setText("Overblik over alle oprettede sager. Opret nye sager, eller og kopier sager");
-        labelInfoNewLine.setText("");
-        anchorPaneCase.setVisible(true);
-        anchorPaneCreateCitizen.setVisible(false);
-        anchorPaneAdmin.setVisible(false);
-        anchorPaneStudent.setVisible(false);
-        anchorPaneCitizen.setVisible(false);
-        anchorPaneCreateTeacher.setVisible(false);
-    }
-
-    @FXML
-    private void btnClickSeeCitizens() {
-        labelTitle.setText("Borgere");
-        labelInfo.setText("Overblik over alle oprettede borgere. Tildel en sag til en borger, se yderligere informationer,");
-        labelInfoNewLine.setText("rediger eller slet borger.");
-        anchorPaneCitizen.setVisible(true);
-        anchorPaneCreateCitizen.setVisible(false);
-        anchorPaneAdmin.setVisible(false);
-        anchorPaneStudent.setVisible(false);
-        anchorPaneCase.setVisible(false);
-        anchorPaneCreateTeacher.setVisible(false);
-    }
-
-    @FXML
-    private void btnClickCitizen() {
-        labelTitle.setText("Opret Borger");
-        labelInfo.setText("Oprettelses vindue til borger");
-        labelInfoNewLine.setText("");
-        anchorPaneCreateCitizen.setVisible(true);
-        anchorPaneAdmin.setVisible(false);
-        anchorPaneStudent.setVisible(false);
-        anchorPaneCase.setVisible(false);
-        anchorPaneCitizen.setVisible(false);
-        anchorPaneCreateTeacher.setVisible(false);
-    }
-
-    @FXML
-    private void btnClickHome() {
-        labelTitle.setText("Admin");
-        labelInfo.setText("Logget ind som Admin");
-        labelInfoNewLine.setText("");
-        anchorPaneAdmin.setVisible(true);
-        anchorPaneStudent.setVisible(false);
-        anchorPaneCase.setVisible(false);
-        anchorPaneCitizen.setVisible(false);
-        anchorPaneCreateCitizen.setVisible(false);
-        anchorPaneCreateTeacher.setVisible(false);
-    }
-
-    /**
-     * Action event for logout button, that gets the login view and loads that when pressed.
-     * Closes current stage
-     *
-     * @param
-     * @throws IOException
-     */
-    @FXML
-    private void btnClickLogout( ) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
-        Scene scene = new Scene(loader.load());
-        Stage switcher = (Stage) btnLogOut.getScene().getWindow();
-        switcher.setScene(scene);
-        switcher.setTitle("Lærer");
-        switcher.show();
-        switcher.centerOnScreen();
-    }
-
-
-    /**
-     * Sets text labels with the user that has logged in.
-     *
-     * @param user
-     * @throws SQLException
-     * @throws IOException
-     */
-    @Override
-    public void setUser(User user) throws SQLException, IOException {
-        labelTitle.setText("Admin");
-        labelInfo.setText("Du er nu logget ind som admin: " + user.getFirstName() + user.getLastName());
-        labelInfoNewLine.setText("");
-    }
 
     @FXML
     private void onActionCreateTeacher() throws SQLException {
@@ -633,7 +471,8 @@ public class AdminViewController implements Initializable, IController {
 
     }
 
-    public void onActionEditTeacherSave() throws Exception {
+    @FXML
+    private void onActionEditTeacherSave() throws Exception {
         if (this.selectedTeacher != null) {
             if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldTeacherID.getText());
@@ -700,20 +539,16 @@ public class AdminViewController implements Initializable, IController {
     /**
      * Makes you able to select a teacher from the table
      *
-     * @param
      */
     private void selectedTeacher() {
         this.tvTeachers.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((User) newValue != null) {
-                this.selectedTeacher = (User) newValue;
+            if (newValue != null) {
+                this.selectedTeacher = newValue;
             }
         }));
     }
 
-    /**
-     *
-     * @param teacher
-     */
+
     public void setSelectedTeacher(User teacher) {
         txtFieldTeacherID.setText(String.valueOf(teacher.getId()));
         txtFieldTeacherFirstName.setText(teacher.getFirstName());
@@ -735,9 +570,7 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
-    /**
-     *
-     */
+
     public void clearTeacherTxtField() {
         txtFieldTeacherID.clear();
         txtFieldTeacherFirstName.clear();
@@ -852,7 +685,6 @@ public class AdminViewController implements Initializable, IController {
     /**
      * Action event for save student button. Gets the text from all the textFields and creates a new student when pressed.
      *
-     * @throws SQLException
      */
     @FXML
     private void btnHandleSaveStudent() throws SQLException {
@@ -875,7 +707,6 @@ public class AdminViewController implements Initializable, IController {
      * Action Event for the edit student button. Fills all textFields, with data from the selected student.
      * Edits the student using the ID.
      *
-     * @throws Exception
      */
     @FXML
     private void btnHandleEditStudent() {
@@ -961,7 +792,6 @@ public class AdminViewController implements Initializable, IController {
     /**
      * Action event for button to delete selected student.
      *
-     * @throws SQLException
      */
     @FXML
     private void btnHandleDeleteStudent() throws SQLException {
@@ -986,8 +816,8 @@ public class AdminViewController implements Initializable, IController {
      */
     private void selectedStudent() {
         this.tvStudent.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((User) newValue != null) {
-                this.selectedStudent = (User) newValue;
+            if (newValue != null) {
+                this.selectedStudent = newValue;
             }
         }));
     }
@@ -997,8 +827,8 @@ public class AdminViewController implements Initializable, IController {
      */
     private void selectedCurrentCase() {
         this.tvCurrentCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((Case) newValue != null) {
-                this.selectedCurrentCase = (Case) newValue;
+            if (newValue != null) {
+                this.selectedCurrentCase = newValue;
             }
         }));
     }
@@ -1009,8 +839,8 @@ public class AdminViewController implements Initializable, IController {
      */
     private void selectedCitizen() {
         this.tvCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((Citizen) newValue != null) {
-                this.selectedCitizen = (Citizen) newValue;
+            if (newValue != null) {
+                this.selectedCitizen = newValue;
                 seeCasesOnCitizen();
             }
         }));
@@ -1050,8 +880,8 @@ public class AdminViewController implements Initializable, IController {
      */
     private void selectedCreatedCitizen() {
         this.tvCreatedCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((Citizen) newValue != null) {
-                this.selectedCreatedCitizen = (Citizen) newValue;
+            if (newValue != null) {
+                this.selectedCreatedCitizen = newValue;
             }
         }));
 
@@ -1089,7 +919,6 @@ public class AdminViewController implements Initializable, IController {
     /**
      * Sets the selected student
      *
-     * @param student
      */
     private void setSelectedStudent(User student) {
         txtFieldStudentID.setText(String.valueOf(student.getId()));
@@ -1135,16 +964,16 @@ public class AdminViewController implements Initializable, IController {
      */
     private void selectedCase() {
         this.tvCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((Case) newValue != null) {
-                this.selectedCase = (Case) newValue;
+            if (newValue != null) {
+                this.selectedCase = newValue;
             }
         }));
     }
 
     private void selectedCaseOnCitizen() {
         this.tvCasesOnCitizen.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((Case) newValue != null) {
-                this.selectedCaseOnCitizen = (Case) newValue;
+            if (newValue != null) {
+                this.selectedCaseOnCitizen = newValue;
             }
         }));
     }
@@ -1175,7 +1004,6 @@ public class AdminViewController implements Initializable, IController {
     /**
      * Sets the selected event
      *
-     * @param aCase
      */
     private void setSelectedCase(Case aCase) {
         txtFieldCaseID.setText(String.valueOf(aCase.getId()));
@@ -1218,12 +1046,12 @@ public class AdminViewController implements Initializable, IController {
             alert.setTitle("Advarsel");
             alert.setHeaderText("Advarsel før du sletter en sag");
             alert.setContentText("Denne handling kan ikke fortrydes");
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK) {
-                    selectedCase();
-                    dataModelFacade.deleteCase(selectedCase.getId());
-                    reloadCaseTable();
-                    reloadCurrentCasesTable();
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                selectedCase();
+                dataModelFacade.deleteCase(selectedCase.getId());
+                reloadCaseTable();
+                reloadCurrentCasesTable();
                 }
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en sag først");
@@ -1243,7 +1071,6 @@ public class AdminViewController implements Initializable, IController {
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en sag først");
         }
-
     }
 
     @FXML
@@ -1292,17 +1119,18 @@ public class AdminViewController implements Initializable, IController {
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en sag først");
         }
-
     }
 
-    public void btnHandleCopySave() throws Exception {
+    @FXML
+    private void btnHandleCopySave() throws Exception {
         if (selectedCase != null){
             btnHandleSaveCase();
             setCaseBtnVisibility();
         }
     }
 
-    public void setCaseBtnVisibility(){
+    @FXML
+    private void setCaseBtnVisibility(){
         btnEditCase.setDisable(false);
         btnCopyCase.setDisable(false);
         btnSaveCase.setVisible(true);
@@ -1311,5 +1139,130 @@ public class AdminViewController implements Initializable, IController {
         btnEditCaseCancel.setVisible(false);
     }
 
+    /**
+     * Method for showing the right anchorpane when opening the program, sets the main view visible and not relevant
+     * anchorpanes not visible
+     */
+    private void setAnchorPanesVisibility() {
+        labelInfoNewLine.setText("");
+        anchorPaneAdmin.setVisible(true);
+        anchorPaneCreateCitizen.setVisible(false);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCitizen.setVisible(false);
+        anchorPaneCase.setVisible(false);
+        anchorPaneCreateTeacher.setVisible(false);
+    }
+
+    @FXML
+    private void btnClickCreateTeacher() {
+        labelTitle.setText("Lærere");
+        labelInfo.setText("Overblik over alle oprettede lærere, hvor du kan oprette nye lærere, redigere eller slette");
+        labelInfoNewLine.setText("");
+        anchorPaneCreateTeacher.setVisible(true);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCreateCitizen.setVisible(false);
+        anchorPaneAdmin.setVisible(false);
+        anchorPaneCitizen.setVisible(false);
+        anchorPaneCase.setVisible(false);
+    }
+
+    /**
+     * Loads the student overview anchorpane when clicked.
+     */
+    @FXML
+    private void btnClickStudent() {
+        labelTitle.setText("Elever");
+        labelInfo.setText("Overblik over alle oprettede elever");
+        labelInfoNewLine.setText("");
+        anchorPaneStudent.setVisible(true);
+        anchorPaneCreateCitizen.setVisible(false);
+        anchorPaneAdmin.setVisible(false);
+        anchorPaneCitizen.setVisible(false);
+        anchorPaneCase.setVisible(false);
+        anchorPaneCreateTeacher.setVisible(false);
+    }
+
+    /**
+     * Loads the cases overview anchorpane when clicked.
+     */
+    @FXML
+    private void btnClickCase() {
+        labelTitle.setText("Sager");
+        labelInfo.setText("Overblik over alle oprettede sager. Opret nye sager, eller og kopier sager");
+        labelInfoNewLine.setText("");
+        anchorPaneCase.setVisible(true);
+        anchorPaneCreateCitizen.setVisible(false);
+        anchorPaneAdmin.setVisible(false);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCitizen.setVisible(false);
+        anchorPaneCreateTeacher.setVisible(false);
+    }
+
+    @FXML
+    private void btnClickSeeCitizens() {
+        labelTitle.setText("Borgere");
+        labelInfo.setText("Overblik over alle oprettede borgere. Tildel en sag til en borger, se yderligere informationer,");
+        labelInfoNewLine.setText("rediger eller slet borger.");
+        anchorPaneCitizen.setVisible(true);
+        anchorPaneCreateCitizen.setVisible(false);
+        anchorPaneAdmin.setVisible(false);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCase.setVisible(false);
+        anchorPaneCreateTeacher.setVisible(false);
+    }
+
+    @FXML
+    private void btnClickCitizen() {
+        labelTitle.setText("Opret Borger");
+        labelInfo.setText("Oprettelses vindue til borger");
+        labelInfoNewLine.setText("");
+        anchorPaneCreateCitizen.setVisible(true);
+        anchorPaneAdmin.setVisible(false);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCase.setVisible(false);
+        anchorPaneCitizen.setVisible(false);
+        anchorPaneCreateTeacher.setVisible(false);
+    }
+
+    @FXML
+    private void btnClickHome() {
+        labelTitle.setText("Admin");
+        labelInfo.setText("Logget ind som Admin");
+        labelInfoNewLine.setText("");
+        anchorPaneAdmin.setVisible(true);
+        anchorPaneStudent.setVisible(false);
+        anchorPaneCase.setVisible(false);
+        anchorPaneCitizen.setVisible(false);
+        anchorPaneCreateCitizen.setVisible(false);
+        anchorPaneCreateTeacher.setVisible(false);
+    }
+
+    /**
+     * Action event for logout button, that gets the login view and loads that when pressed.
+     * Closes current stage
+     *
+     */
+    @FXML
+    private void btnClickLogout( ) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage switcher = (Stage) btnLogOut.getScene().getWindow();
+        switcher.setScene(scene);
+        switcher.setTitle("Lærer");
+        switcher.show();
+        switcher.centerOnScreen();
+    }
+
+
+    /**
+     * Sets text labels with the user that has logged in.
+     *
+     */
+    @Override
+    public void setUser(User user) {
+        labelTitle.setText("Admin");
+        labelInfo.setText("Du er nu logget ind som admin: " + user.getFirstName() + user.getLastName());
+        labelInfoNewLine.setText("");
+    }
 
 }

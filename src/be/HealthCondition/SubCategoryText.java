@@ -2,8 +2,6 @@ package be.HealthCondition;
 
 import be.enums.ConditionEnum;
 
-import java.util.Objects;
-
 public class SubCategoryText {
 
     private int id;

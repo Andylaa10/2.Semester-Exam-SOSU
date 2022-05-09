@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserModel {
 
-    private UserManager userManager;
+    private final UserManager userManager;
 
     public UserModel() throws IOException {
         userManager = new UserManager();
@@ -17,40 +17,27 @@ public class UserModel {
 
     /**
      * Get a list of student using the getStudents method from userManager
-     * @return
-     * @throws SQLException
      */
-    public List<User> getStudents() throws SQLException {
+    public List<User> getStudents() {
         return userManager.getStudents();
     }
 
     /**
      * Get a list of teachers using the getTeachers method from userManager
-     * @return
-     * @throws SQLException
      */
-    public List<User> getTeachers() throws SQLException {
+    public List<User> getTeachers() {
         return userManager.getTeachers();
     }
 
     /**
      * Get a list of admins using the getAdmins method from userManager
-     * @return
-     * @throws SQLException
      */
-    public List<User> getAdmins() throws SQLException {
+    public List<User> getAdmins() {
         return userManager.getAdmins();
     }
 
     /**
      * Creates a student using the createStudent method from userManager
-     * @param firstName
-     * @param lastName
-     * @param username
-     * @param password
-     * @param userType
-     * @return
-     * @throws SQLException
      */
     public User createStudent(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
         return userManager.createStudent(firstName, lastName, username, password, userType);
@@ -58,13 +45,6 @@ public class UserModel {
 
     /**
      * Creates a teacher using the createTeacher method from userManager
-     * @param firstName
-     * @param lastName
-     * @param username
-     * @param password
-     * @param userType
-     * @return
-     * @throws SQLException
      */
     public User createTeacher(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
         return userManager.createTeacher(firstName, lastName, username, password, userType);
@@ -72,13 +52,6 @@ public class UserModel {
 
     /**
      * Creates an admin using the createAdmin method from userManager
-     * @param firstName
-     * @param lastName
-     * @param username
-     * @param password
-     * @param userType
-     * @return
-     * @throws SQLException
      */
     public User createAdmin(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
         return userManager.createAdmin(firstName, lastName, username, password, userType);
@@ -86,8 +59,6 @@ public class UserModel {
 
     /**
      * Deletes a student using the deleteStudent method from userManager
-     * @param id
-     * @param userType
      */
     public void deleteStudent(int id, UserType userType) throws SQLException {
         userManager.deleteStudent(id, userType);
@@ -95,8 +66,6 @@ public class UserModel {
 
     /**
      * Deletes a teacher using the deleteTeacher method from userManager
-     * @param id
-     * @param userType
      */
     public void deleteTeacher(int id, UserType userType) throws SQLException {
         userManager.deleteTeacher(id, userType);
@@ -104,8 +73,6 @@ public class UserModel {
 
     /**
      * Deletes an admin using the deleteAdmin method from userManager
-     * @param id
-     * @param userType
      */
     public void deleteAdmin(int id, UserType userType) throws SQLException {
         userManager.deleteAdmin(id, userType);
@@ -113,8 +80,6 @@ public class UserModel {
 
     /**
      * Edits a student using the editStudent method from userManager
-     * @param student
-     * @throws Exception
      */
     public void editStudent(User student) throws Exception {
         userManager.editStudent(student);
@@ -122,8 +87,6 @@ public class UserModel {
 
     /**
      * Edits a teacher using the editTeacher method from userManager
-     * @param teacher
-     * @throws Exception
      */
     public void editTeacher(User teacher) throws Exception {
         userManager.editTeacher(teacher);
@@ -131,8 +94,6 @@ public class UserModel {
 
     /**
      * Edits an admin using the editAdmin method from userManager
-     * @param admin
-     * @throws Exception
      */
     public void editAdmin(User admin) throws Exception {
         userManager.editAdmin(admin);
@@ -140,9 +101,6 @@ public class UserModel {
 
     /**
      * Gets the user userLogin using the userLogin method from userManager
-     * @param username
-     * @param password
-     * @return
      */
     public User userLogin(String username, String password){
         return userManager.userLogin(username, password);

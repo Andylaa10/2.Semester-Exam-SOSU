@@ -12,14 +12,12 @@ import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,7 +28,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -39,10 +36,13 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class StudentViewController extends Application implements IController, Initializable {
+public class StudentViewController implements IController, Initializable {
 
 
-    //Generel info on Citizen pane
+    public Button btnMobility;
+    /**
+     * General info on Citizen pane
+     */
     @FXML
     private TextField txtFieldFirstName;
     @FXML
@@ -72,13 +72,18 @@ public class StudentViewController extends Application implements IController, I
     @FXML
     private ImageView imageCoping;
 
-    //Studerendes vurdering af funktionelt niveau
+    /**
+     * Students judgement on functional pane
+     */
     @FXML
     private ComboBox comboBoxFunctionalAbilityExpected;
     @FXML
     private TextArea txtAreaFunctionAbilityNote;
 
-    //Borgerens egen vurdering på funktionel pane
+
+    /**
+     * Citizens own judgement on functional pane
+     */
     @FXML
     private ComboBox comboBoxCitizenOwnAbility;
     @FXML
@@ -86,20 +91,28 @@ public class StudentViewController extends Application implements IController, I
     @FXML
     private TextArea txtAreaCitizenGoals;
 
-    //Health condition tables
+
+    /**
+     * HealthCondition Tables
+     */
     @FXML
     private TableView<HealthCondition> tvHealthConditions;
     @FXML
     private TableColumn<HealthCondition, Integer> tcHealthConditionID;
     @FXML
     private TableColumn<HealthCondition, String> tcHealthConditionName;
-
     @FXML
     private TableView<SubCategory> tvSubCategories;
     @FXML
     private TableColumn<SubCategory, Integer> tcSubCategoriesID;
     @FXML
     private TableColumn<SubCategory, String> tcSubCategoriesName;
+    @FXML
+    private TextArea txtAreaNoteOnSubCategory;
+
+    /**
+     * General Information
+     */
     @FXML
     private TextArea txtAreaCoping;
     @FXML
@@ -124,7 +137,9 @@ public class StudentViewController extends Application implements IController, I
     private TextArea txtAreaNetwork;
 
 
-    //Cases table
+    /**
+     * Cases Table
+     */
     @FXML
     private TableView<Case> tvCases;
     @FXML
@@ -136,7 +151,9 @@ public class StudentViewController extends Application implements IController, I
     @FXML
     private TableColumn<Case, String> tcCaseInfo;
 
-    //Citizen Table
+    /**
+     * Citizen Table
+     */
     @FXML
     private TableView<Citizen> tvCitizens;
     @FXML
@@ -152,39 +169,23 @@ public class StudentViewController extends Application implements IController, I
     @FXML
     private TableColumn<Citizen, String> tcCitizenSex;
 
-    //FS III comboBox
+    /**
+     * FS III comboBox
+     */
     @FXML
     private ComboBox comboBoxCitizen;
     @FXML
     private TextField txtFieldCitizenID;
-    @FXML
-    private TextArea txtAreaNoteOnSubCategory;
-    @FXML
-    private Button btnGeneralInformation;
-    @FXML
-    private Button btnHealthCondition;
-    @FXML
-    private Button btnFunctionalCondition;
-    @FXML
-    private Button btnCitizenAssessment;
-    @FXML
-    private Button btnHome;
-    @FXML
-    private Button btnCitizens;
-    @FXML
-    private Button btnFS3;
+
+
     @FXML
     private Button btnLogOut;
-    @FXML
-    private Button btnBack;
     @FXML
     private Label labelTitle;
     @FXML
     private Label labelInfo;
     @FXML
     private Label labelInfoNewLine;
-    @FXML
-    private AnchorPane topPane;
     @FXML
     private AnchorPane anchorPaneStudent;
     @FXML
@@ -223,16 +224,7 @@ public class StudentViewController extends Application implements IController, I
     private TableColumn<SubFunctional, Integer> tcFunctionalConditionID;
     @FXML
     private TableColumn<SubFunctional, String> tcFunctionalConditionName;
-    @FXML
-    private Button btnSelfCare;
-    @FXML
-    private Button btnMentalFunctions;
-    @FXML
-    private Button btnMobility;
-    @FXML
-    private Button btnPracticalAssignments;
-    @FXML
-    private Button btnCommunityLife;
+
     @FXML
     private ComboBox comboBoxCurrentLevel;
     @FXML
@@ -246,24 +238,21 @@ public class StudentViewController extends Application implements IController, I
     @FXML
     private TextField txtFieldFunctionalAbilityID;
 
-
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
     private ObservableList<HealthCondition> allHealthConditions = FXCollections.observableArrayList();
     private ObservableList<SubCategory> allSubCategories = FXCollections.observableArrayList();
     private ObservableList<SubFunctional> allFunctionalAbilitySubCategories = FXCollections.observableArrayList();
 
-
     private Citizen selectedCitizen;
     private Citizen selectedCitizenOnComboBox;
     private SubFunctional selectedFunctionalAbilitySubCategory;
 
     private SubCategory selectedSubCategory;
-    private SubCategoryText subCategoryText;
+    private SubCategoryText selectedSubCategoryText;
     private HealthCondition selectedHealthCondition;
 
     private DataModelFacade dataModelFacade;
-
     private ToggleGroup group;
 
     public StudentViewController() throws IOException {
@@ -272,11 +261,6 @@ public class StudentViewController extends Application implements IController, I
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            this.dataModelFacade = new DataModelFacade();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         setAnchorPanesVisibility();
         selectedCitizen();
         selectedCitizenOnComboBox();
@@ -297,7 +281,6 @@ public class StudentViewController extends Application implements IController, I
     /**
      * Inserts value from database to the different tables
      *
-     * @throws Exception
      */
     private void initializeTables() throws Exception {
         //Initialize the citizens table
@@ -329,7 +312,7 @@ public class StudentViewController extends Application implements IController, I
     /**
      * Loads all data in tableview, from the selected current citizen ID.
      */
-    public void seeCasesOnCitizen() {
+    private void seeCasesOnCitizen() {
         //Initialize the cases on citizen table
         tcCaseID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcCaseName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -346,7 +329,7 @@ public class StudentViewController extends Application implements IController, I
     /**
      * Takes values from the database and inserts them into the sub category tableview
      */
-    public void seeSubCategoriesOnCategory() {
+    private void seeSubCategoriesOnCategory() {
         //Initialize the subCategory table
         tcSubCategoriesID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcSubCategoriesName.setCellValueFactory(new PropertyValueFactory<>("subCategoryName"));
@@ -361,19 +344,56 @@ public class StudentViewController extends Application implements IController, I
     /**
      * Load the tableviews with assigned health condition notes
      *
-     * @throws SQLServerException
      */
-    public void seeTxtOnSubCategory() throws SQLServerException {
+    private void seeTxtOnSubCategory() throws SQLServerException {
         txtFieldCitizenID.getText();
         txtAreaNoteOnSubCategory.setText(String.valueOf(dataModelFacade.getTextOnSubCategory(selectedCitizenOnComboBox.getId(), selectedSubCategory.getId())));
     }
 
     /**
+     * Method to only pick one health condition
+     */
+    private void setupToggleHealthCondition() {
+        group = new ToggleGroup();
+        radioNotRelevant.setToggleGroup(group);
+        radioPotential.setToggleGroup(group);
+        radioRelevant.setToggleGroup(group);
+    }
+
+    /**
+     * Method to only pick one gender
+     */
+    private void setupToggleGender() {
+        group = new ToggleGroup();
+        radioMale.setToggleGroup(group);
+        radioFemale.setToggleGroup(group);
+        radioOther.setToggleGroup(group);
+    }
+
+    private void setFunctionalAbilityComboBoxItems() {
+        comboBoxCurrentLevel.getItems().addAll(
+                "0", "1", "2", "3", "4", "9"
+        );
+        comboBoxExpectedLevel.getItems().addAll(
+                "0", "1", "2", "3", "4", "9"
+        );
+        comboboxPerformance.getItems().addAll(
+                "Udfører selv",
+                "Udfører dele selv",
+                "Udfører ikke selv",
+                "Ikke relevant"
+        );
+        comboboxMeaningOfPerformance.getItems().addAll(
+                "Oplever ikke begrænsninger",
+                "Oplever begrænsninger"
+        );
+    }
+
+    /**
      * Setup combobox with citizens
      *
-     * @throws SQLException
      */
-    public void initializeCitizenComboBox() throws SQLException {
+    private void initializeCitizenComboBox() throws SQLException {
         //Initialize the citizens in the dropdown menu
         allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
         tableViewLoadCitizens(allCitizens);
@@ -383,7 +403,6 @@ public class StudentViewController extends Application implements IController, I
     /**
      * When clicked on citizen in the combobox, the different text fields get values based on the selected citizen
      *
-     * @throws SQLException
      */
     @FXML
     private void onActionComboClicked() throws SQLException {
@@ -398,14 +417,13 @@ public class StudentViewController extends Application implements IController, I
         txtFieldLastName.setText(selectedCitizenInfo.getLastName());
         txtFieldSSN.setText(selectedCitizenInfo.getSSN());
         txtFieldAddress.setText(selectedCitizenInfo.getAddress());
-        if (selectedCitizenInfo.getSex().equals("Male")) {
-            radioMale.setSelected(true);
-        } else if (selectedCitizenInfo.getSex().equals("Female")) {
-            radioFemale.setSelected(true);
-        } else if (selectedCitizenInfo.getSex().equals("Other")) {
-            radioOther.setSelected(true);
+        switch (selectedCitizenInfo.getSex()) {
+            case "Male" -> radioMale.setSelected(true);
+            case "Female" -> radioFemale.setSelected(true);
+            case "Other" -> radioOther.setSelected(true);
         }
-        GeneralInformation selectedGeneralInformation = (GeneralInformation) dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
+
+        GeneralInformation selectedGeneralInformation = dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
         txtAreaCoping.setText(selectedGeneralInformation.getCoping());
         txtAreaMotivation.setText(selectedGeneralInformation.getMotivation());
         txtAreaResources.setText(selectedGeneralInformation.getResources());
@@ -421,29 +439,8 @@ public class StudentViewController extends Application implements IController, I
 
 
     /**
-     * Method to only pick one health condition
-     */
-    public void setupToggleHealthCondition() {
-        group = new ToggleGroup();
-        radioNotRelevant.setToggleGroup(group);
-        radioPotential.setToggleGroup(group);
-        radioRelevant.setToggleGroup(group);
-    }
-
-    /**
-     * Method to only pick one gender
-     */
-    public void setupToggleGender() {
-        group = new ToggleGroup();
-        radioMale.setToggleGroup(group);
-        radioFemale.setToggleGroup(group);
-        radioOther.setToggleGroup(group);
-    }
-
-    /**
      * loads the Citizens table view
      *
-     * @param allCitizens
      */
     private void tableViewLoadCitizens(ObservableList<Citizen> allCitizens) {
         tvCitizens.setItems(getCitizenData());
@@ -460,8 +457,6 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * loads the casesOnCitizen tableview.
-     *
-     * @param allCasesOnCitizen
      */
     private void tableViewLoadCasesOnCitizen(ObservableList<Case> allCasesOnCitizen) {
         tvCases.setItems(getCasesOnCitizenData());
@@ -479,7 +474,6 @@ public class StudentViewController extends Application implements IController, I
     /**
      * loads the health condition tableview.
      *
-     * @param allHealthConditions
      */
     private void tableViewLoadHealthConditions(ObservableList<HealthCondition> allHealthConditions) {
         tvHealthConditions.setItems(getHealthConditionData());
@@ -488,7 +482,6 @@ public class StudentViewController extends Application implements IController, I
     /**
      * Gets the data for health conditions
      *
-     * @return
      */
     private ObservableList<HealthCondition> getHealthConditionData() {
         return allHealthConditions;
@@ -496,8 +489,6 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * loads the sub categories tableview.
-     *
-     * @param allSubCategories
      */
     private void tableViewLoadSubCategories(ObservableList<SubCategory> allSubCategories) {
         tvSubCategories.setItems(getSubCategories());
@@ -505,8 +496,6 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * Gets the data for sub categories
-     *
-     * @return
      */
     private ObservableList<SubCategory> getSubCategories() {
         return allSubCategories;
@@ -526,8 +515,8 @@ public class StudentViewController extends Application implements IController, I
      */
     private void selectedCitizen() {
         this.tvCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((Citizen) newValue != null) {
-                this.selectedCitizen = (Citizen) newValue;
+            if (newValue != null) {
+                this.selectedCitizen = newValue;
                 seeCasesOnCitizen();
             }
         }));
@@ -538,7 +527,7 @@ public class StudentViewController extends Application implements IController, I
      */
     public void selectedCitizenOnComboBox() {
         this.comboBoxCitizen.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((Citizen) newValue != null) {
+            if (newValue != null) {
                 this.selectedCitizenOnComboBox = (Citizen) newValue;
             }
         }));
@@ -549,8 +538,8 @@ public class StudentViewController extends Application implements IController, I
      */
     private void selectedHealthCondition() {
         this.tvHealthConditions.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((HealthCondition) newValue != null) {
-                this.selectedHealthCondition = (HealthCondition) newValue;
+            if (newValue != null) {
+                this.selectedHealthCondition = newValue;
                 seeSubCategoriesOnCategory();
             }
         }));
@@ -561,14 +550,13 @@ public class StudentViewController extends Application implements IController, I
      */
     private void selectedSubCategory() {
         this.tvSubCategories.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((SubCategory) newValue != null) {
-                this.selectedSubCategory = (SubCategory) newValue;
+            if (newValue != null) {
+                this.selectedSubCategory = newValue;
                 try {
                     seeTxtOnSubCategory();
                 } catch (SQLServerException e) {
                     e.printStackTrace();
                 }
-
             }
         }));
     }
@@ -578,22 +566,199 @@ public class StudentViewController extends Application implements IController, I
      */
     private void SelectedFunctionalAbilitySubCategory() {
         this.tvFunctionalConditions.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((SubFunctional) newValue != null) {
-                this.selectedFunctionalAbilitySubCategory = (SubFunctional) newValue;
+            if (newValue != null) {
+                this.selectedFunctionalAbilitySubCategory = newValue;
                 txtFieldFunctionalAbilityID.setText(String.valueOf(selectedFunctionalAbilitySubCategory.getId()));
             }
         }));
     }
 
     /**
-     * Sets the user
+     * Save the changes if there are any
+     */
+    @FXML
+    private void onActionGeneralInfoSave() throws Exception {
+        int id = Integer.parseInt(txtFieldCitizenID.getText());
+        String citizenFirstName = txtFieldFirstName.getText();
+        String citizenLastName = txtFieldLastName.getText();
+        String citizenSSN = txtFieldSSN.getText();
+        String citizenAddress = txtFieldAddress.getText();
+        String sex = null;
+        if (radioMale.isSelected()) {
+            sex = "Male";
+        } else if (radioFemale.isSelected()) {
+            sex = "Female";
+        } else if (radioOther.isSelected()) {
+            sex = "Other";
+        }
+
+        int generalInformationId = Integer.parseInt(txtFieldCitizenID.getText());
+        String coping = txtAreaCoping.getText();
+        String motivation = txtAreaMotivation.getText();
+        String resources = txtAreaResources.getText();
+        String roles = txtAreaRoles.getText();
+        String habits = txtAreaHabits.getText();
+        String educationandjob = txtAreaEducationAndJobs.getText();
+        String lifeStory = txtAreaLifeStory.getText();
+        String network = txtAreaNetwork.getText();
+        String healthInformation = txtAreaHealthInfo.getText();
+        String equipmentAids = txtAreaEquipmentAids.getText();
+        String homeLayout = txtAreaHomeLayout.getText();
+
+        Citizen citizen = new Citizen(id, citizenFirstName, citizenLastName, citizenSSN, citizenAddress, sex);
+        GeneralInformation generalInformation = new GeneralInformation(generalInformationId, coping, motivation, resources, roles, habits, educationandjob,
+                lifeStory, network, healthInformation, equipmentAids, homeLayout);
+        dataModelFacade.editCitizen(citizen);
+        dataModelFacade.editGeneralInformation(generalInformation);
+        lblInfoState.setText("Ændringer - Gemt");
+        imgViewNotSaved.setVisible(false);
+        imgViewSaved.setVisible(true);
+    }
+
+    /**
+     * When a citizen is selected all values is loaded in the text fields
+     */
+    public void setGeneralInfoFromID(String citizenID) throws SQLException {
+        txtFieldCitizenID.setText(citizenID);
+        Citizen selectedCitizenInfo = dataModelFacade.getInfoOnCitizen(Integer.parseInt(txtFieldCitizenID.getText()));
+        txtFieldFirstName.setText(selectedCitizenInfo.getFirstName());
+        txtFieldLastName.setText(selectedCitizenInfo.getLastName());
+        txtFieldSSN.setText(selectedCitizenInfo.getSSN());
+        txtFieldAddress.setText(selectedCitizenInfo.getAddress());
+        radioMale.setToggleGroup(group);
+        radioFemale.setToggleGroup(group);
+        radioOther.setToggleGroup(group);
+        switch (selectedCitizenInfo.getSex()) {
+            case "Male" -> radioMale.setSelected(true);
+            case "Female" -> radioFemale.setSelected(true);
+            case "Other" -> radioOther.setSelected(true);
+        }
+
+        GeneralInformation selectedGeneralInformation = dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
+        txtAreaCoping.setText(selectedGeneralInformation.getCoping());
+        txtAreaMotivation.setText(selectedGeneralInformation.getMotivation());
+        txtAreaResources.setText(selectedGeneralInformation.getResources());
+        txtAreaRoles.setText(selectedGeneralInformation.getRoles());
+        txtAreaHabits.setText(selectedGeneralInformation.getHabits());
+        txtAreaEducationAndJobs.setText(selectedGeneralInformation.getEducationAndJob());
+        txtAreaLifeStory.setText(selectedGeneralInformation.getLifeStory());
+        txtAreaHealthInfo.setText(selectedGeneralInformation.getHealthInformation());
+        txtAreaEquipmentAids.setText(selectedGeneralInformation.getEquipmentAids());
+        txtAreaHomeLayout.setText(selectedGeneralInformation.getHomeLayout());
+        txtAreaNetwork.setText(selectedGeneralInformation.getNetwork());
+        lblInfoState.setText("Ændringer - Ikke Gemt");
+        imgViewSaved.setVisible(false);
+        imgViewNotSaved.setVisible(true);
+    }
+
+    private void setFunctionalAbilityInfo(int citizenId, int functionalAbilitySubCategoryId){
+        //TODO LAV METODE HER TIL AT UDFYLDE TEKSTEN I ALLE FELTER OG COMBOBOXES PÅ FUNKTIONSTILSTANDSVIEWET!!!!!!!!!!!
+        //TODO !!!!!!!!!!!!!!!!
+    }
+
+    @FXML
+    private void btnHandleSaveHC() throws SQLException {
+        int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
+        int subCategoryId = Integer.parseInt(tcSubCategoriesID.getText());
+        String note = txtAreaFunctionAbilityNote.getText();
+        if (radioNotRelevant.isSelected()) {
+            int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
+            dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
+        } else if (radioPotential.isSelected()) {
+            int conditionValue = ConditionEnum.POTENTIAL.getValue();
+            dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
+        } else if (radioRelevant.isSelected()) {
+            int conditionValue = ConditionEnum.RELEVANT.getValue();
+            dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
+        }
+    }
+
+    @FXML
+    private void btnHandelCancelChangesHC() {
+        txtAreaFunctionAbilityNote.clear();
+        radioNotRelevant.setSelected(false);
+        radioPotential.setSelected(false);
+        radioRelevant.setSelected(false);
+    }
+
+
+
+    @FXML
+    private void btnLoadSelfCare() {
+        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        try {
+            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(1));
+            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void btnLoadMentalFunctions() {
+        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        try {
+            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(2));
+            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void btnLoadMobility() {
+        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        try {
+            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(3));
+            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void btnLoadPracticalAssignments() {
+        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        try {
+            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(4));
+            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void btnLoadCommunityLife() {
+        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        try {
+            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(5));
+            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
+
+    /**
+     * When clicked on the little i-icon it sends you to the FS3 homepage
      *
-     * @param user
-     * @throws SQLException
-     * @throws IOException
+     */
+    @FXML
+    private void coupingLink() throws URISyntaxException, IOException {
+        Desktop.getDesktop().browse(new URI("https://www.fs3.nu/filer/Dokumenter/Metode/FSIII-Guide-til-generelle-oplysninger.pdf?t=1647518630"));
+    }
+
+    /**
+     * Sets the user
      */
     @Override
-    public void setUser(User user) throws SQLException, IOException {
+    public void setUser(User user) {
         labelTitle.setText("Elev");
         labelInfo.setText("Du er nu logget ind som Elev: " + user.getFirstName() + " " + user.getLastName());
         labelInfoNewLine.setText("");
@@ -615,8 +780,6 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * Takes you back to the start screen/pane when clicked on logo
-     *
-     * @param actionEvent
      */
     @FXML
     private void btnClickHome(ActionEvent actionEvent) {
@@ -668,8 +831,7 @@ public class StudentViewController extends Application implements IController, I
     /**
      * Set up the general information pane
      */
-    @FXML
-    void btnClickGeneralInformation() {
+    public void btnClickGeneralInformation() {
         labelTitle.setText("Generelle Informationer for borgeren");
         labelInfo.setText("Overblik over borgerens generelle informationer, hvor det er muligt at redigere og gemme eventuelle ændringer");
         labelInfoNewLine.setText("Her kan du se alle informationer for borgeren");
@@ -680,7 +842,6 @@ public class StudentViewController extends Application implements IController, I
         anchorPaneGeneralInformation.setVisible(true);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalCondition.setVisible(false);
-
     }
 
     /**
@@ -720,7 +881,6 @@ public class StudentViewController extends Application implements IController, I
     /**
      * When click on back it sends you back to the start pane/screen
      *
-     * @param actionEvent
      */
     @FXML
     private void btnClickBack(ActionEvent actionEvent) {
@@ -729,8 +889,6 @@ public class StudentViewController extends Application implements IController, I
 
     /**
      * Logs you out when clicked
-     *
-     * @throws IOException
      */
     @FXML
     private void btnClickLogout() throws IOException {
@@ -746,228 +904,12 @@ public class StudentViewController extends Application implements IController, I
     /**
      * When the general information is click it set up the general information pane
      *
-     * @param actionEvent
      */
-    public void onActionGeneralInfoCancel(ActionEvent actionEvent) {
+    @FXML
+    private void onActionGeneralInfoCancel() {
         btnClickGeneralInformation();
     }
 
-    /**
-     * Save the changes if there are any
-     *
-     * @param actionEvent
-     * @throws Exception
-     */
-    public void onActionGeneralInfoSave(ActionEvent actionEvent) throws Exception {
-        int id = Integer.parseInt(txtFieldCitizenID.getText());
-        String citizenFirstName = txtFieldFirstName.getText();
-        String citizenLastName = txtFieldLastName.getText();
-        String citizenSSN = txtFieldSSN.getText();
-        String citizenAddress = txtFieldAddress.getText();
-        String sex = null;
-        if (radioMale.isSelected()) {
-            sex = "Male";
-        } else if (radioFemale.isSelected()) {
-            sex = "Female";
-        } else if (radioOther.isSelected()) {
-            sex = "Other";
-        }
-
-        int generalInformationId = Integer.parseInt(txtFieldCitizenID.getText());
-        String coping = txtAreaCoping.getText();
-        String motivation = txtAreaMotivation.getText();
-        String resources = txtAreaResources.getText();
-        String roles = txtAreaRoles.getText();
-        String habits = txtAreaHabits.getText();
-        String educationandjob = txtAreaEducationAndJobs.getText();
-        String lifeStory = txtAreaLifeStory.getText();
-        String network = txtAreaNetwork.getText();
-        String healthInformation = txtAreaHealthInfo.getText();
-        String equipmentAids = txtAreaEquipmentAids.getText();
-        String homeLayout = txtAreaHomeLayout.getText();
-
-        Citizen citizen = new Citizen(id, citizenFirstName, citizenLastName, citizenSSN, citizenAddress, sex);
-        GeneralInformation generalInformation = new GeneralInformation(generalInformationId, coping, motivation, resources, roles, habits, educationandjob,
-                lifeStory, network, healthInformation, equipmentAids, homeLayout);
-        dataModelFacade.editCitizen(citizen);
-        dataModelFacade.editGeneralInformation(generalInformation);
-        lblInfoState.setText("Ændringer - Gemt");
-        imgViewNotSaved.setVisible(false);
-        imgViewSaved.setVisible(true);
-    }
-
-    /**
-     * When clicked on the little i-icon it sends you to the FS3 homepage
-     *
-     * @param actionEvent
-     * @throws URISyntaxException
-     * @throws IOException
-     */
-    @FXML
-    private void coupingLink(ActionEvent actionEvent) throws URISyntaxException, IOException {
-        Desktop.getDesktop().browse(new URI("http://www.fs3.nu/filer/Dokumenter/Metode/FSIII-Guide-til-generelle-oplysninger.pdf?t=1647518630"));
-    }
-
-    /**
-     * When a citizen is selected all values is loaded in the text fields
-     *
-     * @param citizenID
-     * @throws SQLException
-     */
-    public void setGeneralInfoFromID(String citizenID) throws SQLException {
-        txtFieldCitizenID.setText(citizenID);
-        Citizen selectedCitizenInfo = dataModelFacade.getInfoOnCitizen(Integer.parseInt(txtFieldCitizenID.getText()));
-        txtFieldFirstName.setText(selectedCitizenInfo.getFirstName());
-        txtFieldLastName.setText(selectedCitizenInfo.getLastName());
-        txtFieldSSN.setText(selectedCitizenInfo.getSSN());
-        txtFieldAddress.setText(selectedCitizenInfo.getAddress());
-        radioMale.setToggleGroup(group);
-        radioFemale.setToggleGroup(group);
-        radioOther.setToggleGroup(group);
-        if (selectedCitizenInfo.getSex().equals("Male")) {
-            radioMale.setSelected(true);
-        } else if (selectedCitizenInfo.getSex().equals("Female")) {
-            radioFemale.setSelected(true);
-        } else if (selectedCitizenInfo.getSex().equals("Other")) {
-            radioOther.setSelected(true);
-        }
-
-        GeneralInformation selectedGeneralInformation = dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
-        txtAreaCoping.setText(selectedGeneralInformation.getCoping());
-        txtAreaMotivation.setText(selectedGeneralInformation.getMotivation());
-        txtAreaResources.setText(selectedGeneralInformation.getResources());
-        txtAreaRoles.setText(selectedGeneralInformation.getRoles());
-        txtAreaHabits.setText(selectedGeneralInformation.getHabits());
-        txtAreaEducationAndJobs.setText(selectedGeneralInformation.getEducationAndJob());
-        txtAreaLifeStory.setText(selectedGeneralInformation.getLifeStory());
-        txtAreaHealthInfo.setText(selectedGeneralInformation.getHealthInformation());
-        txtAreaEquipmentAids.setText(selectedGeneralInformation.getEquipmentAids());
-        txtAreaHomeLayout.setText(selectedGeneralInformation.getHomeLayout());
-        txtAreaNetwork.setText(selectedGeneralInformation.getNetwork());
-        lblInfoState.setText("Ændringer - Ikke Gemt");
-        imgViewSaved.setVisible(false);
-        imgViewNotSaved.setVisible(true);
-    }
-
-    private void setFunctionalAbilityInfo(int citizenId, int functionalAbilitySubCategoryId){
-        //TODO LAV METODE HER TIL AT UDFYLDE TEKSTEN I ALLE FELTER OG COMBOBOXES PÅ FUNKTIONSTILSTANDSVIEWET!!!!!!!!!!!
-        //TODO !!!!!!!!!!!!!!!!
-    }
-
-    @FXML
-    private void btnHandleSaveHC() throws SQLException {
-        int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
-        int subCategoryId = Integer.parseInt(tcSubCategoriesID.getText());
-        String note = txtAreaFunctionAbilityNote.getText();
-        if (radioNotRelevant.isSelected()) {
-            int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
-            dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
-        } else if (radioPotential.isSelected()) {
-            int conditionValue = ConditionEnum.POTENTIAL.getValue();
-            dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
-        } else if (radioRelevant.isSelected()) {
-            int conditionValue = ConditionEnum.RELEVANT.getValue();
-            dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
-        }
-    }
-
-    @FXML
-    private void btnHandelCancelChangesHC() {
-        txtAreaFunctionAbilityNote.clear();
-        radioNotRelevant.setSelected(false);
-        radioPotential.setSelected(false);
-        radioRelevant.setSelected(false);
-    }
 
 
-    public void btnLoadSelfCare(ActionEvent actionEvent) {
-        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        try {
-            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(1));
-            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    public void btnLoadMentalFunctions(ActionEvent actionEvent) {
-        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        try {
-            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(2));
-            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    public void btnLoadMobility(ActionEvent actionEvent) {
-        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        try {
-            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(3));
-            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    public void btnLoadPracticalAssignments(ActionEvent actionEvent) {
-        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        try {
-            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(4));
-            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    public void btnLoadCommunityLife(ActionEvent actionEvent) {
-        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        try {
-            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(5));
-            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    private void setFunctionalAbilityComboBoxItems(){
-
-        comboBoxCurrentLevel.getItems().addAll(
-                "0", "1", "2", "3", "4", "9"
-        );
-        comboBoxExpectedLevel.getItems().addAll(
-                "0", "1", "2", "3", "4", "9"
-        );
-        comboboxPerformance.getItems().addAll(
-                "Udfører selv",
-                "Udfører dele selv",
-                "Udfører ikke selv",
-                "Ikke relevant"
-        );
-        comboboxMeaningOfPerformance.getItems().addAll(
-                "Oplever ikke begrænsninger",
-                "Oplever begrænsninger"
-        );
-    }
-
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/StudentView.fxml"));
-        primaryStage.setTitle("SOSU Simulation");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        primaryStage.show();
-
-    }
-
-    public static void main(String[] args) throws IOException, SQLException {
-        DataModelFacade dataModelFacade = new DataModelFacade();
-        System.out.println(dataModelFacade.getFunctionalAbilities());
-    }
 }

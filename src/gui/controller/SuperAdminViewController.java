@@ -7,7 +7,6 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,8 +23,6 @@ import java.util.ResourceBundle;
 
 public class SuperAdminViewController implements Initializable, IController {
 
-
-
     @FXML
     private TableView<User> tvAssignedAdminsOnSchool;
     @FXML
@@ -36,11 +33,6 @@ public class SuperAdminViewController implements Initializable, IController {
     private TableColumn<User, String> tcAssignedAdminLastName;
     @FXML
     private TableColumn<User, String> tcAssignedAdminUsername;
-
-    @FXML
-    private Button btnCreateSchoolOnAssignPane;
-    @FXML
-    private Button btnCreateAdminOnAssignPage;
 
     @FXML
     private Button btnEditSchool;
@@ -75,10 +67,6 @@ public class SuperAdminViewController implements Initializable, IController {
     private Button btnEditAdminCancel;
     @FXML
     private Button btnDeleteAdmin;
-    @FXML
-    private Button btnAssignAdminToSchool;
-    @FXML
-    private Button btnDeleteAdminFromSchool;
 
     @FXML
     private TableView<School> tvSchools;
@@ -113,16 +101,11 @@ public class SuperAdminViewController implements Initializable, IController {
     @FXML
     private TableColumn<User, String> tcAssignAdminUsername;
 
-    @FXML
-    private AnchorPane topPane;
-    @FXML
-    private Button btnHome;
+
     @FXML
     private Button btnCreateSchool;
     @FXML
     private Button btnCreateAdmin;
-    @FXML
-    private Button btnConfigureSchools;
     @FXML
     private Button btnLogOut;
     @FXML
@@ -146,7 +129,6 @@ public class SuperAdminViewController implements Initializable, IController {
     private ObservableList<School> allSchools = FXCollections.observableArrayList();
     private ObservableList<School> allAssignedSchools = FXCollections.observableArrayList();
 
-
     DataModelFacade dataModelFacade;
 
     private School selectedSchool;
@@ -155,7 +137,6 @@ public class SuperAdminViewController implements Initializable, IController {
     private School selectedSchoolToAssign;
     private User selectedAdminToAssign;
     private User selectedAssignedAdmin;
-
 
     public SuperAdminViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
@@ -251,7 +232,7 @@ public class SuperAdminViewController implements Initializable, IController {
     private void onActionEditSaveSchool() throws Exception {
         if (this.selectedSchool != null){
             if (!txtFieldSchoolName.getText().isEmpty()) {
-                int id = Integer.parseInt(txtFieldSchoolID.getText());;
+                int id = Integer.parseInt(txtFieldSchoolID.getText());
                 String schoolName = txtFieldSchoolName.getText();
 
                 School school = new School(id, schoolName);
@@ -264,7 +245,7 @@ public class SuperAdminViewController implements Initializable, IController {
                 btnDeleteSchool.setVisible(true);
                 btnCreateSchool.setVisible(true);
                 btnEditCancel.setVisible(false);
-            }else{
+            } else {
                 ErrorHandlerController.createWarning("Fejl", "Skolen skal have et navn, før du kan gemme ændringen");
             }
         }
@@ -313,7 +294,7 @@ public class SuperAdminViewController implements Initializable, IController {
             clearAdminTxtField();
             tvAdmins.getSelectionModel().clearSelection();
             reloadAdminTable();
-        } else{
+        } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal udfylde alle administratorens informationer først");
         }
     }
@@ -337,7 +318,7 @@ public class SuperAdminViewController implements Initializable, IController {
     private void onActionEditAdminSave() throws Exception {
         if (this.selectedAdmin != null){
             if (!txtFieldAdminFirstName.getText().isEmpty() && !txtFieldAdminLastName.getText().isEmpty() && !txtFieldAdminUsername.getText().isEmpty() && !txtFieldAdminPassword.getText().isEmpty()) {
-                int id = Integer.parseInt(txtFieldAdminID.getText());;
+                int id = Integer.parseInt(txtFieldAdminID.getText());
                 String firstName = txtFieldAdminFirstName.getText();
                 String lastName = txtFieldAdminLastName.getText();
                 String userName = txtFieldAdminUsername.getText();
@@ -353,7 +334,7 @@ public class SuperAdminViewController implements Initializable, IController {
                 btnEditAdminCancel.setVisible(false);
                 btnCreateAdmin.setVisible(true);
                 btnDeleteAdmin.setVisible(true);
-            }else {
+            } else {
                 ErrorHandlerController.createWarning("Fejl", "Du skal vælge en admin først");
             }
         }
@@ -388,7 +369,6 @@ public class SuperAdminViewController implements Initializable, IController {
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en admin først");
         }
-
     }
 
     @FXML
@@ -518,24 +498,24 @@ public class SuperAdminViewController implements Initializable, IController {
 
     private void selectedSchool() {
         this.tvSchools.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((School) newValue != null) {
-                this.selectedSchool = (School) newValue;
+            if (newValue != null) {
+                this.selectedSchool = newValue;
             }
         }));
     }
 
     private void selectedAdmin() {
         this.tvAdmins.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((User) newValue != null) {
-                this.selectedAdmin = (User) newValue;
+            if (newValue != null) {
+                this.selectedAdmin = newValue;
             }
         }));
     }
 
     private void selectedSchoolToAssign() {
         this.tvAssignedSchool.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((School) newValue != null) {
-                this.selectedSchoolToAssign = (School) newValue;
+            if (newValue != null) {
+                this.selectedSchoolToAssign = newValue;
                 seeAssignedAdminsOnSchool();
             }
         }));
@@ -543,16 +523,16 @@ public class SuperAdminViewController implements Initializable, IController {
 
     private void selectedAdminToAssign() {
         this.tvAssignAdmin.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((User) newValue != null) {
-                this.selectedAdminToAssign = (User) newValue;
+            if (newValue != null) {
+                this.selectedAdminToAssign = newValue;
             }
         }));
     }
 
     private void selectedAssignedAdmin() {
         this.tvAssignedAdminsOnSchool.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ((User) newValue != null) {
-                this.selectedAssignedAdmin = (User) newValue;
+            if (newValue != null) {
+                this.selectedAssignedAdmin = newValue;
             }
         }));
     }
@@ -635,7 +615,7 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     @Override
-    public void setUser(User user) throws SQLException, IOException {
+    public void setUser(User user) {
         labelTitle.setText("Super Admin");
         labelInfo.setText("Du er nu logget ind som Super Admin: " + user.getFirstName() + user.getLastName());
         labelInfoNewLine.setText("");

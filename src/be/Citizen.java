@@ -8,7 +8,6 @@ public class Citizen {
     private String SSN;
     private String address;
     private String sex;
-    private String info;
     private int generalInformationID;
     private int functionalAbilitiesID;
     private int loginID;
@@ -23,13 +22,6 @@ public class Citizen {
 
     /**
      * Overloaded constructor with id, firstName, lastName, ssn, address, sex and generalInformation
-     * @param id
-     * @param firstName
-     * @param lastName
-     * @param SSN
-     * @param address
-     * @param sex
-     * @param generalInformationID
      */
     public Citizen(int id, String firstName, String lastName, String SSN, String address, String sex, int generalInformationID) {
         this.id = id;
@@ -79,32 +71,6 @@ public class Citizen {
         this.sex = sex;
     }
 
-    public Citizen(String firstName, String lastName, String SSN, String address, String sex, String info) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.SSN = SSN;
-        this.address = address;
-        this.sex = sex;
-        this.info = info;
-    }
-
-    public Citizen(int id, String firstName, String lastName, String ssn, String address, String sex, int generalInfoID, int functionalAbilityID, int loginID, int schoolID, String info) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.SSN = SSN;
-        this.address = address;
-        this.sex = sex;
-        this.generalInformationID = generalInformationID;
-        this.functionalAbilitiesID = functionalAbilitiesID;
-        this.loginID = loginID;
-        this.schoolID = schoolID;
-        this.info = info;
-    }
-
-    public Citizen(String info) {
-        this.info = info;
-    }
 
     public Citizen(int id, String firstName, String lastName, String SSN, String address, String sex, int functionalAbilityID, int loginID, int schoolID) {
         this.id = id;
@@ -113,7 +79,6 @@ public class Citizen {
         this.SSN = SSN;
         this.address = address;
         this.sex = sex;
-        this.functionalAbilitiesID = functionalAbilitiesID;
         this.loginID = loginID;
         this.schoolID = schoolID;
     }

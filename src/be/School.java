@@ -5,11 +5,6 @@ public class School {
     private int id;
     private String schoolName;
 
-    /**
-     * Constructor
-     */
-    public School() {
-    }
 
     /**
      * Overloaded constructor with id and schoolName

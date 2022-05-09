@@ -1,7 +1,5 @@
 package be.FunctionalAbilities;
 
-import be.enums.FunctionalEnum;
-
 public class FunctionalAbility {
 
     private int functionalAbilityID;
@@ -26,31 +24,8 @@ public class FunctionalAbility {
     }
 
 
-    public String getFunctionalAbilitySubCategoryName() {
-        return functionalAbilitySubCategoryName;
-    }
-
-    public void setFunctionalAbilitySubCategoryName(String functionalAbilitySubCategoryName) {
-        this.functionalAbilitySubCategoryName = functionalAbilitySubCategoryName;
-    }
-
-
-
-    /**
-     * Constructor
-     */
-    public FunctionalAbility() {
-    }
-
     /**
      * Overloaded constructor with functionalAbilityID, citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExcepted, abilityNote and abilityNoteCitizen
-     * @param functionalAbilityID
-     * @param citizenId
-     * @param functionalAbilitySubCategoryId
-     * @param abilityNow
-     * @param abilityExcepted
-     * @param abilityNote
-     * @param abilityNoteCitizen
      */
     public FunctionalAbility(int functionalAbilityID, int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExcepted, String abilityNote, String abilityNoteCitizen,  String citizenPerformance, String citizenMeaningOfPerformance) {
         this.functionalAbilityID = functionalAbilityID;
@@ -180,6 +155,22 @@ public class FunctionalAbility {
      */
     public void setAbilityNoteCitizen(String abilityNoteCitizen) {
         this.abilityNoteCitizen = abilityNoteCitizen;
+    }
+
+    public String getCitizenPerformance() {
+        return citizenPerformance;
+    }
+
+    public void setCitizenPerformance(String citizenPerformance) {
+        this.citizenPerformance = citizenPerformance;
+    }
+
+    public String getCitizenMeaningOfPerformance() {
+        return citizenMeaningOfPerformance;
+    }
+
+    public void setCitizenMeaningOfPerformance(String citizenMeaningOfPerformance) {
+        this.citizenMeaningOfPerformance = citizenMeaningOfPerformance;
     }
 
     @Override
