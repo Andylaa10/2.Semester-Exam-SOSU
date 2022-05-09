@@ -1,6 +1,6 @@
 package bll;
 
-import be.FunctionalAbilities.FunctionalAbilities;
+import be.FunctionalAbilities.FunctionalAbility;
 import be.enums.FunctionalEnum;
 import dal.FunctionalAbilitiesDAO;
 
@@ -16,20 +16,20 @@ public class FunctionalAbilityManager {
         functionalAbilitiesDAO = new FunctionalAbilitiesDAO();
     }
 
-    public List<FunctionalAbilities> getFunctionalAbilities() throws SQLException {
+    public List<FunctionalAbility> getFunctionalAbilities() throws SQLException {
         return functionalAbilitiesDAO.getFunctionalAbilities();
     }
 
-    public FunctionalAbilities abilitiesOnCitizen(int citizenId) throws SQLException {
+    public FunctionalAbility abilitiesOnCitizen(int citizenId) throws SQLException {
         return functionalAbilitiesDAO.abilitiesOnCitizen(citizenId);
     }
 
-    public FunctionalAbilities createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException {
+    public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException {
         return functionalAbilitiesDAO.createFunctionalAbilities(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen);
     }
 
-    public void editAbilities(FunctionalAbilities functionalAbilities) throws SQLException {
-        functionalAbilitiesDAO.editAbilities(functionalAbilities);
+    public void editAbilities(FunctionalAbility functionalAbility) throws SQLException {
+        functionalAbilitiesDAO.editAbilities(functionalAbility);
     }
 
     public void deleteAbilities(int id) throws Exception {

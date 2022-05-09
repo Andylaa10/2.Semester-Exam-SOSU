@@ -1,6 +1,6 @@
 package gui.model;
 
-import be.FunctionalAbilities.FunctionalAbilities;
+import be.FunctionalAbilities.FunctionalAbility;
 import be.enums.FunctionalEnum;
 import bll.FunctionalAbilityManager;
 
@@ -16,20 +16,20 @@ public class FunctionalAbilitiesModel {
         manager = new FunctionalAbilityManager();
     }
 
-    public List<FunctionalAbilities> getFunctionalAbilities() throws SQLException {
+    public List<FunctionalAbility> getFunctionalAbilities() throws SQLException {
         return manager.getFunctionalAbilities();
     }
 
-    public FunctionalAbilities abilitiesOnCitizen(int citizenId) throws SQLException {
+    public FunctionalAbility abilitiesOnCitizen(int citizenId) throws SQLException {
         return manager.abilitiesOnCitizen(citizenId);
     }
 
-    public FunctionalAbilities createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException {
+    public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException {
         return manager.createFunctionalAbility(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen);
     }
 
-    public void editAbilities(FunctionalAbilities functionalAbilities) throws SQLException {
-        manager.editAbilities(functionalAbilities);
+    public void editAbilities(FunctionalAbility functionalAbility) throws SQLException {
+        manager.editAbilities(functionalAbility);
     }
 
     public void deleteAbilities(int id) throws Exception {
