@@ -34,7 +34,7 @@
                   <Button fx:id="btnHome" layoutX="7.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnClickHome" prefHeight="133.0" prefWidth="172.0" style="-fx-background-color: transparent;" />
                </children>
             </Pane>
-            <Button fx:id="btnStudent" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickStudent" prefHeight="42.0" prefWidth="218.0" stylesheets="@css/Teacher.css" text="Elever">
+            <Button fx:id="btnStudent" alignment="CENTER" mnemonicParsing="false" onAction="#btnClickStudent" prefHeight="42.0" prefWidth="218.0" stylesheets="@css/Teacher.css" text="Elever">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -46,7 +46,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnCase" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickCase" prefHeight="42.0" prefWidth="218.0" text="Sager">
+            <Button fx:id="btnCase" alignment="CENTER" mnemonicParsing="false" onAction="#btnClickCase" prefHeight="42.0" prefWidth="218.0" text="Sager">
                <graphic>
                   <ImageView fitHeight="21.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -58,7 +58,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnCreateCitizen" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickCitizen" prefHeight="42.0" prefWidth="218.0" text="Borgere">
+            <Button fx:id="btnCreateCitizen" alignment="CENTER" mnemonicParsing="false" onAction="#btnClickCitizen" prefHeight="42.0" prefWidth="218.0" text="Borgere">
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -70,9 +70,9 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnCitizens" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickSeeCitizens" prefHeight="42.0" prefWidth="218.0" text="Tildel sager">
+            <Button fx:id="btnCitizens" alignment="CENTER" mnemonicParsing="false" onAction="#btnClickSeeCitizens" prefHeight="42.0" prefWidth="218.0" text="Tildel sager">
                <graphic>
-                  <ImageView fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="22.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/Citizen%20icon.png" />
                      </image>
