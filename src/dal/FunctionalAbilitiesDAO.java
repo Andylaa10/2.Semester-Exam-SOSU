@@ -2,6 +2,7 @@ package dal;
 
 import be.FunctionalAbilities.FunctionalAbility;
 import be.enums.FunctionalEnum;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 import java.io.IOException;
 import java.sql.*;
@@ -40,9 +41,13 @@ public class FunctionalAbilitiesDAO {
                 FunctionalAbility functionalAbility = new FunctionalAbility(functionalAbilityID, citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen);
                 allFunctionalAbilities.add(functionalAbility);
             }
+        } catch (SQLServerException throwables) {
+            throw new SQLException();
         }
-        return null;
+        return allFunctionalAbilities;
     }
+
+
 
     /**
      * Gets all the functional abilities on the selected citizen
