@@ -77,4 +77,5 @@ public class GeneralInformationManager {
     public void editGeneralInformation(GeneralInformation generalInformation) throws Exception {
         generalInformationDAO.editGeneralInformation(generalInformation);
     }
+
 }

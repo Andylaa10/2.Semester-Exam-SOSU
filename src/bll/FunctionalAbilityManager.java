@@ -38,4 +38,6 @@ public class FunctionalAbilityManager {
     public void deleteAbilities(int id) throws Exception {
         functionalAbilitiesDAO.deleteFunctionalAbility(id);
     }
+
+
 }

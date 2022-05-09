@@ -34,6 +34,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class StudentViewController extends Application implements IController, Initializable {
@@ -315,14 +316,6 @@ public class StudentViewController extends Application implements IController, I
             e.printStackTrace();
         }
 
-        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("functionalAbilityNameId"));
-        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("functionalAbilitySubCategoryName"));
-        try{
-            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(1));
-            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 
     /**
@@ -846,19 +839,58 @@ public class StudentViewController extends Application implements IController, I
 
 
     public void btnLoadSelfCare(ActionEvent actionEvent) {
-
+        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        try{
+            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(1));
+            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public void btnLoadMentalFunctions(ActionEvent actionEvent) {
+        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        try{
+            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(2));
+            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public void btnLoadMobility(ActionEvent actionEvent) {
+        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        try{
+            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(3));
+            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public void btnLoadPracticalAssignments(ActionEvent actionEvent) {
+        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        try{
+            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(4));
+            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public void btnLoadCommunityLife(ActionEvent actionEvent) {
+        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        try{
+            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(5));
+            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
@@ -871,7 +903,8 @@ public class StudentViewController extends Application implements IController, I
 
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public static void main(String[] args) throws IOException, SQLException {
+        DataModelFacade dataModelFacade = new DataModelFacade();
+        System.out.println(dataModelFacade.getFunctionalAbilities());
     }
 }

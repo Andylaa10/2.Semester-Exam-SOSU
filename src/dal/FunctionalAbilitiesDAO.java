@@ -63,10 +63,10 @@ public class FunctionalAbilitiesDAO {
 
             ResultSet resultset = preparedStatement.executeQuery();
             while (resultset.next()) {
-                int functionalAbilityNameID = resultset.getInt("functionalAbilitySubCategoryID");
-                String functionalAbilitySubCategoryName = resultset.getString("functionalAbilitySubCategoryName");
+                int id = resultset.getInt("functionalAbilitySubCategoryID");
+                String name = resultset.getString("functionalAbilitySubCategoryName");
 
-                SubFunctional functionalAbilitySubCategory = new SubFunctional(functionalAbilityNameID, functionalAbilitySubCategoryName);
+                SubFunctional functionalAbilitySubCategory = new SubFunctional(id, name);
                 allFunctionalAbilitySubCategories.add(functionalAbilitySubCategory);
             }
         } catch (SQLException sqlException) {
@@ -160,5 +160,7 @@ public class FunctionalAbilitiesDAO {
     }
 
     public static void main(String[] args) throws IOException, SQLException {
+        FunctionalAbilitiesDAO functionalAbilitiesDAO = new FunctionalAbilitiesDAO();
+        System.out.println(functionalAbilitiesDAO.getFunctionalAbilities());
     }
 }

@@ -25,9 +25,9 @@ public class SubFunctional {
         this.functionalAbilityNameId = functionalAbilityNameId;
     }
 
-    public SubFunctional(int functionalAbilityNameId, String functionalAbilitySubCategoryName) {
-        this.functionalAbilityNameId = functionalAbilityNameId;
-        this.functionalAbilitySubCategoryName = functionalAbilitySubCategoryName;
+    public SubFunctional(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     /**

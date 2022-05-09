@@ -32,6 +32,7 @@ public class DataModelFacade {
         caseModel = new CaseModel();
         healthConditionsModel = new HealthConditionsModel();
         generalInformationModel = new GeneralInformationModel();
+        functionalAbilitiesModel = new FunctionalAbilitiesModel();
     }
 
     /**
