@@ -3,6 +3,7 @@ package gui.model;
 import be.FunctionalAbilities.SubFunctional;
 import be.FunctionalAbilities.FunctionalAbility;
 
+import be.enums.FunctionalEnum;
 import bll.FunctionalAbilityManager;
 
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class FunctionalAbilitiesModel {
         return manager.abilitiesOnCitizen(citizenId);
     }
 
-    public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException {
+    public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException {
         return manager.createFunctionalAbility(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen);
     }
 

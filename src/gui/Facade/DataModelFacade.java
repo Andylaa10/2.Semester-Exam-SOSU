@@ -6,6 +6,7 @@ import be.FunctionalAbilities.FunctionalAbility;
 import be.HealthCondition.HealthCondition;
 import be.HealthCondition.SubCategory;
 import be.HealthCondition.SubCategoryText;
+import be.enums.FunctionalEnum;
 import be.enums.UserType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.model.*;
@@ -444,7 +445,7 @@ public class DataModelFacade {
         return functionalAbilitiesModel.abilitiesOnCitizen(citizenId);
     }
 
-    public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException {
+    public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException {
         return functionalAbilitiesModel.createFunctionalAbility(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen);
     }
 
