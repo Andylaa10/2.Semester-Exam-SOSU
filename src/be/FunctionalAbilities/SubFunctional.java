@@ -5,6 +5,7 @@ public class SubFunctional {
     private int id;
     private String name;
     private int functionalAbilityNameId;
+    private String functionalAbilitySubCategoryName;
 
     /**
      * Constructor
@@ -22,6 +23,11 @@ public class SubFunctional {
         this.id = id;
         this.name = name;
         this.functionalAbilityNameId = functionalAbilityNameId;
+    }
+
+    public SubFunctional(int functionalAbilityNameId, String functionalAbilitySubCategoryName) {
+        this.functionalAbilityNameId = functionalAbilityNameId;
+        this.functionalAbilitySubCategoryName = functionalAbilitySubCategoryName;
     }
 
     /**

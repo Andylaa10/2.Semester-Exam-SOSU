@@ -6,16 +6,34 @@ public class FunctionalAbilities {
 
     private int functionalAbilityID;
     private int citizenId;
-    private int functionalAbilitySubCategoryId;
     private FunctionalEnum abilityNow;
     private FunctionalEnum abilityExcepted;
     private String abilityNote;
+
+    public String getFunctionalAbilitySubCategoryName() {
+        return functionalAbilitySubCategoryName;
+    }
+
+    public void setFunctionalAbilitySubCategoryName(String functionalAbilitySubCategoryName) {
+        this.functionalAbilitySubCategoryName = functionalAbilitySubCategoryName;
+    }
+
     private String abilityNoteCitizen;
+    private int functionalAbilitySubCategoryId;
+    private String functionalAbilitySubCategoryName;
 
     /**
      * Constructor
      */
     public FunctionalAbilities() {
+    }
+
+    @Override
+    public String toString() {
+        return "FunctionalAbilities{" +
+                "functionalAbilityID=" + functionalAbilityID +
+                ", functionalAbilitySubCategoryName='" + functionalAbilitySubCategoryName + '\'' +
+                '}';
     }
 
     /**
@@ -37,6 +55,12 @@ public class FunctionalAbilities {
         this.abilityNote = abilityNote;
         this.abilityNoteCitizen = abilityNoteCitizen;
     }
+
+    public FunctionalAbilities(int functionalAbilityID, String functionalAbilitySubCategoryName) {
+        this.functionalAbilityID = functionalAbilityID;
+        this.functionalAbilitySubCategoryName = functionalAbilitySubCategoryName;
+    }
+
 
     /**
      * Gets the functionalAbilityID

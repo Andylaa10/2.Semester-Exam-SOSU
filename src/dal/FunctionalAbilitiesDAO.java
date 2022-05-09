@@ -1,6 +1,8 @@
 package dal;
 
 import be.FunctionalAbilities.FunctionalAbilities;
+import be.FunctionalAbilities.SubFunctional;
+import be.HealthCondition.SubCategory;
 import be.enums.FunctionalEnum;
 import dal.db.DatabaseConnector;
 import java.io.IOException;
@@ -43,6 +45,34 @@ public class FunctionalAbilitiesDAO {
         }
         return null;
     }
+
+    public List<SubFunctional> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException {
+        ArrayList<SubFunctional> allFunctionalAbilitySubCategories = new ArrayList<>();
+
+        try (Connection connection = connector.getConnection()) {
+            String sql = "SELECT functionalAbilitySubCategoryID, functionalAbilitySubCategoryName " +
+                    "FROM FunctionalAbilitySubCategory INNER JOIN FunctionalAbilityName" +
+                    " ON FunctionalAbilityName.functionalAbilityNamesID = FunctionalAbilitySubCategory.functionalAbilityNameId" +
+                    " WHERE FunctionalAbilitySubCategory.functionalAbilityNameId = ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setInt(1, functionalAbilitySubCategoryId);
+            preparedStatement.execute();
+
+            ResultSet resultset = preparedStatement.executeQuery();
+            while (resultset.next()) {
+                int functionalAbilityNameID = resultset.getInt("functionalAbilitySubCategoryID");
+                String functionalAbilitySubCategoryName = resultset.getString("functionalAbilitySubCategoryName");
+
+                SubFunctional functionalAbilitySubCategory = new SubFunctional(functionalAbilityNameID, functionalAbilitySubCategoryName);
+                allFunctionalAbilitySubCategories.add(functionalAbilitySubCategory);
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return allFunctionalAbilitySubCategories;
+    }
+
 
     /**
      * Gets all the functional abilities on the selected citizen
@@ -126,5 +156,11 @@ public class FunctionalAbilitiesDAO {
         } catch (SQLException throwables) {
             throw new SQLException();
         }
+    }
+
+    public static void main(String[] args) throws IOException, SQLException {
+        FunctionalAbilitiesDAO functionalAbilitiesDAO = new FunctionalAbilitiesDAO();
+        //System.out.println(functionalAbilitiesDAO.getFunctionalAbilitySubCategories(1));
+
     }
 }

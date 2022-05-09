@@ -498,13 +498,13 @@
                         <Font size="31.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="tvHealthConditions11" layoutX="10.0" layoutY="259.0" prefHeight="240.0" prefWidth="350.0" style="-fx-background-color: transparent;">
+                  <TableView fx:id="tvFunctionalConditions" layoutX="10.0" layoutY="259.0" prefHeight="240.0" prefWidth="350.0" style="-fx-background-color: transparent;">
                      <columns>
-                        <TableColumn fx:id="tcHealthConditionID11" prefWidth="300.7999572753906" text="ID" visible="false" />
-                        <TableColumn fx:id="tcHealthConditionName11" prefWidth="348.800048828125" text="Funktions Tilstande" />
+                        <TableColumn fx:id="tcFunctionalConditionID" prefWidth="300.7999572753906" text="ID" visible="false" />
+                        <TableColumn fx:id="tcFunctionalConditionName" prefWidth="348.800048828125" text="Funktions Tilstande" />
                      </columns>
                   </TableView>
-                  <Button fx:id="btnSelfCare" alignment="CENTER" layoutX="10.0" layoutY="87.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="172.0" text="Egenomsorg">
+                  <Button fx:id="btnSelfCare" alignment="CENTER" layoutX="10.0" layoutY="87.0" mnemonicParsing="false" onAction="#btnLoadSelfCare" prefHeight="40.0" prefWidth="172.0" text="Egenomsorg">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -512,7 +512,7 @@
                         <ColorAdjust />
                      </effect>
                   </Button>
-                  <Button fx:id="btnMentalFunctions" alignment="CENTER" layoutX="189.0" layoutY="147.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="172.0" text="Mentale funktioner">
+                  <Button fx:id="btnMentalFunctions" alignment="CENTER" layoutX="189.0" layoutY="147.0" mnemonicParsing="false" onAction="#btnLoadMentalFunctions" prefHeight="40.0" prefWidth="172.0" text="Mentale funktioner">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -520,7 +520,7 @@
                         <ColorAdjust />
                      </effect>
                   </Button>
-                  <Button fx:id="btnMobility" alignment="CENTER" layoutX="10.0" layoutY="147.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="172.0" text="Mobilitet">
+                  <Button fx:id="btnMobility" alignment="CENTER" layoutX="10.0" layoutY="147.0" mnemonicParsing="false" onAction="#btnLoadMobility" prefHeight="40.0" prefWidth="172.0" text="Mobilitet">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -528,7 +528,7 @@
                         <ColorAdjust />
                      </effect>
                   </Button>
-                  <Button fx:id="btnPracticalAssignments" alignment="CENTER" layoutX="189.0" layoutY="87.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="172.0" text="Praktiske opgaver">
+                  <Button fx:id="btnPracticalAssignments" alignment="CENTER" layoutX="189.0" layoutY="87.0" mnemonicParsing="false" onAction="#btnLoadPracticalAssignments" prefHeight="36.0" prefWidth="172.0" text="Praktiske opgaver">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -536,7 +536,7 @@
                         <ColorAdjust />
                      </effect>
                   </Button>
-                  <Button fx:id="btnCommunityLife" alignment="CENTER" layoutX="99.0" layoutY="203.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="172.0" text="Samfundsliv">
+                  <Button fx:id="btnCommunityLife" alignment="CENTER" layoutX="99.0" layoutY="203.0" mnemonicParsing="false" onAction="#btnLoadCommunityLife" prefHeight="36.0" prefWidth="172.0" text="Samfundsliv">
                      <font>
                         <Font size="18.0" />
                      </font>

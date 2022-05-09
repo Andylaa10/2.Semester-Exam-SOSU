@@ -1,6 +1,8 @@
 package gui.controller;
 
 import be.*;
+import be.FunctionalAbilities.FunctionalAbilities;
+import be.FunctionalAbilities.SubFunctional;
 import be.HealthCondition.HealthCondition;
 import be.HealthCondition.SubCategory;
 import be.HealthCondition.SubCategoryText;
@@ -213,12 +215,39 @@ public class StudentViewController extends Application implements IController, I
     private RadioButton radio4;
     @FXML
     private RadioButton radio9;
+    @FXML
+    private TableView<SubFunctional> tvFunctionalConditions;
+    @FXML
+    private TableColumn<SubFunctional, Integer> tcFunctionalConditionID;
+    @FXML
+    private TableColumn<SubFunctional, String> tcFunctionalConditionName;
+    @FXML
+    private Button btnSelfCare;
+    @FXML
+    private Button btnMentalFunctions;
+    @FXML
+    private Button btnMobility;
+    @FXML
+    private Button btnPracticalAssignments;
+    @FXML
+    private Button btnCommunityLife;
+    @FXML
+    private ComboBox comboBoxCurrentLevel;
+    @FXML
+    private ComboBox comboBoxExpectedLevel;
+    @FXML
+    private TextArea txtAreaNote;
+    @FXML
+    private ComboBox comboboxPerformance;
+    @FXML
+    private ComboBox comboboxMeaningOfPerformance;
 
 
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
     private ObservableList<HealthCondition> allHealthConditions = FXCollections.observableArrayList();
     private ObservableList<SubCategory> allSubCategories = FXCollections.observableArrayList();
+    private ObservableList<SubFunctional> allFunctionalAbilitySubCategories = FXCollections.observableArrayList();
 
 
     private Citizen selectedCitizen;
@@ -238,6 +267,11 @@ public class StudentViewController extends Application implements IController, I
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        try {
+            this.dataModelFacade = new DataModelFacade();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         setAnchorPanesVisibility();
         selectedCitizen();
         selectedCitizenOnComboBox();
@@ -280,6 +314,15 @@ public class StudentViewController extends Application implements IController, I
             tableViewLoadHealthConditions(allHealthConditions);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("functionalAbilityNameId"));
+        tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("functionalAbilitySubCategoryName"));
+        try{
+            allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(1));
+            tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 
@@ -458,6 +501,14 @@ public class StudentViewController extends Application implements IController, I
      */
     private ObservableList<SubCategory> getSubCategories() {
         return allSubCategories;
+    }
+
+    private void tableViewLoadFunctionalAbilitySubCategories(ObservableList <SubFunctional> allFunctionalAbilitySubCategories){
+        tvFunctionalConditions.setItems(getFunctionalAbilitySubCategories());
+    }
+
+    private ObservableList<SubFunctional> getFunctionalAbilitySubCategories() {
+        return allFunctionalAbilitySubCategories;
     }
 
 
@@ -791,6 +842,24 @@ public class StudentViewController extends Application implements IController, I
         radioNotRelevant.setSelected(false);
         radioPotential.setSelected(false);
         radioRelevant.setSelected(false);
+    }
+
+
+
+    public void btnLoadSelfCare(ActionEvent actionEvent) {
+
+    }
+
+    public void btnLoadMentalFunctions(ActionEvent actionEvent) {
+    }
+
+    public void btnLoadMobility(ActionEvent actionEvent) {
+    }
+
+    public void btnLoadPracticalAssignments(ActionEvent actionEvent) {
+    }
+
+    public void btnLoadCommunityLife(ActionEvent actionEvent) {
     }
 
     @Override

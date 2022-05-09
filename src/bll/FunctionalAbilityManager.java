@@ -1,6 +1,7 @@
 package bll;
 
 import be.FunctionalAbilities.FunctionalAbilities;
+import be.FunctionalAbilities.SubFunctional;
 import be.enums.FunctionalEnum;
 import dal.FunctionalAbilitiesDAO;
 
@@ -18,6 +19,10 @@ public class FunctionalAbilityManager {
 
     public List<FunctionalAbilities> getFunctionalAbilities() throws SQLException {
         return functionalAbilitiesDAO.getFunctionalAbilities();
+    }
+
+    public List<SubFunctional> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
+        return functionalAbilitiesDAO.getFunctionalAbilitySubCategories(functionalAbilitySubCategoryId);
     }
 
     public FunctionalAbilities abilitiesOnCitizen(int citizenId) throws SQLException {

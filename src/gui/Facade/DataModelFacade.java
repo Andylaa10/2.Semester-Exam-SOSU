@@ -2,6 +2,7 @@ package gui.Facade;
 
 import be.*;
 import be.FunctionalAbilities.FunctionalAbilities;
+import be.FunctionalAbilities.SubFunctional;
 import be.HealthCondition.HealthCondition;
 import be.HealthCondition.SubCategory;
 import be.HealthCondition.SubCategoryText;
@@ -434,6 +435,10 @@ public class DataModelFacade {
 
     public List<FunctionalAbilities> getFunctionalAbilities() throws SQLException {
         return functionalAbilitiesModel.getFunctionalAbilities();
+    }
+
+    public List<SubFunctional> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
+        return functionalAbilitiesModel.getFunctionalAbilitySubCategories(functionalAbilitySubCategoryId);
     }
 
     public FunctionalAbilities abilitiesOnCitizen(int citizenId) throws SQLException {

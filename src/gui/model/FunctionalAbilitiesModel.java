@@ -1,6 +1,7 @@
 package gui.model;
 
 import be.FunctionalAbilities.FunctionalAbilities;
+import be.FunctionalAbilities.SubFunctional;
 import be.enums.FunctionalEnum;
 import bll.FunctionalAbilityManager;
 
@@ -18,6 +19,10 @@ public class FunctionalAbilitiesModel {
 
     public List<FunctionalAbilities> getFunctionalAbilities() throws SQLException {
         return manager.getFunctionalAbilities();
+    }
+
+    public List<SubFunctional> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
+        return manager.getFunctionalAbilitySubCategories(functionalAbilitySubCategoryId);
     }
 
     public FunctionalAbilities abilitiesOnCitizen(int citizenId) throws SQLException {
