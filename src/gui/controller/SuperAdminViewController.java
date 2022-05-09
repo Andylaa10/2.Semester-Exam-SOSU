@@ -228,19 +228,23 @@ public class SuperAdminViewController implements Initializable, IController {
             dataModelFacade.createSchool(schoolName);
             reloadSchoolTable();
         } else{
-            System.out.println("Something is wrong");
-            //TODO add errorHandler
+            ErrorHandlerController.createWarning("Fejl", "Du skal først give skolen et navn");
         }
     }
 
     @FXML
     private void onActionEditSchool() {
-        setSelectedSchool(selectedSchool);
-        btnEditSchool.setDisable(true);
-        btnEditSave.setVisible(true);
-        btnEditCancel.setVisible(true);
-        btnDeleteSchool.setVisible(false);
-        btnCreateSchool.setVisible(false);
+        if (selectedSchool != null) {
+            setSelectedSchool(selectedSchool);
+            btnEditSchool.setDisable(true);
+            btnEditSave.setVisible(true);
+            btnEditCancel.setVisible(true);
+            btnDeleteSchool.setVisible(false);
+            btnCreateSchool.setVisible(false);
+        } else {
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en skole først");
+        }
+
     }
 
     @FXML
@@ -261,8 +265,7 @@ public class SuperAdminViewController implements Initializable, IController {
                 btnCreateSchool.setVisible(true);
                 btnEditCancel.setVisible(false);
             }else{
-                System.out.println("Something is wrong");
-                //TODO add errorhandler
+                ErrorHandlerController.createWarning("Fejl", "Skolen skal have et navn, før du kan gemme ændringen");
             }
         }
     }
@@ -281,20 +284,21 @@ public class SuperAdminViewController implements Initializable, IController {
 
     @FXML
     private void onActionDeleteSchool() throws SQLException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("WARNING MESSAGE");
-        alert.setHeaderText("Warning before you delete a school");
-        alert.setContentText("Joe");
         if (selectedSchool != null) {
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                selectedSchool();
-                dataModelFacade.deleteSchool(selectedSchool.getId());
-                reloadSchoolTable();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Advarsel");
+            alert.setHeaderText("Advarsel før du sletter en skole");
+            alert.setContentText("Denne handling kan ikke fortrydes");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    selectedSchool();
+                    dataModelFacade.deleteSchool(selectedSchool.getId());
+                    reloadSchoolTable();
             }
         } else {
-            return;
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en skole først");
         }
+
     }
 
     @FXML
@@ -310,19 +314,23 @@ public class SuperAdminViewController implements Initializable, IController {
             tvAdmins.getSelectionModel().clearSelection();
             reloadAdminTable();
         } else{
-            System.out.println("Couldn't create admin");
-            //TODO Make proper errorhandler
+            ErrorHandlerController.createWarning("Fejl", "Du skal udfylde alle administratorens informationer først");
         }
     }
 
     @FXML
-    private void onActionEditAdmin(){
-        setSelectedAdmin(selectedAdmin);
-        btnEditAdmin.setDisable(true);
-        btnEditSaveAdmin.setVisible(true);
-        btnEditAdminCancel.setVisible(true);
-        btnCreateAdmin.setVisible(false);
-        btnDeleteAdmin.setVisible(false);
+    private void onActionEditAdmin() {
+        if (selectedAdmin != null) {
+            setSelectedAdmin(selectedAdmin);
+            btnEditAdmin.setDisable(true);
+            btnEditSaveAdmin.setVisible(true);
+            btnEditAdminCancel.setVisible(true);
+            btnCreateAdmin.setVisible(false);
+            btnDeleteAdmin.setVisible(false);
+        } else {
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en admin først");
+        }
+
     }
 
     @FXML
@@ -345,15 +353,14 @@ public class SuperAdminViewController implements Initializable, IController {
                 btnEditAdminCancel.setVisible(false);
                 btnCreateAdmin.setVisible(true);
                 btnDeleteAdmin.setVisible(true);
-            }else{
-                System.out.println("Something went wrong");
-                //TODO ADD ERRORHANDLER
+            }else {
+                ErrorHandlerController.createWarning("Fejl", "Du skal vælge en admin først");
             }
         }
     }
 
     @FXML
-    private void onActionEditAdminCancel(){
+    private void onActionEditAdminCancel() {
         reloadAdminTable();
         clearAdminTxtField();
         tvAdmins.getSelectionModel().clearSelection();
@@ -366,11 +373,11 @@ public class SuperAdminViewController implements Initializable, IController {
 
     @FXML
     private void OnActionDeleteAdmin() throws SQLException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("WARNING MESSAGE");
-        alert.setHeaderText("Warning before you delete admin");
-        alert.setContentText("Joe");
         if (selectedAdmin != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Advarsel");
+            alert.setHeaderText("Advarsel før du sletter en admin");
+            alert.setContentText("Denne handling kan ikke fortrydes");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 selectedSchool();
@@ -379,8 +386,9 @@ public class SuperAdminViewController implements Initializable, IController {
                 clearAdminTxtField();
             }
         } else {
-            return;
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en admin først");
         }
+
     }
 
     @FXML
@@ -393,8 +401,7 @@ public class SuperAdminViewController implements Initializable, IController {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Something went wrong");
-            //TODO add errorHandler
+            ErrorHandlerController.createWarning("Fejl","Du skal vælge en skole og en admin før du kan tildele");
         }
     }
 
@@ -408,8 +415,7 @@ public class SuperAdminViewController implements Initializable, IController {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Something went wrong");
-            //TODO add errorHandler
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en skole og en admin først");
         }
     }
 
