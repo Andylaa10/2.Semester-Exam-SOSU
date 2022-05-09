@@ -1,6 +1,6 @@
 package bll;
 
-import be.FunctionalAbilities;
+import be.FunctionalAbilities.FunctionalAbilities;
 import be.enums.FunctionalEnum;
 import dal.FunctionalAbilitiesDAO;
 

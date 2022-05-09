@@ -1,9 +1,8 @@
 package bll;
 
-import be.HealthCondition;
-import be.School;
-import be.SubCategory;
-import be.SubCategoryText;
+import be.HealthCondition.HealthCondition;
+import be.HealthCondition.SubCategory;
+import be.HealthCondition.SubCategoryText;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.HealthConditionsDAO;
 

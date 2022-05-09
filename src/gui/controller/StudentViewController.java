@@ -1,6 +1,9 @@
 package gui.controller;
 
 import be.*;
+import be.HealthCondition.HealthCondition;
+import be.HealthCondition.SubCategory;
+import be.HealthCondition.SubCategoryText;
 import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
@@ -19,10 +22,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.IOException;
