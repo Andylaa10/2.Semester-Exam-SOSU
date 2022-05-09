@@ -39,6 +39,16 @@ public class FunctionalAbility {
         this.citizenMeaningOfPerformance = citizenMeaningOfPerformance;
     }
 
+    public FunctionalAbility(int citizenID, int functionalAbilityID, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) {
+        this.citizenId = citizenID;
+        this.functionalAbilityID = functionalAbilityID;
+        this.abilityNow = abilityNow;
+        this.abilityExcepted = abilityExpected;
+        this.abilityNote = abilityNote;
+        this.citizenPerformance = citizenPerformance;
+        this.citizenMeaningOfPerformance = citizenMeaningOfPerformance;
+        this.abilityNoteCitizen = abilityNoteCitizen;
+    }
 
 
     /**

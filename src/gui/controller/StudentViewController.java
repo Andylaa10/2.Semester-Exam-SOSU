@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.Case;
 import be.Citizen;
+import be.FunctionalAbilities.FunctionalAbility;
 import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
 import be.GeneralInformation;
 import be.HealthCondition.HealthCondition;
@@ -9,6 +10,7 @@ import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
 import be.User;
 import be.enums.ConditionEnum;
+import be.enums.FunctionalEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
@@ -35,6 +37,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.function.Function;
 
 public class StudentViewController implements IController, Initializable {
 
@@ -72,25 +75,42 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private ImageView imageCoping;
 
+
+    /**
+     * Functional Ability Pane
+     */
+    @FXML
+    private TextField txtFieldFunctionalAbilityID;
+    @FXML
+    private TableView<FunctionalAbilitySubCategoryText> tvFunctionalConditions;
+    @FXML
+    private TableColumn<FunctionalAbilitySubCategoryText, Integer> tcFunctionalConditionID;
+    @FXML
+    private TableColumn<FunctionalAbilitySubCategoryText, String> tcFunctionalConditionName;
+
     /**
      * Students judgement on functional pane
      */
     @FXML
     private ComboBox comboBoxFunctionalAbilityExpected;
-    @FXML
-    private TextArea txtAreaFunctionAbilityNote;
-
-
     /**
      * Citizens own judgement on functional pane
      */
     @FXML
-    private ComboBox comboBoxCitizenOwnAbility;
+    private TextArea txtAreaNoteOnCondition;
+
     @FXML
-    private ComboBox comboBoxCitizenLimitation;
+    private ComboBox comboBoxCurrentLevel;
+    @FXML
+    private ComboBox comboBoxExpectedLevel;
+
+
     @FXML
     private TextArea txtAreaCitizenGoals;
-
+    @FXML
+    private ComboBox comboboxPerformance;
+    @FXML
+    private ComboBox comboboxMeaningOfPerformance;
 
     /**
      * HealthCondition Tables
@@ -218,25 +238,7 @@ public class StudentViewController implements IController, Initializable {
     private RadioButton radio4;
     @FXML
     private RadioButton radio9;
-    @FXML
-    private TableView<FunctionalAbilitySubCategoryText> tvFunctionalConditions;
-    @FXML
-    private TableColumn<FunctionalAbilitySubCategoryText, Integer> tcFunctionalConditionID;
-    @FXML
-    private TableColumn<FunctionalAbilitySubCategoryText, String> tcFunctionalConditionName;
 
-    @FXML
-    private ComboBox comboBoxCurrentLevel;
-    @FXML
-    private ComboBox comboBoxExpectedLevel;
-    @FXML
-    private ComboBox comboboxPerformance;
-    @FXML
-    private ComboBox comboboxMeaningOfPerformance;
-    @FXML
-    private TextArea txtAreaNote;
-    @FXML
-    private TextField txtFieldFunctionalAbilityID;
 
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
@@ -652,15 +654,36 @@ public class StudentViewController implements IController, Initializable {
     }
 
     private void setFunctionalAbilityInfo(int citizenId, int functionalAbilitySubCategoryId){
+
         //TODO LAV METODE HER TIL AT UDFYLDE TEKSTEN I ALLE FELTER OG COMBOBOXES PÅ FUNKTIONSTILSTANDSVIEWET!!!!!!!!!!!
         //TODO !!!!!!!!!!!!!!!!
     }
 
     @FXML
+    private void btnHandleSaveFunctionalAbilityInfo() throws SQLException {
+        if(txtFieldCitizenID != null && txtFieldFunctionalAbilityID != null) {
+            int citizenID = Integer.parseInt(txtFieldCitizenID.getText());
+            int functionalAbilityID = Integer.parseInt(txtFieldFunctionalAbilityID.getText());
+            int abilityNow = Integer.parseInt(String.valueOf(comboBoxCurrentLevel.getSelectionModel().getSelectedItem()));
+            int abilityExpected = Integer.parseInt(String.valueOf(comboBoxExpectedLevel.getSelectionModel().getSelectedItem()));
+            String abilityNote = txtAreaNoteOnCondition.getText();
+            String citizenPerformance = String.valueOf(comboboxPerformance.getSelectionModel().getSelectedItem());
+            String citizenMeaningOfPerformance = String.valueOf(comboboxMeaningOfPerformance.getSelectionModel().getSelectedItem());
+            String abilityNoteCitizen = txtAreaCitizenGoals.getText();
+
+            dataModelFacade.createFunctionalAbility(citizenID, functionalAbilityID, abilityNow, abilityExpected,
+                    abilityNote, citizenPerformance, citizenMeaningOfPerformance, abilityNoteCitizen);
+
+        }
+
+    }
+
+
+    @FXML
     private void btnHandleSaveHC() throws SQLException {
         int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
         int subCategoryId = Integer.parseInt(tcSubCategoriesID.getText());
-        String note = txtAreaFunctionAbilityNote.getText();
+        String note = txtAreaNoteOnSubCategory.getText();
         if (radioNotRelevant.isSelected()) {
             int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
             dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
@@ -675,7 +698,7 @@ public class StudentViewController implements IController, Initializable {
 
     @FXML
     private void btnHandelCancelChangesHC() {
-        txtAreaFunctionAbilityNote.clear();
+        txtAreaNoteOnSubCategory.clear();
         radioNotRelevant.setSelected(false);
         radioPotential.setSelected(false);
         radioRelevant.setSelected(false);

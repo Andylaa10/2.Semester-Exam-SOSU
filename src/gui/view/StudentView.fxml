@@ -576,12 +576,12 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="397.0" layoutY="276.0" text="Fagligt notat:">
+                  <Label layoutX="397.0" layoutY="289.0" text="Fagligt notat:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextArea layoutX="399.0" layoutY="303.0" prefHeight="193.0" prefWidth="334.0" />
+                  <TextArea fx:id="txtAreaNoteOnCondition" layoutX="399.0" layoutY="314.0" prefHeight="182.0" prefWidth="334.0" />
                   <Label layoutX="799.0" layoutY="47.0" text="Borgerens vurdering af tilstand">
                      <font>
                         <Font size="22.0" />
@@ -599,12 +599,12 @@
                      </font>
                   </Label>
                   <ComboBox fx:id="comboboxMeaningOfPerformance" layoutX="909.0" layoutY="208.0" prefHeight="26.0" prefWidth="198.0" />
-                  <Label layoutX="772.0" layoutY="276.0" text="Fagligt notat:">
+                  <Label layoutX="772.0" layoutY="289.0" text="Borgerens ønsker og mål:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextArea layoutX="772.0" layoutY="303.0" prefHeight="194.0" prefWidth="334.0" />
+                  <TextArea fx:id="txtAreaCitizenGoals" layoutX="772.0" layoutY="315.0" prefHeight="182.0" prefWidth="334.0" />
                   <Label layoutX="822.0" layoutY="87.0" text="Udførelse:">
                      <font>
                         <Font size="16.0" />
@@ -621,7 +621,7 @@
                   <Label layoutX="926.0" layoutY="179.0" text="- Ikke relevant" />
                   <Label layoutX="925.0" layoutY="242.0" text="- Oplever ikke begrænsning" />
                   <Label layoutX="925.0" layoutY="262.0" text="- Oplever begrænsning" />
-                  <Button layoutX="949.0" layoutY="517.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Gem" />
+                  <Button fx:id="btnSaveFuncitonalAbilityInfo" layoutX="949.0" layoutY="517.0" mnemonicParsing="false" onAction="#btnHandleSaveFunctionalAbilityInfo" prefHeight="26.0" prefWidth="170.0" text="Gem" />
                   <Button layoutX="769.0" layoutY="517.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
                   <TextField fx:id="txtFieldFunctionalAbilityID" layoutX="10.0" layoutY="518.0" />
                </children>

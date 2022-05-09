@@ -144,15 +144,16 @@ public class FunctionalAbilitiesDAO {
     }
 
 
-    public FunctionalAbility createFunctionalAbilities(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen, String citizenPerformance, String citizenMeaningOfPerformance) throws SQLException{
+    public FunctionalAbility createFunctionalAbilities(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String abilityNoteCitizen, String citizenPerformance, String citizenMeaningOfPerformance) throws SQLException{
         try(Connection connection = databaseConnector.getConnection()){
-            String sql = "INSERT INTO FunctionalAbility (citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen, citizenPerformance, citizenMeaningOfPerformance) VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO FunctionalAbility (citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen, citizenPerfomance, citizenMeaningOfPerfomance) VALUES (?,?,?,?,?,?,?,?)";
 
             try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
                 preparedStatement.setInt(1, citizenId);
                 preparedStatement.setInt(2, functionalAbilitySubCategoryId);
-                preparedStatement.setInt(3, abilityNow.getValue());
-                preparedStatement.setInt(4, abilityExpected.getValue());
+
+                preparedStatement.setInt(3, abilityNow);
+                preparedStatement.setInt(4, abilityExpected);
                 preparedStatement.setString(5, abilityNote);
                 preparedStatement.setString(6, abilityNoteCitizen);
                 preparedStatement.setString(7, citizenPerformance);
@@ -163,11 +164,13 @@ public class FunctionalAbilitiesDAO {
                 if (rs.next()){
                     id = rs.getInt(1);
                 }
-                FunctionalAbility functionalAbility = new FunctionalAbility(id, citizenId, functionalAbilitySubCategoryId, abilityNow.getValue(), abilityExpected.getValue(), abilityNote, abilityNoteCitizen, citizenPerformance, citizenMeaningOfPerformance);
-
+                FunctionalAbility functionalAbility = new FunctionalAbility(id, citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen, citizenPerformance, citizenMeaningOfPerformance);
                 return functionalAbility;
             }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+        return null;
     }
 
     public void editAbilities(FunctionalAbility functionalAbility) throws SQLException{

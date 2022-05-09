@@ -1,5 +1,7 @@
 package be.FunctionalAbilities;
 
+import be.enums.FunctionalEnum;
+
 public class FunctionalAbilitySubCategoryText {
 
     private int id;
@@ -31,6 +33,7 @@ public class FunctionalAbilitySubCategoryText {
         this.citizenMeaningOfPerformance = citizenMeaningOfPerformance;
         this.abilityNoteCitizen = abilityNoteCitizen;
     }
+
 
     /**
      * Gets the id
