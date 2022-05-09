@@ -8,7 +8,6 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -1173,7 +1172,7 @@ public class AdminViewController implements Initializable, IController {
             txtFieldName.clear();
             txtAreaInfo.clear();
         } else {
-            System.out.println("NOOO");
+            ErrorHandlerController.createWarning("Titel", "Besked");
         }
     }
 

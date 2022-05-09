@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Button?>
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="204.0" prefWidth="304.0" stylesheets="@css/Admin.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.ErrorHandlerController">
+    <children>
+        <Pane layoutX="2.0" layoutY="2.0" prefHeight="200.0" prefWidth="300.0" stylesheets="@css/Admin.css">
+            <children>
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#add8e5" height="4.0" layoutX="20.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="80.0" />
+                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#add8e5" height="4.0" layoutX="200.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="80.0" />
+                <Label fx:id="lblTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="108.0" layoutY="8.0" prefWidth="85.0" text="Warning!" textAlignment="CENTER" textFill="#4c707a">
+                    <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                    </font>
+                </Label>
+                <TextArea fx:id="textArea" editable="false" layoutX="20.0" layoutY="39.0" prefHeight="122.0" prefWidth="264.0" wrapText="true" />
+                <Button layoutX="112.0" layoutY="169.0" onAction="#handleBtnOk" prefHeight="25.0" prefWidth="80.0"  text="Ok" />
+            </children></Pane>
+    </children>
+</AnchorPane>
