@@ -75,8 +75,7 @@ public class LoginViewController {
             switcher.show();
             switcher.centerOnScreen();
         } else {
-            //TODO ADD PROPER ERROR HANDLING
-            System.out.println("Something probably went wrong lol");
+            ErrorHandlerController.createWarning("Fejl i login", "Forkert brugernavn eller password");
         }
     }
 

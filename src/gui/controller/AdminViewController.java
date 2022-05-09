@@ -619,13 +619,18 @@ public class AdminViewController implements Initializable, IController {
     }
 
     @FXML
-    private void onActionEditTeacher(){
-        setSelectedTeacher(selectedTeacher);
-        btnDeleteTeacher.setDisable(true);
-        btnEditTeacher.setDisable(true);
-        btnCreateTeacher.setVisible(false);
-        btnEditTeacherSave.setVisible(true);
-        btnEditTeacherCancel.setVisible(true);
+    private void onActionEditTeacher() {
+        if (selectedTeacher != null) {
+            setSelectedTeacher(selectedTeacher);
+            btnDeleteTeacher.setDisable(true);
+            btnEditTeacher.setDisable(true);
+            btnCreateTeacher.setVisible(false);
+            btnEditTeacherSave.setVisible(true);
+            btnEditTeacherCancel.setVisible(true);
+        } else {
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en lærer først");
+        }
+
     }
 
     public void onActionEditTeacherSave() throws Exception {
@@ -1190,7 +1195,7 @@ public class AdminViewController implements Initializable, IController {
             txtFieldName.clear();
             txtAreaInfo.clear();
         } else {
-            ErrorHandlerController.createWarning("Titel", "Besked");
+            ErrorHandlerController.createWarning("Fejl", "Du skal udfylde sagens navn og info først");
         }
     }
 
@@ -1227,13 +1232,18 @@ public class AdminViewController implements Initializable, IController {
 
     @FXML
     private void btnHandleEditCase() {
-        setSelectedCase(selectedCase);
-        btnEditCase.setDisable(true);
-        btnCopyCase.setDisable(true);
-        btnSaveCase.setVisible(false);
-        btnDeleteCase.setVisible(false);
-        btnEditCaseSave.setVisible(true);
-        btnEditCaseCancel.setVisible(true);
+        if (selectedCase != null) {
+            setSelectedCase(selectedCase);
+            btnEditCase.setDisable(true);
+            btnCopyCase.setDisable(true);
+            btnSaveCase.setVisible(false);
+            btnDeleteCase.setVisible(false);
+            btnEditCaseSave.setVisible(true);
+            btnEditCaseCancel.setVisible(true);
+        } else {
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en sag først");
+        }
+
     }
 
     @FXML
@@ -1268,7 +1278,7 @@ public class AdminViewController implements Initializable, IController {
     }
 
     @FXML
-    private void btnHandleCopyCase() throws Exception {
+    private void btnHandleCopyCase() {
         if (this.selectedCase != null) {
             txtFieldName.setText(selectedCase.getName());
             txtAreaInfo.setText(selectedCase.getInfo());
@@ -1279,6 +1289,8 @@ public class AdminViewController implements Initializable, IController {
             btnDeleteCase.setVisible(false);
             btnCopySave.setVisible(true);
             btnEditCaseCancel.setVisible(true);
+        } else {
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en sag først");
         }
 
     }
