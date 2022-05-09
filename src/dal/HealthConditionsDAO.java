@@ -1,9 +1,8 @@
 package dal;
 
-import be.Citizen;
-import be.HealthCondition;
-import be.SubCategory;
-import be.SubCategoryText;
+import be.HealthCondition.HealthCondition;
+import be.HealthCondition.SubCategory;
+import be.HealthCondition.SubCategoryText;
 import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;

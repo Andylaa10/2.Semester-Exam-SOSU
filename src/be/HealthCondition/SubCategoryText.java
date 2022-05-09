@@ -1,4 +1,4 @@
-package be;
+package be.HealthCondition;
 
 import be.enums.ConditionEnum;
 
