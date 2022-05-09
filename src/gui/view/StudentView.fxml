@@ -476,7 +476,7 @@
                </children>
             </AnchorPane>
             <TextField fx:id="txtFieldCitizenID" layoutX="886.0" layoutY="38.0" prefHeight="26.0" prefWidth="31.0" visible="false" />
-            <AnchorPane layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1122.0">
+            <AnchorPane fx:id="anchorPaneFunctionalCondition" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1122.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b85f7" height="465.0" layoutX="3.0" layoutY="45.0" stroke="BLACK" strokeType="INSIDE" width="365.0">
                      <effect>
@@ -504,7 +504,7 @@
                         <TableColumn fx:id="tcHealthConditionName11" prefWidth="348.800048828125" text="Funktions Tilstande" />
                      </columns>
                   </TableView>
-                  <Button alignment="CENTER" layoutX="10.0" layoutY="87.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="172.0" text="Egenomsorg">
+                  <Button fx:id="btnSelfCare" alignment="CENTER" layoutX="10.0" layoutY="87.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="172.0" text="Egenomsorg">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -512,7 +512,7 @@
                         <ColorAdjust />
                      </effect>
                   </Button>
-                  <Button alignment="CENTER" layoutX="189.0" layoutY="147.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="172.0" text="Mentale funktioner">
+                  <Button fx:id="btnMentalFunctions" alignment="CENTER" layoutX="189.0" layoutY="147.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="172.0" text="Mentale funktioner">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -520,7 +520,7 @@
                         <ColorAdjust />
                      </effect>
                   </Button>
-                  <Button alignment="CENTER" layoutX="10.0" layoutY="147.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="172.0" text="Mobilitet">
+                  <Button fx:id="btnMobility" alignment="CENTER" layoutX="10.0" layoutY="147.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="172.0" text="Mobilitet">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -528,7 +528,7 @@
                         <ColorAdjust />
                      </effect>
                   </Button>
-                  <Button alignment="CENTER" layoutX="189.0" layoutY="87.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="172.0" text="Praktiske opgaver">
+                  <Button fx:id="btnPracticalAssignments" alignment="CENTER" layoutX="189.0" layoutY="87.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="172.0" text="Praktiske opgaver">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -536,7 +536,7 @@
                         <ColorAdjust />
                      </effect>
                   </Button>
-                  <Button alignment="CENTER" layoutX="99.0" layoutY="203.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="172.0" text="Samfundsliv">
+                  <Button fx:id="btnCommunityLife" alignment="CENTER" layoutX="99.0" layoutY="203.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="172.0" text="Samfundsliv">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -581,7 +581,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextArea layoutX="399.0" layoutY="303.0" prefHeight="200.0" prefWidth="334.0" />
+                  <TextArea layoutX="399.0" layoutY="303.0" prefHeight="193.0" prefWidth="334.0" />
                   <Label layoutX="799.0" layoutY="47.0" text="Borgerens vurdering af tilstand">
                      <font>
                         <Font size="22.0" />
@@ -604,7 +604,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextArea layoutX="772.0" layoutY="303.0" prefHeight="200.0" prefWidth="334.0" />
+                  <TextArea layoutX="772.0" layoutY="303.0" prefHeight="194.0" prefWidth="334.0" />
                   <Label layoutX="822.0" layoutY="87.0" text="Udførelse:">
                      <font>
                         <Font size="16.0" />

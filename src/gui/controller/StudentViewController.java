@@ -8,12 +8,14 @@ import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -33,7 +35,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class StudentViewController implements IController, Initializable {
+public class StudentViewController extends Application implements IController, Initializable {
 
 
     //Generel info on Citizen pane
@@ -190,11 +192,9 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private AnchorPane anchorPaneCitizens;
     @FXML
-    private AnchorPane anchorPaneCitizenAssessment;
+    private AnchorPane anchorPaneFunctionalCondition;
     @FXML
     private AnchorPane anchorPaneOBS;
-    @FXML
-    private AnchorPane anchorPaneFunctionalAbility;
     @FXML
     private RadioButton radioNotRelevant;
     @FXML
@@ -549,8 +549,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneOBS.setVisible(false);
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
-        anchorPaneFunctionalAbility.setVisible(false);
-        anchorPaneCitizenAssessment.setVisible(false);
+        anchorPaneFunctionalCondition.setVisible(false);
     }
 
     /**
@@ -567,8 +566,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneFS3.setVisible(false);
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
-        anchorPaneFunctionalAbility.setVisible(false);
-        anchorPaneCitizenAssessment.setVisible(false);
+        anchorPaneFunctionalCondition.setVisible(false);
     }
 
     /**
@@ -584,8 +582,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneFS3.setVisible(false);
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
-        anchorPaneFunctionalAbility.setVisible(false);
-        anchorPaneCitizenAssessment.setVisible(false);
+        anchorPaneFunctionalCondition.setVisible(false);
     }
 
 
@@ -603,8 +600,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneOBS.setVisible(true);
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
-        anchorPaneFunctionalAbility.setVisible(false);
-        anchorPaneCitizenAssessment.setVisible(false);
+        anchorPaneFunctionalCondition.setVisible(false);
     }
 
     /**
@@ -621,8 +617,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneOBS.setVisible(false);
         anchorPaneGeneralInformation.setVisible(true);
         anchorPaneHealthConditions.setVisible(false);
-        anchorPaneFunctionalAbility.setVisible(false);
-        anchorPaneCitizenAssessment.setVisible(false);
+        anchorPaneFunctionalCondition.setVisible(false);
 
     }
 
@@ -640,8 +635,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneOBS.setVisible(false);
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(true);
-        anchorPaneFunctionalAbility.setVisible(false);
-        anchorPaneCitizenAssessment.setVisible(false);
+        anchorPaneFunctionalCondition.setVisible(false);
     }
 
     /**
@@ -658,26 +652,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneOBS.setVisible(false);
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
-        anchorPaneFunctionalAbility.setVisible(true);
-        anchorPaneCitizenAssessment.setVisible(false);
-    }
-
-    /**
-     * Set up the Assessment pane
-     */
-    @FXML
-    private void btnClickCitizenAssessment() {
-        labelTitle.setText("Borgerens egen vurdering af funktionstilstand");
-        labelInfo.setText("Her er det muligt at rapportere på borgerens egen vurdering af sin funktionstilstand.");
-        labelInfoNewLine.setText("Der skal tages stilling til udførelse, betydningen af udførelse og borgerens ønsker og mål");
-        anchorPaneStudent.setVisible(false);
-        anchorPaneCitizens.setVisible(false);
-        anchorPaneFS3.setVisible(true);
-        anchorPaneOBS.setVisible(false);
-        anchorPaneGeneralInformation.setVisible(false);
-        anchorPaneHealthConditions.setVisible(false);
-        anchorPaneFunctionalAbility.setVisible(false);
-        anchorPaneCitizenAssessment.setVisible(true);
+        anchorPaneFunctionalCondition.setVisible(true);
     }
 
     /**
@@ -829,5 +804,19 @@ public class StudentViewController implements IController, Initializable {
         radioNotRelevant.setSelected(false);
         radioPotential.setSelected(false);
         radioRelevant.setSelected(false);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/StudentView.fxml"));
+        primaryStage.setTitle("SOSU Simulation");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
+        primaryStage.show();
+
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
