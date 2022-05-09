@@ -928,7 +928,7 @@ public class AdminViewController implements Initializable, IController {
             if (result.get() == ButtonType.OK) {
                 selectedCitizen();
                 dataModelFacade.deleteCitizen(selectedCreatedCitizen.getId());
-                reloadCitizenTable();
+                reloadCreatedCitizensTable();
             }
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en borger først");
