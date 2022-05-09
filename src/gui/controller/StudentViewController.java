@@ -808,24 +808,25 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private void btnHandleSaveHC() throws SQLException {
         int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
-        int subCategoryId = Integer.parseInt(tcSubCategoriesID.getId());
+        int subCategoryId = Integer.parseInt(tcSubCategoriesID.getText());
         String note = txtAreaFunctionAbilityNote.getText();
-        ConditionEnum condition = null;
         if(radioNotRelevant.isSelected()){
-            subCategoryText.setCondition(ConditionEnum.NOT_RELEVANT);
-            condition.getValue();
+            int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
+            dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
         }else if (radioPotential.isSelected()){
-            subCategoryText.setCondition(ConditionEnum.POTENTIAL);
-            condition.getValue();
+            int conditionValue = ConditionEnum.POTENTIAL.getValue();
+            dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
         }else if(radioRelevant.isSelected()){
-            subCategoryText.setCondition(ConditionEnum.RELEVANT);
-            condition.getValue();
+            int conditionValue = ConditionEnum.RELEVANT.getValue();
+            dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
         }
-
-        dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, condition.getValue());
     }
 
     @FXML
     private void btnHandelCancelChangesHC() {
+        txtAreaFunctionAbilityNote.clear();
+        radioNotRelevant.setSelected(false);
+        radioPotential.setSelected(false);
+        radioRelevant.setSelected(false);
     }
 }

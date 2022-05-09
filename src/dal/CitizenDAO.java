@@ -35,11 +35,8 @@ public class CitizenDAO {
                 String ssn = resultset.getString("SSN");
                 String address = resultset.getString("address");
                 String sex = resultset.getString("sex");
-                int functionalAbilityID = resultset.getInt("functionalAbilityId");
-                int loginID = resultset.getInt("loginId");
-                int schoolID = resultset.getInt("schoolId");
 
-                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex, functionalAbilityID, loginID, schoolID);
+                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex);
                 allCitizens.add(citizen);
             }
 

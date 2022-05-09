@@ -1,6 +1,7 @@
 package bll;
 
 import be.FunctionalAbilities;
+import be.enums.FunctionalEnum;
 import dal.FunctionalAbilitiesDAO;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class FunctionalAbilityManager {
         return functionalAbilitiesDAO.abilitiesOnCitizen(citizenId);
     }
 
-    public FunctionalAbilities createFunctionalAbility(int abilityNow, String abilityExcepted) throws SQLException {
+    public FunctionalAbilities createFunctionalAbility(FunctionalEnum abilityNow, String abilityExcepted) throws SQLException {
         return functionalAbilitiesDAO.createFunctionalAbilities(abilityNow, abilityExcepted);
     }
 

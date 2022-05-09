@@ -1,6 +1,7 @@
 package gui.Facade;
 
 import be.*;
+import be.enums.FunctionalEnum;
 import be.enums.UserType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.model.*;
@@ -435,7 +436,7 @@ public class DataModelFacade {
         return functionalAbilitiesModel.abilitiesOnCitizen(citizenId);
     }
 
-    public FunctionalAbilities createFunctionalAbility(int abilityNow, String abilityExcepted) throws SQLException {
+    public FunctionalAbilities createFunctionalAbility(FunctionalEnum abilityNow, String abilityExcepted) throws SQLException {
         return functionalAbilitiesModel.createFunctionalAbility(abilityNow, abilityExcepted);
     }
 
