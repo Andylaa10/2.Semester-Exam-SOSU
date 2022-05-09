@@ -35,11 +35,8 @@ public class CitizenDAO {
                 String ssn = resultset.getString("SSN");
                 String address = resultset.getString("address");
                 String sex = resultset.getString("sex");
-                int functionalAbilityID = resultset.getInt("functionalAbilityId");
-                int loginID = resultset.getInt("loginId");
-                int schoolID = resultset.getInt("schoolId");
 
-                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex, functionalAbilityID, loginID, schoolID);
+                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex);
                 allCitizens.add(citizen);
             }
 
@@ -117,19 +114,12 @@ public class CitizenDAO {
      * @param
      * @throws Exception
      */
-    public void deleteCitizen(int citizenID, int citizenId, int casesId) throws Exception {
+    public void deleteCitizen(int citizenID) throws Exception {
         try (Connection connection = connector.getConnection()) {
             String sql = "DELETE FROM Citizen WHERE CitizenID =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, citizenID);
             preparedStatement.executeUpdate();
-
-
-            String sqlDeleteCitizen = "DELETE FROM CasesOnCitizen (citizenId, casesId) VALUES (?,?);";
-            PreparedStatement statement = connection.prepareStatement(sqlDeleteCitizen);
-            statement.setInt(1, citizenID);
-            statement.setInt(2, casesId);
-            statement.execute();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

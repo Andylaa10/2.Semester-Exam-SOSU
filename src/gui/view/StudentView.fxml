@@ -414,7 +414,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
+            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
                <children>
                   <TableView fx:id="tvHealthConditions" layoutX="26.0" layoutY="89.0" prefHeight="423.0" prefWidth="302.0" style="-fx-background-color: transparent;">
                     <columns>
@@ -444,11 +444,123 @@
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Button layoutX="951.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Gem" />
-                  <Button layoutX="766.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
+                  <Button fx:id="btnSaveHC" layoutX="951.0" layoutY="499.0" mnemonicParsing="false" onAction="#btnHandleSaveHC" prefHeight="26.0" prefWidth="170.0" text="Gem" />
+                  <Button fx:id="btnCancelChangesHC" layoutX="766.0" layoutY="499.0" mnemonicParsing="false" onAction="#btnHandelCancelChangesHC" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
                   <RadioButton fx:id="radioNotRelevant" layoutX="645.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Ikke Relevant" />
                   <RadioButton fx:id="radioPotential" layoutX="771.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Potentiel" />
                   <RadioButton fx:id="radioRelevant" layoutX="882.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Relevant" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="anchorPaneFunctionalAbility" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
+               <children>
+                  <ImageView fitHeight="329.0" fitWidth="777.0" layoutX="14.0" layoutY="91.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@img/FunctionalAbilities.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="280.0" layoutY="29.0" text="Borgerens Funktionsevne Tilstand- FSIII">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="240.0" layoutY="437.0" text="Vurdering af funktionsevne tilstand">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="txtAreaFunctionAbilityNote" layoutX="802.0" layoutY="219.0" prefHeight="200.0" prefWidth="315.0" />
+                  <Label layoutX="802.0" layoutY="91.0" text="Vurdering af forventet tilstand">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="802.0" layoutY="483.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="Annuller" />
+                  <Button layoutX="967.0" layoutY="484.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="Gem" />
+                  <Label layoutX="802.0" layoutY="177.0" text="Fagligt notat">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="comboBoxFunctionalAbilityExpected" layoutX="802.0" layoutY="129.0" prefHeight="25.0" prefWidth="200.0" visibleRowCount="20">
+                     <effect>
+                        <ColorAdjust brightness="0.2" />
+                     </effect>
+                  </ComboBox>
+                  <RadioButton fx:id="radio0" layoutX="63.0" layoutY="475.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" text="0" />
+                  <RadioButton fx:id="radio1" layoutX="183.0" layoutY="475.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" text="1" />
+                  <RadioButton fx:id="radio2" layoutX="303.0" layoutY="475.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" text="2" />
+                  <RadioButton fx:id="radio3" layoutX="435.0" layoutY="476.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" text="3" />
+                  <RadioButton fx:id="radio4" layoutX="568.0" layoutY="475.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" text="4" />
+                  <RadioButton fx:id="radio9" layoutX="701.0" layoutY="476.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="66.0" text="9" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="anchorPaneCitizenAssessment" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
+               <children>
+                  <Label layoutX="229.0" text="Funktions Tilstand - Borgerens Egen Vurdering">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="54.0" layoutY="79.0" text="Udførelse: ">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="53.0" layoutY="337.0" text="Betydning:">
+                     <font>
+                        <Font size="33.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="55.0" layoutY="387.0" text="af udførelse">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="590.0" layoutY="232.0" text="Borgerens ønsker og mål">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="comboBoxCitizenOwnAbility" layoutX="239.0" layoutY="90.0" prefHeight="31.0" prefWidth="302.0" />
+                  <ComboBox fx:id="comboBoxCitizenLimitation" layoutX="238.0" layoutY="346.0" prefHeight="31.0" prefWidth="302.0" />
+                  <TextArea fx:id="txtAreaCitizenGoals" layoutX="590.0" layoutY="268.0" prefHeight="200.0" prefWidth="483.0" />
+                  <Label layoutX="239.0" layoutY="134.0" text="- Udfører selv">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="239.0" layoutY="173.0" text="- Udfører dele selv">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="239.0" layoutY="214.0" text="- Udfører ikke selv">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="239.0" layoutY="255.0" text="- Ikke relevant">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="236.0" layoutY="387.0" text="- Oplever ikke begrænsning ">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="233.0" layoutY="433.0" text="- Oplever begrænsning ">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="170.0" fitWidth="158.0" layoutX="757.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/CitizenS%20icon.png" />
+                     </image>
+                  </ImageView>
+                  <Button layoutX="922.0" layoutY="491.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="Gem" />
+                  <Button layoutX="761.0" layoutY="491.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="150.0" text="Annuller" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneOBS" layoutX="825.0" layoutY="51.0" prefHeight="302.0" prefWidth="326.0" visible="false">

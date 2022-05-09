@@ -1,8 +1,8 @@
 package gui.model;
 
-import be.HealthCondition;
-import be.SubCategory;
-import be.SubCategoryText;
+import be.HealthCondition.HealthCondition;
+import be.HealthCondition.SubCategory;
+import be.HealthCondition.SubCategoryText;
 import bll.HealthConditionsManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 

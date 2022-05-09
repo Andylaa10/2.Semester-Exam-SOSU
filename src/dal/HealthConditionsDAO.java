@@ -1,9 +1,9 @@
 package dal;
 
-import be.Citizen;
-import be.HealthCondition;
-import be.SubCategory;
-import be.SubCategoryText;
+import be.HealthCondition.HealthCondition;
+import be.HealthCondition.SubCategory;
+import be.HealthCondition.SubCategoryText;
+import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 
@@ -98,7 +98,7 @@ public class HealthConditionsDAO {
                 int citId = resultSet.getInt("citizenId");
                 int subId = resultSet.getInt("subCategoryId");
                 String note = resultSet.getString("Note");
-                int condition = resultSet.getInt("Condition");
+                ConditionEnum condition = ConditionEnum.valueOf(resultSet.getString("Condition"));
 
                 SubCategoryText subCategoryText = new SubCategoryText(id, citId, subId, note, condition);
                 return subCategoryText;
@@ -115,6 +115,7 @@ public class HealthConditionsDAO {
         //healthConditionsDAO.insertIntoSubCategory(12, 3, "Gider ikke noget", 0);
         //System.out.println(healthConditionsDAO.getTextOnSubCategory(13,3));
         //System.out.println(healthConditionsDAO.getSubCategories(1));
+        healthConditionsDAO.insertIntoSubCategory(1, 1, "Gider ikke at gå i bad", ConditionEnum.RELEVANT.getValue());
 
     }
 }

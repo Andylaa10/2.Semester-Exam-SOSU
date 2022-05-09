@@ -1,6 +1,10 @@
 package gui.controller;
 
 import be.*;
+import be.HealthCondition.HealthCondition;
+import be.HealthCondition.SubCategory;
+import be.HealthCondition.SubCategoryText;
+import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
@@ -18,10 +22,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.IOException;
@@ -223,6 +225,7 @@ public class StudentViewController implements IController, Initializable {
     private Citizen selectedCitizenOnComboBox;
 
     private SubCategory selectedSubCategory;
+    private SubCategoryText subCategoryText;
     private HealthCondition selectedHealthCondition;
 
     private DataModelFacade dataModelFacade;
@@ -801,5 +804,30 @@ public class StudentViewController implements IController, Initializable {
         lblInfoState.setText("Ændringer - Ikke Gemt");
         imgViewSaved.setVisible(false);
         imgViewNotSaved.setVisible(true);
+    }
+
+    @FXML
+    private void btnHandleSaveHC() throws SQLException {
+        int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
+        int subCategoryId = Integer.parseInt(tcSubCategoriesID.getText());
+        String note = txtAreaFunctionAbilityNote.getText();
+        if(radioNotRelevant.isSelected()){
+            int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
+            dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
+        }else if (radioPotential.isSelected()){
+            int conditionValue = ConditionEnum.POTENTIAL.getValue();
+            dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
+        }else if(radioRelevant.isSelected()){
+            int conditionValue = ConditionEnum.RELEVANT.getValue();
+            dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
+        }
+    }
+
+    @FXML
+    private void btnHandelCancelChangesHC() {
+        txtAreaFunctionAbilityNote.clear();
+        radioNotRelevant.setSelected(false);
+        radioPotential.setSelected(false);
+        radioRelevant.setSelected(false);
     }
 }

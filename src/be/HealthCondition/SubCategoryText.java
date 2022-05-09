@@ -1,4 +1,6 @@
-package be;
+package be.HealthCondition;
+
+import be.enums.ConditionEnum;
 
 import java.util.Objects;
 
@@ -8,9 +10,9 @@ public class SubCategoryText {
     private int citizenId;
     private int categoryId;
     private String note;
-    private int condition;
+    private ConditionEnum condition;
 
-    public SubCategoryText(int id, int citizenId, int categoryId, String note, int condition) {
+    public SubCategoryText(int id, int citizenId, int categoryId, String note, ConditionEnum condition) {
         this.id = id;
         this.citizenId = citizenId;
         this.categoryId = categoryId;
@@ -50,11 +52,11 @@ public class SubCategoryText {
         this.note = note;
     }
 
-    public int getCondition() {
+    public ConditionEnum getCondition() {
         return condition;
     }
 
-    public void setCondition(int condition) {
+    public void setCondition(ConditionEnum condition) {
         this.condition = condition;
     }
 

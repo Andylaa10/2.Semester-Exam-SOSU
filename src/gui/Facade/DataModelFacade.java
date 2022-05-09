@@ -1,6 +1,7 @@
 package gui.Facade;
 
 import be.*;
+import be.enums.FunctionalEnum;
 import be.enums.UserType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.model.*;
@@ -330,8 +331,8 @@ public class DataModelFacade {
      * Deletes a citizen using the deleteCitizen method from citizenModel
      * @throws Exception
      */
-    public void deleteCitizen(int citizenID, int citizenId, int casesId) throws Exception {
-        citizenModel.deleteCitizen(citizenID, citizenId, casesId);
+    public void deleteCitizen(int citizenID) throws Exception {
+        citizenModel.deleteCitizen(citizenID);
     }
 
     /**
@@ -435,7 +436,7 @@ public class DataModelFacade {
         return functionalAbilitiesModel.abilitiesOnCitizen(citizenId);
     }
 
-    public FunctionalAbilities createFunctionalAbility(int abilityNow, String abilityExcepted) throws SQLException {
+    public FunctionalAbilities createFunctionalAbility(FunctionalEnum abilityNow, String abilityExcepted) throws SQLException {
         return functionalAbilitiesModel.createFunctionalAbility(abilityNow, abilityExcepted);
     }
 

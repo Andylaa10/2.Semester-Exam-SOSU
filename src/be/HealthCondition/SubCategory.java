@@ -1,4 +1,4 @@
-package be;
+package be.HealthCondition;
 
 public class SubCategory {
     private int id;
