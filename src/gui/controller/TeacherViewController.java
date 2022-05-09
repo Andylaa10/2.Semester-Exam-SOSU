@@ -679,13 +679,13 @@ public class TeacherViewController implements Initializable, IController {
     private void btnHandleDeleteCitizen() throws Exception {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("WARNING MESSAGE");
-        alert.setHeaderText("Warning before you delete a citizen");
-        alert.setContentText("Joe");
+        alert.setHeaderText("Advarsel før du sletter en borger");
+        alert.setContentText("Du skal slette alle tager fra en borger, før du kan slette borgeren");
         if (selectedCreatedCitizen != null) {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 selectedCitizen();
-                //dataModelFacade.deleteCitizen(selectedCreatedCitizen.getId());
+                dataModelFacade.deleteCitizen(selectedCreatedCitizen.getId());
                 reloadCitizenTable();
             }
         } else {
