@@ -1,12 +1,11 @@
 package gui.Facade;
 
 import be.*;
-import be.FunctionalAbilities.FunctionalAbilities;
 import be.FunctionalAbilities.SubFunctional;
+import be.FunctionalAbilities.FunctionalAbility;
 import be.HealthCondition.HealthCondition;
 import be.HealthCondition.SubCategory;
 import be.HealthCondition.SubCategoryText;
-import be.enums.FunctionalEnum;
 import be.enums.UserType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.model.*;
@@ -433,7 +432,7 @@ public class DataModelFacade {
         healthConditionsModel.insertIntoSubCategory(citizenId, subCategoryId, note, condition);
     }
 
-    public List<FunctionalAbilities> getFunctionalAbilities() throws SQLException {
+    public List<FunctionalAbility> getFunctionalAbilities() throws SQLException {
         return functionalAbilitiesModel.getFunctionalAbilities();
     }
 
@@ -441,16 +440,16 @@ public class DataModelFacade {
         return functionalAbilitiesModel.getFunctionalAbilitySubCategories(functionalAbilitySubCategoryId);
     }
 
-    public FunctionalAbilities abilitiesOnCitizen(int citizenId) throws SQLException {
+    public FunctionalAbility abilitiesOnCitizen(int citizenId) throws SQLException {
         return functionalAbilitiesModel.abilitiesOnCitizen(citizenId);
     }
 
-    public FunctionalAbilities createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException {
+    public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException {
         return functionalAbilitiesModel.createFunctionalAbility(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen);
     }
 
-    public void editAbilities(FunctionalAbilities functionalAbilities) throws SQLException {
-        functionalAbilitiesModel.editAbilities(functionalAbilities);
+    public void editAbilities(FunctionalAbility functionalAbility) throws SQLException {
+        functionalAbilitiesModel.editAbilities(functionalAbility);
     }
 
     public void deleteAbilities(int id) throws Exception {

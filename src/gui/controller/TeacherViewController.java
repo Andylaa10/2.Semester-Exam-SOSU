@@ -537,8 +537,7 @@ public class TeacherViewController implements Initializable, IController {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Something went wrong");
-            //TODO add errorHandler
+            ErrorHandlerController.createWarning("Fejl", "Du skal først vælge en sag og en borger");
         }
     }
 
@@ -552,42 +551,46 @@ public class TeacherViewController implements Initializable, IController {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Something went wrong");
-            //TODO add errorHandler
+            ErrorHandlerController.createWarning("Fejl", "Du skal først vælge en sag og en borger");
         }
     }
 
     @FXML
     private void btnHandleSaveCitizen() throws SQLException {
-        String firstName = txtFieldCitizenFirstName.getText();
-        String lastName = txtFieldCitizenLastName.getText();
-        String SSN = txtFieldCitizenSSN.getText();
-        String address = txtFieldCitizenAddress.getText();
-        String sex = null;
-        if (radioMale.isSelected()) {
-            sex = "Male";
-        } else if (radioFemale.isSelected()) {
-            sex = "Female";
-        } else if (radioOther.isSelected()) {
-            sex = "Other";
+        if (!txtFieldCitizenFirstName.getText().isEmpty() && !txtFieldCitizenLastName.getText().isEmpty() && !txtFieldCitizenSSN.getText().isEmpty() && txtFieldCitizenAddress.getText().isEmpty()) {
+            String firstName = txtFieldCitizenFirstName.getText();
+            String lastName = txtFieldCitizenLastName.getText();
+            String SSN = txtFieldCitizenSSN.getText();
+            String address = txtFieldCitizenAddress.getText();
+            String sex = null;
+            if (radioMale.isSelected()) {
+                sex = "Male";
+            } else if (radioFemale.isSelected()) {
+                sex = "Female";
+            } else if (radioOther.isSelected()) {
+                sex = "Other";
+            }
+            String coping = "";
+            String motivation = "";
+            String resources = "";
+            String roles = "";
+            String habits = "";
+            String educationandjob = "";
+            String lifeStory = "";
+            String network = "";
+            String healthInformation = "";
+            String equipmentAids = "";
+            String homeLayout = "";
+            dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex);
+            dataModelFacade.createGeneralInformation(coping, motivation, resources, roles, habits, educationandjob,
+                    lifeStory, network, healthInformation, equipmentAids, homeLayout);
+            reloadCreatedCitizensTable();
+            reloadCitizenTable();
+            clearTextFieldCreate();
+        } else {
+            ErrorHandlerController.createWarning("Fejl", "Du skal udfylde alle tekstfelter");
         }
-        String coping = "";
-        String motivation = "";
-        String resources = "";
-        String roles = "";
-        String habits = "";
-        String educationandjob = "";
-        String lifeStory = "";
-        String network = "";
-        String healthInformation = "";
-        String equipmentAids = "";
-        String homeLayout = "";
-        dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex);
-        dataModelFacade.createGeneralInformation(coping, motivation, resources, roles, habits, educationandjob,
-                lifeStory, network, healthInformation, equipmentAids, homeLayout);
-        reloadCreatedCitizensTable();
-        reloadCitizenTable();
-        clearTextFieldCreate();
+
     }
 
     public void clearTextFieldCreate() {
@@ -628,7 +631,7 @@ public class TeacherViewController implements Initializable, IController {
             clearStudentTxtField();
             tvStudent.getSelectionModel().clearSelection();
         } else {
-            System.out.println("NOOO");
+            ErrorHandlerController.createWarning("Fejl", "Du skal udfylde alle informationer på den studerende");
         }
     }
 
@@ -670,18 +673,18 @@ public class TeacherViewController implements Initializable, IController {
                 btnEditSave.setVisible(false);
                 btnDeleteStudent.setVisible(true);
             } else {
-                System.out.println("Noo");
+                ErrorHandlerController.createWarning("Fejl", "Du skal udfylde alle informationer på den studerende");
             }
         }
     }
 
     @FXML
     private void btnHandleDeleteCitizen() throws Exception {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("WARNING MESSAGE");
-        alert.setHeaderText("Advarsel før du sletter en borger");
-        alert.setContentText("Du skal slette alle tager fra en borger, før du kan slette borgeren");
         if (selectedCreatedCitizen != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Advarsel");
+            alert.setHeaderText("Advarsel før du sletter en borger");
+            alert.setContentText("Du skal slette alle tager fra en borger, før du kan slette borgeren");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 selectedCitizen();
@@ -689,8 +692,9 @@ public class TeacherViewController implements Initializable, IController {
                 reloadCitizenTable();
             }
         } else {
-            return;
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en borger først");
         }
+
     }
 
     @FXML
@@ -723,11 +727,11 @@ public class TeacherViewController implements Initializable, IController {
      */
     @FXML
     private void btnHandleDeleteStudent() throws SQLException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("WARNING MESSAGE");
-        alert.setHeaderText("Warning before you delete student");
-        alert.setContentText("Joe");
         if (selectedStudent != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Advarsel");
+            alert.setHeaderText("Advarsel før du sletter en studerende");
+            alert.setContentText("Denne handling kan ikke fortrydes");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 selectedStudent();
@@ -735,8 +739,9 @@ public class TeacherViewController implements Initializable, IController {
                 reloadStudentTable();
             }
         } else {
-            return;
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en studerende først");
         }
+
     }
 
     /**
@@ -964,7 +969,7 @@ public class TeacherViewController implements Initializable, IController {
             txtFieldName.clear();
             txtAreaInfo.clear();
         } else {
-            System.out.println("NOOO");
+            ErrorHandlerController.createWarning("Fejl", "Du skal give sagen et navn og noget informationer, før du kan oprette den");
         }
     }
 
@@ -982,32 +987,37 @@ public class TeacherViewController implements Initializable, IController {
 
     @FXML
     private void btnHandleDeleteCase() throws Exception {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("WARNING MESSAGE");
-        alert.setHeaderText("Warning before you delete case");
-        alert.setContentText("Joe");
         if (selectedCase != null) {
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
-                selectedCase();
-                dataModelFacade.deleteCase(selectedCase.getId());
-                reloadCaseTable();
-                reloadCurrentCasesTable();
-            }
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Advarsel");
+            alert.setHeaderText("Advarsel før du sletter en sag");
+            alert.setContentText("Denne handling kan ikke fortrydes");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    selectedCase();
+                    dataModelFacade.deleteCase(selectedCase.getId());
+                    reloadCaseTable();
+                    reloadCurrentCasesTable();
+                }
         } else {
-            return;
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en sag først");
         }
+
     }
 
     @FXML
     private void btnHandleEditCase() {
-        setSelectedCase(selectedCase);
-        btnEditCase.setDisable(true);
-        btnCopyCase.setDisable(true);
-        btnSaveCase.setVisible(false);
-        btnDeleteCase.setVisible(false);
-        btnEditCaseSave.setVisible(true);
-        btnEditCaseCancel.setVisible(true);
+        if (selectedCase != null) {
+            setSelectedCase(selectedCase);
+            btnEditCase.setDisable(true);
+            btnCopyCase.setDisable(true);
+            btnSaveCase.setVisible(false);
+            btnDeleteCase.setVisible(false);
+            btnEditCaseSave.setVisible(true);
+            btnEditCaseCancel.setVisible(true);
+        } else {
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en sag først");
+        }
     }
 
     @FXML
@@ -1028,7 +1038,7 @@ public class TeacherViewController implements Initializable, IController {
 
                 setCaseBtnVisibility();
             } else {
-                System.out.println("Something went wrong");
+                ErrorHandlerController.createWarning("Fejl", "Du skal give sagen et navn og noget informationer");
             }
         }
     }
@@ -1053,6 +1063,8 @@ public class TeacherViewController implements Initializable, IController {
             btnDeleteCase.setVisible(false);
             btnCopySave.setVisible(true);
             btnEditCaseCancel.setVisible(true);
+        } else {
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en sag først");
         }
 
     }
@@ -1061,6 +1073,8 @@ public class TeacherViewController implements Initializable, IController {
         if (selectedCase != null) {
             btnHandleSaveCase();
             setCaseBtnVisibility();
+        } else {
+            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en sag først");
         }
     }
 

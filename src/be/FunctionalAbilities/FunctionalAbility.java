@@ -2,13 +2,16 @@ package be.FunctionalAbilities;
 
 import be.enums.FunctionalEnum;
 
-public class FunctionalAbilities {
+public class FunctionalAbility {
 
     private int functionalAbilityID;
     private int citizenId;
-    private FunctionalEnum abilityNow;
-    private FunctionalEnum abilityExcepted;
+    private int abilityNow;
+    private int abilityExcepted;
+    private int functionalAbilitySubCategoryId;
     private String abilityNote;
+    private String abilityNoteCitizen;
+    private String functionalAbilitySubCategoryName;
 
     public String getFunctionalAbilitySubCategoryName() {
         return functionalAbilitySubCategoryName;
@@ -18,14 +21,12 @@ public class FunctionalAbilities {
         this.functionalAbilitySubCategoryName = functionalAbilitySubCategoryName;
     }
 
-    private String abilityNoteCitizen;
-    private int functionalAbilitySubCategoryId;
-    private String functionalAbilitySubCategoryName;
+
 
     /**
      * Constructor
      */
-    public FunctionalAbilities() {
+    public FunctionalAbility() {
     }
 
     @Override
@@ -46,7 +47,7 @@ public class FunctionalAbilities {
      * @param abilityNote
      * @param abilityNoteCitizen
      */
-    public FunctionalAbilities(int functionalAbilityID, int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExcepted, String abilityNote, String abilityNoteCitizen) {
+    public FunctionalAbility(int functionalAbilityID, int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExcepted, String abilityNote, String abilityNoteCitizen) {
         this.functionalAbilityID = functionalAbilityID;
         this.citizenId = citizenId;
         this.functionalAbilitySubCategoryId = functionalAbilitySubCategoryId;
@@ -56,7 +57,7 @@ public class FunctionalAbilities {
         this.abilityNoteCitizen = abilityNoteCitizen;
     }
 
-    public FunctionalAbilities(int functionalAbilityID, String functionalAbilitySubCategoryName) {
+    public FunctionalAbility(int functionalAbilityID, String functionalAbilitySubCategoryName) {
         this.functionalAbilityID = functionalAbilityID;
         this.functionalAbilitySubCategoryName = functionalAbilitySubCategoryName;
     }
@@ -114,7 +115,7 @@ public class FunctionalAbilities {
      * Gets the abilityNow
      * @return
      */
-    public FunctionalEnum getAbilityNow() {
+    public int getAbilityNow() {
         return abilityNow;
     }
 
@@ -122,7 +123,7 @@ public class FunctionalAbilities {
      * Sets the abilityNow
      * @return
      */
-    public void setAbilityNow(FunctionalEnum abilityNow) {
+    public void setAbilityNow(int abilityNow) {
         this.abilityNow = abilityNow;
     }
 
@@ -130,7 +131,7 @@ public class FunctionalAbilities {
      * Gets the abilityExcepted
      * @return
      */
-    public FunctionalEnum getAbilityExcepted() {
+    public int getAbilityExcepted() {
         return abilityExcepted;
     }
 
@@ -138,7 +139,7 @@ public class FunctionalAbilities {
      * Sets the abilityExcepted
      * @return
      */
-    public void setAbilityExcepted(FunctionalEnum abilityExcepted) {
+    public void setAbilityExcepted(int abilityExcepted) {
         this.abilityExcepted = abilityExcepted;
     }
 
