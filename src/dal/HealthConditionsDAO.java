@@ -4,6 +4,7 @@ import be.Citizen;
 import be.HealthCondition;
 import be.SubCategory;
 import be.SubCategoryText;
+import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 
@@ -98,7 +99,7 @@ public class HealthConditionsDAO {
                 int citId = resultSet.getInt("citizenId");
                 int subId = resultSet.getInt("subCategoryId");
                 String note = resultSet.getString("Note");
-                int condition = resultSet.getInt("Condition");
+                ConditionEnum condition = ConditionEnum.valueOf(resultSet.getString("Condition"));
 
                 SubCategoryText subCategoryText = new SubCategoryText(id, citId, subId, note, condition);
                 return subCategoryText;

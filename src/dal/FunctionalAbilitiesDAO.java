@@ -1,7 +1,7 @@
 package dal;
 
 import be.FunctionalAbilities;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
+import be.enums.FunctionalEnum;
 import dal.db.DatabaseConnector;
 
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class FunctionalAbilitiesDAO {
             ResultSet rs = preparedStatement.getResultSet();
             while (rs.next()){
                 int id = rs.getInt("abilityID");
-                int abilityNow = rs.getInt("abilityNow");
+                FunctionalEnum abilityNow = FunctionalEnum.valueOf(rs.getString("abilityNow"));
                 String abilityExcepted = rs.getString("abilityExcepted");
 
                 FunctionalAbilities functionalAbilities = new FunctionalAbilities(id, abilityNow, abilityExcepted);
@@ -57,7 +57,7 @@ public class FunctionalAbilitiesDAO {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
                 int id = rs.getInt("abilityID");
-                int abilityNow = rs.getInt("abilityNow");
+                FunctionalEnum abilityNow = FunctionalEnum.valueOf(rs.getString("abilityNow"));
                 String abilityExcepted = rs.getString("abilityExcepted");
 
                 FunctionalAbilities functionalAbilities = new FunctionalAbilities(id, abilityNow, abilityExcepted);
@@ -74,12 +74,12 @@ public class FunctionalAbilitiesDAO {
      * @return
      * @throws SQLException
      */
-    public FunctionalAbilities createFunctionalAbilities(int abilityNow, String abilityExcepted) throws SQLException{
+    public FunctionalAbilities createFunctionalAbilities(FunctionalEnum abilityNow, String abilityExcepted) throws SQLException{
         try(Connection connection = connector.getConnection()){
             String sql = "INSERT INTO FunctionalAbilities (abilityNow, abilityExcepted) VALUES (?,?)";
 
             try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-                preparedStatement.setInt(1, abilityNow);
+                preparedStatement.setInt(1, abilityNow.getValue());
                 preparedStatement.setString(2, abilityExcepted);
                 preparedStatement.execute();
                 ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -97,7 +97,7 @@ public class FunctionalAbilitiesDAO {
         try(Connection connection = connector.getConnection()){
             String sql = "UPDATE FunctionalAbilities SET abilityNow = ?, abilityExcepted = ? WHERE citizenId = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, functionalAbilities.getAbilityNow());
+            preparedStatement.setString(1, String.valueOf(functionalAbilities.getAbilityNow()));
             preparedStatement.setString(2, functionalAbilities.getAbilityExpected());
 
             preparedStatement.executeUpdate();

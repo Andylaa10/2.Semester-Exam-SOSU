@@ -5,7 +5,7 @@ import be.enums.FunctionalEnum;
 public class FunctionalAbilities {
 
     private int id;
-    private int abilityNow;
+    private FunctionalEnum abilityNow;
     private String abilityExpected;
 
     /**
@@ -20,7 +20,7 @@ public class FunctionalAbilities {
      * @param abilityNow
      * @param abilityExpected
      */
-    public FunctionalAbilities(int id, int abilityNow, String abilityExpected) {
+    public FunctionalAbilities(int id, FunctionalEnum abilityNow, String abilityExpected) {
         this.id = id;
         this.abilityNow = abilityNow;
         this.abilityExpected = abilityExpected;
@@ -46,7 +46,7 @@ public class FunctionalAbilities {
      * Gets the abilityNow
      * @return
      */
-    public int getAbilityNow() {
+    public FunctionalEnum getAbilityNow() {
         return abilityNow;
     }
 
@@ -54,7 +54,7 @@ public class FunctionalAbilities {
      * Set the abilityNow
      * @param abilityNow
      */
-    public void setAbilityNow(int abilityNow) {
+    public void setAbilityNow(FunctionalEnum abilityNow) {
         this.abilityNow = abilityNow;
     }
 

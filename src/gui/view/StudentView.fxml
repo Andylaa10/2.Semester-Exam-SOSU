@@ -421,7 +421,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
+            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
                <children>
                   <TableView fx:id="tvHealthConditions" layoutX="26.0" layoutY="89.0" prefHeight="423.0" prefWidth="302.0" style="-fx-background-color: transparent;">
                     <columns>
@@ -451,14 +451,14 @@
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Button layoutX="951.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Gem" />
-                  <Button layoutX="766.0" layoutY="499.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
+                  <Button fx:id="btnSaveHC" layoutX="951.0" layoutY="499.0" mnemonicParsing="false" onAction="#btnHandleSaveHC" prefHeight="26.0" prefWidth="170.0" text="Gem" />
+                  <Button fx:id="btnCancelChangesHC" layoutX="766.0" layoutY="499.0" mnemonicParsing="false" onAction="#btnHandelCancelChangesHC" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
                   <RadioButton fx:id="radioNotRelevant" layoutX="645.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Ikke Relevant" />
                   <RadioButton fx:id="radioPotential" layoutX="771.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Potentiel" />
                   <RadioButton fx:id="radioRelevant" layoutX="882.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Relevant" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneFunctionalAbility" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
+            <AnchorPane fx:id="anchorPaneFunctionalAbility" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
                <children>
                   <ImageView fitHeight="329.0" fitWidth="777.0" layoutX="14.0" layoutY="91.0" pickOnBounds="true">
                      <image>

@@ -1,6 +1,7 @@
 package gui.controller;
 
 import be.*;
+import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
@@ -223,6 +224,7 @@ public class StudentViewController implements IController, Initializable {
     private Citizen selectedCitizenOnComboBox;
 
     private SubCategory selectedSubCategory;
+    private SubCategoryText subCategoryText;
     private HealthCondition selectedHealthCondition;
 
     private DataModelFacade dataModelFacade;
@@ -802,5 +804,29 @@ public class StudentViewController implements IController, Initializable {
         lblInfoState.setText("Ændringer - Ikke Gemt");
         imgViewSaved.setVisible(false);
         imgViewNotSaved.setVisible(true);
+    }
+
+    @FXML
+    private void btnHandleSaveHC() throws SQLException {
+        int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
+        int subCategoryId = Integer.parseInt(tcSubCategoriesID.getId());
+        String note = txtAreaFunctionAbilityNote.getText();
+        ConditionEnum condition = null;
+        if(radioNotRelevant.isSelected()){
+            subCategoryText.setCondition(ConditionEnum.NOT_RELEVANT);
+            condition.getValue();
+        }else if (radioPotential.isSelected()){
+            subCategoryText.setCondition(ConditionEnum.POTENTIAL);
+            condition.getValue();
+        }else if(radioRelevant.isSelected()){
+            subCategoryText.setCondition(ConditionEnum.RELEVANT);
+            condition.getValue();
+        }
+
+        dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, condition.getValue());
+    }
+
+    @FXML
+    private void btnHandelCancelChangesHC() {
     }
 }
