@@ -243,6 +243,8 @@ public class StudentViewController extends Application implements IController, I
     private ComboBox comboboxMeaningOfPerformance;
     @FXML
     private TextArea txtAreaNote;
+    @FXML
+    private TextField txtFieldFunctionalAbilityID;
 
 
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
@@ -578,7 +580,7 @@ public class StudentViewController extends Application implements IController, I
         this.tvFunctionalConditions.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if ((SubFunctional) newValue != null) {
                 this.selectedFunctionalAbilitySubCategory = (SubFunctional) newValue;
-                System.out.println(selectedFunctionalAbilitySubCategory.getId());
+                txtFieldFunctionalAbilityID.setText(String.valueOf(selectedFunctionalAbilitySubCategory.getId()));
             }
         }));
     }
