@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
+<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="182.0" style="-fx-background-color: rgb(81, 83, 222);">
          <children>
@@ -34,7 +34,7 @@
                   <Button fx:id="btnHome" layoutX="7.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnClickHome" prefHeight="133.0" prefWidth="172.0" style="-fx-background-color: transparent;" />
                </children>
             </Pane>
-            <Button fx:id="btnCitizens" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickCitizensAndCases" prefHeight="42.0" prefWidth="218.0" text="Sager - Borger">
+            <Button fx:id="btnCitizens" alignment="CENTER" mnemonicParsing="false" onAction="#btnClickCitizensAndCases" prefHeight="42.0" prefWidth="218.0" text="Sager - Borger">
                <graphic>
                   <ImageView fitHeight="28.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -46,7 +46,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnFS3" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickFS3" prefHeight="42.0" prefWidth="218.0" text="Rapporter FSIII">
+            <Button fx:id="btnFS3" alignment="CENTER" mnemonicParsing="false" onAction="#btnClickFS3" prefHeight="42.0" prefWidth="218.0" text="Rapporter FSIII">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>

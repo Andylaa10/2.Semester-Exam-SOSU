@@ -30,7 +30,7 @@
                   <Button fx:id="btnHome" layoutX="7.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnClickHome" prefHeight="133.0" prefWidth="172.0" style="-fx-background-color: transparent;" />
                </children>
             </Pane>
-            <Button fx:id="btnCreateSchoolOnAssignPane" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btnClickCreateSchool" prefHeight="42.0" prefWidth="218.0" text="Skoler" textFill="WHITE">
+            <Button fx:id="btnCreateSchoolOnAssignPane" alignment="CENTER" mnemonicParsing="false" onAction="#btnClickCreateSchool" prefHeight="42.0" prefWidth="218.0" text="Skoler" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
@@ -42,7 +42,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnCreateAdminOnAssignPage" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#btnClickCreateAdmin" prefHeight="42.0" prefWidth="218.0" text="Admins" textFill="WHITE">
+            <Button fx:id="btnCreateAdminOnAssignPage" alignment="CENTER" mnemonicParsing="false" onAction="#btnClickCreateAdmin" prefHeight="42.0" prefWidth="218.0" text="Admins" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
@@ -54,7 +54,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnConfigureSchools" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#btnClickAssignSchools" prefHeight="42.0" prefWidth="218.0" text="Tildel Skoler" textFill="WHITE">
+            <Button fx:id="btnConfigureSchools" alignment="CENTER" mnemonicParsing="false" onAction="#btnClickAssignSchools" prefHeight="42.0" prefWidth="218.0" text="Tildel Skoler" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>

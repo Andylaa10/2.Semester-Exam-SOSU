@@ -347,15 +347,16 @@ public class StudentViewController implements IController, Initializable {
         btnClickGeneralInformation();
         Citizen selectedCitizenComboBox = (Citizen) comboBoxCitizen.getSelectionModel().getSelectedItem();
         txtFieldCitizenID.setText(String.valueOf(selectedCitizenComboBox.getId()));
-        txtFieldFirstName.setText(selectedCitizenComboBox.getFirstName());
-        txtFieldLastName.setText(selectedCitizenComboBox.getLastName());
-        txtFieldSSN.setText(selectedCitizenComboBox.getSSN());
-        txtFieldAddress.setText(selectedCitizenComboBox.getAddress());
-        if (selectedCitizenComboBox.getSex().equals("Male")){
+        Citizen selectedCitizenInfo = dataModelFacade.getInfoOnCitizen(Integer.parseInt(txtFieldCitizenID.getText()));
+        txtFieldFirstName.setText(selectedCitizenInfo.getFirstName());
+        txtFieldLastName.setText(selectedCitizenInfo.getLastName());
+        txtFieldSSN.setText(selectedCitizenInfo.getSSN());
+        txtFieldAddress.setText(selectedCitizenInfo.getAddress());
+        if (selectedCitizenInfo.getSex().equals("Male")){
             radioMale.setSelected(true);
-        }else if (selectedCitizenComboBox.getSex().equals("Female")){
+        }else if (selectedCitizenInfo.getSex().equals("Female")){
             radioFemale.setSelected(true);
-        }else if(selectedCitizenComboBox.getSex().equals("Other")){
+        }else if(selectedCitizenInfo.getSex().equals("Other")){
             radioOther.setSelected(true);
         }
         GeneralInformation selectedGeneralInformation = (GeneralInformation) dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
@@ -751,7 +752,6 @@ public class StudentViewController implements IController, Initializable {
         lblInfoState.setText("Ændringer - Gemt");
         imgViewNotSaved.setVisible(false);
         imgViewSaved.setVisible(true);
-
     }
 
     /**
@@ -772,7 +772,6 @@ public class StudentViewController implements IController, Initializable {
      */
     public void setGeneralInfoFromID(String citizenID) throws SQLException {
         txtFieldCitizenID.setText(citizenID);
-
         Citizen selectedCitizenInfo = dataModelFacade.getInfoOnCitizen(Integer.parseInt(txtFieldCitizenID.getText()));
         txtFieldFirstName.setText(selectedCitizenInfo.getFirstName());
         txtFieldLastName.setText(selectedCitizenInfo.getLastName());
