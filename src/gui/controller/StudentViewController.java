@@ -1,7 +1,6 @@
 package gui.controller;
 
 import be.*;
-import be.FunctionalAbilities.FunctionalAbilities;
 import be.FunctionalAbilities.SubFunctional;
 import be.HealthCondition.HealthCondition;
 import be.HealthCondition.SubCategory;
