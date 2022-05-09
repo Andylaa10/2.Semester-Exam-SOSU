@@ -3,7 +3,6 @@ package dal;
 import be.FunctionalAbilities.FunctionalAbilities;
 import be.enums.FunctionalEnum;
 import dal.db.DatabaseConnector;
-
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,11 +29,15 @@ public class FunctionalAbilitiesDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet rs = preparedStatement.getResultSet();
             while (rs.next()){
-                int id = rs.getInt("abilityID");
+                int functionalAbilityID = rs.getInt("abilityID");
+                int citizenId = rs.getInt("citizenId");
+                int functionalAbilitySubCategoryId = rs.getInt("functionalAbilitySubCategoryId");
                 FunctionalEnum abilityNow = FunctionalEnum.valueOf(rs.getString("abilityNow"));
-                String abilityExcepted = rs.getString("abilityExcepted");
+                FunctionalEnum abilityExpected = FunctionalEnum.valueOf(rs.getString("abilityExpected"));
+                String abilityNote = rs.getString("abilityExcepted");
+                String abilityNoteCitizen = rs.getString("abilityNoteCitizen");
 
-                FunctionalAbilities functionalAbilities = new FunctionalAbilities(id, abilityNow, abilityExcepted);
+                FunctionalAbilities functionalAbilities = new FunctionalAbilities(functionalAbilityID, citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen);
                 allFunctionalAbilities.add(functionalAbilities);
             }
         }
@@ -56,38 +59,40 @@ public class FunctionalAbilitiesDAO {
             preparedStatement.execute();
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
-                int id = rs.getInt("abilityID");
+                int functionalAbilityID = rs.getInt("abilityID");
+                int functionalAbilitySubCategoryId = rs.getInt("functionalAbilitySubCategoryId");
                 FunctionalEnum abilityNow = FunctionalEnum.valueOf(rs.getString("abilityNow"));
-                String abilityExcepted = rs.getString("abilityExcepted");
+                FunctionalEnum abilityExpected = FunctionalEnum.valueOf(rs.getString("abilityExpected"));
+                String abilityNote = rs.getString("abilityExcepted");
+                String abilityNoteCitizen = rs.getString("abilityNoteCitizen");
 
-                FunctionalAbilities functionalAbilities = new FunctionalAbilities(id, abilityNow, abilityExcepted);
+                FunctionalAbilities functionalAbilities = new FunctionalAbilities(functionalAbilityID, citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen);
+
                 return functionalAbilities;
             }
         }
         return null;
     }
 
-    /**
-     * Creates functionalAbilities
-     * @param abilityNow
-     * @param abilityExcepted
-     * @return
-     * @throws SQLException
-     */
-    public FunctionalAbilities createFunctionalAbilities(FunctionalEnum abilityNow, String abilityExcepted) throws SQLException{
+
+    public FunctionalAbilities createFunctionalAbilities(int citizenId,  int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException{
         try(Connection connection = connector.getConnection()){
-            String sql = "INSERT INTO FunctionalAbilities (abilityNow, abilityExcepted) VALUES (?,?)";
+            String sql = "INSERT INTO FunctionalAbilities (citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen) VALUES (?,?,?,?,?,?)";
 
             try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-                preparedStatement.setInt(1, abilityNow.getValue());
-                preparedStatement.setString(2, abilityExcepted);
+                preparedStatement.setInt(1, citizenId);
+                preparedStatement.setInt(2, functionalAbilitySubCategoryId);
+                preparedStatement.setInt(3, abilityNow.getValue());
+                preparedStatement.setInt(4, abilityExpected.getValue());
+                preparedStatement.setString(5, abilityNote);
+                preparedStatement.setString(6, abilityNoteCitizen);
                 preparedStatement.execute();
                 ResultSet rs = preparedStatement.getGeneratedKeys();
                 int id = 0;
                 if (rs.next()){
                     id = rs.getInt(1);
                 }
-                FunctionalAbilities functionalAbilities = new FunctionalAbilities(id, abilityNow, abilityExcepted);
+                FunctionalAbilities functionalAbilities = new FunctionalAbilities(id, abilityNow, abilityExpected);
                 return functionalAbilities;
             }
         }

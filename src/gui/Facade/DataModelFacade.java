@@ -1,6 +1,10 @@
 package gui.Facade;
 
 import be.*;
+import be.FunctionalAbilities.FunctionalAbilities;
+import be.HealthCondition.HealthCondition;
+import be.HealthCondition.SubCategory;
+import be.HealthCondition.SubCategoryText;
 import be.enums.FunctionalEnum;
 import be.enums.UserType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
