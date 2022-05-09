@@ -250,7 +250,6 @@ public class StudentViewController extends Application implements IController, I
             e.printStackTrace();
         }
         setupToggleGender();
-        setupToggleFunctionCondition();
         setupToggleHealthCondition();
     }
 
@@ -374,18 +373,6 @@ public class StudentViewController extends Application implements IController, I
         txtAreaNetwork.setText(selectedGeneralInformation.getNetwork());
     }
 
-    /**
-     * Method to pick only functional condition
-     */
-    public void setupToggleFunctionCondition(){
-        group = new ToggleGroup();
-        radio0.setToggleGroup(group);
-        radio1.setToggleGroup(group);
-        radio2.setToggleGroup(group);
-        radio3.setToggleGroup(group);
-        radio4.setToggleGroup(group);
-        radio9.setToggleGroup(group);
-    }
 
     /**
      * Method to only pick one health condition

@@ -75,7 +75,7 @@ public class FunctionalAbilitiesDAO {
     }
 
 
-    public FunctionalAbilities createFunctionalAbilities(int citizenId,  int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException{
+    public FunctionalAbilities createFunctionalAbilities(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException{
         try(Connection connection = connector.getConnection()){
             String sql = "INSERT INTO FunctionalAbilities (citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen) VALUES (?,?,?,?,?,?)";
 
@@ -92,7 +92,8 @@ public class FunctionalAbilitiesDAO {
                 if (rs.next()){
                     id = rs.getInt(1);
                 }
-                FunctionalAbilities functionalAbilities = new FunctionalAbilities(id, abilityNow, abilityExpected);
+                FunctionalAbilities functionalAbilities = new FunctionalAbilities(id, citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen);
+
                 return functionalAbilities;
             }
         }
@@ -100,10 +101,12 @@ public class FunctionalAbilitiesDAO {
 
     public void editAbilities(FunctionalAbilities functionalAbilities) throws SQLException{
         try(Connection connection = connector.getConnection()){
-            String sql = "UPDATE FunctionalAbilities SET abilityNow = ?, abilityExcepted = ? WHERE citizenId = ?;";
+            String sql = "UPDATE FunctionalAbilities SET abilityNow = ?, abilityExpected = ?, abilityNote = ?, abilityNoteCitizen = ? WHERE citizenId = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, String.valueOf(functionalAbilities.getAbilityNow()));
-            preparedStatement.setString(2, functionalAbilities.getAbilityExpected());
+            preparedStatement.setInt(1, functionalAbilities.getAbilityNow().getValue());
+            preparedStatement.setInt(2, functionalAbilities.getAbilityExcepted().getValue());
+            preparedStatement.setString(3, functionalAbilities.getAbilityNote());
+            preparedStatement.setString(4, functionalAbilities.getAbilityNoteCitizen());
 
             preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != -1){

@@ -115,7 +115,7 @@ public class HealthConditionsDAO {
         //healthConditionsDAO.insertIntoSubCategory(12, 3, "Gider ikke noget", 0);
         //System.out.println(healthConditionsDAO.getTextOnSubCategory(13,3));
         //System.out.println(healthConditionsDAO.getSubCategories(1));
-        healthConditionsDAO.insertIntoSubCategory(1, 1, "Gider ikke at gå i bad", ConditionEnum.RELEVANT.getValue());
-
+        //healthConditionsDAO.insertIntoSubCategory(1, 1, "Gider ikke at gå i bad", ConditionEnum.RELEVANT.getValue());
+        System.out.println(healthConditionsDAO.getTextOnSubCategory(1,1));
     }
 }

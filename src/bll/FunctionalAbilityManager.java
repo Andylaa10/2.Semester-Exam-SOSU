@@ -24,8 +24,8 @@ public class FunctionalAbilityManager {
         return functionalAbilitiesDAO.abilitiesOnCitizen(citizenId);
     }
 
-    public FunctionalAbilities createFunctionalAbility(FunctionalEnum abilityNow, String abilityExcepted) throws SQLException {
-        return functionalAbilitiesDAO.createFunctionalAbilities(abilityNow, abilityExcepted);
+    public FunctionalAbilities createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException {
+        return functionalAbilitiesDAO.createFunctionalAbilities(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen);
     }
 
     public void editAbilities(FunctionalAbilities functionalAbilities) throws SQLException {

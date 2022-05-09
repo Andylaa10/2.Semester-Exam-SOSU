@@ -440,8 +440,8 @@ public class DataModelFacade {
         return functionalAbilitiesModel.abilitiesOnCitizen(citizenId);
     }
 
-    public FunctionalAbilities createFunctionalAbility(FunctionalEnum abilityNow, String abilityExcepted) throws SQLException {
-        return functionalAbilitiesModel.createFunctionalAbility(abilityNow, abilityExcepted);
+    public FunctionalAbilities createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, FunctionalEnum abilityNow, FunctionalEnum abilityExpected, String abilityNote, String abilityNoteCitizen) throws SQLException {
+        return functionalAbilitiesModel.createFunctionalAbility(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen);
     }
 
     public void editAbilities(FunctionalAbilities functionalAbilities) throws SQLException {
