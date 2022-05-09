@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
+<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="182.0" style="-fx-background-color: rgb(81, 83, 222);">
          <children>
@@ -414,7 +414,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
+            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
                <children>
                   <TableView fx:id="tvHealthConditions" layoutX="26.0" layoutY="89.0" prefHeight="423.0" prefWidth="302.0" style="-fx-background-color: transparent;">
                     <columns>
@@ -449,6 +449,7 @@
                   <RadioButton fx:id="radioNotRelevant" layoutX="645.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Ikke Relevant" />
                   <RadioButton fx:id="radioPotential" layoutX="771.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Potentiel" />
                   <RadioButton fx:id="radioRelevant" layoutX="882.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Relevant" />
+                  <TextField fx:id="subCatTxtID" layoutX="1019.0" layoutY="51.0" prefHeight="26.0" prefWidth="2.0" visible="false" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneOBS" layoutX="825.0" layoutY="51.0" prefHeight="302.0" prefWidth="326.0" visible="false">
@@ -476,7 +477,7 @@
                </children>
             </AnchorPane>
             <TextField fx:id="txtFieldCitizenID" layoutX="886.0" layoutY="38.0" prefHeight="26.0" prefWidth="31.0" visible="false" />
-            <AnchorPane fx:id="anchorPaneFunctionalCondition" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1122.0">
+            <AnchorPane fx:id="anchorPaneFunctionalCondition" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1122.0" visible="false">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b85f7" height="465.0" layoutX="3.0" layoutY="45.0" stroke="BLACK" strokeType="INSIDE" width="365.0">
                      <effect>

@@ -155,6 +155,8 @@ public class StudentViewController implements IController, Initializable {
     private TextArea txtAreaHomeLayout;
     @FXML
     private TextArea txtAreaNetwork;
+    @FXML
+    private TextField subCatTxtID;
 
 
     /**
@@ -338,6 +340,7 @@ public class StudentViewController implements IController, Initializable {
         try {
             allSubCategories = FXCollections.observableList(dataModelFacade.getSubCategories(selectedHealthCondition.getId()));
             tableViewLoadSubCategories(allSubCategories);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -349,7 +352,21 @@ public class StudentViewController implements IController, Initializable {
      */
     private void seeTxtOnSubCategory() throws SQLServerException {
         txtFieldCitizenID.getText();
-        txtAreaNoteOnSubCategory.setText(String.valueOf(dataModelFacade.getTextOnSubCategory(selectedCitizenOnComboBox.getId(), selectedHealthConditionSubCategory.getId())));
+        //TODO
+        //Vi skal finde en måde til at sætte start note til at være tom og condition til at være NOT_RELEVANT 
+        HealthConditionSubCategoryText subCategoryText = dataModelFacade.getTextOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), Integer.parseInt(subCatTxtID.getText()));
+        if (txtAreaNoteOnSubCategory.getText().isEmpty()){
+            subCategoryText.setNote("");
+            txtAreaNoteOnSubCategory.setText(subCategoryText.getNote());
+        }
+        txtAreaNoteOnSubCategory.setText(subCategoryText.getNote());
+        if (subCategoryText.getCondition() == 0){
+            radioNotRelevant.setSelected(true);
+        } else if(subCategoryText.getCondition() == 1){
+            radioPotential.setSelected(true);
+        } else if (subCategoryText.getCondition() == 2){
+            radioRelevant.setSelected(true);
+        }
     }
 
     /**
@@ -555,6 +572,7 @@ public class StudentViewController implements IController, Initializable {
             if (newValue != null) {
                 this.selectedHealthConditionSubCategory = newValue;
                 try {
+                    subCatTxtID.setText(String.valueOf(newValue.getId()));
                     seeTxtOnSubCategory();
                 } catch (SQLServerException e) {
                     e.printStackTrace();
@@ -678,11 +696,10 @@ public class StudentViewController implements IController, Initializable {
 
     }
 
-
     @FXML
     private void btnHandleSaveHC() throws SQLException {
         int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
-        int subCategoryId = Integer.parseInt(tcSubCategoriesID.getText());
+        int subCategoryId = Integer.parseInt(subCatTxtID.getText());
         String note = txtAreaNoteOnSubCategory.getText();
         if (radioNotRelevant.isSelected()) {
             int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
@@ -694,6 +711,7 @@ public class StudentViewController implements IController, Initializable {
             int conditionValue = ConditionEnum.RELEVANT.getValue();
             dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
         }
+        btnHandelCancelChangesHC();
     }
 
     @FXML
@@ -702,6 +720,8 @@ public class StudentViewController implements IController, Initializable {
         radioNotRelevant.setSelected(false);
         radioPotential.setSelected(false);
         radioRelevant.setSelected(false);
+        tvSubCategories.getSelectionModel().clearSelection();
+        tvHealthConditions.getSelectionModel().clearSelection();
     }
 
 

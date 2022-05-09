@@ -59,7 +59,7 @@ public class HealthConditionsDAO {
                 int citId = resultSet.getInt("citizenId");
                 int subId = resultSet.getInt("subCategoryId");
                 String note = resultSet.getString("Note");
-                ConditionEnum condition = ConditionEnum.valueOf(resultSet.getString("Condition"));
+                int condition = resultSet.getInt("Condition");
 
                 HealthConditionSubCategoryText healthConditionSubCategoryText = new HealthConditionSubCategoryText(id, citId, subId, note, condition);
                 return healthConditionSubCategoryText;

@@ -8,9 +8,9 @@ public class HealthConditionSubCategoryText {
     private int citizenId;
     private int categoryId;
     private String note;
-    private ConditionEnum condition;
+    private int condition;
 
-    public HealthConditionSubCategoryText(int id, int citizenId, int categoryId, String note, ConditionEnum condition) {
+    public HealthConditionSubCategoryText(int id, int citizenId, int categoryId, String note, int condition) {
         this.id = id;
         this.citizenId = citizenId;
         this.categoryId = categoryId;
@@ -50,11 +50,11 @@ public class HealthConditionSubCategoryText {
         this.note = note;
     }
 
-    public ConditionEnum getCondition() {
+    public int getCondition() {
         return condition;
     }
 
-    public void setCondition(ConditionEnum condition) {
+    public void setCondition(int condition) {
         this.condition = condition;
     }
 
