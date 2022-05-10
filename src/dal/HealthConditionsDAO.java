@@ -40,6 +40,29 @@ public class HealthConditionsDAO {
         return allHealthConditions;
     }
 
+    public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws Exception {
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT * FROM SubCatTextOnCitizen WHERE citizenId =? AND subCategoryId = ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setInt(1, citizenId);
+            preparedStatement.setInt(2, subCategoryId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("subCatTextOnCitizenID");
+                int citId = resultSet.getInt("citizenId");
+                int subId = resultSet.getInt("subCategoryId");
+                String note = resultSet.getString("Note");
+                int condition = resultSet.getInt("Condition");
+
+                HealthConditionSubCategoryText healthConditionSubCategoryText = new HealthConditionSubCategoryText(id, citId, subId, note, condition);
+                return healthConditionSubCategoryText;
+            }
+        }
+        return null;
+    }
+
     public HealthConditionSubCategoryText getInfoOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
 
         try (Connection connection = databaseConnector.getConnection()) {
@@ -96,12 +119,12 @@ public class HealthConditionsDAO {
     public void insertIntoSubCategory(int citizenId, int subCategoryId, String note, int condition) throws SQLException {
         String sql = "INSERT INTO SubCatTextOnCitizen (citizenId, SubCategoryId, Note, Condition) VALUES (?,?,?,?);";
         try (Connection connection = databaseConnector.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                preparedStatement.setInt(1, citizenId);
-                preparedStatement.setInt(2, subCategoryId);
-                preparedStatement.setString(3, note);
-                preparedStatement.setInt(4, condition);
-                preparedStatement.execute();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setInt(1, citizenId);
+            preparedStatement.setInt(2, subCategoryId);
+            preparedStatement.setString(3, note);
+            preparedStatement.setInt(4, condition);
+            preparedStatement.execute();
 
         } catch (SQLException exception) {
             exception.printStackTrace();
@@ -109,21 +132,20 @@ public class HealthConditionsDAO {
     }
 
     public void editSubcategory(HealthConditionSubCategoryText subCategoryText) throws Exception {
-        try(Connection connection = databaseConnector.getConnection()){
+        try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE SubCatTextOnCitizen SET citizenId = ?, SubCategoryId = ?, Note = ?, Condition = ? WHERE subCatTextOnCitizenID=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, subCategoryText.getCitizenId());
             preparedStatement.setInt(2, subCategoryText.getCategoryId());
             preparedStatement.setString(3, subCategoryText.getNote());
             preparedStatement.setInt(4, subCategoryText.getCondition());
-            preparedStatement.setInt(5,subCategoryText.getId());
+            preparedStatement.setInt(5, subCategoryText.getId());
             preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {
                 throw new Exception();
             }
         }
     }
-
 
 
     public static void main(String[] args) throws IOException, SQLException {

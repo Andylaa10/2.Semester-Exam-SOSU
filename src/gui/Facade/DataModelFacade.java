@@ -325,6 +325,10 @@ public class DataModelFacade {
         healthConditionsModel.editSubcategory(subCategoryText);
     }
 
+    public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws Exception{
+        return healthConditionsModel.getHealthConditionData(citizenId, subCategoryId);
+    }
+
     public List<FunctionalAbility> getFunctionalAbilities() throws SQLException {
         return functionalAbilitiesModel.getFunctionalAbilities();
     }

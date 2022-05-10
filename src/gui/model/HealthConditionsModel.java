@@ -36,4 +36,7 @@ public class HealthConditionsModel {
     public void editSubcategory(HealthConditionSubCategoryText subCategoryText) throws Exception {
         healthConditionsManager.editSubcategory(subCategoryText);
     }
+    public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws Exception{
+        return healthConditionsManager.getHealthConditionData(citizenId, subCategoryId);
+    }
 }
