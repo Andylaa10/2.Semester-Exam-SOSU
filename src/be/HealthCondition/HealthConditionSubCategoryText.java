@@ -1,7 +1,5 @@
 package be.HealthCondition;
 
-import be.enums.ConditionEnum;
-
 public class HealthConditionSubCategoryText {
 
     private int id;

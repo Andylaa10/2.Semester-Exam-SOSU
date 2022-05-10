@@ -1,7 +1,5 @@
 package be.FunctionalAbilities;
 
-import be.enums.FunctionalEnum;
-
 public class FunctionalAbilitySubCategoryText {
 
     private int id;
@@ -34,10 +32,8 @@ public class FunctionalAbilitySubCategoryText {
         this.abilityNoteCitizen = abilityNoteCitizen;
     }
 
-
     /**
      * Gets the id
-     * @return
      */
     public int getId() {
         return id;
@@ -45,7 +41,6 @@ public class FunctionalAbilitySubCategoryText {
 
     /**
      * Gets the name
-     * @return
      */
     public String getName() {
         return name;
@@ -53,7 +48,6 @@ public class FunctionalAbilitySubCategoryText {
 
     /**
      * Sets the name
-     * @param name
      */
     public void setName(String name) {
         this.name = name;
@@ -61,7 +55,6 @@ public class FunctionalAbilitySubCategoryText {
 
     /**
      * Gets the functionalAbilityNameId
-     * @return
      */
     public int getFunctionalAbilityNameId() {
         return functionalAbilityNameId;
@@ -69,7 +62,6 @@ public class FunctionalAbilitySubCategoryText {
 
     /**
      * Sets the functionalAbilityNameId
-     * @param functionalAbilityNameId
      */
     public void setFunctionalAbilityNameId(int functionalAbilityNameId) {
         this.functionalAbilityNameId = functionalAbilityNameId;
