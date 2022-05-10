@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
+<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="182.0" style="-fx-background-color: rgb(81, 83, 222);">
          <children>
@@ -165,111 +165,84 @@
                   <ColorAdjust brightness="-0.24" contrast="0.17" />
                </effect>
             </Pane>
-            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1146.0" visible="false">
+            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="-1.0" layoutY="51.0" prefHeight="546.0" prefWidth="1161.0">
                <children>
-                  <ImageView fitHeight="102.0" fitWidth="140.0" layoutX="48.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/Citizen%20Icon.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="65.0" layoutY="124.0" text="Fornavn:">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b85f7" height="423.0" layoutX="934.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" width="218.0">
+                     <effect>
+                        <ColorAdjust brightness="0.5" />
+                     </effect>
+                  </Rectangle>
+                  <Label layoutX="458.0" layoutY="2.0" text="Generelle Oplysninger">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label layoutX="177.0" layoutY="38.0" text="Generelle Informationer for Borger">
+                  <Label layoutX="27.0" layoutY="79.0" text="Mestring">
                      <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="50.0" layoutY="208.0" text="Efternavn:">
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label layoutX="11.0" layoutY="148.0" text="Motivation">
                      <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="1.0" layoutY="290.0" text="CPR-Nummer:">
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label layoutX="9.0" layoutY="224.0" text="Ressourcer">
                      <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="65.0" layoutY="372.0" text="Adresse:">
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label layoutX="48.0" layoutY="292.0" text="Roller">
                      <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="105.0" layoutY="436.0" text="Køn:">
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label layoutX="48.0" layoutY="361.0" text="Vaner">
                      <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="733.0" layoutY="39.0" text="Generelle Oplysninger">
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label layoutX="3.0" layoutY="435.0" text="Uddannelse">
                      <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="txtFieldFirstName" layoutX="179.0" layoutY="120.0" prefHeight="45.0" prefWidth="286.0">
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label layoutX="462.0" layoutY="83.0" text="Livshistorie">
                      <font>
-                        <Font size="16.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="txtFieldLastName" layoutX="179.0" layoutY="203.0" prefHeight="45.0" prefWidth="286.0">
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label layoutX="467.0" layoutY="147.0" text="Helbreds-">
                      <font>
-                        <Font size="16.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="txtFieldSSN" layoutX="179.0" layoutY="284.0" prefHeight="45.0" prefWidth="286.0">
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label layoutX="482.0" layoutY="289.0" text="Hjælpe-">
                      <font>
-                        <Font size="16.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="txtFieldAddress" layoutX="179.0" layoutY="366.0" prefHeight="45.0" prefWidth="286.0">
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label layoutX="474.0" layoutY="362.0" text="Boligens">
                      <font>
-                        <Font size="16.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="537.0" layoutY="131.0" text="Mestring" />
-                  <Label layoutX="530.0" layoutY="187.0" text="Motivation" />
-                  <Label layoutX="529.0" layoutY="249.0" text="Ressourcer" />
-                  <Label layoutX="553.0" layoutY="308.0" text="Roller" />
-                  <Label layoutX="553.0" layoutY="371.0" text="Vaner" />
-                  <Label layoutX="480.0" layoutY="439.0" text="Uddannelse og Job" />
-                  <Label layoutX="856.0" layoutY="127.0" text="Livshistorie" />
-                  <Label layoutX="808.0" layoutY="186.0" text="Helbredsoplysninger" />
-                  <Label layoutX="843.0" layoutY="311.0" text="Hjælpemidler" />
-                  <Label layoutX="813.0" layoutY="374.0" text="Boligens indretning" />
-                  <Label layoutX="863.0" layoutY="439.0" text="Netværk" />
-                  <Label layoutX="619.0" layoutY="80.0" text="Personlige Faktorer">
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label layoutX="476.0" layoutY="441.0" text="Netværk">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+                  <Label layoutX="200.0" layoutY="46.0" text="Personlige Faktorer">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="947.0" layoutY="80.0" text="Personlige Faktorer">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="943.0" layoutY="238.0" text="Omgivelses Faktorer">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="btnGeneralInfoCancel" layoutX="770.0" layoutY="500.0" mnemonicParsing="false" onAction="#onActionGeneralInfoCancel" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
-                  <Button fx:id="btnGeneralInfoSave" layoutX="953.0" layoutY="500.0" mnemonicParsing="false" onAction="#onActionGeneralInfoSave" prefHeight="26.0" prefWidth="170.0" text="Gem" />
-                  <TextArea fx:id="txtAreaCoping" layoutX="596.0" layoutY="117.0" prefHeight="45.0" prefWidth="200.0" />
-                  <TextArea fx:id="txtAreaMotivation" layoutX="596.0" layoutY="173.0" prefHeight="45.0" prefWidth="200.0" />
-                  <TextArea fx:id="txtAreaResources" layoutX="596.0" layoutY="235.0" prefHeight="45.0" prefWidth="200.0" />
-                  <TextArea fx:id="txtAreaRoles" layoutX="596.0" layoutY="300.0" prefHeight="45.0" prefWidth="200.0" />
-                  <TextArea fx:id="txtAreaHabits" layoutX="596.0" layoutY="362.0" prefHeight="45.0" prefWidth="200.0" />
-                  <TextArea fx:id="txtAreaEducationAndJobs" layoutX="596.0" layoutY="428.0" prefHeight="45.0" prefWidth="200.0" />
-                  <TextArea fx:id="txtAreaLifeStory" layoutX="923.0" layoutY="114.0" prefHeight="45.0" prefWidth="200.0" />
-                  <TextArea fx:id="txtAreaHealthInfo" layoutX="924.0" layoutY="172.0" prefHeight="45.0" prefWidth="200.0" />
-                  <TextArea fx:id="txtAreaEquipmentAids" layoutX="923.0" layoutY="297.0" prefHeight="45.0" prefWidth="200.0" />
-                  <TextArea fx:id="txtAreaHomeLayout" layoutX="924.0" layoutY="360.0" prefHeight="45.0" prefWidth="200.0" />
-                  <TextArea fx:id="txtAreaNetwork" layoutX="923.0" layoutY="425.0" prefHeight="45.0" prefWidth="200.0" />
-                  <RadioButton fx:id="radioMale" layoutX="179.0" layoutY="448.0" mnemonicParsing="false" text="Mand" />
-                  <RadioButton fx:id="radioFemale" layoutX="268.0" layoutY="448.0" mnemonicParsing="false" text="Kvinde" />
-                  <RadioButton fx:id="radioOther" layoutX="368.0" layoutY="448.0" mnemonicParsing="false" text="Andet" />
-                  <Button fx:id="btnCoping" layoutX="557.0" layoutY="148.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnGeneralInfoCancel" layoutX="791.0" layoutY="514.0" mnemonicParsing="false" onAction="#onActionGeneralInfoCancel" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
+                  <Button fx:id="btnGeneralInfoSave" layoutX="974.0" layoutY="514.0" mnemonicParsing="false" onAction="#onActionGeneralInfoSave" prefHeight="26.0" prefWidth="170.0" text="Gem" />
+                  <TextArea fx:id="txtAreaCoping" layoutX="103.0" layoutY="72.0" prefHeight="60.0" prefWidth="350.0" />
+                  <TextArea fx:id="txtAreaMotivation" layoutX="104.0" layoutY="145.0" prefHeight="60.0" prefWidth="350.0" />
+                  <TextArea fx:id="txtAreaResources" layoutX="104.0" layoutY="218.0" prefHeight="60.0" prefWidth="350.0" />
+                  <TextArea fx:id="txtAreaRoles" layoutX="102.0" layoutY="289.0" prefHeight="60.0" prefWidth="350.0" />
+                  <TextArea fx:id="txtAreaHabits" layoutX="102.0" layoutY="362.0" prefHeight="60.0" prefWidth="350.0" />
+                  <TextArea fx:id="txtAreaEducationAndJobs" layoutX="102.0" layoutY="436.0" prefHeight="60.0" prefWidth="350.0" />
+                  <TextArea fx:id="txtAreaLifeStory" layoutX="557.0" layoutY="74.0" prefHeight="60.0" prefWidth="350.0" />
+                  <TextArea fx:id="txtAreaHealthInfo" layoutX="557.0" layoutY="146.0" prefHeight="60.0" prefWidth="350.0" />
+                  <TextArea fx:id="txtAreaEquipmentAids" layoutX="557.0" layoutY="290.0" prefHeight="60.0" prefWidth="350.0" />
+                  <TextArea fx:id="txtAreaHomeLayout" layoutX="557.0" layoutY="361.0" prefHeight="60.0" prefWidth="350.0" />
+                  <TextArea fx:id="txtAreaNetwork" layoutX="557.0" layoutY="435.0" prefHeight="60.0" prefWidth="350.0" />
+                  <Button fx:id="btnCoping" layoutX="71.0" layoutY="108.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                     <tooltip>
+                        <Tooltip prefWidth="250.0" text="Borgerens bevidste eller ubevidste håndtering af livet/sygdommen – både udfordringer og muligheder.       -FS3" wrapText="true" />
+                     </tooltip>
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -277,11 +250,8 @@
                            </image>
                         </ImageView>
                      </graphic>
-                     <tooltip>
-                        <Tooltip prefWidth="250.0" text="Borgerens bevidste eller ubevidste håndtering af livet/sygdommen – både udfordringer og muligheder.       -FS3" wrapText="true" />
-                     </tooltip>
                   </Button>
-                  <Button fx:id="btnMotivation" layoutX="557.0" layoutY="201.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnMotivation" layoutX="71.0" layoutY="172.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -293,7 +263,7 @@
                         <Tooltip prefWidth="250.0" text="Drivkraften bag at borgeren handler på en bestemt måde eller går i gang med/opretholder en opgave/indsats.       -FS3" wrapText="true" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnResources" layoutX="557.0" layoutY="261.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnResources" layoutX="70.0" layoutY="248.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -305,7 +275,10 @@
                         <Tooltip prefWidth="250.0" text="De fysiske eller mentale kræfter, som borgerenen i et vist omfang har til rådighed og kan udnytte. Fysiske kræfter kan fx være i form af fysisk sundhed og styrke. Mentale kræfter kan fx være i form af psykisk sundhed og styrke, herunder tanker og måder at forholde sig til situationer og andre mennesker på.       -FS3" width="45.0" wrapText="true" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnRoles" layoutX="557.0" layoutY="322.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnRoles" layoutX="70.0" layoutY="316.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                     <tooltip>
+                        <Tooltip prefWidth="250.0" text="De roller som er særligt vigtige for borgeren i forhold til familie, arbejde og samfund.       -FS3" wrapText="true" />
+                     </tooltip>
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -313,11 +286,8 @@
                            </image>
                         </ImageView>
                      </graphic>
-                     <tooltip>
-                        <Tooltip prefWidth="250.0" text="De roller som er særligt vigtige for borgeren i forhold til familie, arbejde og samfund.       -FS3" wrapText="true" />
-                     </tooltip>
                   </Button>
-                  <Button fx:id="btnHabits" layoutX="557.0" layoutY="384.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnHabits" layoutX="70.0" layoutY="383.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -329,7 +299,7 @@
                         <Tooltip prefWidth="250.0" text="Regelmæssig adfærd som borgeren har tillært gennem stadig gentagelse og udførelse helt eller delvist ubevidst. Vaner er fx døgnrytmen, måden at blive tiltalt på, kontakt med medmennesker og relationer, måde at anskue verden på.       -FS3" wrapText="true" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnEducationAndJob" layoutX="557.0" layoutY="454.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnEducationAndJob" layoutX="71.0" layoutY="484.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -341,7 +311,7 @@
                         <Tooltip prefWidth="250.0" text="Nuværende eller tidligere uddannelses og/eller erhvervsmæssig baggrund. Fx folkeskole, erhvervsuddannelse og videregående uddannelse.       -FS3" wrapText="true" />
                      </tooltip>
                   </Button>
-                  <Button layoutX="881.0" layoutY="451.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                  <Button layoutX="518.0" layoutY="467.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fx:id="btnNetwork" fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -353,7 +323,7 @@
                         <Tooltip prefWidth="250.0" text="Personer som er tæt på borgeren, og som giver praktisk og/ellerfølelsesmæssigt støtte og omsorg overfor borgeren. Netværk kan være offentligt eller privat. Et offentligt netværk består af personlige hjælpere, sundhedspersonale og andre professionelle primært omsorgsgivere. Privat netværk er familie, slægtning, venner og bekendtskaber.       -FS3" wrapText="true" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnHomeLayout" layoutX="881.0" layoutY="386.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnHomeLayout" layoutX="518.0" layoutY="404.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -365,7 +335,7 @@
                         <Tooltip prefWidth="250.0" text="En beskrivelse af boligens fysiske rammer og omgivelser, der har betydning for borgerens hverdagsliv og funktionsevne.       -FS3" wrapText="true" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnEquipmentAids" layoutX="881.0" layoutY="326.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnEquipmentAids" layoutX="518.0" layoutY="332.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -377,7 +347,7 @@
                         <Tooltip prefWidth="250.0" text="Udstyr, produkter og teknologi som anvendes af borgeren i dagligeaktiviteter, inkl. sådanne som er tilpasset eller særligt fremstillet til, implanteret i, placeret på eller nær personen, som anvender dem. (Inkl. almindelige genstande og hjælpemidler og teknologi til personlig anvendelse).       -FS3 " wrapText="true" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnHealthInformation" layoutX="881.0" layoutY="202.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnHealthInformation" layoutX="518.0" layoutY="192.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -389,7 +359,7 @@
                         <Tooltip prefWidth="250.0" text="Helbredsoplysninger: Aktuelle eller tidligere sygdomme og handicap der har betydning for borgerens situation. Sundhedsfaglige kontakter: Medarbejder eller enheder indenfor sundhedsvæsenet borgeren er tilknyttet, fx øjenlæge, tandlæge, fodterapeut eller afdeling/ambulatorium.       -FS3" wrapText="true" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="btnLifeStory" layoutX="881.0" layoutY="141.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnLifeStory" layoutX="518.0" layoutY="112.0" mnemonicParsing="false" onAction="#coupingLink" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -401,20 +371,84 @@
                         <Tooltip prefWidth="250.0" text="En beskrivelse af borgerens oplevelse af væsentlige begivenheder, interesser og gøremål igennem livet.       -FS3" wrapText="true" />
                      </tooltip>
                   </Button>
-                  <Label fx:id="lblInfoState" alignment="CENTER_RIGHT" layoutX="561.0" layoutY="504.0" prefHeight="18.0" prefWidth="198.0" text="Ændringer - Ikke gemt" />
-                  <ImageView fx:id="imgViewNotSaved" fitHeight="26.0" fitWidth="25.0" layoutX="606.0" layoutY="501.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                  <Label fx:id="lblInfoState" alignment="CENTER_RIGHT" layoutX="581.0" layoutY="518.0" prefHeight="18.0" prefWidth="198.0" text="Ændringer - Ikke gemt" />
+                  <ImageView fx:id="imgViewNotSaved" fitHeight="26.0" fitWidth="25.0" layoutX="622.0" layoutY="515.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/small%20warning%20icon.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="imgViewSaved" fitHeight="26.0" fitWidth="25.0" layoutX="606.0" layoutY="501.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgViewSaved" fitHeight="26.0" fitWidth="25.0" layoutX="622.0" layoutY="515.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@img/small%20checkbox%20icon.png" />
                      </image>
                   </ImageView>
+                  <Label layoutX="42.0" layoutY="459.0" prefWidth="54.0" text="og Job">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="459.0" layoutY="167.0" text="oplysninger">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="494.0" layoutY="311.0" text="midler">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="464.0" layoutY="384.0" text="indretning">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="651.0" layoutY="234.0" text="Omgivelses Faktorer">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="111.0" fitWidth="143.0" layoutX="975.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/Citizen%20Icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="952.0" layoutY="79.0" text="Borgerens Oplysninger">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtFieldLastName" layoutX="971.0" layoutY="293.0" />
+                  <TextField fx:id="txtFieldSSN" layoutX="970.0" layoutY="348.0" />
+                  <TextField fx:id="txtFieldAddress" layoutX="971.0" layoutY="398.0" />
+                  <TextField fx:id="txtFieldFirstName" layoutX="970.0" layoutY="242.0" />
+                  <Label layoutX="1023.0" layoutY="222.0" text="Fornavn" />
+                  <Label layoutX="1008.0" layoutY="323.0" text="CPR-Nummer" />
+                  <Label layoutX="1019.0" layoutY="274.0" text="Efternavn" />
+                  <Label layoutX="1023.0" layoutY="376.0" text="Adresse" />
+                  <Label layoutX="1035.0" layoutY="428.0" text="Køn" />
+                  <RadioButton fx:id="radioMale" layoutX="948.0" layoutY="456.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="54.0" text="Mand">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="radioFemale" layoutX="1014.0" layoutY="456.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="54.0" text="Kvinde">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="radioOther" layoutX="1085.0" layoutY="456.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="54.0" text="Andet">
+                     <font>
+                        <Font size="11.0" />
+                     </font>
+                  </RadioButton>
+                  <Label layoutX="655.0" layoutY="46.0" text="Personlige Faktorer">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
+            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
                <children>
                   <TableView fx:id="tvHealthConditions" layoutX="26.0" layoutY="89.0" prefHeight="423.0" prefWidth="302.0" style="-fx-background-color: transparent;">
                     <columns>
