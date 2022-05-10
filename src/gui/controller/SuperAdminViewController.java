@@ -208,6 +208,8 @@ public class SuperAdminViewController implements Initializable, IController {
 
             dataModelFacade.createSchool(schoolName);
             reloadSchoolTable();
+            reloadAssignSchoolTable();
+            clearSchoolTxtField();
         } else{
             ErrorHandlerController.createWarning("Fejl", "Du skal først give skolen et navn");
         }
@@ -274,7 +276,9 @@ public class SuperAdminViewController implements Initializable, IController {
                 if (result.get() == ButtonType.OK) {
                     selectedSchool();
                     dataModelFacade.deleteSchool(selectedSchool.getId());
+                    tvSchools.getSelectionModel().clearSelection();
                     reloadSchoolTable();
+                    reloadAssignSchoolTable();
             }
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en skole først");
@@ -445,6 +449,16 @@ public class SuperAdminViewController implements Initializable, IController {
             int index = tvSchools.getSelectionModel().getFocusedIndex();
             this.tvSchools.setItems(FXCollections.observableList(dataModelFacade.getSchools()));
             tvSchools.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    private void reloadAssignSchoolTable() {
+        try {
+            int index = tvAssignedSchool.getSelectionModel().getFocusedIndex();
+            this.tvAssignedSchool.setItems(FXCollections.observableList(dataModelFacade.getSchools()));
+            tvAssignedSchool.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
