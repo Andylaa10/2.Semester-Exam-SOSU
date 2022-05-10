@@ -18,21 +18,21 @@ public class UserModel {
     /**
      * Get a list of student using the getStudents method from userManager
      */
-    public List<User> getStudents() {
+    public List<User> getStudents() throws SQLException {
         return userManager.getStudents();
     }
 
     /**
      * Get a list of teachers using the getTeachers method from userManager
      */
-    public List<User> getTeachers() {
+    public List<User> getTeachers() throws SQLException {
         return userManager.getTeachers();
     }
 
     /**
      * Get a list of admins using the getAdmins method from userManager
      */
-    public List<User> getAdmins() {
+    public List<User> getAdmins() throws SQLException {
         return userManager.getAdmins();
     }
 

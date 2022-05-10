@@ -46,9 +46,6 @@ public class CaseDAO {
 
     /**
      * Read what cases a citizen is assigned to
-     * @param
-     * @return
-     * @throws SQLException
      */
     public List<Case> getCasesOnCitizen(int citizenId) throws SQLException {
         ArrayList<Case> allCases = new ArrayList<>();
@@ -78,10 +75,7 @@ public class CaseDAO {
     }
 
     /**
-     * Creates a case, by inserting name, date and info
-     * @param name
-     * @param info
-     * @return a new case
+     * Creates a case, by inserting name and info. Date is added using a method in the controller.
      */
     public Case createCase (String name, String info) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
@@ -105,8 +99,7 @@ public class CaseDAO {
     }
 
     /**
-     * Delete a case, by taking the id
-     * @param id
+     * Deletes a case by taking the selected case ID.
      */
     public void deleteCase(int id) throws Exception {
         try (Connection connection = databaseConnector.getConnection()) {
@@ -122,8 +115,7 @@ public class CaseDAO {
     }
 
     /**
-     * Changes the name of a case if a match is found
-     * @param aCase
+     * Edit the selected case
      */
     public void editCase(Case aCase) throws Exception {
         try (Connection connection = databaseConnector.getConnection()) {
@@ -142,6 +134,9 @@ public class CaseDAO {
         }
     }
 
+    /**
+     * Assign a case to a citizen. Uses the CasesOnCitizen table
+     */
     public void assignCaseToCitizen(int casesId, int citizenId) {
         String sql = "INSERT INTO CasesOnCitizen (casesId, citizenId) VALUES (?,?);";
         try (Connection con = databaseConnector.getConnection();
@@ -154,6 +149,9 @@ public class CaseDAO {
         }
     }
 
+    /**
+     * Deletes a case from a citizen. Uses the CaseOnCitizen table
+     */
     public void deleteCaseFromCitizen(int casesId, int citizenId) {
         String sql = "DELETE FROM CasesOnCitizen WHERE casesId = ? AND citizenId = ?;";
         try (Connection con = databaseConnector.getConnection();
@@ -166,6 +164,9 @@ public class CaseDAO {
         }
     }
 
+    /**
+     * Main method used for testing this DAO class
+     */
     public static void main(String[] args) throws Exception {
         CaseDAO caseDAO = new CaseDAO();
         //caseDAO.deleteCaseFromCitizen(107, 2);

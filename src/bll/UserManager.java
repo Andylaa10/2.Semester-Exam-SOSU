@@ -19,7 +19,7 @@ public class UserManager {
      * @return
      * @throws SQLException
      */
-    public List<User> getStudents() {
+    public List<User> getStudents() throws SQLException {
         return userDAO.getStudents();
     }
 
@@ -28,7 +28,7 @@ public class UserManager {
      * @return
      * @throws SQLException
      */
-    public List<User> getTeachers() {
+    public List<User> getTeachers() throws SQLException {
         return userDAO.getTeachers();
     }
 
@@ -37,7 +37,7 @@ public class UserManager {
      * @return
      * @throws SQLException
      */
-    public List<User> getAdmins() {
+    public List<User> getAdmins() throws SQLException {
         return userDAO.getAdmins();
     }
 
