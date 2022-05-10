@@ -17,6 +17,9 @@ public class SuperAdminDAO {
     public SuperAdminDAO() throws IOException {
     }
 
+    /**
+     * Create a SuperAdmin by inserting into the SuperAdmin table.
+     */
     public SuperAdmin createSuperAdmin (String username, String password) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "INSERT INTO SuperAdmin (username, password) VALUES (?,?);";
@@ -35,11 +38,15 @@ public class SuperAdminDAO {
                 return superAdmin;
             }
         } catch (SQLServerException throwables) {
+            throw new SQLException();
         }
-        return null;
     }
 
 
+    /**
+     * Deletes a superAdmin.
+     * This method is currently not in use.
+     */
     public void deleteSuperAdmin(int id) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "DELETE FROM SuperAdmin WHERE superAdminID =?;";
@@ -51,6 +58,10 @@ public class SuperAdminDAO {
         }
     }
 
+    /**
+     * Edits a superAdmin.
+     * This method is currently not in use.
+     */
     public void editSuperAdmin(SuperAdmin superAdmin) throws Exception {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE SuperAdmin SET username=?, password=? WHERE superAdminID=?;";
@@ -66,6 +77,9 @@ public class SuperAdminDAO {
     }
 
 
+    /**
+     * Makes the superAdmin able to login by checking if the login info is in the database
+     */
     public SuperAdmin superAdminLogin(String user, String pass) throws SQLException {
         String sql = "SELECT * FROM SuperAdmin WHERE username =? AND password =?;";
         try(Connection connection = databaseConnector.getConnection()){
@@ -86,6 +100,9 @@ public class SuperAdminDAO {
         }
     }
 
+    /**
+     * Makes a list of allSchools and returns it
+     */
     public List<School> getSchools() throws SQLException {
         ArrayList<School> allSchools = new ArrayList<>();
 
@@ -107,6 +124,10 @@ public class SuperAdminDAO {
         return allSchools;
     }
 
+    /**
+     * Gets all the admins assigned to a school.
+     * Inner Joins on the UserOnSchool table
+     */
     public List<User> getAdminsOnSchool(int schoolId) throws SQLException {
         ArrayList<User> allAdmins = new ArrayList<>();
         try (Connection connection = databaseConnector.getConnection()) {
@@ -136,6 +157,9 @@ public class SuperAdminDAO {
         return allAdmins;
     }
 
+    /**
+     * Adds an admin to a school, using the UserOnSchool table.
+     */
     public void addAdminToSchool(int loginId, int schoolId){
         String sql = "INSERT INTO UserOnSchool (loginId, schoolId) VALUES (?,?);";
         try (Connection con = databaseConnector.getConnection();
@@ -148,6 +172,9 @@ public class SuperAdminDAO {
         }
     }
 
+    /**
+     * Creates a school by inserting the name into the School table.
+     */
     public School createSchool(String schoolName) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "INSERT INTO School (name) VALUES (?);";
@@ -165,10 +192,13 @@ public class SuperAdminDAO {
                 return school;
             }
         } catch (SQLServerException throwables) {
+            throw new SQLException();
         }
-        return null;
     }
 
+    /**
+     * Deletes the selected school ID from the School table.
+     */
     public void deleteSchool(int schoolID) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "DELETE FROM School WHERE schoolID =?;";
@@ -180,6 +210,9 @@ public class SuperAdminDAO {
         }
     }
 
+    /**
+     * Edits the selected schools name using the selected schools ID.
+     */
     public void editSchool(School school) throws Exception {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE School SET name=? WHERE schoolID=?;";
@@ -192,6 +225,9 @@ public class SuperAdminDAO {
         }
     }
 
+    /**
+     * Deletes an admin from the UserOnSchool table, so he is no longer assigned to that school.
+     */
     public void deleteAdminFromSchool(int userId, int schoolId) {
         String sql = "DELETE FROM UserOnSchool WHERE loginId = ? AND schoolId = ?;";
         try (Connection con = databaseConnector.getConnection();
@@ -205,10 +241,7 @@ public class SuperAdminDAO {
     }
 
     /**
-     * Main used for testing the DAO methods
-     * @param args
-     * @throws IOException
-     * @throws SQLException
+     * Main used for testing the DAO methods in this class.
      */
     public static void main(String[] args) throws IOException, SQLException {
         SuperAdminDAO superAdminDAO = new SuperAdminDAO();

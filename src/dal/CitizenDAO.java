@@ -46,6 +46,9 @@ public class CitizenDAO {
         return allCitizens;
     }
 
+    /**
+     * Gets all the info on a citizen and returns that citizen
+     */
     public Citizen getInfoOnCitizen(int citizenId) throws SQLException {
         try (Connection connection = connector.getConnection()) {
             String sql = "SELECT * FROM Citizen WHERE citizenID = ?;";
@@ -75,14 +78,7 @@ public class CitizenDAO {
 
 
     /**
-     * Creates a citizen, by inserting firstName, lastName, SSN, address and sex
-     * @param firstName
-     * @param lastName
-     * @param SSN
-     * @param address
-     * @param sex
-     * @return
-     * @throws SQLException
+     * Creates a citizen, by inserting firstName, lastName, SSN, address and sex into the Citizen table
      */
     public Citizen createCitizen(String firstName, String lastName, String SSN, String address, String sex) throws SQLException {
         try (Connection connection = connector.getConnection()) {
@@ -109,11 +105,9 @@ public class CitizenDAO {
     }
 
     /**
-     * Deletes a citizen by taken the id
-     * @param
-     * @throws Exception
+     * Deletes a citizen from the database by taken the selected citizen ID
      */
-    public void deleteCitizen(int citizenID) throws Exception {
+    public void deleteCitizen(int citizenID) {
         try (Connection connection = connector.getConnection()) {
             String sql = "DELETE FROM Citizen WHERE CitizenID =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -126,8 +120,7 @@ public class CitizenDAO {
     }
 
     /**
-     * Edit a citizen if a match is found
-     * @param citizen
+     * Edit citizen information by getting the selected citizen ID.
      */
     public void editCitizen(Citizen citizen) throws Exception {
         try (Connection connection = connector.getConnection()) {
@@ -149,6 +142,9 @@ public class CitizenDAO {
     }
 
 
+    /**
+     * Main method used for testing this DAO class
+     */
     public static void main(String[] args) throws Exception {
         CitizenDAO citizenDAO = new CitizenDAO();
         //citizenDAO.createCitizen("Joe", "Mama", "040119-2311", "Bjergberg Allé 205", "Male");
