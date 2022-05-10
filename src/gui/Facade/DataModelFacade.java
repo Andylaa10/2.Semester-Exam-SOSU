@@ -151,6 +151,13 @@ public class DataModelFacade {
     /**
      * Gets the user userLogin using the userLogin method from userModel
      */
+    public User userLogin(String username, String password, int schoolId){
+        return userModel.userLogin(username, password, schoolId);
+    }
+
+    /**
+     * Gets the user userLogin using the userLogin method from userModel
+     */
     public User userLogin(String username, String password){
         return userModel.userLogin(username, password);
     }

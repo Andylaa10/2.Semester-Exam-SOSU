@@ -1,21 +1,29 @@
 package gui.controller;
 
+import be.School;
 import be.SuperAdmin;
 import be.User;
 import be.enums.UserType;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class LoginViewController {
+public class LoginViewController implements Initializable {
 
     @FXML
     private Button btnLogin;
@@ -23,8 +31,12 @@ public class LoginViewController {
     private TextField txtFieldUsername;
     @FXML
     private PasswordField pField;
+    @FXML
+    private ComboBox<School> comboBoxSchool;
 
     private DataModelFacade facade;
+
+    private ObservableList<School> allSchools = FXCollections.observableArrayList();
 
     public LoginViewController() throws IOException {
         facade = new DataModelFacade();
@@ -34,9 +46,11 @@ public class LoginViewController {
     private void Login() throws IOException, SQLException {
         String username = txtFieldUsername.getText();
         String password = pField.getText();
+        //int school = comboBoxSchool.getSelectionModel().getSelectedIndex();
         User user = facade.userLogin(username, password);
+        //User user = facade.userLogin(username, password, school);
         SuperAdmin superAdmin = facade.superAdminLogin(username, password);
-        if (user != null && user.getUsertype() == UserType.STUDENT) {
+        if (user != null && user.getUsertype() == UserType.STUDENT /*&& user.getSchoolId() == school*/) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage switcher = (Stage) btnLogin.getScene().getWindow();
@@ -46,7 +60,7 @@ public class LoginViewController {
             switcher.setTitle("Student");
             switcher.show();
             switcher.centerOnScreen();
-        } else if (user != null && user.getUsertype() == UserType.TEACHER){
+        } else if (user != null && user.getUsertype() == UserType.TEACHER /*&& user.getSchoolId() == school*/) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/TeacherView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage switcher = (Stage) btnLogin.getScene().getWindow();
@@ -56,7 +70,7 @@ public class LoginViewController {
             switcher.setTitle("Teacher");
             switcher.show();
             switcher.centerOnScreen();
-        } else if (user != null && user.getUsertype() == UserType.ADMINISTRATOR) {
+        } else if (user != null && user.getUsertype() == UserType.ADMINISTRATOR /*&& user.getSchoolId() == school*/) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/AdminView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage switcher = (Stage) btnLogin.getScene().getWindow();
@@ -66,7 +80,7 @@ public class LoginViewController {
             switcher.setTitle("Admin");
             switcher.show();
             switcher.centerOnScreen();
-        } else if (superAdmin != null){
+        } else if (superAdmin != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/SuperAdminView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage switcher = (Stage) btnLogin.getScene().getWindow();
@@ -82,5 +96,20 @@ public class LoginViewController {
     @FXML
     private void onActionLoginWithEnter() throws SQLException, IOException {
         Login();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            allSchools = FXCollections.observableArrayList(facade.getSchools());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        comboBoxSchool.setItems(allSchools);
+    }
+
+    @FXML
+    private void handleSchoolCombo() {
+
     }
 }

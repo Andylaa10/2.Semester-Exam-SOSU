@@ -11,6 +11,7 @@ public class User implements ILogin {
     private String username;
     private String password;
     private UserType userType;
+    private int schoolId;
 
 
     public User(int id, String firstName, String lastName, String username, UserType userType) {
@@ -123,6 +124,15 @@ public class User implements ILogin {
     @Override
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+
+    public int getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(int schoolId) {
+        this.schoolId = schoolId;
     }
 
     @Override

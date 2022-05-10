@@ -29,4 +29,8 @@ public class School {
         return schoolName;
     }
 
+    @Override
+    public String toString() {
+        return schoolName;
+    }
 }

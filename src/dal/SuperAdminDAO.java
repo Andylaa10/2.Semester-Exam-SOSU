@@ -124,6 +124,100 @@ public class SuperAdminDAO {
         return allSchools;
     }
 
+
+    /**
+     * Making a students list, connecting to the database and adding the results to our ArrayList.
+     * @return a list of assigned students or an empty list of students.
+     */
+    public List<User> getAssignedStudents(int schoolId) throws SQLException {
+        ArrayList<User> allStudents = new ArrayList<>();
+
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT * FROM Login WHERE userType =? AND schoolId=?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, String.valueOf(UserType.STUDENT));
+            preparedStatement.setInt(2, schoolId);
+            ResultSet resultset = preparedStatement.executeQuery();
+
+            while (resultset.next()) {
+                int loginID = resultset.getInt("LoginID");
+                String firstName = resultset.getString("firstName");
+                String lastName = resultset.getString("lastName");
+                String username = resultset.getString("username");
+                String password = resultset.getString("password");
+                UserType userType = UserType.valueOf(resultset.getString("userType"));
+
+                User student = new User(loginID, firstName, lastName, username, password, userType);
+                allStudents.add(student);
+            }
+        } catch (SQLException sqlException) {
+            throw new SQLException();
+        }
+        return allStudents;
+    }
+
+    /**
+     * Making a teacher list, connecting to the database and adding the results to our ArrayList.
+     * @return a list of assigned teachers or an empty list of teachers.
+     */
+    public List<User> getAssignedTeachers(int schoolId) throws SQLException {
+        ArrayList<User> allTeachers = new ArrayList<>();
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT * FROM Login WHERE userType =? AND schoolId=? ;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, String.valueOf(UserType.TEACHER));
+            preparedStatement.setInt(2, schoolId);
+            ResultSet resultset = preparedStatement.executeQuery();
+            while (resultset.next()) {
+                int loginID = resultset.getInt("LoginID");
+                String firstName = resultset.getString("firstName");
+                String lastName = resultset.getString("lastName");
+                String username = resultset.getString("username");
+                String password = resultset.getString("password");
+                UserType userType = UserType.valueOf(resultset.getString("userType"));
+
+                User teacher = new User(loginID, firstName, lastName, username, password, userType);
+                allTeachers.add(teacher);
+            }
+        } catch (SQLException sqlException) {
+            throw new SQLException();
+        }
+        return allTeachers;
+    }
+
+    /**
+     * Making an admin list, connecting to the database and adding the results to our ArrayList.
+     * @return a list of assigned admins or an empty list of admins.
+     */
+    public List<User> getAssignedAdmins(int schoolId) throws SQLException {
+        ArrayList<User> allAdmins = new ArrayList<>();
+
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT * FROM Login WHERE userType =? AND schoolId=? ;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, String.valueOf(UserType.ADMINISTRATOR));
+            preparedStatement.setInt(2, schoolId);
+            ResultSet resultset = preparedStatement.executeQuery();
+            while (resultset.next()) {
+                int loginID = resultset.getInt("LoginID");
+                String firstName = resultset.getString("firstName");
+                String lastName = resultset.getString("lastName");
+                String username = resultset.getString("username");
+                String password = resultset.getString("password");
+                UserType userType = UserType.valueOf(resultset.getString("userType"));
+
+                User admin = new User(loginID, firstName, lastName, username, password, userType);
+                allAdmins.add(admin);
+            }
+        } catch (SQLException sqlException) {
+            throw new SQLException();
+        }
+        return allAdmins;
+    }
+
     /**
      * Gets all the admins assigned to a school.
      * Inner Joins on the UserOnSchool table

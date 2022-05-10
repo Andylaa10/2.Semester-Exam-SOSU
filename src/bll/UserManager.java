@@ -144,6 +144,16 @@ public class UserManager {
      * @param password
      * @return
      */
+    public User userLogin(String username, String password, int schoolId){
+        return userDAO.userLogin(username, password, schoolId);
+    }
+
+    /**
+     * Gets the user userLogin using the userLogin method from userDAO
+     * @param username
+     * @param password
+     * @return
+     */
     public User userLogin(String username, String password){
         return userDAO.userLogin(username, password);
     }
