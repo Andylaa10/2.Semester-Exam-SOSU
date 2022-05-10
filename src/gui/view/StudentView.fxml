@@ -450,6 +450,7 @@
                   <RadioButton fx:id="radioPotential" layoutX="771.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Potentiel" />
                   <RadioButton fx:id="radioRelevant" layoutX="882.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Relevant" />
                   <TextField fx:id="subCatTxtID" layoutX="1019.0" layoutY="51.0" prefHeight="26.0" prefWidth="2.0" visible="false" />
+                  <TextField fx:id="superCatID" layoutX="327.0" layoutY="507.0" prefHeight="26.0" prefWidth="0.0" visible="false" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneOBS" layoutX="825.0" layoutY="51.0" prefHeight="302.0" prefWidth="326.0" visible="false">

@@ -3,7 +3,6 @@ package dal;
 import be.HealthCondition.HealthCondition;
 import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
-import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 
@@ -103,8 +102,25 @@ public class HealthConditionsDAO {
                 preparedStatement.setString(3, note);
                 preparedStatement.setInt(4, condition);
                 preparedStatement.execute();
+
         } catch (SQLException exception) {
             exception.printStackTrace();
+        }
+    }
+
+    public void editSubcategory(HealthConditionSubCategoryText subCategoryText) throws Exception {
+        try(Connection connection = databaseConnector.getConnection()){
+            String sql = "UPDATE SubCatTextOnCitizen SET citizenId = ?, SubCategoryId = ?, Note = ?, Condition = ? WHERE subCatTextOnCitizenID=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, subCategoryText.getCitizenId());
+            preparedStatement.setInt(2, subCategoryText.getCategoryId());
+            preparedStatement.setString(3, subCategoryText.getNote());
+            preparedStatement.setInt(4, subCategoryText.getCondition());
+            preparedStatement.setInt(5,subCategoryText.getId());
+            preparedStatement.executeUpdate();
+            if (preparedStatement.executeUpdate() != 1) {
+                throw new Exception();
+            }
         }
     }
 

@@ -32,4 +32,8 @@ public class HealthConditionsManager {
     public void insertIntoSubCategory(int citizenId, int subCategoryId, String note, int condition) throws SQLException {
         healthConditionsDAO.insertIntoSubCategory(citizenId, subCategoryId, note, condition);
     }
+
+    public void editSubcategory(HealthConditionSubCategoryText subCategoryText) throws Exception {
+        healthConditionsDAO.editSubcategory(subCategoryText);
+    }
 }
