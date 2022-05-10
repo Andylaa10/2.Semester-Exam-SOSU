@@ -155,8 +155,6 @@ public class StudentViewController implements IController, Initializable {
     private TextArea txtAreaNetwork;
     @FXML
     private TextField subCatTxtID;
-    @FXML
-    private TextField superCatID;
 
 
     /**
@@ -544,7 +542,6 @@ public class StudentViewController implements IController, Initializable {
             if (newValue != null) {
                 this.selectedHealthCondition = newValue;
                 seeSubCategoriesOnCategory();
-                superCatID.setText(String.valueOf(newValue.getId()));
             }
         }));
     }
@@ -556,14 +553,12 @@ public class StudentViewController implements IController, Initializable {
         this.tvSubCategories.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
                 this.selectedHealthConditionSubCategory = newValue;
-                subCatTxtID.setText(String.valueOf(selectedHealthConditionSubCategory.getId()));
+                subCatTxtID.setText(String.valueOf(newValue.getId()));
                 try {
                     seeTxtOnSubCategory();
                 } catch (SQLServerException e) {
                     e.printStackTrace();
                 }
-            }else{
-                clearHealthConditionTxtField();
             }
         }));
     }
@@ -770,8 +765,8 @@ public class StudentViewController implements IController, Initializable {
 
     @FXML
     private void btnHandleSaveHC() throws Exception {
-        if (txtFieldCitizenID != null && subCatTxtID != null){
-            if (dataModelFacade.getHealthConditionData(Integer.parseInt(txtFieldCitizenID.getText()), Integer.parseInt(subCatTxtID.getText())) == null){
+        if (txtFieldCitizenID != null && subCatTxtID != null) {
+            if (dataModelFacade.getHealthConditionData(Integer.parseInt(txtFieldCitizenID.getText()), Integer.parseInt(subCatTxtID.getText())) == null) {
                 int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
                 int subCategoryId = Integer.parseInt(subCatTxtID.getText());
                 String note = txtAreaNoteOnSubCategory.getText();
@@ -785,24 +780,25 @@ public class StudentViewController implements IController, Initializable {
                     int conditionValue = ConditionEnum.RELEVANT.getValue();
                     dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
                 }
-            }
-        }else{
-            int id = Integer.parseInt(superCatID.getText());
-            int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
-            int subCategoryId = Integer.parseInt(subCatTxtID.getText());
-            String note = txtAreaNoteOnSubCategory.getText();
-            if (radioNotRelevant.isSelected()) {
-                int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
-                HealthConditionSubCategoryText subCategoryText = new  HealthConditionSubCategoryText(id, citizenId, subCategoryId, note, conditionValue);
-                dataModelFacade.editSubcategory(subCategoryText);
-            } else if (radioPotential.isSelected()) {
-                int conditionValue = ConditionEnum.POTENTIAL.getValue();
-                HealthConditionSubCategoryText subCategoryText = new  HealthConditionSubCategoryText(id, citizenId, subCategoryId, note, conditionValue);
-                dataModelFacade.editSubcategory(subCategoryText);
-            } else if (radioRelevant.isSelected()) {
-                int conditionValue = ConditionEnum.RELEVANT.getValue();
-                HealthConditionSubCategoryText subCategoryText = new  HealthConditionSubCategoryText(id, citizenId, subCategoryId, note, conditionValue);
-                dataModelFacade.editSubcategory(subCategoryText);
+                System.out.println("Create");
+            } else {
+                int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
+                int subCategoryId = Integer.parseInt(subCatTxtID.getText());
+                String note = txtAreaNoteOnSubCategory.getText();
+                if (radioNotRelevant.isSelected()) {
+                    int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
+                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, note, conditionValue);
+                    dataModelFacade.editSubcategory(subCategoryText);
+                } else if (radioPotential.isSelected()) {
+                    int conditionValue = ConditionEnum.POTENTIAL.getValue();
+                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, note, conditionValue);
+                    dataModelFacade.editSubcategory(subCategoryText);
+                } else if (radioRelevant.isSelected()) {
+                    int conditionValue = ConditionEnum.RELEVANT.getValue();
+                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, note, conditionValue);
+                    dataModelFacade.editSubcategory(subCategoryText);
+                }
+                System.out.println("Edit");
             }
         }
 

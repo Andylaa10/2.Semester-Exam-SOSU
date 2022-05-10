@@ -133,17 +133,15 @@ public class HealthConditionsDAO {
 
     public void editSubcategory(HealthConditionSubCategoryText subCategoryText) throws Exception {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "UPDATE SubCatTextOnCitizen SET citizenId = ?, SubCategoryId = ?, Note = ?, Condition = ? WHERE subCatTextOnCitizenID=?";
+            String sql = "UPDATE SubCatTextOnCitizen SET Note = ?, Condition = ? WHERE citizenId =? AND subCategoryId=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, subCategoryText.getCitizenId());
-            preparedStatement.setInt(2, subCategoryText.getCategoryId());
-            preparedStatement.setString(3, subCategoryText.getNote());
-            preparedStatement.setInt(4, subCategoryText.getCondition());
-            preparedStatement.setInt(5, subCategoryText.getId());
+            preparedStatement.setString(1, subCategoryText.getNote());
+            preparedStatement.setInt(2, subCategoryText.getCondition());
+            preparedStatement.setInt(3, subCategoryText.getCitizenId());
+            preparedStatement.setInt(4, subCategoryText.getCategoryId());
             preparedStatement.executeUpdate();
-            if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception();
-            }
+        }catch(Exception e){
+            e.printStackTrace();
         }
     }
 

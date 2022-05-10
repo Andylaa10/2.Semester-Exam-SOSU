@@ -16,6 +16,13 @@ public class HealthConditionSubCategoryText {
         this.condition = condition;
     }
 
+    public HealthConditionSubCategoryText(int citizenId, int subCategoryId, String note, int conditionValue) {
+        this.citizenId =  citizenId;
+        this.categoryId = subCategoryId;
+        this.note = note;
+        this.condition = conditionValue;
+    }
+
     public int getId() {
         return id;
     }
