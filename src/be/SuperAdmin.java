@@ -6,12 +6,8 @@ public class SuperAdmin {
     private String username;
     private String password;
 
-
     /**
-     * Overloaded constructor with id, username and password
-     * @param id
-     * @param username
-     * @param password
+     * Constructor with id, username and password
      */
     public SuperAdmin(int id, String username, String password) {
         this.id = id;
@@ -21,7 +17,6 @@ public class SuperAdmin {
 
     /**
      * Gets the id
-     * @return
      */
     public int getId() {
         return id;
@@ -30,7 +25,6 @@ public class SuperAdmin {
 
     /**
      * Gets the username
-     * @return
      */
     public String getUsername() {
         return username;
@@ -38,7 +32,6 @@ public class SuperAdmin {
 
     /**
      * Sets the username
-     * @param username
      */
     public void setUsername(String username) {
         this.username = username;
@@ -46,7 +39,6 @@ public class SuperAdmin {
 
     /**
      * Gets the password
-     * @return
      */
     public String getPassword() {
         return password;
@@ -54,7 +46,6 @@ public class SuperAdmin {
 
     /**
      * Sets the password
-     * @param password
      */
     public void setPassword(String password) {
         this.password = password;

@@ -26,7 +26,6 @@ public class Citizen {
 
     /**
      * Gets the id
-     * @return
      */
     public int getId() {
         return id;
@@ -35,7 +34,6 @@ public class Citizen {
 
     /**
      * Gets the firstName
-     * @return
      */
     public String getFirstName() {
         return firstName;
@@ -43,7 +41,6 @@ public class Citizen {
 
     /**
      * Sets the firstName
-     * @param firstName
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -51,7 +48,6 @@ public class Citizen {
 
     /**
      * Gets the lastName
-     * @return
      */
     public String getLastName() {
         return lastName;
@@ -59,7 +55,6 @@ public class Citizen {
 
     /**
      * Sets the lastName
-     * @param lastName
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -67,7 +62,6 @@ public class Citizen {
 
     /**
      * Gets the ssn
-     * @return
      */
     public String getSSN() {
         return SSN;
@@ -75,7 +69,6 @@ public class Citizen {
 
     /**
      * Sets the SSN
-     * @param SSN
      */
     public void setSSN(String SSN) {
         this.SSN = SSN;
@@ -83,7 +76,6 @@ public class Citizen {
 
     /**
      * Gets the address
-     * @return
      */
     public String getAddress() {
         return address;
@@ -91,7 +83,6 @@ public class Citizen {
 
     /**
      * Sets the address
-     * @param address
      */
     public void setAddress(String address) {
         this.address = address;
@@ -99,7 +90,6 @@ public class Citizen {
 
     /**
      * Gets the sex
-     * @return
      */
     public String getSex() {
         return sex;
@@ -107,7 +97,6 @@ public class Citizen {
 
     /**
      * Sets the sex
-     * @param sex
      */
     public void setSex(String sex) {
         this.sex = sex;
@@ -115,7 +104,6 @@ public class Citizen {
 
     /**
      * Gets the generalInformation
-     * @return
      */
     public int getGeneralInformationID() {
         return generalInformationID;
@@ -123,7 +111,6 @@ public class Citizen {
 
     /**
      * Sets the generalInformation
-     * @param generalInformationID
      */
     public void setGeneralInformationID(int generalInformationID) {
         this.generalInformationID = generalInformationID;
@@ -131,7 +118,6 @@ public class Citizen {
 
     /**
      * Gets the functionalAbilitiesID
-     * @return
      */
     public int getFunctionalAbilitiesID() {
         return functionalAbilitiesID;
@@ -139,7 +125,6 @@ public class Citizen {
 
     /**
      * Sets the functionalAbilitiesID
-     * @param functionalAbilitiesID
      */
     public void setFunctionalAbilitiesID(int functionalAbilitiesID) {
         this.functionalAbilitiesID = functionalAbilitiesID;
@@ -147,7 +132,6 @@ public class Citizen {
 
     /**
      * Gets the loginID
-     * @return
      */
     public int getLoginID() {
         return loginID;
@@ -155,7 +139,6 @@ public class Citizen {
 
     /**
      * Sets the loginID
-     * @param loginID
      */
     public void setLoginID(int loginID) {
         this.loginID = loginID;
@@ -163,7 +146,6 @@ public class Citizen {
 
     /**
      * Gets the schoolID
-     * @return
      */
     public int getSchoolID() {
         return schoolID;
@@ -171,7 +153,6 @@ public class Citizen {
 
     /**
      * Sets the schoolID
-     * @param schoolID
      */
     public void setSchoolID(int schoolID) {
         this.schoolID = schoolID;

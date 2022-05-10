@@ -177,7 +177,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateTeacher" layoutX="186.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+      <AnchorPane fx:id="anchorPaneCreateTeacher" layoutX="186.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
          <children>
             <TableView fx:id="tvTeachers" layoutX="14.0" layoutY="45.0" prefHeight="362.0" prefWidth="344.0" style="-fx-background-color: transparent;">
               <columns>
@@ -197,9 +197,9 @@
                   <Font size="23.0" />
                </font>
             </Label>
-            <Label layoutX="538.0" layoutY="130.0" prefHeight="18.0" prefWidth="50.0" text="Fornavn" />
-            <Label layoutX="539.0" layoutY="231.0" prefHeight="18.0" prefWidth="54.0" text="Adgangskode" />
-            <Label layoutX="537.0" layoutY="197.0" prefHeight="18.0" prefWidth="62.0" text="Brugernavn" />
+            <Label layoutX="532.0" layoutY="130.0" prefHeight="18.0" prefWidth="50.0" text="Fornavn" />
+            <Label layoutX="531.0" layoutY="231.0" prefHeight="18.0" prefWidth="74.0" text="Adgangskode" />
+            <Label layoutX="531.0" layoutY="197.0" prefHeight="18.0" prefWidth="62.0" text="Brugernavn" />
             <TextField fx:id="txtFieldTeacherFirstName" layoutX="378.0" layoutY="126.0" />
             <TextField fx:id="txtFieldTeacherLastName" layoutX="378.0" layoutY="161.0" />
             <TextField fx:id="txtFieldTeacherUsername" layoutX="378.0" layoutY="194.0" />
@@ -235,7 +235,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="538.0" layoutY="164.0" prefHeight="18.0" prefWidth="56.0" text="Efternavn" />
+            <Label layoutX="531.0" layoutY="164.0" prefHeight="18.0" prefWidth="56.0" text="Efternavn" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
@@ -358,7 +358,7 @@
             <TextField fx:id="txtFieldCaseID" layoutX="21.0" layoutY="156.0" prefHeight="26.0" prefWidth="21.0" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <TableView fx:id="tvCitizens" layoutX="18.0" layoutY="24.0" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
                <columns>

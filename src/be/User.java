@@ -23,12 +23,6 @@ public class User implements ILogin {
 
     /**
      * Overloaded constructor with id, firstName, lastName, username, password and usertype
-     * @param id
-     * @param firstName
-     * @param lastName
-     * @param username
-     * @param password
-     * @param userType
      */
     public User(int id, String firstName, String lastName, String username, String password, UserType userType) {
         this.id = id;
@@ -39,10 +33,8 @@ public class User implements ILogin {
         this.userType = userType;
     }
 
-
     /**
      * Gets the id
-     * @return
      */
     @Override
     public int getId() {
@@ -51,7 +43,6 @@ public class User implements ILogin {
 
     /**
      * Sets the id
-     * @param id
      */
     @Override
     public void setId(int id) {
@@ -60,7 +51,6 @@ public class User implements ILogin {
 
     /**
      * Gets the first name
-     * @return
      */
     public String getFirstName() {
         return firstName;
@@ -68,7 +58,6 @@ public class User implements ILogin {
 
     /**
      * Sets the first name
-     * @param firstName
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -76,7 +65,6 @@ public class User implements ILogin {
 
     /**
      * Gets the last name
-     * @return
      */
     public String getLastName() {
         return lastName;
@@ -84,7 +72,6 @@ public class User implements ILogin {
 
     /**
      * Sets the last name
-     * @param lastName
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -92,7 +79,6 @@ public class User implements ILogin {
 
     /**
      * Gets the username
-     * @return
      */
     @Override
     public String getUsername() {
@@ -101,7 +87,6 @@ public class User implements ILogin {
 
     /**
      * Sets the username
-     * @param username
      */
     @Override
     public void setUsername(String username) {
@@ -110,7 +95,6 @@ public class User implements ILogin {
 
     /**
      * Gets the password
-     * @return
      */
     @Override
     public String getPassword() {
@@ -119,7 +103,6 @@ public class User implements ILogin {
 
     /**
      * Sets the password
-     * @param password
      */
     @Override
     public void setPassword(String password) {
@@ -128,7 +111,6 @@ public class User implements ILogin {
 
     /**
      * Gets the userType
-     * @return
      */
     @Override
     public UserType getUsertype() {
@@ -137,7 +119,6 @@ public class User implements ILogin {
 
     /**
      * Sets the userType
-     * @param userType
      */
     @Override
     public void setUserType(UserType userType) {

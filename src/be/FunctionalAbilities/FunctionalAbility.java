@@ -23,9 +23,8 @@ public class FunctionalAbility {
         this.abilityNoteCitizen = abilityNoteCitizen;
     }
 
-
     /**
-     * Overloaded constructor with functionalAbilityID, citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExcepted, abilityNote and abilityNoteCitizen
+     * Overloaded constructor
      */
     public FunctionalAbility(int functionalAbilityID, int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExcepted, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) {
         this.functionalAbilityID = functionalAbilityID;
@@ -53,7 +52,6 @@ public class FunctionalAbility {
 
     /**
      * Gets the functionalAbilityID
-     * @return
      */
     public int getFunctionalAbilityID() {
         return functionalAbilityID;
@@ -61,7 +59,6 @@ public class FunctionalAbility {
 
     /**
      * Sets the functionalAbilityID
-     * @return
      */
     public void setFunctionalAbilityID(int functionalAbilityID) {
         this.functionalAbilityID = functionalAbilityID;
@@ -69,7 +66,6 @@ public class FunctionalAbility {
 
     /**
      * Gets the citizenId
-     * @return
      */
     public int getCitizenId() {
         return citizenId;
@@ -77,7 +73,6 @@ public class FunctionalAbility {
 
     /**
      * Sets the citizenId
-     * @return
      */
     public void setCitizenId(int citizenId) {
         this.citizenId = citizenId;
@@ -85,7 +80,6 @@ public class FunctionalAbility {
 
     /**
      * Gets the functionalAbilitySubCategoryId
-     * @return
      */
     public int getFunctionalAbilitySubCategoryId() {
         return functionalAbilitySubCategoryId;
@@ -93,7 +87,6 @@ public class FunctionalAbility {
 
     /**
      * Sets the functionalAbilitySubCategoryId
-     * @return
      */
     public void setFunctionalAbilitySubCategoryId(int functionalAbilitySubCategoryId) {
         this.functionalAbilitySubCategoryId = functionalAbilitySubCategoryId;
@@ -101,7 +94,6 @@ public class FunctionalAbility {
 
     /**
      * Gets the abilityNow
-     * @return
      */
     public int getAbilityNow() {
         return abilityNow;
@@ -109,7 +101,6 @@ public class FunctionalAbility {
 
     /**
      * Sets the abilityNow
-     * @return
      */
     public void setAbilityNow(int abilityNow) {
         this.abilityNow = abilityNow;
@@ -117,7 +108,6 @@ public class FunctionalAbility {
 
     /**
      * Gets the abilityExcepted
-     * @return
      */
     public int getAbilityExcepted() {
         return abilityExcepted;
@@ -125,7 +115,6 @@ public class FunctionalAbility {
 
     /**
      * Sets the abilityExcepted
-     * @return
      */
     public void setAbilityExcepted(int abilityExcepted) {
         this.abilityExcepted = abilityExcepted;
@@ -133,7 +122,6 @@ public class FunctionalAbility {
 
     /**
      * Gets the abilityNote
-     * @return
      */
     public String getAbilityNote() {
         return abilityNote;
@@ -141,7 +129,6 @@ public class FunctionalAbility {
 
     /**
      * Sets the abilityNote
-     * @return
      */
     public void setAbilityNote(String abilityNote) {
         this.abilityNote = abilityNote;
@@ -149,7 +136,6 @@ public class FunctionalAbility {
 
     /**
      * Gets the abilityNoteCitizen
-     * @return
      */
     public String getAbilityNoteCitizen() {
         return abilityNoteCitizen;
@@ -157,7 +143,6 @@ public class FunctionalAbility {
 
     /**
      * Sets the abilityNoteCitizen
-     * @return
      */
     public void setAbilityNoteCitizen(String abilityNoteCitizen) {
         this.abilityNoteCitizen = abilityNoteCitizen;
