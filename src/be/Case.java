@@ -7,6 +7,9 @@ public class Case {
     private String date;
     private String info;
 
+    /**
+     * Overloaded constructor
+     */
     public Case(int id, String name, String date, String info) {
         this.id = id;
         this.name = name;
@@ -14,6 +17,9 @@ public class Case {
         this.info = info;
     }
 
+    /**
+     * Overloaded constructor
+     */
     public Case(int id, String name, String info) {
         this.id = id;
         this.name = name;
@@ -22,7 +28,6 @@ public class Case {
 
     /**
      * Gets the id
-     * @return
      */
     public int getId() {
         return id;
@@ -31,7 +36,6 @@ public class Case {
 
     /**
      * Gets the name
-     * @return
      */
     public String getName() {
         return name;
@@ -39,7 +43,6 @@ public class Case {
 
     /**
      * Set the name
-     * @param name
      */
     public void setName(String name) {
         this.name = name;
@@ -47,7 +50,6 @@ public class Case {
 
     /**
      * Gets the date
-     * @return
      */
     public String getDate() {
         return date;
@@ -55,7 +57,6 @@ public class Case {
 
     /**
      * Sets the date
-     * @param date
      */
     public void setDate(String date) {
         this.date = date;
@@ -63,7 +64,6 @@ public class Case {
 
     /**
      * Gets the info
-     * @return
      */
     public String getInfo() {
         return info;
@@ -71,7 +71,6 @@ public class Case {
 
     /**
      * Sets the info
-     * @param info
      */
     public void setInfo(String info) {
         this.info = info;

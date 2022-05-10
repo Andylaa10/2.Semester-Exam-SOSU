@@ -16,7 +16,7 @@ public class GeneralInformation {
 
 
     /**
-     * Overloaded Constructor id, coping, motivation, resources, roles, habits, educationAndJob, lifeStory, network, healthInformation, equipmentAids and homeLayout
+     * Overloaded Constructor
      */
     public GeneralInformation(int id, String coping, String motivation, String resources, String roles, String habits, String educationAndJob, String lifeStory, String network, String healthInformation, String equipmentAids, String homeLayout) {
         this.id = id;
@@ -35,16 +35,13 @@ public class GeneralInformation {
 
     /**
      * Gets the id
-     * @return
      */
     public int getId() {
         return id;
     }
 
-
     /**
      * Gets the coping
-     * @return
      */
     public String getCoping() {
         return coping;
@@ -52,7 +49,6 @@ public class GeneralInformation {
 
     /**
      * Set the coping
-     * @param coping
      */
     public void setCoping(String coping) {
         this.coping = coping;
@@ -60,7 +56,6 @@ public class GeneralInformation {
 
     /**
      * Gets the motivation
-     * @return
      */
     public String getMotivation() {
         return motivation;
@@ -68,7 +63,6 @@ public class GeneralInformation {
 
     /**
      * Sets the motivation
-     * @param motivation
      */
     public void setMotivation(String motivation) {
         this.motivation = motivation;
@@ -76,7 +70,6 @@ public class GeneralInformation {
 
     /**
      * Gets the resources
-     * @return
      */
     public String getResources() {
         return resources;
@@ -84,7 +77,6 @@ public class GeneralInformation {
 
     /**
      * Sets the resources
-     * @param resources
      */
     public void setResources(String resources) {
         this.resources = resources;
@@ -92,7 +84,6 @@ public class GeneralInformation {
 
     /**
      * Gets the roles
-     * @return
      */
     public String getRoles() {
         return roles;
@@ -100,7 +91,6 @@ public class GeneralInformation {
 
     /**
      * Sets the roles
-     * @param roles
      */
     public void setRoles(String roles) {
         this.roles = roles;
@@ -108,7 +98,6 @@ public class GeneralInformation {
 
     /**
      * Gets the habits
-     * @return
      */
     public String getHabits() {
         return habits;
@@ -116,7 +105,6 @@ public class GeneralInformation {
 
     /**
      * Sets the habits
-     * @param habits
      */
     public void setHabits(String habits) {
         this.habits = habits;
@@ -124,7 +112,6 @@ public class GeneralInformation {
 
     /**
      * Gets the educationAndJob
-     * @return
      */
     public String getEducationAndJob() {
         return educationAndJob;
@@ -132,7 +119,6 @@ public class GeneralInformation {
 
     /**
      * Sets the educationAndJob
-     * @param educationAndJob
      */
     public void setEducationAndJob(String educationAndJob) {
         this.educationAndJob = educationAndJob;
@@ -140,7 +126,6 @@ public class GeneralInformation {
 
     /**
      * Gets the lifeStory
-     * @return
      */
     public String getLifeStory() {
         return lifeStory;
@@ -148,7 +133,6 @@ public class GeneralInformation {
 
     /**
      * Sets the lifeStory
-     * @param lifeStory
      */
     public void setLifeStory(String lifeStory) {
         this.lifeStory = lifeStory;
@@ -156,7 +140,6 @@ public class GeneralInformation {
 
     /**
      * Gets the network
-     * @return
      */
     public String getNetwork() {
         return network;
@@ -164,7 +147,6 @@ public class GeneralInformation {
 
     /**
      * Sets the network
-     * @param network
      */
     public void setNetwork(String network) {
         this.network = network;
@@ -172,7 +154,6 @@ public class GeneralInformation {
 
     /**
      * Gets the healthInformation
-     * @return
      */
     public String getHealthInformation() {
         return healthInformation;
@@ -180,7 +161,6 @@ public class GeneralInformation {
 
     /**
      * Sets the healthInformation
-     * @param healthInformation
      */
     public void setHealthInformation(String healthInformation) {
         this.healthInformation = healthInformation;
@@ -188,7 +168,6 @@ public class GeneralInformation {
 
     /**
      * Gets the equipmentAids
-     * @return
      */
     public String getEquipmentAids() {
         return equipmentAids;
@@ -196,7 +175,6 @@ public class GeneralInformation {
 
     /**
      * Sets the equipmentAids
-     * @param equipmentAids
      */
     public void setEquipmentAids(String equipmentAids) {
         this.equipmentAids = equipmentAids;
@@ -204,7 +182,6 @@ public class GeneralInformation {
 
     /**
      * Gets the homeLayout
-     * @return
      */
     public String getHomeLayout() {
         return homeLayout;
@@ -212,7 +189,6 @@ public class GeneralInformation {
 
     /**
      * Sets the homeLayout
-     * @param homeLayout
      */
     public void setHomeLayout(String homeLayout) {
         this.homeLayout = homeLayout;

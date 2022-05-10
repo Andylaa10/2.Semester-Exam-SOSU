@@ -7,7 +7,7 @@ public class School {
 
 
     /**
-     * Overloaded constructor with id and schoolName
+     * Constructor
      */
     public School(int id, String schoolName) {
         this.id = id;
@@ -16,7 +16,6 @@ public class School {
 
     /**
      * Gets the id
-     * @return
      */
     public int getId() {
         return id;
@@ -25,18 +24,9 @@ public class School {
 
     /**
      * Gets the schoolName
-     * @return
      */
     public String getSchoolName() {
         return schoolName;
-    }
-
-    /**
-     * Sets the schoolName
-     * @param schoolName
-     */
-    public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
     }
 
 }
