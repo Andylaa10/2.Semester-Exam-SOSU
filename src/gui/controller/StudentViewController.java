@@ -10,7 +10,6 @@ import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
 import be.User;
 import be.enums.ConditionEnum;
-import be.enums.FunctionalEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
@@ -30,6 +29,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -37,7 +37,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 
 public class StudentViewController implements IController, Initializable {
 
@@ -284,7 +283,6 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * Inserts value from database to the different tables
-     *
      */
     private void initializeTables() throws Exception {
         //Initialize the citizens table
@@ -348,23 +346,22 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * Load the tableviews with assigned health condition notes
-     *
      */
     private void seeTxtOnSubCategory() throws SQLServerException {
         txtFieldCitizenID.getText();
         //TODO
         //Vi skal finde en måde til at sætte start note til at være tom og condition til at være NOT_RELEVANT 
         HealthConditionSubCategoryText subCategoryText = dataModelFacade.getTextOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), Integer.parseInt(subCatTxtID.getText()));
-        if (txtAreaNoteOnSubCategory.getText().isEmpty()){
+        if (txtAreaNoteOnSubCategory.getText().isEmpty()) {
             subCategoryText.setNote("");
             txtAreaNoteOnSubCategory.setText(subCategoryText.getNote());
         }
         txtAreaNoteOnSubCategory.setText(subCategoryText.getNote());
-        if (subCategoryText.getCondition() == 0){
+        if (subCategoryText.getCondition() == 0) {
             radioNotRelevant.setSelected(true);
-        } else if(subCategoryText.getCondition() == 1){
+        } else if (subCategoryText.getCondition() == 1) {
             radioPotential.setSelected(true);
-        } else if (subCategoryText.getCondition() == 2){
+        } else if (subCategoryText.getCondition() == 2) {
             radioRelevant.setSelected(true);
         }
     }
@@ -410,7 +407,6 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * Setup combobox with citizens
-     *
      */
     private void initializeCitizenComboBox() throws SQLException {
         //Initialize the citizens in the dropdown menu
@@ -421,7 +417,6 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * When clicked on citizen in the combobox, the different text fields get values based on the selected citizen
-     *
      */
     @FXML
     private void onActionComboClicked() throws SQLException {
@@ -459,7 +454,6 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * loads the Citizens table view
-     *
      */
     private void tableViewLoadCitizens(ObservableList<Citizen> allCitizens) {
         tvCitizens.setItems(getCitizenData());
@@ -492,7 +486,6 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * loads the health condition tableview.
-     *
      */
     private void tableViewLoadHealthConditions(ObservableList<HealthCondition> allHealthConditions) {
         tvHealthConditions.setItems(getHealthConditionData());
@@ -500,7 +493,6 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * Gets the data for health conditions
-     *
      */
     private ObservableList<HealthCondition> getHealthConditionData() {
         return allHealthConditions;
@@ -589,6 +581,13 @@ public class StudentViewController implements IController, Initializable {
             if (newValue != null) {
                 this.selectedFunctionalAbilitySubCategory = newValue;
                 txtFieldFunctionalAbilityID.setText(String.valueOf(selectedFunctionalAbilitySubCategory.getId()));
+                try {
+                    setFunctionalAbilityInfo();
+                } catch (SQLServerException e) {
+                    e.printStackTrace();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         }));
     }
@@ -671,27 +670,96 @@ public class StudentViewController implements IController, Initializable {
         imgViewNotSaved.setVisible(true);
     }
 
-    private void setFunctionalAbilityInfo(int citizenId, int functionalAbilitySubCategoryId){
+    private void setFunctionalAbilityInfo() throws SQLException {
+        if (txtFieldCitizenID != null && txtFieldFunctionalAbilityID != null) {
+            FunctionalAbilitySubCategoryText functionalAbilitySubCategoryText = dataModelFacade.getInfoOnSubCategory(Integer.parseInt((txtFieldCitizenID.getText())), Integer.parseInt((txtFieldFunctionalAbilityID.getText())));
 
-        //TODO LAV METODE HER TIL AT UDFYLDE TEKSTEN I ALLE FELTER OG COMBOBOXES PÅ FUNKTIONSTILSTANDSVIEWET!!!!!!!!!!!
-        //TODO !!!!!!!!!!!!!!!!
+            if (functionalAbilitySubCategoryText != null) {
+
+                if (functionalAbilitySubCategoryText.getAbilityNow() == 0) {
+                    comboBoxCurrentLevel.getSelectionModel().select(0);
+                } else if (functionalAbilitySubCategoryText.getAbilityNow() == 1) {
+                    comboBoxCurrentLevel.getSelectionModel().select(1);
+                } else if (functionalAbilitySubCategoryText.getAbilityNow() == 2) {
+                    comboBoxCurrentLevel.getSelectionModel().select(2);
+                } else if (functionalAbilitySubCategoryText.getAbilityNow() == 3) {
+                    comboBoxCurrentLevel.getSelectionModel().select(3);
+                } else if (functionalAbilitySubCategoryText.getAbilityNow() == 4) {
+                    comboBoxCurrentLevel.getSelectionModel().select(4);
+                } else if (functionalAbilitySubCategoryText.getAbilityNow() == 9) {
+                    comboBoxCurrentLevel.getSelectionModel().select(5);
+                }
+
+                if (functionalAbilitySubCategoryText.getAbilityExpected() == 0) {
+                    comboBoxExpectedLevel.getSelectionModel().select(0);
+                } else if (functionalAbilitySubCategoryText.getAbilityExpected() == 1) {
+                    comboBoxExpectedLevel.getSelectionModel().select(1);
+                } else if (functionalAbilitySubCategoryText.getAbilityExpected() == 2) {
+                    comboBoxExpectedLevel.getSelectionModel().select(2);
+                } else if (functionalAbilitySubCategoryText.getAbilityExpected() == 3) {
+                    comboBoxExpectedLevel.getSelectionModel().select(3);
+                } else if (functionalAbilitySubCategoryText.getAbilityExpected() == 4) {
+                    comboBoxExpectedLevel.getSelectionModel().select(4);
+                } else if (functionalAbilitySubCategoryText.getAbilityExpected() == 9) {
+                    comboBoxExpectedLevel.getSelectionModel().select(5);
+                }
+
+                txtAreaNoteOnCondition.setText(functionalAbilitySubCategoryText.getAbilityNote());
+
+                if (functionalAbilitySubCategoryText.getCitizenPerformance().equals("Udfører selv")) {
+                    comboboxPerformance.getSelectionModel().select(0);
+                } else if (functionalAbilitySubCategoryText.getCitizenPerformance().equals("Udfører dele selv")) {
+                    comboboxPerformance.getSelectionModel().select(1);
+                } else if (functionalAbilitySubCategoryText.getCitizenPerformance().equals("Udfører ikke selv")) {
+                    comboboxPerformance.getSelectionModel().select(2);
+                } else if (functionalAbilitySubCategoryText.getCitizenPerformance().equals("Ikke relevant")) {
+                    comboboxPerformance.getSelectionModel().select(3);
+                }
+
+                if (functionalAbilitySubCategoryText.getCitizenMeaningOfPerformance().equals("Oplever ikke begrænsninger")) {
+                    comboboxMeaningOfPerformance.getSelectionModel().select(0);
+                } else if (functionalAbilitySubCategoryText.getCitizenMeaningOfPerformance().equals("Oplever begrænsninger")) {
+                    comboboxMeaningOfPerformance.getSelectionModel().select(1);
+                }
+
+                txtAreaCitizenGoals.setText(functionalAbilitySubCategoryText.getAbilityNoteCitizen());
+            } else{
+                return;
+            }
+        }
     }
+
 
     @FXML
     private void btnHandleSaveFunctionalAbilityInfo() throws SQLException {
-        if(txtFieldCitizenID != null && txtFieldFunctionalAbilityID != null) {
-            int citizenID = Integer.parseInt(txtFieldCitizenID.getText());
-            int functionalAbilityID = Integer.parseInt(txtFieldFunctionalAbilityID.getText());
-            int abilityNow = Integer.parseInt(String.valueOf(comboBoxCurrentLevel.getSelectionModel().getSelectedItem()));
-            int abilityExpected = Integer.parseInt(String.valueOf(comboBoxExpectedLevel.getSelectionModel().getSelectedItem()));
-            String abilityNote = txtAreaNoteOnCondition.getText();
-            String citizenPerformance = String.valueOf(comboboxPerformance.getSelectionModel().getSelectedItem());
-            String citizenMeaningOfPerformance = String.valueOf(comboboxMeaningOfPerformance.getSelectionModel().getSelectedItem());
-            String abilityNoteCitizen = txtAreaCitizenGoals.getText();
+        if (txtFieldCitizenID != null && txtFieldFunctionalAbilityID != null) {
+            if (dataModelFacade.getSubcategoryData(Integer.parseInt((txtFieldCitizenID.getText())), Integer.parseInt((txtFieldFunctionalAbilityID.getText()))) == null) {
+                int citizenID = Integer.parseInt(txtFieldCitizenID.getText());
+                int functionalAbilityID = Integer.parseInt(txtFieldFunctionalAbilityID.getText());
+                int abilityNow = Integer.parseInt(String.valueOf(comboBoxCurrentLevel.getSelectionModel().getSelectedItem()));
+                int abilityExpected = Integer.parseInt(String.valueOf(comboBoxExpectedLevel.getSelectionModel().getSelectedItem()));
+                String abilityNote = txtAreaNoteOnCondition.getText();
+                String citizenPerformance = String.valueOf(comboboxPerformance.getSelectionModel().getSelectedItem());
+                String citizenMeaningOfPerformance = String.valueOf(comboboxMeaningOfPerformance.getSelectionModel().getSelectedItem());
+                String abilityNoteCitizen = txtAreaCitizenGoals.getText();
 
-            dataModelFacade.createFunctionalAbility(citizenID, functionalAbilityID, abilityNow, abilityExpected,
-                    abilityNote, citizenPerformance, citizenMeaningOfPerformance, abilityNoteCitizen);
+                dataModelFacade.createFunctionalAbility(citizenID, functionalAbilityID, abilityNow, abilityExpected,
+                        abilityNote, citizenPerformance, citizenMeaningOfPerformance, abilityNoteCitizen);
 
+            } else {
+                int citizenID = Integer.parseInt(txtFieldCitizenID.getText());
+                int functionalAbilityID = Integer.parseInt(txtFieldFunctionalAbilityID.getText());
+                int abilityNow = Integer.parseInt(String.valueOf(comboBoxCurrentLevel.getSelectionModel().getSelectedItem()));
+                int abilityExpected = Integer.parseInt(String.valueOf(comboBoxExpectedLevel.getSelectionModel().getSelectedItem()));
+                String abilityNote = txtAreaNoteOnCondition.getText();
+                String citizenPerformance = String.valueOf(comboboxPerformance.getSelectionModel().getSelectedItem());
+                String citizenMeaningOfPerformance = String.valueOf(comboboxMeaningOfPerformance.getSelectionModel().getSelectedItem());
+                String abilityNoteCitizen = txtAreaCitizenGoals.getText();
+
+                FunctionalAbility functionalAbility = new FunctionalAbility(citizenID, functionalAbilityID, abilityNow, abilityExpected,
+                        abilityNote, citizenPerformance, citizenMeaningOfPerformance, abilityNoteCitizen);
+                dataModelFacade.editAbilities(functionalAbility);
+            }
         }
 
     }
@@ -723,7 +791,6 @@ public class StudentViewController implements IController, Initializable {
         tvSubCategories.getSelectionModel().clearSelection();
         tvHealthConditions.getSelectionModel().clearSelection();
     }
-
 
 
     @FXML
@@ -787,10 +854,8 @@ public class StudentViewController implements IController, Initializable {
     }
 
 
-
     /**
      * When clicked on the little i-icon it sends you to the FS3 homepage
-     *
      */
     @FXML
     private void coupingLink() throws URISyntaxException, IOException {
@@ -923,7 +988,6 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * When click on back it sends you back to the start pane/screen
-     *
      */
     @FXML
     private void btnClickBack(ActionEvent actionEvent) {
@@ -946,13 +1010,11 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * When the general information is click it set up the general information pane
-     *
      */
     @FXML
     private void onActionGeneralInfoCancel() {
         btnClickGeneralInformation();
     }
-
 
 
 }

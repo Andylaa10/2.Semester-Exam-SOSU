@@ -3,6 +3,7 @@ package bll;
 import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
 import be.FunctionalAbilities.FunctionalAbility;
 import be.enums.FunctionalEnum;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.FunctionalAbilitiesDAO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,8 +21,16 @@ public class FunctionalAbilityManager {
         return functionalAbilitiesDAO.getFunctionalAbilities();
     }
 
+    public FunctionalAbilitySubCategoryText getInfoOnSubCategory(int citizenId, int functionalAbilitySubCategoryId) throws SQLServerException {
+        return functionalAbilitiesDAO.getInfoOnSubCategory(citizenId, functionalAbilitySubCategoryId);
+    }
+
     public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
         return functionalAbilitiesDAO.getFunctionalAbilitySubCategories(functionalAbilitySubCategoryId);
+    }
+
+    public FunctionalAbility getSubcategoryData(int citizenId, int functionalAbilitySubCategoryId) throws SQLException {
+        return functionalAbilitiesDAO.getSubcategoryData(citizenId, functionalAbilitySubCategoryId);
     }
 
     public FunctionalAbility abilitiesOnCitizen(int citizenId) throws SQLException {
@@ -29,7 +38,7 @@ public class FunctionalAbilityManager {
     }
 
     public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) throws SQLException {
-        return functionalAbilitiesDAO.createFunctionalAbilities(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen,citizenPerformance,citizenMeaningOfPerformance);
+        return functionalAbilitiesDAO.createFunctionalAbilities(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote,citizenPerformance,citizenMeaningOfPerformance, abilityNoteCitizen);
     }
 
     public void editAbilities(FunctionalAbility functionalAbility) throws SQLException {

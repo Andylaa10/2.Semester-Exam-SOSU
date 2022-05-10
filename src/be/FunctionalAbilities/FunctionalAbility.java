@@ -27,16 +27,16 @@ public class FunctionalAbility {
     /**
      * Overloaded constructor with functionalAbilityID, citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExcepted, abilityNote and abilityNoteCitizen
      */
-    public FunctionalAbility(int functionalAbilityID, int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExcepted, String abilityNote, String abilityNoteCitizen,  String citizenPerformance, String citizenMeaningOfPerformance) {
+    public FunctionalAbility(int functionalAbilityID, int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExcepted, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) {
         this.functionalAbilityID = functionalAbilityID;
         this.citizenId = citizenId;
         this.functionalAbilitySubCategoryId = functionalAbilitySubCategoryId;
         this.abilityNow = abilityNow;
         this.abilityExcepted = abilityExcepted;
         this.abilityNote = abilityNote;
-        this.abilityNoteCitizen = abilityNoteCitizen;
         this.citizenPerformance = citizenPerformance;
         this.citizenMeaningOfPerformance = citizenMeaningOfPerformance;
+        this.abilityNoteCitizen = abilityNoteCitizen;
     }
 
     public FunctionalAbility(int citizenID, int functionalAbilityID, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) {

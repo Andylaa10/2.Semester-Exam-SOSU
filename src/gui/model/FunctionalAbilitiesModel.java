@@ -5,6 +5,7 @@ import be.FunctionalAbilities.FunctionalAbility;
 
 import be.enums.FunctionalEnum;
 import bll.FunctionalAbilityManager;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -22,8 +23,16 @@ public class FunctionalAbilitiesModel {
         return manager.getFunctionalAbilities();
     }
 
+    public FunctionalAbilitySubCategoryText getInfoOnSubCategory(int citizenId, int functionalAbilitySubCategoryId) throws SQLServerException {
+        return manager.getInfoOnSubCategory(citizenId, functionalAbilitySubCategoryId);
+    }
+
     public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
         return manager.getFunctionalAbilitySubCategories(functionalAbilitySubCategoryId);
+    }
+
+    public FunctionalAbility getSubcategoryData(int citizenId, int functionalAbilitySubCategoryId) throws SQLException {
+        return manager.getSubcategoryData(citizenId, functionalAbilitySubCategoryId);
     }
 
     public FunctionalAbility abilitiesOnCitizen(int citizenId) throws SQLException {
@@ -31,7 +40,7 @@ public class FunctionalAbilitiesModel {
     }
 
     public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) throws SQLException {
-        return manager.createFunctionalAbility(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen,citizenPerformance,citizenMeaningOfPerformance);
+        return manager.createFunctionalAbility(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, citizenPerformance,citizenMeaningOfPerformance, abilityNoteCitizen);
     }
 
     public void editAbilities(FunctionalAbility functionalAbility) throws SQLException {

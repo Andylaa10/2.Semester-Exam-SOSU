@@ -34,6 +34,81 @@ public class FunctionalAbilitySubCategoryText {
         this.abilityNoteCitizen = abilityNoteCitizen;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFunctionalAbilitySubCategoryName() {
+        return functionalAbilitySubCategoryName;
+    }
+
+    public void setFunctionalAbilitySubCategoryName(String functionalAbilitySubCategoryName) {
+        this.functionalAbilitySubCategoryName = functionalAbilitySubCategoryName;
+    }
+
+    public int getFunctionalAbilityID() {
+        return functionalAbilityID;
+    }
+
+    public void setFunctionalAbilityID(int functionalAbilityID) {
+        this.functionalAbilityID = functionalAbilityID;
+    }
+
+    public int getCitizenID() {
+        return citizenID;
+    }
+
+    public void setCitizenID(int citizenID) {
+        this.citizenID = citizenID;
+    }
+
+    public int getAbilityNow() {
+        return abilityNow;
+    }
+
+    public void setAbilityNow(int abilityNow) {
+        this.abilityNow = abilityNow;
+    }
+
+    public int getAbilityExpected() {
+        return abilityExpected;
+    }
+
+    public void setAbilityExpected(int abilityExpected) {
+        this.abilityExpected = abilityExpected;
+    }
+
+    public String getAbilityNote() {
+        return abilityNote;
+    }
+
+    public void setAbilityNote(String abilityNote) {
+        this.abilityNote = abilityNote;
+    }
+
+    public String getCitizenPerformance() {
+        return citizenPerformance;
+    }
+
+    public void setCitizenPerformance(String citizenPerformance) {
+        this.citizenPerformance = citizenPerformance;
+    }
+
+    public String getCitizenMeaningOfPerformance() {
+        return citizenMeaningOfPerformance;
+    }
+
+    public void setCitizenMeaningOfPerformance(String citizenMeaningOfPerformance) {
+        this.citizenMeaningOfPerformance = citizenMeaningOfPerformance;
+    }
+
+    public String getAbilityNoteCitizen() {
+        return abilityNoteCitizen;
+    }
+
+    public void setAbilityNoteCitizen(String abilityNoteCitizen) {
+        this.abilityNoteCitizen = abilityNoteCitizen;
+    }
 
     /**
      * Gets the id
