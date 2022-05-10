@@ -724,11 +724,20 @@ public class StudentViewController implements IController, Initializable {
 
                 txtAreaCitizenGoals.setText(functionalAbilitySubCategoryText.getAbilityNoteCitizen());
             } else{
-                return;
+                clearFunctionalAbilityTextFields();
+
             }
         }
     }
 
+    private void clearFunctionalAbilityTextFields(){
+        comboBoxCurrentLevel.getSelectionModel().clearSelection();
+        comboBoxExpectedLevel.getSelectionModel().clearSelection();
+        txtAreaNoteOnCondition.clear();
+        comboboxPerformance.getSelectionModel().clearSelection();
+        comboboxMeaningOfPerformance.getSelectionModel().clearSelection();
+        txtAreaCitizenGoals.clear();
+    }
 
     @FXML
     private void btnHandleSaveFunctionalAbilityInfo() throws SQLException {
