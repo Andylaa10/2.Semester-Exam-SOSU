@@ -142,7 +142,7 @@
                         <ColorAdjust brightness="0.34" />
                      </effect>
                   </Button>
-                  <Button fx:id="btnFunctionalCondition" layoutX="572.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnClickFunctionalCondition" prefHeight="35.0" prefWidth="271.0" text="Funktionsevnetilstand">
+                  <Button fx:id="btnFunctionalCondition" layoutX="572.0" layoutY="3.0" mnemonicParsing="false" onAction="#btnClickFunctionalCondition" prefHeight="35.0" prefWidth="271.0" text="Funktionstilstand">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -165,7 +165,7 @@
                   <ColorAdjust brightness="-0.24" contrast="0.17" />
                </effect>
             </Pane>
-            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="-1.0" layoutY="51.0" prefHeight="546.0" prefWidth="1161.0" visible="false">
+            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="-1.0" layoutY="51.0" prefHeight="546.0" prefWidth="1161.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b85f7" height="423.0" layoutX="934.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" width="218.0">
                      <effect>
@@ -448,69 +448,42 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
+            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
                <children>
-                  <TableView fx:id="tvHealthConditions" layoutX="25.0" layoutY="53.0" prefHeight="458.0" prefWidth="302.0" style="-fx-background-color: transparent;">
+                  <TableView fx:id="tvHealthConditions" layoutX="26.0" layoutY="89.0" prefHeight="423.0" prefWidth="302.0" style="-fx-background-color: transparent;">
                     <columns>
                       <TableColumn fx:id="tcHealthConditionID" prefWidth="300.7999572753906" text="ID" visible="false" />
                         <TableColumn fx:id="tcHealthConditionName" prefWidth="300.7999572753906" text="Helbredstilstande" />
                     </columns>
                   </TableView>
-                  <TableView fx:id="tvSubCategories" layoutX="354.0" layoutY="53.0" prefHeight="458.0" prefWidth="254.0" style="-fx-background-color: transparent;">
+                  <TableView fx:id="tvSubCategories" layoutX="355.0" layoutY="89.0" prefHeight="423.0" prefWidth="254.0" style="-fx-background-color: transparent;">
                      <columns>
                         <TableColumn fx:id="tcSubCategoriesID" prefWidth="253.60001220703126" text="ID" visible="false" />
                         <TableColumn fx:id="tcSubCategoriesName" prefWidth="250.39996337890625" text="Underkategorier" />
                      </columns>
                   </TableView>
-                  <Label layoutX="316.0" text="Borgerens Helbredstilstande - FSIII">
+                  <Label layoutX="316.0" layoutY="14.0" text="Borgerens Helbredstilstande - FSIII">
                      <font>
                         <Font size="33.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="txtAreaNoteOnSubCategory" layoutX="638.0" layoutY="83.0" prefHeight="114.0" prefWidth="483.0" />
-                  <Label layoutX="638.0" layoutY="50.0" text="Fagligt notat">
+                  <TextArea fx:id="txtAreaNoteOnSubCategory" layoutX="638.0" layoutY="130.0" prefHeight="200.0" prefWidth="483.0" />
+                  <Label layoutX="638.0" layoutY="88.0" text="Beskrivelse af tilstand">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Label layoutX="638.0" layoutY="420.0" text="Vurdering af tilstand">
+                  <Label layoutX="638.0" layoutY="340.0" text="Vurdering af tilstand">
                      <font>
                         <Font size="21.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnSaveHC" layoutX="951.0" layoutY="516.0" mnemonicParsing="false" onAction="#btnHandleSaveHC" prefHeight="26.0" prefWidth="170.0" text="Gem" />
-                  <Button fx:id="btnCancelChangesHC" layoutX="766.0" layoutY="516.0" mnemonicParsing="false" onAction="#btnHandelCancelChangesHC" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
-                  <RadioButton fx:id="radioNotRelevant" layoutX="645.0" layoutY="459.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="98.0" text="Ikke Relevant" />
-                  <RadioButton fx:id="radioPotential" layoutX="760.0" layoutY="459.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="76.0" text="Potentiel" />
-                  <RadioButton fx:id="radioRelevant" layoutX="851.0" layoutY="459.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="70.0" text="Relevant" />
+                  <Button fx:id="btnSaveHC" layoutX="951.0" layoutY="499.0" mnemonicParsing="false" onAction="#btnHandleSaveHC" prefHeight="26.0" prefWidth="170.0" text="Gem" />
+                  <Button fx:id="btnCancelChangesHC" layoutX="766.0" layoutY="499.0" mnemonicParsing="false" onAction="#btnHandelCancelChangesHC" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
+                  <RadioButton fx:id="radioNotRelevant" layoutX="645.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Ikke Relevant" />
+                  <RadioButton fx:id="radioPotential" layoutX="771.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Potentiel" />
+                  <RadioButton fx:id="radioRelevant" layoutX="882.0" layoutY="384.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="108.0" text="Relevant" />
                   <TextField fx:id="subCatTxtID" layoutX="1019.0" layoutY="51.0" prefHeight="26.0" prefWidth="2.0" visible="false" />
-                  <Label layoutX="638.0" layoutY="197.0" text="Vurdering af nuværende niveau">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
-                  <TextArea fx:id="txtAreaCurrentLevelAssessment" layoutX="638.0" layoutY="230.0" prefHeight="114.0" prefWidth="483.0" />
-                  <Label layoutX="638.0" layoutY="346.0" text="Vurdering af forventet niveau">
-                     <font>
-                        <Font size="21.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="comboBoxExpectedLevelAssessment" layoutX="640.0" layoutY="381.0" prefHeight="26.0" prefWidth="483.0" />
-                  <Label layoutX="993.0" layoutY="416.0" text="- Mindskes">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="994.0" layoutY="439.0" text="- Forbliver uændret">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="994.0" layoutY="461.0" text="- Forsvinder">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneOBS" layoutX="825.0" layoutY="51.0" prefHeight="302.0" prefWidth="326.0" visible="false">

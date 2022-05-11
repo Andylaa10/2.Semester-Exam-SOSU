@@ -10,20 +10,6 @@ public class HealthConditionSubCategoryText {
     private String expectedLevelAssessment;
     private int condition;
 
-    public HealthConditionSubCategoryText(int id, int citizenId, int categoryId, String note, int condition) {
-        this.id = id;
-        this.citizenId = citizenId;
-        this.categoryId = categoryId;
-        this.professionalNote = note;
-        this.condition = condition;
-    }
-
-    public HealthConditionSubCategoryText(int citizenId, int subCategoryId, String note, int conditionValue) {
-        this.citizenId =  citizenId;
-        this.categoryId = subCategoryId;
-        this.professionalNote = note;
-        this.condition = conditionValue;
-    }
 
     public HealthConditionSubCategoryText(int id, int citId, int subId, String professionalNote, String currentLevelAssessment, String expectedLevelAssessment, int condition) {
         this.id = id;
@@ -33,6 +19,15 @@ public class HealthConditionSubCategoryText {
         this.currentLevelAssessment = currentLevelAssessment;
         this.expectedLevelAssessment = expectedLevelAssessment;
         this.condition = condition;
+    }
+
+    public HealthConditionSubCategoryText(int citizenId, int subCategoryId, String professionalNote, String currentLevelAssessment, String expectedLevelAssessment, int conditionValue) {
+        this.citizenId = citizenId;
+        this.categoryId = subCategoryId;
+        this.professionalNote = professionalNote;
+        this.currentLevelAssessment = currentLevelAssessment;
+        this.expectedLevelAssessment = expectedLevelAssessment;
+        this.condition = conditionValue;
     }
 
     public int getId() {

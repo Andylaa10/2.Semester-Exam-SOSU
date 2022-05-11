@@ -332,37 +332,10 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
-    /**
-     * Load the tableviews with assigned health condition notes
-     */
-    private void seeTxtOnSubCategory() throws SQLServerException {
-        if (txtFieldCitizenID != null && subCatTxtID != null) {
-            HealthConditionSubCategoryText subCategoryText = dataModelFacade.getTextOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), Integer.parseInt(subCatTxtID.getText()));
-            if (subCategoryText != null) {
-                txtAreaNoteOnSubCategory.setText(subCategoryText.getProfessionalNote());
-                txtAreaCurrentLevelAssessment.setText(subCategoryText.getCurrentLevelAssessment());
-                if (subCategoryText.getExpectedLevelAssessment().equals("Mindskes")) {
-                    comboboxPerformance.getSelectionModel().select(0);
-                } else if (subCategoryText.getExpectedLevelAssessment().equals("Forbliver uændret")) {
-                    comboboxPerformance.getSelectionModel().select(1);
-                } else if (subCategoryText.getExpectedLevelAssessment().equals("Forsvinder")) {
-                    comboboxPerformance.getSelectionModel().select(2);
-                }
-                if (subCategoryText.getCondition() == 0) {
-                    radioNotRelevant.setSelected(true);
-                } else if (subCategoryText.getCondition() == 1) {
-                    radioPotential.setSelected(true);
-                } else if (subCategoryText.getCondition() == 2) {
-                    radioRelevant.setSelected(true);
-                }
-            } else {
-                clearHealthConditionTxtField();
-            }
-        }
-    }
-
     public void clearHealthConditionTxtField() {
         txtAreaNoteOnSubCategory.clear();
+        txtAreaCurrentLevelAssessment.clear();
+        comboBoxExpectedLevelAssessment.getSelectionModel().clearSelection();
         radioPotential.setSelected(false);
         radioRelevant.setSelected(false);
         radioNotRelevant.setSelected(false);
@@ -680,6 +653,35 @@ public class StudentViewController implements IController, Initializable {
         imgViewNotSaved.setVisible(true);
     }
 
+    /**
+     * Load the tableviews with assigned health condition notes
+     */
+    private void seeTxtOnSubCategory() throws SQLServerException {
+        if (txtFieldCitizenID != null && subCatTxtID != null) {
+            HealthConditionSubCategoryText subCategoryText = dataModelFacade.getTextOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), Integer.parseInt(subCatTxtID.getText()));
+            if (subCategoryText != null) {
+                txtAreaNoteOnSubCategory.setText(subCategoryText.getProfessionalNote());
+                txtAreaCurrentLevelAssessment.setText(subCategoryText.getCurrentLevelAssessment());
+                if (subCategoryText.getExpectedLevelAssessment().equals("Mindskes")) {
+                    comboBoxExpectedLevelAssessment.getSelectionModel().select(0);
+                } else if (subCategoryText.getExpectedLevelAssessment().equals("Forbliver uændret")) {
+                    comboBoxExpectedLevelAssessment.getSelectionModel().select(1);
+                } else if (subCategoryText.getExpectedLevelAssessment().equals("Forsvinder")) {
+                    comboBoxExpectedLevelAssessment.getSelectionModel().select(2);
+                }
+                if (subCategoryText.getCondition() == 0) {
+                    radioNotRelevant.setSelected(true);
+                } else if (subCategoryText.getCondition() == 1) {
+                    radioPotential.setSelected(true);
+                } else if (subCategoryText.getCondition() == 2) {
+                    radioRelevant.setSelected(true);
+                }
+            } else {
+                clearHealthConditionTxtField();
+            }
+        }
+    }
+
     private void setFunctionalAbilityInfo() throws SQLException {
         if (txtFieldCitizenID != null && txtFieldFunctionalAbilityID != null) {
             FunctionalAbilitySubCategoryText functionalAbilitySubCategoryText = dataModelFacade.getInfoOnSubCategory(Integer.parseInt((txtFieldCitizenID.getText())), Integer.parseInt((txtFieldFunctionalAbilityID.getText())));
@@ -806,18 +808,20 @@ public class StudentViewController implements IController, Initializable {
             } else {
                 int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
                 int subCategoryId = Integer.parseInt(subCatTxtID.getText());
-                String note = txtAreaNoteOnSubCategory.getText();
+                String professionalNote = txtAreaNoteOnSubCategory.getText();
+                String currentLevelAssessment = txtAreaCurrentLevelAssessment.getText();
+                String expectedLevelAssessment = String.valueOf(comboBoxExpectedLevelAssessment.getSelectionModel().getSelectedItem());
                 if (radioNotRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
-                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, note, conditionValue);
+                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
                 } else if (radioPotential.isSelected()) {
                     int conditionValue = ConditionEnum.POTENTIAL.getValue();
-                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, note, conditionValue);
+                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
                 } else if (radioRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.RELEVANT.getValue();
-                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, note, conditionValue);
+                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
                 }
                 System.out.println("Edit");
