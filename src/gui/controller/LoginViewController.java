@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class LoginViewController implements Initializable {
 
@@ -49,6 +50,7 @@ public class LoginViewController implements Initializable {
     private void Login() throws IOException, SQLException {
         String username = txtFieldUsername.getText();
         String password = pField.getText();
+        txtFieldSchoolId.setText("99999");
         int school = Integer.parseInt(txtFieldSchoolId.getText());
         User user = facade.userLogin(username, password, school);
         SuperAdmin superAdmin = facade.superAdminLogin(username, password);

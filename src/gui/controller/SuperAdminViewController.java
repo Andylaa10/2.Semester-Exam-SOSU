@@ -7,6 +7,7 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -641,4 +642,6 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
 
+    public void handleComboSchool(ActionEvent actionEvent) {
+    }
 }
