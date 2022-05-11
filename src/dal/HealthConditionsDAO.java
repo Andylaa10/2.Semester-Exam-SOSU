@@ -53,13 +53,10 @@ public class HealthConditionsDAO {
                 int id = resultSet.getInt("subCatTextOnCitizenID");
                 int citId = resultSet.getInt("citizenId");
                 int subId = resultSet.getInt("subCategoryId");
-                String professionalNote = resultSet.getString("professionalNote");
-                String currentLevelAssessment = resultSet.getString("currentLevelAssessment");
-                String expectedLevelAssessment = resultSet.getString("expectedLevelAssessment");
+                String note = resultSet.getString("Note");
                 int condition = resultSet.getInt("Condition");
 
-                HealthConditionSubCategoryText healthConditionSubCategoryText = new HealthConditionSubCategoryText(id, citId,
-                        subId, professionalNote, currentLevelAssessment, expectedLevelAssessment,  condition);
+                HealthConditionSubCategoryText healthConditionSubCategoryText = new HealthConditionSubCategoryText(id, citId, subId, note, condition);
                 return healthConditionSubCategoryText;
             }
         }
@@ -143,14 +140,12 @@ public class HealthConditionsDAO {
 
     public void editSubcategory(HealthConditionSubCategoryText subCategoryText) throws Exception {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "UPDATE SubCatTextOnCitizen SET professionalNote = ?, currentLevelAssessment = ?, expectedLevelAssessment = ?, Condition = ? WHERE citizenId =? AND subCategoryId=?";
+            String sql = "UPDATE SubCatTextOnCitizen SET Note = ?, Condition = ? WHERE citizenId =? AND subCategoryId=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, subCategoryText.getProfessionalNote());
-            preparedStatement.setString(2, subCategoryText.getCurrentLevelAssessment());
-            preparedStatement.setString(3, subCategoryText.getExpectedLevelAssessment());
-            preparedStatement.setInt(4, subCategoryText.getCondition());
-            preparedStatement.setInt(5, subCategoryText.getCitizenId());
-            preparedStatement.setInt(6, subCategoryText.getCategoryId());
+            preparedStatement.setInt(2, subCategoryText.getCondition());
+            preparedStatement.setInt(3, subCategoryText.getCitizenId());
+            preparedStatement.setInt(4, subCategoryText.getCategoryId());
             preparedStatement.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
