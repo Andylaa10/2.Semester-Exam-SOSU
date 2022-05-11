@@ -30,8 +30,8 @@ public class CitizenModel {
     /**
      * Creates a case using the createCitizen method from citizenManager
      */
-    public Citizen createCitizen(String firstname, String lastName, String SSN, String address, String sex) throws SQLException {
-        return citizenManager.createCitizen(firstname, lastName, SSN, address, sex);
+    public Citizen createCitizen(String firstname, String lastName, String SSN, String address, String sex, int schoolId) throws SQLException {
+        return citizenManager.createCitizen(firstname, lastName, SSN, address, sex, schoolId);
     }
 
     /**
