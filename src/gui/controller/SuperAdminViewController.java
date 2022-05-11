@@ -390,34 +390,6 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
-    @FXML
-    private void onActionAssignAdminToSchool() {
-        if (selectedSchoolToAssign != null && selectedAdminToAssign != null) {
-            try {
-                dataModelFacade.addAdminToSchool(selectedAdminToAssign.getId(), selectedSchoolToAssign.getId());
-                reloadAssignedAdminTable();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            ErrorHandlerController.createWarning("Fejl","Du skal vælge en skole og en admin før du kan tildele");
-        }
-    }
-
-    @FXML
-    private void onActionDeleteAdminFromSchool() {
-        if (selectedSchoolToAssign != null && selectedAssignedAdmin != null) {
-            try {
-                dataModelFacade.deleteAdminFromSchool(selectedAssignedAdmin.getId(), selectedSchoolToAssign.getId());
-                reloadAssignedAdminTable();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            ErrorHandlerController.createWarning("Fejl", "Du skal vælge en skole og en admin først");
-        }
-    }
-
     private void tableViewLoadSchools(ObservableList<School> allSchools) {
         tvSchools.setItems(getSchoolData());
     }
