@@ -147,6 +147,7 @@ public class CitizenDAO {
      * Main method used for testing this DAO class
      */
     public static void main(String[] args) throws Exception {
+        /**
         CitizenDAO citizenDAO = new CitizenDAO();
         citizenDAO.createCitizen("Andy Lam", "Nguyen", "040100-1111", "Golfvej 8", "Male");
         citizenDAO.createCitizen("Kristian", "Hollænder", "140396-2222", "Hollændervej 4", "Male");
@@ -158,6 +159,7 @@ public class CitizenDAO {
         citizenDAO.createCitizen("Jeppe", "Led", "221067-8888", "Designvej 96", "Male");
 
         System.out.println(citizenDAO.getCitizens());
+         */
     }
 
 

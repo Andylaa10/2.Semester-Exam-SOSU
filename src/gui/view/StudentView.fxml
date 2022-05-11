@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
+<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="182.0" style="-fx-background-color: rgb(81, 83, 222);">
          <children>
@@ -511,6 +511,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
+                  <TextField fx:id="txtFieldSchoolID" layoutX="173.0" layoutY="12.0" prefHeight="26.0" prefWidth="2.0" visible="false" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneOBS" layoutX="825.0" layoutY="51.0" prefHeight="302.0" prefWidth="326.0" visible="false">

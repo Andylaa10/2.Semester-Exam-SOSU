@@ -29,7 +29,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -40,9 +39,6 @@ import java.util.ResourceBundle;
 
 public class StudentViewController implements IController, Initializable {
 
-    public Button btnMobility;
-    public TextArea txtAreaCurrentLevelAssessment;
-    public ComboBox comboBoxExpectedLevelAssessment;
     /**
      * General info on Citizen pane
      */
@@ -71,9 +67,7 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private ImageView imgViewSaved;
     @FXML
-    private TextField txtFieldCitizenGeneralInfoID;
-    @FXML
-    private ImageView imageCoping;
+    private TextField txtFieldSchoolID;
 
 
     /**
@@ -98,20 +92,16 @@ public class StudentViewController implements IController, Initializable {
      */
     @FXML
     private TextArea txtAreaNoteOnCondition;
-
     @FXML
     private ComboBox comboBoxCurrentLevel;
     @FXML
     private ComboBox comboBoxExpectedLevel;
-
-
     @FXML
     private TextArea txtAreaCitizenGoals;
     @FXML
     private ComboBox comboboxPerformance;
     @FXML
     private ComboBox comboboxMeaningOfPerformance;
-
     /**
      * HealthCondition Tables
      */
@@ -129,6 +119,12 @@ public class StudentViewController implements IController, Initializable {
     private TableColumn<HealthConditionSubCategory, String> tcSubCategoriesName;
     @FXML
     private TextArea txtAreaNoteOnSubCategory;
+    @FXML
+    private Button btnMobility;
+    @FXML
+    private TextArea txtAreaCurrentLevelAssessment;
+    @FXML
+    private ComboBox comboBoxExpectedLevelAssessment;
 
     /**
      * General Information
@@ -296,6 +292,9 @@ public class StudentViewController implements IController, Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //https://stackoverflow.com/questions/30889732/javafx-tableview-change-row-color-based-on-column-value
+        //https://coderanch.com/t/633408/java/combobox-picture
+        //https://stackoverflow.com/questions/14327275/java-combobox-how-to-add-icon
 
     }
 
@@ -612,6 +611,7 @@ public class StudentViewController implements IController, Initializable {
         String citizenLastName = txtFieldLastName.getText();
         String citizenSSN = txtFieldSSN.getText();
         String citizenAddress = txtFieldAddress.getText();
+        int schoolId = Integer.parseInt(txtFieldSchoolID.getText());
         String sex = null;
         if (radioMale.isSelected()) {
             sex = "Male";
@@ -634,7 +634,7 @@ public class StudentViewController implements IController, Initializable {
         String equipmentAids = txtAreaEquipmentAids.getText();
         String homeLayout = txtAreaHomeLayout.getText();
 
-        Citizen citizen = new Citizen(id, citizenFirstName, citizenLastName, citizenSSN, citizenAddress, sex);
+        Citizen citizen = new Citizen(id, citizenFirstName, citizenLastName, citizenSSN, citizenAddress, sex, schoolId);
         GeneralInformation generalInformation = new GeneralInformation(generalInformationId, coping, motivation, resources, roles, habits, educationandjob,
                 lifeStory, network, healthInformation, equipmentAids, homeLayout);
         dataModelFacade.editCitizen(citizen);
@@ -914,6 +914,7 @@ public class StudentViewController implements IController, Initializable {
         labelTitle.setText("Elev");
         labelInfo.setText("Du er nu logget ind som Elev: " + user.getFirstName() + " " + user.getLastName());
         labelInfoNewLine.setText("");
+        txtFieldSchoolID.setText(String.valueOf(user.getSchoolId()));
     }
 
     /**
