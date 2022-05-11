@@ -447,8 +447,9 @@ public class AdminViewController implements Initializable, IController {
             String lastName = txtFieldTeacherLastName.getText();
             String userName = txtFieldTeacherUsername.getText();
             String password = txtFieldTeacherPassword.getText();
+            //TODO
 
-            dataModelFacade.createTeacher(firstName, lastName, userName, password, UserType.TEACHER);
+            dataModelFacade.createTeacher(firstName, lastName, userName, password, UserType.TEACHER,2);
             reloadTeacherTable();
         } else {
             ErrorHandlerController.createWarning("Fejl", "Læreren kunne ikke oprettes,"
@@ -693,8 +694,8 @@ public class AdminViewController implements Initializable, IController {
             String lastName = txtFieldLastName.getText();
             String userName = txtFieldUsername.getText();
             String password = txtFieldPassword.getText();
-
-            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT);
+            //TODO
+            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT,2);
             reloadStudentTable();
             clearStudentTxtField();
             tvStudent.getSelectionModel().clearSelection();

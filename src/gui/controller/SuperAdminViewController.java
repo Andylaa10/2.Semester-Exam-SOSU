@@ -122,6 +122,10 @@ public class SuperAdminViewController implements Initializable, IController {
     private AnchorPane anchorPaneCreateAdmin;
     @FXML
     private AnchorPane anchorPaneConfigureSchool;
+    @FXML
+    private ComboBox<School> comboSchool;
+    @FXML
+    private TextField txtSchoolID;
 
     private ObservableList<User> allAdmins = FXCollections.observableArrayList();
     private ObservableList<User> allAssignAdmins = FXCollections.observableArrayList();
@@ -129,7 +133,7 @@ public class SuperAdminViewController implements Initializable, IController {
     private ObservableList<School> allSchools = FXCollections.observableArrayList();
     private ObservableList<School> allAssignedSchools = FXCollections.observableArrayList();
 
-    DataModelFacade dataModelFacade;
+    private DataModelFacade dataModelFacade;
 
     private School selectedSchool;
     private User selectedAdmin;
@@ -293,8 +297,9 @@ public class SuperAdminViewController implements Initializable, IController {
             String lastName = txtFieldAdminLastName.getText();
             String userName = txtFieldAdminUsername.getText();
             String password = txtFieldAdminPassword.getText();
-
-            dataModelFacade.createAdmin(firstName, lastName, userName, password, UserType.ADMINISTRATOR);
+            int schoolId = 2;
+            //TODO schoolId is missing
+            dataModelFacade.createAdmin(firstName, lastName, userName, password, UserType.ADMINISTRATOR, schoolId);
             clearAdminTxtField();
             tvAdmins.getSelectionModel().clearSelection();
             reloadAdminTable();

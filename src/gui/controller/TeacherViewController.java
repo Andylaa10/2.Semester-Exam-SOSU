@@ -488,8 +488,9 @@ public class TeacherViewController implements Initializable, IController {
             String lastName = txtFieldLastName.getText();
             String userName = txtFieldUsername.getText();
             String password = txtFieldPassword.getText();
+            //TODO
 
-            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT);
+            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT,2);
             reloadStudentTable();
             clearStudentTxtField();
             tvStudent.getSelectionModel().clearSelection();

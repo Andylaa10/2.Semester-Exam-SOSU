@@ -34,6 +34,7 @@
          <effect>
             <Bloom threshold="0.64" />
          </effect></Button>
-      <ComboBox fx:id="comboBoxSchool" layoutX="514.0" layoutY="296.0" onAction="#handleSchoolCombo" prefWidth="150.0" promptText="Choose School" />
+      <ComboBox fx:id="comboBoxSchool" layoutX="514.0" layoutY="296.0" prefWidth="150.0" promptText="Vælg Skole" />
+      <TextField fx:id="txtFieldSchoolId" layoutX="199.0" layoutY="302.0" prefHeight="26.0" prefWidth="38.0" visible="false" />
    </children>
 </AnchorPane>

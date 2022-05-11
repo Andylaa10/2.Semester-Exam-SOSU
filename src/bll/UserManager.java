@@ -51,8 +51,8 @@ public class UserManager {
      * @return
      * @throws SQLException
      */
-    public User createStudent(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
-        return userDAO.createStudent(firstName, lastName, username, password, userType);
+    public User createStudent(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+        return userDAO.createStudent(firstName, lastName, username, password, userType, schoolId);
     }
 
     /**
@@ -65,8 +65,8 @@ public class UserManager {
      * @return
      * @throws SQLException
      */
-    public User createTeacher(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
-        return userDAO.createTeacher(firstName, lastName, username, password, userType);
+    public User createTeacher(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+        return userDAO.createTeacher(firstName, lastName, username, password, userType, schoolId);
     }
 
     /**
@@ -79,8 +79,8 @@ public class UserManager {
      * @return
      * @throws SQLException
      */
-    public User createAdmin(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
-        return userDAO.createAdmin(firstName, lastName, username, password, userType);
+    public User createAdmin(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+        return userDAO.createAdmin(firstName, lastName, username, password, userType, schoolId);
     }
 
 

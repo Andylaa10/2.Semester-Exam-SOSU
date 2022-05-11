@@ -8,7 +8,6 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -33,10 +32,14 @@ public class LoginViewController implements Initializable {
     private PasswordField pField;
     @FXML
     private ComboBox<School> comboBoxSchool;
+    @FXML
+    private TextField txtFieldSchoolId;
 
     private DataModelFacade facade;
 
     private ObservableList<School> allSchools = FXCollections.observableArrayList();
+
+    private School selectedSchoolOnComboBox;
 
     public LoginViewController() throws IOException {
         facade = new DataModelFacade();
@@ -46,11 +49,10 @@ public class LoginViewController implements Initializable {
     private void Login() throws IOException, SQLException {
         String username = txtFieldUsername.getText();
         String password = pField.getText();
-        //int school = comboBoxSchool.getSelectionModel().getSelectedIndex();
-        User user = facade.userLogin(username, password);
-        //User user = facade.userLogin(username, password, school);
+        int school = Integer.parseInt(txtFieldSchoolId.getText());
+        User user = facade.userLogin(username, password, school);
         SuperAdmin superAdmin = facade.superAdminLogin(username, password);
-        if (user != null && user.getUsertype() == UserType.STUDENT /*&& user.getSchoolId() == school*/) {
+        if (user != null && user.getUsertype() == UserType.STUDENT && user.getSchoolId() == school) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage switcher = (Stage) btnLogin.getScene().getWindow();
@@ -60,7 +62,7 @@ public class LoginViewController implements Initializable {
             switcher.setTitle("Student");
             switcher.show();
             switcher.centerOnScreen();
-        } else if (user != null && user.getUsertype() == UserType.TEACHER /*&& user.getSchoolId() == school*/) {
+        } else if (user != null && user.getUsertype() == UserType.TEACHER && user.getSchoolId() == school) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/TeacherView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage switcher = (Stage) btnLogin.getScene().getWindow();
@@ -70,7 +72,7 @@ public class LoginViewController implements Initializable {
             switcher.setTitle("Teacher");
             switcher.show();
             switcher.centerOnScreen();
-        } else if (user != null && user.getUsertype() == UserType.ADMINISTRATOR /*&& user.getSchoolId() == school*/) {
+        } else if (user != null && user.getUsertype() == UserType.ADMINISTRATOR && user.getSchoolId() == school) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/AdminView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage switcher = (Stage) btnLogin.getScene().getWindow();
@@ -100,6 +102,11 @@ public class LoginViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        selectedSchoolOnComboBox();
+        initializeCombo();
+    }
+
+    public void initializeCombo(){
         try {
             allSchools = FXCollections.observableArrayList(facade.getSchools());
         } catch (SQLException e) {
@@ -107,9 +114,13 @@ public class LoginViewController implements Initializable {
         }
         comboBoxSchool.setItems(allSchools);
     }
-
-    @FXML
-    private void handleSchoolCombo() {
-
+    public void selectedSchoolOnComboBox(){
+        this.comboBoxSchool.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue != null){
+                this.selectedSchoolOnComboBox = newValue;
+                comboBoxSchool.getSelectionModel().getSelectedItem();
+                txtFieldSchoolId.setText(String.valueOf(selectedSchoolOnComboBox.getId()));
+            }
+        });
     }
 }

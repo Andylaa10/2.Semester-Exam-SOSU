@@ -225,7 +225,7 @@ public class SuperAdminDAO {
     public List<User> getAdminsOnSchool(int schoolId) throws SQLException {
         ArrayList<User> allAdmins = new ArrayList<>();
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT [Login].loginID, [firstName], [lastName], [username], userType FROM [Login] INNER JOIN UserOnSchool ON UserOnSchool.loginId = [Login].loginID WHERE [Login].userType = ? AND UserOnSchool.schoolId = ?;";
+            String sql = "SELECT * FROM [Login] INNER JOIN School ON School.schoolID = [Login].schoolId WHERE [Login].userType=? AND [Login].schoolId =?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 
@@ -240,8 +240,9 @@ public class SuperAdminDAO {
                 String lastName = resultset.getString("lastName");
                 String username = resultset.getString("username");
                 UserType usertype = UserType.valueOf(resultset.getString("userType"));
+                int schoolID = resultset.getInt("schoolId");
 
-                User admin = new User(id, firstName, lastName, username, usertype);
+                User admin = new User(id, firstName, lastName, username, usertype, schoolID);
                 allAdmins.add(admin);
             }
 
@@ -255,7 +256,7 @@ public class SuperAdminDAO {
      * Adds an admin to a school, using the UserOnSchool table.
      */
     public void addAdminToSchool(int loginId, int schoolId){
-        String sql = "INSERT INTO UserOnSchool (loginId, schoolId) VALUES (?,?);";
+        String sql = "INSERT INTO [Login] (loginId, schoolId) VALUES (?,?);";
         try (Connection con = databaseConnector.getConnection();
              PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             st.setInt(1, loginId);
@@ -339,11 +340,12 @@ public class SuperAdminDAO {
      */
     public static void main(String[] args) throws IOException, SQLException {
         SuperAdminDAO superAdminDAO = new SuperAdminDAO();
-        superAdminDAO.createSchool("SOSU Esbjerg");
+        //superAdminDAO.createSchool("SOSU Bramming");
+        System.out.println(superAdminDAO.getSchools());
         //System.out.println(superAdminDAO.getAdminsOnSchool(4));
         //System.out.println(superAdminDAO.getSchools());
         //superAdminDAO.deleteSchool(1);
-        superAdminDAO.createSuperAdmin("superadmin", "1");
+        //superAdminDAO.createSuperAdmin("superadmin", "1");
         //superAdminDAO.deleteSuperAdmin(1);
     }
 

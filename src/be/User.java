@@ -34,6 +34,25 @@ public class User implements ILogin {
         this.userType = userType;
     }
 
+    public User(int id, String firstName, String lastName, String username, String password, UserType userType, int schoolId) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.userType = userType;
+        this.schoolId = schoolId;
+    }
+
+    public User(int id, String firstName, String lastName, String username, UserType userType, int schoolId) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.userType = userType;
+        this.schoolId = schoolId;
+    }
+
     /**
      * Gets the id
      */

@@ -39,22 +39,22 @@ public class UserModel {
     /**
      * Creates a student using the createStudent method from userManager
      */
-    public User createStudent(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
-        return userManager.createStudent(firstName, lastName, username, password, userType);
+    public User createStudent(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+        return userManager.createStudent(firstName, lastName, username, password, userType, schoolId);
     }
 
     /**
      * Creates a teacher using the createTeacher method from userManager
      */
-    public User createTeacher(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
-        return userManager.createTeacher(firstName, lastName, username, password, userType);
+    public User createTeacher(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+        return userManager.createTeacher(firstName, lastName, username, password, userType, schoolId);
     }
 
     /**
      * Creates an admin using the createAdmin method from userManager
      */
-    public User createAdmin(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
-        return userManager.createAdmin(firstName, lastName, username, password, userType);
+    public User createAdmin(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+        return userManager.createAdmin(firstName, lastName, username, password, userType, schoolId);
     }
 
     /**

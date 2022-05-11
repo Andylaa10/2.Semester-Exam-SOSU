@@ -67,22 +67,22 @@ public class DataModelFacade {
     /**
      * Creates a student using the createStudent method from userModel
      */
-    public User createStudent(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
-        return userModel.createStudent(firstName, lastName, username, password, userType);
+    public User createStudent(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+        return userModel.createStudent(firstName, lastName, username, password, userType, schoolId);
     }
 
     /**
      * Creates a teacher using the createTeacher method from userModel
      */
-    public User createTeacher(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
-        return userModel.createTeacher(firstName, lastName, username, password, userType);
+    public User createTeacher(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+        return userModel.createTeacher(firstName, lastName, username, password, userType, schoolId);
     }
 
     /**
      * Creates an admin using the createAdmin method from userModel
      */
-    public User createAdmin(String firstName, String lastName, String username, String password, UserType userType) throws SQLException {
-        return userModel.createAdmin(firstName, lastName, username, password, userType);
+    public User createAdmin(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+        return userModel.createAdmin(firstName, lastName, username, password, userType, schoolId);
     }
 
     /**
