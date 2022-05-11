@@ -30,11 +30,11 @@
          <effect>
             <DropShadow />
          </effect></PasswordField>
-      <Button fx:id="btnLogin" layoutX="350.0" layoutY="412.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="98.0" text="Login">
+      <ComboBox fx:id="comboBoxSchool" layoutX="324.0" layoutY="409.0" prefWidth="150.0" promptText="Vælg Skole" />
+      <Button fx:id="btnLogin" layoutX="350.0" layoutY="451.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="98.0" text="Login">
          <effect>
             <Bloom threshold="0.64" />
          </effect></Button>
-      <ComboBox fx:id="comboBoxSchool" layoutX="514.0" layoutY="296.0" prefWidth="150.0" promptText="Vælg Skole" />
       <TextField fx:id="txtFieldSchoolId" layoutX="199.0" layoutY="302.0" prefHeight="26.0" prefWidth="38.0" visible="false" />
    </children>
 </AnchorPane>

@@ -225,8 +225,8 @@
                   <ColorAdjust brightness="0.3" />
                </effect>
             </Button>
-            <ComboBox fx:id="comboSchool" layoutX="15.0" layoutY="11.0" onAction="#handleComboSchool" prefWidth="150.0" promptText="Vælg Skole " />
-            <TextField fx:id="txtSchoolID" layoutX="538.0" layoutY="11.0" prefHeight="26.0" prefWidth="18.0" />
+            <ComboBox fx:id="comboSchool" layoutX="15.0" layoutY="11.0" prefWidth="150.0" promptText="Vælg Skole " />
+            <TextField fx:id="txtSchoolID" layoutX="538.0" layoutY="11.0" prefHeight="26.0" prefWidth="18.0" visible="false" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneConfigureSchool" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">

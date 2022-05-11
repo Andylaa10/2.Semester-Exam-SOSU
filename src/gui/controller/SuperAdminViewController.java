@@ -133,10 +133,12 @@ public class SuperAdminViewController implements Initializable, IController {
     private ObservableList<User> allAssignedAdmins = FXCollections.observableArrayList();
     private ObservableList<School> allSchools = FXCollections.observableArrayList();
     private ObservableList<School> allAssignedSchools = FXCollections.observableArrayList();
+    private ObservableList<School> allSchoolsOnCombo = FXCollections.observableArrayList();
 
     private DataModelFacade dataModelFacade;
 
     private School selectedSchool;
+    private School selectedSchoolOnComboBox;
     private User selectedAdmin;
     
     private School selectedSchoolToAssign;
@@ -152,6 +154,7 @@ public class SuperAdminViewController implements Initializable, IController {
         setAnchorPanesVisibility();
         try {
             initializeTables();
+            initializeComboBox();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -160,6 +163,7 @@ public class SuperAdminViewController implements Initializable, IController {
         selectedSchoolToAssign();
         selectedAdminToAssign();
         selectedAssignedAdmin();
+        selectedSchoolOnComboBox();
     }
 
     private void initializeTables() throws Exception {
@@ -204,6 +208,11 @@ public class SuperAdminViewController implements Initializable, IController {
         } catch (Exception e) {
             throw new Exception();
         }
+    }
+
+    public void initializeComboBox() throws SQLException {
+        allSchoolsOnCombo = FXCollections.observableArrayList(dataModelFacade.getSchools());
+        comboSchool.setItems(allSchoolsOnCombo);
     }
 
     @FXML
@@ -293,13 +302,13 @@ public class SuperAdminViewController implements Initializable, IController {
 
     @FXML
     private void onActionCreateAdmin() throws SQLException {
-        if (!txtFieldAdminFirstName.getText().isEmpty() && !txtFieldAdminLastName.getText().isEmpty() && !txtFieldAdminUsername.getText().isEmpty() && !txtFieldAdminPassword.getText().isEmpty()){
+        if (!txtFieldAdminFirstName.getText().isEmpty() && !txtFieldAdminLastName.getText().isEmpty() && !txtFieldAdminUsername.getText().isEmpty() && !txtFieldAdminPassword.getText().isEmpty() && comboSchool.getSelectionModel().getSelectedItem() != null){
             String firstName = txtFieldAdminFirstName.getText();
             String lastName = txtFieldAdminLastName.getText();
             String userName = txtFieldAdminUsername.getText();
             String password = txtFieldAdminPassword.getText();
-            int schoolId = 2;
-            //TODO schoolId is missing
+            int schoolId = Integer.parseInt(txtSchoolID.getText());
+            //TODO Warning
             dataModelFacade.createAdmin(firstName, lastName, userName, password, UserType.ADMINISTRATOR, schoolId);
             clearAdminTxtField();
             tvAdmins.getSelectionModel().clearSelection();
@@ -516,6 +525,16 @@ public class SuperAdminViewController implements Initializable, IController {
         txtFieldAdminPassword.setText(admin.getPassword());
     }
 
+    private void selectedSchoolOnComboBox(){
+        this.comboSchool.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (newValue != null) {
+                this.selectedSchoolOnComboBox = newValue;
+                comboSchool.getSelectionModel().getSelectedItem();
+                txtSchoolID.setText(String.valueOf(selectedSchoolOnComboBox.getId()));
+            }
+        }));
+    }
+
     private void selectedSchool() {
         this.tvSchools.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
@@ -641,7 +660,4 @@ public class SuperAdminViewController implements Initializable, IController {
         labelInfoNewLine.setText("");
     }
 
-
-    public void handleComboSchool(ActionEvent actionEvent) {
-    }
 }

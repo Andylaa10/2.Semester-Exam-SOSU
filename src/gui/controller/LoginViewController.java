@@ -50,41 +50,8 @@ public class LoginViewController implements Initializable {
     private void Login() throws IOException, SQLException {
         String username = txtFieldUsername.getText();
         String password = pField.getText();
-        txtFieldSchoolId.setText("99999");
-        int school = Integer.parseInt(txtFieldSchoolId.getText());
-        User user = facade.userLogin(username, password, school);
         SuperAdmin superAdmin = facade.superAdminLogin(username, password);
-        if (user != null && user.getUsertype() == UserType.STUDENT && user.getSchoolId() == school) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage switcher = (Stage) btnLogin.getScene().getWindow();
-            switcher.setScene(scene);
-            IController controller = loader.getController();
-            controller.setUser(user);
-            switcher.setTitle("Student");
-            switcher.show();
-            switcher.centerOnScreen();
-        } else if (user != null && user.getUsertype() == UserType.TEACHER && user.getSchoolId() == school) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/TeacherView.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage switcher = (Stage) btnLogin.getScene().getWindow();
-            switcher.setScene(scene);
-            IController controller = loader.getController();
-            controller.setUser(user);
-            switcher.setTitle("Teacher");
-            switcher.show();
-            switcher.centerOnScreen();
-        } else if (user != null && user.getUsertype() == UserType.ADMINISTRATOR && user.getSchoolId() == school) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/AdminView.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage switcher = (Stage) btnLogin.getScene().getWindow();
-            switcher.setScene(scene);
-            IController controller = loader.getController();
-            controller.setUser(user);
-            switcher.setTitle("Admin");
-            switcher.show();
-            switcher.centerOnScreen();
-        } else if (superAdmin != null) {
+        if (superAdmin != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/SuperAdminView.fxml"));
             Scene scene = new Scene(loader.load());
             Stage switcher = (Stage) btnLogin.getScene().getWindow();
@@ -92,8 +59,42 @@ public class LoginViewController implements Initializable {
             switcher.setTitle("Super Admin");
             switcher.show();
             switcher.centerOnScreen();
-        } else {
-            ErrorHandlerController.createWarning("Fejl i login", "Forkert brugernavn eller password");
+        }else{
+            int school = Integer.parseInt(txtFieldSchoolId.getText());
+            User user = facade.userLogin(username, password, school);
+            if (user != null && user.getUsertype() == UserType.STUDENT && user.getSchoolId() == school) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
+                Scene scene = new Scene(loader.load());
+                Stage switcher = (Stage) btnLogin.getScene().getWindow();
+                switcher.setScene(scene);
+                IController controller = loader.getController();
+                controller.setUser(user);
+                switcher.setTitle("Student");
+                switcher.show();
+                switcher.centerOnScreen();
+            } else if (user != null && user.getUsertype() == UserType.TEACHER && user.getSchoolId() == school) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/TeacherView.fxml"));
+                Scene scene = new Scene(loader.load());
+                Stage switcher = (Stage) btnLogin.getScene().getWindow();
+                switcher.setScene(scene);
+                IController controller = loader.getController();
+                controller.setUser(user);
+                switcher.setTitle("Teacher");
+                switcher.show();
+                switcher.centerOnScreen();
+            } else if (user != null && user.getUsertype() == UserType.ADMINISTRATOR && user.getSchoolId() == school) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/AdminView.fxml"));
+                Scene scene = new Scene(loader.load());
+                Stage switcher = (Stage) btnLogin.getScene().getWindow();
+                switcher.setScene(scene);
+                IController controller = loader.getController();
+                controller.setUser(user);
+                switcher.setTitle("Admin");
+                switcher.show();
+                switcher.centerOnScreen();
+            } else {
+                ErrorHandlerController.createWarning("Fejl i login", "Forkert brugernavn, adgangskode eller skole");
+            }
         }
     }
 
@@ -122,6 +123,7 @@ public class LoginViewController implements Initializable {
                 this.selectedSchoolOnComboBox = newValue;
                 comboBoxSchool.getSelectionModel().getSelectedItem();
                 txtFieldSchoolId.setText(String.valueOf(selectedSchoolOnComboBox.getId()));
+                txtFieldSchoolId.setDisable(false);
             }
         });
     }
