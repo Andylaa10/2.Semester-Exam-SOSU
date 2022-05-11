@@ -37,8 +37,8 @@ public class CitizenManager {
      * @return
      * @throws SQLException
      */
-    public Citizen createCitizen(String firstname, String lastName, String SSN, String address, String sex) throws SQLException {
-        return citizenDAO.createCitizen(firstname, lastName, SSN, address, sex);
+    public Citizen createCitizen(String firstname, String lastName, String SSN, String address, String sex, int schoolId) throws SQLException {
+        return citizenDAO.createCitizen(firstname, lastName, SSN, address, sex, schoolId);
     }
 
     /**

@@ -90,6 +90,8 @@ public class AdminViewController implements Initializable, IController {
     private TextField txtFieldTeacherPassword;
     @FXML
     private TextField txtFieldTeacherID;
+    @FXML
+    private TextField txtFieldSchoolID;
 
 
     /**
@@ -447,9 +449,8 @@ public class AdminViewController implements Initializable, IController {
             String lastName = txtFieldTeacherLastName.getText();
             String userName = txtFieldTeacherUsername.getText();
             String password = txtFieldTeacherPassword.getText();
-            //TODO
-
-            dataModelFacade.createTeacher(firstName, lastName, userName, password, UserType.TEACHER,2);
+            //TODO Errorhandling ved samme username
+            dataModelFacade.createTeacher(firstName, lastName, userName, password, UserType.TEACHER, Integer.parseInt(txtFieldSchoolID.getText()));
             reloadTeacherTable();
         } else {
             ErrorHandlerController.createWarning("Fejl", "Læreren kunne ikke oprettes,"
@@ -637,7 +638,7 @@ public class AdminViewController implements Initializable, IController {
             String healthInformation = "";
             String equipmentAids = "";
             String homeLayout = "";
-            dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex);
+            dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex, Integer.parseInt(txtFieldSchoolID.getText()));
             dataModelFacade.createGeneralInformation(coping, motivation, resources, roles, habits, educationAndjob,
                     lifeStory, network, healthInformation, equipmentAids, homeLayout);
             clearTextFieldCreate();
@@ -694,11 +695,11 @@ public class AdminViewController implements Initializable, IController {
             String lastName = txtFieldLastName.getText();
             String userName = txtFieldUsername.getText();
             String password = txtFieldPassword.getText();
-            //TODO
-            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT,2);
+            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT, Integer.parseInt(txtFieldSchoolID.getText()));
             reloadStudentTable();
             clearStudentTxtField();
             tvStudent.getSelectionModel().clearSelection();
+            //TODO Errorhandling ved samme username
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal først udfylde alle den studerendes oplysninger");
         }
@@ -1265,6 +1266,7 @@ public class AdminViewController implements Initializable, IController {
         labelTitle.setText("Admin");
         labelInfo.setText("Du er nu logget ind som admin: " + user.getFirstName() + user.getLastName());
         labelInfoNewLine.setText("");
+        txtFieldSchoolID.setText(String.valueOf(user.getSchoolId()));
     }
 
 }

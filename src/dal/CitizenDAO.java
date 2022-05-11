@@ -80,15 +80,16 @@ public class CitizenDAO {
     /**
      * Creates a citizen, by inserting firstName, lastName, SSN, address and sex into the Citizen table
      */
-    public Citizen createCitizen(String firstName, String lastName, String SSN, String address, String sex) throws SQLException {
+    public Citizen createCitizen(String firstName, String lastName, String SSN, String address, String sex, int schoolId) throws SQLException {
         try (Connection connection = connector.getConnection()) {
-            String sql = "INSERT INTO Citizen (firstName, lastName , SSN, address, sex) VALUES (?,?,?,?,?);";
+            String sql = "INSERT INTO Citizen (firstName, lastName , SSN, address, sex, schoolId) VALUES (?,?,?,?,?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setString(1, firstName);
                 preparedStatement.setString(2, lastName);
                 preparedStatement.setString(3, SSN);
                 preparedStatement.setString(4, address);
                 preparedStatement.setString(5, sex);
+                preparedStatement.setInt(6,schoolId);
                 preparedStatement.execute();
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 int id = 0;
@@ -96,7 +97,7 @@ public class CitizenDAO {
                     id = resultSet.getInt(1);
                 }
 
-                Citizen citizen = new Citizen(id, firstName, lastName, SSN, address, sex);
+                Citizen citizen = new Citizen(id, firstName, lastName, SSN, address, sex, schoolId);
                 return citizen;
             }
         } catch (SQLServerException throwables) {

@@ -48,6 +48,8 @@ public class TeacherViewController implements Initializable, IController {
     private AnchorPane anchorPaneCase;
     @FXML
     private AnchorPane anchorPaneStudent;
+    @FXML
+    private TextField txtFieldSchoolID;
 
     /**
      * Student pane
@@ -445,7 +447,7 @@ public class TeacherViewController implements Initializable, IController {
             String healthInformation = "";
             String equipmentAids = "";
             String homeLayout = "";
-            dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex);
+            dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex, Integer.parseInt(txtFieldSchoolID.getText()));
             dataModelFacade.createGeneralInformation(coping, motivation, resources, roles, habits, educationandjob,
                     lifeStory, network, healthInformation, equipmentAids, homeLayout);
             reloadCreatedCitizensTable();
@@ -1056,6 +1058,7 @@ public class TeacherViewController implements Initializable, IController {
         labelTitle.setText("Lærer");
         labelInfo.setText("Du er nu logget ind som lærer: " + user.getFirstName() + user.getLastName());
         labelInfoNewLine.setText("");
+        txtFieldSchoolID.setText(String.valueOf(user.getSchoolId()));
     }
 
 
