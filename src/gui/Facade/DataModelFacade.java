@@ -323,9 +323,9 @@ public class DataModelFacade {
     public HealthConditionSubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
         return healthConditionsModel.getTextOnSubCategory(citizenId, subCategoryId);
     }
-    
-    public void insertIntoSubCategory(int citizenId, int subCategoryId, String note, int condition) throws SQLException {
-        healthConditionsModel.insertIntoSubCategory(citizenId, subCategoryId, note, condition);
+
+    public void insertIntoSubCategory(int citizenId, int subCategoryId, String professionalnote, String currentLevelAssessment, String expectedLevelAssessment, int condition) throws SQLException {
+        healthConditionsModel.insertIntoSubCategory(citizenId, subCategoryId, professionalnote, currentLevelAssessment, expectedLevelAssessment, condition);
     }
 
     public void editSubcategory(HealthConditionSubCategoryText subCategoryText) throws Exception {

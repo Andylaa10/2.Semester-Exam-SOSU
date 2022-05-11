@@ -41,6 +41,8 @@ import java.util.ResourceBundle;
 public class StudentViewController implements IController, Initializable {
 
     public Button btnMobility;
+    public TextArea txtAreaCurrentLevelAssessment;
+    public ComboBox comboBoxExpectedLevelAssessment;
     /**
      * General info on Citizen pane
      */
@@ -264,6 +266,7 @@ public class StudentViewController implements IController, Initializable {
         setupToggleGender();
         setupToggleHealthCondition();
         setFunctionalAbilityComboBoxItems();
+        setExpectedLevelAssessmentComboBoxItems();
     }
 
     /**
@@ -336,7 +339,15 @@ public class StudentViewController implements IController, Initializable {
         if (txtFieldCitizenID != null && subCatTxtID != null) {
             HealthConditionSubCategoryText subCategoryText = dataModelFacade.getTextOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), Integer.parseInt(subCatTxtID.getText()));
             if (subCategoryText != null) {
-                txtAreaNoteOnSubCategory.setText(subCategoryText.getNote());
+                txtAreaNoteOnSubCategory.setText(subCategoryText.getProfessionalNote());
+                txtAreaCurrentLevelAssessment.setText(subCategoryText.getCurrentLevelAssessment());
+                if (subCategoryText.getExpectedLevelAssessment().equals("Mindskes")) {
+                    comboboxPerformance.getSelectionModel().select(0);
+                } else if (subCategoryText.getExpectedLevelAssessment().equals("Forbliver uændret")) {
+                    comboboxPerformance.getSelectionModel().select(1);
+                } else if (subCategoryText.getExpectedLevelAssessment().equals("Forsvinder")) {
+                    comboboxPerformance.getSelectionModel().select(2);
+                }
                 if (subCategoryText.getCondition() == 0) {
                     radioNotRelevant.setSelected(true);
                 } else if (subCategoryText.getCondition() == 1) {
@@ -375,6 +386,12 @@ public class StudentViewController implements IController, Initializable {
         radioMale.setToggleGroup(group);
         radioFemale.setToggleGroup(group);
         radioOther.setToggleGroup(group);
+    }
+
+    private void setExpectedLevelAssessmentComboBoxItems(){
+        comboBoxExpectedLevelAssessment.getItems().addAll(
+                "Mindskes", "Forbliver uændret", "Forsvinder"
+        );
     }
 
     private void setFunctionalAbilityComboBoxItems() {
@@ -428,18 +445,21 @@ public class StudentViewController implements IController, Initializable {
             case "Other" -> radioOther.setSelected(true);
         }
 
+
         GeneralInformation selectedGeneralInformation = dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
-        txtAreaCoping.setText(selectedGeneralInformation.getCoping());
-        txtAreaMotivation.setText(selectedGeneralInformation.getMotivation());
-        txtAreaResources.setText(selectedGeneralInformation.getResources());
-        txtAreaRoles.setText(selectedGeneralInformation.getRoles());
-        txtAreaHabits.setText(selectedGeneralInformation.getHabits());
-        txtAreaEducationAndJobs.setText(selectedGeneralInformation.getEducationAndJob());
-        txtAreaLifeStory.setText(selectedGeneralInformation.getLifeStory());
-        txtAreaHealthInfo.setText(selectedGeneralInformation.getHealthInformation());
-        txtAreaEquipmentAids.setText(selectedGeneralInformation.getEquipmentAids());
-        txtAreaHomeLayout.setText(selectedGeneralInformation.getHomeLayout());
-        txtAreaNetwork.setText(selectedGeneralInformation.getNetwork());
+        if(selectedGeneralInformation != null){
+            txtAreaCoping.setText(selectedGeneralInformation.getCoping());
+            txtAreaMotivation.setText(selectedGeneralInformation.getMotivation());
+            txtAreaResources.setText(selectedGeneralInformation.getResources());
+            txtAreaRoles.setText(selectedGeneralInformation.getRoles());
+            txtAreaHabits.setText(selectedGeneralInformation.getHabits());
+            txtAreaEducationAndJobs.setText(selectedGeneralInformation.getEducationAndJob());
+            txtAreaLifeStory.setText(selectedGeneralInformation.getLifeStory());
+            txtAreaHealthInfo.setText(selectedGeneralInformation.getHealthInformation());
+            txtAreaEquipmentAids.setText(selectedGeneralInformation.getEquipmentAids());
+            txtAreaHomeLayout.setText(selectedGeneralInformation.getHomeLayout());
+            txtAreaNetwork.setText(selectedGeneralInformation.getNetwork());
+        }
     }
 
     /**
@@ -769,16 +789,18 @@ public class StudentViewController implements IController, Initializable {
             if (dataModelFacade.getHealthConditionData(Integer.parseInt(txtFieldCitizenID.getText()), Integer.parseInt(subCatTxtID.getText())) == null) {
                 int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
                 int subCategoryId = Integer.parseInt(subCatTxtID.getText());
-                String note = txtAreaNoteOnSubCategory.getText();
+                String professionalNote = txtAreaNoteOnSubCategory.getText();
+                String currentLevelAssessment = txtAreaCurrentLevelAssessment.getText();
+                String expectedLevelAssessment = String.valueOf(comboBoxExpectedLevelAssessment.getSelectionModel().getSelectedItem());
                 if (radioNotRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
-                    dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
+                    dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                 } else if (radioPotential.isSelected()) {
                     int conditionValue = ConditionEnum.POTENTIAL.getValue();
-                    dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
+                    dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, professionalNote,  currentLevelAssessment, expectedLevelAssessment, conditionValue);
                 } else if (radioRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.RELEVANT.getValue();
-                    dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, note, conditionValue);
+                    dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                 }
                 System.out.println("Create");
             } else {

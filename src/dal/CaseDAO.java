@@ -170,7 +170,21 @@ public class CaseDAO {
     public static void main(String[] args) throws Exception {
         CaseDAO caseDAO = new CaseDAO();
         //caseDAO.deleteCaseFromCitizen(107, 2);
-        caseDAO.createCase("Brækket ben", "Hjælp med at indtaste informationer");
-        //System.out.println(caseDAO.getCasesOnCitizen(1).toString());
+        caseDAO.createCase("Knoglebrud i anklen", "Borgeren har oplevet et knoglebrud af 3. grad, skal restituere " +
+                "i op til 12 uger ");
+        caseDAO.createCase("Kateter seponering", "Borgeren har problemer med udskillelsen af affaldsstoffer" +
+                " derfor skal borgeren have seponeret sit kateter");
+        caseDAO.createCase("Covid-19 Positiv Testsvar", "Borgeren har modtaget en positiv covid-19 Delta test." +
+                " Derfor skal der tages covid 19 forholdsregler ved håndteringen af borgeren");
+        caseDAO.createCase("Skulder skred i venstre skulder", "Borgeren har oplevet en skulder der er gået af led. " +
+                "Borgerens ledbånd i skulderen er revet over grundet et 3. grads skulderskred, restitution i op til 8 uger med slynge");
+        caseDAO.createCase("Cancer sår i brystet", "Grundet brystkræft har borgeren oplevet cancer sår omkring " +
+                "brystområdet. Der skal ydes sårepleje på inficerede sår.");
+        caseDAO.createCase("Diabetes type 2", "Borgeren har fået eklæret diabetes type 2. Derfor skal der " +
+                "holdes øje med kost og sukkerindtag, samt blodsukkerniveau og insulin");
+        caseDAO.createCase("Afasi af mindre grad", "Borgeren har for nyligt oplevet en blodprop der har " +
+                "vist sig at give taleproblemer (afasi), derfor skal der observeres om der bliver forbedret");
+        System.out.println(caseDAO.getCases());
+
     }
 }

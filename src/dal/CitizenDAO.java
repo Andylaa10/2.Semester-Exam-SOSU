@@ -147,10 +147,16 @@ public class CitizenDAO {
      */
     public static void main(String[] args) throws Exception {
         CitizenDAO citizenDAO = new CitizenDAO();
-        //citizenDAO.createCitizen("Joe", "Mama", "040119-2311", "Bjergberg Allé 205", "Male");
-        //citizenDAO.deleteCitizen(3);
-        //citizenDAO.deleteCitizen(4);
-        System.out.println(citizenDAO.getInfoOnCitizen(8));
+        citizenDAO.createCitizen("Andy Lam", "Nguyen", "040100-1111", "Golfvej 8", "Male");
+        citizenDAO.createCitizen("Kristian", "Hollænder", "140396-2222", "Hollændervej 4", "Male");
+        citizenDAO.createCitizen("Marcus", "Iversen", "271100-3333", "Skolegade 8", "Male");
+        citizenDAO.createCitizen("Lise", "Billeschou", "170901-4444", "Skolegade 8", "Female");
+        citizenDAO.createCitizen("Agnes", "Mynte", "140598-5555", "Transvej 2", "Other");
+        citizenDAO.createCitizen("Peter", "Stegger", "260869-6666", "Hackervej 69", "Male");
+        citizenDAO.createCitizen("Trine", "Thomsen", "190974-7777", "ITO Vej 12", "Female");
+        citizenDAO.createCitizen("Jeppe", "Led", "221067-8888", "Designvej 96", "Male");
+
+        System.out.println(citizenDAO.getCitizens());
     }
 
 
