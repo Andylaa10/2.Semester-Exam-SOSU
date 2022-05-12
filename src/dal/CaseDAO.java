@@ -75,6 +75,36 @@ public class CaseDAO {
     }
 
     /**
+     * Read what cases a citizen is assigned to
+     */
+    public Case getCaseOnCitizen(int citizenId, int casesId) throws SQLException {
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT Cases.casesID, name, date, info FROM Cases INNER JOIN CasesOnCitizen ON CasesOnCitizen.casesId = Cases.casesID WHERE CasesOnCitizen.citizenId = ? AND CasesOnCitizen.casesId = ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setInt(1, citizenId);
+            preparedStatement.setInt(2, casesId);
+            preparedStatement.execute();
+            ResultSet resultset = preparedStatement.executeQuery();
+            while (resultset.next()) {
+                int id = resultset.getInt("casesID");
+                String name = resultset.getString("name");
+                String date = resultset.getString("date");
+                String info = resultset.getString("info");
+
+
+                Case aCase = new Case(id, name, date, info);
+                return aCase;
+            }
+
+        } catch (SQLServerException throwables) {
+            throw new SQLException();
+        }
+        return null;
+    }
+
+    /**
      * Creates a case, by inserting name and info. Date is added using a method in the controller.
      */
     public Case createCase (String name, String info, int schoolId) throws SQLException {
@@ -185,7 +215,11 @@ public class CaseDAO {
                 "holdes øje med kost og sukkerindtag, samt blodsukkerniveau og insulin", 1);
         caseDAO.createCase("Afasi af mindre grad", "Borgeren har for nyligt oplevet en blodprop der har " +
                 "vist sig at give taleproblemer (afasi), derfor skal der observeres om der bliver forbedret", 1);
-        System.out.println(caseDAO.getCases());
+        /**System.out.println(caseDAO.getCaseOnCitizen(7,1));
+        System.out.println("-----------------------------------------");
+        System.out.println(caseDAO.getCaseOnCitizen(7,2));
+        System.out.println("-----------------------------------------");
+        System.out.println(caseDAO.getCaseOnCitizen(7,3));*/
 
     }
 }

@@ -56,4 +56,7 @@ public class CaseModel {
     public List<Case> getCasesOnCitizen(int citizenId) throws SQLException {
         return caseManager.getCasesOnCitizen(citizenId);
     }
+    public Case getCaseOnCitizen(int citizenId, int casesId) throws SQLException {
+        return caseManager.getCaseOnCitizen(citizenId, casesId);
+    }
 }

@@ -1062,7 +1062,7 @@ public class StudentViewController implements IController, Initializable {
         btnClickGeneralInformation();
     }
 
-    public void btnOpenCitizenInfo(ActionEvent actionEvent) throws IOException {
+    public void btnOpenCitizenInfo(ActionEvent actionEvent) throws IOException, SQLException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/gui/view/CitizenInfoView.fxml"));
 
@@ -1072,7 +1072,6 @@ public class StudentViewController implements IController, Initializable {
 
         citizenInfoViewController = fxmlLoader.getController();
         citizenInfoViewController.setSelectedCitizen(selectedCitizenOnComboBox);
-
 
         stage.setScene(scene);
         stage.setResizable(false);
