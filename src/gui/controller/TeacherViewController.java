@@ -450,9 +450,9 @@ public class TeacherViewController implements Initializable, IController {
             dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex, Integer.parseInt(txtFieldSchoolID.getText()));
             dataModelFacade.createGeneralInformation(coping, motivation, resources, roles, habits, educationandjob,
                     lifeStory, network, healthInformation, equipmentAids, homeLayout);
+            clearTextFieldCreate();
             reloadCreatedCitizensTable();
             reloadCitizenTable();
-            clearTextFieldCreate();
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal udfylde alle tekstfelter");
         }
@@ -490,9 +490,9 @@ public class TeacherViewController implements Initializable, IController {
             String lastName = txtFieldLastName.getText();
             String userName = txtFieldUsername.getText();
             String password = txtFieldPassword.getText();
-            //TODO
 
-            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT,2);
+            //TODO Make errorhandling if username is already taken
+            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT,Integer.parseInt(txtFieldSchoolID.getText()));
             reloadStudentTable();
             clearStudentTxtField();
             tvStudent.getSelectionModel().clearSelection();
