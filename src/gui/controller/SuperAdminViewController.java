@@ -207,16 +207,8 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     public void initializeComboBox() throws SQLException {
-        allAssignAdmins = FXCollections.observableArrayList(dataModelFacade.getAssignedAdmins(Integer.parseInt(txtFieldSchoolID.getText())));
+        allSchoolsOnCombo = FXCollections.observableArrayList(dataModelFacade.getSchools());
         comboSchool.setItems(allSchoolsOnCombo);
-    }
-
-    @FXML
-    private void btnHandleComboSchool() throws SQLException {
-        if (comboSchool.getSelectionModel().getSelectedItem().getId() == 0){
-            allAssignedAdmins = FXCollections.observableArrayList(dataModelFacade.getAssignedAdmins(Integer.parseInt(txtSchoolID.getText())));
-        }
-
     }
 
     @FXML
