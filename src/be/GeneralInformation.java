@@ -2,6 +2,7 @@ package be;
 
 public class GeneralInformation {
     private int id;
+    private int citizenId;
     private String coping;
     private String motivation;
     private String resources;
@@ -31,6 +32,34 @@ public class GeneralInformation {
         this.healthInformation = healthInformation;
         this.equipmentAids = equipmentAids;
         this.homeLayout = homeLayout;
+    }
+
+    public GeneralInformation(int id, int citizenId, String coping, String motivation, String resources, String roles, String habits, String educationAndJob, String lifeStory, String network, String healthInformation, String equipmentAids, String homeLayout) {
+        this.id = id;
+        this.citizenId = citizenId;
+        this.coping = coping;
+        this.motivation = motivation;
+        this.resources = resources;
+        this.roles = roles;
+        this.habits = habits;
+        this.educationAndJob = educationAndJob;
+        this.lifeStory = lifeStory;
+        this.network = network;
+        this.healthInformation = healthInformation;
+        this.equipmentAids = equipmentAids;
+        this.homeLayout = homeLayout;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCitizenId() {
+        return citizenId;
+    }
+
+    public void setCitizenId(int citizenId) {
+        this.citizenId = citizenId;
     }
 
     /**

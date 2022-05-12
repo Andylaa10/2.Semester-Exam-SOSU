@@ -436,20 +436,8 @@ public class TeacherViewController implements Initializable, IController {
             } else if (radioOther.isSelected()) {
                 sex = "Other";
             }
-            String coping = "";
-            String motivation = "";
-            String resources = "";
-            String roles = "";
-            String habits = "";
-            String educationandjob = "";
-            String lifeStory = "";
-            String network = "";
-            String healthInformation = "";
-            String equipmentAids = "";
-            String homeLayout = "";
+
             dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex, Integer.parseInt(txtFieldSchoolID.getText()));
-            dataModelFacade.createGeneralInformation(coping, motivation, resources, roles, habits, educationandjob,
-                    lifeStory, network, healthInformation, equipmentAids, homeLayout);
             reloadCreatedCitizensTable();
             clearTextFieldCreate();
             reloadCitizenTable();

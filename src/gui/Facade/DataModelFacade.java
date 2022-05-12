@@ -298,11 +298,11 @@ public class DataModelFacade {
     /**
      * Creates  generalInformation using the createGeneralInformation method from generalInformationManager
      */
-    public GeneralInformation createGeneralInformation(String coping, String motivation, String resources, String roles,
+    public GeneralInformation createGeneralInformation(int citizenId, String coping, String motivation, String resources, String roles,
                                                        String habits, String educationAndJob, String lifestory,
                                                        String network, String healthInformation, String equipmentAids,
                                                        String homeLayout) throws SQLException {
-        return generalInformationModel.createGeneralInformation(coping, motivation, resources, roles, habits,
+        return generalInformationModel.createGeneralInformation(citizenId, coping, motivation, resources, roles, habits,
                 educationAndJob, lifestory, network, healthInformation, equipmentAids, homeLayout);
     }
 
