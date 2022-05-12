@@ -275,6 +275,13 @@ public class DataModelFacade {
         return superAdminModel.getAdminsOnSchool(schoolId);
     }
 
+    public List<Citizen> getAssignedCitizen(int schoolId){
+        return superAdminModel.getAssignedCitizen(schoolId);
+    }
+    public List<Case> getAssignedCases(int schoolId){
+        return superAdminModel.getAssignedCases(schoolId);
+    }
+
     public void addAdminToSchool(int loginId, int schoolId) {
         superAdminModel.addAdminToSchool(loginId, schoolId);
     }

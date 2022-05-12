@@ -1,8 +1,6 @@
 package bll;
 
-import be.School;
-import be.SuperAdmin;
-import be.User;
+import be.*;
 import dal.SuperAdminDAO;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -104,6 +102,13 @@ public class SuperAdminManager {
 
     public List<User> getAdminsOnSchool(int schoolId) throws SQLException {
         return superAdminDAO.getAdminsOnSchool(schoolId);
+    }
+
+    public List<Citizen> getAssignedCitizen(int schoolId){
+        return superAdminDAO.getAssignedCitizen(schoolId);
+    }
+    public List<Case> getAssignedCases(int schoolId){
+        return superAdminDAO.getAssignedCases(schoolId);
     }
 
     public void addAdminToSchool(int loginId, int schoolId) {

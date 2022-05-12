@@ -293,7 +293,7 @@ public class AdminViewController implements Initializable, IController {
         tcCasesName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcCasesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         try {
-            allCases = FXCollections.observableList(dataModelFacade.getCases());
+            allCases = FXCollections.observableList(dataModelFacade.getAssignedCases(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadCases(allCases);
         } catch (Exception e) {
             e.printStackTrace();
@@ -305,7 +305,7 @@ public class AdminViewController implements Initializable, IController {
         tcCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
         try {
-            allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
+            allCitizens = FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadCitizens(allCitizens);
         } catch (Exception e) {
             e.printStackTrace();
@@ -316,7 +316,7 @@ public class AdminViewController implements Initializable, IController {
         tcCurrentCasesName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcCurrentCasesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         try {
-            allCurrentCases = FXCollections.observableList(dataModelFacade.getCases());
+            allCurrentCases = FXCollections.observableList(dataModelFacade.getAssignedCases(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadCurrentCases(allCurrentCases);
         } catch (Exception e) {
             e.printStackTrace();
@@ -328,7 +328,7 @@ public class AdminViewController implements Initializable, IController {
         tcCreatedCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcCreatedCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
         try {
-            allCreatedCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
+            allCreatedCitizens = FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadCreatedCitizens(allCreatedCitizens);
         } catch (Exception e) {
             e.printStackTrace();
@@ -663,7 +663,7 @@ public class AdminViewController implements Initializable, IController {
     private void reloadCitizenTable() {
         try {
             int index = tvCitizens.getSelectionModel().getFocusedIndex();
-            this.tvCitizens.setItems(FXCollections.observableList(dataModelFacade.getCitizens()));
+            this.tvCitizens.setItems(FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText()))));
             tvCitizens.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -676,7 +676,7 @@ public class AdminViewController implements Initializable, IController {
     private void reloadCreatedCitizensTable() {
         try {
             int index = tvCreatedCitizens.getSelectionModel().getFocusedIndex();
-            this.tvCreatedCitizens.setItems(FXCollections.observableList(dataModelFacade.getCitizens()));
+            this.tvCreatedCitizens.setItems(FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText()))));
             tvCreatedCitizens.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -985,7 +985,7 @@ public class AdminViewController implements Initializable, IController {
     private void reloadCaseTable() {
         try {
             int index = tvCases.getSelectionModel().getFocusedIndex();
-            this.tvCases.setItems(FXCollections.observableList(dataModelFacade.getCases()));
+            this.tvCases.setItems(FXCollections.observableList(dataModelFacade.getAssignedCases(Integer.parseInt(txtFieldSchoolID.getText()))));
             tvCases.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -995,7 +995,7 @@ public class AdminViewController implements Initializable, IController {
     private void reloadCurrentCasesTable() {
         try {
             int index = tvCurrentCases.getSelectionModel().getFocusedIndex();
-            this.tvCurrentCases.setItems(FXCollections.observableList(dataModelFacade.getCases()));
+            this.tvCurrentCases.setItems(FXCollections.observableList(dataModelFacade.getAssignedCases(Integer.parseInt(txtFieldSchoolID.getText()))));
             tvCurrentCases.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();

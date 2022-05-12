@@ -1,8 +1,6 @@
 package gui.model;
 
-import be.School;
-import be.SuperAdmin;
-import be.User;
+import be.*;
 import bll.SuperAdminManager;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -86,6 +84,13 @@ public class SuperAdminModel {
 
     public List<User> getAdminsOnSchool(int schoolId) throws SQLException {
         return superAdminManager.getAdminsOnSchool(schoolId);
+    }
+
+    public List<Citizen> getAssignedCitizen(int schoolId){
+        return superAdminManager.getAssignedCitizen(schoolId);
+    }
+    public List<Case> getAssignedCases(int schoolId){
+        return superAdminManager.getAssignedCases(schoolId);
     }
 
     public void addAdminToSchool(int loginId, int schoolId) {
