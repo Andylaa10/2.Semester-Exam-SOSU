@@ -42,8 +42,6 @@ import java.util.ResourceBundle;
 public class StudentViewController implements IController, Initializable {
 
 
-
-
     /**
      * General info on Citizen pane
      */
@@ -207,6 +205,10 @@ public class StudentViewController implements IController, Initializable {
     private Label labelInfo;
     @FXML
     private Label labelInfoNewLine;
+    @FXML
+    private Label lblInfoStateHC;
+    @FXML
+    private Label lblInfoStateFC;
     @FXML
     private ImageView imgViewNotSavedHC;
     @FXML
@@ -670,7 +672,7 @@ public class StudentViewController implements IController, Initializable {
         lblInfoState.setText("Ændringer - Gemt");
         imgViewNotSaved.setVisible(false);
         imgViewSaved.setVisible(true);
-}
+    }
 
     /**
      * When a citizen is selected all values is loaded in the text fields
@@ -763,7 +765,6 @@ public class StudentViewController implements IController, Initializable {
                 txtAreaCitizenGoals.setText(functionalAbilitySubCategoryText.getAbilityNoteCitizen());
             } else {
                 clearFunctionalAbilityTextFields();
-
             }
         }
     }
@@ -807,9 +808,11 @@ public class StudentViewController implements IController, Initializable {
                         abilityNote, citizenPerformance, citizenMeaningOfPerformance, abilityNoteCitizen);
                 dataModelFacade.editAbilities(functionalAbility);
             }
-            lblInfoState.setText("Ændringer - Gemt");
+            lblInfoStateFC.setText("Ændringer - Gemt");
             imgViewNotSavedFC.setVisible(false);
             imgViewSavedFC.setVisible(true);
+            clearFunctionalAbilityTextFields();
+            tvFunctionalConditions.getSelectionModel().clearSelection();
         }
 
     }
@@ -836,26 +839,29 @@ public class StudentViewController implements IController, Initializable {
             } else {
                 int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
                 int subCategoryId = Integer.parseInt(subCatTxtID.getText());
-                String note = txtAreaNoteOnSubCategory.getText();
+                String professionalNote = txtAreaNoteOnSubCategory.getText();
+                String currentLevelAssessment = txtAreaCurrentLevelAssessment.getText();
+                String expectedLevelAssessment = String.valueOf(comboBoxExpectedLevelAssessment.getSelectionModel().getSelectedItem());
                 if (radioNotRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
-                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, note, conditionValue);
+                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
                 } else if (radioPotential.isSelected()) {
                     int conditionValue = ConditionEnum.POTENTIAL.getValue();
-                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, note, conditionValue);
+                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
                 } else if (radioRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.RELEVANT.getValue();
-                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, note, conditionValue);
+                    HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
                 }
             }
-            lblInfoState.setText("Ændringer - Gemt");
+            lblInfoStateHC.setText("Ændringer - Gemt");
             imgViewNotSavedHC.setVisible(false);
             imgViewSavedHC.setVisible(true);
+            clearHealthConditionTxtField();
+            tvSubCategories.getSelectionModel().clearSelection();
         }
-        btnHandelCancelChangesHC();
     }
 
     @FXML

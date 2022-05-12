@@ -704,7 +704,7 @@
                         <Image url="@img/small%20warning%20icon.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="imgViewSavedFC" fitHeight="26.0" fitWidth="25.0" layoutX="610.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgViewSavedFC" fitHeight="26.0" fitWidth="25.0" layoutX="610.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@img/small%20checkbox%20icon.png" />
                      </image>

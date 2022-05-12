@@ -35,6 +35,15 @@ public class HealthConditionSubCategoryText {
         this.condition = condition;
     }
 
+    public HealthConditionSubCategoryText(int citizenId, int categoryId, String professionalNote, String currentLevelAssessment, String expectedLevelAssessment, int condition) {
+        this.citizenId = citizenId;
+        this.categoryId = categoryId;
+        this.professionalNote = professionalNote;
+        this.currentLevelAssessment = currentLevelAssessment;
+        this.expectedLevelAssessment = expectedLevelAssessment;
+        this.condition = condition;
+    }
+
     public int getId() {
         return id;
     }
