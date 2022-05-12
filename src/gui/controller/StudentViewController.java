@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -222,7 +223,8 @@ public class StudentViewController implements IController, Initializable {
     private RadioButton radioPotential;
     @FXML
     private RadioButton radioRelevant;
-
+    @FXML
+    private Button btnCitizenInfo;
 
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
@@ -239,6 +241,7 @@ public class StudentViewController implements IController, Initializable {
     private HealthCondition selectedHealthCondition;
 
     private DataModelFacade dataModelFacade;
+    private CitizenInfoViewController citizenInfoViewController;
     private ToggleGroup group;
 
     public StudentViewController() throws IOException {
@@ -341,11 +344,11 @@ public class StudentViewController implements IController, Initializable {
                 txtAreaNoteOnSubCategory.setText(subCategoryText.getProfessionalNote());
                 txtAreaCurrentLevelAssessment.setText(subCategoryText.getCurrentLevelAssessment());
                 if (subCategoryText.getExpectedLevelAssessment().equals("Mindskes")) {
-                    comboboxPerformance.getSelectionModel().select(0);
+                    comboBoxExpectedLevelAssessment.getSelectionModel().select(0);
                 } else if (subCategoryText.getExpectedLevelAssessment().equals("Forbliver uændret")) {
-                    comboboxPerformance.getSelectionModel().select(1);
+                    comboBoxExpectedLevelAssessment.getSelectionModel().select(1);
                 } else if (subCategoryText.getExpectedLevelAssessment().equals("Forsvinder")) {
-                    comboboxPerformance.getSelectionModel().select(2);
+                    comboBoxExpectedLevelAssessment.getSelectionModel().select(2);
                 }
                 if (subCategoryText.getCondition() == 0) {
                     radioNotRelevant.setSelected(true);
@@ -362,6 +365,8 @@ public class StudentViewController implements IController, Initializable {
 
     public void clearHealthConditionTxtField() {
         txtAreaNoteOnSubCategory.clear();
+        txtAreaCurrentLevelAssessment.clear();
+        comboBoxExpectedLevelAssessment.getSelectionModel().clearSelection();
         radioPotential.setSelected(false);
         radioRelevant.setSelected(false);
         radioNotRelevant.setSelected(false);
@@ -444,7 +449,6 @@ public class StudentViewController implements IController, Initializable {
             case "Other" -> radioOther.setSelected(true);
         }
 
-
         GeneralInformation selectedGeneralInformation = dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
         if(selectedGeneralInformation != null){
             txtAreaCoping.setText(selectedGeneralInformation.getCoping());
@@ -459,6 +463,7 @@ public class StudentViewController implements IController, Initializable {
             txtAreaHomeLayout.setText(selectedGeneralInformation.getHomeLayout());
             txtAreaNetwork.setText(selectedGeneralInformation.getNetwork());
         }
+        btnCitizenInfo.setVisible(true);
     }
 
     /**
@@ -979,6 +984,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalCondition.setVisible(false);
+        btnCitizenInfo.setVisible(false);
     }
 
     /**
@@ -1053,11 +1059,29 @@ public class StudentViewController implements IController, Initializable {
         switcher.centerOnScreen();
     }
 
+
     /**
      * When the general information is click it set up the general information pane
      */
     @FXML
     private void onActionGeneralInfoCancel() {
         btnClickGeneralInformation();
+    }
+
+    public void btnOpenCitizenInfo(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/gui/view/CitizenInfoView.fxml"));
+
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+
+
+        citizenInfoViewController = fxmlLoader.getController();
+        citizenInfoViewController.setSelectedCitizen(selectedCitizenOnComboBox);
+
+
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.show();
     }
 }

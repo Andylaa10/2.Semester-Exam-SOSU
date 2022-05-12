@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
+<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="182.0" style="-fx-background-color: rgb(81, 83, 222);">
          <children>
@@ -448,7 +448,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
+            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
                <children>
                   <TableView fx:id="tvHealthConditions" layoutX="25.0" layoutY="53.0" prefHeight="458.0" prefWidth="302.0" style="-fx-background-color: transparent;">
                     <columns>
@@ -689,6 +689,7 @@
                   <TextField fx:id="txtFieldFunctionalAbilityID" layoutX="10.0" layoutY="518.0" visible="false" />
                </children>
             </AnchorPane>
+            <Button fx:id="btnCitizenInfo" layoutX="944.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnOpenCitizenInfo" prefHeight="25.0" prefWidth="200.0" text="Se alle borgerens informationer" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0" visible="false">
