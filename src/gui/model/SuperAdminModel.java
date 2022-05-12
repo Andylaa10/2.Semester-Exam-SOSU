@@ -51,6 +51,18 @@ public class SuperAdminModel {
         return superAdminManager.getSchools();
     }
 
+    public List<User> getAssignedTeachers(int schoolId) throws SQLException{
+        return superAdminManager.getAssignedTeachers(schoolId);
+    }
+
+    public List<User> getAssignedAdmins(int schoolId) throws SQLException{
+        return superAdminManager.getAssignedAdmins(schoolId);
+    }
+
+    public List<User> getAssignedStudents(int schoolId) throws SQLException{
+        return superAdminManager.getAssignedStudents(schoolId);
+    }
+
     /**
      * Creates a school using the createSchool method from superAdminManager
      */

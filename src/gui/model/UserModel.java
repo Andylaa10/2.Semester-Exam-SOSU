@@ -105,10 +105,5 @@ public class UserModel {
     public User userLogin(String username, String password, int schoolId){
         return userManager.userLogin(username, password, schoolId);
     }
-    /**
-     * Gets the user userLogin using the userLogin method from userManager
-     */
-    public User userLogin(String username, String password){
-        return userManager.userLogin(username, password);
-    }
+
 }

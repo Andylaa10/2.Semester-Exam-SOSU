@@ -63,6 +63,18 @@ public class SuperAdminManager {
         return superAdminDAO.getSchools();
     }
 
+    public List<User> getAssignedTeachers(int schoolId) throws SQLException{
+        return superAdminDAO.getAssignedTeachers(schoolId);
+    }
+
+    public List<User> getAssignedAdmins(int schoolId) throws SQLException{
+        return superAdminDAO.getAssignedAdmins(schoolId);
+    }
+
+    public List<User> getAssignedStudents(int schoolId) throws SQLException{
+        return superAdminDAO.getAssignedStudents(schoolId);
+    }
+
     /**
      * Creates a school using the createSchool method in superAdminDAO
      * @param schoolName

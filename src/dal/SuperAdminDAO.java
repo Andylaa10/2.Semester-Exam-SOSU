@@ -124,7 +124,6 @@ public class SuperAdminDAO {
         return allSchools;
     }
 
-
     /**
      * Making a students list, connecting to the database and adding the results to our ArrayList.
      * @return a list of assigned students or an empty list of students.

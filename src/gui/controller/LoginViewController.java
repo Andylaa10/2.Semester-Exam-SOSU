@@ -60,6 +60,7 @@ public class LoginViewController implements Initializable {
             switcher.show();
             switcher.centerOnScreen();
         }else{
+            //TODO Errorhandling if school is not selected
             int school = Integer.parseInt(txtFieldSchoolId.getText());
             User user = facade.userLogin(username, password, school);
             if (user != null && user.getUsertype() == UserType.STUDENT && user.getSchoolId() == school) {

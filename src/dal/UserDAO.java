@@ -334,39 +334,6 @@ public class UserDAO {
     }
 
     /**
-     * This method gets a userLogin from the database and check if it is a student, teacher or administrator
-     */
-    public User userLogin(String user, String pass) {
-        String sql = "SELECT * FROM Login WHERE username =? AND password =?;";
-        try(Connection connection = databaseConnector.getConnection()){
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, user);
-            st.setString(2, pass);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()){
-                int id = rs.getInt("LoginID");
-                String firstName = rs.getString("firstName");
-                String lastName = rs.getString("lastName");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                UserType userType = UserType.valueOf(rs.getString("userType"));
-                if (userType == UserType.STUDENT){
-                    return new User(id, firstName, lastName, username, password, userType);
-                } else if (userType == UserType.TEACHER){
-                    return new User(id, firstName, lastName, username, password, userType);
-                } else if (userType == UserType.ADMINISTRATOR) {
-                    return new User(id, firstName, lastName, username, password, userType);
-                }else {
-                    return null;
-                }
-            }
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
      * Main method used for testing this DAO class.
      */
     public static void main(String[] args) throws Exception {

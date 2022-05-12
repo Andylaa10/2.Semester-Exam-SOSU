@@ -142,8 +142,6 @@ public class SuperAdminViewController implements Initializable, IController {
     private User selectedAdmin;
     
     private School selectedSchoolToAssign;
-    private User selectedAdminToAssign;
-    private User selectedAssignedAdmin;
 
     public SuperAdminViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
@@ -161,8 +159,6 @@ public class SuperAdminViewController implements Initializable, IController {
         selectedSchool();
         selectedAdmin();
         selectedSchoolToAssign();
-        selectedAdminToAssign();
-        selectedAssignedAdmin();
         selectedSchoolOnComboBox();
     }
 
@@ -211,8 +207,16 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     public void initializeComboBox() throws SQLException {
-        allSchoolsOnCombo = FXCollections.observableArrayList(dataModelFacade.getSchools());
+        allAssignAdmins = FXCollections.observableArrayList(dataModelFacade.getAssignedAdmins(Integer.parseInt(txtFieldSchoolID.getText())));
         comboSchool.setItems(allSchoolsOnCombo);
+    }
+
+    @FXML
+    private void btnHandleComboSchool() throws SQLException {
+        if (comboSchool.getSelectionModel().getSelectedItem().getId() == 0){
+            allAssignedAdmins = FXCollections.observableArrayList(dataModelFacade.getAssignedAdmins(Integer.parseInt(txtSchoolID.getText())));
+        }
+
     }
 
     @FXML
@@ -532,21 +536,6 @@ public class SuperAdminViewController implements Initializable, IController {
         }));
     }
 
-    private void selectedAdminToAssign() {
-        this.tvAssignAdmin.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (newValue != null) {
-                this.selectedAdminToAssign = newValue;
-            }
-        }));
-    }
-
-    private void selectedAssignedAdmin() {
-        this.tvAssignedAdminsOnSchool.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (newValue != null) {
-                this.selectedAssignedAdmin = newValue;
-            }
-        }));
-    }
 
     private void seeAssignedAdminsOnSchool() {
         //Initialize the assigned admins table on the assign admin view

@@ -156,13 +156,6 @@ public class DataModelFacade {
     }
 
     /**
-     * Gets the user userLogin using the userLogin method from userModel
-     */
-    public User userLogin(String username, String password){
-        return userModel.userLogin(username, password);
-    }
-
-    /**
      * Gets the super admin login using the superAdminLogin method from superAdminModel
      */
     public SuperAdmin superAdminLogin(String username, String password) throws SQLException {
@@ -171,6 +164,18 @@ public class DataModelFacade {
 
     public List<School> getSchools() throws SQLException {
         return superAdminModel.getSchools();
+    }
+
+    public List<User> getAssignedTeachers(int schoolId) throws SQLException{
+        return superAdminModel.getAssignedTeachers(schoolId);
+    }
+
+    public List<User> getAssignedAdmins(int schoolId) throws SQLException{
+        return superAdminModel.getAssignedAdmins(schoolId);
+    }
+
+    public List<User> getAssignedStudents(int schoolId) throws SQLException{
+        return superAdminModel.getAssignedStudents(schoolId);
     }
 
     /**
