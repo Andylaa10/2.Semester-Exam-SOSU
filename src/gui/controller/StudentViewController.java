@@ -678,9 +678,10 @@ public class StudentViewController implements IController, Initializable {
     /**
      * When a citizen is selected all values is loaded in the text fields
      */
-    public void setGeneralInfoFromID(String citizenID) throws SQLException {
+    public void setGeneralInfoFromID(String citizenID, String generalInfoId) throws SQLException {
+        txtFieldCitizenID.setText(citizenID);
         GeneralInformation selectedGeneralInformation = dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
-        txtFieldGeneralInfoId.setText(String.valueOf(selectedGeneralInformation.getId()));
+        txtFieldGeneralInfoId.setText(generalInfoId);
         txtAreaCoping.setText(selectedGeneralInformation.getCoping());
         txtAreaMotivation.setText(selectedGeneralInformation.getMotivation());
         txtAreaResources.setText(selectedGeneralInformation.getResources());
@@ -696,7 +697,6 @@ public class StudentViewController implements IController, Initializable {
         imgViewSaved.setVisible(false);
         imgViewNotSaved.setVisible(true);
 
-        txtFieldCitizenID.setText(citizenID);
         Citizen selectedCitizenInfo = dataModelFacade.getInfoOnCitizen(Integer.parseInt(txtFieldCitizenID.getText()));
         txtFieldFirstName.setText(selectedCitizenInfo.getFirstName());
         txtFieldLastName.setText(selectedCitizenInfo.getLastName());

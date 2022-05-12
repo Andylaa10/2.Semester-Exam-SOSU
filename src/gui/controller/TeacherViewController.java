@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.Case;
 import be.Citizen;
+import be.GeneralInformation;
 import be.User;
 import be.enums.UserType;
 import gui.Facade.DataModelFacade;
@@ -657,9 +658,11 @@ public class TeacherViewController implements Initializable, IController {
                     viewCitizenStage = new Stage();
                     viewCitizenStage.setScene(mainWindowScene);
 
+                    GeneralInformation generalInformation = dataModelFacade.getGeneralInformationOnCitizen(tvCitizens.getSelectionModel().getSelectedItem().getId());
                     studentViewController = fxmlLoader.getController();
                     studentViewController.btnClickGeneralInformation();
-                    studentViewController.setGeneralInfoFromID(String.valueOf(tvCitizens.getSelectionModel().getSelectedItem().getId()));
+                    studentViewController.setGeneralInfoFromID(String.valueOf(tvCitizens.getSelectionModel().getSelectedItem().getId()), String.valueOf(generalInformation.getId()));
+
 
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();
@@ -697,9 +700,11 @@ public class TeacherViewController implements Initializable, IController {
                     viewCitizenStage = new Stage();
                     viewCitizenStage.setScene(mainWindowScene);
 
+                    GeneralInformation generalInformation = dataModelFacade.getGeneralInformationOnCitizen(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId());
                     studentViewController = fxmlLoader.getController();
                     studentViewController.btnClickGeneralInformation();
-                    studentViewController.setGeneralInfoFromID(String.valueOf(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId()));
+                    studentViewController.setGeneralInfoFromID(String.valueOf(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId()), String.valueOf(generalInformation.getId()));
+
 
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();
