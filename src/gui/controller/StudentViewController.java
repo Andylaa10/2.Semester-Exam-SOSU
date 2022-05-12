@@ -19,7 +19,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -40,8 +39,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class StudentViewController implements IController, Initializable {
-
-
+    
     /**
      * General info on Citizen pane
      */
@@ -71,6 +69,8 @@ public class StudentViewController implements IController, Initializable {
     private ImageView imgViewSaved;
     @FXML
     private TextField txtFieldSchoolID;
+    @FXML
+    private TextField txtFieldGeneralInfoId;
 
 
     /**
@@ -660,14 +660,14 @@ public class StudentViewController implements IController, Initializable {
         String healthInformation = txtAreaHealthInfo.getText();
         String equipmentAids = txtAreaEquipmentAids.getText();
         String homeLayout = txtAreaHomeLayout.getText();
-
-        dataModelFacade.createGeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationandjob,
-                lifeStory, network, healthInformation, equipmentAids, homeLayout);
-
-
         GeneralInformation generalInformation = new GeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationandjob,
                 lifeStory, network, healthInformation, equipmentAids, homeLayout);
-        dataModelFacade.editGeneralInformation(generalInformation);
+        if(txtFieldGeneralInfoId.getText() == null){
+            dataModelFacade.createGeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationandjob,
+                    lifeStory, network, healthInformation, equipmentAids, homeLayout);
+        }else{
+            dataModelFacade.editGeneralInformation(generalInformation);
+        }
 
         lblInfoState.setText("Ændringer - Gemt");
         imgViewNotSaved.setVisible(false);
@@ -678,22 +678,8 @@ public class StudentViewController implements IController, Initializable {
      * When a citizen is selected all values is loaded in the text fields
      */
     public void setGeneralInfoFromID(String citizenID) throws SQLException {
-        txtFieldCitizenID.setText(citizenID);
-        Citizen selectedCitizenInfo = dataModelFacade.getInfoOnCitizen(Integer.parseInt(txtFieldCitizenID.getText()));
-        txtFieldFirstName.setText(selectedCitizenInfo.getFirstName());
-        txtFieldLastName.setText(selectedCitizenInfo.getLastName());
-        txtFieldSSN.setText(selectedCitizenInfo.getSSN());
-        txtFieldAddress.setText(selectedCitizenInfo.getAddress());
-        radioMale.setToggleGroup(group);
-        radioFemale.setToggleGroup(group);
-        radioOther.setToggleGroup(group);
-        switch (selectedCitizenInfo.getSex()) {
-            case "Male" -> radioMale.setSelected(true);
-            case "Female" -> radioFemale.setSelected(true);
-            case "Other" -> radioOther.setSelected(true);
-        }
-
         GeneralInformation selectedGeneralInformation = dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
+        txtFieldGeneralInfoId.setText(String.valueOf(selectedGeneralInformation.getId()));
         txtAreaCoping.setText(selectedGeneralInformation.getCoping());
         txtAreaMotivation.setText(selectedGeneralInformation.getMotivation());
         txtAreaResources.setText(selectedGeneralInformation.getResources());
@@ -708,6 +694,21 @@ public class StudentViewController implements IController, Initializable {
         lblInfoState.setText("Ændringer - Ikke Gemt");
         imgViewSaved.setVisible(false);
         imgViewNotSaved.setVisible(true);
+
+        txtFieldCitizenID.setText(citizenID);
+        Citizen selectedCitizenInfo = dataModelFacade.getInfoOnCitizen(Integer.parseInt(txtFieldCitizenID.getText()));
+        txtFieldFirstName.setText(selectedCitizenInfo.getFirstName());
+        txtFieldLastName.setText(selectedCitizenInfo.getLastName());
+        txtFieldSSN.setText(selectedCitizenInfo.getSSN());
+        txtFieldAddress.setText(selectedCitizenInfo.getAddress());
+        radioMale.setToggleGroup(group);
+        radioFemale.setToggleGroup(group);
+        radioOther.setToggleGroup(group);
+        switch (selectedCitizenInfo.getSex()) {
+            case "Male" -> radioMale.setSelected(true);
+            case "Female" -> radioFemale.setSelected(true);
+            case "Other" -> radioOther.setSelected(true);
+        }
     }
 
     private void setFunctionalAbilityInfo() throws SQLException {

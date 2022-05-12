@@ -56,7 +56,7 @@ public class GeneralInformationDAO {
 
     public GeneralInformation getGeneralInformationOnCitizen(int citizenId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM GeneralInformation INNER JOIN Citizen ON GeneralInformation.generalInfoID = Citizen.citizenID WHERE Citizen.citizenID = ?;";
+            String sql = "SELECT * FROM GeneralInformation WHERE citizenId =?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 
@@ -176,6 +176,6 @@ public class GeneralInformationDAO {
         //        "healthInformation", "equipmentAids", "homeLayout");
         //generalInformationDAO.deleteGeneralInformation(1);
         //System.out.println(generalInformationDAO.getGeneralInformationOnCitizen(13));
-        System.out.println(generalInformationDAO.getGeneralInformation());
+        System.out.println(generalInformationDAO.getGeneralInformationOnCitizen(5));
     }
 }
