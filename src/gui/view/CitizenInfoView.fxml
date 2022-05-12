@@ -96,9 +96,9 @@
                      <children>
                         <ScrollPane layoutX="4.0" layoutY="3.0" pannable="true" prefHeight="676.0" prefWidth="540.0">
                            <content>
-                              <AnchorPane prefHeight="659.0" prefWidth="534.0">
+                              <AnchorPane fx:id="anchorPaneHealthConditions" prefHeight="659.0" prefWidth="534.0">
                                  <children>
-                                    <VBox fx:id="vBoxHealthConditions" layoutX="20.0" layoutY="4.0" prefHeight="200.0" prefWidth="522.0" />
+                                    <VBox fx:id="vBoxHealthConditions" layoutX="6.0" layoutY="7.0" prefHeight="200.0" prefWidth="522.0" />
                                  </children>
                               </AnchorPane>
                            </content>
