@@ -142,8 +142,6 @@ public class SuperAdminViewController implements Initializable, IController {
     private User selectedAdmin;
     
     private School selectedSchoolToAssign;
-    private User selectedAdminToAssign;
-    private User selectedAssignedAdmin;
 
     public SuperAdminViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
@@ -161,8 +159,6 @@ public class SuperAdminViewController implements Initializable, IController {
         selectedSchool();
         selectedAdmin();
         selectedSchoolToAssign();
-        selectedAdminToAssign();
-        selectedAssignedAdmin();
         selectedSchoolOnComboBox();
     }
 
@@ -313,6 +309,7 @@ public class SuperAdminViewController implements Initializable, IController {
             clearAdminTxtField();
             tvAdmins.getSelectionModel().clearSelection();
             reloadAdminTable();
+            reloadAssignedAdminTable();
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal udfylde alle administratorens informationer først");
         }
@@ -532,21 +529,6 @@ public class SuperAdminViewController implements Initializable, IController {
         }));
     }
 
-    private void selectedAdminToAssign() {
-        this.tvAssignAdmin.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (newValue != null) {
-                this.selectedAdminToAssign = newValue;
-            }
-        }));
-    }
-
-    private void selectedAssignedAdmin() {
-        this.tvAssignedAdminsOnSchool.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (newValue != null) {
-                this.selectedAssignedAdmin = newValue;
-            }
-        }));
-    }
 
     private void seeAssignedAdminsOnSchool() {
         //Initialize the assigned admins table on the assign admin view

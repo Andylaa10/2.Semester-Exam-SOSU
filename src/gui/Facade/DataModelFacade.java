@@ -156,13 +156,6 @@ public class DataModelFacade {
     }
 
     /**
-     * Gets the user userLogin using the userLogin method from userModel
-     */
-    public User userLogin(String username, String password){
-        return userModel.userLogin(username, password);
-    }
-
-    /**
      * Gets the super admin login using the superAdminLogin method from superAdminModel
      */
     public SuperAdmin superAdminLogin(String username, String password) throws SQLException {
@@ -171,6 +164,18 @@ public class DataModelFacade {
 
     public List<School> getSchools() throws SQLException {
         return superAdminModel.getSchools();
+    }
+
+    public List<User> getAssignedTeachers(int schoolId) throws SQLException{
+        return superAdminModel.getAssignedTeachers(schoolId);
+    }
+
+    public List<User> getAssignedAdmins(int schoolId) throws SQLException{
+        return superAdminModel.getAssignedAdmins(schoolId);
+    }
+
+    public List<User> getAssignedStudents(int schoolId) throws SQLException{
+        return superAdminModel.getAssignedStudents(schoolId);
     }
 
     /**
@@ -204,8 +209,8 @@ public class DataModelFacade {
     /**
      * Creates a case using the createCase method from caseModel
      */
-    public Case createCase(String name, String info) throws SQLException {
-        return caseModel.createCase(name, info);
+    public Case createCase(String name, String info, int schoolId) throws SQLException {
+        return caseModel.createCase(name, info, schoolId);
     }
 
     /**
@@ -270,6 +275,13 @@ public class DataModelFacade {
         return superAdminModel.getAdminsOnSchool(schoolId);
     }
 
+    public List<Citizen> getAssignedCitizen(int schoolId){
+        return superAdminModel.getAssignedCitizen(schoolId);
+    }
+    public List<Case> getAssignedCases(int schoolId){
+        return superAdminModel.getAssignedCases(schoolId);
+    }
+
     public void addAdminToSchool(int loginId, int schoolId) {
         superAdminModel.addAdminToSchool(loginId, schoolId);
     }
@@ -298,11 +310,11 @@ public class DataModelFacade {
     /**
      * Creates  generalInformation using the createGeneralInformation method from generalInformationManager
      */
-    public GeneralInformation createGeneralInformation(String coping, String motivation, String resources, String roles,
+    public GeneralInformation createGeneralInformation(int citizenId, String coping, String motivation, String resources, String roles,
                                                        String habits, String educationAndJob, String lifestory,
                                                        String network, String healthInformation, String equipmentAids,
                                                        String homeLayout) throws SQLException {
-        return generalInformationModel.createGeneralInformation(coping, motivation, resources, roles, habits,
+        return generalInformationModel.createGeneralInformation(citizenId, coping, motivation, resources, roles, habits,
                 educationAndJob, lifestory, network, healthInformation, equipmentAids, homeLayout);
     }
 

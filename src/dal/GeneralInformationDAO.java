@@ -89,26 +89,27 @@ public class GeneralInformationDAO {
         return null;
     }
 
-    public GeneralInformation createGeneralInformation(String coping, String motivation, String resources, String roles,
+    public GeneralInformation createGeneralInformation(int citizenId, String coping, String motivation, String resources, String roles,
                                                        String habits, String educationAndJob, String lifeStory,
                                                        String network, String healthInformation, String equipmentAids,
                                                        String homeLayout) throws SQLException {
 
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "INSERT INTO GeneralInformation (coping, motivation, resources, roles, habits," +
-                    "educationAndJob, lifestory, network, healthInformation, equipmentAids, homelayout) VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO GeneralInformation (citizenId, coping, motivation, resources, roles, habits," +
+                    "educationAndJob, lifestory, network, healthInformation, equipmentAids, homelayout) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                preparedStatement.setString(1, coping);
-                preparedStatement.setString(2, motivation);
-                preparedStatement.setString(3, resources);
-                preparedStatement.setString(4, roles);
-                preparedStatement.setString(5, habits);
-                preparedStatement.setString(6, educationAndJob);
-                preparedStatement.setString(7, lifeStory);
-                preparedStatement.setString(8, network);
-                preparedStatement.setString(9, healthInformation);
-                preparedStatement.setString(10, equipmentAids);
-                preparedStatement.setString(11, homeLayout);
+                preparedStatement.setInt(1, citizenId);
+                preparedStatement.setString(2, coping);
+                preparedStatement.setString(3, motivation);
+                preparedStatement.setString(4, resources);
+                preparedStatement.setString(5, roles);
+                preparedStatement.setString(6, habits);
+                preparedStatement.setString(7, educationAndJob);
+                preparedStatement.setString(8, lifeStory);
+                preparedStatement.setString(9, network);
+                preparedStatement.setString(10, healthInformation);
+                preparedStatement.setString(11, equipmentAids);
+                preparedStatement.setString(12, homeLayout);
                 preparedStatement.execute();
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 int id = 0;
@@ -116,7 +117,7 @@ public class GeneralInformationDAO {
                     id = resultSet.getInt(1);
                 }
 
-                GeneralInformation generalInformation = new GeneralInformation(id, coping, motivation, resources,
+                GeneralInformation generalInformation = new GeneralInformation(id, citizenId, coping, motivation, resources,
                         roles, habits, educationAndJob, lifeStory, network, healthInformation, equipmentAids,
                         homeLayout);
                 return generalInformation;

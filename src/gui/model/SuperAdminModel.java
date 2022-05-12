@@ -1,8 +1,6 @@
 package gui.model;
 
-import be.School;
-import be.SuperAdmin;
-import be.User;
+import be.*;
 import bll.SuperAdminManager;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -51,6 +49,18 @@ public class SuperAdminModel {
         return superAdminManager.getSchools();
     }
 
+    public List<User> getAssignedTeachers(int schoolId) throws SQLException{
+        return superAdminManager.getAssignedTeachers(schoolId);
+    }
+
+    public List<User> getAssignedAdmins(int schoolId) throws SQLException{
+        return superAdminManager.getAssignedAdmins(schoolId);
+    }
+
+    public List<User> getAssignedStudents(int schoolId) throws SQLException{
+        return superAdminManager.getAssignedStudents(schoolId);
+    }
+
     /**
      * Creates a school using the createSchool method from superAdminManager
      */
@@ -74,6 +84,13 @@ public class SuperAdminModel {
 
     public List<User> getAdminsOnSchool(int schoolId) throws SQLException {
         return superAdminManager.getAdminsOnSchool(schoolId);
+    }
+
+    public List<Citizen> getAssignedCitizen(int schoolId){
+        return superAdminManager.getAssignedCitizen(schoolId);
+    }
+    public List<Case> getAssignedCases(int schoolId){
+        return superAdminManager.getAssignedCases(schoolId);
     }
 
     public void addAdminToSchool(int loginId, int schoolId) {

@@ -248,6 +248,19 @@ public class StudentViewController implements IController, Initializable {
         this.dataModelFacade = new DataModelFacade();
     }
 
+    /**
+     * Sets the user
+     */
+    @Override
+    public void setUser(User user) throws Exception {
+        labelTitle.setText("Elev");
+        labelInfo.setText("Du er nu logget ind som Elev: " + user.getFirstName() + " " + user.getLastName());
+        labelInfoNewLine.setText("");
+        txtFieldSchoolID.setText(String.valueOf(user.getSchoolId()));
+        initializeTables();
+        initializeCitizenComboBox();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setAnchorPanesVisibility();
@@ -256,12 +269,6 @@ public class StudentViewController implements IController, Initializable {
         selectedHealthCondition();
         selectedSubCategory();
         SelectedFunctionalAbilitySubCategory();
-        try {
-            initializeTables();
-            initializeCitizenComboBox();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         setupToggleGender();
         setupToggleHealthCondition();
         setFunctionalAbilityComboBoxItems();
@@ -280,7 +287,7 @@ public class StudentViewController implements IController, Initializable {
         tcCitizenAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         tcCitizenSex.setCellValueFactory(new PropertyValueFactory<>("sex"));
         try {
-            allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
+            allCitizens = FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadCitizens(allCitizens);
         } catch (Exception e) {
             throw new Exception();
@@ -422,7 +429,7 @@ public class StudentViewController implements IController, Initializable {
      */
     private void initializeCitizenComboBox() throws SQLException {
         //Initialize the citizens in the dropdown menu
-        allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
+        allCitizens = FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText())));
         tableViewLoadCitizens(allCitizens);
         comboBoxCitizen.setItems(allCitizens);
     }
@@ -611,7 +618,7 @@ public class StudentViewController implements IController, Initializable {
      */
     @FXML
     private void onActionGeneralInfoSave() throws Exception {
-        int id = Integer.parseInt(txtFieldCitizenID.getText());
+        int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
         String citizenFirstName = txtFieldFirstName.getText();
         String citizenLastName = txtFieldLastName.getText();
         String citizenSSN = txtFieldSSN.getText();
@@ -626,7 +633,6 @@ public class StudentViewController implements IController, Initializable {
             sex = "Other";
         }
 
-        int generalInformationId = Integer.parseInt(txtFieldCitizenID.getText());
         String coping = txtAreaCoping.getText();
         String motivation = txtAreaMotivation.getText();
         String resources = txtAreaResources.getText();
@@ -639,11 +645,10 @@ public class StudentViewController implements IController, Initializable {
         String equipmentAids = txtAreaEquipmentAids.getText();
         String homeLayout = txtAreaHomeLayout.getText();
 
-        Citizen citizen = new Citizen(id, citizenFirstName, citizenLastName, citizenSSN, citizenAddress, sex, schoolId);
-        GeneralInformation generalInformation = new GeneralInformation(generalInformationId, coping, motivation, resources, roles, habits, educationandjob,
-                lifeStory, network, healthInformation, equipmentAids, homeLayout);
+        Citizen citizen = new Citizen(citizenId, citizenFirstName, citizenLastName, citizenSSN, citizenAddress, sex, schoolId);
         dataModelFacade.editCitizen(citizen);
-        dataModelFacade.editGeneralInformation(generalInformation);
+        dataModelFacade.createGeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationandjob,
+                lifeStory, network, healthInformation, equipmentAids, homeLayout);
         lblInfoState.setText("Ændringer - Gemt");
         imgViewNotSaved.setVisible(false);
         imgViewSaved.setVisible(true);
@@ -909,17 +914,6 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private void coupingLink() throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://www.fs3.nu/filer/Dokumenter/Metode/FSIII-Guide-til-generelle-oplysninger.pdf?t=1647518630"));
-    }
-
-    /**
-     * Sets the user
-     */
-    @Override
-    public void setUser(User user) {
-        labelTitle.setText("Elev");
-        labelInfo.setText("Du er nu logget ind som Elev: " + user.getFirstName() + " " + user.getLastName());
-        labelInfoNewLine.setText("");
-        txtFieldSchoolID.setText(String.valueOf(user.getSchoolId()));
     }
 
     /**

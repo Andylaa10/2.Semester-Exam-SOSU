@@ -334,49 +334,16 @@ public class UserDAO {
     }
 
     /**
-     * This method gets a userLogin from the database and check if it is a student, teacher or administrator
-     */
-    public User userLogin(String user, String pass) {
-        String sql = "SELECT * FROM Login WHERE username =? AND password =?;";
-        try(Connection connection = databaseConnector.getConnection()){
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, user);
-            st.setString(2, pass);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()){
-                int id = rs.getInt("LoginID");
-                String firstName = rs.getString("firstName");
-                String lastName = rs.getString("lastName");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                UserType userType = UserType.valueOf(rs.getString("userType"));
-                if (userType == UserType.STUDENT){
-                    return new User(id, firstName, lastName, username, password, userType);
-                } else if (userType == UserType.TEACHER){
-                    return new User(id, firstName, lastName, username, password, userType);
-                } else if (userType == UserType.ADMINISTRATOR) {
-                    return new User(id, firstName, lastName, username, password, userType);
-                }else {
-                    return null;
-                }
-            }
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
      * Main method used for testing this DAO class.
      */
     public static void main(String[] args) throws Exception {
         UserDAO dao = new UserDAO();
         //dao.createAdmin("John", "Johnson", "Admin", "1", UserType.ADMINISTRATOR, 1);
-        dao.createTeacher("Kim", "Larsen", "Teacher", "1", UserType.TEACHER,1);
-        dao.createStudent("andy", "lam", "Student", "1", UserType.STUDENT,1);
-        //dao.createAdmin("Test", "Testen", "test", "1", UserType.ADMINISTRATOR,1);
-        //dao.createTeacher("Kim", "Larsen", "Kim", "1", UserType.TEACHER);
-        //dao.createStudent("Kristian", "Hollænder", "kris",  "1", UserType.STUDENT);
+        //dao.createTeacher("Kim", "Larsen", "Teacher", "1", UserType.TEACHER,1);
+        //dao.createStudent("andy", "lam", "Student", "1", UserType.STUDENT,1);
+        dao.createAdmin("Test", "Testen", "Admin2", "1", UserType.ADMINISTRATOR,2);
+        dao.createTeacher("Kim", "Larsen", "Teacher2", "1", UserType.TEACHER,2);
+        dao.createStudent("Kristian", "Hollænder", "Student2",  "1", UserType.STUDENT, 2);
         //System.out.println(dao.getAdmins());
         //System.out.println(dao.getStudents());
         //System.out.println(dao.getTeachers());

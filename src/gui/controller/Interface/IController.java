@@ -7,5 +7,5 @@ import java.sql.SQLException;
 
 public interface IController {
 
-    void setUser(User user) throws SQLException, IOException;
+    void setUser(User user) throws Exception;
 }

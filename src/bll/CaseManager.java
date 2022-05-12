@@ -24,8 +24,8 @@ public class CaseManager {
     /**
      * Creates a case using the createCase method from caseDAO
      */
-    public Case createCase(String name, String info) throws SQLException {
-        return caseDAO.createCase(name, info);
+    public Case createCase(String name, String info, int schoolId) throws SQLException {
+        return caseDAO.createCase(name, info, schoolId);
     }
 
     /**

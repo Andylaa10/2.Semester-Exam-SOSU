@@ -210,10 +210,22 @@ public class TeacherViewController implements Initializable, IController {
         this.studentViewController = new StudentViewController();
     }
 
+    /**
+     * Sets text labels with the user that has logged in.
+     *
+     */
+    @Override
+    public void setUser(User user) {
+        labelTitle.setText("Lærer");
+        labelInfo.setText("Du er nu logget ind som lærer: " + user.getFirstName() + user.getLastName());
+        labelInfoNewLine.setText("");
+        txtFieldSchoolID.setText(String.valueOf(user.getSchoolId()));
+        initializeTable();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setToggleGroup();
-        initializeTable();
         setAnchorPanesVisibility();
         selectedStudent();
         selectedCurrentCase();
@@ -236,7 +248,7 @@ public class TeacherViewController implements Initializable, IController {
         tcStudentLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcStudentUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         try {
-            allStudents = FXCollections.observableList(dataModelFacade.getStudents());
+            allStudents = FXCollections.observableList(dataModelFacade.getAssignedStudents(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadStudents(allStudents);
         } catch (Exception e) {
             e.printStackTrace();
@@ -246,7 +258,7 @@ public class TeacherViewController implements Initializable, IController {
         tcCasesName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcCasesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         try {
-            allCases = FXCollections.observableList(dataModelFacade.getCases());
+            allCases = FXCollections.observableList(dataModelFacade.getAssignedCases(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadCases(allCases);
         } catch (Exception e) {
             e.printStackTrace();
@@ -258,7 +270,7 @@ public class TeacherViewController implements Initializable, IController {
         tcCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
         try {
-            allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
+            allCitizens = FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadCitizens(allCitizens);
         } catch (Exception e) {
             e.printStackTrace();
@@ -269,7 +281,7 @@ public class TeacherViewController implements Initializable, IController {
         tcCurrentCasesName.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcCurrentCasesDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         try {
-            allCurrentCases = FXCollections.observableList(dataModelFacade.getCases());
+            allCurrentCases = FXCollections.observableList(dataModelFacade.getAssignedCases(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadCurrentCases(allCurrentCases);
         } catch (Exception e) {
             e.printStackTrace();
@@ -281,7 +293,7 @@ public class TeacherViewController implements Initializable, IController {
         tcCreatedCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcCreatedCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
         try {
-            allCreatedCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
+            allCreatedCitizens = FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadCreatedCitizens(allCreatedCitizens);
         } catch (Exception e) {
             e.printStackTrace();
@@ -436,23 +448,11 @@ public class TeacherViewController implements Initializable, IController {
             } else if (radioOther.isSelected()) {
                 sex = "Other";
             }
-            String coping = "";
-            String motivation = "";
-            String resources = "";
-            String roles = "";
-            String habits = "";
-            String educationandjob = "";
-            String lifeStory = "";
-            String network = "";
-            String healthInformation = "";
-            String equipmentAids = "";
-            String homeLayout = "";
+
             dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex, Integer.parseInt(txtFieldSchoolID.getText()));
-            dataModelFacade.createGeneralInformation(coping, motivation, resources, roles, habits, educationandjob,
-                    lifeStory, network, healthInformation, equipmentAids, homeLayout);
             reloadCreatedCitizensTable();
-            reloadCitizenTable();
             clearTextFieldCreate();
+            reloadCitizenTable();
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal udfylde alle tekstfelter");
         }
@@ -472,7 +472,7 @@ public class TeacherViewController implements Initializable, IController {
     private void reloadCreatedCitizensTable() {
         try {
             int index = tvCreatedCitizens.getSelectionModel().getFocusedIndex();
-            this.tvCreatedCitizens.setItems(FXCollections.observableList(dataModelFacade.getCitizens()));
+            this.tvCreatedCitizens.setItems(FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText()))));
             tvCreatedCitizens.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -490,9 +490,9 @@ public class TeacherViewController implements Initializable, IController {
             String lastName = txtFieldLastName.getText();
             String userName = txtFieldUsername.getText();
             String password = txtFieldPassword.getText();
-            //TODO
 
-            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT,2);
+            //TODO Make errorhandling if username is already taken
+            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT,Integer.parseInt(txtFieldSchoolID.getText()));
             reloadStudentTable();
             clearStudentTxtField();
             tvStudent.getSelectionModel().clearSelection();
@@ -553,6 +553,7 @@ public class TeacherViewController implements Initializable, IController {
             if (result.get() == ButtonType.OK) {
                 selectedCitizen();
                 dataModelFacade.deleteCitizen(selectedCreatedCitizen.getId());
+                reloadCreatedCitizensTable();
                 reloadCitizenTable();
             }
         } else {
@@ -728,7 +729,7 @@ public class TeacherViewController implements Initializable, IController {
     private void reloadStudentTable() {
         try {
             int index = tvStudent.getSelectionModel().getFocusedIndex();
-            this.tvStudent.setItems(FXCollections.observableList(dataModelFacade.getStudents()));
+            this.tvStudent.setItems(FXCollections.observableList(dataModelFacade.getAssignedStudents(Integer.parseInt(txtFieldSchoolID.getText()))));
             tvStudent.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -777,7 +778,7 @@ public class TeacherViewController implements Initializable, IController {
     private void reloadCaseTable() {
         try {
             int index = tvCases.getSelectionModel().getFocusedIndex();
-            this.tvCases.setItems(FXCollections.observableList(dataModelFacade.getCases()));
+            this.tvCases.setItems(FXCollections.observableList(dataModelFacade.getAssignedCases(Integer.parseInt(txtFieldSchoolID.getText()))));
             tvCases.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -787,7 +788,7 @@ public class TeacherViewController implements Initializable, IController {
     private void reloadCitizenTable() {
         try {
             int index = tvCitizens.getSelectionModel().getFocusedIndex();
-            this.tvCitizens.setItems(FXCollections.observableList(dataModelFacade.getCitizens()));
+            this.tvCitizens.setItems(FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText()))));
             tvCitizens.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -797,7 +798,7 @@ public class TeacherViewController implements Initializable, IController {
     private void reloadCurrentCasesTable() {
         try {
             int index = tvCurrentCases.getSelectionModel().getFocusedIndex();
-            this.tvCurrentCases.setItems(FXCollections.observableList(dataModelFacade.getCases()));
+            this.tvCurrentCases.setItems(FXCollections.observableList(dataModelFacade.getAssignedCases(Integer.parseInt(txtFieldSchoolID.getText()))));
             tvCurrentCases.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -819,7 +820,7 @@ public class TeacherViewController implements Initializable, IController {
         if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
             String name = txtFieldName.getText();
             String area = txtAreaInfo.getText();
-            allCases.add(dataModelFacade.createCase(name, area));
+            allCases.add(dataModelFacade.createCase(name, area, Integer.parseInt(txtFieldSchoolID.getText())));
             assignDate();
             reloadCaseTable();
             reloadCurrentCasesTable();
@@ -1047,19 +1048,4 @@ public class TeacherViewController implements Initializable, IController {
         switcher.show();
         switcher.centerOnScreen();
     }
-
-
-    /**
-     * Sets text labels with the user that has logged in.
-     *
-     */
-    @Override
-    public void setUser(User user) {
-        labelTitle.setText("Lærer");
-        labelInfo.setText("Du er nu logget ind som lærer: " + user.getFirstName() + user.getLastName());
-        labelInfoNewLine.setText("");
-        txtFieldSchoolID.setText(String.valueOf(user.getSchoolId()));
-    }
-
-
 }

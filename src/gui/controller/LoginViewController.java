@@ -47,7 +47,7 @@ public class LoginViewController implements Initializable {
     }
 
     @FXML
-    private void Login() throws IOException, SQLException {
+    private void Login() throws Exception {
         String username = txtFieldUsername.getText();
         String password = pField.getText();
         SuperAdmin superAdmin = facade.superAdminLogin(username, password);
@@ -60,6 +60,7 @@ public class LoginViewController implements Initializable {
             switcher.show();
             switcher.centerOnScreen();
         }else{
+            //TODO Errorhandling if school is not selected
             int school = Integer.parseInt(txtFieldSchoolId.getText());
             User user = facade.userLogin(username, password, school);
             if (user != null && user.getUsertype() == UserType.STUDENT && user.getSchoolId() == school) {
@@ -99,7 +100,7 @@ public class LoginViewController implements Initializable {
     }
 
     @FXML
-    private void onActionLoginWithEnter() throws SQLException, IOException {
+    private void onActionLoginWithEnter() throws Exception {
         Login();
     }
 

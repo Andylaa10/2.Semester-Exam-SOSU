@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/SuperAdmin.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SuperAdminViewController">
+<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/SuperAdmin.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SuperAdminViewController">
    <children>
       <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: rgb(215, 84, 84);">
          <children>
@@ -181,7 +181,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateAdmin" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+      <AnchorPane fx:id="anchorPaneCreateAdmin" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
          <children>
             <TableView fx:id="tvAdmins" layoutX="15.0" layoutY="44.0" prefHeight="307.0" prefWidth="580.0" style="-fx-background-color: transparent;">
               <columns>
@@ -229,7 +229,7 @@
             <TextField fx:id="txtSchoolID" layoutX="538.0" layoutY="11.0" prefHeight="26.0" prefWidth="18.0" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneConfigureSchool" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneConfigureSchool" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <TableView fx:id="tvAssignedSchool" layoutX="14.0" layoutY="38.0" prefHeight="232.0" prefWidth="274.0" style="-fx-background-color: transparent;">
               <columns>

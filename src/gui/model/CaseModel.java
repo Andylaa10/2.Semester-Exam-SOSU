@@ -25,8 +25,8 @@ public class CaseModel {
     /**
      * Creates a case using the createCase method from caseManager
      */
-    public Case createCase(String name, String info) throws SQLException {
-        return caseManager.createCase(name, info);
+    public Case createCase(String name, String info, int schoolId) throws SQLException {
+        return caseManager.createCase(name, info, schoolId);
     }
 
     /**
