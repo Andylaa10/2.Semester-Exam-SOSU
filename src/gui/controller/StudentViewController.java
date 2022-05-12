@@ -470,19 +470,20 @@ public class StudentViewController implements IController, Initializable {
             case "Other" -> radioOther.setSelected(true);
         }
 
-        GeneralInformation selectedGeneralInformation = dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
-        if (selectedGeneralInformation != null) {
-            txtAreaCoping.setText(selectedGeneralInformation.getCoping());
-            txtAreaMotivation.setText(selectedGeneralInformation.getMotivation());
-            txtAreaResources.setText(selectedGeneralInformation.getResources());
-            txtAreaRoles.setText(selectedGeneralInformation.getRoles());
-            txtAreaHabits.setText(selectedGeneralInformation.getHabits());
-            txtAreaEducationAndJobs.setText(selectedGeneralInformation.getEducationAndJob());
-            txtAreaLifeStory.setText(selectedGeneralInformation.getLifeStory());
-            txtAreaHealthInfo.setText(selectedGeneralInformation.getHealthInformation());
-            txtAreaEquipmentAids.setText(selectedGeneralInformation.getEquipmentAids());
-            txtAreaHomeLayout.setText(selectedGeneralInformation.getHomeLayout());
-            txtAreaNetwork.setText(selectedGeneralInformation.getNetwork());
+        GeneralInformation generalInformation = dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
+        if (generalInformation != null) {
+            txtFieldGeneralInfoId.setText(String.valueOf(generalInformation.getId()));
+            txtAreaCoping.setText(generalInformation.getCoping());
+            txtAreaMotivation.setText(generalInformation.getMotivation());
+            txtAreaResources.setText(generalInformation.getResources());
+            txtAreaRoles.setText(generalInformation.getRoles());
+            txtAreaHabits.setText(generalInformation.getHabits());
+            txtAreaEducationAndJobs.setText(generalInformation.getEducationAndJob());
+            txtAreaLifeStory.setText(generalInformation.getLifeStory());
+            txtAreaHealthInfo.setText(generalInformation.getHealthInformation());
+            txtAreaEquipmentAids.setText(generalInformation.getEquipmentAids());
+            txtAreaHomeLayout.setText(generalInformation.getHomeLayout());
+            txtAreaNetwork.setText(generalInformation.getNetwork());
         }
         btnCitizenInfo.setVisible(true);
     }

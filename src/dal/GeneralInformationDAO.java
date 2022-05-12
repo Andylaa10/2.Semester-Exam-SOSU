@@ -171,11 +171,10 @@ public class GeneralInformationDAO {
 
     public static void main(String[] args) throws Exception {
         GeneralInformationDAO generalInformationDAO = new GeneralInformationDAO();
-        //generalInformationDAO.createGeneralInformation("coping", "motivation", "resources",
-        //        "roles", "habits", "educationAndJob", "lifeStory", "network",
-        //        "healthInformation", "equipmentAids", "homeLayout");
+        generalInformationDAO.createGeneralInformation(8,"coping", "motivation", "resources",
+              "roles", "habits", "educationAndJob", "lifeStory", "network", "healthInformation", "equipmentAids", "homeLayout");
         //generalInformationDAO.deleteGeneralInformation(1);
         //System.out.println(generalInformationDAO.getGeneralInformationOnCitizen(13));
-        System.out.println(generalInformationDAO.getGeneralInformationOnCitizen(5));
+        System.out.println(generalInformationDAO.getGeneralInformationOnCitizen(8));
     }
 }
