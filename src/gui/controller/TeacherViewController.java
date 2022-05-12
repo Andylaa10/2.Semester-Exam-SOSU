@@ -450,8 +450,8 @@ public class TeacherViewController implements Initializable, IController {
             dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex, Integer.parseInt(txtFieldSchoolID.getText()));
             dataModelFacade.createGeneralInformation(coping, motivation, resources, roles, habits, educationandjob,
                     lifeStory, network, healthInformation, equipmentAids, homeLayout);
-            clearTextFieldCreate();
             reloadCreatedCitizensTable();
+            clearTextFieldCreate();
             reloadCitizenTable();
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal udfylde alle tekstfelter");
@@ -553,7 +553,7 @@ public class TeacherViewController implements Initializable, IController {
             if (result.get() == ButtonType.OK) {
                 selectedCitizen();
                 dataModelFacade.deleteCitizen(selectedCreatedCitizen.getId());
-                reloadCitizenTable();
+                reloadCreatedCitizensTable();
             }
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en borger først");
