@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
+<AnchorPane fx:id="topPane" prefHeight="750.0" prefWidth="1350.0" stylesheets="@css/Student.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.StudentViewController">
    <children>
       <VBox prefHeight="750.0" prefWidth="182.0" style="-fx-background-color: rgb(81, 83, 222);">
          <children>
@@ -165,7 +165,7 @@
                   <ColorAdjust brightness="-0.24" contrast="0.17" />
                </effect>
             </Pane>
-            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="-1.0" layoutY="51.0" prefHeight="546.0" prefWidth="1161.0" visible="false">
+            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="-1.0" layoutY="51.0" prefHeight="546.0" prefWidth="1161.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b85f7" height="423.0" layoutX="934.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" width="218.0">
                      <effect>
@@ -446,6 +446,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <TextField fx:id="txtFieldGeneralInfoId" layoutX="149.0" layoutY="8.0" prefHeight="26.0" prefWidth="21.0" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
@@ -512,6 +513,17 @@
                      </font>
                   </Label>
                   <TextField fx:id="txtFieldSchoolID" layoutX="173.0" layoutY="12.0" prefHeight="26.0" prefWidth="2.0" visible="false" />
+                  <Label fx:id="lblInfoStateHC" alignment="CENTER_RIGHT" layoutX="557.0" layoutY="517.0" prefHeight="18.0" prefWidth="198.0" text="Ændringer - Ikke gemt" />
+                  <ImageView fx:id="imgViewNotSavedHC" fitHeight="26.0" fitWidth="25.0" layoutX="607.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/small%20warning%20icon.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imgViewSavedHC" fitHeight="26.0" fitWidth="25.0" layoutX="607.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@img/small%20checkbox%20icon.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneOBS" layoutX="825.0" layoutY="51.0" prefHeight="302.0" prefWidth="326.0" visible="false">
@@ -556,7 +568,7 @@
                         <ColorAdjust brightness="0.49" />
                      </effect>
                   </Rectangle>
-                  <Label layoutX="444.0" text="Funktionstilstand">
+                  <Label layoutX="412.0" text="Funktionsevnetilstand">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -687,6 +699,17 @@
                   <Button fx:id="btnSaveFuncitonalAbilityInfo" layoutX="949.0" layoutY="517.0" mnemonicParsing="false" onAction="#btnHandleSaveFunctionalAbilityInfo" prefHeight="26.0" prefWidth="170.0" text="Gem" />
                   <Button layoutX="769.0" layoutY="517.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
                   <TextField fx:id="txtFieldFunctionalAbilityID" layoutX="10.0" layoutY="518.0" visible="false" />
+                  <Label fx:id="lblInfoStateFC" alignment="CENTER_RIGHT" layoutX="566.0" layoutY="521.0" prefHeight="18.0" prefWidth="198.0" text="Ændringer - Ikke gemt" />
+                  <ImageView fx:id="imgViewNotSavedFC" fitHeight="26.0" fitWidth="25.0" layoutX="610.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/small%20warning%20icon.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="imgViewSavedFC" fitHeight="26.0" fitWidth="25.0" layoutX="610.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                     <image>
+                        <Image url="@img/small%20checkbox%20icon.png" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
             <Button fx:id="btnCitizenInfo" layoutX="944.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnOpenCitizenInfo" prefHeight="25.0" prefWidth="200.0" text="Se alle borgerens informationer" />
