@@ -47,7 +47,7 @@ public class LoginViewController implements Initializable {
     }
 
     @FXML
-    private void Login() throws IOException, SQLException {
+    private void Login() throws Exception {
         String username = txtFieldUsername.getText();
         String password = pField.getText();
         SuperAdmin superAdmin = facade.superAdminLogin(username, password);
@@ -100,7 +100,7 @@ public class LoginViewController implements Initializable {
     }
 
     @FXML
-    private void onActionLoginWithEnter() throws SQLException, IOException {
+    private void onActionLoginWithEnter() throws Exception {
         Login();
     }
 

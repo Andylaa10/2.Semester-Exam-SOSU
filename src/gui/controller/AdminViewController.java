@@ -761,6 +761,7 @@ public class AdminViewController implements Initializable, IController {
                 selectedCitizen();
                 dataModelFacade.deleteCitizen(selectedCreatedCitizen.getId());
                 reloadCreatedCitizensTable();
+                reloadCitizenTable();
             }
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en borger først");
