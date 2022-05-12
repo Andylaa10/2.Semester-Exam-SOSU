@@ -245,6 +245,19 @@ public class StudentViewController implements IController, Initializable {
         this.dataModelFacade = new DataModelFacade();
     }
 
+    /**
+     * Sets the user
+     */
+    @Override
+    public void setUser(User user) throws Exception {
+        labelTitle.setText("Elev");
+        labelInfo.setText("Du er nu logget ind som Elev: " + user.getFirstName() + " " + user.getLastName());
+        labelInfoNewLine.setText("");
+        txtFieldSchoolID.setText(String.valueOf(user.getSchoolId()));
+        initializeTables();
+        initializeCitizenComboBox();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setAnchorPanesVisibility();
@@ -253,12 +266,6 @@ public class StudentViewController implements IController, Initializable {
         selectedHealthCondition();
         selectedSubCategory();
         SelectedFunctionalAbilitySubCategory();
-        try {
-            initializeTables();
-            initializeCitizenComboBox();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         setupToggleGender();
         setupToggleHealthCondition();
         setFunctionalAbilityComboBoxItems();
@@ -277,7 +284,7 @@ public class StudentViewController implements IController, Initializable {
         tcCitizenAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         tcCitizenSex.setCellValueFactory(new PropertyValueFactory<>("sex"));
         try {
-            allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
+            allCitizens = FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadCitizens(allCitizens);
         } catch (Exception e) {
             throw new Exception();
@@ -417,7 +424,7 @@ public class StudentViewController implements IController, Initializable {
      */
     private void initializeCitizenComboBox() throws SQLException {
         //Initialize the citizens in the dropdown menu
-        allCitizens = FXCollections.observableList(dataModelFacade.getCitizens());
+        allCitizens = FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText())));
         tableViewLoadCitizens(allCitizens);
         comboBoxCitizen.setItems(allCitizens);
     }
@@ -902,17 +909,6 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private void coupingLink() throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://www.fs3.nu/filer/Dokumenter/Metode/FSIII-Guide-til-generelle-oplysninger.pdf?t=1647518630"));
-    }
-
-    /**
-     * Sets the user
-     */
-    @Override
-    public void setUser(User user) {
-        labelTitle.setText("Elev");
-        labelInfo.setText("Du er nu logget ind som Elev: " + user.getFirstName() + " " + user.getLastName());
-        labelInfoNewLine.setText("");
-        txtFieldSchoolID.setText(String.valueOf(user.getSchoolId()));
     }
 
     /**
