@@ -4,6 +4,7 @@ import be.*;
 import be.enums.UserType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class SuperAdminDAO {
     /**
      * Create a SuperAdmin by inserting into the SuperAdmin table.
      */
-    public SuperAdmin createSuperAdmin (String username, String password) throws SQLException {
+    public SuperAdmin createSuperAdmin(String username, String password) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "INSERT INTO SuperAdmin (username, password) VALUES (?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -82,19 +83,19 @@ public class SuperAdminDAO {
      */
     public SuperAdmin superAdminLogin(String user, String pass) throws SQLException {
         String sql = "SELECT * FROM SuperAdmin WHERE username =? AND password =?;";
-        try(Connection connection = databaseConnector.getConnection()){
+        try (Connection connection = databaseConnector.getConnection()) {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, user);
             st.setString(2, pass);
             ResultSet rs = st.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 int id = rs.getInt("SuperAdminID");
                 String username = rs.getString("username");
                 String password = rs.getString("password");
-                    return new SuperAdmin(id, username, password);
-                } else {
-                    return null;
-                }
+                return new SuperAdmin(id, username, password);
+            } else {
+                return null;
+            }
         } catch (SQLException sqlException) {
             throw new SQLException();
         }
@@ -126,6 +127,7 @@ public class SuperAdminDAO {
 
     /**
      * Making a students list, connecting to the database and adding the results to our ArrayList.
+     *
      * @return a list of assigned students or an empty list of students.
      */
     public List<User> getAssignedStudents(int schoolId) throws SQLException {
@@ -158,6 +160,7 @@ public class SuperAdminDAO {
 
     /**
      * Making a teacher list, connecting to the database and adding the results to our ArrayList.
+     *
      * @return a list of assigned teachers or an empty list of teachers.
      */
     public List<User> getAssignedTeachers(int schoolId) throws SQLException {
@@ -188,6 +191,7 @@ public class SuperAdminDAO {
 
     /**
      * Making an admin list, connecting to the database and adding the results to our ArrayList.
+     *
      * @return a list of assigned admins or an empty list of admins.
      */
     public List<User> getAssignedAdmins(int schoolId) throws SQLException {
@@ -226,7 +230,7 @@ public class SuperAdminDAO {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT * FROM [Login] INNER JOIN School ON School.schoolID = [Login].schoolId WHERE [Login].userType=? AND [Login].schoolId =?;";
 
-            PreparedStatement preparedStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, String.valueOf(UserType.ADMINISTRATOR));
             preparedStatement.setInt(2, schoolId);
@@ -251,10 +255,67 @@ public class SuperAdminDAO {
         return allAdmins;
     }
 
+    public List<Citizen> getAssignedCitizen(int schoolId){
+        ArrayList<Citizen> allCitizens = new ArrayList<>();
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT * FROM Citizen WHERE schoolId =?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, schoolId);
+            ResultSet resultset = preparedStatement.executeQuery();
+            while (resultset.next()) {
+                int id = resultset.getInt("citizenID");
+                String firstName = resultset.getString("firstName");
+                String lastName = resultset.getString("lastName");
+                String ssn = resultset.getString("SSN");
+                String address = resultset.getString("address");
+                String sex = resultset.getString("sex");
+                int schoolID = resultset.getInt("schoolId");
+
+
+                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex, schoolID);
+                allCitizens.add(citizen);
+            }
+            return allCitizens;
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Case> getAssignedCases(int schoolId){
+        ArrayList<Case> allCases = new ArrayList<>();
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT * FROM Cases WHERE schoolId =?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, schoolId);
+            ResultSet resultset = preparedStatement.executeQuery();
+            while (resultset.next()) {
+                int id = resultset.getInt("casesID");
+                String name = resultset.getString("name");
+                String date = resultset.getString("date");
+                String info = resultset.getString("info");
+                int schoolID = resultset.getInt("schoolId");
+
+
+                Case aCase = new Case(id, name, date, info, schoolID);
+                allCases.add(aCase);
+            }
+            return allCases;
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return null;
+    }
+
+
     /**
      * Adds an admin to a school, using the UserOnSchool table.
      */
-    public void addAdminToSchool(int loginId, int schoolId){
+    public void addAdminToSchool(int loginId, int schoolId) {
         String sql = "INSERT INTO [Login] (loginId, schoolId) VALUES (?,?);";
         try (Connection con = databaseConnector.getConnection();
              PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -337,16 +398,19 @@ public class SuperAdminDAO {
     /**
      * Main used for testing the DAO methods in this class.
      */
-    public static void main(String[] args) throws IOException, SQLException {
+    public static void main(String[] args) throws Exception {
         SuperAdminDAO superAdminDAO = new SuperAdminDAO();
-        superAdminDAO.createSchool("SOSU Esbjerg");
-        superAdminDAO.createSchool("SOSU Bramming");
-        System.out.println(superAdminDAO.getSchools());
+        //superAdminDAO.createSchool("SOSU Esbjerg");
+        //superAdminDAO.createSchool("SOSU Bramming");
+        //System.out.println(superAdminDAO.getSchools());
         //System.out.println(superAdminDAO.getAdminsOnSchool(4));
         //System.out.println(superAdminDAO.getSchools());
         //superAdminDAO.deleteSchool(1);
-        superAdminDAO.createSuperAdmin("superadmin", "1");
+        //superAdminDAO.createSuperAdmin("superadmin", "1");
         //superAdminDAO.deleteSuperAdmin(1);
+        //System.out.println(superAdminDAO.getAssignedTeachers(2));
+        //System.out.println(superAdminDAO.getAssignedCitizen(2));
+        System.out.println(superAdminDAO.getAssignedCases(2));
     }
 
 }

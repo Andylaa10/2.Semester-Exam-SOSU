@@ -807,7 +807,7 @@ public class TeacherViewController implements Initializable, IController {
         if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
             String name = txtFieldName.getText();
             String area = txtAreaInfo.getText();
-            allCases.add(dataModelFacade.createCase(name, area));
+            allCases.add(dataModelFacade.createCase(name, area, Integer.parseInt(txtFieldSchoolID.getText())));
             assignDate();
             reloadCaseTable();
             reloadCurrentCasesTable();

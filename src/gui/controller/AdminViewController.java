@@ -241,9 +241,21 @@ public class AdminViewController implements Initializable, IController {
         this.dataModelFacade = new DataModelFacade();
     }
 
+    /**
+     * Sets text labels with the user that has logged in.
+     *
+     */
+    @Override
+    public void setUser(User user) {
+        labelTitle.setText("Admin");
+        labelInfo.setText("Du er nu logget ind som admin: " + user.getFirstName() + user.getLastName());
+        labelInfoNewLine.setText("");
+        txtFieldSchoolID.setText(String.valueOf(user.getSchoolId()));
+        initializeTable();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initializeTable();
         setToggleGroup();
         setAnchorPanesVisibility();
         selectedTeacher();
@@ -261,7 +273,7 @@ public class AdminViewController implements Initializable, IController {
         tcTeacherLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcTeacherUserName.setCellValueFactory(new PropertyValueFactory<>("username"));
         try {
-            allTeachers = FXCollections.observableList(dataModelFacade.getTeachers());
+            allTeachers = FXCollections.observableList(dataModelFacade.getAssignedTeachers(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadTeachers(allTeachers);
         } catch (Exception e) {
             e.printStackTrace();
@@ -271,7 +283,7 @@ public class AdminViewController implements Initializable, IController {
         tcStudentLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcStudentUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
         try {
-            allStudents = FXCollections.observableList(dataModelFacade.getStudents());
+            allStudents = FXCollections.observableList(dataModelFacade.getAssignedStudents(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadStudents(allStudents);
         } catch (Exception e) {
             e.printStackTrace();
@@ -565,7 +577,7 @@ public class AdminViewController implements Initializable, IController {
     private void reloadTeacherTable() {
         try {
             int index = tvTeachers.getSelectionModel().getFocusedIndex();
-            this.tvTeachers.setItems(FXCollections.observableList(dataModelFacade.getTeachers()));
+            this.tvTeachers.setItems(FXCollections.observableList(dataModelFacade.getAssignedTeachers(Integer.parseInt(txtFieldSchoolID.getText()))));
             tvTeachers.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -923,7 +935,7 @@ public class AdminViewController implements Initializable, IController {
     private void reloadStudentTable() {
         try {
             int index = tvStudent.getSelectionModel().getFocusedIndex();
-            this.tvStudent.setItems(FXCollections.observableList(dataModelFacade.getStudents()));
+            this.tvStudent.setItems(FXCollections.observableList(dataModelFacade.getAssignedStudents(Integer.parseInt(txtFieldSchoolID.getText()))));
             tvStudent.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -1005,7 +1017,7 @@ public class AdminViewController implements Initializable, IController {
         if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
             String name = txtFieldName.getText();
             String area = txtAreaInfo.getText();
-            allCases.add(dataModelFacade.createCase(name, area));
+            allCases.add(dataModelFacade.createCase(name, area, Integer.parseInt(txtFieldSchoolID.getText())));
             assignDate();
             reloadCaseTable();
             reloadCurrentCasesTable();
@@ -1241,19 +1253,6 @@ public class AdminViewController implements Initializable, IController {
         switcher.setTitle("Lærer");
         switcher.show();
         switcher.centerOnScreen();
-    }
-
-
-    /**
-     * Sets text labels with the user that has logged in.
-     *
-     */
-    @Override
-    public void setUser(User user) {
-        labelTitle.setText("Admin");
-        labelInfo.setText("Du er nu logget ind som admin: " + user.getFirstName() + user.getLastName());
-        labelInfoNewLine.setText("");
-        txtFieldSchoolID.setText(String.valueOf(user.getSchoolId()));
     }
 
 }

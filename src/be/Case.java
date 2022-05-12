@@ -6,6 +6,7 @@ public class Case {
     private String name;
     private String date;
     private String info;
+    private int schoolId;
 
     /**
      * Overloaded constructor
@@ -24,6 +25,21 @@ public class Case {
         this.id = id;
         this.name = name;
         this.info = info;
+    }
+
+    public Case(int id, String name, String date, String info, int schoolId) {
+        this.id = id;
+        this.name = name;
+        this.date = date;
+        this.info = info;
+        this.schoolId = schoolId;
+    }
+
+    public Case(int id, String name, String info, int schoolId) {
+        this.id = id;
+        this.name = name;
+        this.info = info;
+        this.schoolId = schoolId;
     }
 
     /**
@@ -74,6 +90,14 @@ public class Case {
      */
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public int getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(int schoolId) {
+        this.schoolId = schoolId;
     }
 
     @Override

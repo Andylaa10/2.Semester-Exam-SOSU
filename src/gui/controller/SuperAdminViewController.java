@@ -309,6 +309,7 @@ public class SuperAdminViewController implements Initializable, IController {
             clearAdminTxtField();
             tvAdmins.getSelectionModel().clearSelection();
             reloadAdminTable();
+            reloadAssignedAdminTable();
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal udfylde alle administratorens informationer først");
         }
