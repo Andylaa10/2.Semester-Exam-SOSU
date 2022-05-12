@@ -339,11 +339,11 @@ public class UserDAO {
     public static void main(String[] args) throws Exception {
         UserDAO dao = new UserDAO();
         //dao.createAdmin("John", "Johnson", "Admin", "1", UserType.ADMINISTRATOR, 1);
-        dao.createTeacher("Kim", "Larsen", "Teacher", "1", UserType.TEACHER,1);
-        dao.createStudent("andy", "lam", "Student", "1", UserType.STUDENT,1);
-        //dao.createAdmin("Test", "Testen", "test", "1", UserType.ADMINISTRATOR,1);
-        //dao.createTeacher("Kim", "Larsen", "Kim", "1", UserType.TEACHER);
-        //dao.createStudent("Kristian", "Hollænder", "kris",  "1", UserType.STUDENT);
+        //dao.createTeacher("Kim", "Larsen", "Teacher", "1", UserType.TEACHER,1);
+        //dao.createStudent("andy", "lam", "Student", "1", UserType.STUDENT,1);
+        dao.createAdmin("Test", "Testen", "Admin2", "1", UserType.ADMINISTRATOR,2);
+        dao.createTeacher("Kim", "Larsen", "Teacher2", "1", UserType.TEACHER,2);
+        dao.createStudent("Kristian", "Hollænder", "Student2",  "1", UserType.STUDENT, 2);
         //System.out.println(dao.getAdmins());
         //System.out.println(dao.getStudents());
         //System.out.println(dao.getTeachers());
