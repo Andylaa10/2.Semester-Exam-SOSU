@@ -8,7 +8,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/LoginView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/gui/view/CitizenInfoView.fxml"));
         primaryStage.setTitle("SOSU Simulation");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
