@@ -1,4 +1,4 @@
-package be;
+package be.Utilities;
 
 import javafx.scene.image.Image;
 

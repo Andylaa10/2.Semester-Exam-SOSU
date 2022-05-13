@@ -6,6 +6,7 @@ import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
 import be.HealthCondition.HealthCondition;
 import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
+import be.Utilities.ImageWithText;
 import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
@@ -367,10 +368,13 @@ public class StudentViewController implements IController, Initializable {
                 }
                 if (subCategoryText.getCondition() == 0) {
                     radioNotRelevant.setSelected(true);
+                    tcSubCategoriesName.setStyle("-fx-text-fill: red");
                 } else if (subCategoryText.getCondition() == 1) {
                     radioPotential.setSelected(true);
+                    tcSubCategoriesName.setStyle("-fx-text-fill: yellow");
                 } else if (subCategoryText.getCondition() == 2) {
                     radioRelevant.setSelected(true);
+                    tcSubCategoriesName.setStyle("-fx-text-fill: green");
                 }
             } else {
                 clearHealthConditionTxtField();
@@ -719,16 +723,16 @@ public class StudentViewController implements IController, Initializable {
         String resources = txtAreaResources.getText();
         String roles = txtAreaRoles.getText();
         String habits = txtAreaHabits.getText();
-        String educationandjob = txtAreaEducationAndJobs.getText();
+        String educationAndJob = txtAreaEducationAndJobs.getText();
         String lifeStory = txtAreaLifeStory.getText();
         String network = txtAreaNetwork.getText();
         String healthInformation = txtAreaHealthInfo.getText();
         String equipmentAids = txtAreaEquipmentAids.getText();
         String homeLayout = txtAreaHomeLayout.getText();
-        GeneralInformation generalInformation = new GeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationandjob,
+        GeneralInformation generalInformation = new GeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationAndJob,
                 lifeStory, network, healthInformation, equipmentAids, homeLayout);
         if(txtFieldGeneralInfoId.getText() == null){
-            dataModelFacade.createGeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationandjob,
+            dataModelFacade.createGeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationAndJob,
                     lifeStory, network, healthInformation, equipmentAids, homeLayout);
         }else{
             dataModelFacade.editGeneralInformation(generalInformation);
@@ -896,12 +900,15 @@ public class StudentViewController implements IController, Initializable {
                 if (radioNotRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
                     dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
+                    tcSubCategoriesName.setStyle("-fx-text-fill: red");
                 } else if (radioPotential.isSelected()) {
                     int conditionValue = ConditionEnum.POTENTIAL.getValue();
                     dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
+                    tcSubCategoriesName.setStyle("-fx-text-fill: yellow");
                 } else if (radioRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.RELEVANT.getValue();
                     dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
+                    tcSubCategoriesName.setStyle("-fx-text-fill: green");
                 }
             } else {
                 int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
@@ -913,14 +920,17 @@ public class StudentViewController implements IController, Initializable {
                     int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
                     HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
+                    tcSubCategoriesName.setStyle("-fx-text-fill: red");
                 } else if (radioPotential.isSelected()) {
                     int conditionValue = ConditionEnum.POTENTIAL.getValue();
                     HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
+                    tcSubCategoriesName.setStyle("-fx-text-fill: yellow");
                 } else if (radioRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.RELEVANT.getValue();
                     HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
+                    tcSubCategoriesName.setStyle("-fx-text-fill: green");
                 }
             }
             lblInfoStateHC.setText("Ændringer - Gemt");
