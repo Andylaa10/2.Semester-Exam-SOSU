@@ -107,8 +107,6 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private TableColumn<User, String> tcStudentUsername;
     @FXML
-    private TableColumn<User, String> tcStudentPassword;
-    @FXML
     private Button btnSaveStudent;
     @FXML
     private Button btnEditStudent;

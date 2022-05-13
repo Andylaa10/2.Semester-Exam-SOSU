@@ -12,45 +12,77 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CitizenInfoViewController implements Initializable {
-    public Label lblName;
-    public Label lblSSN;
-    public Label lblAddress;
-    public TextArea txtFieldObservationNote;
-    public TextField txtFieldFollowUpDate;
-    public Pane casePane;
-    public TextField txtFieldCaseName;
-    public TextArea txtAreaCaseInfo;
-    public Pane healthConditionPane;
-    public TextField txtFieldHealthCondition;
-    public TextArea txtAreaCurrentLevel;
-    public TextField txtFieldHCSubcategory;
-    public TextField txtFieldExpectedLevel;
-    public TextField txtFieldHCRelevance;
-    public Pane functionalAbilityPane;
-    public TextField txtFieldFunctionalAbility;
-    public TextArea txFieldNote;
-    public TextField txtFieldFASubCategory;
-    public TextField txtFieldMeaningOfPerformance;
-    public TextField txtFieldCurrentLvl;
-    public TextField txtFieldFAExpectedLevel;
-    public TextField txtFieldPerformance;
-    public TextArea txtFieldCitizenGoals;
-    public VBox vBoxFunctionalAbilities;
-    public VBox vBoxHealthCondition;
-    public VBox vBoxCase;
-    public TextField txtFieldCitizenID;
-    public AnchorPane anchorPaneCases;
-    public Button addnewCaseToVboxBtn;
-    public Button addnewHCToVBoxBtn;
-    public AnchorPane anchorPaneHealthConditions;
-    public Button addnewFAToVboxBtn;
+
+    @FXML
+    private Label lblName;
+    @FXML
+    private Label lblSSN;
+    @FXML
+    private Label lblAddress;
+    @FXML
+    private TextArea txtFieldObservationNote;
+    @FXML
+    private TextField txtFieldFollowUpDate;
+    @FXML
+    private Pane casePane;
+    @FXML
+    private TextField txtFieldCaseName;
+    @FXML
+    private TextArea txtAreaCaseInfo;
+    @FXML
+    private Pane healthConditionPane;
+    @FXML
+    private TextField txtFieldHealthCondition;
+    @FXML
+    private TextArea txtAreaCurrentLevel;
+    @FXML
+    private TextField txtFieldHCSubcategory;
+    @FXML
+    private TextField txtFieldExpectedLevel;
+    @FXML
+    private TextField txtFieldHCRelevance;
+    @FXML
+    private Pane functionalAbilityPane;
+    @FXML
+    private TextField txtFieldFunctionalAbility;
+    @FXML
+    private TextArea txFieldNote;
+    @FXML
+    private TextField txtFieldFASubCategory;
+    @FXML
+    private TextField txtFieldMeaningOfPerformance;
+    @FXML
+    private TextField txtFieldCurrentLvl;
+    @FXML
+    private TextField txtFieldFAExpectedLevel;
+    @FXML
+    private TextField txtFieldPerformance;
+    @FXML
+    private TextArea txtFieldCitizenGoals;
+    @FXML
+    private VBox vBoxFunctionalAbilities;
+    @FXML
+    private VBox vBoxHealthCondition;
+    @FXML
+    private VBox vBoxCase;
+    @FXML
+    private TextField txtFieldCitizenID;
+    @FXML
+    private AnchorPane anchorPaneCases;
+    @FXML
+    private Button addNewCaseToVboxBtn;
+    @FXML
+    private Button addNewHCToVBoxBtn;
+    @FXML
+    private AnchorPane anchorPaneHealthConditions;
+    @FXML
+    private Button addNewFAToVboxBtn;
 
 
     private int citizenId;

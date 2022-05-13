@@ -29,7 +29,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -85,11 +84,6 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private TableColumn<FunctionalAbilitySubCategoryText, String> tcFunctionalConditionName;
 
-    /**
-     * Students judgement on functional pane
-     */
-    @FXML
-    private ComboBox comboBoxFunctionalAbilityExpected;
     /**
      * Citizens own judgement on functional pane
      */
@@ -943,7 +937,7 @@ public class StudentViewController implements IController, Initializable {
      */
     @FXML
     private void coupingLink() throws URISyntaxException, IOException {
-        Desktop.getDesktop().browse(new URI("https://www.fs3.nu/filer/Dokumenter/Metode/FSIII-Guide-til-generelle-oplysninger.pdf?t=1647518630"));
+        Desktop.getDesktop().browse(new URI("http://www.fs3.nu/filer/Dokumenter/Metode/FSIII-Guide-til-generelle-oplysninger.pdf?t=1647518630"));
     }
 
     /**
