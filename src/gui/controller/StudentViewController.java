@@ -1,14 +1,11 @@
 package gui.controller;
 
-import be.Case;
-import be.Citizen;
+import be.*;
 import be.FunctionalAbilities.FunctionalAbility;
 import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
-import be.GeneralInformation;
 import be.HealthCondition.HealthCondition;
 import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
-import be.User;
 import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
@@ -26,9 +23,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -38,7 +38,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class StudentViewController implements IController, Initializable {
-    
+
     /**
      * General info on Citizen pane
      */
@@ -90,9 +90,9 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private TextArea txtAreaNoteOnCondition;
     @FXML
-    private ComboBox comboBoxCurrentLevel;
+    private ComboBox<ImageWithText> comboBoxCurrentLevel;
     @FXML
-    private ComboBox comboBoxExpectedLevel;
+    private ComboBox<ImageWithText> comboBoxExpectedLevel;
     @FXML
     private TextArea txtAreaCitizenGoals;
     @FXML
@@ -414,12 +414,82 @@ public class StudentViewController implements IController, Initializable {
     }
 
     private void setFunctionalAbilityComboBoxItems() {
-        comboBoxCurrentLevel.getItems().addAll(
-                "0", "1", "2", "3", "4", "9"
-        );
-        comboBoxExpectedLevel.getItems().addAll(
-                "0", "1", "2", "3", "4", "9"
-        );
+        Image img0 = new Image("gui/view/img/funktionstilstand0.png", 100, 100, false, false);
+        Image img1 = new Image("gui/view/img/funktionstilstand1.png", 100, 100, false, false);
+        Image img2 = new Image("gui/view/img/funktionstilstand2.png", 100, 100, false, false);
+        Image img3 = new Image("gui/view/img/funktionstilstand3.png", 100, 100, false, false);
+        Image img9 = new Image("gui/view/img/funktionstilstand9.png", 100, 100, false, false);
+
+        ImageWithText iWT0 = new ImageWithText("gui/view/img/funktionstilstand0.png", 100, 100, false, false, "0");
+        ImageWithText iWT1 = new ImageWithText("gui/view/img/funktionstilstand1.png", 100, 100, false, false, "1");
+        ImageWithText iWT2 = new ImageWithText("gui/view/img/funktionstilstand2.png", 100, 100, false, false, "2");
+        ImageWithText iWT3 = new ImageWithText("gui/view/img/funktionstilstand3.png", 100, 100, false, false, "3");
+        ImageWithText iWT9 = new ImageWithText("gui/view/img/funktionstilstand9.png", 100, 100, false, false, "9");
+
+        comboBoxCurrentLevel.getItems().addAll(iWT0, iWT1, iWT2, iWT3, iWT9);
+        comboBoxCurrentLevel.setCellFactory(new Callback<ListView<ImageWithText>,ListCell<ImageWithText>>(){
+
+            @Override
+            public ListCell<ImageWithText> call(ListView<ImageWithText> p) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                return new ListCell<ImageWithText>(){
+                    private final ImageView view;
+                    {
+                        setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                        view = new ImageView();
+                    }
+                    @Override
+                    protected void updateItem(ImageWithText item, boolean empty) {
+                        super.updateItem(item, empty);
+                        itemProperty().getName();
+
+                        if (item == null || empty) {
+                            setGraphic(null);
+                        } else {
+                            view.setImage(item);
+                            setGraphic(view);
+                        }
+                    }
+                };
+            }
+        });
+
+        comboBoxExpectedLevel.getItems().addAll(iWT0, iWT1, iWT2, iWT3, iWT9);
+        comboBoxExpectedLevel.setCellFactory(new Callback<ListView<ImageWithText>,ListCell<ImageWithText>>(){
+            @Override
+            public ListCell<ImageWithText> call(ListView<ImageWithText> i) {
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                return new ListCell<>() {
+                    private final ImageView view;
+                    {
+                        setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                        view = new ImageView();
+                    }
+
+                    @Override
+                    protected void updateItem(ImageWithText item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (item == null || empty) {
+                            setGraphic(null);
+                        } else {
+                            setText(itemProperty().getName());
+                            view.setImage(item);
+                            setGraphic(view);
+                        }
+                    }
+                };
+            }
+        });
+
+
+        //comboBoxCurrentLevel.getItems().addAll(
+        //        "0", "1", "2", "3", "4", "9"
+        //);
+        //comboBoxExpectedLevel.getItems().addAll(
+        //        "0", "1", "2", "3", "4", "9"
+        //);
+
         comboboxPerformance.getItems().addAll(
                 "Udfører selv",
                 "Udfører dele selv",
@@ -707,6 +777,7 @@ public class StudentViewController implements IController, Initializable {
     }
 
     private void setFunctionalAbilityInfo() throws SQLException {
+
         if (txtFieldCitizenID != null && txtFieldFunctionalAbilityID != null) {
             FunctionalAbilitySubCategoryText functionalAbilitySubCategoryText = dataModelFacade.getInfoOnSubCategory(Integer.parseInt((txtFieldCitizenID.getText())), Integer.parseInt((txtFieldFunctionalAbilityID.getText())));
 
