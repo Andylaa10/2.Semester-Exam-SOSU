@@ -79,6 +79,8 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private TextField txtFieldFunctionalAbilityID;
     @FXML
+    private Button btnObservationFA;
+    @FXML
     private TableView<FunctionalAbilitySubCategoryText> tvFunctionalConditions;
     @FXML
     private TableColumn<FunctionalAbilitySubCategoryText, Integer> tcFunctionalConditionID;
@@ -117,6 +119,8 @@ public class StudentViewController implements IController, Initializable {
     private TableColumn<HealthConditionSubCategory, String> tcSubCategoriesName;
     @FXML
     private TextArea txtAreaNoteOnSubCategory;
+    @FXML
+    private Button btnObservationHC;
     @FXML
     private Button btnMobility;
     @FXML
@@ -1007,6 +1011,34 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
+    @FXML
+    private void btnHandleObservationFA() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/gui/view/ObservationNoteView.fxml"));
+
+        Scene scene = new Scene(fxmlLoader.load());
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+
+        stage.setResizable(false);
+        stage.show();
+    }
+
+    @FXML
+    private void btnHandleObservationHC() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/gui/view/ObservationNoteView.fxml"));
+
+        Scene scene = new Scene(fxmlLoader.load());
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+
+        stage.setResizable(false);
+        stage.show();
+    }
+
 
     /**
      * When clicked on the little i-icon it sends you to the FS3 homepage
@@ -1177,4 +1209,6 @@ public class StudentViewController implements IController, Initializable {
         stage.setResizable(false);
         stage.show();
     }
+
+
 }
