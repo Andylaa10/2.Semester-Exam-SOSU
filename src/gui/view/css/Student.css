@@ -73,6 +73,11 @@ Redefine of the background color, to a dark blue color.
 .text-field:hover{
 
 }
+
+.date-picker-popup  {
+    -fx-border-color: white;
+}
+
 .scroll-bar{
     -fx-opacity: 0.6;
 }

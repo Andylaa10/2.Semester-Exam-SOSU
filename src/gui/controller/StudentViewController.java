@@ -255,6 +255,7 @@ public class StudentViewController implements IController, Initializable {
 
     private DataModelFacade dataModelFacade;
     private CitizenInfoViewController citizenInfoViewController;
+    private ObservationNoteViewController observationNoteViewController;
     private ToggleGroup group;
 
     public StudentViewController() throws IOException {
@@ -1012,29 +1013,35 @@ public class StudentViewController implements IController, Initializable {
     }
 
     @FXML
-    private void btnHandleObservationFA() throws IOException {
+    private void btnHandleObservationFA() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/gui/view/ObservationNoteView.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
-
         Stage stage = new Stage();
-        stage.setScene(scene);
 
+
+        observationNoteViewController = fxmlLoader.getController();
+        observationNoteViewController.setSelectedCitizen(selectedCitizenOnComboBox);
+
+        stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
 
     @FXML
-    private void btnHandleObservationHC() throws IOException {
+    private void btnHandleObservationHC() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/gui/view/ObservationNoteView.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
-
         Stage stage = new Stage();
-        stage.setScene(scene);
 
+
+        observationNoteViewController = fxmlLoader.getController();
+        observationNoteViewController.setSelectedCitizen(selectedCitizenOnComboBox);
+
+        stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
