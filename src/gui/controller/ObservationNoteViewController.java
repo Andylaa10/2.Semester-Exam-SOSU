@@ -26,7 +26,7 @@ public class ObservationNoteViewController implements Initializable {
     @FXML
     private Button btnClose;
 
-    DataModelFacade dataModelFacade;
+    private final DataModelFacade dataModelFacade;
 
     private int citizenId;
 
@@ -36,14 +36,12 @@ public class ObservationNoteViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
-    
+
     public void setSelectedCitizen(Citizen citizen) throws Exception {
         txtFieldCitizenId.setText(String.valueOf(citizen.getId()));
         citizenId = Integer.parseInt(txtFieldCitizenId.getText());
-
         ObservationNote observationNote = dataModelFacade.getObservationNote(citizenId);
         txtAreaObservationNote.setText(observationNote.getNote());
         txtFieldFollowUpDate.setText(observationNote.getDate());
