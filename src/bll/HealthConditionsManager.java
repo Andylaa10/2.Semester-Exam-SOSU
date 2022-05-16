@@ -29,6 +29,10 @@ public class HealthConditionsManager {
         return healthConditionsDAO.getInfoOnSubCategory(citizenId, subCategoryId);
     }
 
+    public List<HealthConditionSubCategoryText> getInfoOnSubCategories(int citizenId){
+        return healthConditionsDAO.getInfoOnSubCategories(citizenId);
+    }
+
     public void insertIntoSubCategory(int citizenId, int subCategoryId, String professionalnote, String currentLevelAssessment, String expectedLevelAssessment, int condition) throws SQLException {
         healthConditionsDAO.insertIntoSubCategory(citizenId, subCategoryId, professionalnote, currentLevelAssessment, expectedLevelAssessment, condition);
     }

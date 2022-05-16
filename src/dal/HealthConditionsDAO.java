@@ -68,9 +68,7 @@ public class HealthConditionsDAO {
     public HealthConditionSubCategoryText getInfoOnSubCategory(int citizenId, int subCategoryId) {
 
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT SubCatTextOnCitizen.SubCatTextOnCitizenID, SubCatTextOnCitizen.citizenId," +
-                    " SubCatTextOnCitizen.subCategoryId, SubCatTextOnCitizen.professionalNote, SubCatTextOnCitizen.currentLevelAssessment," +
-                    " SubCatTextOnCitizen.expectedLevelAssessment, SubCatTextOnCitizen.Condition " +
+            String sql = "SELECT * " +
                     "FROM SubCatTextOnCitizen " +
                     "INNER JOIN SubCategory " +
                     "ON SubCatTextOnCitizen.subCategoryId = SubCategory.subCategoryID " +
@@ -83,20 +81,55 @@ public class HealthConditionsDAO {
             while (resultSet.next()) {
                 int id = resultSet.getInt("subCatTextOnCitizenID");
                 int citId = resultSet.getInt("citizenId");
-                int subId = resultSet.getInt("subCategoryId");
+                int subCatId = resultSet.getInt("subCategoryId");
                 String professionalNote = resultSet.getString("professionalNote");
                 String currentLevelAssessment = resultSet.getString("currentLevelAssessment");
                 String expectedLevelAssessment = resultSet.getString("expectedLevelAssessment");
-                int condition = resultSet.getInt("Condition");
+                int condition = resultSet.getInt("condition");
+                int healthConditionId = resultSet.getInt("healthConditionId");
 
                 HealthConditionSubCategoryText healthConditionSubCategoryText = new HealthConditionSubCategoryText(id,
-                        citId, subId, professionalNote, currentLevelAssessment, expectedLevelAssessment, condition);
+                        citId, subCatId, professionalNote, currentLevelAssessment, expectedLevelAssessment, condition, healthConditionId);
                 return healthConditionSubCategoryText;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<HealthConditionSubCategoryText> getInfoOnSubCategories(int citizenId) {
+        ArrayList<HealthConditionSubCategoryText> allHCSubCategoryInfo = new ArrayList<>();
+
+
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT * " +
+                    "FROM SubCatTextOnCitizen " +
+                    "INNER JOIN SubCategory " +
+                    "ON SubCatTextOnCitizen.subCategoryId = SubCategory.subCategoryID " +
+                    "WHERE SubCatTextOnCitizen.citizenId = ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, citizenId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("subCatTextOnCitizenID");
+                int citId = resultSet.getInt("citizenId");
+                int subCatId = resultSet.getInt("subCategoryId");
+                String professionalNote = resultSet.getString("professionalNote");
+                String currentLevelAssessment = resultSet.getString("currentLevelAssessment");
+                String expectedLevelAssessment = resultSet.getString("expectedLevelAssessment");
+                int condition = resultSet.getInt("condition");
+                int healthConditionId = resultSet.getInt("healthConditionId");
+
+                HealthConditionSubCategoryText healthConditionSubCategoryText = new HealthConditionSubCategoryText(id,
+                        citId, subCatId, professionalNote, currentLevelAssessment, expectedLevelAssessment, condition, healthConditionId);
+                allHCSubCategoryInfo.add(healthConditionSubCategoryText);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return allHCSubCategoryInfo;
     }
 
     public List<HealthConditionSubCategory> getSubCategories(int categoryId) throws SQLException {
@@ -164,6 +197,9 @@ public class HealthConditionsDAO {
         //System.out.println(healthConditionsDAO.getSubCategories(1));
         //healthConditionsDAO.insertIntoSubCategory(1, 1, "Gider ikke at gå i bad", ConditionEnum.RELEVANT.getValue());
         //System.out.println(healthConditionsDAO.getTextOnSubCategory(1,1));
-        System.out.println(healthConditionsDAO.getHealthConditions());
+        System.out.println(healthConditionsDAO.getInfoOnSubCategory(7, 1));
+        System.out.println("--------------------------------------------------------------------------------------------");
+        System.out.println(healthConditionsDAO.getInfoOnSubCategory(7, 2));
+
     }
 }

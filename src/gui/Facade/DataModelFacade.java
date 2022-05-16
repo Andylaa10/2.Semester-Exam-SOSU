@@ -339,6 +339,10 @@ public class DataModelFacade {
         return healthConditionsModel.getTextOnSubCategory(citizenId, subCategoryId);
     }
 
+    public List<HealthConditionSubCategoryText> getHCInfoOnSubCategories(int citizenId){
+        return healthConditionsModel.getInfoOnSubCategories(citizenId);
+    }
+
     public void insertIntoSubCategory(int citizenId, int subCategoryId, String professionalnote, String currentLevelAssessment, String expectedLevelAssessment, int condition) throws SQLException {
         healthConditionsModel.insertIntoSubCategory(citizenId, subCategoryId, professionalnote, currentLevelAssessment, expectedLevelAssessment, condition);
     }
@@ -359,7 +363,7 @@ public class DataModelFacade {
         return functionalAbilitiesModel.getInfoOnSubCategory(citizenId, functionalAbilitySubCategoryId);
     }
 
-    public List<FunctionalAbilitySubCategoryText> getInfoOnSubCategories(int citizenId) throws SQLServerException{
+    public List<FunctionalAbilitySubCategoryText> getFAInfoOnSubCategories(int citizenId) throws SQLServerException{
         return functionalAbilitiesModel.getInfoOnSubCategories(citizenId);
     }
 
