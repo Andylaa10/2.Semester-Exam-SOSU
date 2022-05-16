@@ -49,6 +49,9 @@ public class FunctionalAbility {
         this.abilityNoteCitizen = abilityNoteCitizen;
     }
 
+    public FunctionalAbility(String name) {
+    }
+
 
     /**
      * Gets the functionalAbilityID

@@ -32,6 +32,26 @@ public class FunctionalAbilitySubCategoryText {
         this.abilityNoteCitizen = abilityNoteCitizen;
     }
 
+
+    public FunctionalAbilitySubCategoryText(String functionalAbilityName) {
+        this.name = functionalAbilityName;
+    }
+
+    public FunctionalAbilitySubCategoryText(int functionalAbilityID, int citizenId, int functionalAbilitySubCategoryId,
+                                            int abilityNow, int abilityExpected, String abilityNote, String abilityNoteCitizen,
+                                            String citizenPerformance, String citizenMeaningOfPerformance) {
+        this.functionalAbilityID = functionalAbilityID;
+        this.citizenID = citizenId;
+        this.functionalAbilityNameId = functionalAbilitySubCategoryId;
+        this.abilityNow = abilityNow;
+        this.abilityExpected = abilityExpected;
+        this.abilityNote = abilityNote;
+        this.abilityNoteCitizen = abilityNoteCitizen;
+        this.citizenPerformance = citizenPerformance;
+        this.citizenMeaningOfPerformance = citizenMeaningOfPerformance;
+    }
+
+
     public void setId(int id) {
         this.id = id;
     }

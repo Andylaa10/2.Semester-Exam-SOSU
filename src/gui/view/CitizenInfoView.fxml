@@ -126,8 +126,5 @@
         </tabs>
       </TabPane>
       <TextField fx:id="txtFieldCitizenID" layoutX="726.0" layoutY="66.0" prefHeight="20.0" prefWidth="39.0" style="-fx-background-color: red;" />
-      <Button fx:id="addNewCaseToVboxBtn" layoutX="618.0" layoutY="10.0" mnemonicParsing="false" onAction="#addNewCaseToVBox" text="Case" />
-      <Button fx:id="addNewHCToVBoxBtn" layoutX="670.0" layoutY="10.0" mnemonicParsing="false" onAction="#addNewHCToVBox" text="healthconditions" />
-      <Button fx:id="addNewFAToVboxBtn" layoutX="52.0" layoutY="10.0" mnemonicParsing="false" onAction="#addNewFAToVBox" text="FunctionalAbilities" />
    </children>
 </AnchorPane>

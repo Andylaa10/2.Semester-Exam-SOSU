@@ -11,6 +11,10 @@ public class FunctionalAbilitySubCategory {
         this.name = name;
     }
 
+    public FunctionalAbilitySubCategory(String name) {
+        this.name = name;
+    }
+
     /**
      * Gets the id
      */

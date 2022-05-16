@@ -1,7 +1,14 @@
 package gui.controller;
 
+import be.Case;
 import be.Citizen;
+import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
+import be.HealthCondition.HealthCondition;
+import be.HealthCondition.HealthConditionSubCategory;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -86,9 +93,16 @@ public class CitizenInfoViewController implements Initializable {
 
 
     private int citizenId;
+    private int caseId = 0;
+    private int healthConditionId = 0;
+    private int functionalAbilityId = 0;
 
     private DataModelFacade dataModelFacade;
-
+    private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
+    private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
+    private ObservableList<HealthCondition> allHealthConditions = FXCollections.observableArrayList();
+    private ObservableList<HealthConditionSubCategory> allSubCategories = FXCollections.observableArrayList();
+    private ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories = FXCollections.observableArrayList();
 
     public CitizenInfoViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
@@ -101,32 +115,44 @@ public class CitizenInfoViewController implements Initializable {
         lblAddress.setText(citizen.getAddress());
 
         citizenId = Integer.parseInt(txtFieldCitizenID.getText());
-        setCaseInfo();
-        createCasesVBox();
-        createHealthConditionsVBox();
+        createCases();
+        //createHealthConditions();
+        createFunctionalAbilities();
     }
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    private void setCaseInfo() throws SQLException {
-        //Case aCase = dataModelFacade.getCaseOnCitizen(citizenId, 1);
-        //txtFieldCaseName.setText(aCase.getName());
-        //txtAreaCaseInfo.setText(aCase.getInfo());
+    private void createCases() throws SQLException {
+        allCasesOnCitizen = FXCollections.observableList(dataModelFacade.getCasesOnCitizen(citizenId));
+        for (Case casesOnCitizen : allCasesOnCitizen) {
+            caseId = casesOnCitizen.getId();
+            newCaseToVBox(caseId);
+        }
+    }
+
+    private void createHealthConditions() throws SQLException {
+        allCasesOnCitizen = FXCollections.observableList(dataModelFacade.getCasesOnCitizen(citizenId));
+        for (Case casesOnCitizen : allCasesOnCitizen) {
+            caseId = casesOnCitizen.getId();
+            newCaseToVBox(caseId);
+        }
+    }
+
+    private void createFunctionalAbilities() throws SQLException {
+      // allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getInfoOnSubCategories(citizenId));
+        for (FunctionalAbilitySubCategoryText FAOnCitizen : allFunctionalAbilitySubCategories) {
+            functionalAbilityId = FAOnCitizen.getId();
+            newFAToVBox(functionalAbilityId);
+        }
     }
 
 
-    private void createCasesVBox() {
-    }
-
-
-    public void createHealthConditionsVBox() {
-
-    }
-
-    @FXML
-    private void addNewCaseToVBox() {
+    private void newCaseToVBox(int caseId) throws SQLException {
+        Case aCase = dataModelFacade.getCaseOnCitizen(Integer.parseInt(txtFieldCitizenID.getText()), caseId);
         Label labelName = new Label("Sagsnavn");
         labelName.setFont(Font.font(18.0));
         TextField txtFieldCaseName = new TextField();
@@ -135,6 +161,7 @@ public class CitizenInfoViewController implements Initializable {
         txtFieldCaseName.setPrefHeight(26);
         txtFieldCaseName.setMaxHeight(26);
         txtFieldCaseName.setFont(Font.font(12.0));
+        txtFieldCaseName.setText(aCase.getName());
         Label labelInfo = new Label("Sagens informationer");
         labelInfo.setFont(Font.font(18.0));
         TextArea textAreaCaseInfo = new TextArea();
@@ -144,6 +171,7 @@ public class CitizenInfoViewController implements Initializable {
         textAreaCaseInfo.setMaxHeight(118);
         textAreaCaseInfo.setPrefWidth(486);
         textAreaCaseInfo.setMaxWidth(486);
+        textAreaCaseInfo.setText(aCase.getInfo());
         Label labelNewLine = new Label();
         Label labelNewLine2 = new Label();
         Label labelNewLine3 = new Label();
@@ -155,7 +183,7 @@ public class CitizenInfoViewController implements Initializable {
     }
 
 
-    public void addNewHCToVBox() {
+    public void newHCToVBox() {
 
         HBox hBox1 = new HBox();
         HBox hBox2 = new HBox();
@@ -259,7 +287,8 @@ public class CitizenInfoViewController implements Initializable {
         vBoxHealthCondition.getChildren().add(vBoxNewHC);
     }
 
-    public void addNewFAToVBox() {
+    public void newFAToVBox(int functionalAbilityId) throws SQLServerException {
+        FunctionalAbilitySubCategoryText FASubCategoryText = dataModelFacade.getInfoOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), functionalAbilityId);
         HBox hBox1 = new HBox();
         HBox hBox2 = new HBox();
         HBox hBox3 = new HBox();
@@ -291,6 +320,7 @@ public class CitizenInfoViewController implements Initializable {
         txtFieldFA.setPrefWidth(215);
         txtFieldFA.setMinHeight(25);
         txtFieldFA.setMinWidth(215);
+        txtFieldFA.setText(FASubCategoryText.getName());
         TextField txtFieldFASubCategory = new TextField();
         txtFieldFASubCategory.setEditable(false);
         txtFieldFASubCategory.setFont(Font.font(12.0));
@@ -298,7 +328,7 @@ public class CitizenInfoViewController implements Initializable {
         txtFieldFASubCategory.setPrefWidth(250);
         txtFieldFASubCategory.setMinHeight(25);
         txtFieldFASubCategory.setMinWidth(250);
-
+        txtFieldFASubCategory.setText(FASubCategoryText.getFunctionalAbilitySubCategoryName());
         hBox2.setSpacing(25);
         hBox2.getChildren().addAll(txtFieldFA, txtFieldFASubCategory);
 
@@ -317,6 +347,7 @@ public class CitizenInfoViewController implements Initializable {
         txtFieldCurrentLevel.setPrefWidth(155);
         txtFieldCurrentLevel.setMinHeight(25);
         txtFieldCurrentLevel.setMinWidth(155);
+        txtFieldCurrentLevel.setText(String.valueOf(FASubCategoryText.getAbilityNow()));
 
         Label lblExpectedLevel = new Label("Forventet niveau: ");
         lblExpectedLevel.setFont(Font.font(14.0));
@@ -327,6 +358,7 @@ public class CitizenInfoViewController implements Initializable {
         txtFieldExpectedLevel.setPrefWidth(130);
         txtFieldExpectedLevel.setMinHeight(25);
         txtFieldExpectedLevel.setMinWidth(130);
+        txtFieldExpectedLevel.setText(String.valueOf(FASubCategoryText.getAbilityExpected()));
 
 
         hBox3.getChildren().addAll(lblCurrentLevel, txtFieldCurrentLevel);
@@ -350,6 +382,7 @@ public class CitizenInfoViewController implements Initializable {
         txtAreaFANote.setMaxWidth(490);
         txtAreaFANote.setMinHeight(80);
         txtAreaFANote.setMinWidth(490);
+        txtAreaFANote.setText(FASubCategoryText.getAbilityNote());
 
         Label lblCitizenAssessment = new Label("Borgerens vurdering");
         lblCitizenAssessment.setFont(Font.font(18.0));
@@ -366,6 +399,7 @@ public class CitizenInfoViewController implements Initializable {
         txtFieldCitizenCurrentLevel.setPrefWidth(155);
         txtFieldCitizenCurrentLevel.setMinHeight(25);
         txtFieldCitizenCurrentLevel.setMinWidth(155);
+        txtFieldCitizenCurrentLevel.setText(FASubCategoryText.getCitizenPerformance());
 
         Label lblCitizenExpectedLevel = new Label("Betydning: ");
         lblCitizenExpectedLevel.setFont(Font.font(14.0));
@@ -376,6 +410,7 @@ public class CitizenInfoViewController implements Initializable {
         txtFieldCitizenExpectedLevel.setPrefWidth(155);
         txtFieldCitizenExpectedLevel.setMinHeight(25);
         txtFieldCitizenExpectedLevel.setMinWidth(155);
+        txtFieldCitizenExpectedLevel.setText(FASubCategoryText.getCitizenMeaningOfPerformance());
 
 
         hBox6.getChildren().addAll(lblCitizenCurrentLevel, txtFieldCitizenCurrentLevel);
@@ -388,8 +423,8 @@ public class CitizenInfoViewController implements Initializable {
         hBox8.setSpacing(28);
 
         Label lblCitizenGoals = new Label("Borgerens ønsker og mål");
-        lblFANote.setFont(Font.font(18.0));
-        lblFANote.setPadding(new Insets(0, 0, 0, 3));
+        lblCitizenGoals.setFont(Font.font(18.0));
+        lblCitizenGoals.setPadding(new Insets(0, 0, 0, 3));
 
         TextArea txtAreaCitizenGoals = new TextArea();
         txtAreaCitizenGoals.setEditable(false);
@@ -400,6 +435,7 @@ public class CitizenInfoViewController implements Initializable {
         txtAreaCitizenGoals.setMaxWidth(490);
         txtAreaCitizenGoals.setMinHeight(80);
         txtAreaCitizenGoals.setMinWidth(490);
+        txtAreaCitizenGoals.setText(FASubCategoryText.getAbilityNoteCitizen());
 
         VBox vBoxNewFA = new VBox();
 

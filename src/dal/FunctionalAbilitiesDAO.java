@@ -1,7 +1,9 @@
 package dal;
 
+import be.FunctionalAbilities.FunctionalAbilitySubCategory;
 import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
 import be.FunctionalAbilities.FunctionalAbility;
+import be.HealthCondition.HealthConditionSubCategory;
 import be.enums.FunctionalEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
@@ -141,6 +143,42 @@ public class FunctionalAbilitiesDAO {
             sqlException.printStackTrace();
         }
         return null;
+    }
+
+    public List<FunctionalAbilitySubCategoryText> getInfoOnSubCategories(int citizenId) throws SQLServerException {
+        ArrayList<FunctionalAbilitySubCategoryText> allFASubcategories = new ArrayList();
+
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT FunctionalAbility.functionalAbilityID, FunctionalAbility.citizenId," +
+                    " FunctionalAbility.abilityNow, FunctionalAbility.abilityExpected, FunctionalAbility.abilityNote," +
+                    " FunctionalAbility.citizenPerfomance, FunctionalAbility.citizenMeaningOfPerfomance," +
+                    " FunctionalAbility.abilityNoteCitizen" +
+                    " FROM FunctionalAbility" +
+                    " INNER JOIN FunctionalAbilitySubCategory" +
+                    " ON FunctionalAbility.functionalAbilitySubCategoryId = FunctionalAbilitySubCategory.functionalAbilitySubCategoryID" +
+                    " WHERE FunctionalAbility.citizenId = ?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, citizenId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int functionalAbilityID = resultSet.getInt("functionalAbilityID");
+                int citId = resultSet.getInt("citizenId");
+                int abilityNow = resultSet.getInt("abilityNow");
+                int abilityExpected = resultSet.getInt("abilityExpected");
+                String abilityNote = resultSet.getString("abilityNote");
+                String citizenPerformance = resultSet.getString("citizenPerfomance");
+                String citizenMeaningOfPerformance = resultSet.getString("citizenMeaningOfPerfomance");
+                String abilityNoteCitizen = resultSet.getString("abilityNoteCitizen");
+
+                FunctionalAbilitySubCategoryText functionalAbilitySubCategoryText = new FunctionalAbilitySubCategoryText(functionalAbilityID, citId, abilityNow,
+                        abilityExpected, abilityNote, citizenPerformance, citizenMeaningOfPerformance, abilityNoteCitizen);
+                allFASubcategories.add(functionalAbilitySubCategoryText);
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return allFASubcategories;
     }
 
     /**
