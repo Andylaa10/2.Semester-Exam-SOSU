@@ -4,8 +4,8 @@ public class FunctionalAbilitySubCategoryText {
 
     private int id;
     private String name;
-    private int functionalAbilityNameId;
-    private String functionalAbilitySubCategoryName;
+    private int subCategoryId;
+    private String subCategoryName;
     private int functionalAbilityID;
     private int citizenID;
     private int abilityNow;
@@ -21,8 +21,10 @@ public class FunctionalAbilitySubCategoryText {
         this.name = name;
     }
 
-    public FunctionalAbilitySubCategoryText(int functionalAbilityID, int citId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) {
-        this.functionalAbilityID = functionalAbilityID;
+
+    public FunctionalAbilitySubCategoryText(int id, int functionalAbilitySubCategoryIdColumn, int citId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen, int functionalAbilityNameID) {
+        this.id = id;
+        this.subCategoryId = functionalAbilitySubCategoryIdColumn;
         this.citizenID = citId;
         this.abilityNow = abilityNow;
         this.abilityExpected = abilityExpected;
@@ -30,25 +32,7 @@ public class FunctionalAbilitySubCategoryText {
         this.citizenPerformance = citizenPerformance;
         this.citizenMeaningOfPerformance = citizenMeaningOfPerformance;
         this.abilityNoteCitizen = abilityNoteCitizen;
-    }
-
-
-    public FunctionalAbilitySubCategoryText(String functionalAbilityName) {
-        this.name = functionalAbilityName;
-    }
-
-    public FunctionalAbilitySubCategoryText(int functionalAbilityID, int citizenId, int functionalAbilitySubCategoryId,
-                                            int abilityNow, int abilityExpected, String abilityNote, String abilityNoteCitizen,
-                                            String citizenPerformance, String citizenMeaningOfPerformance) {
-        this.functionalAbilityID = functionalAbilityID;
-        this.citizenID = citizenId;
-        this.functionalAbilityNameId = functionalAbilitySubCategoryId;
-        this.abilityNow = abilityNow;
-        this.abilityExpected = abilityExpected;
-        this.abilityNote = abilityNote;
-        this.abilityNoteCitizen = abilityNoteCitizen;
-        this.citizenPerformance = citizenPerformance;
-        this.citizenMeaningOfPerformance = citizenMeaningOfPerformance;
+        this.functionalAbilityID = functionalAbilityNameID;
     }
 
 
@@ -56,12 +40,12 @@ public class FunctionalAbilitySubCategoryText {
         this.id = id;
     }
 
-    public String getFunctionalAbilitySubCategoryName() {
-        return functionalAbilitySubCategoryName;
+    public String getSubCategoryName() {
+        return subCategoryName;
     }
 
-    public void setFunctionalAbilitySubCategoryName(String functionalAbilitySubCategoryName) {
-        this.functionalAbilitySubCategoryName = functionalAbilitySubCategoryName;
+    public void setSubCategoryName(String subCategoryName) {
+        this.subCategoryName = subCategoryName;
     }
 
     public int getFunctionalAbilityID() {
@@ -152,20 +136,24 @@ public class FunctionalAbilitySubCategoryText {
     /**
      * Gets the functionalAbilityNameId
      */
-    public int getFunctionalAbilityNameId() {
-        return functionalAbilityNameId;
+    public int getSubCategoryId() {
+        return subCategoryId;
     }
 
     /**
      * Sets the functionalAbilityNameId
      */
-    public void setFunctionalAbilityNameId(int functionalAbilityNameId) {
-        this.functionalAbilityNameId = functionalAbilityNameId;
+    public void setSubCategoryId(int subCategoryId) {
+        this.subCategoryId = subCategoryId;
     }
 
     @Override
     public String toString() {
-        return "SubFunctional{" +
+        return "FunctionalAbilitySubCategoryText{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", functionalAbilityNameId=" + subCategoryId +
+                ", functionalAbilitySubCategoryName='" + subCategoryName + '\'' +
                 ", functionalAbilityID=" + functionalAbilityID +
                 ", citizenID=" + citizenID +
                 ", abilityNow=" + abilityNow +

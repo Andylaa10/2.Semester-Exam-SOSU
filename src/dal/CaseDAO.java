@@ -201,7 +201,7 @@ public class CaseDAO {
     public static void main(String[] args) throws Exception {
         CaseDAO caseDAO = new CaseDAO();
         //caseDAO.deleteCaseFromCitizen(107, 2);
-        caseDAO.createCase("Knoglebrud i anklen", "Borgeren har oplevet et knoglebrud af 3. grad, skal restituere " +
+        /**caseDAO.createCase("Knoglebrud i anklen", "Borgeren har oplevet et knoglebrud af 3. grad, skal restituere " +
                 "i op til 12 uger ", 2);
         caseDAO.createCase("Kateter seponering", "Borgeren har problemer med udskillelsen af affaldsstoffer" +
                 " derfor skal borgeren have seponeret sit kateter", 2);
@@ -214,12 +214,14 @@ public class CaseDAO {
         caseDAO.createCase("Diabetes type 2", "Borgeren har fået eklæret diabetes type 2. Derfor skal der " +
                 "holdes øje med kost og sukkerindtag, samt blodsukkerniveau og insulin", 1);
         caseDAO.createCase("Afasi af mindre grad", "Borgeren har for nyligt oplevet en blodprop der har " +
-                "vist sig at give taleproblemer (afasi), derfor skal der observeres om der bliver forbedret", 1);
+                "vist sig at give taleproblemer (afasi), derfor skal der observeres om der bliver forbedret", 1);*/
         /**System.out.println(caseDAO.getCaseOnCitizen(7,1));
         System.out.println("-----------------------------------------");
         System.out.println(caseDAO.getCaseOnCitizen(7,2));
         System.out.println("-----------------------------------------");
         System.out.println(caseDAO.getCaseOnCitizen(7,3));*/
+
+        caseDAO.getCasesOnCitizen(7);
 
     }
 }

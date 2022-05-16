@@ -16,9 +16,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -121,7 +125,6 @@ public class CitizenInfoViewController implements Initializable {
     }
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
@@ -132,6 +135,7 @@ public class CitizenInfoViewController implements Initializable {
             caseId = casesOnCitizen.getId();
             newCaseToVBox(caseId);
         }
+        System.out.println("CaseId = " + caseId);
     }
 
     private void createHealthConditions() throws SQLException {
@@ -143,9 +147,10 @@ public class CitizenInfoViewController implements Initializable {
     }
 
     private void createFunctionalAbilities() throws SQLException {
-      // allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getInfoOnSubCategories(citizenId));
+        allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getInfoOnSubCategories(citizenId));
         for (FunctionalAbilitySubCategoryText FAOnCitizen : allFunctionalAbilitySubCategories) {
-            functionalAbilityId = FAOnCitizen.getId();
+            functionalAbilityId = FAOnCitizen.getSubCategoryId();
+            System.out.println(allFunctionalAbilitySubCategories);
             newFAToVBox(functionalAbilityId);
         }
     }
@@ -287,8 +292,8 @@ public class CitizenInfoViewController implements Initializable {
         vBoxHealthCondition.getChildren().add(vBoxNewHC);
     }
 
-    public void newFAToVBox(int functionalAbilityId) throws SQLServerException {
-        FunctionalAbilitySubCategoryText FASubCategoryText = dataModelFacade.getInfoOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), functionalAbilityId);
+    public void newFAToVBox(int functionalAbilitySubCategoryId) throws SQLServerException {
+        FunctionalAbilitySubCategoryText FASubCategoryText = dataModelFacade.getInfoOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), functionalAbilitySubCategoryId);
         HBox hBox1 = new HBox();
         HBox hBox2 = new HBox();
         HBox hBox3 = new HBox();
@@ -320,7 +325,18 @@ public class CitizenInfoViewController implements Initializable {
         txtFieldFA.setPrefWidth(215);
         txtFieldFA.setMinHeight(25);
         txtFieldFA.setMinWidth(215);
-        txtFieldFA.setText(FASubCategoryText.getName());
+        if (FASubCategoryText.getFunctionalAbilityID() == 1) {
+            txtFieldFA.setText("Egenomsorg");
+        } else if (FASubCategoryText.getFunctionalAbilityID() == 2) {
+            txtFieldFA.setText("Praktiske opgaver");
+        } else if (FASubCategoryText.getFunctionalAbilityID() == 3) {
+            txtFieldFA.setText("Mobilitet");
+        } else if (FASubCategoryText.getFunctionalAbilityID() == 4) {
+            txtFieldFA.setText("Mentale Funktioner");
+        } else if (FASubCategoryText.getFunctionalAbilityID() == 5) {
+            txtFieldFA.setText("Samfundsliv");
+        }
+
         TextField txtFieldFASubCategory = new TextField();
         txtFieldFASubCategory.setEditable(false);
         txtFieldFASubCategory.setFont(Font.font(12.0));
@@ -328,7 +344,69 @@ public class CitizenInfoViewController implements Initializable {
         txtFieldFASubCategory.setPrefWidth(250);
         txtFieldFASubCategory.setMinHeight(25);
         txtFieldFASubCategory.setMinWidth(250);
-        txtFieldFASubCategory.setText(FASubCategoryText.getFunctionalAbilitySubCategoryName());
+
+        if (FASubCategoryText.getSubCategoryId() == 1) {
+            txtFieldFASubCategory.setText("Vaske sig");
+        } else if (FASubCategoryText.getSubCategoryId() == 2) {
+            txtFieldFASubCategory.setText("Gå på toilet");
+        } else if (FASubCategoryText.getSubCategoryId() == 3) {
+            txtFieldFASubCategory.setText("Kropspleje");
+        } else if (FASubCategoryText.getSubCategoryId() == 4) {
+            txtFieldFASubCategory.setText("Af- og påklædning");
+        } else if (FASubCategoryText.getSubCategoryId() == 5) {
+            txtFieldFASubCategory.setText("Spise");
+        } else if (FASubCategoryText.getSubCategoryId() == 6) {
+            txtFieldFASubCategory.setText("Drikke");
+        } else if (FASubCategoryText.getSubCategoryId() == 7) {
+            txtFieldFASubCategory.setText("Varetage egen sundhed");
+        } else if (FASubCategoryText.getSubCategoryId() == 8) {
+            txtFieldFASubCategory.setText("Fødeindtagelse");
+        } else if (FASubCategoryText.getSubCategoryId() == 9) {
+            txtFieldFASubCategory.setText("Udføre daglige rutiner");
+        } else if (FASubCategoryText.getSubCategoryId() == 10) {
+            txtFieldFASubCategory.setText("Skaffe sig varer og tjenesteydelser");
+        } else if (FASubCategoryText.getSubCategoryId() == 11) {
+            txtFieldFASubCategory.setText("Lave mad");
+        } else if (FASubCategoryText.getSubCategoryId() == 12) {
+            txtFieldFASubCategory.setText("Lave husligt arbejde");
+        } else if (FASubCategoryText.getSubCategoryId() == 13) {
+            txtFieldFASubCategory.setText("Ændre kropsstilling");
+        } else if (FASubCategoryText.getSubCategoryId() == 14) {
+            txtFieldFASubCategory.setText("Forflytte sig");
+        } else if (FASubCategoryText.getSubCategoryId() == 15) {
+            txtFieldFASubCategory.setText("Løfte og bære");
+        } else if (FASubCategoryText.getSubCategoryId() == 16) {
+            txtFieldFASubCategory.setText("Gå");
+        } else if (FASubCategoryText.getSubCategoryId() == 17) {
+            txtFieldFASubCategory.setText("Bevæge sig omkring");
+        } else if (FASubCategoryText.getSubCategoryId() == 18) {
+            txtFieldFASubCategory.setText("Færden i forskellige omgivelser");
+        } else if (FASubCategoryText.getSubCategoryId() == 19) {
+            txtFieldFASubCategory.setText("Bruge transportmidler");
+        } else if (FASubCategoryText.getSubCategoryId() == 20) {
+            txtFieldFASubCategory.setText("Færden i forskellige omgivelser");
+        } else if (FASubCategoryText.getSubCategoryId() == 21) {
+            txtFieldFASubCategory.setText("Udholdenhed");
+        } else if (FASubCategoryText.getSubCategoryId() == 22) {
+            txtFieldFASubCategory.setText("Muskelstyrke");
+        } else if (FASubCategoryText.getSubCategoryId() == 23) {
+            txtFieldFASubCategory.setText("Tilegne sig færdigheder");
+        } else if (FASubCategoryText.getSubCategoryId() == 24) {
+            txtFieldFASubCategory.setText("Problemløsning");
+        } else if (FASubCategoryText.getSubCategoryId() == 25) {
+            txtFieldFASubCategory.setText("Anvende kommunikationsudstyr- og teknikker");
+        } else if (FASubCategoryText.getSubCategoryId() == 26) {
+            txtFieldFASubCategory.setText("Orienteringsevne");
+        } else if (FASubCategoryText.getSubCategoryId() == 27) {
+            txtFieldFASubCategory.setText("Energi og handlekraft");
+        } else if (FASubCategoryText.getSubCategoryId() == 28) {
+            txtFieldFASubCategory.setText("Følelsesfunktioner");
+        } else if (FASubCategoryText.getSubCategoryId() == 29) {
+            txtFieldFASubCategory.setText("Overordnede kognitive funktioner");
+        } else if (FASubCategoryText.getSubCategoryId() == 30) {
+            txtFieldFASubCategory.setText("Have lønnet beskæftigelse");
+        }
+
         hBox2.setSpacing(25);
         hBox2.getChildren().addAll(txtFieldFA, txtFieldFASubCategory);
 

@@ -359,6 +359,10 @@ public class DataModelFacade {
         return functionalAbilitiesModel.getInfoOnSubCategory(citizenId, functionalAbilitySubCategoryId);
     }
 
+    public List<FunctionalAbilitySubCategoryText> getInfoOnSubCategories(int citizenId) throws SQLServerException{
+        return functionalAbilitiesModel.getInfoOnSubCategories(citizenId);
+    }
+
     public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
         return functionalAbilitiesModel.getFunctionalAbilitySubCategories(functionalAbilitySubCategoryId);
     }
