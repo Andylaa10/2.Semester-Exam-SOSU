@@ -6,11 +6,9 @@ import be.FunctionalAbilities.FunctionalAbility;
 import be.HealthCondition.HealthCondition;
 import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
-import be.enums.FunctionalEnum;
 import be.enums.UserType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.model.*;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,6 +22,7 @@ public class DataModelFacade {
     private final HealthConditionsModel healthConditionsModel;
     private final GeneralInformationModel generalInformationModel;
     private final FunctionalAbilitiesModel functionalAbilitiesModel;
+    private final ObservationNoteModel observationNoteModel;
 
     public DataModelFacade() throws IOException {
         citizenModel = new CitizenModel();
@@ -33,6 +32,7 @@ public class DataModelFacade {
         healthConditionsModel = new HealthConditionsModel();
         generalInformationModel = new GeneralInformationModel();
         functionalAbilitiesModel = new FunctionalAbilitiesModel();
+        observationNoteModel = new ObservationNoteModel();
     }
 
     /**
@@ -377,6 +377,22 @@ public class DataModelFacade {
 
     public void deleteAbilities(int id) throws Exception {
         functionalAbilitiesModel.deleteAbilities(id);
+    }
+
+    public ObservationNote getObservationNote(int citizenId) throws Exception {
+        return observationNoteModel.getObservationNote(citizenId);
+    }
+
+    public ObservationNote createObservationNote(int citizenId, String date, String note) throws SQLException {
+        return observationNoteModel.createObservationNote(citizenId, date, note);
+    }
+
+    public void editObservationNote(ObservationNote observationNote) throws Exception {
+        observationNoteModel.editObservationNote(observationNote);
+    }
+
+    public void deleteObservationNote(int id) throws Exception {
+        observationNoteModel.deleteObservationNote(id);
     }
 
 
