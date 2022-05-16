@@ -1,7 +1,5 @@
 package dal;
 
-import be.GeneralInformation;
-import be.HealthCondition.HealthConditionSubCategoryText;
 import be.ObservationNote;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
@@ -95,7 +93,7 @@ public class ObservationNoteDAO {
 
     public static void main(String[] args) throws Exception {
         ObservationNoteDAO observationNoteDAO = new ObservationNoteDAO();
-        observationNoteDAO.deleteObservationNote(1);
+        observationNoteDAO.createObservationNote(5, "12/12/2021", "TEst af create");
         System.out.println(observationNoteDAO.getObservationNote(5));
     }
 
