@@ -368,13 +368,18 @@ public class StudentViewController implements IController, Initializable {
                 }
                 if (subCategoryText.getCondition() == 0) {
                     radioNotRelevant.setSelected(true);
+                    tcSubCategoriesName.setStyle("");
                     tcSubCategoriesName.setStyle("-fx-text-fill: red");
                 } else if (subCategoryText.getCondition() == 1) {
                     radioPotential.setSelected(true);
+                    tcSubCategoriesName.setStyle("");
                     tcSubCategoriesName.setStyle("-fx-text-fill: yellow");
                 } else if (subCategoryText.getCondition() == 2) {
                     radioRelevant.setSelected(true);
+                    tcSubCategoriesName.setStyle("");
                     tcSubCategoriesName.setStyle("-fx-text-fill: green");
+                } else{
+                    tcSubCategoriesName.setStyle("");
                 }
             } else {
                 clearHealthConditionTxtField();
@@ -418,24 +423,17 @@ public class StudentViewController implements IController, Initializable {
     }
 
     private void setFunctionalAbilityComboBoxItems() {
-        Image img0 = new Image("gui/view/img/funktionstilstand0.png", 100, 100, false, false);
-        Image img1 = new Image("gui/view/img/funktionstilstand1.png", 100, 100, false, false);
-        Image img2 = new Image("gui/view/img/funktionstilstand2.png", 100, 100, false, false);
-        Image img3 = new Image("gui/view/img/funktionstilstand3.png", 100, 100, false, false);
-        Image img9 = new Image("gui/view/img/funktionstilstand9.png", 100, 100, false, false);
-
         ImageWithText iWT0 = new ImageWithText("gui/view/img/funktionstilstand0.png", 100, 100, false, false, "0");
         ImageWithText iWT1 = new ImageWithText("gui/view/img/funktionstilstand1.png", 100, 100, false, false, "1");
         ImageWithText iWT2 = new ImageWithText("gui/view/img/funktionstilstand2.png", 100, 100, false, false, "2");
         ImageWithText iWT3 = new ImageWithText("gui/view/img/funktionstilstand3.png", 100, 100, false, false, "3");
+        ImageWithText iWT4 = new ImageWithText("gui/view/img/funktionstilstand4.png", 100, 100, false, false, "4");
         ImageWithText iWT9 = new ImageWithText("gui/view/img/funktionstilstand9.png", 100, 100, false, false, "9");
 
-        comboBoxCurrentLevel.getItems().addAll(iWT0, iWT1, iWT2, iWT3, iWT9);
+        comboBoxCurrentLevel.getItems().addAll(iWT0, iWT1, iWT2, iWT3, iWT4, iWT9);
         comboBoxCurrentLevel.setCellFactory(new Callback<ListView<ImageWithText>,ListCell<ImageWithText>>(){
-
             @Override
             public ListCell<ImageWithText> call(ListView<ImageWithText> p) {
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 return new ListCell<ImageWithText>(){
                     private final ImageView view;
                     {
@@ -445,7 +443,6 @@ public class StudentViewController implements IController, Initializable {
                     @Override
                     protected void updateItem(ImageWithText item, boolean empty) {
                         super.updateItem(item, empty);
-                        itemProperty().getName();
 
                         if (item == null || empty) {
                             setGraphic(null);
@@ -458,11 +455,10 @@ public class StudentViewController implements IController, Initializable {
             }
         });
 
-        comboBoxExpectedLevel.getItems().addAll(iWT0, iWT1, iWT2, iWT3, iWT9);
+        comboBoxExpectedLevel.getItems().addAll(iWT0, iWT1, iWT2, iWT3, iWT4, iWT9);
         comboBoxExpectedLevel.setCellFactory(new Callback<ListView<ImageWithText>,ListCell<ImageWithText>>(){
             @Override
             public ListCell<ImageWithText> call(ListView<ImageWithText> i) {
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 return new ListCell<>() {
                     private final ImageView view;
                     {
@@ -477,7 +473,6 @@ public class StudentViewController implements IController, Initializable {
                         if (item == null || empty) {
                             setGraphic(null);
                         } else {
-                            setText(itemProperty().getName());
                             view.setImage(item);
                             setGraphic(view);
                         }
@@ -485,14 +480,6 @@ public class StudentViewController implements IController, Initializable {
                 };
             }
         });
-
-
-        //comboBoxCurrentLevel.getItems().addAll(
-        //        "0", "1", "2", "3", "4", "9"
-        //);
-        //comboBoxExpectedLevel.getItems().addAll(
-        //        "0", "1", "2", "3", "4", "9"
-        //);
 
         comboboxPerformance.getItems().addAll(
                 "Udfører selv",
@@ -900,14 +887,17 @@ public class StudentViewController implements IController, Initializable {
                 if (radioNotRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
                     dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
+                    tcSubCategoriesName.setStyle("");
                     tcSubCategoriesName.setStyle("-fx-text-fill: red");
                 } else if (radioPotential.isSelected()) {
                     int conditionValue = ConditionEnum.POTENTIAL.getValue();
                     dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
+                    tcSubCategoriesName.setStyle("");
                     tcSubCategoriesName.setStyle("-fx-text-fill: yellow");
                 } else if (radioRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.RELEVANT.getValue();
                     dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
+                    tcSubCategoriesName.setStyle("");
                     tcSubCategoriesName.setStyle("-fx-text-fill: green");
                 }
             } else {
@@ -920,17 +910,22 @@ public class StudentViewController implements IController, Initializable {
                     int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
                     HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
+                    tcSubCategoriesName.setStyle("");
                     tcSubCategoriesName.setStyle("-fx-text-fill: red");
                 } else if (radioPotential.isSelected()) {
                     int conditionValue = ConditionEnum.POTENTIAL.getValue();
                     HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
+                    tcSubCategoriesName.setStyle("");
                     tcSubCategoriesName.setStyle("-fx-text-fill: yellow");
                 } else if (radioRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.RELEVANT.getValue();
                     HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
+                    tcSubCategoriesName.setStyle("");
                     tcSubCategoriesName.setStyle("-fx-text-fill: green");
+                }else{
+                    tcSubCategoriesName.setStyle("");
                 }
             }
             lblInfoStateHC.setText("Ændringer - Gemt");
