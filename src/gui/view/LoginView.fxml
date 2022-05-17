@@ -10,7 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="startPane" prefHeight="535.0" prefWidth="800.0" stylesheets="@css/Teacher.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LoginViewController">
+<AnchorPane fx:id="startPane" prefHeight="535.0" prefWidth="800.0" stylesheets="@css/Teacher.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LoginViewController">
    <children>
       <ImageView fitHeight="612.0" fitWidth="800.0" opacity="0.82" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -30,7 +30,7 @@
          <effect>
             <DropShadow />
          </effect></PasswordField>
-      <ComboBox fx:id="comboBoxSchool" layoutX="324.0" layoutY="409.0" prefWidth="150.0" promptText="Vælg Skole" />
+      <ComboBox fx:id="comboBoxSchool" layoutX="324.0" layoutY="409.0" onKeyPressed="#onEnterPressedLogin" prefWidth="150.0" promptText="Vælg Skole" />
       <Button fx:id="btnLogin" layoutX="350.0" layoutY="451.0" mnemonicParsing="false" onAction="#Login" prefHeight="26.0" prefWidth="98.0" text="Login">
          <effect>
             <Bloom threshold="0.64" />

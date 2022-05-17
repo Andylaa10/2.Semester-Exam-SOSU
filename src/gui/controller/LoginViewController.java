@@ -8,6 +8,7 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -104,11 +106,17 @@ public class LoginViewController implements Initializable {
 
     /**
      * When press enter, we can log in if the credentials is valid
-     * @throws Exception
      */
     @FXML
     private void onActionLoginWithEnter() throws Exception {
         Login();
+    }
+
+    @FXML
+    private void onEnterPressedLogin(KeyEvent keyEvent) throws Exception {
+        if (keyEvent.getCode().getName().equals("Enter")) {
+            Login();
+        }
     }
 
     @Override
