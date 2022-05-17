@@ -16,9 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -27,8 +24,6 @@ import java.util.ResourceBundle;
 
 public class LoginViewController implements Initializable {
 
-    @FXML
-    private AnchorPane startPane;
     @FXML
     private Button btnLogin;
     @FXML
@@ -65,44 +60,52 @@ public class LoginViewController implements Initializable {
             switcher.centerOnScreen();
         }else{
             //TODO Errorhandling if school is not selected
-            int school = Integer.parseInt(txtFieldSchoolId.getText());
-            User user = facade.userLogin(username, password, school);
-            if (user != null && user.getUsertype() == UserType.STUDENT && user.getSchoolId() == school) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage switcher = (Stage) btnLogin.getScene().getWindow();
-                switcher.setScene(scene);
-                IController controller = loader.getController();
-                controller.setUser(user);
-                switcher.setTitle("Student");
-                switcher.show();
-                switcher.centerOnScreen();
-            } else if (user != null && user.getUsertype() == UserType.TEACHER && user.getSchoolId() == school) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/TeacherView.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage switcher = (Stage) btnLogin.getScene().getWindow();
-                switcher.setScene(scene);
-                IController controller = loader.getController();
-                controller.setUser(user);
-                switcher.setTitle("Teacher");
-                switcher.show();
-                switcher.centerOnScreen();
-            } else if (user != null && user.getUsertype() == UserType.ADMINISTRATOR && user.getSchoolId() == school) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/AdminView.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage switcher = (Stage) btnLogin.getScene().getWindow();
-                switcher.setScene(scene);
-                IController controller = loader.getController();
-                controller.setUser(user);
-                switcher.setTitle("Admin");
-                switcher.show();
-                switcher.centerOnScreen();
-            } else {
-                ErrorHandlerController.createWarning("Fejl i login", "Forkert brugernavn, adgangskode eller skole");
+            if (comboBoxSchool.getSelectionModel().getSelectedItem() == null){
+                ErrorHandlerController.createWarning("Vælg skole", "For at logge ind husk at vælge skole");
+            }else {
+                int school = Integer.parseInt(txtFieldSchoolId.getText());
+                User user = facade.userLogin(username, password, school);
+                if (user != null && user.getUsertype() == UserType.STUDENT && user.getSchoolId() == school) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
+                    Scene scene = new Scene(loader.load());
+                    Stage switcher = (Stage) btnLogin.getScene().getWindow();
+                    switcher.setScene(scene);
+                    IController controller = loader.getController();
+                    controller.setUser(user);
+                    switcher.setTitle("Student");
+                    switcher.show();
+                    switcher.centerOnScreen();
+                } else if (user != null && user.getUsertype() == UserType.TEACHER && user.getSchoolId() == school) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/TeacherView.fxml"));
+                    Scene scene = new Scene(loader.load());
+                    Stage switcher = (Stage) btnLogin.getScene().getWindow();
+                    switcher.setScene(scene);
+                    IController controller = loader.getController();
+                    controller.setUser(user);
+                    switcher.setTitle("Teacher");
+                    switcher.show();
+                    switcher.centerOnScreen();
+                } else if (user != null && user.getUsertype() == UserType.ADMINISTRATOR && user.getSchoolId() == school) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/AdminView.fxml"));
+                    Scene scene = new Scene(loader.load());
+                    Stage switcher = (Stage) btnLogin.getScene().getWindow();
+                    switcher.setScene(scene);
+                    IController controller = loader.getController();
+                    controller.setUser(user);
+                    switcher.setTitle("Admin");
+                    switcher.show();
+                    switcher.centerOnScreen();
+                } else {
+                    ErrorHandlerController.createWarning("Fejl i login", "Forkert brugernavn, adgangskode eller skole");
+                }
             }
         }
     }
 
+    /**
+     * When press enter, we can log in if the credentials is valid
+     * @throws Exception
+     */
     @FXML
     private void onActionLoginWithEnter() throws Exception {
         Login();
@@ -114,6 +117,9 @@ public class LoginViewController implements Initializable {
         initializeCombo();
     }
 
+    /**
+     * Initializing the combobox
+     */
     public void initializeCombo(){
         try {
             allSchools = FXCollections.observableArrayList(facade.getSchools());
@@ -122,6 +128,10 @@ public class LoginViewController implements Initializable {
         }
         comboBoxSchool.setItems(allSchools);
     }
+
+    /**
+     * Select a school on combobox
+     */
     public void selectedSchoolOnComboBox(){
         this.comboBoxSchool.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue != null){
