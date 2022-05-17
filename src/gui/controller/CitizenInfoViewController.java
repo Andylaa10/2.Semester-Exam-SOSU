@@ -3,15 +3,12 @@ package gui.controller;
 import be.Case;
 import be.Citizen;
 import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
-import be.HealthCondition.HealthCondition;
-import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
 import be.ObservationNote;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -19,14 +16,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -47,42 +41,6 @@ public class CitizenInfoViewController implements Initializable {
     @FXML
     private TextField txtFieldFollowUpDate;
     @FXML
-    private Pane casePane;
-    @FXML
-    private TextField txtFieldCaseName;
-    @FXML
-    private TextArea txtAreaCaseInfo;
-    @FXML
-    private Pane healthConditionPane;
-    @FXML
-    private TextField txtFieldHealthCondition;
-    @FXML
-    private TextArea txtAreaCurrentLevel;
-    @FXML
-    private TextField txtFieldHCSubcategory;
-    @FXML
-    private TextField txtFieldExpectedLevel;
-    @FXML
-    private TextField txtFieldHCRelevance;
-    @FXML
-    private Pane functionalAbilityPane;
-    @FXML
-    private TextField txtFieldFunctionalAbility;
-    @FXML
-    private TextArea txFieldNote;
-    @FXML
-    private TextField txtFieldFASubCategory;
-    @FXML
-    private TextField txtFieldMeaningOfPerformance;
-    @FXML
-    private TextField txtFieldCurrentLvl;
-    @FXML
-    private TextField txtFieldFAExpectedLevel;
-    @FXML
-    private TextField txtFieldPerformance;
-    @FXML
-    private TextArea txtFieldCitizenGoals;
-    @FXML
     private VBox vBoxFunctionalAbilities;
     @FXML
     private VBox vBoxHealthCondition;
@@ -90,28 +48,12 @@ public class CitizenInfoViewController implements Initializable {
     private VBox vBoxCase;
     @FXML
     private TextField txtFieldCitizenID;
-    @FXML
-    private AnchorPane anchorPaneCases;
-    @FXML
-    private Button addNewCaseToVboxBtn;
-    @FXML
-    private Button addNewHCToVBoxBtn;
-    @FXML
-    private AnchorPane anchorPaneHealthConditions;
-    @FXML
-    private Button addNewFAToVboxBtn;
-
 
     private int citizenId;
-    private int caseId = 0;
-    private int healthConditionId = 0;
-    private int functionalAbilityId = 0;
+    private int healthConditionId;
 
-    private DataModelFacade dataModelFacade;
-    private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
-    private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
-    private ObservableList<HealthConditionSubCategoryText> allSubCategories = FXCollections.observableArrayList();
-    private ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories = FXCollections.observableArrayList();
+    private final DataModelFacade dataModelFacade;
+
 
     public CitizenInfoViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
@@ -164,15 +106,15 @@ public class CitizenInfoViewController implements Initializable {
     }
 
     private void createCases() throws SQLException {
-        allCasesOnCitizen = FXCollections.observableList(dataModelFacade.getCasesOnCitizen(citizenId));
+        ObservableList<Case> allCasesOnCitizen = FXCollections.observableList(dataModelFacade.getCasesOnCitizen(citizenId));
         for (Case casesOnCitizen : allCasesOnCitizen) {
-            caseId = casesOnCitizen.getId();
+            int caseId = casesOnCitizen.getId();
             newCaseToVBox(caseId);
         }
     }
 
     private void createHealthConditions() throws SQLException {
-        allSubCategories = FXCollections.observableList(dataModelFacade.getHCInfoOnSubCategories(citizenId));
+        ObservableList<HealthConditionSubCategoryText> allSubCategories = FXCollections.observableList(dataModelFacade.getHCInfoOnSubCategories(citizenId));
         for (HealthConditionSubCategoryText HCSubCategoryText : allSubCategories) {
             healthConditionId = HCSubCategoryText.getCategoryId();
             newHCToVBox(healthConditionId);
@@ -181,9 +123,9 @@ public class CitizenInfoViewController implements Initializable {
     }
 
     private void createFunctionalAbilities() throws SQLException {
-        allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFAInfoOnSubCategories(citizenId));
+        ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFAInfoOnSubCategories(citizenId));
         for (FunctionalAbilitySubCategoryText FAOnCitizen : allFunctionalAbilitySubCategories) {
-            functionalAbilityId = FAOnCitizen.getSubCategoryId();
+            int functionalAbilityId = FAOnCitizen.getSubCategoryId();
             newFAToVBox(functionalAbilityId);
         }
     }
@@ -221,8 +163,8 @@ public class CitizenInfoViewController implements Initializable {
     }
 
 
-    public void newHCToVBox(int healthConditionID) throws SQLServerException {
-        HealthConditionSubCategoryText HCSubCategoryText = dataModelFacade.getTextOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), healthConditionId);
+    public void newHCToVBox(int healthConditionId) throws SQLServerException {
+        HealthConditionSubCategoryText HCSubCategoryText = dataModelFacade.getTextOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), this.healthConditionId);
 
         HBox hBox1 = new HBox();
         HBox hBox2 = new HBox();
