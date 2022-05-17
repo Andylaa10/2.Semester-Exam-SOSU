@@ -141,7 +141,6 @@ public class CitizenInfoViewController implements Initializable {
         allSubCategories = FXCollections.observableList(dataModelFacade.getHCInfoOnSubCategories(citizenId));
         for (HealthConditionSubCategoryText HCSubCategoryText : allSubCategories) {
             healthConditionId = HCSubCategoryText.getCategoryId();
-            System.out.println(allFunctionalAbilitySubCategories);
             newHCToVBox(healthConditionId);
         }
 

@@ -246,6 +246,7 @@ public class StudentViewController implements IController, Initializable {
     private ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories = FXCollections.observableArrayList();
 
     private Citizen selectedCitizen;
+    private Case selectedCase;
     private Citizen selectedCitizenOnComboBox;
     private FunctionalAbilitySubCategoryText selectedFunctionalAbilitySubCategory;
 
@@ -255,6 +256,7 @@ public class StudentViewController implements IController, Initializable {
 
     private DataModelFacade dataModelFacade;
     private CitizenInfoViewController citizenInfoViewController;
+    private EditCaseViewController editCaseViewController;
     private ObservationNoteViewController observationNoteViewController;
     private ToggleGroup group;
 
@@ -279,6 +281,7 @@ public class StudentViewController implements IController, Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setAnchorPanesVisibility();
         selectedCitizen();
+        selectedCase();
         selectedCitizenOnComboBox();
         selectedHealthCondition();
         selectedSubCategory();
@@ -627,6 +630,49 @@ public class StudentViewController implements IController, Initializable {
                 seeCasesOnCitizen();
             }
         }));
+    }
+
+    /**
+     * Selects a case from the citizens TableView
+     * Also opens the case window if you choose to double click
+     */
+    private void selectedCase() {
+        this.tvCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (newValue != null) {
+                this.selectedCase = newValue;
+            }
+        }));
+
+        this.tvCases.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && selectedCase != null) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/gui/view/EditCaseView.fxml"));
+
+                    Scene mainWindowScene = null;
+                    try {
+                        mainWindowScene = new Scene(fxmlLoader.load());
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
+                    }
+                    Stage viewCaseStage;
+                    viewCaseStage = new Stage();
+                    viewCaseStage.setScene(mainWindowScene);
+
+
+                    editCaseViewController = fxmlLoader.getController();
+                    editCaseViewController.setSelectedCase(selectedCase);
+
+
+                    viewCaseStage.setResizable(false);
+                    viewCaseStage.show();
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     /**

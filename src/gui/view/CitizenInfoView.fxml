@@ -32,9 +32,9 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Label fx:id="lblName" alignment="CENTER" layoutX="582.0" layoutY="149.0" prefHeight="35.0" prefWidth="188.0" text="Fornavn + &quot; &quot; + efternavn">
+      <Label fx:id="lblName" alignment="CENTER" layoutX="584.0" layoutY="149.0" prefHeight="35.0" prefWidth="188.0" text="Fornavn + &quot; &quot; + efternavn">
          <font>
-            <Font size="14.0" />
+            <Font size="19.0" />
          </font>
       </Label>
       <Label layoutX="663.0" layoutY="188.0" text="CPR:">
@@ -125,6 +125,6 @@
             </Tab>
         </tabs>
       </TabPane>
-      <TextField fx:id="txtFieldCitizenID" layoutX="726.0" layoutY="66.0" prefHeight="20.0" prefWidth="39.0" style="-fx-background-color: red;" />
+      <TextField fx:id="txtFieldCitizenID" layoutX="726.0" layoutY="66.0" prefHeight="20.0" prefWidth="39.0" style="-fx-background-color: red;" visible="false" />
    </children>
 </AnchorPane>
