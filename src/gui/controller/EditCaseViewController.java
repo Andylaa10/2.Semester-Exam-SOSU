@@ -42,6 +42,8 @@ public class EditCaseViewController {
         txtAreaCaseInfo.setText(aCase.getInfo());
         btnCancel.setText("Tilbage");
         btnSave.setVisible(false);
+        txtFieldCaseName.setEditable(false);
+        txtAreaCaseInfo.setEditable(false);
     }
 
     public void setSelectedCaseAsAdmin(Case aCase){
@@ -50,6 +52,8 @@ public class EditCaseViewController {
         txtAreaCaseInfo.setText(aCase.getInfo());
         btnCancel.setText("Tilbage");
         btnSave.setVisible(false);
+        txtFieldCaseName.setEditable(false);
+        txtAreaCaseInfo.setEditable(false);
     }
 
     public EditCaseViewController() throws IOException {
