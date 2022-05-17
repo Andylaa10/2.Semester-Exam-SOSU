@@ -61,11 +61,11 @@ public class ObservationNoteDAO {
 
     public void editObservationNote(ObservationNote observationNote) throws Exception {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "UPDATE ObservationNote SET date = ?, note = ? WHERE observationNoteID = ? ;";
+            String sql = "UPDATE ObservationNote SET date = ?, note = ? WHERE citizenId = ? ;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, observationNote.getDate());
             preparedStatement.setString(2, observationNote.getNote());
-            preparedStatement.setInt(3, observationNote.getId());
+            preparedStatement.setInt(3, observationNote.getCitizenId());
 
             preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {

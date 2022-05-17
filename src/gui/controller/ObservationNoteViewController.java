@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,8 +44,13 @@ public class ObservationNoteViewController implements Initializable {
         txtFieldCitizenId.setText(String.valueOf(citizen.getId()));
         citizenId = Integer.parseInt(txtFieldCitizenId.getText());
         ObservationNote observationNote = dataModelFacade.getObservationNote(citizenId);
-        txtAreaObservationNote.setText(observationNote.getNote());
-        txtFieldFollowUpDate.setText(observationNote.getDate());
+        if (observationNote != null) {
+            txtFieldFollowUpDate.setText(observationNote.getDate());
+            txtAreaObservationNote.setText(observationNote.getNote());
+        } else {
+            txtFieldFollowUpDate.setText("");
+            txtAreaObservationNote.setText("");
+        }
     }
 
 
@@ -52,17 +58,19 @@ public class ObservationNoteViewController implements Initializable {
     private void onActionSave() throws Exception {
         Stage stage = (Stage) btnSave.getScene().getWindow();
 
-        String date = String.valueOf(txtFieldFollowUpDate);
-        String note = String.valueOf(txtAreaObservationNote);
+        String date = txtFieldFollowUpDate.getText();
+        String note = txtAreaObservationNote.getText();
 
-        if (txtFieldFollowUpDate != null && txtAreaObservationNote.getText() != null) {
-            dataModelFacade.createObservationNote(citizenId, date, note);
-        } else {
-            ObservationNote observationNote = new ObservationNote(citizenId, date, note);
-            dataModelFacade.editObservationNote(observationNote);
+        if (txtFieldFollowUpDate.getText() != null && txtAreaObservationNote.getText() != null) {
+            if (dataModelFacade.getObservationNote(citizenId) == null) {
+                dataModelFacade.createObservationNote(citizenId, date, note);
+            } else {
+                ObservationNote observationNote = new ObservationNote(citizenId, date, note);
+                dataModelFacade.editObservationNote(observationNote);
+            }
+
+            stage.close();
         }
-
-        stage.close();
     }
 
     @FXML
