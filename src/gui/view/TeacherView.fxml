@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Teacher.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TeacherViewController">
+<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/Teacher.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.TeacherViewController">
    <children>
       <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: #044d39;">
          <children>
@@ -194,9 +194,9 @@
             <TextField fx:id="txtFieldStudentID" layoutY="394.0" prefHeight="26.0" prefWidth="12.0" visible="false" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneCase" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <Label layoutX="111.0" layoutY="22.0" text="Opret ny sag" textFill="#1d5e3f">
+            <Label layoutX="111.0" layoutY="10.0" text="Opret ny sag" textFill="#1d5e3f">
                <font>
                   <Font size="24.0" />
                </font>
@@ -204,34 +204,34 @@
                   <Bloom threshold="0.36" />
                </effect>
             </Label>
-            <TextField fx:id="txtFieldName" layoutX="63.0" layoutY="75.0" prefHeight="26.0" prefWidth="232.0">
+            <TextField fx:id="txtFieldName" layoutX="63.0" layoutY="63.0" prefHeight="26.0" prefWidth="232.0">
                <effect>
                   <DropShadow height="2.5" radius="0.75" width="2.5" />
                </effect>
             </TextField>
-            <Label layoutX="14.0" layoutY="76.0" text="Navn">
+            <Label layoutX="14.0" layoutY="62.0" text="Navn">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextArea fx:id="txtAreaInfo" layoutX="63.0" layoutY="121.0" prefHeight="277.0" prefWidth="232.0">
+            <TextArea fx:id="txtAreaInfo" layoutX="63.0" layoutY="109.0" prefHeight="277.0" prefWidth="232.0">
                <effect>
                   <DropShadow height="1.0" radius="0.25" width="2.0" />
                </effect>
             </TextArea>
-            <Label layoutX="18.0" layoutY="121.0" text="Info">
+            <Label layoutX="18.0" layoutY="107.0" text="Info">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TableView fx:id="tvCases" layoutX="325.0" layoutY="73.0" prefHeight="289.0" prefWidth="249.0" style="-fx-background-color: transparent;">
+            <TableView fx:id="tvCases" layoutX="325.0" layoutY="61.0" prefHeight="289.0" prefWidth="249.0" style="-fx-background-color: transparent;">
               <columns>
                 <TableColumn fx:id="tcCasesName" prefWidth="128.0" text="Navn" />
                 <TableColumn fx:id="tcCasesDate" prefWidth="121.0" text="Dato" />
                   <TableColumn fx:id="tcCasesInfo" prefWidth="132.79998779296875" text="Info" visible="false" />
               </columns>
             </TableView>
-            <Label layoutX="412.0" layoutY="22.0" text="Sager" textFill="#1d5e3f">
+            <Label layoutX="412.0" layoutY="10.0" text="Sager" textFill="#1d5e3f">
                <font>
                   <Font size="24.0" />
                </font>
@@ -239,34 +239,35 @@
                   <Bloom threshold="0.36" />
                </effect>
             </Label>
-            <Button fx:id="btnSaveCase" layoutX="63.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleSaveCase" prefHeight="26.0" prefWidth="232.0" text="Opret Sag">
+            <Button fx:id="btnSaveCase" layoutX="63.0" layoutY="395.0" mnemonicParsing="false" onAction="#btnHandleSaveCase" prefHeight="26.0" prefWidth="232.0" text="Opret Sag">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect></Button>
-            <Button fx:id="btnEditCase" layoutX="325.0" layoutY="369.0" mnemonicParsing="false" onAction="#btnHandleEditCase" prefHeight="26.0" prefWidth="117.0" text="Rediger Sag">
+            <Button fx:id="btnEditCase" layoutX="325.0" layoutY="357.0" mnemonicParsing="false" onAction="#btnHandleEditCase" prefHeight="26.0" prefWidth="117.0" text="Rediger Sag">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect></Button>
-            <Button fx:id="btnDeleteCase" layoutX="456.0" layoutY="368.0" mnemonicParsing="false" onAction="#btnHandleDeleteCase" prefHeight="26.0" prefWidth="118.0" text="Slet Sag">
+            <Button fx:id="btnDeleteCase" layoutX="456.0" layoutY="356.0" mnemonicParsing="false" onAction="#btnHandleDeleteCase" prefHeight="26.0" prefWidth="118.0" text="Slet Sag">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect></Button>
-            <Button fx:id="btnCopyCase" layoutX="325.0" layoutY="405.0" mnemonicParsing="false" onAction="#btnHandleCopyCase" prefHeight="26.0" prefWidth="250.0" text="Kopier Sag">
+            <Button fx:id="btnCopyCase" layoutX="325.0" layoutY="393.0" mnemonicParsing="false" onAction="#btnHandleCopyCase" prefHeight="26.0" prefWidth="250.0" text="Kopier Sag">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect></Button>
-            <Button fx:id="btnEditCaseSave" layoutX="63.0" layoutY="407.0" mnemonicParsing="false" onAction="#btnHandleEditCaseSave" prefHeight="26.0" prefWidth="232.0" text="Gem Ændringer" visible="false">
+            <Button fx:id="btnEditCaseSave" layoutX="63.0" layoutY="395.0" mnemonicParsing="false" onAction="#btnHandleEditCaseSave" prefHeight="26.0" prefWidth="232.0" text="Gem Ændringer" visible="false">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect>
             </Button>
-            <Button fx:id="btnEditCaseCancel" layoutX="456.0" layoutY="368.0" mnemonicParsing="false" onAction="#btnHandleEditCaseCancel" prefHeight="26.0" prefWidth="118.0" text="Annuller" visible="false">
+            <Button fx:id="btnEditCaseCancel" layoutX="456.0" layoutY="356.0" mnemonicParsing="false" onAction="#btnHandleEditCaseCancel" prefHeight="26.0" prefWidth="118.0" text="Annuller" visible="false">
                <effect>
                   <ColorAdjust brightness="0.3" />
                </effect>
             </Button>
-            <Button fx:id="btnCopySave" layoutX="63.0" layoutY="406.0" mnemonicParsing="false" onAction="#btnHandleCopySave" prefHeight="26.0" prefWidth="232.0" text="Opret Kopi " visible="false" />
-            <TextField fx:id="txtFieldCaseID" layoutX="21.0" layoutY="156.0" prefHeight="26.0" prefWidth="21.0" visible="false" />
+            <Button fx:id="btnCopySave" layoutX="63.0" layoutY="394.0" mnemonicParsing="false" onAction="#btnHandleCopySave" prefHeight="26.0" prefWidth="232.0" text="Opret Kopi " visible="false" />
+            <TextField fx:id="txtFieldCaseID" layoutX="21.0" layoutY="142.0" prefHeight="26.0" prefWidth="21.0" visible="false" />
+            <Label alignment="CENTER_RIGHT" layoutX="350.0" layoutY="433.0" text="Dobbeltklik for at se sagens informationer" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">

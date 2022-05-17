@@ -122,7 +122,40 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0">
+      <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0">
+         <children>
+            <TableView fx:id="tvCases" layoutX="606.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0" style="-fx-background-color: transparent;">
+              <columns>
+                  <TableColumn fx:id="tcCaseID" prefWidth="184.80003356933594" text="ID" visible="false" />
+                <TableColumn fx:id="tcCaseName" prefWidth="184.80003356933594" text="Navn" />
+                  <TableColumn fx:id="tcCaseDate" prefWidth="142.39996337890625" text="Dato" />
+                  <TableColumn fx:id="tcCaseInfo" prefWidth="200.800048828125" text="Info" />
+              </columns>
+            </TableView>
+            <TableView fx:id="tvCitizens" layoutX="40.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0" style="-fx-background-color: transparent;">
+               <columns>
+                  <TableColumn fx:id="tcCitizenID" prefWidth="108.0" text="ID" visible="false" />
+                  <TableColumn fx:id="tcCitizenFirstName" prefWidth="108.0" text="Fornavn" />
+                  <TableColumn fx:id="tcCitizenLastName" prefWidth="110.39996337890625" text="Efternavn" />
+                  <TableColumn fx:id="tcCitizenSSN" prefWidth="124.79998779296875" text="CPR-Nummer" />
+                  <TableColumn fx:id="tcCitizenAddress" prefWidth="106.39990234375" text="Addresse" />
+                  <TableColumn fx:id="tcCitizenSex" prefWidth="78.4000244140625" text="Køn" />
+               </columns>
+            </TableView>
+            <Label layoutX="246.0" layoutY="14.0" text="Borgere">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Label layoutX="697.0" layoutY="14.0" text="Borgerens tildelte sager">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnBack" layoutX="982.0" layoutY="577.0" mnemonicParsing="false" onAction="#btnClickBack" prefHeight="27.0" prefWidth="150.0" text="Tilbage" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0" visible="false">
          <children>
             <Pane prefHeight="42.0" prefWidth="1158.0" style="-fx-background-color: transparent;">
                <children>
@@ -684,39 +717,6 @@
                </children>
             </AnchorPane>
             <Button fx:id="btnCitizenInfo" layoutX="944.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnOpenCitizenInfo" prefHeight="25.0" prefWidth="200.0" text="Se alle borgerens informationer" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0" visible="false">
-         <children>
-            <TableView fx:id="tvCases" layoutX="606.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0" style="-fx-background-color: transparent;">
-              <columns>
-                  <TableColumn fx:id="tcCaseID" prefWidth="184.80003356933594" text="ID" visible="false" />
-                <TableColumn fx:id="tcCaseName" prefWidth="184.80003356933594" text="Navn" />
-                  <TableColumn fx:id="tcCaseDate" prefWidth="142.39996337890625" text="Dato" />
-                  <TableColumn fx:id="tcCaseInfo" prefWidth="200.800048828125" text="Info" />
-              </columns>
-            </TableView>
-            <TableView fx:id="tvCitizens" layoutX="40.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0" style="-fx-background-color: transparent;">
-               <columns>
-                  <TableColumn fx:id="tcCitizenID" prefWidth="108.0" text="ID" visible="false" />
-                  <TableColumn fx:id="tcCitizenFirstName" prefWidth="108.0" text="Fornavn" />
-                  <TableColumn fx:id="tcCitizenLastName" prefWidth="110.39996337890625" text="Efternavn" />
-                  <TableColumn fx:id="tcCitizenSSN" prefWidth="124.79998779296875" text="CPR-Nummer" />
-                  <TableColumn fx:id="tcCitizenAddress" prefWidth="106.39990234375" text="Addresse" />
-                  <TableColumn fx:id="tcCitizenSex" prefWidth="78.4000244140625" text="Køn" />
-               </columns>
-            </TableView>
-            <Label layoutX="246.0" layoutY="14.0" text="Borgere">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Label>
-            <Label layoutX="749.0" layoutY="14.0" text="Sager på borgeren">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Label>
-            <Button fx:id="btnBack" layoutX="982.0" layoutY="577.0" mnemonicParsing="false" onAction="#btnClickBack" prefHeight="27.0" prefWidth="150.0" text="Tilbage" />
          </children>
       </AnchorPane>
    </children>
