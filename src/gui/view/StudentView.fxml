@@ -449,7 +449,7 @@
                   <TextField fx:id="txtFieldGeneralInfoId" layoutX="149.0" layoutY="8.0" prefHeight="26.0" prefWidth="21.0" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
+            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
                <children>
                   <TableView fx:id="tvHealthConditions" layoutX="25.0" layoutY="53.0" prefHeight="458.0" prefWidth="302.0" style="-fx-background-color: transparent;">
                     <columns>
@@ -509,7 +509,7 @@
                         <Image url="@img/small%20checkbox%20icon.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btnObservationHC" layoutX="951.0" layoutY="51.0" mnemonicParsing="false" onAction="#btnHandleObservationHC" prefHeight="26.0" prefWidth="170.0" text="Observations notat" />
+                  <Button fx:id="btnObservationHC" layoutX="25.0" layoutY="23.0" mnemonicParsing="false" onAction="#btnHandleObservationHC" prefHeight="26.0" prefWidth="170.0" text="Observations notat" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneOBS" layoutX="825.0" layoutY="51.0" prefHeight="302.0" prefWidth="326.0" visible="false">
@@ -537,7 +537,7 @@
                </children>
             </AnchorPane>
             <TextField fx:id="txtFieldCitizenID" layoutX="886.0" layoutY="38.0" prefHeight="26.0" prefWidth="31.0" visible="false" />
-            <AnchorPane fx:id="anchorPaneFunctionalCondition" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1122.0">
+            <AnchorPane fx:id="anchorPaneFunctionalCondition" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1122.0" visible="false">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b85f7" height="469.0" layoutX="3.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" width="365.0">
                      <effect>
@@ -680,7 +680,7 @@
                         <Image url="@img/small%20checkbox%20icon.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btnObservationFA" layoutX="727.0" layoutY="1.0" mnemonicParsing="false" onAction="#btnHandleObservationFA" prefHeight="26.0" prefWidth="198.0" text="Observartions notat" />
+                  <Button fx:id="btnObservationFA" layoutX="3.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnHandleObservationFA" prefHeight="26.0" prefWidth="198.0" text="Observartions notat" />
                </children>
             </AnchorPane>
             <Button fx:id="btnCitizenInfo" layoutX="944.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnOpenCitizenInfo" prefHeight="25.0" prefWidth="200.0" text="Se alle borgerens informationer" />
