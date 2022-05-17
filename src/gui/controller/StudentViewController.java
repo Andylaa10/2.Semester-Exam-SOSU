@@ -1263,5 +1263,15 @@ public class StudentViewController implements IController, Initializable {
         stage.show();
     }
 
+    public void reloadCaseTable() {
+        try {
+            int index = tvCases.getSelectionModel().getFocusedIndex();
+            this.tvCases.setItems(FXCollections.observableList(dataModelFacade.getAssignedCases(Integer.parseInt(txtFieldCitizenID.getText()))));
+            tvCases.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
 
 }
