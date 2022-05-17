@@ -78,8 +78,6 @@ public class EditCaseViewController {
 
         dataModelFacade.editCase(aCase);
 
-        studentViewController.reloadCaseTable();
-
     }
 
     @FXML
