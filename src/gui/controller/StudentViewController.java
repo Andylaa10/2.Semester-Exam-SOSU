@@ -723,46 +723,50 @@ public class StudentViewController implements IController, Initializable {
      */
     @FXML
     private void onActionGeneralInfoSave() throws Exception {
-        int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
-        String citizenFirstName = txtFieldFirstName.getText();
-        String citizenLastName = txtFieldLastName.getText();
-        String citizenSSN = txtFieldSSN.getText();
-        String citizenAddress = txtFieldAddress.getText();
-        int schoolId = Integer.parseInt(txtFieldSchoolID.getText());
-        String sex = null;
-        if (radioMale.isSelected()) {
-            sex = "Male";
-        } else if (radioFemale.isSelected()) {
-            sex = "Female";
-        } else if (radioOther.isSelected()) {
-            sex = "Other";
-        }
-        Citizen citizen = new Citizen(citizenId, citizenFirstName, citizenLastName, citizenSSN, citizenAddress, sex, schoolId);
-        dataModelFacade.editCitizen(citizen);
-
-        String coping = txtAreaCoping.getText();
-        String motivation = txtAreaMotivation.getText();
-        String resources = txtAreaResources.getText();
-        String roles = txtAreaRoles.getText();
-        String habits = txtAreaHabits.getText();
-        String educationAndJob = txtAreaEducationAndJobs.getText();
-        String lifeStory = txtAreaLifeStory.getText();
-        String network = txtAreaNetwork.getText();
-        String healthInformation = txtAreaHealthInfo.getText();
-        String equipmentAids = txtAreaEquipmentAids.getText();
-        String homeLayout = txtAreaHomeLayout.getText();
-        GeneralInformation generalInformation = new GeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationAndJob,
-                lifeStory, network, healthInformation, equipmentAids, homeLayout);
-        if(txtFieldGeneralInfoId.getText() == null){
-            dataModelFacade.createGeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationAndJob,
-                    lifeStory, network, healthInformation, equipmentAids, homeLayout);
+        if(selectedCitizen == null){
+            ErrorHandlerController.createWarning("Select Citizen", "Remember to select a citizen from the Combobox");
+            clearHealthCondition();
         }else{
-            dataModelFacade.editGeneralInformation(generalInformation);
-        }
+            int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
+            String citizenFirstName = txtFieldFirstName.getText();
+            String citizenLastName = txtFieldLastName.getText();
+            String citizenSSN = txtFieldSSN.getText();
+            String citizenAddress = txtFieldAddress.getText();
+            int schoolId = Integer.parseInt(txtFieldSchoolID.getText());
+            String sex = null;
+            if (radioMale.isSelected()) {
+                sex = "Male";
+            } else if (radioFemale.isSelected()) {
+                sex = "Female";
+            } else if (radioOther.isSelected()) {
+                sex = "Other";
+            }
+            Citizen citizen = new Citizen(citizenId, citizenFirstName, citizenLastName, citizenSSN, citizenAddress, sex, schoolId);
+            dataModelFacade.editCitizen(citizen);
 
-        lblInfoState.setText("Ændringer - Gemt");
-        imgViewNotSaved.setVisible(false);
-        imgViewSaved.setVisible(true);
+            String coping = txtAreaCoping.getText();
+            String motivation = txtAreaMotivation.getText();
+            String resources = txtAreaResources.getText();
+            String roles = txtAreaRoles.getText();
+            String habits = txtAreaHabits.getText();
+            String educationAndJob = txtAreaEducationAndJobs.getText();
+            String lifeStory = txtAreaLifeStory.getText();
+            String network = txtAreaNetwork.getText();
+            String healthInformation = txtAreaHealthInfo.getText();
+            String equipmentAids = txtAreaEquipmentAids.getText();
+            String homeLayout = txtAreaHomeLayout.getText();
+            GeneralInformation generalInformation = new GeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationAndJob,
+                    lifeStory, network, healthInformation, equipmentAids, homeLayout);
+            if(txtFieldGeneralInfoId.getText() == null){
+                dataModelFacade.createGeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationAndJob,
+                        lifeStory, network, healthInformation, equipmentAids, homeLayout);
+            }else{
+                dataModelFacade.editGeneralInformation(generalInformation);
+            }
+            lblInfoState.setText("Ændringer - Gemt");
+            imgViewNotSaved.setVisible(false);
+            imgViewSaved.setVisible(true);
+        }
     }
 
     /**
@@ -866,6 +870,20 @@ public class StudentViewController implements IController, Initializable {
         comboboxPerformance.getSelectionModel().clearSelection();
         comboboxMeaningOfPerformance.getSelectionModel().clearSelection();
         txtAreaCitizenGoals.clear();
+    }
+
+    private void clearHealthCondition(){
+        txtAreaCoping.clear();
+        txtAreaMotivation.clear();
+        txtAreaResources.clear();
+        txtAreaRoles.clear();
+        txtAreaHabits.clear();
+        txtAreaEducationAndJobs.clear();
+        txtAreaLifeStory.clear();
+        txtAreaNetwork.clear();
+        txtAreaHealthInfo.clear();
+        txtAreaEquipmentAids.clear();
+        txtAreaHomeLayout.clear();
     }
 
     @FXML
