@@ -1247,7 +1247,7 @@ public class StudentViewController implements IController, Initializable {
         btnClickGeneralInformation();
     }
 
-    public void btnOpenCitizenInfo(ActionEvent actionEvent) throws IOException, SQLException {
+    public void btnOpenCitizenInfo(ActionEvent actionEvent) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/gui/view/CitizenInfoView.fxml"));
 

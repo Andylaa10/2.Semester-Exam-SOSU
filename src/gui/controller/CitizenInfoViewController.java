@@ -6,10 +6,12 @@ import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
 import be.HealthCondition.HealthCondition;
 import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
+import be.ObservationNote;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -23,6 +25,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,13 +35,15 @@ import java.util.ResourceBundle;
 public class CitizenInfoViewController implements Initializable {
 
     @FXML
+    private Button btnSaveDateAndNote;
+    @FXML
     private Label lblName;
     @FXML
     private Label lblSSN;
     @FXML
     private Label lblAddress;
     @FXML
-    private TextArea txtFieldObservationNote;
+    private TextArea txtAreaObservationNote;
     @FXML
     private TextField txtFieldFollowUpDate;
     @FXML
@@ -112,21 +117,50 @@ public class CitizenInfoViewController implements Initializable {
         this.dataModelFacade = new DataModelFacade();
     }
 
-    public void setSelectedCitizen(Citizen citizen) throws SQLException {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    }
+
+    public void setSelectedCitizen(Citizen citizen) throws Exception {
         txtFieldCitizenID.setText(String.valueOf(citizen.getId()));
+        citizenId = Integer.parseInt(txtFieldCitizenID.getText());
+
         lblName.setText(citizen.getFirstName() + " " + citizen.getLastName());
         lblSSN.setText(citizen.getSSN());
         lblAddress.setText(citizen.getAddress());
 
-        citizenId = Integer.parseInt(txtFieldCitizenID.getText());
+        ObservationNote observationNote = dataModelFacade.getObservationNote(citizenId);
+        if (observationNote != null) {
+            txtFieldFollowUpDate.setText(observationNote.getDate());
+            txtAreaObservationNote.setText(observationNote.getNote());
+        } else {
+            txtFieldFollowUpDate.setText("");
+            txtAreaObservationNote.setText("");
+        }
+
         createCases();
         createHealthConditions();
         createFunctionalAbilities();
     }
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    private void onActionSaveDateAndNote() throws Exception {
+        Stage stage = (Stage) btnSaveDateAndNote.getScene().getWindow();
+
+        String date = txtFieldFollowUpDate.getText();
+        String note = txtAreaObservationNote.getText();
+
+        if (txtFieldFollowUpDate.getText() != null && txtAreaObservationNote.getText() != null) {
+            if (dataModelFacade.getObservationNote(citizenId) == null) {
+                dataModelFacade.createObservationNote(citizenId, date, note);
+            } else {
+                ObservationNote observationNote = new ObservationNote(citizenId, date, note);
+                dataModelFacade.editObservationNote(observationNote);
+            }
+
+            stage.close();
+        }
     }
 
     private void createCases() throws SQLException {
@@ -646,6 +680,4 @@ public class CitizenInfoViewController implements Initializable {
         vBoxFunctionalAbilities.getChildren().add(vBoxNewFA);
 
     }
-
-
 }
