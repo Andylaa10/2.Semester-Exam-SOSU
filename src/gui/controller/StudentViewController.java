@@ -24,12 +24,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -58,10 +56,6 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private RadioButton radioOther;
     @FXML
-    private Button btnGeneralInfoCancel;
-    @FXML
-    private Button btnGeneralInfoSave;
-    @FXML
     private Label lblInfoState;
     @FXML
     private ImageView imgViewNotSaved;
@@ -78,8 +72,6 @@ public class StudentViewController implements IController, Initializable {
      */
     @FXML
     private TextField txtFieldFunctionalAbilityID;
-    @FXML
-    private Button btnObservationFA;
     @FXML
     private TableView<FunctionalAbilitySubCategoryText> tvFunctionalConditions;
     @FXML
@@ -99,9 +91,9 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private TextArea txtAreaCitizenGoals;
     @FXML
-    private ComboBox comboboxPerformance;
+    private ComboBox<String> comboboxPerformance;
     @FXML
-    private ComboBox comboboxMeaningOfPerformance;
+    private ComboBox<String> comboboxMeaningOfPerformance;
     /**
      * HealthCondition Tables
      */
@@ -120,13 +112,9 @@ public class StudentViewController implements IController, Initializable {
     @FXML
     private TextArea txtAreaNoteOnSubCategory;
     @FXML
-    private Button btnObservationHC;
-    @FXML
-    private Button btnMobility;
-    @FXML
     private TextArea txtAreaCurrentLevelAssessment;
     @FXML
-    private ComboBox comboBoxExpectedLevelAssessment;
+    private ComboBox<String> comboBoxExpectedLevelAssessment;
 
     /**
      * General Information
@@ -193,7 +181,7 @@ public class StudentViewController implements IController, Initializable {
      * FS III comboBox
      */
     @FXML
-    private ComboBox comboBoxCitizen;
+    private ComboBox<Citizen> comboBoxCitizen;
     @FXML
     private TextField txtFieldCitizenID;
     @FXML
@@ -251,11 +239,9 @@ public class StudentViewController implements IController, Initializable {
     private FunctionalAbilitySubCategoryText selectedFunctionalAbilitySubCategory;
 
     private HealthConditionSubCategory selectedHealthConditionSubCategory;
-    private HealthConditionSubCategoryText selectedHealthConditionSubCategoryText;
     private HealthCondition selectedHealthCondition;
 
-    private DataModelFacade dataModelFacade;
-    private CitizenInfoViewController citizenInfoViewController;
+    private final DataModelFacade dataModelFacade;
     private EditCaseViewController editCaseViewController;
     private ObservationNoteViewController observationNoteViewController;
     private ToggleGroup group;
@@ -367,12 +353,10 @@ public class StudentViewController implements IController, Initializable {
             if (subCategoryText != null) {
                 txtAreaNoteOnSubCategory.setText(subCategoryText.getProfessionalNote());
                 txtAreaCurrentLevelAssessment.setText(subCategoryText.getCurrentLevelAssessment());
-                if (subCategoryText.getExpectedLevelAssessment().equals("Mindskes")) {
-                    comboBoxExpectedLevelAssessment.getSelectionModel().select(0);
-                } else if (subCategoryText.getExpectedLevelAssessment().equals("Forbliver uændret")) {
-                    comboBoxExpectedLevelAssessment.getSelectionModel().select(1);
-                } else if (subCategoryText.getExpectedLevelAssessment().equals("Forsvinder")) {
-                    comboBoxExpectedLevelAssessment.getSelectionModel().select(2);
+                switch (subCategoryText.getExpectedLevelAssessment()) {
+                    case "Mindskes" -> comboBoxExpectedLevelAssessment.getSelectionModel().select(0);
+                    case "Forbliver uændret" -> comboBoxExpectedLevelAssessment.getSelectionModel().select(1);
+                    case "Forsvinder" -> comboBoxExpectedLevelAssessment.getSelectionModel().select(2);
                 }
                 if (subCategoryText.getCondition() == 0) {
                     radioNotRelevant.setSelected(true);
@@ -439,15 +423,17 @@ public class StudentViewController implements IController, Initializable {
         ImageWithText iWT9 = new ImageWithText("gui/view/img/funktionstilstand9.png", 100, 100, false, false, "9");
 
         comboBoxCurrentLevel.getItems().addAll(iWT0, iWT1, iWT2, iWT3, iWT4, iWT9);
-        comboBoxCurrentLevel.setCellFactory(new Callback<ListView<ImageWithText>,ListCell<ImageWithText>>(){
+        comboBoxCurrentLevel.setCellFactory(new Callback<>() {
             @Override
             public ListCell<ImageWithText> call(ListView<ImageWithText> p) {
-                return new ListCell<ImageWithText>(){
+                return new ListCell<>() {
                     private final ImageView view;
+
                     {
                         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
                         view = new ImageView();
                     }
+
                     @Override
                     protected void updateItem(ImageWithText item, boolean empty) {
                         super.updateItem(item, empty);
@@ -464,11 +450,12 @@ public class StudentViewController implements IController, Initializable {
         });
 
         comboBoxExpectedLevel.getItems().addAll(iWT0, iWT1, iWT2, iWT3, iWT4, iWT9);
-        comboBoxExpectedLevel.setCellFactory(new Callback<ListView<ImageWithText>,ListCell<ImageWithText>>(){
+        comboBoxExpectedLevel.setCellFactory(new Callback<>() {
             @Override
             public ListCell<ImageWithText> call(ListView<ImageWithText> i) {
                 return new ListCell<>() {
                     private final ImageView view;
+
                     {
                         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
                         view = new ImageView();
@@ -504,7 +491,7 @@ public class StudentViewController implements IController, Initializable {
     /**
      * Setup combobox with citizens
      */
-    private void initializeCitizenComboBox() throws SQLException {
+    private void initializeCitizenComboBox() {
         //Initialize the citizens in the dropdown menu
         allCitizens = FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText())));
         tableViewLoadCitizens(allCitizens);
@@ -520,7 +507,7 @@ public class StudentViewController implements IController, Initializable {
         imgViewNotSaved.setVisible(true);
         imgViewSaved.setVisible(false);
         btnClickGeneralInformation();
-        Citizen selectedCitizenComboBox = (Citizen) comboBoxCitizen.getSelectionModel().getSelectedItem();
+        Citizen selectedCitizenComboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
         txtFieldCitizenID.setText(String.valueOf(selectedCitizenComboBox.getId()));
         Citizen selectedCitizenInfo = dataModelFacade.getInfoOnCitizen(Integer.parseInt(txtFieldCitizenID.getText()));
         txtFieldFirstName.setText(selectedCitizenInfo.getFirstName());
@@ -680,7 +667,7 @@ public class StudentViewController implements IController, Initializable {
     public void selectedCitizenOnComboBox() {
         this.comboBoxCitizen.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
-                this.selectedCitizenOnComboBox = (Citizen) newValue;
+                this.selectedCitizenOnComboBox = newValue;
             }
         }));
     }
@@ -724,10 +711,8 @@ public class StudentViewController implements IController, Initializable {
                 txtFieldFunctionalAbilityID.setText(String.valueOf(selectedFunctionalAbilitySubCategory.getId()));
                 try {
                     setFunctionalAbilityInfo();
-                } catch (SQLServerException e) {
+                } catch (SQLException e) {
                     e.printStackTrace();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
                 }
             }
         }));
@@ -854,14 +839,11 @@ public class StudentViewController implements IController, Initializable {
 
                 txtAreaNoteOnCondition.setText(functionalAbilitySubCategoryText.getAbilityNote());
 
-                if (functionalAbilitySubCategoryText.getCitizenPerformance().equals("Udfører selv")) {
-                    comboboxPerformance.getSelectionModel().select(0);
-                } else if (functionalAbilitySubCategoryText.getCitizenPerformance().equals("Udfører dele selv")) {
-                    comboboxPerformance.getSelectionModel().select(1);
-                } else if (functionalAbilitySubCategoryText.getCitizenPerformance().equals("Udfører ikke selv")) {
-                    comboboxPerformance.getSelectionModel().select(2);
-                } else if (functionalAbilitySubCategoryText.getCitizenPerformance().equals("Ikke relevant")) {
-                    comboboxPerformance.getSelectionModel().select(3);
+                switch (functionalAbilitySubCategoryText.getCitizenPerformance()) {
+                    case "Udfører selv" -> comboboxPerformance.getSelectionModel().select(0);
+                    case "Udfører dele selv" -> comboboxPerformance.getSelectionModel().select(1);
+                    case "Udfører ikke selv" -> comboboxPerformance.getSelectionModel().select(2);
+                    case "Ikke relevant" -> comboboxPerformance.getSelectionModel().select(3);
                 }
 
                 if (functionalAbilitySubCategoryText.getCitizenMeaningOfPerformance().equals("Oplever ikke begrænsninger")) {
@@ -1004,56 +986,56 @@ public class StudentViewController implements IController, Initializable {
         try {
             allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(1));
             tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
     }
 
     @FXML
-    private void btnLoadMentalFunctions() {
+    private void btnLoadMentalFunctions() throws SQLException {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
         try {
             allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(2));
             tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException sqlException) {
+            throw new SQLException();
         }
     }
 
     @FXML
-    private void btnLoadMobility() {
+    private void btnLoadMobility() throws SQLException {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
         try {
             allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(3));
             tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException sqlException) {
+            throw new SQLException();
         }
     }
 
     @FXML
-    private void btnLoadPracticalAssignments() {
+    private void btnLoadPracticalAssignments() throws SQLException {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
         try {
             allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(4));
             tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException sqlException) {
+            throw new SQLException();
         }
     }
 
     @FXML
-    private void btnLoadCommunityLife() {
+    private void btnLoadCommunityLife() throws SQLException {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcFunctionalConditionName.setCellValueFactory(new PropertyValueFactory<>("name"));
         try {
             allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFunctionalAbilitySubCategories(5));
             tableViewLoadFunctionalAbilitySubCategories(allFunctionalAbilitySubCategories);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException sqlException) {
+            throw new SQLException();
         }
     }
 
@@ -1205,7 +1187,7 @@ public class StudentViewController implements IController, Initializable {
     private void btnClickFunctionalCondition() {
         labelTitle.setText("Funktionstilstanden for borgeren");
         labelInfo.setText("Overblik over borgerens funktionstilstand, hvor der skal tages stilling til den nuværende funktionstilstand");
-        labelInfoNewLine.setText("Her er det muligt at se et skema over definitionen på funktionstilstandende, men der skal også tages stilling til den forventede funktionstilstand");
+        labelInfoNewLine.setText("Her er det muligt at se et skema over definitionen på funktionsevnetilstandene, men der skal også tages stilling til den forventede funktionstilstand");
         anchorPaneStudent.setVisible(false);
         anchorPaneCitizens.setVisible(false);
         anchorPaneFS3.setVisible(true);
@@ -1246,7 +1228,7 @@ public class StudentViewController implements IController, Initializable {
         btnClickGeneralInformation();
     }
 
-    public void btnOpenCitizenInfo(ActionEvent actionEvent) throws Exception {
+    public void btnOpenCitizenInfo() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/gui/view/CitizenInfoView.fxml"));
 
@@ -1254,7 +1236,7 @@ public class StudentViewController implements IController, Initializable {
         Stage stage = new Stage();
 
 
-        citizenInfoViewController = fxmlLoader.getController();
+        CitizenInfoViewController citizenInfoViewController = fxmlLoader.getController();
         citizenInfoViewController.setSelectedCitizen(selectedCitizenOnComboBox);
 
         stage.setScene(scene);

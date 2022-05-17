@@ -35,7 +35,6 @@ public class AdminViewController implements Initializable, IController {
     /**
      * Top Pane
      */
-
     @FXML
     private Button btnLogOut;
     @FXML
@@ -63,8 +62,6 @@ public class AdminViewController implements Initializable, IController {
      */
     @FXML
     private TableView<User> tvTeachers;
-    @FXML
-    private TableColumn<User, Integer> tcTeacherID;
     @FXML
     private TableColumn<User, String> tcTeacherFirstName;
     @FXML
@@ -233,7 +230,7 @@ public class AdminViewController implements Initializable, IController {
     private Citizen selectedCitizen;
     private Citizen selectedCreatedCitizen;
 
-    private DataModelFacade dataModelFacade;
+    private final DataModelFacade dataModelFacade;
     private StudentViewController studentViewController;
     private EditCaseViewController editCaseViewController;
 
@@ -535,9 +532,7 @@ public class AdminViewController implements Initializable, IController {
 
     }
 
-    /**
-     *
-     */
+
     @FXML
     private void onActionEditTeacherCancel() {
         reloadTeacherTable();
@@ -564,8 +559,7 @@ public class AdminViewController implements Initializable, IController {
         }));
     }
 
-
-    public void setSelectedTeacher(User teacher) {
+    private void setSelectedTeacher(User teacher) {
         txtFieldTeacherID.setText(String.valueOf(teacher.getId()));
         txtFieldTeacherFirstName.setText(teacher.getFirstName());
         txtFieldTeacherLastName.setText(teacher.getLastName());
@@ -573,9 +567,6 @@ public class AdminViewController implements Initializable, IController {
         txtFieldTeacherPassword.setText(teacher.getPassword());
     }
 
-    /**
-     * Reloads the teacher table
-     */
     private void reloadTeacherTable() {
         try {
             int index = tvTeachers.getSelectionModel().getFocusedIndex();
@@ -586,8 +577,7 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
-
-    public void clearTeacherTxtField() {
+    private void clearTeacherTxtField() {
         txtFieldTeacherID.clear();
         txtFieldTeacherFirstName.clear();
         txtFieldTeacherLastName.clear();
@@ -651,7 +641,7 @@ public class AdminViewController implements Initializable, IController {
 
     }
 
-    public void clearTextFieldCreate(){
+    private void clearTextFieldCreate(){
         txtFieldCitizenFirstName.clear();
         txtFieldCitizenLastName.clear();
         txtFieldCitizenSSN.clear();
@@ -687,7 +677,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * Action event for save student button. Gets the text from all the textFields and creates a new student when pressed.
-     *
      */
     @FXML
     private void btnHandleSaveStudent() throws SQLException {
@@ -709,7 +698,6 @@ public class AdminViewController implements Initializable, IController {
     /**
      * Action Event for the edit student button. Fills all textFields, with data from the selected student.
      * Edits the student using the ID.
-     *
      */
     @FXML
     private void btnHandleEditStudent() {

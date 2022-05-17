@@ -163,7 +163,7 @@ public class CitizenInfoViewController implements Initializable {
     }
 
 
-    public void newHCToVBox(int healthConditionId) throws SQLServerException {
+    private void newHCToVBox(int healthConditionId) throws SQLServerException {
         HealthConditionSubCategoryText HCSubCategoryText = dataModelFacade.getTextOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), this.healthConditionId);
 
         HBox hBox1 = new HBox();
@@ -390,7 +390,7 @@ public class CitizenInfoViewController implements Initializable {
         vBoxHealthCondition.getChildren().add(vBoxNewHC);
     }
 
-    public void newFAToVBox(int functionalAbilitySubCategoryId) throws SQLServerException {
+    private void newFAToVBox(int functionalAbilitySubCategoryId) throws SQLServerException {
         FunctionalAbilitySubCategoryText FASubCategoryText = dataModelFacade.getInfoOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), functionalAbilitySubCategoryId);
         HBox hBox1 = new HBox();
         HBox hBox2 = new HBox();

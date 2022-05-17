@@ -22,7 +22,6 @@ public class ErrorHandlerController {
     public void setText(String text) {
         textArea.setText(text);
     }
-
     public void setTitle(String title) {
         lblTitle.setText(title);
     }

@@ -7,7 +7,6 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,8 +25,6 @@ public class SuperAdminViewController implements Initializable, IController {
 
     @FXML
     private TableView<User> tvAssignedAdminsOnSchool;
-    @FXML
-    private TableColumn<User, Integer> tcAssignedAdminID;
     @FXML
     private TableColumn<User, String> tcAssignedAdminFirstName;
     @FXML
@@ -133,9 +130,8 @@ public class SuperAdminViewController implements Initializable, IController {
     private ObservableList<User> allAssignedAdmins = FXCollections.observableArrayList();
     private ObservableList<School> allSchools = FXCollections.observableArrayList();
     private ObservableList<School> allAssignedSchools = FXCollections.observableArrayList();
-    private ObservableList<School> allSchoolsOnCombo = FXCollections.observableArrayList();
 
-    private DataModelFacade dataModelFacade;
+    private final DataModelFacade dataModelFacade;
 
     private School selectedSchool;
     private School selectedSchoolOnComboBox;
@@ -207,7 +203,7 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     public void initializeComboBox() throws SQLException {
-        allSchoolsOnCombo = FXCollections.observableArrayList(dataModelFacade.getSchools());
+        ObservableList<School> allSchoolsOnCombo = FXCollections.observableArrayList(dataModelFacade.getSchools());
         comboSchool.setItems(allSchoolsOnCombo);
     }
 

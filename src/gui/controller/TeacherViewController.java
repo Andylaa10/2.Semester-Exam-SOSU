@@ -65,8 +65,6 @@ public class TeacherViewController implements Initializable, IController {
     @FXML
     private TableColumn<User, String> tcStudentUsername;
     @FXML
-    private TableColumn<User, String> tcStudentPassword;
-    @FXML
     private Button btnSaveStudent;
     @FXML
     private Button btnEditStudent;
@@ -204,7 +202,7 @@ public class TeacherViewController implements Initializable, IController {
     private Citizen selectedCitizen;
     private Citizen selectedCreatedCitizen;
 
-    private DataModelFacade dataModelFacade;
+    private final DataModelFacade dataModelFacade;
     private StudentViewController studentViewController;
     private EditCaseViewController editCaseViewController;
 
@@ -487,7 +485,7 @@ public class TeacherViewController implements Initializable, IController {
             String userName = txtFieldUsername.getText();
             String password = txtFieldPassword.getText();
 
-            //TODO Make errorhandling if username is already taken
+            //TODO Make errorHandling if username is already taken
             dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT, Integer.parseInt(txtFieldSchoolID.getText()));
             reloadStudentTable();
             clearStudentTxtField();
@@ -971,8 +969,8 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     /**
-     * Method for showing the right anchorpane when opening the program, sets the main view visible and not relevant
-     * anchorpanes not visible
+     * Method for showing the right anchorPane when opening the program, sets the main view visible and not relevant
+     * anchorPanes not visible
      */
     private void setAnchorPanesVisibility() {
         labelInfoNewLine.setText("");
@@ -984,7 +982,7 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     /**
-     * Loads the student overview anchorpane when clicked.
+     * Loads the student overview anchorPane when clicked.
      */
     @FXML
     private void btnClickStudent() {
@@ -999,7 +997,7 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     /**
-     * Loads the cases overview anchorpane when clicked.
+     * Loads the cases overview anchorPane when clicked.
      */
     @FXML
     private void btnClickCase() {
@@ -1014,7 +1012,7 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     /**
-     * Loads the citizen overview anchorpane when clicked.
+     * Loads the citizen overview anchorPane when clicked.
      */
     @FXML
     private void btnClickSeeCitizens() {
@@ -1030,7 +1028,7 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     /**
-     * Loads the create citizen anchorpane when clicked.
+     * Loads the createCitizen anchorPane when clicked.
      */
     @FXML
     private void btnClickCitizen() {

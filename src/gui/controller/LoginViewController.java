@@ -8,7 +8,6 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,14 +36,33 @@ public class LoginViewController implements Initializable {
     @FXML
     private TextField txtFieldSchoolId;
 
-    private DataModelFacade facade;
+    private final DataModelFacade facade;
 
     private ObservableList<School> allSchools = FXCollections.observableArrayList();
 
     private School selectedSchoolOnComboBox;
 
+
     public LoginViewController() throws IOException {
         facade = new DataModelFacade();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        selectedSchoolOnComboBox();
+        initializeCombo();
+    }
+
+    /**
+     * Initializing the combobox
+     */
+    private void initializeCombo(){
+        try {
+            allSchools = FXCollections.observableArrayList(facade.getSchools());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        comboBoxSchool.setItems(allSchools);
     }
 
     @FXML
@@ -61,7 +79,6 @@ public class LoginViewController implements Initializable {
             switcher.show();
             switcher.centerOnScreen();
         }else{
-            //TODO Errorhandling if school is not selected
             if (comboBoxSchool.getSelectionModel().getSelectedItem() == null){
                 ErrorHandlerController.createWarning("Vælg skole", "For at logge ind husk at vælge skole");
             }else {
@@ -119,28 +136,10 @@ public class LoginViewController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        selectedSchoolOnComboBox();
-        initializeCombo();
-    }
-
-    /**
-     * Initializing the combobox
-     */
-    public void initializeCombo(){
-        try {
-            allSchools = FXCollections.observableArrayList(facade.getSchools());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        comboBoxSchool.setItems(allSchools);
-    }
-
     /**
      * Select a school on combobox
      */
-    public void selectedSchoolOnComboBox(){
+    private void selectedSchoolOnComboBox(){
         this.comboBoxSchool.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue != null){
                 this.selectedSchoolOnComboBox = newValue;

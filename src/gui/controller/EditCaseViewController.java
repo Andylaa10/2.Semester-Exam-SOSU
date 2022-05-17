@@ -7,12 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
-
 public class EditCaseViewController {
-
 
     @FXML
     private Button btnCancel;
@@ -26,7 +23,6 @@ public class EditCaseViewController {
     private TextField txtFieldCaseName;
     @FXML
     private TextArea txtAreaCaseInfo;
-
 
     private final DataModelFacade dataModelFacade;
 
