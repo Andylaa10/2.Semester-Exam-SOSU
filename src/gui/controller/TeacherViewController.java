@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -215,7 +216,6 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * Sets text labels with the user that has logged in.
-     *
      */
     @Override
     public void setUser(User user) {
@@ -305,7 +305,6 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * loads the students tableview.
-     *
      */
     private void tableViewLoadStudents(ObservableList<User> allStudents) {
         tvStudent.setItems(getStudentData());
@@ -322,7 +321,6 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * loads the cases TableView.
-     *
      */
     private void tableViewLoadCases(ObservableList<Case> allCases) {
         tvCases.setItems(getCaseData());
@@ -339,7 +337,6 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * loads the Citizens table view
-     *
      */
     private void tableViewLoadCitizens(ObservableList<Citizen> allCitizens) {
         tvCitizens.setItems(getCitizenData());
@@ -356,7 +353,6 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * loads the Citizens table view
-     *
      */
     private void tableViewLoadCreatedCitizens(ObservableList<Citizen> allCreatedCitizens) {
         tvCreatedCitizens.setItems(getCreatedCitizenData());
@@ -373,7 +369,6 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * loads the CurrentCases tableview.
-     *
      */
     private void tableViewLoadCurrentCases(ObservableList<Case> allCurrentCases) {
         tvCurrentCases.setItems(getCurrentCasesData());
@@ -390,7 +385,6 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * loads the casesOnCitizen tableview.
-     *
      */
     private void tableViewLoadCasesOnCitizen(ObservableList<Case> allCasesOnCitizen) {
         tvCasesOnCitizen.setItems(getCasesOnCitizenData());
@@ -484,7 +478,6 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * Action event for save student button. Gets the text from all the textFields and creates a new student when pressed.
-     *
      */
     @FXML
     private void btnHandleSaveStudent() throws SQLException {
@@ -495,7 +488,7 @@ public class TeacherViewController implements Initializable, IController {
             String password = txtFieldPassword.getText();
 
             //TODO Make errorhandling if username is already taken
-            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT,Integer.parseInt(txtFieldSchoolID.getText()));
+            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT, Integer.parseInt(txtFieldSchoolID.getText()));
             reloadStudentTable();
             clearStudentTxtField();
             tvStudent.getSelectionModel().clearSelection();
@@ -507,7 +500,6 @@ public class TeacherViewController implements Initializable, IController {
     /**
      * Action Event for the edit student button. Fills all textFields, with data from the selected student.
      * Edits the student using the ID.
-     *
      */
     @FXML
     private void btnHandleEditStudent() {
@@ -589,7 +581,6 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * Action event for button to delete selected student.
-     *
      */
     @FXML
     private void btnHandleDeleteStudent() throws SQLException {
@@ -615,7 +606,7 @@ public class TeacherViewController implements Initializable, IController {
      */
     private void selectedStudent() {
         this.tvStudent.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ( newValue != null) {
+            if (newValue != null) {
                 this.selectedStudent = newValue;
             }
         }));
@@ -638,7 +629,7 @@ public class TeacherViewController implements Initializable, IController {
      */
     private void selectedCitizen() {
         this.tvCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if ( newValue != null) {
+            if (newValue != null) {
                 this.selectedCitizen = newValue;
                 seeCasesOnCitizen();
             }
@@ -720,7 +711,6 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * Sets the selected student
-     *
      */
     private void setSelectedStudent(User student) {
         txtFieldStudentID.setText(String.valueOf(student.getId()));
@@ -776,26 +766,24 @@ public class TeacherViewController implements Initializable, IController {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("/gui/view/EditCaseView.fxml"));
 
-                    Scene mainWindowScene = null;
-                    try {
-                        mainWindowScene = new Scene(fxmlLoader.load());
-                    } catch (IOException exception) {
-                        exception.printStackTrace();
-                    }
-                    Stage viewCaseStage;
-                    viewCaseStage = new Stage();
-                    viewCaseStage.setScene(mainWindowScene);
+                    Scene scene = new Scene(fxmlLoader.load());
 
-
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
 
                     editCaseViewController = fxmlLoader.getController();
-                    editCaseViewController.setSelectedCaseAsTeacher(selectedCase);
+                    editCaseViewController.setSelectedCase(selectedCase);
 
-
-                    viewCaseStage.setResizable(false);
-                    viewCaseStage.show();
-
-
+                    stage.setResizable(false);
+                    stage.show();
+                    stage.setOnHiding(aCase ->
+                    {
+                        try {
+                            reloadCaseTable();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -846,7 +834,6 @@ public class TeacherViewController implements Initializable, IController {
 
     /**
      * Sets the selected event
-     *
      */
     private void setSelectedCase(Case aCase) {
         txtFieldCaseID.setText(String.valueOf(aCase.getId()));
@@ -889,13 +876,13 @@ public class TeacherViewController implements Initializable, IController {
             alert.setTitle("Advarsel");
             alert.setHeaderText("Advarsel før du sletter en sag");
             alert.setContentText("Denne handling kan ikke fortrydes");
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK) {
-                    selectedCase();
-                    dataModelFacade.deleteCase(selectedCase.getId());
-                    reloadCaseTable();
-                    reloadCurrentCasesTable();
-                }
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                selectedCase();
+                dataModelFacade.deleteCase(selectedCase.getId());
+                reloadCaseTable();
+                reloadCurrentCasesTable();
+            }
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en sag først");
         }
@@ -1075,7 +1062,6 @@ public class TeacherViewController implements Initializable, IController {
     /**
      * Action event for logout button, that gets the login view and loads that when pressed.
      * Closes current stage
-     *
      */
     @FXML
     private void btnClickLogout() throws IOException {

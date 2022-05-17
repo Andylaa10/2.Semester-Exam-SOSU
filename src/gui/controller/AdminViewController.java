@@ -984,26 +984,24 @@ public class AdminViewController implements Initializable, IController {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("/gui/view/EditCaseView.fxml"));
 
-                    Scene mainWindowScene = null;
-                    try {
-                        mainWindowScene = new Scene(fxmlLoader.load());
-                    } catch (IOException exception) {
-                        exception.printStackTrace();
-                    }
-                    Stage viewCaseStage;
-                    viewCaseStage = new Stage();
-                    viewCaseStage.setScene(mainWindowScene);
+                    Scene scene = new Scene(fxmlLoader.load());
 
-
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
 
                     editCaseViewController = fxmlLoader.getController();
-                    editCaseViewController.setSelectedCaseAsAdmin(selectedCase);
+                    editCaseViewController.setSelectedCase(selectedCase);
 
-
-                    viewCaseStage.setResizable(false);
-                    viewCaseStage.show();
-
-
+                    stage.setResizable(false);
+                    stage.show();
+                    stage.setOnHiding(aCase ->
+                    {
+                        try {
+                            reloadCaseTable();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

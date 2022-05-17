@@ -667,7 +667,6 @@ public class StudentViewController implements IController, Initializable {
                             e.printStackTrace();
                         }
                     });
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
