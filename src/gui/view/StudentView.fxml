@@ -153,6 +153,7 @@
                </font>
             </Label>
             <Button fx:id="btnBack" layoutX="982.0" layoutY="577.0" mnemonicParsing="false" onAction="#btnClickBack" prefHeight="27.0" prefWidth="150.0" text="Tilbage" />
+            <Label alignment="CENTER_RIGHT" layoutX="746.0" layoutY="582.0" text="Dobbeltklik for at se sagens informationer" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0" visible="false">

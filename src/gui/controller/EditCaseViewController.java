@@ -1,15 +1,12 @@
 package gui.controller;
 
 import be.Case;
-import be.Citizen;
 import gui.Facade.DataModelFacade;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 
@@ -30,23 +27,22 @@ public class EditCaseViewController {
     @FXML
     private TextArea txtAreaCaseInfo;
 
-    private DataModelFacade dataModelFacade;
-    private StudentViewController studentViewController;
+
+    private final DataModelFacade dataModelFacade;
 
     public EditCaseViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
-        this.studentViewController = new StudentViewController();
     }
 
 
-    public void setSelectedCase(Case aCase){
+    public void setSelectedCase(Case aCase) {
         txtFieldCaseId.setText(String.valueOf(aCase.getId()));
         txtFieldCaseDate.setText(aCase.getDate());
         txtFieldCaseName.setText(aCase.getName());
         txtAreaCaseInfo.setText(aCase.getInfo());
     }
 
-    public void setSelectedCaseAsTeacher(Case aCase){
+    public void setSelectedCaseAsTeacher(Case aCase) {
         txtFieldCaseId.setText(String.valueOf(aCase.getId()));
         txtFieldCaseDate.setText(aCase.getDate());
         txtFieldCaseName.setText(aCase.getName());
@@ -57,7 +53,7 @@ public class EditCaseViewController {
         txtAreaCaseInfo.setEditable(false);
     }
 
-    public void setSelectedCaseAsAdmin(Case aCase){
+    public void setSelectedCaseAsAdmin(Case aCase) {
         txtFieldCaseId.setText(String.valueOf(aCase.getId()));
         txtFieldCaseDate.setText(aCase.getDate());
         txtFieldCaseName.setText(aCase.getName());
@@ -72,12 +68,15 @@ public class EditCaseViewController {
     private void onActionSave() throws Exception {
         int caseId = Integer.parseInt(txtFieldCaseId.getText());
         String name = txtFieldCaseName.getText();
+        String date = txtFieldCaseDate.getText();
         String info = txtAreaCaseInfo.getText();
 
-        Case aCase = new Case(caseId, name, info);
-
+        Case aCase = new Case(caseId, name, date, info);
         dataModelFacade.editCase(aCase);
 
+
+        Stage stage = (Stage) btnSave.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
