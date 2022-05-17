@@ -205,10 +205,12 @@ public class TeacherViewController implements Initializable, IController {
 
     private DataModelFacade dataModelFacade;
     private StudentViewController studentViewController;
+    private EditCaseViewController editCaseViewController;
 
     public TeacherViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
         this.studentViewController = new StudentViewController();
+        this.editCaseViewController = new EditCaseViewController();
     }
 
     /**
@@ -767,6 +769,38 @@ public class TeacherViewController implements Initializable, IController {
                 this.selectedCase = newValue;
             }
         }));
+
+        this.tvCases.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && selectedCase != null) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/gui/view/EditCaseView.fxml"));
+
+                    Scene mainWindowScene = null;
+                    try {
+                        mainWindowScene = new Scene(fxmlLoader.load());
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
+                    }
+                    Stage viewCaseStage;
+                    viewCaseStage = new Stage();
+                    viewCaseStage.setScene(mainWindowScene);
+
+
+
+                    editCaseViewController = fxmlLoader.getController();
+                    editCaseViewController.setSelectedCaseAsTeacher(selectedCase);
+
+
+                    viewCaseStage.setResizable(false);
+                    viewCaseStage.show();
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void selectedCaseOnCitizen() {

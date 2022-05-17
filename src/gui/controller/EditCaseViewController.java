@@ -36,13 +36,35 @@ public class EditCaseViewController {
         txtAreaCaseInfo.setText(aCase.getInfo());
     }
 
+    public void setSelectedCaseAsTeacher(Case aCase){
+        txtFieldCaseId.setText(String.valueOf(aCase.getId()));
+        txtFieldCaseName.setText(aCase.getName());
+        txtAreaCaseInfo.setText(aCase.getInfo());
+        btnCancel.setText("Tilbage");
+        btnSave.setVisible(false);
+    }
+
+    public void setSelectedCaseAsAdmin(Case aCase){
+        txtFieldCaseId.setText(String.valueOf(aCase.getId()));
+        txtFieldCaseName.setText(aCase.getName());
+        txtAreaCaseInfo.setText(aCase.getInfo());
+        btnCancel.setText("Tilbage");
+        btnSave.setVisible(false);
+    }
+
     public EditCaseViewController() throws IOException {
         this.dataModelFacade = new DataModelFacade();
     }
 
     @FXML
-    private void onActionSave() {
+    private void onActionSave() throws Exception {
         int caseId = Integer.parseInt(txtFieldCaseId.getText());
+        String name = txtFieldCaseName.getText();
+        String info = txtAreaCaseInfo.getText();
+
+        Case aCase = new Case(caseId, name, info);
+
+        dataModelFacade.editCase(aCase);
     }
 
     @FXML
