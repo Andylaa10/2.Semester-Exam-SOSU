@@ -5,6 +5,7 @@ public class HealthConditionSubCategory {
     private int id;
     private String subCategoryName;
     private int healthConditionId;
+    private int condition;
 
     public HealthConditionSubCategory(int id, String subCategoryName) {
         this.id = id;
@@ -29,5 +30,10 @@ public class HealthConditionSubCategory {
 
     public void setHealthConditionId(int healthConditionId) {
         this.healthConditionId = healthConditionId;
+    }
+
+    public int getCondition(HealthConditionSubCategoryText subCategoryText) {
+        condition = subCategoryText.getCondition();
+        return condition;
     }
 }

@@ -309,8 +309,7 @@ public class StudentViewController implements IController, Initializable {
             e.printStackTrace();
         }
         //https://stackoverflow.com/questions/30889732/javafx-tableview-change-row-color-based-on-column-value
-        //https://coderanch.com/t/633408/java/combobox-picture
-        //https://stackoverflow.com/questions/14327275/java-combobox-how-to-add-icon
+
 
     }
 
@@ -341,7 +340,6 @@ public class StudentViewController implements IController, Initializable {
         try {
             allSubCategories = FXCollections.observableList(dataModelFacade.getSubCategories(selectedHealthCondition.getId()));
             tableViewLoadSubCategories(allSubCategories);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -358,29 +356,57 @@ public class StudentViewController implements IController, Initializable {
                 txtAreaCurrentLevelAssessment.setText(subCategoryText.getCurrentLevelAssessment());
                 switch (subCategoryText.getExpectedLevelAssessment()) {
                     case "Mindskes" -> comboBoxExpectedLevelAssessment.getSelectionModel().select(0);
-                    case "Forbliver uændret" -> comboBoxExpectedLevelAssessment.getSelectionModel().select(1);
+                    case "Forbliver uÃ¦ndret" -> comboBoxExpectedLevelAssessment.getSelectionModel().select(1);
                     case "Forsvinder" -> comboBoxExpectedLevelAssessment.getSelectionModel().select(2);
                 }
                 if (subCategoryText.getCondition() == 0) {
                     radioNotRelevant.setSelected(true);
-                    tcSubCategoriesName.setStyle("");
-                    tcSubCategoriesName.setStyle("-fx-text-fill: red");
                 } else if (subCategoryText.getCondition() == 1) {
                     radioPotential.setSelected(true);
-                    tcSubCategoriesName.setStyle("");
-                    tcSubCategoriesName.setStyle("-fx-text-fill: yellow");
                 } else if (subCategoryText.getCondition() == 2) {
                     radioRelevant.setSelected(true);
-                    tcSubCategoriesName.setStyle("");
-                    tcSubCategoriesName.setStyle("-fx-text-fill: green");
-                } else{
-                    tcSubCategoriesName.setStyle("");
                 }
             } else {
                 clearHealthConditionTxtField();
             }
+            Callback<TableColumn<HealthConditionSubCategory, String>, TableCell<HealthConditionSubCategory, String>> cellFactory
+                    =
+                    new Callback<TableColumn<HealthConditionSubCategory, String>, TableCell<HealthConditionSubCategory, String>>() {
+                        @Override
+                        public TableCell<HealthConditionSubCategory, String> call(final TableColumn<HealthConditionSubCategory, String> param) {
+                            final TableCell<HealthConditionSubCategory, String> cell = new TableCell<HealthConditionSubCategory, String>() {
+
+                                @Override
+                                public void updateItem(String item, boolean empty) {
+                                    super.updateItem(item, empty);
+                                    if (empty) {
+                                        setGraphic(null);
+                                        setText(null);
+                                    } else {
+                                        setText(item);
+                                        TableRow<HealthConditionSubCategory> row = getTableRow();
+                                        if(subCategoryText == null) {
+                                            row.setStyle("");
+                                        }else if (row.getItem().getCondition(subCategoryText) == 0) {
+                                            row.getStyleClass().clear();
+                                            row.setStyle("-fx-background-color: red");
+                                        }else if (row.getItem().getCondition(subCategoryText) == 1) {
+                                            row.getStyleClass().clear();
+                                            row.setStyle("-fx-background-color: yellow");
+                                        }else if (row.getItem().getCondition(subCategoryText) == 2) {
+                                            row.getStyleClass().clear();
+                                            row.setStyle("-fx-background-color: green");
+                                        }
+                                    }
+                                }
+                            };
+                            return cell;
+                        }
+                    };
+            tcSubCategoriesName.setCellFactory(cellFactory);
         }
     }
+
 
     public void clearHealthConditionTxtField() {
         txtAreaNoteOnSubCategory.clear();
@@ -505,9 +531,24 @@ public class StudentViewController implements IController, Initializable {
         txtFieldCitizenID.setText(String.valueOf(citizen.getId()));
         txtFieldSchoolID.setText(String.valueOf(citizen.getSchoolID()));
 
+<<<<<<< Updated upstream
         comboBoxCitizen.getSelectionModel().select(citizen);
         btnLogOut.setVisible(false);
         btnClose.setVisible(true);
+=======
+        String firstName = citizen.getFirstName();
+        String lastName = citizen.getLastName();
+        String SSN = citizen.getSSN();
+
+        citizen = new Citizen(firstName, lastName, SSN);
+        comboBoxCitizen.getItems().add(citizen);
+        comboBoxCitizen.getSelectionModel().select(0);
+
+        selectedCitizen = comboBoxCitizen.getSelectionModel().getSelectedItem();
+        //comboBoxCitizen.itemsProperty().getName()
+        //selectedCitizenOnComboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
+
+>>>>>>> Stashed changes
     }
 
     /**
