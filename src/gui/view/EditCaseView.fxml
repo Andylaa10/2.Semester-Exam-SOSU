@@ -14,12 +14,12 @@
             <Font size="27.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="105.0" text="Sagens dato">
+      <Label layoutX="20.0" layoutY="105.0" text="Dato">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="21.0" layoutY="170.0" text="Sagens informationer">
+      <Label layoutX="21.0" layoutY="170.0" text="Informationer">
          <font>
             <Font size="18.0" />
          </font>
@@ -30,7 +30,7 @@
       <Button fx:id="btnCancel" layoutX="21.0" layoutY="360.0" mnemonicParsing="false" onAction="#onActionCloseWindow" prefHeight="26.0" prefWidth="170.0" text="Annuller" />
       <Button fx:id="btnSave" layoutX="209.0" layoutY="360.0" mnemonicParsing="false" onAction="#onActionSave" prefHeight="26.0" prefWidth="170.0" text="Gem " />
       <TextField fx:id="txtFieldCaseId" layoutX="345.0" layoutY="20.0" prefHeight="26.0" prefWidth="33.0" style="-fx-background-color: red;" visible="false" />
-      <Label layoutX="19.0" layoutY="44.0" text="Sagens navn">
+      <Label layoutX="19.0" layoutY="44.0" text="Navn">
          <font>
             <Font size="18.0" />
          </font>
