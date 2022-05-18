@@ -282,7 +282,7 @@ public class StudentViewController implements IController, Initializable {
     /**
      * Inserts value from database to the different tables
      */
-    private void initializeTables() throws Exception {
+    public void initializeTables() throws Exception {
         //Initialize the citizens table
         tcCitizenID.setCellValueFactory(new PropertyValueFactory<>("id"));
         tcCitizenFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -492,7 +492,7 @@ public class StudentViewController implements IController, Initializable {
     /**
      * Setup combobox with citizens
      */
-    private void initializeCitizenComboBox() {
+    public void initializeCitizenComboBox() {
         //Initialize the citizens in the dropdown menu
         allCitizens = FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText())));
         tableViewLoadCitizens(allCitizens);
@@ -510,7 +510,7 @@ public class StudentViewController implements IController, Initializable {
 
         citizen = new Citizen(firstName, lastName, SSN);
         comboBoxCitizen.getItems().add(citizen);
-        comboBoxCitizen.getSelectionModel().select(0);
+        comboBoxCitizen.getSelectionModel().select(citizen);
 
         selectedCitizen = comboBoxCitizen.getSelectionModel().getSelectedItem();
         //selectedCitizenOnComboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
@@ -742,7 +742,7 @@ public class StudentViewController implements IController, Initializable {
      */
     @FXML
     private void onActionGeneralInfoSave() throws Exception {
-        if(selectedCitizen == null){
+        if(selectedCitizenOnComboBox == null){
             ErrorHandlerController.createWarning("Select Citizen", "Remember to select a citizen from the Combobox");
             clearHealthCondition();
         }else{
@@ -774,14 +774,17 @@ public class StudentViewController implements IController, Initializable {
             String healthInformation = txtAreaHealthInfo.getText();
             String equipmentAids = txtAreaEquipmentAids.getText();
             String homeLayout = txtAreaHomeLayout.getText();
-            GeneralInformation generalInformation = new GeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationAndJob,
-                    lifeStory, network, healthInformation, equipmentAids, homeLayout);
-            if(txtFieldGeneralInfoId.getId() == null){
+
+            if(txtFieldGeneralInfoId.getText().isEmpty()){
                 dataModelFacade.createGeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationAndJob,
                         lifeStory, network, healthInformation, equipmentAids, homeLayout);
             }else{
+                int generalInfoId = Integer.parseInt(txtFieldGeneralInfoId.getText());
+                GeneralInformation generalInformation = new GeneralInformation(generalInfoId, coping, motivation, resources, roles, habits, educationAndJob,
+                        lifeStory, network, healthInformation, equipmentAids, homeLayout);
                 dataModelFacade.editGeneralInformation(generalInformation);
             }
+
             lblInfoState.setText("Ændringer - Gemt");
             imgViewNotSaved.setVisible(false);
             imgViewSaved.setVisible(true);

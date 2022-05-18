@@ -480,7 +480,6 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtFieldGeneralInfoId" layoutX="149.0" layoutY="8.0" prefHeight="26.0" prefWidth="21.0" visible="false" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
@@ -531,7 +530,6 @@
                      </font>
                   </Label>
                   <ComboBox fx:id="comboBoxExpectedLevelAssessment" layoutX="640.0" layoutY="381.0" prefHeight="26.0" prefWidth="483.0" />
-                  <TextField fx:id="txtFieldSchoolID" layoutX="173.0" layoutY="12.0" prefHeight="26.0" prefWidth="2.0" visible="false" />
                   <Label fx:id="lblInfoStateHC" alignment="CENTER_RIGHT" layoutX="557.0" layoutY="517.0" prefHeight="18.0" prefWidth="198.0" text="Ændringer - Ikke gemt" />
                   <ImageView fx:id="imgViewNotSavedHC" fitHeight="26.0" fitWidth="25.0" layoutX="607.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -570,7 +568,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <TextField fx:id="txtFieldCitizenID" layoutX="886.0" layoutY="38.0" prefHeight="26.0" prefWidth="31.0" style="-fx-background-color: red;" />
+            <TextField fx:id="txtFieldCitizenID" layoutX="886.0" layoutY="38.0" prefHeight="26.0" prefWidth="31.0" style="-fx-background-color: red;" visible="false" />
             <AnchorPane fx:id="anchorPaneFunctionalCondition" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1122.0" visible="false">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b85f7" height="469.0" layoutX="3.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" width="365.0">
@@ -718,6 +716,8 @@
                </children>
             </AnchorPane>
             <Button fx:id="btnCitizenInfo" layoutX="944.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnOpenCitizenInfo" prefHeight="25.0" prefWidth="200.0" text="Se alle borgerens informationer" />
+            <TextField fx:id="txtFieldSchoolID" layoutX="847.0" layoutY="38.0" prefHeight="26.0" prefWidth="31.0" style="-fx-background-color: green;" visible="false" />
+            <TextField fx:id="txtFieldGeneralInfoId" layoutX="814.0" layoutY="40.0" prefHeight="26.0" prefWidth="21.0" style="-fx-background-color: yellow;" visible="false" />
          </children>
       </AnchorPane>
    </children>

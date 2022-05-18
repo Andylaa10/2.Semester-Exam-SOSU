@@ -661,6 +661,9 @@ public class TeacherViewController implements Initializable, IController {
                     if (generalInformation != null) {
                         studentViewController.setGeneralInfoFromID(String.valueOf(tvCitizens.getSelectionModel().getSelectedItem().getId()), String.valueOf(generalInformation.getId()));
                     }
+                    studentViewController.initializeTables();
+                    studentViewController.initializeCitizenComboBox();
+                    studentViewController.setCitizenComboBoxItems(tvCreatedCitizens.getSelectionModel().getSelectedItem());
 
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();
@@ -706,6 +709,9 @@ public class TeacherViewController implements Initializable, IController {
                         studentViewController.setGeneralInfoFromID(String.valueOf(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId()), String.valueOf(generalInformation.getId()));
                     }
                     studentViewController.setCitizenComboBoxItems(tvCreatedCitizens.getSelectionModel().getSelectedItem());
+                    studentViewController.initializeTables();
+                    studentViewController.initializeCitizenComboBox();
+
 
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();
