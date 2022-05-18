@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/SuperAdmin.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SuperAdminViewController">
+<AnchorPane fx:id="topPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/SuperAdmin.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SuperAdminViewController">
    <children>
       <VBox prefHeight="600.0" prefWidth="181.0" style="-fx-background-color: rgb(215, 84, 84);">
          <children>
@@ -96,11 +96,6 @@
             <ColorAdjust brightness="0.3" />
          </effect>
       </Pane>
-      <Label layoutX="213.0" prefHeight="47.0" prefWidth="211.0" text="Hold overblik over dine data her...">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
       <AnchorPane fx:id="anchorPaneSuperAdmin" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Label alignment="TOP_LEFT" layoutX="2.0" layoutY="50.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">

@@ -123,7 +123,7 @@
             <ColorAdjust brightness="0.3" />
          </effect>
       </Pane>
-      <Label layoutX="213.0" prefHeight="47.0" prefWidth="211.0" text="Hold overblik over dine data her...">
+      <Label layoutX="213.0" prefHeight="47.0" prefWidth="211.0" text="Hold overblik over dine data her..." visible="false">
          <font>
             <Font size="14.0" />
          </font>
