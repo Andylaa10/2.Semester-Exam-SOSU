@@ -387,13 +387,13 @@ public class StudentViewController implements IController, Initializable {
                                         TableRow<HealthConditionSubCategory> row = getTableRow();
                                         if(subCategoryText == null) {
                                             row.setStyle("");
-                                        }else if (row.getItem().getCondition(subCategoryText) == 0) {
+                                        }else if (row.getItem().getCondition(subCategoryText) == 0 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
                                             row.getStyleClass().clear();
                                             row.setStyle("-fx-background-color: red");
-                                        }else if (row.getItem().getCondition(subCategoryText) == 1) {
+                                        }else if (row.getItem().getCondition(subCategoryText) == 1 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())){
                                             row.getStyleClass().clear();
                                             row.setStyle("-fx-background-color: yellow");
-                                        }else if (row.getItem().getCondition(subCategoryText) == 2) {
+                                        }else if (row.getItem().getCondition(subCategoryText) == 2 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())){
                                             row.getStyleClass().clear();
                                             row.setStyle("-fx-background-color: green");
                                         }
