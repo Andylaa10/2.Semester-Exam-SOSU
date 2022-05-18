@@ -247,7 +247,7 @@ public class AdminViewController implements Initializable, IController {
     @Override
     public void setUser(User user) {
         labelTitle.setText("Admin");
-        labelInfo.setText("Du er nu logget ind som admin: " + user.getFirstName() + user.getLastName());
+        labelInfo.setText("Du er nu logget ind som admin: " + user.getFirstName() + " " + user.getLastName());
         labelInfoNewLine.setText("");
         txtFieldSchoolID.setText(String.valueOf(user.getSchoolId()));
         initializeTable();

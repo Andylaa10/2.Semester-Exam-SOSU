@@ -218,7 +218,7 @@ public class TeacherViewController implements Initializable, IController {
     @Override
     public void setUser(User user) {
         labelTitle.setText("Lærer");
-        labelInfo.setText("Du er nu logget ind som lærer: " + user.getFirstName() + user.getLastName());
+        labelInfo.setText("Du er nu logget ind som lærer: " + user.getFirstName() + " " + user.getLastName());
         labelInfoNewLine.setText("");
         txtFieldSchoolID.setText(String.valueOf(user.getSchoolId()));
         initializeTable();
