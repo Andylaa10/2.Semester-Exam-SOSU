@@ -80,9 +80,12 @@ public class CitizenInfoViewController implements Initializable {
             txtAreaObservationNote.setText("");
         }
 
+
         createCases();
         createHealthConditions();
         createFunctionalAbilities();
+
+        Thread.currentThread().isAlive();
     }
 
 
@@ -106,19 +109,47 @@ public class CitizenInfoViewController implements Initializable {
     }
 
     private void createCases() throws SQLException {
-        ObservableList<Case> allCasesOnCitizen = FXCollections.observableList(dataModelFacade.getCasesOnCitizen(citizenId));
-        for (Case casesOnCitizen : allCasesOnCitizen) {
-            int caseId = casesOnCitizen.getId();
-            newCaseToVBox(caseId);
-        }
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ObservableList<Case> allCasesOnCitizen = null;
+                try {
+                    allCasesOnCitizen = FXCollections.observableList(dataModelFacade.getCasesOnCitizen(citizenId));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                for (Case casesOnCitizen : allCasesOnCitizen) {
+                    int caseId = casesOnCitizen.getId();
+                    try {
+                        newCaseToVBox(caseId);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }            }
+        });
+        t1.start();
+
+
+
     }
 
     private void createHealthConditions() throws SQLException {
-        ObservableList<HealthConditionSubCategoryText> allSubCategories = FXCollections.observableList(dataModelFacade.getHCInfoOnSubCategories(citizenId));
-        for (HealthConditionSubCategoryText HCSubCategoryText : allSubCategories) {
-            healthConditionId = HCSubCategoryText.getCategoryId();
-            newHCToVBox(healthConditionId);
-        }
+
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ObservableList<HealthConditionSubCategoryText> allSubCategories = FXCollections.observableList(dataModelFacade.getHCInfoOnSubCategories(citizenId));
+                for (HealthConditionSubCategoryText HCSubCategoryText : allSubCategories) {
+                    healthConditionId = HCSubCategoryText.getCategoryId();
+                    try {
+                        newHCToVBox(healthConditionId);
+                    } catch (SQLServerException e) {
+                        e.printStackTrace();
+                    }
+                }            }
+        });
+        t1.start();
+
 
     }
 
