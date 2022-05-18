@@ -500,21 +500,10 @@ public class StudentViewController implements IController, Initializable {
     }
 
     public void setCitizenComboBoxItems(Citizen citizen){
-
         txtFieldCitizenID.setText(String.valueOf(citizen.getId()));
         txtFieldSchoolID.setText(String.valueOf(citizen.getSchoolID()));
 
-        String firstName = citizen.getFirstName();
-        String lastName = citizen.getLastName();
-        String SSN = citizen.getSSN();
-
-        citizen = new Citizen(firstName, lastName, SSN);
-        comboBoxCitizen.getItems().add(citizen);
         comboBoxCitizen.getSelectionModel().select(citizen);
-
-        selectedCitizen = comboBoxCitizen.getSelectionModel().getSelectedItem();
-        //selectedCitizenOnComboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
-
     }
 
     /**

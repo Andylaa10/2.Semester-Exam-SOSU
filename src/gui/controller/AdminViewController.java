@@ -867,6 +867,7 @@ public class AdminViewController implements Initializable, IController {
                     studentViewController.initializeCitizenComboBox();
 
 
+
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();
 
