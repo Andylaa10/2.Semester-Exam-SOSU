@@ -227,6 +227,8 @@ public class StudentViewController implements IController, Initializable {
     private RadioButton radioRelevant;
     @FXML
     private Button btnCitizenInfo;
+    @FXML
+    private Button btnClose;
 
     private ObservableList<Citizen> allCitizens = FXCollections.observableArrayList();
     private ObservableList<Case> allCasesOnCitizen = FXCollections.observableArrayList();
@@ -504,6 +506,8 @@ public class StudentViewController implements IController, Initializable {
         txtFieldSchoolID.setText(String.valueOf(citizen.getSchoolID()));
 
         comboBoxCitizen.getSelectionModel().select(citizen);
+        btnLogOut.setVisible(false);
+        btnClose.setVisible(true);
     }
 
     /**
@@ -1279,7 +1283,10 @@ public class StudentViewController implements IController, Initializable {
         stage.setResizable(false);
         stage.show();
     }
-    
 
 
+    public void btnClickClose(ActionEvent actionEvent) {
+        Stage stage = (Stage) btnClose.getScene().getWindow();
+        stage.close();
+    }
 }

@@ -72,6 +72,18 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button fx:id="btnClose" mnemonicParsing="false" onAction="#btnClickClose" prefHeight="42.0" prefWidth="218.0" text="Tilbage" visible="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/Logout%20Icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </VBox>
       <Pane layoutX="182.0" layoutY="35.0" prefHeight="97.0" prefWidth="1170.0" style="-fx-background-color: rgb(81, 83, 222);">
