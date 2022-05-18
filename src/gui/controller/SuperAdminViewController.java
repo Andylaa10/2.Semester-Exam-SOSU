@@ -300,7 +300,7 @@ public class SuperAdminViewController implements Initializable, IController {
             String userName = txtFieldAdminUsername.getText();
             String password = txtFieldAdminPassword.getText();
             int schoolId = Integer.parseInt(txtSchoolID.getText());
-            //TODO Warning
+            //TODO Warning Samme username
             dataModelFacade.createAdmin(firstName, lastName, userName, password, UserType.ADMINISTRATOR, schoolId);
             clearAdminTxtField();
             tvAdmins.getSelectionModel().clearSelection();
