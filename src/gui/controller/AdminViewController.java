@@ -853,11 +853,13 @@ public class AdminViewController implements Initializable, IController {
                     viewCitizenStage = new Stage();
                     viewCitizenStage.setScene(mainWindowScene);
 
-                    int citizenId = tvCitizens.getSelectionModel().getSelectedItem().getId();
-                    GeneralInformation generalInformation = dataModelFacade.getGeneralInformationOnCitizen(citizenId);
+                    GeneralInformation generalInformation = dataModelFacade.getGeneralInformationOnCitizen(tvCitizens.getSelectionModel().getSelectedItem().getId());
                     studentViewController = fxmlLoader.getController();
                     studentViewController.btnClickGeneralInformation();
-                    studentViewController.setGeneralInfoFromID(String.valueOf(citizenId), String.valueOf(generalInformation.getId()));
+                    studentViewController.setCitizenInfo(tvCitizens.getSelectionModel().getSelectedItem().getId());
+                    if (generalInformation != null) {
+                        studentViewController.setGeneralInfoFromID(String.valueOf(tvCitizens.getSelectionModel().getSelectedItem().getId()), String.valueOf(generalInformation.getId()));
+                    }
 
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();
@@ -895,12 +897,13 @@ public class AdminViewController implements Initializable, IController {
                     viewCitizenStage = new Stage();
                     viewCitizenStage.setScene(mainWindowScene);
 
-                    int citizenId = tvCreatedCitizens.getSelectionModel().getSelectedItem().getId();
-                    GeneralInformation generalInformation = dataModelFacade.getGeneralInformationOnCitizen(citizenId);
+                    GeneralInformation generalInformation = dataModelFacade.getGeneralInformationOnCitizen(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId());
                     studentViewController = fxmlLoader.getController();
                     studentViewController.btnClickGeneralInformation();
-                    studentViewController.setGeneralInfoFromID(String.valueOf(citizenId), String.valueOf(generalInformation.getId()));
-
+                    studentViewController.setCitizenInfo(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId());
+                    if (generalInformation != null) {
+                        studentViewController.setGeneralInfoFromID(String.valueOf(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId()), String.valueOf(generalInformation.getId()));
+                    }
 
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();

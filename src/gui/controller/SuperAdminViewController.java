@@ -202,7 +202,7 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
-    public void initializeComboBox() throws SQLException {
+    private void initializeComboBox() throws SQLException {
         ObservableList<School> allSchoolsOnCombo = FXCollections.observableArrayList(dataModelFacade.getSchools());
         comboSchool.setItems(allSchoolsOnCombo);
     }

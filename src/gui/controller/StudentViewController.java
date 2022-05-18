@@ -791,6 +791,12 @@ public class StudentViewController implements IController, Initializable {
         imgViewSaved.setVisible(false);
         imgViewNotSaved.setVisible(true);
 
+
+    }
+
+    public void setCitizenInfo(int citizenID) throws SQLException {
+        txtFieldCitizenID.setText(String.valueOf(citizenID));
+
         Citizen selectedCitizenInfo = dataModelFacade.getInfoOnCitizen(Integer.parseInt(txtFieldCitizenID.getText()));
         txtFieldFirstName.setText(selectedCitizenInfo.getFirstName());
         txtFieldLastName.setText(selectedCitizenInfo.getLastName());
