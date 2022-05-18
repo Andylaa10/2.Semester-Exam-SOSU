@@ -26,7 +26,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class CitizenInfoViewController implements Initializable {
+public class CitizenInfoViewController implements Initializable, Runnable {
 
     @FXML
     private Button btnSaveDateAndNote;
@@ -134,7 +134,6 @@ public class CitizenInfoViewController implements Initializable {
     }
 
     private void createHealthConditions() throws SQLException {
-
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -154,11 +153,14 @@ public class CitizenInfoViewController implements Initializable {
     }
 
     private void createFunctionalAbilities() throws SQLException {
+
         ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFAInfoOnSubCategories(citizenId));
         for (FunctionalAbilitySubCategoryText FAOnCitizen : allFunctionalAbilitySubCategories) {
             int functionalAbilityId = FAOnCitizen.getSubCategoryId();
             newFAToVBox(functionalAbilityId);
         }
+
+
     }
 
 
@@ -652,5 +654,14 @@ public class CitizenInfoViewController implements Initializable {
                 lblCitizenAssessment, hBox8, lblCitizenGoals, txtAreaCitizenGoals, lblNewLine, lblNewLine2, line);
         vBoxFunctionalAbilities.getChildren().add(vBoxNewFA);
 
+    }
+
+    @Override
+    public void run() {
+        try {
+            createFunctionalAbilities();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
