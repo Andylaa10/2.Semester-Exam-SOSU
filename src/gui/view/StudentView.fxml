@@ -122,7 +122,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0">
+      <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0" visible="false">
          <children>
             <TableView fx:id="tvCases" layoutX="606.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0" style="-fx-background-color: transparent;">
               <columns>
@@ -156,7 +156,7 @@
             <Label alignment="CENTER_RIGHT" layoutX="746.0" layoutY="582.0" text="Dobbeltklik for at se sagens informationer" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0" visible="false">
+      <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0">
          <children>
             <Pane prefHeight="42.0" prefWidth="1158.0" style="-fx-background-color: transparent;">
                <children>
@@ -199,7 +199,7 @@
                   <ColorAdjust brightness="-0.24" contrast="0.17" />
                </effect>
             </Pane>
-            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="-1.0" layoutY="51.0" prefHeight="546.0" prefWidth="1161.0" visible="false">
+            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="-1.0" layoutY="51.0" prefHeight="546.0" prefWidth="1161.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b85f7" height="423.0" layoutX="934.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" width="218.0">
                      <effect>
@@ -483,7 +483,7 @@
                   <TextField fx:id="txtFieldGeneralInfoId" layoutX="149.0" layoutY="8.0" prefHeight="26.0" prefWidth="21.0" visible="false" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0">
+            <AnchorPane fx:id="anchorPaneHealthConditions" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1136.0" visible="false">
                <children>
                   <TableView fx:id="tvHealthConditions" layoutX="25.0" layoutY="53.0" prefHeight="458.0" prefWidth="302.0" style="-fx-background-color: transparent;">
                     <columns>
@@ -570,7 +570,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <TextField fx:id="txtFieldCitizenID" layoutX="886.0" layoutY="38.0" prefHeight="26.0" prefWidth="31.0" visible="false" />
+            <TextField fx:id="txtFieldCitizenID" layoutX="886.0" layoutY="38.0" prefHeight="26.0" prefWidth="31.0" style="-fx-background-color: red;" />
             <AnchorPane fx:id="anchorPaneFunctionalCondition" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1122.0" visible="false">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b85f7" height="469.0" layoutX="3.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" width="365.0">

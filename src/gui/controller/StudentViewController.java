@@ -34,6 +34,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class StudentViewController implements IController, Initializable {
@@ -498,6 +499,24 @@ public class StudentViewController implements IController, Initializable {
         comboBoxCitizen.setItems(allCitizens);
     }
 
+    public void setCitizenComboBoxItems(Citizen citizen){
+
+        txtFieldCitizenID.setText(String.valueOf(citizen.getId()));
+        txtFieldSchoolID.setText(String.valueOf(citizen.getSchoolID()));
+
+        String firstName = citizen.getFirstName();
+        String lastName = citizen.getLastName();
+        String SSN = citizen.getSSN();
+
+        citizen = new Citizen(firstName, lastName, SSN);
+        comboBoxCitizen.getItems().add(citizen);
+        comboBoxCitizen.getSelectionModel().select(0);
+
+        selectedCitizen = comboBoxCitizen.getSelectionModel().getSelectedItem();
+        //selectedCitizenOnComboBox = comboBoxCitizen.getSelectionModel().getSelectedItem();
+
+    }
+
     /**
      * When clicked on citizen in the combobox, the different text fields get values based on the selected citizen
      */
@@ -757,7 +776,7 @@ public class StudentViewController implements IController, Initializable {
             String homeLayout = txtAreaHomeLayout.getText();
             GeneralInformation generalInformation = new GeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationAndJob,
                     lifeStory, network, healthInformation, equipmentAids, homeLayout);
-            if(txtFieldGeneralInfoId.getText() == null){
+            if(txtFieldGeneralInfoId.getId() == null){
                 dataModelFacade.createGeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationAndJob,
                         lifeStory, network, healthInformation, equipmentAids, homeLayout);
             }else{
@@ -811,6 +830,7 @@ public class StudentViewController implements IController, Initializable {
             case "Other" -> radioOther.setSelected(true);
         }
     }
+
 
     private void setFunctionalAbilityInfo() throws SQLException {
 

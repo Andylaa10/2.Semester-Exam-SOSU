@@ -164,6 +164,8 @@ public class TeacherViewController implements Initializable, IController {
     private TableColumn<Citizen, String> tcCreatedCitizenLastName;
     @FXML
     private TableColumn<Citizen, String> tcCreatedCitizenSSN;
+    @FXML
+    private TableColumn<Citizen, String> tcCreatedCitizenSchoolId;
 
     /**
      * General Info citizen info
@@ -293,6 +295,7 @@ public class TeacherViewController implements Initializable, IController {
         tcCreatedCitizenFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcCreatedCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcCreatedCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+        tcCreatedCitizenSchoolId.setCellValueFactory(new PropertyValueFactory<>("schoolID"));
         try {
             allCreatedCitizens = FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText())));
             tableViewLoadCreatedCitizens(allCreatedCitizens);
@@ -430,7 +433,9 @@ public class TeacherViewController implements Initializable, IController {
 
     @FXML
     private void btnHandleSaveCitizen() throws SQLException {
-        if (!txtFieldCitizenFirstName.getText().isEmpty() && !txtFieldCitizenLastName.getText().isEmpty() && !txtFieldCitizenSSN.getText().isEmpty() && !txtFieldCitizenAddress.getText().isEmpty()) {
+        if (!txtFieldCitizenFirstName.getText().isEmpty() && !txtFieldCitizenLastName.getText().isEmpty()
+                && !txtFieldCitizenSSN.getText().isEmpty() && !txtFieldCitizenAddress.getText().isEmpty() &&
+                radioMale.isSelected() || radioFemale.isSelected() || radioOther.isSelected()) {
             String firstName = txtFieldCitizenFirstName.getText();
             String lastName = txtFieldCitizenLastName.getText();
             String SSN = txtFieldCitizenSSN.getText();
@@ -449,7 +454,7 @@ public class TeacherViewController implements Initializable, IController {
             clearTextFieldCreate();
             reloadCitizenTable();
         } else {
-            ErrorHandlerController.createWarning("Fejl", "Du skal udfylde alle tekstfelter");
+            ErrorHandlerController.createWarning("Fejl", "Du skal udfylde alle borgerens informationer");
         }
 
     }
@@ -700,6 +705,7 @@ public class TeacherViewController implements Initializable, IController {
                     if (generalInformation != null) {
                         studentViewController.setGeneralInfoFromID(String.valueOf(tvCreatedCitizens.getSelectionModel().getSelectedItem().getId()), String.valueOf(generalInformation.getId()));
                     }
+                    studentViewController.setCitizenComboBoxItems(tvCreatedCitizens.getSelectionModel().getSelectedItem());
 
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();

@@ -30,6 +30,14 @@ public class Citizen {
         this.schoolID = schoolID;
     }
 
+    public Citizen(String firstName, String lastName, String ssn) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.SSN = ssn;
+    }
+
+
+
     public int getId() {
         return id;
     }

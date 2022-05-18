@@ -618,7 +618,9 @@ public class AdminViewController implements Initializable, IController {
 
     @FXML
     private void btnHandleSaveCitizen() throws SQLException {
-        if (!txtFieldCitizenFirstName.getText().isEmpty() && !txtFieldCitizenLastName.getText().isEmpty() && !txtFieldCitizenSSN.getText().isEmpty() && !txtFieldCitizenAddress.getText().isEmpty()) {
+        if (!txtFieldCitizenFirstName.getText().isEmpty() && !txtFieldCitizenLastName.getText().isEmpty()
+                && !txtFieldCitizenSSN.getText().isEmpty() && !txtFieldCitizenAddress.getText().isEmpty() &&
+        radioMale.isSelected() || radioFemale.isSelected() || radioOther.isSelected()) {
             String firstName = txtFieldCitizenFirstName.getText();
             String lastName = txtFieldCitizenLastName.getText();
             String SSN = txtFieldCitizenSSN.getText();
