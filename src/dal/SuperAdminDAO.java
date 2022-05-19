@@ -2,6 +2,7 @@ package dal;
 
 import be.*;
 import be.enums.UserType;
+import bll.utilities.BCrypt.BCrypt;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 
@@ -396,10 +397,43 @@ public class SuperAdminDAO {
     }
 
     /**
+     * Making a students list, connecting to the database and adding the results to our ArrayList.
+     * @return a list of students or an empty list of students.
+     */
+    public SuperAdmin getHashedPasswordSuperAdmin(String username, String password) throws SQLException {
+
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT * FROM SuperAdmin WHERE username =?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            ResultSet resultset = preparedStatement.executeQuery();
+
+            while (resultset.next()) {
+                int id = resultset.getInt("superAdminID");
+                String hashedPassword = resultset.getString("password");
+
+
+                if(BCrypt.checkpw(password, hashedPassword)){
+                    SuperAdmin superAdmin = new SuperAdmin(id, username, password);
+                    return superAdmin;
+                }else{
+                    System.out.println("VERY SAD");
+                }
+
+            }
+        } catch (SQLException sqlException) {
+            throw new SQLException();
+        }
+        return null;
+    }
+
+    /**
      * Main used for testing the DAO methods in this class.
      */
     public static void main(String[] args) throws Exception {
         SuperAdminDAO superAdminDAO = new SuperAdminDAO();
+        superAdminDAO.getHashedPasswordSuperAdmin("Andy", "1");
         //superAdminDAO.createSchool("SOSU Esbjerg");
         //superAdminDAO.createSchool("SOSU Bramming");
         //System.out.println(superAdminDAO.getSchools());
@@ -410,7 +444,7 @@ public class SuperAdminDAO {
         //superAdminDAO.deleteSuperAdmin(1);
         //System.out.println(superAdminDAO.getAssignedTeachers(2));
         //System.out.println(superAdminDAO.getAssignedCitizen(2));
-        System.out.println(superAdminDAO.getAssignedCases(2));
+        //System.out.println(superAdminDAO.getAssignedCases(2));
     }
 
 }

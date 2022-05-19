@@ -101,4 +101,8 @@ public class SuperAdminModel {
         superAdminManager.deleteAdminFromSchool(userId, schoolId);
     }
 
+    public SuperAdmin getHashedPasswordSuperAdmin(String username, String password) throws SQLException {
+        return superAdminManager.getHashedPasswordSuperAdmin(username, password);
+    }
+
 }

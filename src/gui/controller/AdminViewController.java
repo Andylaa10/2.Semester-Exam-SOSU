@@ -5,6 +5,8 @@ import be.Citizen;
 import be.GeneralInformation;
 import be.User;
 import be.enums.UserType;
+import bll.utilities.BCrypt.BCrypt;
+import bll.utilities.Encryptor;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
@@ -242,6 +244,8 @@ public class AdminViewController implements Initializable, IController {
     private StudentViewController studentViewController;
     private EditCaseViewController editCaseViewController;
 
+    private Encryptor encryptor;
+
     private boolean hasSearched = true;
     private ObservableList<Citizen> searchData = FXCollections.observableArrayList();
 
@@ -250,6 +254,7 @@ public class AdminViewController implements Initializable, IController {
         this.dataModelFacade = new DataModelFacade();
         this.studentViewController = new StudentViewController();
         this.editCaseViewController = new EditCaseViewController();
+        this.encryptor = new Encryptor();
     }
 
     /**
@@ -466,14 +471,14 @@ public class AdminViewController implements Initializable, IController {
 
 
     @FXML
-    private void onActionCreateTeacher() throws SQLException {
+    private void onActionCreateTeacher() throws SQLException, IOException {
         if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()) {
             String firstName = txtFieldTeacherFirstName.getText();
             String lastName = txtFieldTeacherLastName.getText();
             String userName = txtFieldTeacherUsername.getText();
             String password = txtFieldTeacherPassword.getText();
             //TODO Errorhandling ved samme username
-            dataModelFacade.createTeacher(firstName, lastName, userName, password, UserType.TEACHER, Integer.parseInt(txtFieldSchoolID.getText()));
+            dataModelFacade.createTeacher(firstName, lastName, userName, encryptor.encrypt(password), UserType.TEACHER, Integer.parseInt(txtFieldSchoolID.getText()));
             reloadTeacherTable();
         } else {
             ErrorHandlerController.createWarning("Fejl", "Læreren kunne ikke oprettes,"
@@ -693,13 +698,13 @@ public class AdminViewController implements Initializable, IController {
      * Action event for save student button. Gets the text from all the textFields and creates a new student when pressed.
      */
     @FXML
-    private void btnHandleSaveStudent() throws SQLException {
+    private void btnHandleSaveStudent() throws SQLException, IOException {
         if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
             String firstName = txtFieldFirstName.getText();
             String lastName = txtFieldLastName.getText();
             String userName = txtFieldUsername.getText();
             String password = txtFieldPassword.getText();
-            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT, Integer.parseInt(txtFieldSchoolID.getText()));
+            dataModelFacade.createStudent(firstName, lastName, userName, encryptor.encrypt(password), UserType.STUDENT, Integer.parseInt(txtFieldSchoolID.getText()));
             reloadStudentTable();
             clearStudentTxtField();
             tvStudent.getSelectionModel().clearSelection();
@@ -747,6 +752,7 @@ public class AdminViewController implements Initializable, IController {
                 btnEditStudent.setVisible(true);
                 btnEditSave.setVisible(false);
                 btnDeleteStudent.setVisible(true);
+                txtFieldPassword.setStyle("-fx-border-color: transparent");
             } else {
                 ErrorHandlerController.createWarning("Fejl", "Alle den studerendes informationer skal være udfyldt");
             }
@@ -782,6 +788,7 @@ public class AdminViewController implements Initializable, IController {
         btnDeleteStudent.setVisible(true);
         btnEditSave.setVisible(false);
         btnEditCancel.setVisible(false);
+        txtFieldPassword.setStyle("-fx-border-color: transparent");
     }
 
     /**
@@ -947,7 +954,8 @@ public class AdminViewController implements Initializable, IController {
         txtFieldFirstName.setText(student.getFirstName());
         txtFieldLastName.setText(student.getLastName());
         txtFieldUsername.setText(student.getUsername());
-        txtFieldPassword.setText(student.getPassword());
+        txtFieldPassword.setPromptText("Indtast nyt password");
+        txtFieldPassword.setStyle("-fx-border-color: red");
     }
 
     /**

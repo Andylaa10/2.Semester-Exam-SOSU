@@ -23,6 +23,10 @@ public class UserManager {
         return userDAO.getStudents();
     }
 
+    public User getHashedPassword(String userName, String password, int schoolId) throws SQLException {
+        return userDAO.getHashedPassword(userName, password, schoolId);
+    }
+
     /**
      * Get a list of teachers using the getTeachers method from userDAO
      * @return

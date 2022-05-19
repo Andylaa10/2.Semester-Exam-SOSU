@@ -5,11 +5,12 @@ import be.Citizen;
 import be.GeneralInformation;
 import be.User;
 import be.enums.UserType;
+import bll.utilities.BCrypt.BCrypt;
+import bll.utilities.Encryptor;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -211,6 +212,10 @@ public class TeacherViewController implements Initializable, IController {
     private StudentViewController studentViewController;
     private EditCaseViewController editCaseViewController;
 
+    private Encryptor encryptor;
+
+
+
     private boolean hasSearched = true;
     private ObservableList<Citizen> searchData = FXCollections.observableArrayList();
 
@@ -218,6 +223,7 @@ public class TeacherViewController implements Initializable, IController {
         this.dataModelFacade = new DataModelFacade();
         this.studentViewController = new StudentViewController();
         this.editCaseViewController = new EditCaseViewController();
+        this.encryptor = new Encryptor();
     }
 
     /**
@@ -489,7 +495,7 @@ public class TeacherViewController implements Initializable, IController {
      * Action event for save student button. Gets the text from all the textFields and creates a new student when pressed.
      */
     @FXML
-    private void btnHandleSaveStudent() throws SQLException {
+    private void btnHandleSaveStudent() throws SQLException, IOException {
         if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
             String firstName = txtFieldFirstName.getText();
             String lastName = txtFieldLastName.getText();
@@ -497,7 +503,7 @@ public class TeacherViewController implements Initializable, IController {
             String password = txtFieldPassword.getText();
 
             //TODO Make errorHandling if username is already taken
-            dataModelFacade.createStudent(firstName, lastName, userName, password, UserType.STUDENT, Integer.parseInt(txtFieldSchoolID.getText()));
+            dataModelFacade.createStudent(firstName, lastName, userName, encryptor.encrypt(password), UserType.STUDENT, Integer.parseInt(txtFieldSchoolID.getText()));
             reloadStudentTable();
             clearStudentTxtField();
             tvStudent.getSelectionModel().clearSelection();
@@ -530,7 +536,7 @@ public class TeacherViewController implements Initializable, IController {
                 String userName = txtFieldUsername.getText();
                 String password = txtFieldPassword.getText();
 
-                User student = new User(id, firstName, lastName, userName, password, UserType.STUDENT);
+                User student = new User(id, firstName, lastName, userName, encryptor.encrypt(password), UserType.STUDENT);
                 dataModelFacade.editStudent(student);
                 reloadStudentTable();
                 clearStudentTxtField();
@@ -540,6 +546,7 @@ public class TeacherViewController implements Initializable, IController {
                 btnEditStudent.setVisible(true);
                 btnEditSave.setVisible(false);
                 btnDeleteStudent.setVisible(true);
+                txtFieldPassword.setStyle("-fx-border-color: transparent");
             } else {
                 ErrorHandlerController.createWarning("Fejl", "Du skal udfylde alle informationer på den studerende");
             }
@@ -575,6 +582,7 @@ public class TeacherViewController implements Initializable, IController {
         btnDeleteStudent.setVisible(true);
         btnEditSave.setVisible(false);
         btnEditCancel.setVisible(false);
+        txtFieldPassword.setStyle("-fx-border-color: transparent");
     }
 
     /**
@@ -737,7 +745,8 @@ public class TeacherViewController implements Initializable, IController {
         txtFieldFirstName.setText(student.getFirstName());
         txtFieldLastName.setText(student.getLastName());
         txtFieldUsername.setText(student.getUsername());
-        txtFieldPassword.setText(student.getPassword());
+        txtFieldPassword.setPromptText("Indtast nyt password");
+        txtFieldPassword.setStyle("-fx-border-color: red");
     }
 
     /**

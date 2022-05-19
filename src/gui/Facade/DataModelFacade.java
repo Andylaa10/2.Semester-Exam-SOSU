@@ -50,6 +50,10 @@ public class DataModelFacade {
         return userModel.getStudents();
     }
 
+    public User getHashedPassword(String userName, String password, int schoolId) throws SQLException {
+        return userModel.getHashedPassword(userName, password, schoolId);
+    }
+
     /**
      * Get a list of teachers using the getTeachers method from userModel
      */
@@ -303,6 +307,10 @@ public class DataModelFacade {
 
     public void deleteAdminFromSchool(int userId, int schoolId) {
         superAdminModel.deleteAdminFromSchool(userId, schoolId);
+    }
+
+    public SuperAdmin getHashedPasswordSuperAdmin(String username, String password) throws SQLException {
+        return superAdminModel.getHashedPasswordSuperAdmin(username, password);
     }
 
 

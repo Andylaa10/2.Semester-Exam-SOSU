@@ -69,7 +69,8 @@ public class LoginViewController implements Initializable {
     private void Login() throws Exception {
         String username = txtFieldUsername.getText();
         String password = pField.getText();
-        SuperAdmin superAdmin = facade.superAdminLogin(username, password);
+        SuperAdmin superAdmin = facade.getHashedPasswordSuperAdmin(username, password);
+        //SuperAdmin superAdmin = facade.superAdminLogin(username, password);
         if (superAdmin != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/SuperAdminView.fxml"));
             Scene scene = new Scene(loader.load());
@@ -83,7 +84,8 @@ public class LoginViewController implements Initializable {
                 ErrorHandlerController.createWarning("Vælg skole", "For at logge ind husk at vælge skole");
             }else {
                 int school = Integer.parseInt(txtFieldSchoolId.getText());
-                User user = facade.userLogin(username, password, school);
+                User user = facade.getHashedPassword(username, password, school);
+                //User user = facade.userLogin(username, password, school);
                 if (user != null && user.getUsertype() == UserType.STUDENT && user.getSchoolId() == school) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
                     Scene scene = new Scene(loader.load());

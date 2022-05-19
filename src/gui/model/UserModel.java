@@ -22,6 +22,10 @@ public class UserModel {
         return userManager.getStudents();
     }
 
+    public User getHashedPassword(String userName, String password, int schoolId) throws SQLException {
+        return userManager.getHashedPassword(userName, password, schoolId);
+    }
+
     /**
      * Get a list of teachers using the getTeachers method from userManager
      */

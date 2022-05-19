@@ -3,6 +3,7 @@ package gui.controller;
 import be.School;
 import be.User;
 import be.enums.UserType;
+import bll.utilities.Encryptor;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
@@ -136,11 +137,16 @@ public class SuperAdminViewController implements Initializable, IController {
     private School selectedSchool;
     private School selectedSchoolOnComboBox;
     private User selectedAdmin;
+
+    private Encryptor encryptor;
     
     private School selectedSchoolToAssign;
 
+
+
     public SuperAdminViewController() throws IOException, SQLException {
         this.dataModelFacade = new DataModelFacade();
+        this.encryptor = new Encryptor();
     }
 
     @Override
@@ -335,7 +341,7 @@ public class SuperAdminViewController implements Initializable, IController {
                 String userName = txtFieldAdminUsername.getText();
                 String password = txtFieldAdminPassword.getText();
 
-                User admin = new User(id, firstName, lastName, userName, password, UserType.STUDENT);
+                User admin = new User(id, firstName, lastName, userName, encryptor.encrypt(password), UserType.STUDENT);
                 dataModelFacade.editAdmin(admin);
                 reloadAdminTable();
                 clearAdminTxtField();
@@ -345,6 +351,7 @@ public class SuperAdminViewController implements Initializable, IController {
                 btnEditAdminCancel.setVisible(false);
                 btnCreateAdmin.setVisible(true);
                 btnDeleteAdmin.setVisible(true);
+                txtFieldAdminPassword.setStyle("-fx-border-color: transparent");
             } else {
                 ErrorHandlerController.createWarning("Fejl", "Du skal vælge en admin først");
             }
@@ -361,6 +368,7 @@ public class SuperAdminViewController implements Initializable, IController {
         btnEditAdminCancel.setVisible(false);
         btnCreateAdmin.setVisible(true);
         btnDeleteAdmin.setVisible(true);
+        txtFieldAdminPassword.setStyle("-fx-border-color: transparent");
     }
 
     @FXML
@@ -486,7 +494,8 @@ public class SuperAdminViewController implements Initializable, IController {
         txtFieldAdminFirstName.setText(admin.getFirstName());
         txtFieldAdminLastName.setText(admin.getLastName());
         txtFieldAdminUsername.setText(admin.getUsername());
-        txtFieldAdminPassword.setText(admin.getPassword());
+        txtFieldAdminPassword.setPromptText("Indtast nyt password");
+        txtFieldAdminPassword.setStyle("-fx-border-color: red");
     }
 
     private void selectedSchoolOnComboBox(){

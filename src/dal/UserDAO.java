@@ -2,6 +2,7 @@ package dal;
 
 import be.User;
 import be.enums.UserType;
+import bll.utilities.BCrypt.BCrypt;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 import java.io.IOException;
@@ -334,16 +335,55 @@ public class UserDAO {
     }
 
     /**
+     * Making a students list, connecting to the database and adding the results to our ArrayList.
+     * @return a list of students or an empty list of students.
+     */
+    public User getHashedPassword(String userName, String password, int schoolId) throws SQLException {
+
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT * FROM Login WHERE userName =? AND schoolId =? ;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, userName);
+            preparedStatement.setInt(2, schoolId);
+            ResultSet resultset = preparedStatement.executeQuery();
+
+            while (resultset.next()) {
+                int id = resultset.getInt("loginID");
+                String firstName = resultset.getString("firstName");
+                String lastName = resultset.getString("lastName");
+                String username = resultset.getString("username");
+                UserType userType = UserType.valueOf(resultset.getString("userType"));
+                String hashedPassword = resultset.getString("password");
+
+
+                if(BCrypt.checkpw(password, hashedPassword)){
+                    User user = new User(id, firstName, lastName, username,  userType, schoolId);
+                    return user;
+                }else{
+                    System.out.println("VERY SAD");
+                }
+
+            }
+        } catch (SQLException sqlException) {
+            throw new SQLException();
+        }
+        return null;
+    }
+
+    /**
      * Main method used for testing this DAO class.
      */
     public static void main(String[] args) throws Exception {
         UserDAO dao = new UserDAO();
+
+        dao.getHashedPassword("BCryptCheck", "hej123", 2);
         //dao.createAdmin("John", "Johnson", "Admin", "1", UserType.ADMINISTRATOR, 1);
         //dao.createTeacher("Kim", "Larsen", "Teacher", "1", UserType.TEACHER,1);
         //dao.createStudent("andy", "lam", "Student", "1", UserType.STUDENT,1);
-        dao.createAdmin("Test", "Testen", "Admin2", "1", UserType.ADMINISTRATOR,2);
-        dao.createTeacher("Kim", "Larsen", "Teacher2", "1", UserType.TEACHER,2);
-        dao.createStudent("Kristian", "Hollænder", "Student2",  "1", UserType.STUDENT, 2);
+        //dao.createAdmin("Test", "Testen", "Admin2", "1", UserType.ADMINISTRATOR,2);
+        //dao.createTeacher("Kim", "Larsen", "Teacher2", "1", UserType.TEACHER,2);
+        //dao.createStudent("Kristian", "Hollænder", "Student2",  "1", UserType.STUDENT, 2);
         //System.out.println(dao.getAdmins());
         //System.out.println(dao.getStudents());
         //System.out.println(dao.getTeachers());

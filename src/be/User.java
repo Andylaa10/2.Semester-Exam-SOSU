@@ -53,6 +53,10 @@ public class User implements ILogin {
         this.schoolId = schoolId;
     }
 
+    public User(String hashedPassword) {
+        this.password = hashedPassword;
+    }
+
     /**
      * Gets the id
      */

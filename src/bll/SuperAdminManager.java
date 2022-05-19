@@ -119,4 +119,8 @@ public class SuperAdminManager {
         superAdminDAO.deleteAdminFromSchool(userId, schoolId);
     }
 
+    public SuperAdmin getHashedPasswordSuperAdmin(String username, String password) throws SQLException {
+       return superAdminDAO.getHashedPasswordSuperAdmin(username, password);
+    }
+
 }
