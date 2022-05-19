@@ -3,6 +3,7 @@ package dal;
 import be.*;
 import be.enums.UserType;
 import bll.utilities.BCrypt.BCrypt;
+import bll.utilities.Encryptor;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 
@@ -433,7 +434,9 @@ public class SuperAdminDAO {
      */
     public static void main(String[] args) throws Exception {
         SuperAdminDAO superAdminDAO = new SuperAdminDAO();
-        superAdminDAO.getHashedPasswordSuperAdmin("Andy", "1");
+        Encryptor encryptor = new Encryptor();
+        superAdminDAO.createSuperAdmin("superadmin", encryptor.encrypt("1"));
+        //superAdminDAO.getHashedPasswordSuperAdmin("Andy", "1");
         //superAdminDAO.createSchool("SOSU Esbjerg");
         //superAdminDAO.createSchool("SOSU Bramming");
         //System.out.println(superAdminDAO.getSchools());

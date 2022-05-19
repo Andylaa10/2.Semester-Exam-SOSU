@@ -495,6 +495,7 @@ public class AdminViewController implements Initializable, IController {
             btnCreateTeacher.setVisible(false);
             btnEditTeacherSave.setVisible(true);
             btnEditTeacherCancel.setVisible(true);
+            txtFieldPassword.setStyle("-fx-border-color: red");
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en lærer først");
         }
@@ -512,7 +513,7 @@ public class AdminViewController implements Initializable, IController {
                 String userName = txtFieldTeacherUsername.getText();
                 String password = txtFieldTeacherPassword.getText();
 
-                User teacher = new User(id, firstName, lastName, userName, password, UserType.TEACHER);
+                User teacher = new User(id, firstName, lastName, userName, encryptor.encrypt(password), UserType.TEACHER);
                 dataModelFacade.editTeacher(teacher);
                 reloadTeacherTable();
                 clearTeacherTxtField();
@@ -522,6 +523,7 @@ public class AdminViewController implements Initializable, IController {
                 btnCreateTeacher.setVisible(true);
                 btnEditTeacherSave.setVisible(false);
                 btnEditTeacherCancel.setVisible(false);
+                txtFieldPassword.setStyle("-fx-border-color: transparent");
             } else {
                 ErrorHandlerController.createWarning("Fejl", "Husk at vælge en lærer først");
             }
@@ -562,6 +564,7 @@ public class AdminViewController implements Initializable, IController {
         btnEditTeacherCancel.setVisible(false);
         btnEditTeacherSave.setVisible(false);
         btnCreateTeacher.setVisible(true);
+        txtFieldPassword.setStyle("-fx-border-color: transparent");
     }
 
     /**
@@ -581,7 +584,8 @@ public class AdminViewController implements Initializable, IController {
         txtFieldTeacherFirstName.setText(teacher.getFirstName());
         txtFieldTeacherLastName.setText(teacher.getLastName());
         txtFieldTeacherUsername.setText(teacher.getUsername());
-        txtFieldTeacherPassword.setText(teacher.getPassword());
+        txtFieldTeacherPassword.setPromptText("Indtast nyt password");
+
     }
 
     private void reloadTeacherTable() {
@@ -742,7 +746,7 @@ public class AdminViewController implements Initializable, IController {
                 String userName = txtFieldUsername.getText();
                 String password = txtFieldPassword.getText();
 
-                User student = new User(id, firstName, lastName, userName, password, UserType.STUDENT);
+                User student = new User(id, firstName, lastName, userName, encryptor.encrypt(password), UserType.STUDENT);
                 dataModelFacade.editStudent(student);
                 reloadStudentTable();
                 clearStudentTxtField();
