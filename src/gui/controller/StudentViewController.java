@@ -34,7 +34,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class StudentViewController implements IController, Initializable {
@@ -274,7 +273,7 @@ public class StudentViewController implements IController, Initializable {
         selectedCitizenOnComboBox();
         selectedHealthCondition();
         selectedSubCategory();
-        SelectedFunctionalAbilitySubCategory();
+        selectedFunctionalAbilitySubCategory();
         setupToggleGender();
         setupToggleHealthCondition();
         setFunctionalAbilityComboBoxItems();
@@ -369,42 +368,48 @@ public class StudentViewController implements IController, Initializable {
             } else {
                 clearHealthConditionTxtField();
             }
-            Callback<TableColumn<HealthConditionSubCategory, String>, TableCell<HealthConditionSubCategory, String>> cellFactory
-                    =
-                    new Callback<TableColumn<HealthConditionSubCategory, String>, TableCell<HealthConditionSubCategory, String>>() {
-                        @Override
-                        public TableCell<HealthConditionSubCategory, String> call(final TableColumn<HealthConditionSubCategory, String> param) {
-                            final TableCell<HealthConditionSubCategory, String> cell = new TableCell<HealthConditionSubCategory, String>() {
+            changeColorOnTV(subCategoryText);
+        }
+    }
 
-                                @Override
-                                public void updateItem(String item, boolean empty) {
-                                    super.updateItem(item, empty);
-                                    if (empty) {
-                                        setGraphic(null);
-                                        setText(null);
-                                    } else {
-                                        setText(item);
-                                        TableRow<HealthConditionSubCategory> row = getTableRow();
-                                        if(subCategoryText == null) {
-                                            row.setStyle("");
-                                        }else if (row.getItem().getCondition(subCategoryText) == 0 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
-                                            row.getStyleClass().clear();
-                                            row.setStyle("-fx-background-color: red");
-                                        }else if (row.getItem().getCondition(subCategoryText) == 1 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())){
-                                            row.getStyleClass().clear();
-                                            row.setStyle("-fx-background-color: yellow");
-                                        }else if (row.getItem().getCondition(subCategoryText) == 2 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())){
-                                            row.getStyleClass().clear();
-                                            row.setStyle("-fx-background-color: green");
-                                        }
+    public void changeColorOnTV(HealthConditionSubCategoryText subCategoryText){
+        Callback<TableColumn<HealthConditionSubCategory, String>, TableCell<HealthConditionSubCategory, String>> cellFactory
+                =
+                new Callback<TableColumn<HealthConditionSubCategory, String>, TableCell<HealthConditionSubCategory, String>>() {
+                    @Override
+                    public TableCell<HealthConditionSubCategory, String> call(final TableColumn<HealthConditionSubCategory, String> param) {
+                        final TableCell<HealthConditionSubCategory, String> cell = new TableCell<HealthConditionSubCategory, String>() {
+
+                            @Override
+                            public void updateItem(String item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (empty) {
+                                    setGraphic(null);
+                                    setText(null);
+                                } else {
+                                    setText(item);
+                                    TableRow<HealthConditionSubCategory> row = getTableRow();
+                                    if(subCategoryText == null) {
+                                        row.setStyle("");
+                                    }else if (row.getItem().getCondition(subCategoryText) == 0 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
+                                        row.getStyleClass().clear();
+                                        row.setStyle("-fx-background-color: red");
+                                    }else if (row.getItem().getCondition(subCategoryText) == 1 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())){
+                                        row.getStyleClass().clear();
+                                        row.setStyle("-fx-background-color: yellow");
+                                    }else if (row.getItem().getCondition(subCategoryText) == 2 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())){
+                                        row.getStyleClass().clear();
+                                        row.setStyle("-fx-background-color: green");
+                                    }else{
+                                        row.setStyle("");
                                     }
                                 }
-                            };
-                            return cell;
-                        }
-                    };
-            tcSubCategoriesName.setCellFactory(cellFactory);
-        }
+                            }
+                        };
+                        return cell;
+                    }
+                };
+        tcSubCategoriesName.setCellFactory(cellFactory);
     }
 
 
@@ -743,7 +748,7 @@ public class StudentViewController implements IController, Initializable {
     /**
      * Selects a sub category from the tableview
      */
-    private void SelectedFunctionalAbilitySubCategory() {
+    private void selectedFunctionalAbilitySubCategory() {
         this.tvFunctionalConditions.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
                 this.selectedFunctionalAbilitySubCategory = newValue;
