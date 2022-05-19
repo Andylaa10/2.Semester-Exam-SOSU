@@ -9,6 +9,9 @@ import be.HealthCondition.HealthConditionSubCategoryText;
 import be.enums.UserType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.model.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,7 +27,10 @@ public class DataModelFacade {
     private final FunctionalAbilitiesModel functionalAbilitiesModel;
     private final ObservationNoteModel observationNoteModel;
 
-    public DataModelFacade() throws IOException {
+    private final ObservableList<Citizen> citizensToBeViewed;
+
+
+    public DataModelFacade() throws IOException, SQLException {
         citizenModel = new CitizenModel();
         userModel = new UserModel();
         superAdminModel = new SuperAdminModel();
@@ -33,6 +39,8 @@ public class DataModelFacade {
         generalInformationModel = new GeneralInformationModel();
         functionalAbilitiesModel = new FunctionalAbilitiesModel();
         observationNoteModel = new ObservationNoteModel();
+        citizensToBeViewed = FXCollections.observableArrayList();
+        citizensToBeViewed.addAll(citizenModel.getCitizens());
     }
 
     /**
@@ -403,5 +411,14 @@ public class DataModelFacade {
         observationNoteModel.deleteObservationNote(id);
     }
 
+    public List<Citizen> searchCitizen(String query) throws SQLException {
+        List<Citizen> searchResults = null;
+
+        searchResults = citizenModel.searchCitizen(query);
+        citizensToBeViewed.clear();
+        citizensToBeViewed.addAll(searchResults);
+
+        return searchResults;
+    }
 
 }

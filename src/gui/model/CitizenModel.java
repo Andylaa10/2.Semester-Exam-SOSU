@@ -2,6 +2,9 @@ package gui.model;
 
 import be.Citizen;
 import bll.CitizenManager;
+import bll.utilities.CitizenSearcher;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,9 +13,13 @@ import java.util.List;
 public class CitizenModel {
 
     private final CitizenManager citizenManager;
+    private ObservableList<Citizen> citizensToBeViewed;
 
-    public CitizenModel() throws IOException {
+
+    public CitizenModel() throws IOException, SQLException {
         citizenManager = new CitizenManager();
+        citizensToBeViewed = FXCollections.observableArrayList();
+        citizensToBeViewed.addAll(citizenManager.getCitizens());
     }
 
     /**
@@ -47,4 +54,15 @@ public class CitizenModel {
     public void editCitizen(Citizen citizen) throws Exception {
         citizenManager.editCitizen(citizen);
     }
+
+    public List<Citizen> searchCitizen(String query) throws SQLException {
+        List<Citizen> searchResults = null;
+
+        searchResults = citizenManager.searchCitizen(query);
+        citizensToBeViewed.clear();
+        citizensToBeViewed.addAll(searchResults);
+
+        return searchResults;
+    }
+
 }

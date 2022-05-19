@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ObservationNoteViewController implements Initializable {
@@ -30,7 +31,7 @@ public class ObservationNoteViewController implements Initializable {
 
     private int citizenId;
 
-    public ObservationNoteViewController() throws IOException {
+    public ObservationNoteViewController() throws IOException, SQLException {
         this.dataModelFacade = new DataModelFacade();
     }
 

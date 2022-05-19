@@ -208,7 +208,7 @@ public class TeacherViewController implements Initializable, IController {
     private StudentViewController studentViewController;
     private EditCaseViewController editCaseViewController;
 
-    public TeacherViewController() throws IOException {
+    public TeacherViewController() throws IOException, SQLException {
         this.dataModelFacade = new DataModelFacade();
         this.studentViewController = new StudentViewController();
         this.editCaseViewController = new EditCaseViewController();

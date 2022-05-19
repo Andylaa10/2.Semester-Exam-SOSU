@@ -248,7 +248,7 @@ public class StudentViewController implements IController, Initializable {
     private ObservationNoteViewController observationNoteViewController;
     private ToggleGroup group;
 
-    public StudentViewController() throws IOException {
+    public StudentViewController() throws IOException, SQLException {
         this.dataModelFacade = new DataModelFacade();
     }
 

@@ -43,7 +43,7 @@ public class LoginViewController implements Initializable {
     private School selectedSchoolOnComboBox;
 
 
-    public LoginViewController() throws IOException {
+    public LoginViewController() throws IOException, SQLException {
         facade = new DataModelFacade();
     }
 

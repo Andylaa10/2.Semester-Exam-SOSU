@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class EditCaseViewController {
 
@@ -26,7 +27,7 @@ public class EditCaseViewController {
 
     private final DataModelFacade dataModelFacade;
 
-    public EditCaseViewController() throws IOException {
+    public EditCaseViewController() throws IOException, SQLException {
         this.dataModelFacade = new DataModelFacade();
     }
 

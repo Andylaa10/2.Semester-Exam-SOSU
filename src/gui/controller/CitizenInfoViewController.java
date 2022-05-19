@@ -55,7 +55,7 @@ public class CitizenInfoViewController implements Initializable, Runnable {
     private final DataModelFacade dataModelFacade;
 
 
-    public CitizenInfoViewController() throws IOException {
+    public CitizenInfoViewController() throws IOException, SQLException {
         this.dataModelFacade = new DataModelFacade();
     }
 

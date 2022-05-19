@@ -139,7 +139,7 @@ public class SuperAdminViewController implements Initializable, IController {
     
     private School selectedSchoolToAssign;
 
-    public SuperAdminViewController() throws IOException {
+    public SuperAdminViewController() throws IOException, SQLException {
         this.dataModelFacade = new DataModelFacade();
     }
 
@@ -323,7 +323,6 @@ public class SuperAdminViewController implements Initializable, IController {
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en admin først");
         }
-
     }
 
     @FXML

@@ -9,6 +9,7 @@ import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -185,6 +186,10 @@ public class AdminViewController implements Initializable, IController {
     private TableColumn<Case, String> tcCasesOnCitizenInfo;
     @FXML
     private Button btnCopySave;
+    @FXML
+    private TextField txtFieldSearchCitizens;
+    @FXML
+    private Button btnSearchCitizens;
 
     /**
      * Create Citizen Pane
@@ -234,7 +239,11 @@ public class AdminViewController implements Initializable, IController {
     private StudentViewController studentViewController;
     private EditCaseViewController editCaseViewController;
 
-    public AdminViewController() throws IOException {
+    private boolean hasSearched = true;
+    private ObservableList<Citizen> searchData = FXCollections.observableArrayList();
+
+
+    public AdminViewController() throws IOException, SQLException {
         this.dataModelFacade = new DataModelFacade();
         this.studentViewController = new StudentViewController();
         this.editCaseViewController = new EditCaseViewController();
@@ -1292,6 +1301,39 @@ public class AdminViewController implements Initializable, IController {
         switcher.setTitle("Lærer");
         switcher.show();
         switcher.centerOnScreen();
+    }
+
+    @FXML
+    private void onActionSearchCitizens() {
+        if (hasSearched && !txtFieldSearchCitizens.getText().equals("")) {
+            btnSearchCitizens.setText("X");
+            hasSearched = false;
+        } else {
+            btnSearchCitizens.setText("🔍");
+            hasSearched = true;
+            txtFieldSearchCitizens.clear();
+        }
+        try {
+            searchData = FXCollections.observableList(dataModelFacade.searchCitizen(txtFieldSearchCitizens.getText()));
+            searchTableViewLoad(searchData);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Loads the tableview for the citizens, when search is pressed.
+     * @param searchData
+     */
+    private void searchTableViewLoad(ObservableList<Citizen> searchData) {
+        tvCitizens.setItems(getSearchData());
+    }
+
+    /**
+     * @return searchData;
+     */
+    private ObservableList<Citizen> getSearchData() {
+        return searchData;
     }
 
 }
