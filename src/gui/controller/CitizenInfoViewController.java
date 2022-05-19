@@ -84,8 +84,6 @@ public class CitizenInfoViewController implements Initializable, Runnable {
         createCases();
         createHealthConditions();
         createFunctionalAbilities();
-
-        Thread.currentThread().isAlive();
     }
 
 
@@ -108,23 +106,20 @@ public class CitizenInfoViewController implements Initializable, Runnable {
         }
     }
 
-    private void createCases() throws SQLException {
-        Thread t1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ObservableList<Case> allCasesOnCitizen = null;
+    private void createCases() {
+        Thread t1 = new Thread(() -> {
+            ObservableList<Case> allCasesOnCitizen = null;
+            try {
+                allCasesOnCitizen = FXCollections.observableList(dataModelFacade.getCasesOnCitizen(citizenId));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            for (Case casesOnCitizen : allCasesOnCitizen) {
+                int caseId = casesOnCitizen.getId();
                 try {
-                    allCasesOnCitizen = FXCollections.observableList(dataModelFacade.getCasesOnCitizen(citizenId));
+                    newCaseToVBox(caseId);
                 } catch (SQLException e) {
                     e.printStackTrace();
-                }
-                for (Case casesOnCitizen : allCasesOnCitizen) {
-                    int caseId = casesOnCitizen.getId();
-                    try {
-                        newCaseToVBox(caseId);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
                 }
             }
         });
@@ -133,18 +128,15 @@ public class CitizenInfoViewController implements Initializable, Runnable {
 
     }
 
-    private void createHealthConditions() throws SQLException {
-        Thread t1 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ObservableList<HealthConditionSubCategoryText> allSubCategories = FXCollections.observableList(dataModelFacade.getHCInfoOnSubCategories(citizenId));
-                for (HealthConditionSubCategoryText HCSubCategoryText : allSubCategories) {
-                    healthConditionId = HCSubCategoryText.getCategoryId();
-                    try {
-                        newHCToVBox(healthConditionId);
-                    } catch (SQLServerException e) {
-                        e.printStackTrace();
-                    }
+    private void createHealthConditions() {
+        Thread t1 = new Thread(() -> {
+            ObservableList<HealthConditionSubCategoryText> allSubCategories = FXCollections.observableList(dataModelFacade.getHCInfoOnSubCategories(citizenId));
+            for (HealthConditionSubCategoryText HCSubCategoryText : allSubCategories) {
+                healthConditionId = HCSubCategoryText.getCategoryId();
+                try {
+                    newHCToVBox(healthConditionId);
+                } catch (SQLServerException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -230,43 +222,20 @@ public class CitizenInfoViewController implements Initializable, Runnable {
         txtFieldHC.setMinWidth(215);
         int hcCondition = hcSubCategoryText.getCondition();
         switch (hcCondition) {
-            case 1:
-                txtFieldHC.setText("Funktionsniveau");
-                break;
-            case 2:
-                txtFieldHC.setText("Bevægeapparat");
-                break;
-            case 3:
-                txtFieldHC.setText("Ernæring");
-                break;
-            case 4:
-                txtFieldHC.setText("Hud og slimhinder");
-                break;
-            case 5:
-                txtFieldHC.setText("Kommunikation");
-                break;
-            case 6:
-                txtFieldHC.setText("Psykosociale forhold");
-                break;
-            case 7:
-                txtFieldHC.setText("Respiration og cirkulation");
-                break;
-            case 8:
-                txtFieldHC.setText("Seksualitet");
-                break;
-            case 9:
-                txtFieldHC.setText("Smerter og sanseindtryk");
-                break;
-            case 10:
-                txtFieldHC.setText("Søvn og hvile");
-                break;
-            case 11:
-                txtFieldHC.setText("Viden og udvikling");
-                break;
-            case 12:
-                txtFieldHC.setText("Udskillelse af affaldsstoffer");
-                break;
-            default:
+            case 1 -> txtFieldHC.setText("Funktionsniveau");
+            case 2 -> txtFieldHC.setText("Bevægeapparat");
+            case 3 -> txtFieldHC.setText("Ernæring");
+            case 4 -> txtFieldHC.setText("Hud og slimhinder");
+            case 5 -> txtFieldHC.setText("Kommunikation");
+            case 6 -> txtFieldHC.setText("Psykosociale forhold");
+            case 7 -> txtFieldHC.setText("Respiration og cirkulation");
+            case 8 -> txtFieldHC.setText("Seksualitet");
+            case 9 -> txtFieldHC.setText("Smerter og sanseindtryk");
+            case 10 -> txtFieldHC.setText("Søvn og hvile");
+            case 11 -> txtFieldHC.setText("Viden og udvikling");
+            case 12 -> txtFieldHC.setText("Udskillelse af affaldsstoffer");
+            default -> {
+            }
         }
 
         TextField txtFieldHCSubCategory = new TextField();
@@ -279,137 +248,51 @@ public class CitizenInfoViewController implements Initializable, Runnable {
 
         int hcCategoryId = hcSubCategoryText.getCategoryId();
         switch (hcCategoryId) {
-            case 1:
-                txtFieldHCSubCategory.setText("Problemer med personlig pleje");
-                break;
-            case 2:
-                txtFieldHCSubCategory.setText("Problemer med daglige aktiviteter");
-                break;
-            case 3:
-                txtFieldHCSubCategory.setText("Problemer med mobilitet og bevægelse");
-                break;
-            case 4:
-                txtFieldHCSubCategory.setText("Problemer med væskeindtag");
-                break;
-            case 5:
-                txtFieldHCSubCategory.setText("Problemer med fødeindtag");
-                break;
-            case 6:
-                txtFieldHCSubCategory.setText("Uhensigtsmæssig vægtændring");
-                break;
-            case 7:
-                txtFieldHCSubCategory.setText("Problemer med overvægt");
-                break;
-            case 8:
-                txtFieldHCSubCategory.setText("Problemer med undervægt");
-                break;
-            case 9:
-                txtFieldHCSubCategory.setText("Problemer med kirurgisk sår");
-                break;
-            case 10:
-                txtFieldHCSubCategory.setText("Problemer med diabetisk sår");
-                break;
-            case 11:
-                txtFieldHCSubCategory.setText("Problemer med cancersår");
-                break;
-            case 12:
-                txtFieldHCSubCategory.setText("Problemer med tryksår");
-                break;
-            case 13:
-                txtFieldHCSubCategory.setText("Problemer med arterielt sår");
-                break;
-            case 14:
-                txtFieldHCSubCategory.setText("Problemer med venøst sår");
-                break;
-            case 15:
-                txtFieldHCSubCategory.setText("Problemer med blandingssår");
-                break;
-            case 16:
-                txtFieldHCSubCategory.setText("Problemer med traumesår");
-                break;
-            case 17:
-                txtFieldHCSubCategory.setText("Andre problemer med hud og slimhinder");
-                break;
-            case 18:
-                txtFieldHCSubCategory.setText("Problemer med kommunikation");
-                break;
-            case 19:
-                txtFieldHCSubCategory.setText("Problemer med socialt samvær");
-                break;
-            case 20:
-                txtFieldHCSubCategory.setText("Emotionelle problemer");
-                break;
-            case 21:
-                txtFieldHCSubCategory.setText("Problemer med misbrug");
-                break;
-            case 22:
-                txtFieldHCSubCategory.setText("Mentale problemer");
-                break;
-            case 23:
-                txtFieldHCSubCategory.setText("Respirationsproblemer");
-                break;
-            case 24:
-                txtFieldHCSubCategory.setText("Cirkulationsproblemer");
-                break;
-            case 25:
-                txtFieldHCSubCategory.setText("Problemer med seksualitet");
-                break;
-            case 26:
-                txtFieldHCSubCategory.setText("Akutte smerter");
-                break;
-            case 27:
-                txtFieldHCSubCategory.setText("Periodevis smerter");
-                break;
-            case 28:
-                txtFieldHCSubCategory.setText("Kroniske smerter");
-                break;
-            case 29:
-                txtFieldHCSubCategory.setText("Problemer med synssans");
-                break;
-            case 30:
-                txtFieldHCSubCategory.setText("Problemer med lugtesans");
-                break;
-            case 31:
-                txtFieldHCSubCategory.setText("Problemer med hørelse");
-                break;
-            case 32:
-                txtFieldHCSubCategory.setText("Problemer med smagssans");
-                break;
-            case 33:
-                txtFieldHCSubCategory.setText("Problemer med følesans");
-                break;
-            case 34:
-                txtFieldHCSubCategory.setText("Døgnrytmeproblemer");
-                break;
-            case 35:
-                txtFieldHCSubCategory.setText("Søvnproblemer");
-                break;
-            case 36:
-                txtFieldHCSubCategory.setText("Problemer med hukommelse");
-                break;
-            case 37:
-                txtFieldHCSubCategory.setText("Problemer med sygdomsindsigt");
-                break;
-            case 38:
-                txtFieldHCSubCategory.setText("Problemer med indsigt i behandlingsmål");
-                break;
-            case 39:
-                txtFieldHCSubCategory.setText("Kognitive problemer");
-                break;
-            case 40:
-                txtFieldHCSubCategory.setText("Problemer med vandladning");
-                break;
-            case 41:
-                txtFieldHCSubCategory.setText("Problemer med urininkontinens");
-                break;
-            case 42:
-                txtFieldHCSubCategory.setText("Problemer med afføringsinkontinens");
-                break;
-            case 43:
-                txtFieldHCSubCategory.setText("Problemer med mave og tarm");
-                break;
-            default:
-
+            case 1 -> txtFieldHCSubCategory.setText("Problemer med personlig pleje");
+            case 2 -> txtFieldHCSubCategory.setText("Problemer med daglige aktiviteter");
+            case 3 -> txtFieldHCSubCategory.setText("Problemer med mobilitet og bevægelse");
+            case 4 -> txtFieldHCSubCategory.setText("Problemer med væskeindtag");
+            case 5 -> txtFieldHCSubCategory.setText("Problemer med fødeindtag");
+            case 6 -> txtFieldHCSubCategory.setText("Uhensigtsmæssig vægtændring");
+            case 7 -> txtFieldHCSubCategory.setText("Problemer med overvægt");
+            case 8 -> txtFieldHCSubCategory.setText("Problemer med undervægt");
+            case 9 -> txtFieldHCSubCategory.setText("Problemer med kirurgisk sår");
+            case 10 -> txtFieldHCSubCategory.setText("Problemer med diabetisk sår");
+            case 11 -> txtFieldHCSubCategory.setText("Problemer med cancersår");
+            case 12 -> txtFieldHCSubCategory.setText("Problemer med tryksår");
+            case 13 -> txtFieldHCSubCategory.setText("Problemer med arterielt sår");
+            case 14 -> txtFieldHCSubCategory.setText("Problemer med venøst sår");
+            case 15 -> txtFieldHCSubCategory.setText("Problemer med blandingssår");
+            case 16 -> txtFieldHCSubCategory.setText("Problemer med traumesår");
+            case 17 -> txtFieldHCSubCategory.setText("Andre problemer med hud og slimhinder");
+            case 18 -> txtFieldHCSubCategory.setText("Problemer med kommunikation");
+            case 19 -> txtFieldHCSubCategory.setText("Problemer med socialt samvær");
+            case 20 -> txtFieldHCSubCategory.setText("Emotionelle problemer");
+            case 21 -> txtFieldHCSubCategory.setText("Problemer med misbrug");
+            case 22 -> txtFieldHCSubCategory.setText("Mentale problemer");
+            case 23 -> txtFieldHCSubCategory.setText("Respirationsproblemer");
+            case 24 -> txtFieldHCSubCategory.setText("Cirkulationsproblemer");
+            case 25 -> txtFieldHCSubCategory.setText("Problemer med seksualitet");
+            case 26 -> txtFieldHCSubCategory.setText("Akutte smerter");
+            case 27 -> txtFieldHCSubCategory.setText("Periodevis smerter");
+            case 28 -> txtFieldHCSubCategory.setText("Kroniske smerter");
+            case 29 -> txtFieldHCSubCategory.setText("Problemer med synssans");
+            case 30 -> txtFieldHCSubCategory.setText("Problemer med lugtesans");
+            case 31 -> txtFieldHCSubCategory.setText("Problemer med hørelse");
+            case 32 -> txtFieldHCSubCategory.setText("Problemer med smagssans");
+            case 33 -> txtFieldHCSubCategory.setText("Problemer med følesans");
+            case 34 -> txtFieldHCSubCategory.setText("Døgnrytmeproblemer");
+            case 35 -> txtFieldHCSubCategory.setText("Søvnproblemer");
+            case 36 -> txtFieldHCSubCategory.setText("Problemer med hukommelse");
+            case 37 -> txtFieldHCSubCategory.setText("Problemer med sygdomsindsigt");
+            case 38 -> txtFieldHCSubCategory.setText("Problemer med indsigt i behandlingsmål");
+            case 39 -> txtFieldHCSubCategory.setText("Kognitive problemer");
+            case 40 -> txtFieldHCSubCategory.setText("Problemer med vandladning");
+            case 41 -> txtFieldHCSubCategory.setText("Problemer med urininkontinens");
+            case 42 -> txtFieldHCSubCategory.setText("Problemer med afføringsinkontinens");
+            case 43 -> txtFieldHCSubCategory.setText("Problemer med mave og tarm");
+            default -> {
+            }
         }
 
         hBox2.setSpacing(25);
@@ -550,98 +433,39 @@ public class CitizenInfoViewController implements Initializable, Runnable {
         txtFieldFASubCategory.setMinWidth(250);
 
         int faSubCategoryId = faSubCategoryText.getSubCategoryId();
-        switch (faSubCategoryId){
-            case 1:
-                txtFieldFASubCategory.setText("Vaske sig");
-                break;
-            case 2:
-                txtFieldFASubCategory.setText("Gå på toilet");
-                break;
-            case 3:
-                txtFieldFASubCategory.setText("Kropspleje");
-                break;
-            case 4:
-                txtFieldFASubCategory.setText("Af- og påklædning");
-                break;
-            case 5:
-                txtFieldFASubCategory.setText("Spise");
-                break;
-            case 6:
-                txtFieldFASubCategory.setText("Drikke");
-                break;
-            case 7:
-                txtFieldFASubCategory.setText("Varetage egen sundhed");
-                break;
-            case 8:
-                txtFieldFASubCategory.setText("Fødeindtagelse");
-                break;
-            case 9:
-                txtFieldFASubCategory.setText("Udføre daglige rutiner");
-                break;
-            case 10:
-                txtFieldFASubCategory.setText("Skaffe sig varer og tjenesteydelser");
-                break;
-            case 11:
-                txtFieldFASubCategory.setText("Lave mad");
-                break;
-            case 12:
-                txtFieldFASubCategory.setText("Lave husligt arbejde");
-                break;
-            case 13:
-                txtFieldFASubCategory.setText("Ændre kropsstilling");
-                break;
-            case 14:
-                txtFieldFASubCategory.setText("Forflytte sig");
-                break;
-            case 15:
-                txtFieldFASubCategory.setText("Løfte og bære");
-                break;
-            case 16:
-                txtFieldFASubCategory.setText("Gå");
-                break;
-            case 17:
-                txtFieldFASubCategory.setText("Bevæge sig omkring");
-                break;
-            case 18:
-                txtFieldFASubCategory.setText("Færden i forskellige omgivelser");
-                break;
-            case 19:
-                txtFieldFASubCategory.setText("Bruge transportmidler");
-                break;
-            case 20:
-                txtFieldFASubCategory.setText("Færden i forskellige omgivelser");
-                break;
-            case 21:
-                txtFieldFASubCategory.setText("Udholdenhed");
-                break;
-            case 22:
-                txtFieldFASubCategory.setText("Muskelstyrke");
-                break;
-            case 23:
-                txtFieldFASubCategory.setText("Tilegne sig færdigheder");
-                break;
-            case 24:
-                txtFieldFASubCategory.setText("Problemløsning");
-                break;
-            case 25:
-                txtFieldFASubCategory.setText("Anvende kommunikationsudstyr- og teknikker");
-                break;
-            case 26:
-                txtFieldFASubCategory.setText("Orienteringsevne");
-                break;
-            case 27:
-                txtFieldFASubCategory.setText("Energi og handlekraft");
-                break;
-            case 28:
-                txtFieldFASubCategory.setText("Følelsesfunktioner");
-                break;
-            case 29:
-                txtFieldFASubCategory.setText("Overordnede kognitive funktioner");
-                break;
-            case 30:
-                txtFieldFASubCategory.setText("Have lønnet beskæftigelse");
-                break;
-            default:
+        switch (faSubCategoryId) {
+            case 1 -> txtFieldFASubCategory.setText("Vaske sig");
+            case 2 -> txtFieldFASubCategory.setText("Gå på toilet");
+            case 3 -> txtFieldFASubCategory.setText("Kropspleje");
+            case 4 -> txtFieldFASubCategory.setText("Af- og påklædning");
+            case 5 -> txtFieldFASubCategory.setText("Spise");
+            case 6 -> txtFieldFASubCategory.setText("Drikke");
+            case 7 -> txtFieldFASubCategory.setText("Varetage egen sundhed");
+            case 8 -> txtFieldFASubCategory.setText("Fødeindtagelse");
+            case 9 -> txtFieldFASubCategory.setText("Udføre daglige rutiner");
+            case 10 -> txtFieldFASubCategory.setText("Skaffe sig varer og tjenesteydelser");
+            case 11 -> txtFieldFASubCategory.setText("Lave mad");
+            case 12 -> txtFieldFASubCategory.setText("Lave husligt arbejde");
+            case 13 -> txtFieldFASubCategory.setText("Ændre kropsstilling");
+            case 14 -> txtFieldFASubCategory.setText("Forflytte sig");
+            case 15 -> txtFieldFASubCategory.setText("Løfte og bære");
+            case 16 -> txtFieldFASubCategory.setText("Gå");
+            case 17 -> txtFieldFASubCategory.setText("Bevæge sig omkring");
+            case 18 -> txtFieldFASubCategory.setText("Færden i forskellige omgivelser");
+            case 19 -> txtFieldFASubCategory.setText("Bruge transportmidler");
+            case 20 -> txtFieldFASubCategory.setText("Færden i forskellige omgivelser");
+            case 21 -> txtFieldFASubCategory.setText("Udholdenhed");
+            case 22 -> txtFieldFASubCategory.setText("Muskelstyrke");
+            case 23 -> txtFieldFASubCategory.setText("Tilegne sig færdigheder");
+            case 24 -> txtFieldFASubCategory.setText("Problemløsning");
+            case 25 -> txtFieldFASubCategory.setText("Anvende kommunikationsudstyr- og teknikker");
+            case 26 -> txtFieldFASubCategory.setText("Orienteringsevne");
+            case 27 -> txtFieldFASubCategory.setText("Energi og handlekraft");
+            case 28 -> txtFieldFASubCategory.setText("Følelsesfunktioner");
+            case 29 -> txtFieldFASubCategory.setText("Overordnede kognitive funktioner");
+            case 30 -> txtFieldFASubCategory.setText("Have lønnet beskæftigelse");
+            default -> {
+            }
         }
 
 

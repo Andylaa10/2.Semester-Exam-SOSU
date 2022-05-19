@@ -28,6 +28,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -377,13 +378,11 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
-    public void changeColorOnTV(HealthConditionSubCategoryText subCategoryText){
-        Callback<TableColumn<HealthConditionSubCategory, String>, TableCell<HealthConditionSubCategory, String>> cellFactory
-                =
-                new Callback<TableColumn<HealthConditionSubCategory, String>, TableCell<HealthConditionSubCategory, String>>() {
+    public void changeColorOnTV(HealthConditionSubCategoryText subCategoryText) {
+        Callback<TableColumn<HealthConditionSubCategory, String>, TableCell<HealthConditionSubCategory, String>> cellFactory = new Callback<>() {
                     @Override
                     public TableCell<HealthConditionSubCategory, String> call(final TableColumn<HealthConditionSubCategory, String> param) {
-                        final TableCell<HealthConditionSubCategory, String> cell = new TableCell<HealthConditionSubCategory, String>() {
+                        return new TableCell<>() {
 
                             @Override
                             public void updateItem(String item, boolean empty) {
@@ -394,24 +393,23 @@ public class StudentViewController implements IController, Initializable {
                                 } else {
                                     setText(item);
                                     TableRow<HealthConditionSubCategory> row = getTableRow();
-                                    if(subCategoryText == null) {
+                                    if (subCategoryText == null) {
                                         row.setStyle("");
-                                    }else if (row.getItem().getCondition(subCategoryText) == 0 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
+                                    } else if (row.getItem().getCondition(subCategoryText) == 0 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
                                         row.getStyleClass().clear();
                                         row.setStyle("-fx-background-color: red");
-                                    }else if (row.getItem().getCondition(subCategoryText) == 1 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())){
+                                    } else if (row.getItem().getCondition(subCategoryText) == 1 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
                                         row.getStyleClass().clear();
                                         row.setStyle("-fx-background-color: yellow");
-                                    }else if (row.getItem().getCondition(subCategoryText) == 2 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())){
+                                    } else if (row.getItem().getCondition(subCategoryText) == 2 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
                                         row.getStyleClass().clear();
                                         row.setStyle("-fx-background-color: green");
-                                    }else{
+                                    } else {
                                         row.setStyle("");
                                     }
                                 }
                             }
                         };
-                        return cell;
                     }
                 };
         tcSubCategoriesName.setCellFactory(cellFactory);
@@ -537,7 +535,7 @@ public class StudentViewController implements IController, Initializable {
         comboBoxCitizen.setItems(allCitizens);
     }
 
-    public void setCitizenComboBoxItems(Citizen citizen){
+    public void setCitizenComboBoxItems(Citizen citizen) {
         txtFieldCitizenID.setText(String.valueOf(citizen.getId()));
         txtFieldSchoolID.setText(String.valueOf(citizen.getSchoolID()));
 
@@ -729,6 +727,7 @@ public class StudentViewController implements IController, Initializable {
             if (newValue != null) {
                 this.selectedHealthCondition = newValue;
                 seeSubCategoriesOnCategory();
+                clearHealthConditionTxtField();
             }
         }));
     }
@@ -772,10 +771,10 @@ public class StudentViewController implements IController, Initializable {
      */
     @FXML
     private void onActionGeneralInfoSave() throws Exception {
-        if(selectedCitizenOnComboBox == null){
+        if (selectedCitizenOnComboBox == null) {
             ErrorHandlerController.createWarning("Select Citizen", "Remember to select a citizen from the Combobox");
             clearHealthCondition();
-        }else{
+        } else {
             int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
             String citizenFirstName = txtFieldFirstName.getText();
             String citizenLastName = txtFieldLastName.getText();
@@ -805,10 +804,10 @@ public class StudentViewController implements IController, Initializable {
             String equipmentAids = txtAreaEquipmentAids.getText();
             String homeLayout = txtAreaHomeLayout.getText();
 
-            if(txtFieldGeneralInfoId.getText().isEmpty()){
+            if (txtFieldGeneralInfoId.getText().isEmpty()) {
                 dataModelFacade.createGeneralInformation(citizenId, coping, motivation, resources, roles, habits, educationAndJob,
                         lifeStory, network, healthInformation, equipmentAids, homeLayout);
-            }else{
+            } else {
                 int generalInfoId = Integer.parseInt(txtFieldGeneralInfoId.getText());
                 GeneralInformation generalInformation = new GeneralInformation(generalInfoId, coping, motivation, resources, roles, habits, educationAndJob,
                         lifeStory, network, healthInformation, equipmentAids, homeLayout);
@@ -873,50 +872,28 @@ public class StudentViewController implements IController, Initializable {
             if (functionalAbilitySubCategoryText != null) {
 
                 int abilityCurrentLevel = functionalAbilitySubCategoryText.getAbilityNow();
-                switch (abilityCurrentLevel){
-                    case 0:
-                        comboBoxCurrentLevel.getSelectionModel().select(0);
-                        break;
-                    case 1:
-                        comboBoxCurrentLevel.getSelectionModel().select(1);
-                        break;
-                    case 2:
-                        comboBoxCurrentLevel.getSelectionModel().select(2);
-                        break;
-                    case 3:
-                        comboBoxCurrentLevel.getSelectionModel().select(3);
-                        break;
-                    case 4:
-                        comboBoxCurrentLevel.getSelectionModel().select(4);
-                        break;
-                    case 9:
-                        comboBoxCurrentLevel.getSelectionModel().select(5);
-                        break;
-                    default:
+                switch (abilityCurrentLevel) {
+                    case 0 -> comboBoxCurrentLevel.getSelectionModel().select(0);
+                    case 1 -> comboBoxCurrentLevel.getSelectionModel().select(1);
+                    case 2 -> comboBoxCurrentLevel.getSelectionModel().select(2);
+                    case 3 -> comboBoxCurrentLevel.getSelectionModel().select(3);
+                    case 4 -> comboBoxCurrentLevel.getSelectionModel().select(4);
+                    case 9 -> comboBoxCurrentLevel.getSelectionModel().select(5);
+                    default -> {
+                    }
                 }
 
 
                 int abilityExpectedLevel = functionalAbilitySubCategoryText.getAbilityExpected();
-                switch (abilityExpectedLevel){
-                    case 0:
-                        comboBoxExpectedLevel.getSelectionModel().select(0);
-                        break;
-                    case 1:
-                        comboBoxExpectedLevel.getSelectionModel().select(1);
-                        break;
-                    case 2:
-                        comboBoxExpectedLevel.getSelectionModel().select(2);
-                        break;
-                    case 3:
-                        comboBoxExpectedLevel.getSelectionModel().select(3);
-                        break;
-                    case 4:
-                        comboBoxExpectedLevel.getSelectionModel().select(4);
-                        break;
-                    case 9:
-                        comboBoxExpectedLevel.getSelectionModel().select(5);
-                        break;
-                    default:
+                switch (abilityExpectedLevel) {
+                    case 0 -> comboBoxExpectedLevel.getSelectionModel().select(0);
+                    case 1 -> comboBoxExpectedLevel.getSelectionModel().select(1);
+                    case 2 -> comboBoxExpectedLevel.getSelectionModel().select(2);
+                    case 3 -> comboBoxExpectedLevel.getSelectionModel().select(3);
+                    case 4 -> comboBoxExpectedLevel.getSelectionModel().select(4);
+                    case 9 -> comboBoxExpectedLevel.getSelectionModel().select(5);
+                    default -> {
+                    }
                 }
 
                 txtAreaNoteOnCondition.setText(functionalAbilitySubCategoryText.getAbilityNote());
@@ -950,7 +927,7 @@ public class StudentViewController implements IController, Initializable {
         txtAreaCitizenGoals.clear();
     }
 
-    private void clearHealthCondition(){
+    private void clearHealthCondition() {
         txtAreaCoping.clear();
         txtAreaMotivation.clear();
         txtAreaResources.clear();
@@ -1052,7 +1029,7 @@ public class StudentViewController implements IController, Initializable {
                     dataModelFacade.editSubcategory(subCategoryText);
                     tcSubCategoriesName.setStyle("");
                     tcSubCategoriesName.setStyle("-fx-text-fill: green");
-                }else{
+                } else {
                     tcSubCategoriesName.setStyle("");
                 }
             }
@@ -1366,7 +1343,6 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * Loads the tableview for the citizens, when search is pressed.
-     * @param searchData
      */
     private void searchTableViewLoad(ObservableList<Citizen> searchData) {
         tvCitizens.setItems(getSearchData());
