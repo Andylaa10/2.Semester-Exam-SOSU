@@ -33,6 +33,7 @@ import java.util.ResourceBundle;
 public class AdminViewController implements Initializable, IController {
 
 
+
     /**
      * Top Pane
      */
@@ -198,6 +199,8 @@ public class AdminViewController implements Initializable, IController {
     private TableView<Citizen> tvCreatedCitizens;
     @FXML
     private TableColumn<Citizen, Integer> tcCreatedCitizenID;
+    @FXML
+    private TableColumn<Citizen, Integer> tcCreatedCitizenSchoolId;
     @FXML
     private TableColumn<Citizen, String> tcCreatedCitizenFirstName;
     @FXML
@@ -1314,7 +1317,7 @@ public class AdminViewController implements Initializable, IController {
             txtFieldSearchCitizens.clear();
         }
         try {
-            searchData = FXCollections.observableList(dataModelFacade.searchCitizen(txtFieldSearchCitizens.getText()));
+            searchData = FXCollections.observableList(dataModelFacade.searchCitizen(txtFieldSearchCitizens.getText(), Integer.parseInt(txtFieldSchoolID.getText())));
             searchTableViewLoad(searchData);
         } catch (Exception e) {
             e.printStackTrace();
@@ -1326,7 +1329,7 @@ public class AdminViewController implements Initializable, IController {
      * @param searchData
      */
     private void searchTableViewLoad(ObservableList<Citizen> searchData) {
-        tvCitizens.setItems(getSearchData());
+        tvCreatedCitizens.setItems(getSearchData());
     }
 
     /**

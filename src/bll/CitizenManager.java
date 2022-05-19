@@ -26,6 +26,10 @@ public class CitizenManager {
         return citizenDAO.getCitizens();
     }
 
+    public List<Citizen> getCitizensAndSchool(int schoolId) throws SQLException {
+        return citizenDAO.getCitizenAndSchool(schoolId);
+    }
+
     public Citizen getInfoOnCitizen(int citizenId) throws SQLException {
         return citizenDAO.getInfoOnCitizen(citizenId);
     }
@@ -55,8 +59,8 @@ public class CitizenManager {
         citizenDAO.editCitizen(citizen);
     }
 
-    public List<Citizen> searchCitizen(String query) throws SQLException {
-        List<Citizen> allCitizens = getCitizens();
+    public List<Citizen> searchCitizen(String query, int schoolId) throws SQLException {
+        List<Citizen> allCitizens = getCitizensAndSchool(schoolId);
         List<Citizen> searchResult = citizenSearcher.searchCitizen(allCitizens, query);
         return searchResult;
     }

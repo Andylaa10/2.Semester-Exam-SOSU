@@ -96,6 +96,14 @@ public class Citizen {
 
     @Override
     public String toString() {
-        return getFirstName() + " " + getLastName() + " - " + getSSN();
+        return "Citizen{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", SSN='" + SSN + '\'' +
+                ", address='" + address + '\'' +
+                ", sex='" + sex + '\'' +
+                ", schoolID=" + schoolID +
+                '}';
     }
 }

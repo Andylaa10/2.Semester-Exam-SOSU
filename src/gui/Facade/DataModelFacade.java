@@ -257,6 +257,10 @@ public class DataModelFacade {
         return citizenModel.getCitizens();
     }
 
+    public List<Citizen> getCitizensAndSchool(int schoolId) throws SQLException {
+        return citizenModel.getCitizensAndSchool(schoolId);
+    }
+
     public Citizen getInfoOnCitizen(int citizenId) throws SQLException {
         return citizenModel.getInfoOnCitizen(citizenId);
     }
@@ -411,10 +415,10 @@ public class DataModelFacade {
         observationNoteModel.deleteObservationNote(id);
     }
 
-    public List<Citizen> searchCitizen(String query) throws SQLException {
+    public List<Citizen> searchCitizen(String query, int schoolId) throws SQLException {
         List<Citizen> searchResults = null;
 
-        searchResults = citizenModel.searchCitizen(query);
+        searchResults = citizenModel.searchCitizen(query, schoolId);
         citizensToBeViewed.clear();
         citizensToBeViewed.addAll(searchResults);
 

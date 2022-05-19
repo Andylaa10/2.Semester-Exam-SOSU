@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -134,7 +135,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0" visible="false">
+      <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0">
          <children>
             <TableView fx:id="tvCases" layoutX="606.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0" style="-fx-background-color: transparent;">
               <columns>
@@ -166,9 +167,15 @@
             </Label>
             <Button fx:id="btnBack" layoutX="982.0" layoutY="577.0" mnemonicParsing="false" onAction="#btnClickBack" prefHeight="27.0" prefWidth="150.0" text="Tilbage" />
             <Label alignment="CENTER_RIGHT" layoutX="746.0" layoutY="582.0" text="Dobbeltklik for at se sagens informationer" />
+            <TextField fx:id="txtFieldSearchCitizens" layoutX="385.0" layoutY="39.0" onAction="#onActionSearchCitizens" />
+            <Button fx:id="btnSearchCitizens" layoutX="535.0" layoutY="39.0" mnemonicParsing="false" onAction="#onActionSearchCitizens" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="🔍">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0">
+      <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0" visible="false">
          <children>
             <Pane prefHeight="42.0" prefWidth="1158.0" style="-fx-background-color: transparent;">
                <children>
