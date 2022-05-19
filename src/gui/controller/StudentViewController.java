@@ -867,32 +867,51 @@ public class StudentViewController implements IController, Initializable {
 
             if (functionalAbilitySubCategoryText != null) {
 
-                if (functionalAbilitySubCategoryText.getAbilityNow() == 0) {
-                    comboBoxCurrentLevel.getSelectionModel().select(0);
-                } else if (functionalAbilitySubCategoryText.getAbilityNow() == 1) {
-                    comboBoxCurrentLevel.getSelectionModel().select(1);
-                } else if (functionalAbilitySubCategoryText.getAbilityNow() == 2) {
-                    comboBoxCurrentLevel.getSelectionModel().select(2);
-                } else if (functionalAbilitySubCategoryText.getAbilityNow() == 3) {
-                    comboBoxCurrentLevel.getSelectionModel().select(3);
-                } else if (functionalAbilitySubCategoryText.getAbilityNow() == 4) {
-                    comboBoxCurrentLevel.getSelectionModel().select(4);
-                } else if (functionalAbilitySubCategoryText.getAbilityNow() == 9) {
-                    comboBoxCurrentLevel.getSelectionModel().select(5);
+                int abilityCurrentLevel = functionalAbilitySubCategoryText.getAbilityNow();
+                switch (abilityCurrentLevel){
+                    case 0:
+                        comboBoxCurrentLevel.getSelectionModel().select(0);
+                        break;
+                    case 1:
+                        comboBoxCurrentLevel.getSelectionModel().select(1);
+                        break;
+                    case 2:
+                        comboBoxCurrentLevel.getSelectionModel().select(2);
+                        break;
+                    case 3:
+                        comboBoxCurrentLevel.getSelectionModel().select(3);
+                        break;
+                    case 4:
+                        comboBoxCurrentLevel.getSelectionModel().select(4);
+                        break;
+                    case 9:
+                        comboBoxCurrentLevel.getSelectionModel().select(5);
+                        break;
+                    default:
                 }
 
-                if (functionalAbilitySubCategoryText.getAbilityExpected() == 0) {
-                    comboBoxExpectedLevel.getSelectionModel().select(0);
-                } else if (functionalAbilitySubCategoryText.getAbilityExpected() == 1) {
-                    comboBoxExpectedLevel.getSelectionModel().select(1);
-                } else if (functionalAbilitySubCategoryText.getAbilityExpected() == 2) {
-                    comboBoxExpectedLevel.getSelectionModel().select(2);
-                } else if (functionalAbilitySubCategoryText.getAbilityExpected() == 3) {
-                    comboBoxExpectedLevel.getSelectionModel().select(3);
-                } else if (functionalAbilitySubCategoryText.getAbilityExpected() == 4) {
-                    comboBoxExpectedLevel.getSelectionModel().select(4);
-                } else if (functionalAbilitySubCategoryText.getAbilityExpected() == 9) {
-                    comboBoxExpectedLevel.getSelectionModel().select(5);
+
+                int abilityExpectedLevel = functionalAbilitySubCategoryText.getAbilityExpected();
+                switch (abilityExpectedLevel){
+                    case 0:
+                        comboBoxExpectedLevel.getSelectionModel().select(0);
+                        break;
+                    case 1:
+                        comboBoxExpectedLevel.getSelectionModel().select(1);
+                        break;
+                    case 2:
+                        comboBoxExpectedLevel.getSelectionModel().select(2);
+                        break;
+                    case 3:
+                        comboBoxExpectedLevel.getSelectionModel().select(3);
+                        break;
+                    case 4:
+                        comboBoxExpectedLevel.getSelectionModel().select(4);
+                        break;
+                    case 9:
+                        comboBoxExpectedLevel.getSelectionModel().select(5);
+                        break;
+                    default:
                 }
 
                 txtAreaNoteOnCondition.setText(functionalAbilitySubCategoryText.getAbilityNote());
