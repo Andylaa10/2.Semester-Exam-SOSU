@@ -38,6 +38,8 @@ import java.util.ResourceBundle;
 
 public class StudentViewController implements IController, Initializable {
 
+    public TextField txtFieldSearchCitizens;
+    public Button btnSearchCitizens;
     /**
      * General info on Citizen pane
      */
@@ -247,6 +249,9 @@ public class StudentViewController implements IController, Initializable {
     private EditCaseViewController editCaseViewController;
     private ObservationNoteViewController observationNoteViewController;
     private ToggleGroup group;
+
+    private boolean hasSearched = true;
+    private ObservableList<Citizen> searchData = FXCollections.observableArrayList();
 
     public StudentViewController() throws IOException, SQLException {
         this.dataModelFacade = new DataModelFacade();
@@ -1339,5 +1344,38 @@ public class StudentViewController implements IController, Initializable {
     public void btnClickClose(ActionEvent actionEvent) {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void onActionSearchCitizens() {
+        if (hasSearched && !txtFieldSearchCitizens.getText().equals("")) {
+            btnSearchCitizens.setText("X");
+            hasSearched = false;
+        } else {
+            btnSearchCitizens.setText("🔍");
+            hasSearched = true;
+            txtFieldSearchCitizens.clear();
+        }
+        try {
+            searchData = FXCollections.observableList(dataModelFacade.searchCitizen(txtFieldSearchCitizens.getText(), Integer.parseInt(txtFieldSchoolID.getText())));
+            searchTableViewLoad(searchData);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Loads the tableview for the citizens, when search is pressed.
+     * @param searchData
+     */
+    private void searchTableViewLoad(ObservableList<Citizen> searchData) {
+        tvCitizens.setItems(getSearchData());
+    }
+
+    /**
+     * @return searchData;
+     */
+    private ObservableList<Citizen> getSearchData() {
+        return searchData;
     }
 }
