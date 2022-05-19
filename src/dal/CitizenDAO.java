@@ -35,8 +35,38 @@ public class CitizenDAO {
                 String ssn = resultset.getString("SSN");
                 String address = resultset.getString("address");
                 String sex = resultset.getString("sex");
+                int schoolId = resultset.getInt("schoolId");
 
-                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex);
+                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex, schoolId);
+                allCitizens.add(citizen);
+            }
+
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        }
+        return allCitizens;
+    }
+
+    public List<Citizen> getCitizenAndSchool(int schoolId) throws SQLException {
+        ArrayList<Citizen> allCitizens = new ArrayList<>();
+
+        try (Connection connection = connector.getConnection()) {
+            String sql = "SELECT * FROM Citizen WHERE schoolId = ?;";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, schoolId);
+            ResultSet resultset = preparedStatement.executeQuery();
+
+            while (resultset.next()) {
+                int id = resultset.getInt("citizenID");
+                String firstName = resultset.getString("firstName");
+                String lastName = resultset.getString("lastName");
+                String ssn = resultset.getString("SSN");
+                String address = resultset.getString("address");
+                String sex = resultset.getString("sex");
+                int schoolID = resultset.getInt("schoolId");
+
+                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex, schoolID);
                 allCitizens.add(citizen);
             }
 
@@ -147,8 +177,8 @@ public class CitizenDAO {
      * Main method used for testing this DAO class
      */
     public static void main(String[] args) throws Exception {
-
         CitizenDAO citizenDAO = new CitizenDAO();
+        /**
         citizenDAO.createCitizen("Andy Lam", "Nguyen", "040100-1111", "Golfvej 8", "Male", 1);
         citizenDAO.createCitizen("Kristian", "Hollænder", "140396-2222", "Hollændervej 4", "Male", 1);
         citizenDAO.createCitizen("Marcus", "Iversen", "271100-3333", "Skolegade 8", "Male", 1);
@@ -157,7 +187,7 @@ public class CitizenDAO {
         citizenDAO.createCitizen("Peter", "Stegger", "260869-6666", "Hackervej 69", "Male", 2);
         citizenDAO.createCitizen("Trine", "Thomsen", "190974-7777", "ITO Vej 12", "Female", 2);
         citizenDAO.createCitizen("Jeppe", "Led", "221067-8888", "Designvej 96", "Male", 2);
-
+        */
         System.out.println(citizenDAO.getCitizens());
 
     }

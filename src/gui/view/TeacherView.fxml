@@ -291,6 +291,12 @@
                   <ColorAdjust brightness="0.3" />
                </effect>
             </Button>
+            <TextField fx:id="txtFieldSearchCitizens" layoutX="422.0" layoutY="1.0" onAction="#onActionSearchCitizens" />
+            <Button fx:id="btnSearchCitizens" layoutX="580.0" layoutY="1.0" mnemonicParsing="false" onAction="#onActionSearchCitizens" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="🔍">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
             <Label layoutX="420.0" layoutY="26.0" text="Borgere">
                <font>
                   <Font size="22.0" />
@@ -299,10 +305,10 @@
             <TableView fx:id="tvCreatedCitizens" layoutX="325.0" layoutY="70.0" prefHeight="340.0" prefWidth="266.0" style="-fx-background-color: transparent;">
                <columns>
                   <TableColumn fx:id="tcCreatedCitizenID" prefWidth="75.0" text="ID" visible="false" />
+                  <TableColumn fx:id="tcCreatedCitizenSchoolId" prefWidth="108.800048828125" text="SchoolID" visible="false" />
                   <TableColumn fx:id="tcCreatedCitizenFirstName" prefWidth="75.0" text="Fornavn" />
                   <TableColumn fx:id="tcCreatedCitizenLastName" prefWidth="79.9998779296875" text="Efternavn" />
                   <TableColumn fx:id="tcCreatedCitizenSSN" prefWidth="108.800048828125" text="CPR-Nummer" />
-                  <TableColumn fx:id="tcCreatedCitizenSchoolId" prefWidth="108.800048828125" text="SchoolID" visible="false" />
                </columns>
             </TableView>
             <Label layoutX="421.0" layoutY="410.0" text="Dobbeltklik for at åbne borger">
