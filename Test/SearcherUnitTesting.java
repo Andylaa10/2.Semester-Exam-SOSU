@@ -38,7 +38,7 @@ class SearcherUnitTesting {
         Assertions.assertEquals(expected, actual);
     }
 
-    @DisplayName("Test event search on citizen ssn")
+    @DisplayName("Test citizen search on citizen ssn")
     @Test
     void locationSearch(){
         //Triple A pattern
