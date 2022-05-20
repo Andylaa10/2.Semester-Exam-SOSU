@@ -5,6 +5,7 @@ import be.enums.UserType;
 import bll.utilities.BCrypt.BCrypt;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class UserDAO {
 
     /**
      * Making a students list, connecting to the database and adding the results to our ArrayList.
+     *
      * @return a list of students or an empty list of students.
      */
     public List<User> getStudents() throws SQLException {
@@ -50,6 +52,7 @@ public class UserDAO {
 
     /**
      * Making a teacher list, connecting to the database and adding the results to our ArrayList.
+     *
      * @return a list of teachers or an empty list of teachers.
      */
     public List<User> getTeachers() throws SQLException {
@@ -79,6 +82,7 @@ public class UserDAO {
 
     /**
      * Making an admin list, connecting to the database and adding the results to our ArrayList.
+     *
      * @return a list of admins or an empty list of admins.
      */
     public List<User> getAdmins() throws SQLException {
@@ -131,7 +135,7 @@ public class UserDAO {
     /**
      * Creating a new student, by inserting first name, last name, username, password and type of user.
      */
-    public User createStudent (String firstname, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+    public User createStudent(String firstname, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "INSERT INTO Login (firstName, lastName, username, password, userType, schoolId) VALUES (?,?,?,?,?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -140,7 +144,7 @@ public class UserDAO {
                 preparedStatement.setString(3, username);
                 preparedStatement.setString(4, password);
                 preparedStatement.setString(5, String.valueOf(userType.STUDENT));
-                preparedStatement.setInt(6,schoolId);
+                preparedStatement.setInt(6, schoolId);
                 preparedStatement.execute();
 
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -160,7 +164,7 @@ public class UserDAO {
     /**
      * Creating a new user, type teacher by inserting first name, last name, username, password and type of user.
      */
-    public User createTeacher (String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+    public User createTeacher(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "INSERT INTO Login (firstName, lastName, username, password, userType, schoolId) VALUES (?,?,?,?,?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -189,7 +193,7 @@ public class UserDAO {
     /**
      * Creating a new admin, type teacher by inserting first name, last name, username, password and type of user.
      */
-    public User createAdmin (String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+    public User createAdmin(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "INSERT INTO Login (firstName, lastName, username, password, userType, schoolId) VALUES (?,?,?,?,?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -324,13 +328,13 @@ public class UserDAO {
      */
     public User userLogin(String user, String pass, int schoolId) throws SQLException {
         String sql = "SELECT * FROM Login WHERE username =? AND password =? AND schoolId=?;";
-        try(Connection connection = databaseConnector.getConnection()){
+        try (Connection connection = databaseConnector.getConnection()) {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, user);
             st.setString(2, pass);
-            st.setInt(3,schoolId);
+            st.setInt(3, schoolId);
             ResultSet rs = st.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 int id = rs.getInt("LoginID");
                 String firstName = rs.getString("firstName");
                 String lastName = rs.getString("lastName");
@@ -338,13 +342,13 @@ public class UserDAO {
                 String password = rs.getString("password");
                 UserType userType = UserType.valueOf(rs.getString("userType"));
                 int schoolID = rs.getInt("schoolId");
-                if (userType == UserType.STUDENT){
+                if (userType == UserType.STUDENT) {
                     return new User(id, firstName, lastName, username, password, userType, schoolID);
-                } else if (userType == UserType.TEACHER){
+                } else if (userType == UserType.TEACHER) {
                     return new User(id, firstName, lastName, username, password, userType, schoolID);
                 } else if (userType == UserType.ADMINISTRATOR) {
                     return new User(id, firstName, lastName, username, password, userType, schoolID);
-                }else {
+                } else {
                     return null;
                 }
             }
@@ -356,6 +360,7 @@ public class UserDAO {
 
     /**
      * Making a students list, connecting to the database and adding the results to our ArrayList.
+     *
      * @return a list of students or an empty list of students.
      */
     public User getHashedPassword(String userName, String password, int schoolId) throws SQLException {
@@ -377,10 +382,10 @@ public class UserDAO {
                 String hashedPassword = resultset.getString("password");
 
 
-                if(BCrypt.checkpw(password, hashedPassword)){
-                    User user = new User(id, firstName, lastName, username,  userType, schoolId);
+                if (BCrypt.checkpw(password, hashedPassword)) {
+                    User user = new User(id, firstName, lastName, username, userType, schoolId);
                     return user;
-                }else{
+                } else {
                     System.out.println("VERY SAD");
                 }
 

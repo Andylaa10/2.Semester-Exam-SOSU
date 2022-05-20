@@ -3,6 +3,7 @@ package bll;
 import be.User;
 import be.enums.UserType;
 import dal.UserDAO;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -10,12 +11,14 @@ import java.util.List;
 public class UserManager {
 
     private UserDAO userDAO;
+
     public UserManager() throws IOException {
         userDAO = new UserDAO();
     }
 
     /**
      * Get a list of student using the getStudents method from userDAO
+     *
      * @return
      * @throws SQLException
      */
@@ -29,6 +32,7 @@ public class UserManager {
 
     /**
      * Get a list of teachers using the getTeachers method from userDAO
+     *
      * @return
      * @throws SQLException
      */
@@ -38,6 +42,7 @@ public class UserManager {
 
     /**
      * Get a list of admins using the getAdmins method from userDAO
+     *
      * @return
      * @throws SQLException
      */
@@ -73,6 +78,7 @@ public class UserManager {
 
     /**
      * Deletes a student using the deleteStudent method from userDAO
+     *
      * @param id
      * @param userType
      */
@@ -82,6 +88,7 @@ public class UserManager {
 
     /**
      * Deletes a teacher using the deleteTeacher method from userDAO
+     *
      * @param id
      * @param userType
      */
@@ -91,6 +98,7 @@ public class UserManager {
 
     /**
      * Deletes an admin using the deleteAdmin method from userDAO
+     *
      * @param id
      * @param userType
      */
@@ -100,6 +108,7 @@ public class UserManager {
 
     /**
      * Edits a student using the editStudent method from userDAO
+     *
      * @param student
      * @throws Exception
      */
@@ -109,6 +118,7 @@ public class UserManager {
 
     /**
      * Edits a teacher using the editTeacher method from userDAO
+     *
      * @param teacher
      * @throws Exception
      */
@@ -118,6 +128,7 @@ public class UserManager {
 
     /**
      * Edits an admin using the editAdmin method from userDAO
+     *
      * @param admin
      * @throws Exception
      */
@@ -127,6 +138,7 @@ public class UserManager {
 
     /**
      * Gets the user userLogin using the userLogin method from userDAO
+     *
      * @param username
      * @param password
      * @return

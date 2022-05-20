@@ -2,6 +2,7 @@ package gui.model;
 
 import be.GeneralInformation;
 import bll.GeneralInformationManager;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;

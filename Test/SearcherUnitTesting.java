@@ -11,7 +11,7 @@ class SearcherUnitTesting {
 
     @DisplayName("Test user search on user name")
     @Test
-    void userSearch(){
+    void userSearch() {
         //Triple A pattern
         //Arrange - set up our test object etc.
         //Make a list of Users
@@ -40,7 +40,7 @@ class SearcherUnitTesting {
 
     @DisplayName("Test citizen search on citizen ssn")
     @Test
-    void locationSearch(){
+    void locationSearch() {
         //Triple A pattern
         //Arrange - set up our test object etc.
         //Make a list of Events

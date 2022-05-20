@@ -3,6 +3,7 @@ package gui.model;
 import be.User;
 import be.enums.UserType;
 import bll.UserManager;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -24,6 +25,7 @@ public class UserModel {
 
     /**
      * Gets a user login with the hashed password, using the getHashedPassword method from userManager.
+     *
      * @param userName
      * @param password
      * @param schoolId
@@ -50,6 +52,7 @@ public class UserModel {
 
     /**
      * Get a list of userNames using the getUsernames method from the userManager.
+     *
      * @return
      * @throws SQLException
      */

@@ -9,7 +9,6 @@ public class CitizenSearcher {
 
     /**
      * Method for searching an event with the searchCitizen button.
-     *
      */
     public List<Citizen> searchCitizen(List<Citizen> searchBase, String query) {
         List<Citizen> searchResult = new ArrayList<>();
@@ -33,7 +32,6 @@ public class CitizenSearcher {
     private boolean compareToCitizenSSN(String query, Citizen citizen) {
         return citizen.getSSN().toLowerCase().contains(query.toLowerCase());
     }
-
 
 
 }

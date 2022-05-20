@@ -33,11 +33,11 @@ public class DataModelFacade {
     private static DataModelFacade instance = null;
 
 
-
     /**
      * Facade pattern that collects all methods from the model layer, put together to make it easier for coding in the
      * controller layer. You now only have to instantiate one model (dataModelFacade) instead of instantiating all 9
      * models.
+     *
      * @throws IOException
      * @throws SQLException
      */
@@ -56,6 +56,7 @@ public class DataModelFacade {
 
     /**
      * Singleton pattern
+     *
      * @return DataModelFacade called instance
      */
     public static DataModelFacade getInstance() throws IOException, SQLException {
@@ -188,15 +189,15 @@ public class DataModelFacade {
         return superAdminModel.getSchools();
     }
 
-    public List<User> getAssignedTeachers(int schoolId) throws SQLException{
+    public List<User> getAssignedTeachers(int schoolId) throws SQLException {
         return superAdminModel.getAssignedTeachers(schoolId);
     }
 
-    public List<User> getAssignedAdmins(int schoolId) throws SQLException{
+    public List<User> getAssignedAdmins(int schoolId) throws SQLException {
         return superAdminModel.getAssignedAdmins(schoolId);
     }
 
-    public List<User> getAssignedStudents(int schoolId) throws SQLException{
+    public List<User> getAssignedStudents(int schoolId) throws SQLException {
         return superAdminModel.getAssignedStudents(schoolId);
     }
 
@@ -253,6 +254,7 @@ public class DataModelFacade {
     public void assignCaseToCitizen(int caseId, int citizenId) throws SQLException {
         caseModel.assignCaseToCitizen(caseId, citizenId);
     }
+
     public void deleteCaseFromCitizen(int caseId, int citizenId) throws SQLException {
         caseModel.deleteCaseFromCitizen(caseId, citizenId);
     }
@@ -322,7 +324,6 @@ public class DataModelFacade {
     }
 
 
-
     public GeneralInformation createGeneralInformation(int citizenId, String coping, String motivation, String resources, String roles,
                                                        String habits, String educationAndJob, String lifestory,
                                                        String network, String healthInformation, String equipmentAids,
@@ -357,7 +358,7 @@ public class DataModelFacade {
         healthConditionsModel.editSubcategory(subCategoryText);
     }
 
-    public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws Exception{
+    public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws Exception {
         return healthConditionsModel.getHealthConditionData(citizenId, subCategoryId);
     }
 
@@ -377,7 +378,7 @@ public class DataModelFacade {
         return functionalAbilitiesModel.getInfoOnSubCategories(citizenId);
     }
 
-    public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
+    public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException {
         return functionalAbilitiesModel.getFunctionalAbilitySubCategories(functionalAbilitySubCategoryId);
     }
 
@@ -386,7 +387,7 @@ public class DataModelFacade {
     }
 
     public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) throws SQLException {
-        return functionalAbilitiesModel.createFunctionalAbility(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, citizenPerformance,citizenMeaningOfPerformance, abilityNoteCitizen);
+        return functionalAbilitiesModel.createFunctionalAbility(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, citizenPerformance, citizenMeaningOfPerformance, abilityNoteCitizen);
     }
 
     public void editAbilities(FunctionalAbility functionalAbility) throws SQLException {

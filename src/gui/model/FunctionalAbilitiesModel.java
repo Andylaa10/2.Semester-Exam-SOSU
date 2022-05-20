@@ -20,6 +20,7 @@ public class FunctionalAbilitiesModel {
 
     /**
      * Gets a list of functionalAbilities using the getFunctionalAbilities method from functionalAbilityManager.
+     *
      * @return
      * @throws SQLException
      */
@@ -29,6 +30,7 @@ public class FunctionalAbilitiesModel {
 
     /**
      * Gets a single info from the subcategory using the getInfoOnSubCategory method from functionalAbilityManager.
+     *
      * @param citizenId
      * @param functionalAbilitySubCategoryId
      * @return
@@ -50,16 +52,18 @@ public class FunctionalAbilitiesModel {
 
     /**
      * Gets a list of subCategories using the getFunctionalAbilitySubCategories method from functionalAbilityManager.
+     *
      * @param functionalAbilitySubCategoryId
      * @return
      * @throws SQLException
      */
-    public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
+    public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException {
         return functionalAbilityManager.getFunctionalAbilitySubCategories(functionalAbilitySubCategoryId);
     }
 
     /**
      * Gets subCategory Data using the getSubcategoryData method from functionalAbilityManager.
+     *
      * @param citizenId
      * @param functionalAbilitySubCategoryId
      * @return
@@ -71,6 +75,7 @@ public class FunctionalAbilitiesModel {
 
     /**
      * Creates a functionalAbility using the createFunctionalAbility from the functionalAbilityManager.
+     *
      * @param citizenId
      * @param functionalAbilitySubCategoryId
      * @param abilityNow
@@ -83,11 +88,12 @@ public class FunctionalAbilitiesModel {
      * @throws SQLException
      */
     public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) throws SQLException {
-        return functionalAbilityManager.createFunctionalAbility(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, citizenPerformance,citizenMeaningOfPerformance, abilityNoteCitizen);
+        return functionalAbilityManager.createFunctionalAbility(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, citizenPerformance, citizenMeaningOfPerformance, abilityNoteCitizen);
     }
 
     /**
      * Edits a functionalAbility using the editAbilities from the functionalAbilityManager.
+     *
      * @param functionalAbility
      * @throws SQLException
      */
@@ -97,6 +103,7 @@ public class FunctionalAbilitiesModel {
 
     /**
      * Deletes a functionalAbility using the deleteAbilities from the functionalAbilityManager.
+     *
      * @param id
      * @throws Exception
      */

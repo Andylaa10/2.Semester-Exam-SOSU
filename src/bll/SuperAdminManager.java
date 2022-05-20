@@ -2,6 +2,7 @@ package bll;
 
 import be.*;
 import dal.SuperAdminDAO;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -12,6 +13,7 @@ public class SuperAdminManager {
 
     /**
      * Constructor
+     *
      * @throws IOException
      */
     public SuperAdminManager() throws IOException {
@@ -20,6 +22,7 @@ public class SuperAdminManager {
 
     /**
      * Creates a super admin using the createSuperAdmin method in superAdminDAO
+     *
      * @param username
      * @param password
      * @return
@@ -31,6 +34,7 @@ public class SuperAdminManager {
 
     /**
      * Deletes a super admin using the deleteSuperAdmin method in superAdminDAO
+     *
      * @param id
      */
     public void deleteSuperAdmin(int id) throws SQLException {
@@ -39,6 +43,7 @@ public class SuperAdminManager {
 
     /**
      * Edits a super admin using the editSuperAdmin method in superAdminDAO
+     *
      * @param superAdmin
      * @throws Exception
      */
@@ -48,6 +53,7 @@ public class SuperAdminManager {
 
     /**
      * Gets the super admin Login using the superAdminLogin method from superAdminDAO
+     *
      * @param username
      * @param password
      * @return
@@ -59,6 +65,7 @@ public class SuperAdminManager {
 
     /**
      * Gets a list of schools, by using the method from superAdminDAO
+     *
      * @return
      * @throws SQLException
      */
@@ -68,36 +75,40 @@ public class SuperAdminManager {
 
     /**
      * Gets a list of teachers assigned on a school, by using the method from superAdminDAO
+     *
      * @param schoolId
      * @return
      * @throws SQLException
      */
-    public List<User> getAssignedTeachers(int schoolId) throws SQLException{
+    public List<User> getAssignedTeachers(int schoolId) throws SQLException {
         return superAdminDAO.getAssignedTeachers(schoolId);
     }
 
     /**
      * Gets a list of admins assigned on a school, by using the method from superAdminDAO
+     *
      * @param schoolId
      * @return
      * @throws SQLException
      */
-    public List<User> getAssignedAdmins(int schoolId) throws SQLException{
+    public List<User> getAssignedAdmins(int schoolId) throws SQLException {
         return superAdminDAO.getAssignedAdmins(schoolId);
     }
 
     /**
      * Gets a list of student assigned on a school, by using the method from superAdminDAO
+     *
      * @param schoolId
      * @return
      * @throws SQLException
      */
-    public List<User> getAssignedStudents(int schoolId) throws SQLException{
+    public List<User> getAssignedStudents(int schoolId) throws SQLException {
         return superAdminDAO.getAssignedStudents(schoolId);
     }
 
     /**
      * Creates a school using the createSchool method in superAdminDAO
+     *
      * @param schoolName
      * @return
      * @throws SQLException
@@ -108,6 +119,7 @@ public class SuperAdminManager {
 
     /**
      * Deletes a school using the deleteSchool method in superAdminDAO
+     *
      * @param schoolID
      */
     public void deleteSchool(int schoolID) throws SQLException {
@@ -116,6 +128,7 @@ public class SuperAdminManager {
 
     /**
      * Edits a school using the editSchool method in superAdminDAO
+     *
      * @param school
      * @throws Exception
      */
@@ -125,6 +138,7 @@ public class SuperAdminManager {
 
     /**
      * Gets a list of admins assigned to a school, by using the method from superAdminDAO
+     *
      * @param schoolId
      * @return
      * @throws SQLException
@@ -135,6 +149,7 @@ public class SuperAdminManager {
 
     /**
      * Gets a list of citizens assigned to a school, by using the method from superAdminDAO
+     *
      * @param schoolId
      * @return
      */
@@ -144,6 +159,7 @@ public class SuperAdminManager {
 
     /**
      * Gets a list of cases assigned to a school, by using the method from superAdminDAO
+     *
      * @param schoolId
      * @return
      */
@@ -153,6 +169,7 @@ public class SuperAdminManager {
 
     /**
      * Add admin to a school, by using the method from superAdminDAO
+     *
      * @param loginId
      * @param schoolId
      */
@@ -162,6 +179,7 @@ public class SuperAdminManager {
 
     /**
      * Deletes an admin from a school, by using the method from superAdminDAO
+     *
      * @param userId
      * @param schoolId
      */
@@ -171,13 +189,14 @@ public class SuperAdminManager {
 
     /**
      * Gets a superAdmin with username and a hashed password
+     *
      * @param username
      * @param password
      * @return
      * @throws SQLException
      */
     public SuperAdmin getHashedPasswordSuperAdmin(String username, String password) throws SQLException {
-       return superAdminDAO.getHashedPasswordSuperAdmin(username, password);
+        return superAdminDAO.getHashedPasswordSuperAdmin(username, password);
     }
 
 }

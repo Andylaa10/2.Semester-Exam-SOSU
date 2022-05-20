@@ -18,6 +18,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -55,7 +56,7 @@ public class LoginViewController implements Initializable {
     /**
      * Initializing the combobox
      */
-    private void initializeCombo(){
+    private void initializeCombo() {
         try {
             allSchools = FXCollections.observableArrayList(facade.getSchools());
         } catch (SQLException e) {
@@ -78,10 +79,10 @@ public class LoginViewController implements Initializable {
             switcher.setTitle("Super Admin");
             switcher.show();
             switcher.centerOnScreen();
-        }else{
-            if (comboBoxSchool.getSelectionModel().getSelectedItem() == null){
+        } else {
+            if (comboBoxSchool.getSelectionModel().getSelectedItem() == null) {
                 ErrorHandlerController.createWarning("Vælg skole", "For at logge ind husk at vælge skole");
-            }else {
+            } else {
                 int school = Integer.parseInt(txtFieldSchoolId.getText());
                 User user = facade.getHashedPassword(username, password, school);
                 //User user = facade.userLogin(username, password, school);
@@ -140,9 +141,9 @@ public class LoginViewController implements Initializable {
     /**
      * Select a school on combobox
      */
-    private void selectedSchoolOnComboBox(){
+    private void selectedSchoolOnComboBox() {
         this.comboBoxSchool.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if(newValue != null){
+            if (newValue != null) {
                 this.selectedSchoolOnComboBox = newValue;
                 comboBoxSchool.getSelectionModel().getSelectedItem();
                 txtFieldSchoolId.setText(String.valueOf(selectedSchoolOnComboBox.getId()));

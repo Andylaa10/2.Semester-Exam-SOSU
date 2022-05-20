@@ -2,6 +2,7 @@ package bll;
 
 import be.Case;
 import dal.CaseDAO;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -44,6 +45,7 @@ public class CaseManager {
 
     /**
      * When a case and a citizen is selected, you can assign case to citizen, by using the method from caseDAO
+     *
      * @param caseId
      * @param citizenId
      */
@@ -53,6 +55,7 @@ public class CaseManager {
 
     /**
      * When a case and a citizen is selected, you can delete a case from citizen, by using the method from caseDAO
+     *
      * @param caseId
      * @param citizenId
      */
@@ -62,6 +65,7 @@ public class CaseManager {
 
     /**
      * Gets assigned cases on the selected citizen, by using the method from caseDAO
+     *
      * @param citizenId
      * @return
      * @throws SQLException
@@ -72,6 +76,7 @@ public class CaseManager {
 
     /**
      * Gets a selected case on the selected citizen, by using the method from caseDAO
+     *
      * @param citizenId
      * @param casesId
      * @return

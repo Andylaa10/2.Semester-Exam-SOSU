@@ -2,6 +2,7 @@ package gui.model;
 
 import be.Case;
 import bll.CaseManager;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -16,7 +17,6 @@ public class CaseModel {
 
     /**
      * Get a list of case using the getCases method from caseManager
-
      */
     public List<Case> getCases() throws SQLException {
         return caseManager.getCases();
@@ -31,15 +31,13 @@ public class CaseModel {
 
     /**
      * Deletes a case using the deleteCase method from caseManager
-
      */
     public void deleteCase(int id) throws Exception {
-         caseManager.deleteCase(id);
+        caseManager.deleteCase(id);
     }
 
     /**
      * Edits a case using the editCase method in caseManager
-
      */
     public void editCase(Case aCase) throws Exception {
         caseManager.editCase(aCase);
@@ -47,6 +45,7 @@ public class CaseModel {
 
     /**
      * Assigns case to a citizen using the assignCaseToCitizen method from the caseManager.
+     *
      * @param caseId
      * @param citizenId
      */
@@ -56,6 +55,7 @@ public class CaseModel {
 
     /**
      * Deletes a case from a citizen using the deleteCaseFromCitizen method from the caseManager
+     *
      * @param caseId
      * @param citizenId
      */
@@ -65,6 +65,7 @@ public class CaseModel {
 
     /**
      * Gets a list of cases assigned to a citizen using the getCasesOnCitizen method from caseManager.
+     *
      * @param citizenId
      * @return
      * @throws SQLException
@@ -75,6 +76,7 @@ public class CaseModel {
 
     /**
      * Gets a single case assigned to a citizen using the getCaseOnCitizen method from the caseManager.
+     *
      * @param citizenId
      * @param casesId
      * @return
