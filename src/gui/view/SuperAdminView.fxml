@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -96,43 +97,51 @@
             <ColorAdjust brightness="0.3" />
          </effect>
       </Pane>
-      <AnchorPane fx:id="anchorPaneSuperAdmin" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneSuperAdmin" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <Label alignment="TOP_LEFT" layoutX="2.0" layoutY="50.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">
+            <Label alignment="TOP_LEFT" layoutX="2.0" layoutY="6.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="90.0" prefHeight="35.0" prefWidth="580.0" text="- Få et overblik over alle oprettede skoler, samt oprette en ny skole i systemet, redigere eller ">
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="33.0" prefHeight="35.0" prefWidth="580.0" text="- Få et overblik over alle oprettede skoler, samt oprette en ny skole i systemet, redigere eller ">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="140.0" prefHeight="35.0" prefWidth="586.0" text="- Få et overblik over alle oprettede admins i systemet, samt oprette nye admins, redigere eller ">
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="80.0" prefHeight="35.0" prefWidth="586.0" text="- Få et overblik over alle oprettede admins i systemet, samt oprette nye admins, redigere eller ">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="195.0" prefHeight="35.0" prefWidth="545.0" text="- Få et overblik over alle oprettede skoler, samt admins. Herefter er det muligt at tildele">
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="123.0" prefHeight="35.0" prefWidth="545.0" text="- Få et overblik over alle oprettede skoler, samt admins. Herefter er det muligt at tildele">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="212.0" prefHeight="35.0" prefWidth="225.0" text="admins til deres tilhørende skole">
+            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="140.0" prefHeight="35.0" prefWidth="225.0" text="admins til deres tilhørende skole">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="157.0" prefHeight="35.0" prefWidth="225.0" text="slette admins">
+            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="97.0" prefHeight="35.0" prefWidth="225.0" text="slette admins">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="107.0" prefHeight="35.0" prefWidth="225.0" text="slette skoler">
+            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="50.0" prefHeight="35.0" prefWidth="225.0" text="slette skoler">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <ImageView fitHeight="316.0" fitWidth="362.0" layoutX="236.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/screenshot%2013.jpg" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneCreateSchool" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
@@ -176,7 +185,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateAdmin" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneCreateAdmin" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <TableView fx:id="tvAdmins" layoutX="15.0" layoutY="44.0" prefHeight="307.0" prefWidth="580.0" style="-fx-background-color: transparent;">
               <columns>

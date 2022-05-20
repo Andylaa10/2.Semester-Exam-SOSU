@@ -107,48 +107,56 @@
             <Label fx:id="labelInfoNewLine" layoutX="34.0" layoutY="58.0" prefHeight="35.0" prefWidth="580.0" text="Tekst2" textFill="WHITE" />
          </children>
       </Pane>
-      <AnchorPane fx:id="anchorPaneTeacher" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneTeacher" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <Label alignment="TOP_LEFT" layoutX="2.0" layoutY="50.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">
+            <Label alignment="TOP_LEFT" layoutX="2.0" layoutY="9.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="90.0" prefHeight="35.0" prefWidth="400.0" text="- Få et overblik og håndtere alle dine elever, samt deres logins">
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="45.0" prefHeight="35.0" prefWidth="400.0" text="- Få et overblik og håndtere alle dine elever, samt deres logins">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="126.0" prefHeight="35.0" prefWidth="586.0" text="- Få et overblik eller opret flere borgere i systemet, samt udfylde deres generelle informationer">
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="71.0" prefHeight="35.0" prefWidth="586.0" text="- Få et overblik eller opret flere borgere i systemet, samt udfylde deres generelle informationer">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="161.0" prefHeight="35.0" prefWidth="545.0" text="- Åbne nye sager til dine borgere, derudover har du også mulighed for at tildele en sag, ">
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="99.0" prefHeight="35.0" prefWidth="545.0" text="- Åbne nye sager til dine borgere, derudover har du også mulighed for at tildele en sag, ">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="178.0" prefHeight="35.0" prefWidth="84.0" text="til en borger">
+            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="116.0" prefHeight="35.0" prefWidth="84.0" text="til en borger">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="205.0" prefHeight="35.0" prefWidth="545.0" text="- Nederst til venstre er det muligt at logge ud">
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="141.0" prefHeight="35.0" prefWidth="545.0" text="- Nederst til venstre er det muligt at logge ud">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="241.0" prefHeight="35.0" prefWidth="594.0" text="- Ved at trykke på logoet (øverst venstre), kommer du tilbage til hjemmeskærmen dvs.">
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="164.0" prefHeight="35.0" prefWidth="594.0" text="- Ved at trykke på logoet (øverst venstre), kommer du tilbage til hjemmeskærmen dvs.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="20.0" layoutY="258.0" prefHeight="35.0" prefWidth="148.0" text="det nuværende vindue">
+            <Label alignment="TOP_LEFT" layoutX="20.0" layoutY="181.0" prefHeight="35.0" prefWidth="148.0" text="det nuværende vindue">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <ImageView fitHeight="252.0" fitWidth="325.0" layoutX="252.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/screenshot%2011.jpg" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
@@ -265,7 +273,7 @@
             <Label alignment="CENTER_RIGHT" layoutX="350.0" layoutY="433.0" text="Dobbeltklik for at se sagens informationer" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0">
+      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
          <children>
             <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="14.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
