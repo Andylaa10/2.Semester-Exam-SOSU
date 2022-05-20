@@ -1,11 +1,14 @@
 package gui.controller;
 
-import be.*;
+import be.Case;
+import be.Citizen;
 import be.FunctionalAbilities.FunctionalAbility;
 import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
+import be.GeneralInformation;
 import be.HealthCondition.HealthCondition;
 import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
+import be.User;
 import be.Utilities.ImageWithText;
 import be.enums.ConditionEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -284,6 +287,8 @@ public class StudentViewController implements IController, Initializable {
         setupToggleHealthCondition();
         setFunctionalAbilityComboBoxItems();
         setExpectedLevelAssessmentComboBoxItems();
+
+        System.out.println(Thread.currentThread().isAlive());
     }
 
     /**
@@ -380,38 +385,38 @@ public class StudentViewController implements IController, Initializable {
 
     public void changeColorOnTV(HealthConditionSubCategoryText subCategoryText) {
         Callback<TableColumn<HealthConditionSubCategory, String>, TableCell<HealthConditionSubCategory, String>> cellFactory = new Callback<>() {
-                    @Override
-                    public TableCell<HealthConditionSubCategory, String> call(final TableColumn<HealthConditionSubCategory, String> param) {
-                        return new TableCell<>() {
+            @Override
+            public TableCell<HealthConditionSubCategory, String> call(final TableColumn<HealthConditionSubCategory, String> param) {
+                return new TableCell<>() {
 
-                            @Override
-                            public void updateItem(String item, boolean empty) {
-                                super.updateItem(item, empty);
-                                if (empty) {
-                                    setGraphic(null);
-                                    setText(null);
-                                } else {
-                                    setText(item);
-                                    TableRow<HealthConditionSubCategory> row = getTableRow();
-                                    if (subCategoryText == null) {
-                                        row.setStyle("");
-                                    } else if (row.getItem().getCondition(subCategoryText) == 0 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
-                                        row.getStyleClass().clear();
-                                        row.setStyle("-fx-background-color: red");
-                                    } else if (row.getItem().getCondition(subCategoryText) == 1 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
-                                        row.getStyleClass().clear();
-                                        row.setStyle("-fx-background-color: yellow");
-                                    } else if (row.getItem().getCondition(subCategoryText) == 2 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
-                                        row.getStyleClass().clear();
-                                        row.setStyle("-fx-background-color: green");
-                                    } else {
-                                        row.setStyle("");
-                                    }
-                                }
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            setText(item);
+                            TableRow<HealthConditionSubCategory> row = getTableRow();
+                            if (subCategoryText == null) {
+                                row.setStyle("");
+                            } else if (row.getItem().getCondition(subCategoryText) == 0 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
+                                row.getStyleClass().clear();
+                                row.setStyle("-fx-background-color: red");
+                            } else if (row.getItem().getCondition(subCategoryText) == 1 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
+                                row.getStyleClass().clear();
+                                row.setStyle("-fx-background-color: yellow");
+                            } else if (row.getItem().getCondition(subCategoryText) == 2 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
+                                row.getStyleClass().clear();
+                                row.setStyle("-fx-background-color: green");
+                            } else {
+                                row.setStyle("");
                             }
-                        };
+                        }
                     }
                 };
+            }
+        };
         tcSubCategoriesName.setCellFactory(cellFactory);
     }
 
@@ -605,7 +610,11 @@ public class StudentViewController implements IController, Initializable {
      * loads the casesOnCitizen tableview.
      */
     private void tableViewLoadCasesOnCitizen(ObservableList<Case> allCasesOnCitizen) {
-        tvCases.setItems(getCasesOnCitizenData());
+        new Thread(() -> {
+            tvCases.setItems(getCasesOnCitizenData());
+        }).start();
+        System.out.println(Thread.currentThread().isAlive());
+
     }
 
     /**
@@ -621,7 +630,11 @@ public class StudentViewController implements IController, Initializable {
      * loads the health condition tableview.
      */
     private void tableViewLoadHealthConditions(ObservableList<HealthCondition> allHealthConditions) {
-        tvHealthConditions.setItems(getHealthConditionData());
+        new Thread(() -> {
+            tvHealthConditions.setItems(getHealthConditionData());
+        }).start();
+        System.out.println(Thread.currentThread().isAlive());
+
     }
 
     /**
@@ -635,7 +648,11 @@ public class StudentViewController implements IController, Initializable {
      * loads the sub categories tableview.
      */
     private void tableViewLoadSubCategories(ObservableList<HealthConditionSubCategory> allSubCategories) {
-        tvSubCategories.setItems(getSubCategories());
+        new Thread(() -> {
+            tvSubCategories.setItems(getSubCategories());
+        }).start();
+        System.out.println(Thread.currentThread().isAlive());
+
     }
 
     /**
@@ -646,7 +663,11 @@ public class StudentViewController implements IController, Initializable {
     }
 
     private void tableViewLoadFunctionalAbilitySubCategories(ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories) {
-        tvFunctionalConditions.setItems(getFunctionalAbilitySubCategories());
+        new Thread(() -> {
+            tvFunctionalConditions.setItems(getFunctionalAbilitySubCategories());
+
+        }).start();
+        System.out.println(Thread.currentThread().isAlive());
     }
 
     private ObservableList<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories() {
