@@ -6,7 +6,6 @@ import bll.utilities.BCrypt.BCrypt;
 import bll.utilities.Encryptor;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
-
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -65,7 +64,7 @@ public class SuperAdminDAO {
      * Edits a superAdmin.
      * This method is currently not in use.
      */
-    public void editSuperAdmin(SuperAdmin superAdmin) throws Exception {
+    public void editSuperAdmin(SuperAdmin superAdmin) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE SuperAdmin SET username=?, password=? WHERE superAdminID=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -74,7 +73,7 @@ public class SuperAdminDAO {
             preparedStatement.setInt(3, superAdmin.getId());
             preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception("Could not edit super admin");
+                throw new SQLException();
             }
         }
     }
@@ -252,12 +251,12 @@ public class SuperAdminDAO {
             }
 
         } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
+            throw new SQLException();
         }
         return allAdmins;
     }
 
-    public List<Citizen> getAssignedCitizen(int schoolId){
+    public List<Citizen> getAssignedCitizen(int schoolId) throws SQLException {
         ArrayList<Citizen> allCitizens = new ArrayList<>();
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT * FROM Citizen WHERE schoolId =?";
@@ -279,14 +278,11 @@ public class SuperAdminDAO {
             }
             return allCitizens;
         } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            throw new SQLException();
         }
-        return null;
     }
 
-    public List<Case> getAssignedCases(int schoolId){
+    public List<Case> getAssignedCases(int schoolId) throws SQLException {
         ArrayList<Case> allCases = new ArrayList<>();
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT * FROM Cases WHERE schoolId =?";
@@ -306,18 +302,15 @@ public class SuperAdminDAO {
             }
             return allCases;
         } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            throw new SQLException();
         }
-        return null;
     }
 
 
     /**
      * Adds an admin to a school, using the UserOnSchool table.
      */
-    public void addAdminToSchool(int loginId, int schoolId) {
+    public void addAdminToSchool(int loginId, int schoolId) throws SQLException {
         String sql = "INSERT INTO [Login] (loginId, schoolId) VALUES (?,?);";
         try (Connection con = databaseConnector.getConnection();
              PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -325,7 +318,7 @@ public class SuperAdminDAO {
             st.setInt(2, schoolId);
             st.executeUpdate();
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            throw new SQLException();
         }
     }
 
@@ -370,14 +363,14 @@ public class SuperAdminDAO {
     /**
      * Edits the selected schools name using the selected schools ID.
      */
-    public void editSchool(School school) throws Exception {
+    public void editSchool(School school) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE School SET name=? WHERE schoolID=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, school.getSchoolName());
             preparedStatement.setInt(2, school.getId());
             if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception("Could not edit school name");
+                throw new SQLException();
             }
         }
     }
@@ -385,7 +378,7 @@ public class SuperAdminDAO {
     /**
      * Deletes an admin from the UserOnSchool table, so he is no longer assigned to that school.
      */
-    public void deleteAdminFromSchool(int userId, int schoolId) {
+    public void deleteAdminFromSchool(int userId, int schoolId) throws SQLException {
         String sql = "DELETE FROM UserOnSchool WHERE loginId = ? AND schoolId = ?;";
         try (Connection con = databaseConnector.getConnection();
              PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -393,7 +386,7 @@ public class SuperAdminDAO {
             st.setInt(2, schoolId);
             st.executeUpdate();
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            throw new SQLException();
         }
     }
 
@@ -418,8 +411,6 @@ public class SuperAdminDAO {
                 if(BCrypt.checkpw(password, hashedPassword)){
                     SuperAdmin superAdmin = new SuperAdmin(id, username, password);
                     return superAdmin;
-                }else{
-                    System.out.println("VERY SAD");
                 }
 
             }

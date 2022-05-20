@@ -357,7 +357,7 @@ public class StudentViewController implements IController, Initializable {
     /**
      * Load the tableviews with assigned health condition notes
      */
-    private void seeTxtOnSubCategory() throws SQLServerException {
+    private void seeTxtOnSubCategory() throws SQLException {
         if (txtFieldCitizenID != null && subCatTxtID != null) {
             HealthConditionSubCategoryText subCategoryText = dataModelFacade.getTextOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), Integer.parseInt(subCatTxtID.getText()));
             if (subCategoryText != null) {
@@ -532,7 +532,7 @@ public class StudentViewController implements IController, Initializable {
     /**
      * Setup combobox with citizens
      */
-    public void initializeCitizenComboBox() {
+    public void initializeCitizenComboBox() throws SQLException {
         //Initialize the citizens in the dropdown menu
         allCitizens = FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText())));
         tableViewLoadCitizens(allCitizens);
@@ -776,7 +776,7 @@ public class StudentViewController implements IController, Initializable {
                 subCatTxtID.setText(String.valueOf(newValue.getId()));
                 try {
                     seeTxtOnSubCategory();
-                } catch (SQLServerException e) {
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }

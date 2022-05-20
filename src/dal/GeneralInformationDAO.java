@@ -3,7 +3,6 @@ package dal;
 import be.GeneralInformation;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
-
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -84,7 +83,7 @@ public class GeneralInformationDAO {
             }
 
         } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
+            throw new SQLException();
         }
         return null;
     }
@@ -123,12 +122,11 @@ public class GeneralInformationDAO {
                 return generalInformation;
             }
         } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
+            throw new SQLException();
         }
-        return null;
     }
 
-    public void editGeneralInformation(GeneralInformation generalInformation) throws Exception {
+    public void editGeneralInformation(GeneralInformation generalInformation) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE GeneralInformation SET coping = ?, motivation = ?, resources = ?, roles = ?," +
                     " habits = ?,educationAndJob = ?, lifestory = ?, network = ?, healthInformation = ?," +
@@ -149,23 +147,19 @@ public class GeneralInformationDAO {
 
             preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception("Could not edit case");
+                throw new SQLException();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
-    public void deleteGeneralInformation(int id) throws Exception {
+    public void deleteGeneralInformation(int id) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "DELETE FROM GeneralInformation WHERE generalInfoID =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception();
+                throw new SQLException();
             }
-        } catch (SQLException throwables) {
-            throw new SQLException();
         }
     }
 

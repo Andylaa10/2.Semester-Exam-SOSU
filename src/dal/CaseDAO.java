@@ -132,23 +132,21 @@ public class CaseDAO {
     /**
      * Deletes a case by taking the selected case ID.
      */
-    public void deleteCase(int id) throws Exception {
+    public void deleteCase(int id) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "DELETE FROM Cases WHERE casesID =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception("Could not delete case");
+                throw new SQLException();
             }
-        } catch (SQLException throwables) {
-            throw new SQLException("could not delete a case");
         }
     }
 
     /**
      * Edit the selected case
      */
-    public void editCase(Case aCase) throws Exception {
+    public void editCase(Case aCase) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE Cases SET name=?, date=?, info=? WHERE casesID=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -158,10 +156,8 @@ public class CaseDAO {
             preparedStatement.setInt(4,aCase.getId());
             preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception("Could not edit case");
+                throw new SQLException();
             }
-        } catch (SQLException e) {
-            throw new SQLException();
         }
     }
 

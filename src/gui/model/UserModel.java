@@ -123,7 +123,7 @@ public class UserModel {
     /**
      * Gets the user userLogin using the userLogin method from userManager
      */
-    public User userLogin(String username, String password, int schoolId){
+    public User userLogin(String username, String password, int schoolId) throws SQLException {
         return userManager.userLogin(username, password, schoolId);
     }
 

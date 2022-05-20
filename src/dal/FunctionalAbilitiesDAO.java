@@ -1,10 +1,7 @@
 package dal;
 
-import be.FunctionalAbilities.FunctionalAbilitySubCategory;
 import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
 import be.FunctionalAbilities.FunctionalAbility;
-import be.HealthCondition.HealthConditionSubCategory;
-import be.enums.FunctionalEnum;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 import java.io.IOException;
@@ -74,7 +71,7 @@ public class FunctionalAbilitiesDAO {
                 allFunctionalAbilitySubCategories.add(functionalAbilitySubCategory);
             }
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            throw new SQLException();
         }
         return allFunctionalAbilitySubCategories;
     }
@@ -103,13 +100,12 @@ public class FunctionalAbilitiesDAO {
                 FunctionalAbility functionalAbility = new FunctionalAbility(citId, functionalAbilityId, abilityNow,
                         abilityExpected, abilityNote, citizenPerformance, citizenMeaningOfPerformance, abilityNoteCitizen);
                 return functionalAbility;
-
             }
         }
         return null;
     }
 
-    public FunctionalAbilitySubCategoryText getInfoOnSubCategory(int citizenId, int functionalAbilitySubCategoryId) throws SQLServerException {
+    public FunctionalAbilitySubCategoryText getInfoOnSubCategory(int citizenId, int functionalAbilitySubCategoryId) throws SQLException {
 
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT *" +
@@ -141,7 +137,7 @@ public class FunctionalAbilitiesDAO {
                 return functionalAbilitySubCategoryText;
             }
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            throw new SQLException();
         }
         return null;
     }
@@ -149,7 +145,7 @@ public class FunctionalAbilitiesDAO {
 
 
 
-    public List<FunctionalAbilitySubCategoryText> getInfoOnSubCategories(int citizenId) throws SQLServerException {
+    public List<FunctionalAbilitySubCategoryText> getInfoOnSubCategories(int citizenId) throws SQLException {
         ArrayList<FunctionalAbilitySubCategoryText> allFASubcategories = new ArrayList();
 
         try (Connection connection = databaseConnector.getConnection()) {
@@ -185,7 +181,7 @@ public class FunctionalAbilitiesDAO {
 
             }
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            throw new SQLException();
         }
         return allFASubcategories;
     }
@@ -216,9 +212,8 @@ public class FunctionalAbilitiesDAO {
                 return functionalAbility;
             }
         }catch (Exception e){
-            e.printStackTrace();
+            throw new SQLException();
         }
-        return null;
     }
 
     public void editAbilities(FunctionalAbility functionalAbility) throws SQLException{
@@ -238,21 +233,19 @@ public class FunctionalAbilitiesDAO {
             if (preparedStatement.executeUpdate() != 1){
                 throw new SQLException();
             }
-        }catch (Exception e){
-            e.printStackTrace();
+        }catch (SQLException e){
+            throw new SQLException();
         }
     }
 
-    public void deleteFunctionalAbility(int id) throws Exception {
+    public void deleteFunctionalAbility(int id) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "DELETE FROM FunctionalAbility WHERE abilityID =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception();
+                throw new SQLException();
             }
-        } catch (SQLException throwables) {
-            throw new SQLException();
         }
     }
 

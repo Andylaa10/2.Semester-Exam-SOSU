@@ -50,7 +50,7 @@ public class CaseModel {
      * @param caseId
      * @param citizenId
      */
-    public void assignCaseToCitizen(int caseId, int citizenId){
+    public void assignCaseToCitizen(int caseId, int citizenId) throws SQLException {
         caseManager.assignCaseToCitizen(caseId, citizenId);
     }
 
@@ -59,7 +59,7 @@ public class CaseModel {
      * @param caseId
      * @param citizenId
      */
-    public void deleteCaseFromCitizen(int caseId, int citizenId){
+    public void deleteCaseFromCitizen(int caseId, int citizenId) throws SQLException {
         caseManager.deleteCaseFromCitizen(caseId, citizenId);
     }
 

@@ -130,12 +130,17 @@ public class CitizenInfoViewController implements Initializable {
 
     private void createHealthConditions() {
         Thread t1 = new Thread(() -> {
-            ObservableList<HealthConditionSubCategoryText> allSubCategories = FXCollections.observableList(dataModelFacade.getHCInfoOnSubCategories(citizenId));
+            ObservableList<HealthConditionSubCategoryText> allSubCategories = null;
+            try {
+                allSubCategories = FXCollections.observableList(dataModelFacade.getHCInfoOnSubCategories(citizenId));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             for (HealthConditionSubCategoryText HCSubCategoryText : allSubCategories) {
                 healthConditionId = HCSubCategoryText.getCategoryId();
                 try {
                     newHCToVBox(healthConditionId);
-                } catch (SQLServerException e) {
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
@@ -186,7 +191,7 @@ public class CitizenInfoViewController implements Initializable {
     }
 
 
-    private void newHCToVBox(int condition) throws SQLServerException {
+    private void newHCToVBox(int condition) throws SQLException {
         HealthConditionSubCategoryText hcSubCategoryText = dataModelFacade.getTextOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), this.healthConditionId);
 
         HBox hBox1 = new HBox();
@@ -368,7 +373,7 @@ public class CitizenInfoViewController implements Initializable {
         vBoxHealthCondition.getChildren().add(vBoxNewHC);
     }
 
-    private void newFAToVBox(int functionalAbilitySubCategoryId) throws SQLServerException {
+    private void newFAToVBox(int functionalAbilitySubCategoryId) throws SQLException {
         FunctionalAbilitySubCategoryText faSubCategoryText = dataModelFacade.getInfoOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), functionalAbilitySubCategoryId);
         HBox hBox1 = new HBox();
         HBox hBox2 = new HBox();

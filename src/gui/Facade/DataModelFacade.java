@@ -74,7 +74,7 @@ public class DataModelFacade {
         return userModel.getStudents();
     }
 
-    public User userLogin(String username, String password, int schoolId){
+    public User userLogin(String username, String password, int schoolId) throws SQLException {
         return userModel.userLogin(username, password, schoolId);
     }
 
@@ -163,11 +163,11 @@ public class DataModelFacade {
         return superAdminModel.getAdminsOnSchool(schoolId);
     }
 
-    public List<Citizen> getAssignedCitizen(int schoolId){
+    public List<Citizen> getAssignedCitizen(int schoolId) throws SQLException {
         return superAdminModel.getAssignedCitizen(schoolId);
     }
 
-    public List<Case> getAssignedCases(int schoolId){
+    public List<Case> getAssignedCases(int schoolId) throws SQLException {
         return superAdminModel.getAssignedCases(schoolId);
     }
 
@@ -214,11 +214,11 @@ public class DataModelFacade {
         superAdminModel.editSchool(school);
     }
 
-    public void addAdminToSchool(int loginId, int schoolId) {
+    public void addAdminToSchool(int loginId, int schoolId) throws SQLException {
         superAdminModel.addAdminToSchool(loginId, schoolId);
     }
 
-    public void deleteAdminFromSchool(int userId, int schoolId) {
+    public void deleteAdminFromSchool(int userId, int schoolId) throws SQLException {
         superAdminModel.deleteAdminFromSchool(userId, schoolId);
     }
 
@@ -250,10 +250,10 @@ public class DataModelFacade {
         caseModel.editCase(aCase);
     }
 
-    public void assignCaseToCitizen(int caseId, int citizenId){
+    public void assignCaseToCitizen(int caseId, int citizenId) throws SQLException {
         caseModel.assignCaseToCitizen(caseId, citizenId);
     }
-    public void deleteCaseFromCitizen(int caseId, int citizenId){
+    public void deleteCaseFromCitizen(int caseId, int citizenId) throws SQLException {
         caseModel.deleteCaseFromCitizen(caseId, citizenId);
     }
 
@@ -341,11 +341,11 @@ public class DataModelFacade {
         generalInformationModel.editGeneralInformation(generalInformation);
     }
 
-    public HealthConditionSubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
+    public HealthConditionSubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLException {
         return healthConditionsModel.getTextOnSubCategory(citizenId, subCategoryId);
     }
 
-    public List<HealthConditionSubCategoryText> getHCInfoOnSubCategories(int citizenId){
+    public List<HealthConditionSubCategoryText> getHCInfoOnSubCategories(int citizenId) throws SQLException {
         return healthConditionsModel.getInfoOnSubCategories(citizenId);
     }
 
@@ -369,11 +369,11 @@ public class DataModelFacade {
         return functionalAbilitiesModel.getFunctionalAbilities();
     }
 
-    public FunctionalAbilitySubCategoryText getInfoOnSubCategory(int citizenId, int functionalAbilitySubCategoryId) throws SQLServerException {
+    public FunctionalAbilitySubCategoryText getInfoOnSubCategory(int citizenId, int functionalAbilitySubCategoryId) throws SQLException {
         return functionalAbilitiesModel.getInfoOnSubCategory(citizenId, functionalAbilitySubCategoryId);
     }
 
-    public List<FunctionalAbilitySubCategoryText> getFAInfoOnSubCategories(int citizenId) throws SQLServerException{
+    public List<FunctionalAbilitySubCategoryText> getFAInfoOnSubCategories(int citizenId) throws SQLException {
         return functionalAbilitiesModel.getInfoOnSubCategories(citizenId);
     }
 

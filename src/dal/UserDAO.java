@@ -1,6 +1,5 @@
 package dal;
 
-import be.School;
 import be.User;
 import be.enums.UserType;
 import bll.utilities.BCrypt.BCrypt;
@@ -108,7 +107,7 @@ public class UserDAO {
         return allAdmins;
     }
 
-    public List<User> getUsernames() {
+    public List<User> getUsernames() throws SQLException {
         ArrayList<User> allUsernames = new ArrayList<>();
 
         try (Connection connection = databaseConnector.getConnection()) {
@@ -124,7 +123,7 @@ public class UserDAO {
                 allUsernames.add(user);
             }
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            throw new SQLException();
         }
         return allUsernames;
     }
@@ -212,9 +211,8 @@ public class UserDAO {
                 return admin;
             }
         } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
+            throw new SQLException();
         }
-        return null;
     }
 
     /**
@@ -266,7 +264,7 @@ public class UserDAO {
     /**
      * Edits the selected students ID.
      */
-    public void editStudent(User student) throws Exception {
+    public void editStudent(User student) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE Login SET firstName=?, lastName=?, username=?, password=? WHERE LoginID=? AND userType=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -277,7 +275,7 @@ public class UserDAO {
             preparedStatement.setInt(5, student.getId());
             preparedStatement.setString(6, String.valueOf(UserType.STUDENT));
             if (preparedStatement.executeUpdate() != 1) {
-                new Exception("Could not edit student").printStackTrace();
+                throw new SQLException();
             }
         }
     }
@@ -285,7 +283,7 @@ public class UserDAO {
     /**
      * Edits a teacher
      */
-    public void editTeacher(User teacher) throws Exception {
+    public void editTeacher(User teacher) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE Login SET firstName=?, lastName=?, username=?, password=? WHERE LoginID=? AND userType=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -296,7 +294,7 @@ public class UserDAO {
             preparedStatement.setInt(5, teacher.getId());
             preparedStatement.setString(6, String.valueOf(UserType.TEACHER));
             if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception("Could not edit teacher");
+                throw new SQLException();
             }
         }
     }
@@ -304,7 +302,7 @@ public class UserDAO {
     /**
      * Edits an admin
      */
-    public void editAdmin(User admin) throws Exception {
+    public void editAdmin(User admin) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE Login SET firstName=?, lastName=?, username=?, password=? WHERE LoginID=? AND userType=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -316,7 +314,7 @@ public class UserDAO {
             preparedStatement.setString(6, String.valueOf(UserType.ADMINISTRATOR));
             preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception();
+                throw new SQLException();
             }
         }
     }
@@ -324,7 +322,7 @@ public class UserDAO {
     /**
      * This method gets a userLogin from the database and check if it is a student, teacher or administrator
      */
-    public User userLogin(String user, String pass, int schoolId) {
+    public User userLogin(String user, String pass, int schoolId) throws SQLException {
         String sql = "SELECT * FROM Login WHERE username =? AND password =? AND schoolId=?;";
         try(Connection connection = databaseConnector.getConnection()){
             PreparedStatement st = connection.prepareStatement(sql);
@@ -351,7 +349,7 @@ public class UserDAO {
                 }
             }
         } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
+            throw new SQLException();
         }
         return null;
     }

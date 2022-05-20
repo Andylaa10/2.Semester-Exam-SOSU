@@ -3,7 +3,6 @@ package dal;
 import be.ObservationNote;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
-
 import java.io.IOException;
 import java.sql.*;
 
@@ -15,7 +14,7 @@ public class ObservationNoteDAO {
     public ObservationNoteDAO() throws IOException {
     }
 
-    public ObservationNote getObservationNote(int citizenId) throws Exception {
+    public ObservationNote getObservationNote(int citizenId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT * FROM ObservationNote WHERE citizenId =?;";
 
@@ -54,12 +53,11 @@ public class ObservationNoteDAO {
                 return new ObservationNote(id, citizenId, date, note);
             }
         } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
+            throw new SQLException();
         }
-        return null;
     }
 
-    public void editObservationNote(ObservationNote observationNote) throws Exception {
+    public void editObservationNote(ObservationNote observationNote) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE ObservationNote SET date = ?, note = ? WHERE citizenId = ? ;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -69,24 +67,20 @@ public class ObservationNoteDAO {
 
             preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception("Could not edit observation note");
+                throw new SQLException();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 
 
-    public void deleteObservationNote(int id) throws Exception {
+    public void deleteObservationNote(int id) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "DELETE FROM ObservationNote WHERE ObservationNoteID = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception();
+                throw new SQLException();
             }
-        } catch (SQLException throwables) {
-            throw new SQLException();
         }
     }
 

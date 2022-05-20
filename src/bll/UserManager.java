@@ -131,7 +131,7 @@ public class UserManager {
      * @param password
      * @return
      */
-    public User userLogin(String username, String password, int schoolId){
+    public User userLogin(String username, String password, int schoolId) throws SQLException {
         return userDAO.userLogin(username, password, schoolId);
     }
 

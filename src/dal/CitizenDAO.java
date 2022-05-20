@@ -42,7 +42,7 @@ public class CitizenDAO {
             }
 
         } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
+            throw new SQLException();
         }
         return allCitizens;
     }
@@ -71,7 +71,7 @@ public class CitizenDAO {
             }
 
         } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
+            throw new SQLException();
         }
         return allCitizens;
     }
@@ -101,7 +101,7 @@ public class CitizenDAO {
             }
 
         } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
+            throw new SQLException();
         }
         return null;
     }
@@ -153,7 +153,7 @@ public class CitizenDAO {
     /**
      * Edit citizen information by getting the selected citizen ID.
      */
-    public void editCitizen(Citizen citizen) throws Exception {
+    public void editCitizen(Citizen citizen) throws SQLException {
         try (Connection connection = connector.getConnection()) {
             String sql = "UPDATE Citizen SET firstName=?, lastName=?, SSN=?, address=?, sex=? WHERE citizenID=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -165,10 +165,8 @@ public class CitizenDAO {
             preparedStatement.setInt(6, citizen.getId());
             preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {
-                throw new Exception("Could not edit case");
+                throw new SQLException();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 

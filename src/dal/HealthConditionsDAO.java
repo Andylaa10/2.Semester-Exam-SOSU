@@ -3,9 +3,7 @@ package dal;
 import be.HealthCondition.HealthCondition;
 import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
-
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -40,7 +38,7 @@ public class HealthConditionsDAO {
         return allHealthConditions;
     }
 
-    public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws Exception {
+    public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT * FROM SubCatTextOnCitizen WHERE citizenId =? AND subCategoryId = ?;";
 
@@ -65,7 +63,7 @@ public class HealthConditionsDAO {
         return null;
     }
 
-    public HealthConditionSubCategoryText getInfoOnSubCategory(int citizenId, int subCategoryId) {
+    public HealthConditionSubCategoryText getInfoOnSubCategory(int citizenId, int subCategoryId) throws SQLException {
 
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT * " +
@@ -92,13 +90,13 @@ public class HealthConditionsDAO {
                         citId, subCatId, professionalNote, currentLevelAssessment, expectedLevelAssessment, condition, healthConditionId);
                 return healthConditionSubCategoryText;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new SQLException();
         }
         return null;
     }
 
-    public List<HealthConditionSubCategoryText> getInfoOnSubCategories(int citizenId) {
+    public List<HealthConditionSubCategoryText> getInfoOnSubCategories(int citizenId) throws SQLException {
         ArrayList<HealthConditionSubCategoryText> allHCSubCategoryInfo = new ArrayList<>();
 
 
@@ -127,7 +125,7 @@ public class HealthConditionsDAO {
                 allHCSubCategoryInfo.add(healthConditionSubCategoryText);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new SQLException();
         }
         return allHCSubCategoryInfo;
     }
@@ -169,11 +167,11 @@ public class HealthConditionsDAO {
             preparedStatement.execute();
 
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            throw new SQLException();
         }
     }
 
-    public void editSubcategory(HealthConditionSubCategoryText subCategoryText) throws Exception {
+    public void editSubcategory(HealthConditionSubCategoryText subCategoryText) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE SubCatTextOnCitizen SET professionalNote = ?, currentLevelAssessment = ?, expectedLevelAssessment = ?, Condition = ? WHERE citizenId =? AND subCategoryId=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -185,7 +183,7 @@ public class HealthConditionsDAO {
             preparedStatement.setInt(6, subCategoryText.getCategoryId());
             preparedStatement.executeUpdate();
         }catch(Exception e){
-            e.printStackTrace();
+            throw new SQLException();
         }
     }
 

@@ -120,7 +120,7 @@ public class SuperAdminModel {
      * @param schoolId
      * @return
      */
-    public List<Citizen> getAssignedCitizen(int schoolId){
+    public List<Citizen> getAssignedCitizen(int schoolId) throws SQLException {
         return superAdminManager.getAssignedCitizen(schoolId);
     }
 
@@ -129,7 +129,7 @@ public class SuperAdminModel {
      * @param schoolId
      * @return
      */
-    public List<Case> getAssignedCases(int schoolId){
+    public List<Case> getAssignedCases(int schoolId) throws SQLException {
         return superAdminManager.getAssignedCases(schoolId);
     }
 
@@ -138,7 +138,7 @@ public class SuperAdminModel {
      * @param loginId
      * @param schoolId
      */
-    public void addAdminToSchool(int loginId, int schoolId) {
+    public void addAdminToSchool(int loginId, int schoolId) throws SQLException {
         superAdminManager.addAdminToSchool(loginId, schoolId);
     }
 
@@ -147,7 +147,7 @@ public class SuperAdminModel {
      * @param userId
      * @param schoolId
      */
-    public void deleteAdminFromSchool(int userId, int schoolId) {
+    public void deleteAdminFromSchool(int userId, int schoolId) throws SQLException {
         superAdminManager.deleteAdminFromSchool(userId, schoolId);
     }
 

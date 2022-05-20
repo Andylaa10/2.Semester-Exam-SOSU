@@ -34,7 +34,7 @@ public class FunctionalAbilitiesModel {
      * @return
      * @throws SQLServerException
      */
-    public FunctionalAbilitySubCategoryText getInfoOnSubCategory(int citizenId, int functionalAbilitySubCategoryId) throws SQLServerException {
+    public FunctionalAbilitySubCategoryText getInfoOnSubCategory(int citizenId, int functionalAbilitySubCategoryId) throws SQLException {
         return functionalAbilityManager.getInfoOnSubCategory(citizenId, functionalAbilitySubCategoryId);
     }
 
@@ -44,7 +44,7 @@ public class FunctionalAbilitiesModel {
      * @return
      * @throws SQLServerException
      */
-    public List<FunctionalAbilitySubCategoryText> getInfoOnSubCategories(int citizenId) throws SQLServerException{
+    public List<FunctionalAbilitySubCategoryText> getInfoOnSubCategories(int citizenId) throws SQLException {
         return functionalAbilityManager.getInfoOnSubCategories(citizenId);
     }
 

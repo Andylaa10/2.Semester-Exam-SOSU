@@ -44,7 +44,7 @@ public class HealthConditionsModel {
      * @return
      * @throws SQLServerException
      */
-    public HealthConditionSubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLServerException {
+    public HealthConditionSubCategoryText getTextOnSubCategory(int citizenId, int subCategoryId) throws SQLException {
         return healthConditionsManager.getTextOnSubCategory(citizenId, subCategoryId);
     }
 
@@ -53,7 +53,7 @@ public class HealthConditionsModel {
      * @param citizenId
      * @return
      */
-    public List<HealthConditionSubCategoryText> getInfoOnSubCategories(int citizenId){
+    public List<HealthConditionSubCategoryText> getInfoOnSubCategories(int citizenId) throws SQLException {
         return healthConditionsManager.getInfoOnSubCategories(citizenId);
     }
 
