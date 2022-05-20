@@ -2,6 +2,7 @@ package gui.model;
 
 import be.*;
 import bll.SuperAdminManager;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -47,6 +48,7 @@ public class SuperAdminModel {
 
     /**
      * Gets a list of schools using the getSchools method from the superAdminManager.
+     *
      * @return
      * @throws SQLException
      */
@@ -56,31 +58,34 @@ public class SuperAdminModel {
 
     /**
      * Gets all assigned teachers at a school using the getAssignedTeachers method from the superAdminManager.
+     *
      * @param schoolId
      * @return
      * @throws SQLException
      */
-    public List<User> getAssignedTeachers(int schoolId) throws SQLException{
+    public List<User> getAssignedTeachers(int schoolId) throws SQLException {
         return superAdminManager.getAssignedTeachers(schoolId);
     }
 
     /**
      * Gets all assigned admin at a school using the getAssignedAdmins method from the superAdminManager.
+     *
      * @param schoolId
      * @return
      * @throws SQLException
      */
-    public List<User> getAssignedAdmins(int schoolId) throws SQLException{
+    public List<User> getAssignedAdmins(int schoolId) throws SQLException {
         return superAdminManager.getAssignedAdmins(schoolId);
     }
 
     /**
      * Gets all assigned students at a school using the getAssignedStudents method from the superAdminManager.
+     *
      * @param schoolId
      * @return
      * @throws SQLException
      */
-    public List<User> getAssignedStudents(int schoolId) throws SQLException{
+    public List<User> getAssignedStudents(int schoolId) throws SQLException {
         return superAdminManager.getAssignedStudents(schoolId);
     }
 
@@ -107,6 +112,7 @@ public class SuperAdminModel {
 
     /**
      * Gets a list of all admins on a school, using the getAdminsOnSchool method from the superAdminManager.
+     *
      * @param schoolId
      * @return
      * @throws SQLException
@@ -117,6 +123,7 @@ public class SuperAdminModel {
 
     /**
      * Gets a list of citizens assigned to a school, using the getAssignedCitizen method from the superAdminManager
+     *
      * @param schoolId
      * @return
      */
@@ -126,6 +133,7 @@ public class SuperAdminModel {
 
     /**
      * Gets a list of cases assigned to a school, using the getAssignedCases method from the superAdminManager.
+     *
      * @param schoolId
      * @return
      */
@@ -135,6 +143,7 @@ public class SuperAdminModel {
 
     /**
      * Adds admin to a school using the addAdminToSchool method from the superAdminManager.
+     *
      * @param loginId
      * @param schoolId
      */
@@ -144,6 +153,7 @@ public class SuperAdminModel {
 
     /**
      * Deletes admin from a school using the deleteAdminFromSchool method from the superAdminManager.
+     *
      * @param userId
      * @param schoolId
      */
@@ -154,6 +164,7 @@ public class SuperAdminModel {
     /**
      * Gets a superadmin login, with a hashed password using the getHashedPasswordSuperAdmin  method from the
      * superAdminManager.
+     *
      * @param username
      * @param password
      * @return

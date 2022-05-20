@@ -2,6 +2,7 @@ package dal.db;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -38,6 +39,7 @@ public class DatabaseConnector {
 
     /**
      * Singleton pattern
+     *
      * @return DatabaseConnector called instance
      */
     public static DatabaseConnector getInstance() throws IOException {

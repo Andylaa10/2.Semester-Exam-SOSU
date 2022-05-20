@@ -31,6 +31,7 @@ public class CitizenModel {
 
     /**
      * Gets a list of citizens on a specific school using the getCitizensAndSchool method from citizenManager.
+     *
      * @param schoolId
      * @return
      * @throws SQLException
@@ -41,6 +42,7 @@ public class CitizenModel {
 
     /**
      * Gets info on a specific citizen using the getInfoOnCitizen method from citizenManager.
+     *
      * @param citizenId
      * @return
      * @throws SQLException
@@ -73,6 +75,7 @@ public class CitizenModel {
 
     /**
      * Returns a list of citizens from search, using the searchCitizen method from citizenManager.
+     *
      * @param query
      * @param schoolId
      * @return

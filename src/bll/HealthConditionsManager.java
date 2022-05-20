@@ -5,6 +5,7 @@ import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.HealthConditionsDAO;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,6 +16,7 @@ public class HealthConditionsManager {
 
     /**
      * Constructor
+     *
      * @throws IOException
      */
     public HealthConditionsManager() throws IOException {
@@ -23,6 +25,7 @@ public class HealthConditionsManager {
 
     /**
      * Get a list of all health conditions, by using the method from healthConditionsDAO
+     *
      * @return
      * @throws SQLException
      */
@@ -32,6 +35,7 @@ public class HealthConditionsManager {
 
     /**
      * Gets a list of all health condition subcategories, by using the method from healthConditionsDAO
+     *
      * @param categoryId
      * @return
      * @throws SQLException
@@ -42,6 +46,7 @@ public class HealthConditionsManager {
 
     /**
      * Gets text on a selected subcategories noted on the selected citizen, by using the method from healthConditionsDAO
+     *
      * @param citizenId
      * @param subCategoryId
      * @return
@@ -53,6 +58,7 @@ public class HealthConditionsManager {
 
     /**
      * Gets a list of all the information on subcategories noted on th citizen, by using the method from healthConditionsDAO
+     *
      * @param citizenId
      * @return
      */
@@ -62,6 +68,7 @@ public class HealthConditionsManager {
 
     /**
      * Inserts information to a selected subcategory, by using the method from healthConditionsDAO
+     *
      * @param citizenId
      * @param subCategoryId
      * @param professionalnote
@@ -76,6 +83,7 @@ public class HealthConditionsManager {
 
     /**
      * Edits a selected subcategory
+     *
      * @param subCategoryText
      * @throws Exception
      */
@@ -85,12 +93,13 @@ public class HealthConditionsManager {
 
     /**
      * Get the health condition data noted on a citizen, by using the method from healthConditionsDAO
+     *
      * @param citizenId
      * @param subCategoryId
      * @return
      * @throws Exception
      */
-    public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws Exception{
+    public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws Exception {
         return healthConditionsDAO.getHealthConditionData(citizenId, subCategoryId);
     }
 }

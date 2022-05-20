@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 import java.io.IOException;
 
 public class ErrorHandlerController {
@@ -22,6 +23,7 @@ public class ErrorHandlerController {
     public void setText(String text) {
         textArea.setText(text);
     }
+
     public void setTitle(String title) {
         lblTitle.setText(title);
     }
@@ -37,7 +39,7 @@ public class ErrorHandlerController {
      * @param message The message to show.
      * @return Returns the created WarningController instance.
      */
-    public static ErrorHandlerController createWarning (String message) {
+    public static ErrorHandlerController createWarning(String message) {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(ErrorHandlerController.class.getResource("/gui/view/ErrorHandlerView.fxml"));
 
@@ -61,7 +63,7 @@ public class ErrorHandlerController {
      * @param message The message to show.
      * @return Returns the created WarningController instance.
      */
-    public static ErrorHandlerController createWarning (String title, String message) {
+    public static ErrorHandlerController createWarning(String title, String message) {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(ErrorHandlerController.class.getResource("/gui/view/ErrorHandlerView.fxml"));
 

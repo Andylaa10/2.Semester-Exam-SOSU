@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -33,7 +34,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AdminViewController implements Initializable, IController {
-
 
 
     /**
@@ -258,7 +258,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * Sets text labels with the user that has logged in.
-     *
      */
     @Override
     public void setUser(User user) {
@@ -350,7 +349,7 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
-    private void setToggleGroup(){
+    private void setToggleGroup() {
         ToggleGroup group = new ToggleGroup();
         radioMale.setToggleGroup(group);
         radioFemale.setToggleGroup(group);
@@ -448,7 +447,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * loads the casesOnCitizen tableview.
-     *
      */
     private void tableViewLoadCasesOnCitizen(ObservableList<Case> allCasesOnCitizen) {
         new Thread(() -> {
@@ -588,7 +586,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * Makes you able to select a teacher from the table
-     *
      */
     private void selectedTeacher() {
         this.tvTeachers.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
@@ -660,7 +657,7 @@ public class AdminViewController implements Initializable, IController {
     private void btnHandleSaveCitizen() throws SQLException {
         if (!txtFieldCitizenFirstName.getText().isEmpty() && !txtFieldCitizenLastName.getText().isEmpty()
                 && !txtFieldCitizenSSN.getText().isEmpty() && !txtFieldCitizenAddress.getText().isEmpty() &&
-        radioMale.isSelected() || radioFemale.isSelected() || radioOther.isSelected()) {
+                radioMale.isSelected() || radioFemale.isSelected() || radioOther.isSelected()) {
             String firstName = txtFieldCitizenFirstName.getText();
             String lastName = txtFieldCitizenLastName.getText();
             String SSN = txtFieldCitizenSSN.getText();
@@ -683,7 +680,7 @@ public class AdminViewController implements Initializable, IController {
 
     }
 
-    private void clearTextFieldCreate(){
+    private void clearTextFieldCreate() {
         txtFieldCitizenFirstName.clear();
         txtFieldCitizenLastName.clear();
         txtFieldCitizenSSN.clear();
@@ -833,7 +830,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * Action event for button to delete selected student.
-     *
      */
     @FXML
     private void btnHandleDeleteStudent() throws SQLException {
@@ -915,7 +911,6 @@ public class AdminViewController implements Initializable, IController {
                     studentViewController.initializeCitizenComboBox();
 
 
-
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();
 
@@ -976,7 +971,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * Sets the selected student
-     *
      */
     private void setSelectedStudent(User student) {
         txtFieldStudentID.setText(String.valueOf(student.getId()));
@@ -1092,7 +1086,6 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * Sets the selected event
-     *
      */
     private void setSelectedCase(Case aCase) {
         txtFieldCaseID.setText(String.valueOf(aCase.getId()));
@@ -1117,7 +1110,7 @@ public class AdminViewController implements Initializable, IController {
     }
 
     private void assignDate() throws Exception {
-        selectedCase = allCases.get(allCases.size() -1);
+        selectedCase = allCases.get(allCases.size() - 1);
         if (selectedCase != null) {
             Date caseDate = new Date(System.currentTimeMillis());
             String pattern = "dd/MM/yyyy  HH:mm:ss";
@@ -1141,7 +1134,7 @@ public class AdminViewController implements Initializable, IController {
                 dataModelFacade.deleteCase(selectedCase.getId());
                 reloadCaseTable();
                 reloadCurrentCasesTable();
-                }
+            }
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en sag først");
         }
@@ -1212,14 +1205,14 @@ public class AdminViewController implements Initializable, IController {
 
     @FXML
     private void btnHandleCopySave() throws Exception {
-        if (selectedCase != null){
+        if (selectedCase != null) {
             btnHandleSaveCase();
             setCaseBtnVisibility();
         }
     }
 
     @FXML
-    private void setCaseBtnVisibility(){
+    private void setCaseBtnVisibility() {
         btnEditCase.setDisable(false);
         btnCopyCase.setDisable(false);
         btnSaveCase.setVisible(true);
@@ -1330,10 +1323,9 @@ public class AdminViewController implements Initializable, IController {
     /**
      * Action event for logout button, that gets the login view and loads that when pressed.
      * Closes current stage
-     *
      */
     @FXML
-    private void btnClickLogout( ) throws IOException {
+    private void btnClickLogout() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
         Scene scene = new Scene(loader.load());
         Stage switcher = (Stage) btnLogOut.getScene().getWindow();
@@ -1363,6 +1355,7 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * Loads the tableview for the citizens, when search is pressed.
+     *
      * @param searchData
      */
     private void searchTableViewLoad(ObservableList<Citizen> searchData) {

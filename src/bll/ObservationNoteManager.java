@@ -12,6 +12,7 @@ public class ObservationNoteManager {
 
     /**
      * Constructor
+     *
      * @throws IOException
      */
     public ObservationNoteManager() throws IOException {
@@ -20,6 +21,7 @@ public class ObservationNoteManager {
 
     /**
      * Gets an observation note assign to a citizen, by using the method from observationNoteDAO
+     *
      * @param citizenId
      * @return
      * @throws Exception
@@ -30,6 +32,7 @@ public class ObservationNoteManager {
 
     /**
      * Creates oberservation note on a selected citizen, by using the method from observationNoteDAO
+     *
      * @param citizenId
      * @param date
      * @param note
@@ -42,6 +45,7 @@ public class ObservationNoteManager {
 
     /**
      * Edits an observation note
+     *
      * @param observationNote
      * @throws Exception
      */
@@ -51,6 +55,7 @@ public class ObservationNoteManager {
 
     /**
      * Deletes a selected observations note
+     *
      * @param id
      * @throws Exception
      */
