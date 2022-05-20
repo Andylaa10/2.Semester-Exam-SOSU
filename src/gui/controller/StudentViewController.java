@@ -287,7 +287,6 @@ public class StudentViewController implements IController, Initializable {
         setFunctionalAbilityComboBoxItems();
         setExpectedLevelAssessmentComboBoxItems();
 
-        System.out.println(Thread.currentThread().isAlive());
     }
 
     /**
@@ -612,7 +611,6 @@ public class StudentViewController implements IController, Initializable {
         new Thread(() -> {
             tvCases.setItems(getCasesOnCitizenData());
         }).start();
-        System.out.println(Thread.currentThread().isAlive());
 
     }
 
@@ -632,7 +630,7 @@ public class StudentViewController implements IController, Initializable {
         new Thread(() -> {
             tvHealthConditions.setItems(getHealthConditionData());
         }).start();
-        System.out.println(Thread.currentThread().isAlive());
+
 
     }
 
@@ -650,7 +648,7 @@ public class StudentViewController implements IController, Initializable {
         new Thread(() -> {
             tvSubCategories.setItems(getSubCategories());
         }).start();
-        System.out.println(Thread.currentThread().isAlive());
+
 
     }
 
@@ -666,7 +664,7 @@ public class StudentViewController implements IController, Initializable {
             tvFunctionalConditions.setItems(getFunctionalAbilitySubCategories());
 
         }).start();
-        System.out.println(Thread.currentThread().isAlive());
+
     }
 
     private ObservableList<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories() {
@@ -1336,7 +1334,6 @@ public class StudentViewController implements IController, Initializable {
     }
 
     public void btnOpenCitizenInfo() throws Exception {
-        long startTime = System.currentTimeMillis();
 
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/gui/view/CitizenInfoView.fxml"));
@@ -1352,9 +1349,6 @@ public class StudentViewController implements IController, Initializable {
         stage.setResizable(false);
         stage.show();
 
-        long endTime = System.currentTimeMillis();
-
-        System.out.println("That took " + (endTime - startTime) + " milliseconds");
     }
 
 
