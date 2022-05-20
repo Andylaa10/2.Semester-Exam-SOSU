@@ -9,19 +9,9 @@ public class FunctionalAbility {
     private int functionalAbilitySubCategoryId;
     private String abilityNote;
     private String abilityNoteCitizen;
-    private String functionalAbilitySubCategoryName;
     private String citizenPerformance;
     private String citizenMeaningOfPerformance;
 
-    public FunctionalAbility(int functionalAbilityID, int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String abilityNoteCitizen) {
-        this.functionalAbilityID = functionalAbilityID;
-        this.citizenId = citizenId;
-        this.functionalAbilitySubCategoryId = functionalAbilitySubCategoryId;
-        this.abilityNow = abilityNow;
-        this.abilityExcepted = abilityExpected;
-        this.abilityNote = abilityNote;
-        this.abilityNoteCitizen = abilityNoteCitizen;
-    }
 
     /**
      * Overloaded constructor
@@ -47,9 +37,6 @@ public class FunctionalAbility {
         this.citizenPerformance = citizenPerformance;
         this.citizenMeaningOfPerformance = citizenMeaningOfPerformance;
         this.abilityNoteCitizen = abilityNoteCitizen;
-    }
-
-    public FunctionalAbility(String name) {
     }
 
 
@@ -169,9 +156,16 @@ public class FunctionalAbility {
 
     @Override
     public String toString() {
-        return "FunctionalAbilities{" +
+        return "FunctionalAbility{" +
                 "functionalAbilityID=" + functionalAbilityID +
-                ", functionalAbilitySubCategoryName='" + functionalAbilitySubCategoryName + '\'' +
+                ", citizenId=" + citizenId +
+                ", abilityNow=" + abilityNow +
+                ", abilityExcepted=" + abilityExcepted +
+                ", functionalAbilitySubCategoryId=" + functionalAbilitySubCategoryId +
+                ", abilityNote='" + abilityNote + '\'' +
+                ", abilityNoteCitizen='" + abilityNoteCitizen + '\'' +
+                ", citizenPerformance='" + citizenPerformance + '\'' +
+                ", citizenMeaningOfPerformance='" + citizenMeaningOfPerformance + '\'' +
                 '}';
     }
 }

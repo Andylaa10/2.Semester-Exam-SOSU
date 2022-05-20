@@ -20,10 +20,6 @@ public class ObservationNote {
         this.note = note;
     }
 
-    public ObservationNote() {
-
-    }
-
     public int getId() {
         return id;
     }

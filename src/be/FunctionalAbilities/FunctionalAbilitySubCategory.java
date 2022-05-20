@@ -6,15 +6,6 @@ public class FunctionalAbilitySubCategory {
     private String name;
 
 
-    public FunctionalAbilitySubCategory(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public FunctionalAbilitySubCategory(String name) {
-        this.name = name;
-    }
-
     /**
      * Gets the id
      */
