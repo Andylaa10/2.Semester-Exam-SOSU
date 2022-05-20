@@ -477,7 +477,7 @@ public class SuperAdminViewController implements Initializable, IController {
     private void reloadAssignedAdminTable() {
         try {
             int index = tvAssignedAdminsOnSchool.getSelectionModel().getFocusedIndex();
-            this.tvAssignedAdminsOnSchool.setItems(FXCollections.observableList(dataModelFacade.getAdminsOnSchool(selectedSchoolToAssign.getId())));
+            this.tvAssignedAdminsOnSchool.setItems(FXCollections.observableList(dataModelFacade.getAssignedAdmins(selectedSchoolOnComboBox.getId())));
             tvAssignedAdminsOnSchool.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
