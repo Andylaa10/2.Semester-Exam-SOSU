@@ -299,7 +299,7 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     @FXML
-    private void onActionCreateAdmin() throws SQLException {
+    private void onActionCreateAdmin() throws SQLException, IOException {
         String userNames = String.valueOf(dataModelFacade.getUsernames());
         if (userNames.contains(String.valueOf(txtFieldAdminUsername.getText()))) {
             ErrorHandlerController.createWarning("Fejl", "Brugernavn er allerede taget");
@@ -310,7 +310,7 @@ public class SuperAdminViewController implements Initializable, IController {
             String password = txtFieldAdminPassword.getText();
             int schoolId = Integer.parseInt(txtSchoolID.getText());
 
-            dataModelFacade.createAdmin(firstName, lastName, userName, password, UserType.ADMINISTRATOR, schoolId);
+            dataModelFacade.createAdmin(firstName, lastName, userName, encryptor.encrypt(password), UserType.ADMINISTRATOR, schoolId);
 
             tvAdmins.getSelectionModel().clearSelection();
             clearAdminTxtField();
