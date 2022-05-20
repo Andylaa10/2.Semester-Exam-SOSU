@@ -138,7 +138,7 @@ public class CitizenDAO {
     /**
      * Deletes a citizen from the database by taken the selected citizen ID
      */
-    public void deleteCitizen(int citizenID) {
+    public void deleteCitizen(int citizenID) throws SQLException {
         try (Connection connection = connector.getConnection()) {
             String sql = "DELETE FROM Citizen WHERE CitizenID =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -146,7 +146,7 @@ public class CitizenDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new SQLException();
         }
     }
 

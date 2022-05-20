@@ -26,10 +26,22 @@ public class CitizenManager {
         return citizenDAO.getCitizens();
     }
 
+    /**
+     * Gets all the citizens, that is assigned to school, by using the method from citizenDAO
+     * @param schoolId
+     * @return
+     * @throws SQLException
+     */
     public List<Citizen> getCitizensAndSchool(int schoolId) throws SQLException {
         return citizenDAO.getCitizenAndSchool(schoolId);
     }
 
+    /**
+     * Gets all the general information on a selected citizen, by using the method from citizenDAO
+     * @param citizenId
+     * @return
+     * @throws SQLException
+     */
     public Citizen getInfoOnCitizen(int citizenId) throws SQLException {
         return citizenDAO.getInfoOnCitizen(citizenId);
     }
@@ -59,6 +71,13 @@ public class CitizenManager {
         citizenDAO.editCitizen(citizen);
     }
 
+    /**
+     * Gets a list of citizen based on the query, by using the method from citizenDAO
+     * @param query
+     * @param schoolId
+     * @return
+     * @throws SQLException
+     */
     public List<Citizen> searchCitizen(String query, int schoolId) throws SQLException {
         List<Citizen> allCitizens = getCitizensAndSchool(schoolId);
         List<Citizen> searchResult = citizenSearcher.searchCitizen(allCitizens, query);

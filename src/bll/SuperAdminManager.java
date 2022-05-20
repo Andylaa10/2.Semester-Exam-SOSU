@@ -57,18 +57,41 @@ public class SuperAdminManager {
         return superAdminDAO.superAdminLogin(username, password);
     }
 
+    /**
+     * Gets a list of schools, by using the method from superAdminDAO
+     * @return
+     * @throws SQLException
+     */
     public List<School> getSchools() throws SQLException {
         return superAdminDAO.getSchools();
     }
 
+    /**
+     * Gets a list of teachers assigned on a school, by using the method from superAdminDAO
+     * @param schoolId
+     * @return
+     * @throws SQLException
+     */
     public List<User> getAssignedTeachers(int schoolId) throws SQLException{
         return superAdminDAO.getAssignedTeachers(schoolId);
     }
 
+    /**
+     * Gets a list of admins assigned on a school, by using the method from superAdminDAO
+     * @param schoolId
+     * @return
+     * @throws SQLException
+     */
     public List<User> getAssignedAdmins(int schoolId) throws SQLException{
         return superAdminDAO.getAssignedAdmins(schoolId);
     }
 
+    /**
+     * Gets a list of student assigned on a school, by using the method from superAdminDAO
+     * @param schoolId
+     * @return
+     * @throws SQLException
+     */
     public List<User> getAssignedStudents(int schoolId) throws SQLException{
         return superAdminDAO.getAssignedStudents(schoolId);
     }
@@ -100,25 +123,59 @@ public class SuperAdminManager {
         superAdminDAO.editSchool(school);
     }
 
+    /**
+     * Gets a list of admins assigned to a school, by using the method from superAdminDAO
+     * @param schoolId
+     * @return
+     * @throws SQLException
+     */
     public List<User> getAdminsOnSchool(int schoolId) throws SQLException {
         return superAdminDAO.getAdminsOnSchool(schoolId);
     }
 
+    /**
+     * Gets a list of citizens assigned to a school, by using the method from superAdminDAO
+     * @param schoolId
+     * @return
+     */
     public List<Citizen> getAssignedCitizen(int schoolId){
         return superAdminDAO.getAssignedCitizen(schoolId);
     }
+
+    /**
+     * Gets a list of cases assigned to a school, by using the method from superAdminDAO
+     * @param schoolId
+     * @return
+     */
     public List<Case> getAssignedCases(int schoolId){
         return superAdminDAO.getAssignedCases(schoolId);
     }
 
+    /**
+     * Add admin to a school, by using the method from superAdminDAO
+     * @param loginId
+     * @param schoolId
+     */
     public void addAdminToSchool(int loginId, int schoolId) {
         superAdminDAO.addAdminToSchool(loginId, schoolId);
     }
 
+    /**
+     * Deletes an admin from a school, by using the method from superAdminDAO
+     * @param userId
+     * @param schoolId
+     */
     public void deleteAdminFromSchool(int userId, int schoolId) {
         superAdminDAO.deleteAdminFromSchool(userId, schoolId);
     }
 
+    /**
+     * Gets a superAdmin with username and a hashed password
+     * @param username
+     * @param password
+     * @return
+     * @throws SQLException
+     */
     public SuperAdmin getHashedPasswordSuperAdmin(String username, String password) throws SQLException {
        return superAdminDAO.getHashedPasswordSuperAdmin(username, password);
     }

@@ -168,7 +168,7 @@ public class CaseDAO {
     /**
      * Assign a case to a citizen. Uses the CasesOnCitizen table
      */
-    public void assignCaseToCitizen(int casesId, int citizenId) {
+    public void assignCaseToCitizen(int casesId, int citizenId) throws SQLException {
         String sql = "INSERT INTO CasesOnCitizen (casesId, citizenId) VALUES (?,?);";
         try (Connection con = databaseConnector.getConnection();
              PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -176,14 +176,14 @@ public class CaseDAO {
             st.setInt(2, citizenId);
             st.executeUpdate();
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            throw new SQLException();
         }
     }
 
     /**
      * Deletes a case from a citizen. Uses the CaseOnCitizen table
      */
-    public void deleteCaseFromCitizen(int casesId, int citizenId) {
+    public void deleteCaseFromCitizen(int casesId, int citizenId) throws SQLException {
         String sql = "DELETE FROM CasesOnCitizen WHERE casesId = ? AND citizenId = ?;";
         try (Connection con = databaseConnector.getConnection();
              PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -191,7 +191,7 @@ public class CaseDAO {
             st.setInt(2, citizenId);
             st.executeUpdate();
         } catch (SQLException exception) {
-            exception.printStackTrace();
+            throw new SQLException();
         }
     }
 

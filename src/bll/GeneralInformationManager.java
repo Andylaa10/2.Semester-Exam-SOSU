@@ -10,6 +10,10 @@ public class GeneralInformationManager {
 
     private GeneralInformationDAO generalInformationDAO;
 
+    /**
+     * Constructor
+     * @throws IOException
+     */
     public GeneralInformationManager() throws IOException {
         generalInformationDAO = new GeneralInformationDAO();
     }
@@ -24,7 +28,7 @@ public class GeneralInformationManager {
     }
 
     /**
-     * Gets a list of generalInformation that is assigned to citizen, using the getGeneralInformationsOnCitizen
+     * Gets generalInformation that is assigned to citizen, using the getGeneralInformationsOnCitizen
      * method from generalInformationDAO
      * @param citizenID
      * @return
@@ -36,7 +40,7 @@ public class GeneralInformationManager {
 
 
     /**
-     * Creates  generalInformation using the createGeneralInformation method from generalInformationDAO
+     * Creates generalInformation using the createGeneralInformation method from generalInformationDAO
      */
     public GeneralInformation createGeneralInformation(int citizenId, String coping, String motivation, String resources, String roles,
                                                        String habits, String educationAndJob, String lifestory,
