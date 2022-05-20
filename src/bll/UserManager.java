@@ -45,15 +45,12 @@ public class UserManager {
         return userDAO.getAdmins();
     }
 
+    public List<User> getUsernames() throws SQLException {
+        return userDAO.getUsernames();
+    }
+
     /**
      * Creates a student using the createStudent method in userDAO
-     * @param firstName
-     * @param lastName
-     * @param username
-     * @param password
-     * @param userType
-     * @return
-     * @throws SQLException
      */
     public User createStudent(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
         return userDAO.createStudent(firstName, lastName, username, password, userType, schoolId);
@@ -61,13 +58,6 @@ public class UserManager {
 
     /**
      * Creates a teacher using the createTeacher method from userDAO
-     * @param firstName
-     * @param lastName
-     * @param username
-     * @param password
-     * @param userType
-     * @return
-     * @throws SQLException
      */
     public User createTeacher(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
         return userDAO.createTeacher(firstName, lastName, username, password, userType, schoolId);
@@ -75,13 +65,6 @@ public class UserManager {
 
     /**
      * Creates an admin using the createAdmin method from userDAO
-     * @param firstName
-     * @param lastName
-     * @param username
-     * @param password
-     * @param userType
-     * @return
-     * @throws SQLException
      */
     public User createAdmin(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
         return userDAO.createAdmin(firstName, lastName, username, password, userType, schoolId);

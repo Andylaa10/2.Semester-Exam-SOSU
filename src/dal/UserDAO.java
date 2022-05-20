@@ -1,5 +1,6 @@
 package dal;
 
+import be.School;
 import be.User;
 import be.enums.UserType;
 import bll.utilities.BCrypt.BCrypt;
@@ -105,6 +106,27 @@ public class UserDAO {
             throw new SQLException();
         }
         return allAdmins;
+    }
+
+    public List<User> getUsernames() {
+        ArrayList<User> allUsernames = new ArrayList<>();
+
+        try (Connection connection = databaseConnector.getConnection()) {
+            String sql = "SELECT loginID, [username] FROM [Login];";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultset = preparedStatement.executeQuery();
+            while (resultset.next()) {
+                int loginID = resultset.getInt("loginID");
+                String username = resultset.getString("username");
+
+                User user = new User(loginID, username);
+                allUsernames.add(user);
+            }
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return allUsernames;
     }
 
     /**
@@ -376,8 +398,8 @@ public class UserDAO {
      */
     public static void main(String[] args) throws Exception {
         UserDAO dao = new UserDAO();
-
-        dao.getHashedPassword("BCryptCheck", "hej123", 2);
+        System.out.println(dao.getUsernames());
+        //dao.getHashedPassword("BCryptCheck", "hej123", 2);
         //dao.createAdmin("John", "Johnson", "Admin", "1", UserType.ADMINISTRATOR, 1);
         //dao.createTeacher("Kim", "Larsen", "Teacher", "1", UserType.TEACHER,1);
         //dao.createStudent("andy", "lam", "Student", "1", UserType.STUDENT,1);

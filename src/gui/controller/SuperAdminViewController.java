@@ -300,12 +300,21 @@ public class SuperAdminViewController implements Initializable, IController {
 
     @FXML
     private void onActionCreateAdmin() throws SQLException {
+        String userNames = String.valueOf(dataModelFacade.getUsernames());
+        if (userNames.contains(String.valueOf(txtFieldAdminUsername.getText()))) {
+            ErrorHandlerController.createWarning("Fejl", "Brugernavn er allerede taget");
+            System.out.println(userNames);
+        }
+
         if (!txtFieldAdminFirstName.getText().isEmpty() && !txtFieldAdminLastName.getText().isEmpty() && !txtFieldAdminUsername.getText().isEmpty() && !txtFieldAdminPassword.getText().isEmpty() && comboSchool.getSelectionModel().getSelectedItem() != null){
             String firstName = txtFieldAdminFirstName.getText();
             String lastName = txtFieldAdminLastName.getText();
             String userName = txtFieldAdminUsername.getText();
             String password = txtFieldAdminPassword.getText();
             int schoolId = Integer.parseInt(txtSchoolID.getText());
+
+
+
             //TODO Warning Samme username
             dataModelFacade.createAdmin(firstName, lastName, userName, password, UserType.ADMINISTRATOR, schoolId);
             clearAdminTxtField();

@@ -14,14 +14,6 @@ public class User implements ILogin {
     private int schoolId;
 
 
-    public User(int id, String firstName, String lastName, String username, UserType userType) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.userType = userType;
-    }
-
     /**
      * Overloaded constructor with id, firstName, lastName, username, password and usertype
      */
@@ -51,6 +43,19 @@ public class User implements ILogin {
         this.username = username;
         this.userType = userType;
         this.schoolId = schoolId;
+    }
+
+    public User(int id, String firstName, String lastName, String username, UserType userType) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.userType = userType;
+    }
+
+    public User(int id, String username) {
+        this.id = id;
+        this.username = username;
     }
 
     public User(String hashedPassword) {
@@ -167,6 +172,7 @@ public class User implements ILogin {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", userType=" + userType +
+                ", schoolId=" + schoolId +
                 '}';
     }
 }

@@ -40,6 +40,10 @@ public class UserModel {
         return userManager.getAdmins();
     }
 
+    public List<User> getUsernames() throws SQLException {
+        return userManager.getUsernames();
+    }
+
     /**
      * Creates a student using the createStudent method from userManager
      */

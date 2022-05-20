@@ -68,6 +68,10 @@ public class DataModelFacade {
         return userModel.getAdmins();
     }
 
+    public List<User> getUsernames() throws SQLException {
+        return userModel.getUsernames();
+    }
+
     public List<HealthCondition> getHealthConditions() throws SQLException {
         return healthConditionsModel.getHealthConditions();
     }
