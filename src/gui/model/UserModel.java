@@ -22,6 +22,14 @@ public class UserModel {
         return userManager.getStudents();
     }
 
+    /**
+     * Gets a user login with the hashed password, using the getHashedPassword method from userManager.
+     * @param userName
+     * @param password
+     * @param schoolId
+     * @return
+     * @throws SQLException
+     */
     public User getHashedPassword(String userName, String password, int schoolId) throws SQLException {
         return userManager.getHashedPassword(userName, password, schoolId);
     }
@@ -40,6 +48,11 @@ public class UserModel {
         return userManager.getAdmins();
     }
 
+    /**
+     * Get a list of userNames using the getUsernames method from the userManager.
+     * @return
+     * @throws SQLException
+     */
     public List<User> getUsernames() throws SQLException {
         return userManager.getUsernames();
     }

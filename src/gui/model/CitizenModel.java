@@ -29,10 +29,22 @@ public class CitizenModel {
         return citizenManager.getCitizens();
     }
 
+    /**
+     * Gets a list of citizens on a specific school using the getCitizensAndSchool method from citizenManager.
+     * @param schoolId
+     * @return
+     * @throws SQLException
+     */
     public List<Citizen> getCitizensAndSchool(int schoolId) throws SQLException {
         return citizenManager.getCitizensAndSchool(schoolId);
     }
 
+    /**
+     * Gets info on a specific citizen using the getInfoOnCitizen method from citizenManager.
+     * @param citizenId
+     * @return
+     * @throws SQLException
+     */
     public Citizen getInfoOnCitizen(int citizenId) throws SQLException {
         return citizenManager.getInfoOnCitizen(citizenId);
     }
@@ -59,6 +71,13 @@ public class CitizenModel {
         citizenManager.editCitizen(citizen);
     }
 
+    /**
+     * Returns a list of citizens from search, using the searchCitizen method from citizenManager.
+     * @param query
+     * @param schoolId
+     * @return
+     * @throws SQLException
+     */
     public List<Citizen> searchCitizen(String query, int schoolId) throws SQLException {
         List<Citizen> searchResults = null;
 

@@ -37,9 +37,6 @@ public class FunctionalAbilityManager {
         return functionalAbilitiesDAO.getSubcategoryData(citizenId, functionalAbilitySubCategoryId);
     }
 
-    public FunctionalAbility abilitiesOnCitizen(int citizenId) throws SQLException {
-        return functionalAbilitiesDAO.abilitiesOnCitizen(citizenId);
-    }
 
     public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) throws SQLException {
         return functionalAbilitiesDAO.createFunctionalAbilities(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote,citizenPerformance,citizenMeaningOfPerformance, abilityNoteCitizen);

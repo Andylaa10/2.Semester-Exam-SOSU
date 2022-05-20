@@ -190,35 +190,6 @@ public class FunctionalAbilitiesDAO {
         return allFASubcategories;
     }
 
-    /**
-     * Gets all the functional abilities on the selected citizen
-     * @param citizenId
-     * @return
-     * @throws SQLException
-     */
-    public FunctionalAbility abilitiesOnCitizen(int citizenId) throws SQLException {
-        try (Connection connection = databaseConnector.getConnection()){
-            String sql = "SELECT abilityNow, abilityExpected FROM FunctionalAbilities INNER JOIN Citizen ON FunctionalAbilities.abilityID = Citizen.functionalAbilityId WHERE citizenID =?;";
-
-            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setInt(1, citizenId);
-            preparedStatement.execute();
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()){
-                int functionalAbilityID = rs.getInt("abilityID");
-                int functionalAbilitySubCategoryId = rs.getInt("functionalAbilitySubCategoryId");
-                int abilityNow = rs.getInt("abilityNow");
-                int abilityExpected = rs.getInt("abilityExpected");
-                String abilityNote = rs.getString("abilityExcepted");
-                String abilityNoteCitizen = rs.getString("abilityNoteCitizen");
-
-                FunctionalAbility functionalAbility = new FunctionalAbility(functionalAbilityID, citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, abilityNoteCitizen);
-
-                return functionalAbility;
-            }
-        }
-        return null;
-    }
 
 
     public FunctionalAbility createFunctionalAbilities(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance,  String abilityNoteCitizen) throws SQLException{
