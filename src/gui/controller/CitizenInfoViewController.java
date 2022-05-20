@@ -21,12 +21,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class CitizenInfoViewController implements Initializable, Runnable {
+public class CitizenInfoViewController implements Initializable {
 
     @FXML
     private Button btnSaveDateAndNote;
@@ -145,15 +146,12 @@ public class CitizenInfoViewController implements Initializable, Runnable {
 
     }
 
-    private void createFunctionalAbilities() throws SQLException {
-
+    private void createFunctionalAbilities() throws SQLException{
         ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFAInfoOnSubCategories(citizenId));
         for (FunctionalAbilitySubCategoryText FAOnCitizen : allFunctionalAbilitySubCategories) {
             int functionalAbilityId = FAOnCitizen.getSubCategoryId();
             newFAToVBox(functionalAbilityId);
         }
-
-
     }
 
 
@@ -406,7 +404,7 @@ public class CitizenInfoViewController implements Initializable, Runnable {
         txtFieldFA.setMinWidth(215);
 
         int faAbilityId = faSubCategoryText.getFunctionalAbilityID();
-        switch (faAbilityId){
+        switch (faAbilityId) {
             case 1:
                 txtFieldFA.setText("Egenomsorg");
                 break;
@@ -587,12 +585,4 @@ public class CitizenInfoViewController implements Initializable, Runnable {
 
     }
 
-    @Override
-    public void run() {
-        try {
-            createFunctionalAbilities();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

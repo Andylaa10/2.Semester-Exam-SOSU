@@ -674,6 +674,20 @@ public class StudentViewController implements IController, Initializable {
         return allFunctionalAbilitySubCategories;
     }
 
+    /**
+     * Loads the tableview for the citizens, when search is pressed.
+     */
+    private void searchTableViewLoad(ObservableList<Citizen> searchData) {
+        tvCitizens.setItems(getSearchData());
+    }
+
+    /**
+     * @return searchData;
+     */
+    private ObservableList<Citizen> getSearchData() {
+        return searchData;
+    }
+
 
     /**
      * Selects a citizen from the citizens TableView
@@ -1323,6 +1337,8 @@ public class StudentViewController implements IController, Initializable {
     }
 
     public void btnOpenCitizenInfo() throws Exception {
+        long startTime = System.currentTimeMillis();
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/gui/view/CitizenInfoView.fxml"));
 
@@ -1336,6 +1352,10 @@ public class StudentViewController implements IController, Initializable {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("That took " + (endTime - startTime) + " milliseconds");
     }
 
 
@@ -1360,19 +1380,5 @@ public class StudentViewController implements IController, Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Loads the tableview for the citizens, when search is pressed.
-     */
-    private void searchTableViewLoad(ObservableList<Citizen> searchData) {
-        tvCitizens.setItems(getSearchData());
-    }
-
-    /**
-     * @return searchData;
-     */
-    private ObservableList<Citizen> getSearchData() {
-        return searchData;
     }
 }
