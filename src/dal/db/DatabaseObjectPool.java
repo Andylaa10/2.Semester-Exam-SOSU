@@ -5,8 +5,9 @@ import java.util.Hashtable;
 
 /**
  * ConnectionPool
- * @author SourceMaking
+ *
  * @param <T>
+ * @author SourceMaking
  */
 
 public abstract class DatabaseObjectPool<T> {

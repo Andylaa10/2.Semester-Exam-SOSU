@@ -215,7 +215,6 @@ public class TeacherViewController implements Initializable, IController {
     private Encryptor encryptor;
 
 
-
     private boolean hasSearched = true;
     private ObservableList<Citizen> searchData = FXCollections.observableArrayList();
 

@@ -3,6 +3,7 @@ package bll;
 import be.Citizen;
 import bll.utilities.CitizenSearcher;
 import dal.CitizenDAO;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -19,6 +20,7 @@ public class CitizenManager {
 
     /**
      * Get a list of citizen using the getCitizens method from citizenDAO
+     *
      * @return
      * @throws SQLException
      */
@@ -28,6 +30,7 @@ public class CitizenManager {
 
     /**
      * Gets all the citizens, that is assigned to school, by using the method from citizenDAO
+     *
      * @param schoolId
      * @return
      * @throws SQLException
@@ -38,6 +41,7 @@ public class CitizenManager {
 
     /**
      * Gets all the general information on a selected citizen, by using the method from citizenDAO
+     *
      * @param citizenId
      * @return
      * @throws SQLException
@@ -55,6 +59,7 @@ public class CitizenManager {
 
     /**
      * Deletes a citizen using the deleteCitizen method from citizenDAO
+     *
      * @param
      * @throws Exception
      */
@@ -64,6 +69,7 @@ public class CitizenManager {
 
     /**
      * Edits a citizen using the editCitizen method in citizenDAO
+     *
      * @param citizen
      * @throws Exception
      */
@@ -73,6 +79,7 @@ public class CitizenManager {
 
     /**
      * Gets a list of citizen based on the query, by using the method from citizenDAO
+     *
      * @param query
      * @param schoolId
      * @return

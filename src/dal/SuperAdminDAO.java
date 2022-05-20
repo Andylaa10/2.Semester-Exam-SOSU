@@ -6,6 +6,7 @@ import bll.utilities.BCrypt.BCrypt;
 import bll.utilities.Encryptor;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -392,6 +393,7 @@ public class SuperAdminDAO {
 
     /**
      * Making a students list, connecting to the database and adding the results to our ArrayList.
+     *
      * @return a list of students or an empty list of students.
      */
     public SuperAdmin getHashedPasswordSuperAdmin(String username, String password) throws SQLException {
@@ -408,7 +410,7 @@ public class SuperAdminDAO {
                 String hashedPassword = resultset.getString("password");
 
 
-                if(BCrypt.checkpw(password, hashedPassword)){
+                if (BCrypt.checkpw(password, hashedPassword)) {
                     SuperAdmin superAdmin = new SuperAdmin(id, username, password);
                     return superAdmin;
                 }

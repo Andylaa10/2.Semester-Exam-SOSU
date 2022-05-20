@@ -3,6 +3,7 @@ package dal;
 import be.GeneralInformation;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class GeneralInformationDAO {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT * FROM GeneralInformation WHERE citizenId =?;";
 
-            PreparedStatement preparedStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setInt(1, citizenId);
             preparedStatement.execute();
@@ -165,8 +166,8 @@ public class GeneralInformationDAO {
 
     public static void main(String[] args) throws Exception {
         GeneralInformationDAO generalInformationDAO = new GeneralInformationDAO();
-        generalInformationDAO.createGeneralInformation(8,"coping", "motivation", "resources",
-              "roles", "habits", "educationAndJob", "lifeStory", "network", "healthInformation", "equipmentAids", "homeLayout");
+        generalInformationDAO.createGeneralInformation(8, "coping", "motivation", "resources",
+                "roles", "habits", "educationAndJob", "lifeStory", "network", "healthInformation", "equipmentAids", "homeLayout");
         //generalInformationDAO.deleteGeneralInformation(1);
         //System.out.println(generalInformationDAO.getGeneralInformationOnCitizen(13));
         System.out.println(generalInformationDAO.getGeneralInformationOnCitizen(8));

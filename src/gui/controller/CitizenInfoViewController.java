@@ -150,7 +150,7 @@ public class CitizenInfoViewController implements Initializable {
 
     }
 
-    private void createFunctionalAbilities() throws SQLException{
+    private void createFunctionalAbilities() throws SQLException {
         ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFAInfoOnSubCategories(citizenId));
         for (FunctionalAbilitySubCategoryText FAOnCitizen : allFunctionalAbilitySubCategories) {
             int functionalAbilityId = FAOnCitizen.getSubCategoryId();

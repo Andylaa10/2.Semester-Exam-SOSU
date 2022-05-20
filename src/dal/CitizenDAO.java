@@ -4,6 +4,7 @@ import be.Citizen;
 import be.GeneralInformation;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class CitizenDAO {
 
     /**
      * Making a citizens list, connecting to the database and adding the results to our ArrayList.
+     *
      * @return a list of citizens or an empty list of citizens.
      */
     public List<Citizen> getCitizens() throws SQLException {
@@ -83,7 +85,7 @@ public class CitizenDAO {
         try (Connection connection = connector.getConnection()) {
             String sql = "SELECT * FROM Citizen WHERE citizenID = ?;";
 
-            PreparedStatement preparedStatement = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setInt(1, citizenId);
             preparedStatement.execute();
@@ -96,7 +98,7 @@ public class CitizenDAO {
                 String address = resultset.getString("address");
                 String sex = resultset.getString("sex");
 
-               Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex);
+                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex);
                 return citizen;
             }
 
@@ -119,7 +121,7 @@ public class CitizenDAO {
                 preparedStatement.setString(3, SSN);
                 preparedStatement.setString(4, address);
                 preparedStatement.setString(5, sex);
-                preparedStatement.setInt(6,schoolId);
+                preparedStatement.setInt(6, schoolId);
                 preparedStatement.execute();
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 int id = 0;
@@ -177,15 +179,15 @@ public class CitizenDAO {
     public static void main(String[] args) throws Exception {
         CitizenDAO citizenDAO = new CitizenDAO();
         /**
-        citizenDAO.createCitizen("Andy Lam", "Nguyen", "040100-1111", "Golfvej 8", "Male", 1);
-        citizenDAO.createCitizen("Kristian", "Hollænder", "140396-2222", "Hollændervej 4", "Male", 1);
-        citizenDAO.createCitizen("Marcus", "Iversen", "271100-3333", "Skolegade 8", "Male", 1);
-        citizenDAO.createCitizen("Lise", "Billeschou", "170901-4444", "Skolegade 8", "Female", 1);
-        citizenDAO.createCitizen("Agnes", "Mynte", "140598-5555", "Transvej 2", "Other", 2);
-        citizenDAO.createCitizen("Peter", "Stegger", "260869-6666", "Hackervej 69", "Male", 2);
-        citizenDAO.createCitizen("Trine", "Thomsen", "190974-7777", "ITO Vej 12", "Female", 2);
-        citizenDAO.createCitizen("Jeppe", "Led", "221067-8888", "Designvej 96", "Male", 2);
-        */
+         citizenDAO.createCitizen("Andy Lam", "Nguyen", "040100-1111", "Golfvej 8", "Male", 1);
+         citizenDAO.createCitizen("Kristian", "Hollænder", "140396-2222", "Hollændervej 4", "Male", 1);
+         citizenDAO.createCitizen("Marcus", "Iversen", "271100-3333", "Skolegade 8", "Male", 1);
+         citizenDAO.createCitizen("Lise", "Billeschou", "170901-4444", "Skolegade 8", "Female", 1);
+         citizenDAO.createCitizen("Agnes", "Mynte", "140598-5555", "Transvej 2", "Other", 2);
+         citizenDAO.createCitizen("Peter", "Stegger", "260869-6666", "Hackervej 69", "Male", 2);
+         citizenDAO.createCitizen("Trine", "Thomsen", "190974-7777", "ITO Vej 12", "Female", 2);
+         citizenDAO.createCitizen("Jeppe", "Led", "221067-8888", "Designvej 96", "Male", 2);
+         */
         System.out.println(citizenDAO.getCitizens());
 
     }
