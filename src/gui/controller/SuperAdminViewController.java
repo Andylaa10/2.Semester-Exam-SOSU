@@ -391,7 +391,9 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     private void tableViewLoadSchools(ObservableList<School> allSchools) {
-        tvSchools.setItems(getSchoolData());
+        new Thread(() -> {
+            tvSchools.setItems(getSchoolData());
+        }).start();
     }
 
     private ObservableList<School> getSchoolData() {
@@ -399,7 +401,9 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     private void tableViewLoadAdmins(ObservableList<User> allAdmins) {
-        tvAdmins.setItems(getAdminData());
+        new Thread(() -> {
+            tvAdmins.setItems(getAdminData());
+        }).start();
     }
 
     private ObservableList<User> getAdminData() {
@@ -408,7 +412,9 @@ public class SuperAdminViewController implements Initializable, IController {
 
 
     private void tableViewLoadAssignAdmins(ObservableList<User> allAssignAdmins) {
-        tvAssignAdmin.setItems(getAssignAdminData());
+        new Thread(() -> {
+            tvAssignAdmin.setItems(getAssignAdminData());
+        }).start();
     }
 
     private ObservableList<User> getAssignAdminData() {
@@ -416,7 +422,9 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     private void tableViewLoadAssignedSchools(ObservableList<School> allAssignedSchools) {
-        tvAssignedSchool.setItems(getAssignedSchoolData());
+        new Thread(() -> {
+            tvAssignedSchool.setItems(getAssignedSchoolData());
+        }).start();
     }
 
     private ObservableList<School> getAssignedSchoolData() {
@@ -424,7 +432,9 @@ public class SuperAdminViewController implements Initializable, IController {
     }
 
     private void tableViewLoadAssignedAdmins(ObservableList<User> allAssignedAdmins) {
-        tvAssignedAdminsOnSchool.setItems(getAssignedAdminData());
+        new Thread(() -> {
+            tvAssignedAdminsOnSchool.setItems(getAssignedAdminData());
+        }).start();
     }
 
     private ObservableList<User> getAssignedAdminData() {
