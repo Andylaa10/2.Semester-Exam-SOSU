@@ -1,10 +1,8 @@
 package dal;
 
 import be.Case;
-import be.Citizen;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
-
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,6 +12,11 @@ public class CaseDAO {
 
     private DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
 
+
+    /**
+     * Constructor
+     * @throws IOException
+     */
     public CaseDAO() throws IOException {
 
     }

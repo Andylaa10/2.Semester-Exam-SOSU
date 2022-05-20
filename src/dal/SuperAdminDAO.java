@@ -17,6 +17,10 @@ public class SuperAdminDAO {
     private final DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
 
 
+    /**
+     * Constructor
+     * @throws IOException
+     */
     public SuperAdminDAO() throws IOException {
     }
 
@@ -257,6 +261,12 @@ public class SuperAdminDAO {
         return allAdmins;
     }
 
+    /**
+     * Gets a list of citizens assigned to a school
+     * @param schoolId
+     * @return
+     * @throws SQLException
+     */
     public List<Citizen> getAssignedCitizen(int schoolId) throws SQLException {
         ArrayList<Citizen> allCitizens = new ArrayList<>();
         try (Connection connection = databaseConnector.getConnection()) {
@@ -283,6 +293,12 @@ public class SuperAdminDAO {
         }
     }
 
+    /**
+     * Gets a list of cases assigned to a school
+     * @param schoolId
+     * @return
+     * @throws SQLException
+     */
     public List<Case> getAssignedCases(int schoolId) throws SQLException {
         ArrayList<Case> allCases = new ArrayList<>();
         try (Connection connection = databaseConnector.getConnection()) {

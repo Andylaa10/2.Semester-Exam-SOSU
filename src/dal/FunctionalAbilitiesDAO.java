@@ -14,6 +14,11 @@ public class FunctionalAbilitiesDAO {
 
     private DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
 
+
+    /**
+     * Constructor
+     * @throws IOException
+     */
     public FunctionalAbilitiesDAO() throws IOException {
     }
 
@@ -51,6 +56,12 @@ public class FunctionalAbilitiesDAO {
         return allFunctionalAbilities;
     }
 
+    /**
+     * Gets a list of all functional ability subcategories
+     * @param functionalAbilitySubCategoryId
+     * @return
+     * @throws SQLException
+     */
     public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException {
         ArrayList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories = new ArrayList<>();
 
@@ -78,6 +89,14 @@ public class FunctionalAbilitiesDAO {
         return allFunctionalAbilitySubCategories;
     }
 
+
+    /**
+     * Gets functional abilities subcategory data
+     * @param citizenId
+     * @param functionalAbilitySubCategoryId
+     * @return
+     * @throws SQLException
+     */
     public FunctionalAbility getSubcategoryData(int citizenId, int functionalAbilitySubCategoryId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT * FROM FunctionalAbility WHERE citizenId = ? AND functionalAbilitySubCategoryId =?;";
@@ -107,6 +126,13 @@ public class FunctionalAbilitiesDAO {
         return null;
     }
 
+    /**
+     * Gets all the citizens functional abilities with information noted by a student
+     * @param citizenId
+     * @param functionalAbilitySubCategoryId
+     * @return
+     * @throws SQLException
+     */
     public FunctionalAbilitySubCategoryText getInfoOnSubCategory(int citizenId, int functionalAbilitySubCategoryId) throws SQLException {
 
         try (Connection connection = databaseConnector.getConnection()) {
@@ -144,7 +170,12 @@ public class FunctionalAbilitiesDAO {
         return null;
     }
 
-
+    /**
+     * Gets a list of the citizens functional ability information
+     * @param citizenId
+     * @return
+     * @throws SQLException
+     */
     public List<FunctionalAbilitySubCategoryText> getInfoOnSubCategories(int citizenId) throws SQLException {
         ArrayList<FunctionalAbilitySubCategoryText> allFASubcategories = new ArrayList();
 
@@ -185,6 +216,19 @@ public class FunctionalAbilitiesDAO {
     }
 
 
+    /**
+     * Creates the functional abilities
+     * @param citizenId
+     * @param functionalAbilitySubCategoryId
+     * @param abilityNow
+     * @param abilityExpected
+     * @param abilityNote
+     * @param citizenPerformance
+     * @param citizenMeaningOfPerformance
+     * @param abilityNoteCitizen
+     * @return
+     * @throws SQLException
+     */
     public FunctionalAbility createFunctionalAbilities(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "INSERT INTO FunctionalAbility (citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote , citizenPerfomance, citizenMeaningOfPerfomance, abilityNoteCitizen) VALUES (?,?,?,?,?,?,?,?)";
@@ -213,6 +257,11 @@ public class FunctionalAbilitiesDAO {
         }
     }
 
+    /**
+     * Edits a functional ability
+     * @param functionalAbility
+     * @throws SQLException
+     */
     public void editAbilities(FunctionalAbility functionalAbility) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE FunctionalAbility SET abilityNow = ?, abilityExpected = ?, abilityNote = ?, citizenPerfomance =?, citizenMeaningOfPerfomance =?, abilityNoteCitizen = ? WHERE citizenId = ? AND functionalAbilitySubCategoryId = ?;";
@@ -235,6 +284,11 @@ public class FunctionalAbilitiesDAO {
         }
     }
 
+    /**
+     * Deletes a functional ability
+     * @param id
+     * @throws SQLException
+     */
     public void deleteFunctionalAbility(int id) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "DELETE FROM FunctionalAbility WHERE abilityID =?;";

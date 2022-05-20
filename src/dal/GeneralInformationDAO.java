@@ -13,6 +13,10 @@ public class GeneralInformationDAO {
 
     private final DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
 
+    /**
+     * Constructor
+     * @throws IOException
+     */
     public GeneralInformationDAO() throws IOException {
     }
 
@@ -54,6 +58,12 @@ public class GeneralInformationDAO {
         return allGeneralInformations;
     }
 
+    /**
+     * Gets all the general information on a citizen
+     * @param citizenId
+     * @return
+     * @throws SQLException
+     */
     public GeneralInformation getGeneralInformationOnCitizen(int citizenId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT * FROM GeneralInformation WHERE citizenId =?;";
@@ -89,6 +99,23 @@ public class GeneralInformationDAO {
         return null;
     }
 
+    /**
+     * Creates general information on a selected citizen
+     * @param citizenId
+     * @param coping
+     * @param motivation
+     * @param resources
+     * @param roles
+     * @param habits
+     * @param educationAndJob
+     * @param lifeStory
+     * @param network
+     * @param healthInformation
+     * @param equipmentAids
+     * @param homeLayout
+     * @return
+     * @throws SQLException
+     */
     public GeneralInformation createGeneralInformation(int citizenId, String coping, String motivation, String resources, String roles,
                                                        String habits, String educationAndJob, String lifeStory,
                                                        String network, String healthInformation, String equipmentAids,
@@ -127,6 +154,11 @@ public class GeneralInformationDAO {
         }
     }
 
+    /**
+     * Edits general information
+     * @param generalInformation
+     * @throws SQLException
+     */
     public void editGeneralInformation(GeneralInformation generalInformation) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE GeneralInformation SET coping = ?, motivation = ?, resources = ?, roles = ?," +
@@ -153,6 +185,11 @@ public class GeneralInformationDAO {
         }
     }
 
+    /**
+     * Deletes general information on a citizen
+     * @param id
+     * @throws SQLException
+     */
     public void deleteGeneralInformation(int id) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "DELETE FROM GeneralInformation WHERE generalInfoID =?;";

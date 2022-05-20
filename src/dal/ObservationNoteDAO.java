@@ -11,10 +11,20 @@ public class ObservationNoteDAO {
 
     private DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
 
-
+    /**
+     * Constructor
+     * @throws IOException
+     */
     public ObservationNoteDAO() throws IOException {
     }
 
+
+    /**
+     * Gets observation note on a selected citizen
+     * @param citizenId
+     * @return
+     * @throws SQLException
+     */
     public ObservationNote getObservationNote(int citizenId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT * FROM ObservationNote WHERE citizenId =?;";
@@ -37,6 +47,14 @@ public class ObservationNoteDAO {
         return null;
     }
 
+    /**
+     * Creates an observation on a selected citizen
+     * @param citizenId
+     * @param date
+     * @param note
+     * @return
+     * @throws SQLException
+     */
     public ObservationNote createObservationNote(int citizenId, String date, String note) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "INSERT INTO ObservationNote (citizenId, date, note) VALUES (?,?,?);";
@@ -59,6 +77,11 @@ public class ObservationNoteDAO {
         }
     }
 
+    /**
+     * Edits observation note on a citizen
+     * @param observationNote
+     * @throws SQLException
+     */
     public void editObservationNote(ObservationNote observationNote) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE ObservationNote SET date = ?, note = ? WHERE citizenId = ? ;";
@@ -75,6 +98,11 @@ public class ObservationNoteDAO {
     }
 
 
+    /**
+     * Deletes observations note on a citizen
+     * @param id
+     * @throws SQLException
+     */
     public void deleteObservationNote(int id) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "DELETE FROM ObservationNote WHERE ObservationNoteID = ?;";

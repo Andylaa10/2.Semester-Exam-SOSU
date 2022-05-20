@@ -15,6 +15,11 @@ public class UserDAO {
 
     private final DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
 
+
+    /**
+     * Constructor
+     * @throws IOException
+     */
     public UserDAO() throws IOException {
     }
 
@@ -111,6 +116,11 @@ public class UserDAO {
         return allAdmins;
     }
 
+    /**
+     * Gets a list of usernames in the database
+     * @return
+     * @throws SQLException
+     */
     public List<User> getUsernames() throws SQLException {
         ArrayList<User> allUsernames = new ArrayList<>();
 

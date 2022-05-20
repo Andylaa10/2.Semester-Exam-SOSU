@@ -1,10 +1,8 @@
 package dal;
 
 import be.Citizen;
-import be.GeneralInformation;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
-
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,6 +12,10 @@ public class CitizenDAO {
 
     private final DatabaseConnector connector = DatabaseConnector.getInstance();
 
+    /**
+     * Constructor
+     * @throws IOException
+     */
     public CitizenDAO() throws IOException {
     }
 
@@ -49,6 +51,12 @@ public class CitizenDAO {
         return allCitizens;
     }
 
+    /**
+     * Gets a list of citizens assigned to a school
+     * @param schoolId
+     * @return
+     * @throws SQLException
+     */
     public List<Citizen> getCitizenAndSchool(int schoolId) throws SQLException {
         ArrayList<Citizen> allCitizens = new ArrayList<>();
 

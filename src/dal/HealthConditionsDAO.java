@@ -15,9 +15,18 @@ public class HealthConditionsDAO {
     private DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
 
 
+    /**
+     * Constructor
+     * @throws IOException
+     */
     public HealthConditionsDAO() throws IOException {
     }
 
+    /**
+     * Gets a list of all health conditions
+     * @return
+     * @throws SQLException
+     */
     public List<HealthCondition> getHealthConditions() throws SQLException {
         ArrayList<HealthCondition> allHealthConditions = new ArrayList<>();
 
@@ -39,6 +48,13 @@ public class HealthConditionsDAO {
         return allHealthConditions;
     }
 
+    /**
+     * Gets health condition on a selected citizen
+     * @param citizenId
+     * @param subCategoryId
+     * @return
+     * @throws SQLException
+     */
     public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT * FROM SubCatTextOnCitizen WHERE citizenId =? AND subCategoryId = ?;";
@@ -64,6 +80,13 @@ public class HealthConditionsDAO {
         return null;
     }
 
+    /**
+     * Gets all information on general information on citizen
+     * @param citizenId
+     * @param subCategoryId
+     * @return
+     * @throws SQLException
+     */
     public HealthConditionSubCategoryText getInfoOnSubCategory(int citizenId, int subCategoryId) throws SQLException {
 
         try (Connection connection = databaseConnector.getConnection()) {
@@ -97,6 +120,12 @@ public class HealthConditionsDAO {
         return null;
     }
 
+    /**
+     * Gets a list of the selected citizens' information on general information
+     * @param citizenId
+     * @return
+     * @throws SQLException
+     */
     public List<HealthConditionSubCategoryText> getInfoOnSubCategories(int citizenId) throws SQLException {
         ArrayList<HealthConditionSubCategoryText> allHCSubCategoryInfo = new ArrayList<>();
 
@@ -131,6 +160,12 @@ public class HealthConditionsDAO {
         return allHCSubCategoryInfo;
     }
 
+    /**
+     * Gets a list of all health condition subcategories
+     * @param categoryId
+     * @return
+     * @throws SQLException
+     */
     public List<HealthConditionSubCategory> getSubCategories(int categoryId) throws SQLException {
         ArrayList<HealthConditionSubCategory> allSubCategories = new ArrayList<>();
 
@@ -155,6 +190,16 @@ public class HealthConditionsDAO {
         return allSubCategories;
     }
 
+    /**
+     * Insert data into a selected health condition subcategory on a selected citizen
+     * @param citizenId
+     * @param subCategoryId
+     * @param professionalNote
+     * @param currentLevelAssessment
+     * @param expectedLevelAssessment
+     * @param condition
+     * @throws SQLException
+     */
     public void insertIntoSubCategory(int citizenId, int subCategoryId, String professionalNote, String currentLevelAssessment, String expectedLevelAssessment, int condition) throws SQLException {
         String sql = "INSERT INTO SubCatTextOnCitizen (citizenId, SubCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, Condition) VALUES (?,?,?,?,?,?);";
         try (Connection connection = databaseConnector.getConnection();
@@ -172,6 +217,11 @@ public class HealthConditionsDAO {
         }
     }
 
+    /**
+     * Edits a health condition subcategory
+     * @param subCategoryText
+     * @throws SQLException
+     */
     public void editSubcategory(HealthConditionSubCategoryText subCategoryText) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "UPDATE SubCatTextOnCitizen SET professionalNote = ?, currentLevelAssessment = ?, expectedLevelAssessment = ?, Condition = ? WHERE citizenId =? AND subCategoryId=?";
