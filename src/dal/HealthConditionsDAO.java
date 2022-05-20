@@ -4,6 +4,7 @@ import be.HealthCondition.HealthCondition;
 import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
 import dal.db.DatabaseConnector;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -182,7 +183,7 @@ public class HealthConditionsDAO {
             preparedStatement.setInt(5, subCategoryText.getCitizenId());
             preparedStatement.setInt(6, subCategoryText.getCategoryId());
             preparedStatement.executeUpdate();
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new SQLException();
         }
     }

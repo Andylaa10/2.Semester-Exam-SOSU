@@ -3,6 +3,7 @@ package dal;
 import be.ObservationNote;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
+
 import java.io.IOException;
 import java.sql.*;
 
@@ -20,7 +21,8 @@ public class ObservationNoteDAO {
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setInt(1, citizenId);;
+            preparedStatement.setInt(1, citizenId);
+            ;
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {

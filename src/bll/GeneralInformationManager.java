@@ -2,6 +2,7 @@ package bll;
 
 import be.GeneralInformation;
 import dal.GeneralInformationDAO;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -12,6 +13,7 @@ public class GeneralInformationManager {
 
     /**
      * Constructor
+     *
      * @throws IOException
      */
     public GeneralInformationManager() throws IOException {
@@ -20,6 +22,7 @@ public class GeneralInformationManager {
 
     /**
      * Get a list of generalInformation using the getgeneralInformations method from generalInformationDAO
+     *
      * @return
      * @throws SQLException
      */
@@ -30,6 +33,7 @@ public class GeneralInformationManager {
     /**
      * Gets generalInformation that is assigned to citizen, using the getGeneralInformationsOnCitizen
      * method from generalInformationDAO
+     *
      * @param citizenID
      * @return
      * @throws SQLException
@@ -52,6 +56,7 @@ public class GeneralInformationManager {
 
     /**
      * Deletes generalInformation using the deleteGeneralInformation method from generalInformationDAO
+     *
      * @param id
      * @throws Exception
      */
@@ -61,6 +66,7 @@ public class GeneralInformationManager {
 
     /**
      * Edits generalInformation using the editGeneralInformation method in generalInformationDAO
+     *
      * @param generalInformation
      * @throws Exception
      */

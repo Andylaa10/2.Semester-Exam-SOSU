@@ -17,6 +17,7 @@ public class ObservationNoteModel {
 
     /**
      * Gets a single observationNote using te getObservationNote method from the observationNoteManager.
+     *
      * @param citizenId
      * @return
      * @throws Exception
@@ -27,6 +28,7 @@ public class ObservationNoteModel {
 
     /**
      * Creates an observationNote using the createObservationNote method from the observationNoteManager.
+     *
      * @param citizenId
      * @param date
      * @param note
@@ -39,7 +41,8 @@ public class ObservationNoteModel {
 
     /**
      * Edits an observationNote using the editObservationNote method from the observationNoteManger.
-      * @param observationNote
+     *
+     * @param observationNote
      * @throws Exception
      */
     public void editObservationNote(ObservationNote observationNote) throws Exception {
@@ -48,6 +51,7 @@ public class ObservationNoteModel {
 
     /**
      * Deletes an observationNote using the deleteObservationNote method from the observationNoteManager.
+     *
      * @param id
      * @throws Exception
      */

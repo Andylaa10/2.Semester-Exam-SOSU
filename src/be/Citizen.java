@@ -37,7 +37,6 @@ public class Citizen {
     }
 
 
-
     public int getId() {
         return id;
     }

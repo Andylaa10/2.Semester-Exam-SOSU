@@ -4,6 +4,7 @@ import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
 import be.FunctionalAbilities.FunctionalAbility;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.FunctionalAbilitiesDAO;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,6 +15,7 @@ public class FunctionalAbilityManager {
 
     /**
      * Constructor
+     *
      * @throws IOException
      */
     public FunctionalAbilityManager() throws IOException {
@@ -22,6 +24,7 @@ public class FunctionalAbilityManager {
 
     /**
      * Gets a list of all functional abilities, by using the method from functionalAbilitiesDAO
+     *
      * @return
      * @throws SQLException
      */
@@ -31,6 +34,7 @@ public class FunctionalAbilityManager {
 
     /**
      * Gets functional abilities information based on selected citizen and selected functional abilities, by using the method from functionalAbilitiesDAO
+     *
      * @param citizenId
      * @param functionalAbilitySubCategoryId
      * @return
@@ -42,6 +46,7 @@ public class FunctionalAbilityManager {
 
     /**
      * Gets functional abilities information based on selected citizen, by using the method from functionalAbilitiesDAO
+     *
      * @param citizenId
      * @return
      * @throws SQLServerException
@@ -52,17 +57,19 @@ public class FunctionalAbilityManager {
 
     /**
      * Gets all functional abilities subcategories based on selected functional abilities, by using the method from functionalAbilitiesDAO
+     *
      * @param functionalAbilitySubCategoryId
      * @return
      * @throws SQLException
      */
-    public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException{
+    public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException {
         return functionalAbilitiesDAO.getFunctionalAbilitySubCategories(functionalAbilitySubCategoryId);
     }
 
     /**
      * Get all subcategory data on a selected citizen, by using the method from functionalAbilitiesDAO
-     *      * @param citizenId
+     * * @param citizenId
+     *
      * @param citizenId
      * @param functionalAbilitySubCategoryId
      * @return
@@ -74,7 +81,8 @@ public class FunctionalAbilityManager {
 
     /**
      * Creates functional ability on a citizen, by selecting a citizen and assign the credentials, by using the method from functionalAbilitiesDAO
-     *      * @param citizenId
+     * * @param citizenId
+     *
      * @param citizenId
      * @param functionalAbilitySubCategoryId
      * @param abilityNow
@@ -87,11 +95,12 @@ public class FunctionalAbilityManager {
      * @throws SQLException
      */
     public FunctionalAbility createFunctionalAbility(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) throws SQLException {
-        return functionalAbilitiesDAO.createFunctionalAbilities(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote,citizenPerformance,citizenMeaningOfPerformance, abilityNoteCitizen);
+        return functionalAbilitiesDAO.createFunctionalAbilities(citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote, citizenPerformance, citizenMeaningOfPerformance, abilityNoteCitizen);
     }
 
     /**
      * Edits a functional ability when a functional ability is selected, by using the method from functionalAbilitiesDAO
+     *
      * @param functionalAbility
      * @throws SQLException
      */
@@ -101,6 +110,7 @@ public class FunctionalAbilityManager {
 
     /**
      * Deletes a functional ability when a functional ability selected, by using the method from functionalAbilitiesDAO
+     *
      * @param id
      * @throws Exception
      */

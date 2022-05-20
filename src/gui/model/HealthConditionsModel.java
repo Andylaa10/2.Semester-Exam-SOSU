@@ -5,6 +5,7 @@ import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
 import bll.HealthConditionsManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,6 +21,7 @@ public class HealthConditionsModel {
 
     /**
      * Gets a list of HealthConditions using the getHealthConditions from the healthConditionsManager.
+     *
      * @return
      * @throws SQLException
      */
@@ -29,6 +31,7 @@ public class HealthConditionsModel {
 
     /**
      * Gets a list of HealthConditionsSubCategory using the getSubCategories from the healthConditionsManager.
+     *
      * @param categoryId
      * @return
      * @throws SQLException
@@ -39,6 +42,7 @@ public class HealthConditionsModel {
 
     /**
      * Gets a single healthConditionSubCategoryText using the getTextOnSubCategory from the healthConditionsManager.
+     *
      * @param citizenId
      * @param subCategoryId
      * @return
@@ -50,6 +54,7 @@ public class HealthConditionsModel {
 
     /**
      * Gets a list of HealthConditionSubCategoryText using the getInfoOnSubCategories from the healthConditionsManager;
+     *
      * @param citizenId
      * @return
      */
@@ -59,6 +64,7 @@ public class HealthConditionsModel {
 
     /**
      * Creates all data from subCategory using the insertIntoSubCategory method from the healthConditionsManager.
+     *
      * @param citizenId
      * @param subCategoryId
      * @param professionalnote
@@ -73,6 +79,7 @@ public class HealthConditionsModel {
 
     /**
      * Edits all data from subCategory using the editSubCategory method from healthConditionsManager.
+     *
      * @param subCategoryText
      * @throws Exception
      */
@@ -83,12 +90,13 @@ public class HealthConditionsModel {
     /**
      * Gets data on a single HealthConditionSubCategoryText using the getHealthConditionData method from the -
      * healthConditionsManager.
+     *
      * @param citizenId
      * @param subCategoryId
      * @return
      * @throws Exception
      */
-    public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws Exception{
+    public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws Exception {
         return healthConditionsManager.getHealthConditionData(citizenId, subCategoryId);
     }
 }
