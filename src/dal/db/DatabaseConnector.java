@@ -17,7 +17,7 @@ public class DatabaseConnector {
     /**
      * Constructor for the database, plugging in the details of our SQL server / userLogin
      */
-    public DatabaseConnector() throws IOException {
+    private DatabaseConnector() throws IOException {
         Properties settings = new Properties();
         settings.load(new FileInputStream(PROP_FILE));
 

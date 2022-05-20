@@ -8,6 +8,7 @@ import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
 import be.enums.UserType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import dal.db.DatabaseConnector;
 import gui.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,8 +30,18 @@ public class DataModelFacade {
 
     private final ObservableList<Citizen> citizensToBeViewed;
 
+    private static DataModelFacade instance = null;
 
-    public DataModelFacade() throws IOException, SQLException {
+
+
+    /**
+     * Facade pattern that collects all methods from the model layer, put together to make it easier for coding in the
+     * controller layer. You now only have to instantiate one model (dataModelFacade) instead of instantiating all 9
+     * models.
+     * @throws IOException
+     * @throws SQLException
+     */
+    private DataModelFacade() throws IOException, SQLException {
         citizenModel = new CitizenModel();
         userModel = new UserModel();
         superAdminModel = new SuperAdminModel();
@@ -44,26 +55,33 @@ public class DataModelFacade {
     }
 
     /**
-     * Get a list of students using the getStudents method from userModel
+     * Singleton pattern
+     * @return DataModelFacade called instance
      */
+    public static DataModelFacade getInstance() throws IOException, SQLException {
+        if (instance == null)
+            instance = new DataModelFacade();
+
+        return instance;
+    }
+
+
+    /**
+     * UserModel methods.
+     */
+
     public List<User> getStudents() throws SQLException {
         return userModel.getStudents();
     }
 
-    public User getHashedPassword(String userName, String password, int schoolId) throws SQLException {
-        return userModel.getHashedPassword(userName, password, schoolId);
+    public User userLogin(String username, String password, int schoolId){
+        return userModel.userLogin(username, password, schoolId);
     }
 
-    /**
-     * Get a list of teachers using the getTeachers method from userModel
-     */
     public List<User> getTeachers() throws SQLException {
         return userModel.getTeachers();
     }
 
-    /**
-     * Get a list of admins using the getAdmins method from userModel
-     */
     public List<User> getAdmins() throws SQLException {
         return userModel.getAdmins();
     }
@@ -71,6 +89,62 @@ public class DataModelFacade {
     public List<User> getUsernames() throws SQLException {
         return userModel.getUsernames();
     }
+
+    public User getHashedPassword(String userName, String password, int schoolId) throws SQLException {
+        return userModel.getHashedPassword(userName, password, schoolId);
+    }
+
+    public User createStudent(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+        return userModel.createStudent(firstName, lastName, username, password, userType, schoolId);
+    }
+
+
+    public User createTeacher(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+        return userModel.createTeacher(firstName, lastName, username, password, userType, schoolId);
+    }
+
+
+    public User createAdmin(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
+        return userModel.createAdmin(firstName, lastName, username, password, userType, schoolId);
+    }
+
+    public void deleteStudent(int id, UserType userType) throws SQLException {
+        userModel.deleteStudent(id, userType);
+    }
+
+    public void deleteTeacher(int id, UserType userType) throws SQLException {
+        userModel.deleteTeacher(id, userType);
+    }
+
+
+    public void deleteAdmin(int id, UserType userType) throws SQLException {
+        userModel.deleteAdmin(id, userType);
+    }
+
+
+    public void deleteSuperAdmin(int id) throws SQLException {
+        superAdminModel.deleteSuperAdmin(id);
+    }
+
+
+    public void editStudent(User student) throws Exception {
+        userModel.editStudent(student);
+    }
+
+
+    public void editTeacher(User teacher) throws Exception {
+        userModel.editTeacher(teacher);
+    }
+
+
+    public void editAdmin(User admin) throws Exception {
+        userModel.editAdmin(admin);
+    }
+
+
+    /**
+     * HealthConditionsModel methods.
+     */
 
     public List<HealthCondition> getHealthConditions() throws SQLException {
         return healthConditionsModel.getHealthConditions();
@@ -80,103 +154,35 @@ public class DataModelFacade {
         return healthConditionsModel.getSubCategories(categoryId);
     }
 
-    /**
-     * Creates a student using the createStudent method from userModel
-     */
-    public User createStudent(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
-        return userModel.createStudent(firstName, lastName, username, password, userType, schoolId);
-    }
 
     /**
-     * Creates a teacher using the createTeacher method from userModel
+     * SuperAdminModel methods.
      */
-    public User createTeacher(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
-        return userModel.createTeacher(firstName, lastName, username, password, userType, schoolId);
+
+    public List<User> getAdminsOnSchool(int schoolId) throws SQLException {
+        return superAdminModel.getAdminsOnSchool(schoolId);
     }
 
-    /**
-     * Creates an admin using the createAdmin method from userModel
-     */
-    public User createAdmin(String firstName, String lastName, String username, String password, UserType userType, int schoolId) throws SQLException {
-        return userModel.createAdmin(firstName, lastName, username, password, userType, schoolId);
+    public List<Citizen> getAssignedCitizen(int schoolId){
+        return superAdminModel.getAssignedCitizen(schoolId);
     }
 
-    /**
-     * Create a super admin using the createSuperAdmin method from superAdminModel
-     */
+    public List<Case> getAssignedCases(int schoolId){
+        return superAdminModel.getAssignedCases(schoolId);
+    }
+
+    public SuperAdmin superAdminLogin(String username, String password) throws SQLException {
+        return superAdminModel.superAdminLogin(username, password);
+    }
+
     public SuperAdmin createSuperAdmin(String username, String password) throws SQLException {
         return superAdminModel.createSuperAdmin(username, password);
     }
 
-    /**
-     * Deletes a student using the deleteStudent method from userModel
-     */
-    public void deleteStudent(int id, UserType userType) throws SQLException {
-        userModel.deleteStudent(id, userType);
-    }
-
-    /**
-     * Deletes a teacher using the deleteTeacher method from userModel
-     */
-    public void deleteTeacher(int id, UserType userType) throws SQLException {
-        userModel.deleteTeacher(id, userType);
-    }
-
-    /**
-     * Deletes an admin using the deleteAdmin method from userModel
-     */
-    public void deleteAdmin(int id, UserType userType) throws SQLException {
-        userModel.deleteAdmin(id, userType);
-    }
-
-    /**
-     * Deletes a super admin using the deleteSuperAdmin method from superAdminModel
-     */
-    public void deleteSuperAdmin(int id) throws SQLException {
-        superAdminModel.deleteSuperAdmin(id);
-    }
-
-    /**
-     * Edits a student using the editStudent method from userModel
-     */
-    public void editStudent(User student) throws Exception {
-        userModel.editStudent(student);
-    }
-
-    /**
-     * Edits a teacher using the editTeacher method from userModel
-     */
-    public void editTeacher(User teacher) throws Exception {
-        userModel.editTeacher(teacher);
-    }
-
-    /**
-     * Edits an admin using the editAdmin method from userModel
-     */
-    public void editAdmin(User admin) throws Exception {
-        userModel.editAdmin(admin);
-    }
-
-    /**
-     * Edits a super admin using the editSuperAdmin method from superAdminModel
-     */
     public void editSuperAdmin(SuperAdmin superAdmin) throws Exception {
         superAdminModel.editSuperAdmin(superAdmin);
     }
 
-    /**
-     * Gets the user userLogin using the userLogin method from userModel
-     */
-    public User userLogin(String username, String password, int schoolId){
-        return userModel.userLogin(username, password, schoolId);
-    }
-
-    /**
-     * Gets the super admin login using the superAdminLogin method from superAdminModel
-     */
-    public SuperAdmin superAdminLogin(String username, String password) throws SQLException {
-        return superAdminModel.superAdminLogin(username, password);
-    }
 
     public List<School> getSchools() throws SQLException {
         return superAdminModel.getSchools();
@@ -194,115 +200,18 @@ public class DataModelFacade {
         return superAdminModel.getAssignedStudents(schoolId);
     }
 
-    /**
-     * Creates a school using the createSchool method from superAdminModel
-     */
     public School createSchool(String schoolName) throws SQLException {
         return superAdminModel.createSchool(schoolName);
     }
 
-    /**
-     * Deletes a school using the deleteSchool method from superAdminModel
-     */
+
     public void deleteSchool(int id) throws SQLException {
         superAdminModel.deleteSchool(id);
     }
 
-    /**
-     * Edits a school using the editSchool method from superAdminModel
-     */
+
     public void editSchool(School school) throws Exception {
         superAdminModel.editSchool(school);
-    }
-
-    /**
-     * Get a list of case using the getCases method from caseModel
-     */
-    public List<Case> getCases() throws SQLException {
-        return caseModel.getCases();
-    }
-
-    /**
-     * Creates a case using the createCase method from caseModel
-     */
-    public Case createCase(String name, String info, int schoolId) throws SQLException {
-        return caseModel.createCase(name, info, schoolId);
-    }
-
-    /**
-     * Deletes a case using the deleteCase method from caseModel
-     */
-    public void deleteCase(int id) throws Exception {
-        caseModel.deleteCase(id);
-    }
-
-    /**
-     * Edits a case using the editCase method in caseModel
-     */
-    public void editCase(Case aCase) throws Exception {
-        caseModel.editCase(aCase);
-    }
-
-    public void assignCaseToCitizen(int caseId, int citizenId){
-        caseModel.assignCaseToCitizen(caseId, citizenId);
-    }
-
-    public void deleteCaseFromCitizen(int caseId, int citizenId){
-        caseModel.deleteCaseFromCitizen(caseId, citizenId);
-    }
-
-    public List<Case> getCasesOnCitizen(int citizenId) throws SQLException {
-        return caseModel.getCasesOnCitizen(citizenId);
-    }
-    public Case getCaseOnCitizen(int citizenId, int casesId) throws SQLException {
-        return caseModel.getCaseOnCitizen(citizenId, casesId);
-    }
-
-    /**
-     * Get a list of citizen using the getCitizens method from citizenModel
-     */
-    public List<Citizen> getCitizens() throws SQLException {
-        return citizenModel.getCitizens();
-    }
-
-    public List<Citizen> getCitizensAndSchool(int schoolId) throws SQLException {
-        return citizenModel.getCitizensAndSchool(schoolId);
-    }
-
-    public Citizen getInfoOnCitizen(int citizenId) throws SQLException {
-        return citizenModel.getInfoOnCitizen(citizenId);
-    }
-
-    /**
-     * Creates a case using the createCitizen method from citizenModel
-     */
-    public Citizen createCitizen(String firstname, String lastName, String SSN, String address, String sex, int schoolId) throws SQLException {
-        return citizenModel.createCitizen(firstname, lastName, SSN, address, sex, schoolId);
-    }
-
-    /**
-     * Deletes a citizen using the deleteCitizen method from citizenModel
-     */
-    public void deleteCitizen(int citizenID) throws Exception {
-        citizenModel.deleteCitizen(citizenID);
-    }
-
-    /**
-     * Edits a citizen using the editCitizen method in citizenModel
-     */
-    public void editCitizen(Citizen citizen) throws Exception {
-        citizenModel.editCitizen(citizen);
-    }
-
-    public List<User> getAdminsOnSchool(int schoolId) throws SQLException {
-        return superAdminModel.getAdminsOnSchool(schoolId);
-    }
-
-    public List<Citizen> getAssignedCitizen(int schoolId){
-        return superAdminModel.getAssignedCitizen(schoolId);
-    }
-    public List<Case> getAssignedCases(int schoolId){
-        return superAdminModel.getAssignedCases(schoolId);
     }
 
     public void addAdminToSchool(int loginId, int schoolId) {
@@ -319,24 +228,101 @@ public class DataModelFacade {
 
 
     /**
-     * Get a list of generalInformation using the getgeneralInformations method from generalInformationManager
+     * CaseModel Methods
      */
+
+    public List<Case> getCases() throws SQLException {
+        return caseModel.getCases();
+    }
+
+
+    public Case createCase(String name, String info, int schoolId) throws SQLException {
+        return caseModel.createCase(name, info, schoolId);
+    }
+
+
+    public void deleteCase(int id) throws Exception {
+        caseModel.deleteCase(id);
+    }
+
+
+    public void editCase(Case aCase) throws Exception {
+        caseModel.editCase(aCase);
+    }
+
+    public void assignCaseToCitizen(int caseId, int citizenId){
+        caseModel.assignCaseToCitizen(caseId, citizenId);
+    }
+    public void deleteCaseFromCitizen(int caseId, int citizenId){
+        caseModel.deleteCaseFromCitizen(caseId, citizenId);
+    }
+
+    public List<Case> getCasesOnCitizen(int citizenId) throws SQLException {
+        return caseModel.getCasesOnCitizen(citizenId);
+    }
+
+    public Case getCaseOnCitizen(int citizenId, int casesId) throws SQLException {
+        return caseModel.getCaseOnCitizen(citizenId, casesId);
+    }
+
+
+    /**
+     * CitizenModel methods.
+     */
+
+    public List<Citizen> getCitizens() throws SQLException {
+        return citizenModel.getCitizens();
+    }
+
+    public List<Citizen> getCitizensAndSchool(int schoolId) throws SQLException {
+        return citizenModel.getCitizensAndSchool(schoolId);
+    }
+
+    public Citizen getInfoOnCitizen(int citizenId) throws SQLException {
+        return citizenModel.getInfoOnCitizen(citizenId);
+    }
+
+
+    public Citizen createCitizen(String firstname, String lastName, String SSN, String address, String sex, int schoolId) throws SQLException {
+        return citizenModel.createCitizen(firstname, lastName, SSN, address, sex, schoolId);
+    }
+
+
+    public void deleteCitizen(int citizenID) throws Exception {
+        citizenModel.deleteCitizen(citizenID);
+    }
+
+
+    public void editCitizen(Citizen citizen) throws Exception {
+        citizenModel.editCitizen(citizen);
+    }
+
+    public List<Citizen> searchCitizen(String query, int schoolId) throws SQLException {
+        List<Citizen> searchResults = null;
+
+        searchResults = citizenModel.searchCitizen(query, schoolId);
+        citizensToBeViewed.clear();
+        citizensToBeViewed.addAll(searchResults);
+
+        return searchResults;
+    }
+
+
+    /**
+     * GeneralInformationModel methods
+     */
+
     public List<GeneralInformation> getGeneralInformation() throws SQLException {
         return generalInformationModel.getGeneralInformation();
     }
 
-    /**
-     * Gets a list of generalInformation that is assigned to citizen, using the getGeneralInformationsOnCitizen
-     * method from generalInformationManager
-     */
+
     public GeneralInformation getGeneralInformationOnCitizen(int citizenID) throws SQLException {
         return generalInformationModel.getGeneralInformationOnCitizen(citizenID);
     }
 
 
-    /**
-     * Creates  generalInformation using the createGeneralInformation method from generalInformationManager
-     */
+
     public GeneralInformation createGeneralInformation(int citizenId, String coping, String motivation, String resources, String roles,
                                                        String habits, String educationAndJob, String lifestory,
                                                        String network, String healthInformation, String equipmentAids,
@@ -345,16 +331,12 @@ public class DataModelFacade {
                 educationAndJob, lifestory, network, healthInformation, equipmentAids, homeLayout);
     }
 
-    /**
-     * Deletes generalInformation using the deleteGeneralInformation method from generalInformationManager
-     */
+
     public void deleteGeneralInformation(int id) throws Exception {
         generalInformationModel.deleteGeneralInformation(id);
     }
 
-    /**
-     * Edits generalInformation using the editGeneralInformation method in generalInformationManager
-     */
+
     public void editGeneralInformation(GeneralInformation generalInformation) throws Exception {
         generalInformationModel.editGeneralInformation(generalInformation);
     }
@@ -378,6 +360,10 @@ public class DataModelFacade {
     public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws Exception{
         return healthConditionsModel.getHealthConditionData(citizenId, subCategoryId);
     }
+
+    /**
+     * FunctionalAbilityModel Methods
+     */
 
     public List<FunctionalAbility> getFunctionalAbilities() throws SQLException {
         return functionalAbilitiesModel.getFunctionalAbilities();
@@ -411,6 +397,10 @@ public class DataModelFacade {
         functionalAbilitiesModel.deleteAbilities(id);
     }
 
+    /**
+     * ObservationNoteModel methods.
+     */
+
     public ObservationNote getObservationNote(int citizenId) throws Exception {
         return observationNoteModel.getObservationNote(citizenId);
     }
@@ -425,16 +415,6 @@ public class DataModelFacade {
 
     public void deleteObservationNote(int id) throws Exception {
         observationNoteModel.deleteObservationNote(id);
-    }
-
-    public List<Citizen> searchCitizen(String query, int schoolId) throws SQLException {
-        List<Citizen> searchResults = null;
-
-        searchResults = citizenModel.searchCitizen(query, schoolId);
-        citizensToBeViewed.clear();
-        citizensToBeViewed.addAll(searchResults);
-
-        return searchResults;
     }
 
 }

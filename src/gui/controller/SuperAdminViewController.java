@@ -133,7 +133,7 @@ public class SuperAdminViewController implements Initializable, IController {
     private ObservableList<School> allSchools = FXCollections.observableArrayList();
     private ObservableList<School> allAssignedSchools = FXCollections.observableArrayList();
 
-    private final DataModelFacade dataModelFacade;
+    private final DataModelFacade dataModelFacade = DataModelFacade.getInstance();
 
     private School selectedSchool;
     private School selectedSchoolOnComboBox;
@@ -145,7 +145,6 @@ public class SuperAdminViewController implements Initializable, IController {
 
 
     public SuperAdminViewController() throws IOException, SQLException {
-        this.dataModelFacade = new DataModelFacade();
         this.encryptor = new Encryptor();
     }
 

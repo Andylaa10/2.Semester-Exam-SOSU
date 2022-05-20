@@ -36,7 +36,7 @@ public class LoginViewController implements Initializable {
     @FXML
     private TextField txtFieldSchoolId;
 
-    private final DataModelFacade facade;
+    private final DataModelFacade facade = DataModelFacade.getInstance();
 
     private ObservableList<School> allSchools = FXCollections.observableArrayList();
 
@@ -44,7 +44,6 @@ public class LoginViewController implements Initializable {
 
 
     public LoginViewController() throws IOException, SQLException {
-        facade = new DataModelFacade();
     }
 
     @Override

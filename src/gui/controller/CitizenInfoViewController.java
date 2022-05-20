@@ -53,11 +53,10 @@ public class CitizenInfoViewController implements Initializable {
     private int citizenId;
     private int healthConditionId;
 
-    private final DataModelFacade dataModelFacade;
+    private final DataModelFacade dataModelFacade = DataModelFacade.getInstance();
 
 
     public CitizenInfoViewController() throws IOException, SQLException {
-        this.dataModelFacade = new DataModelFacade();
     }
 
     @Override

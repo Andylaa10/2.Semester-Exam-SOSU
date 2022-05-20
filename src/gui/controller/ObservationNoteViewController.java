@@ -27,12 +27,11 @@ public class ObservationNoteViewController implements Initializable {
     @FXML
     private Button btnClose;
 
-    private final DataModelFacade dataModelFacade;
+    private final DataModelFacade dataModelFacade = DataModelFacade.getInstance();
 
     private int citizenId;
 
     public ObservationNoteViewController() throws IOException, SQLException {
-        this.dataModelFacade = new DataModelFacade();
     }
 
     @Override

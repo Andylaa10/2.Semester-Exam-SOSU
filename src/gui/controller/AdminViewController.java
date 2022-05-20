@@ -240,7 +240,7 @@ public class AdminViewController implements Initializable, IController {
     private Citizen selectedCitizen;
     private Citizen selectedCreatedCitizen;
 
-    private final DataModelFacade dataModelFacade;
+    private final DataModelFacade dataModelFacade = DataModelFacade.getInstance();
     private StudentViewController studentViewController;
     private EditCaseViewController editCaseViewController;
 
@@ -251,7 +251,6 @@ public class AdminViewController implements Initializable, IController {
 
 
     public AdminViewController() throws IOException, SQLException {
-        this.dataModelFacade = new DataModelFacade();
         this.studentViewController = new StudentViewController();
         this.editCaseViewController = new EditCaseViewController();
         this.encryptor = new Encryptor();

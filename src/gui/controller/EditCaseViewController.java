@@ -25,10 +25,9 @@ public class EditCaseViewController {
     @FXML
     private TextArea txtAreaCaseInfo;
 
-    private final DataModelFacade dataModelFacade;
+    private final DataModelFacade dataModelFacade = DataModelFacade.getInstance();
 
     public EditCaseViewController() throws IOException, SQLException {
-        this.dataModelFacade = new DataModelFacade();
     }
 
     public void setSelectedCase(Case aCase) {

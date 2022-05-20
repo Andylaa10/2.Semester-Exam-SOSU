@@ -249,7 +249,7 @@ public class StudentViewController implements IController, Initializable {
     private HealthConditionSubCategory selectedHealthConditionSubCategory;
     private HealthCondition selectedHealthCondition;
 
-    private final DataModelFacade dataModelFacade;
+    private final DataModelFacade dataModelFacade = DataModelFacade.getInstance();
     private EditCaseViewController editCaseViewController;
     private ObservationNoteViewController observationNoteViewController;
     private ToggleGroup group;
@@ -258,7 +258,6 @@ public class StudentViewController implements IController, Initializable {
     private ObservableList<Citizen> searchData = FXCollections.observableArrayList();
 
     public StudentViewController() throws IOException, SQLException {
-        this.dataModelFacade = new DataModelFacade();
     }
 
     /**
