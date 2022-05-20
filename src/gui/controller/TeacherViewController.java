@@ -510,13 +510,15 @@ public class TeacherViewController implements Initializable, IController {
      */
     @FXML
     private void btnHandleSaveStudent() throws SQLException, IOException {
-        if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
+        String userNames = String.valueOf(dataModelFacade.getUsernames());
+        if (userNames.contains(String.valueOf(txtFieldUsername.getText()))) {
+            ErrorHandlerController.createWarning("Fejl", "Brugernavn er allerede taget");
+        } else if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
             String firstName = txtFieldFirstName.getText();
             String lastName = txtFieldLastName.getText();
             String userName = txtFieldUsername.getText();
             String password = txtFieldPassword.getText();
 
-            //TODO Make errorHandling if username is already taken
             dataModelFacade.createStudent(firstName, lastName, userName, encryptor.encrypt(password), UserType.STUDENT, Integer.parseInt(txtFieldSchoolID.getText()));
             reloadStudentTable();
             clearStudentTxtField();
@@ -543,7 +545,10 @@ public class TeacherViewController implements Initializable, IController {
     @FXML
     private void btnHandleEditSave() throws Exception {
         if (this.selectedStudent != null) {
-            if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
+            String userNames = String.valueOf(dataModelFacade.getUsernames());
+            if (userNames.contains(String.valueOf(txtFieldUsername.getText()))) {
+                ErrorHandlerController.createWarning("Fejl", "Brugernavn er allerede taget");
+            } else if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldStudentID.getText());
                 String firstName = txtFieldFirstName.getText();
                 String lastName = txtFieldLastName.getText();

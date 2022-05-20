@@ -487,12 +487,14 @@ public class AdminViewController implements Initializable, IController {
 
     @FXML
     private void onActionCreateTeacher() throws SQLException, IOException {
-        if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()) {
+        String userNames = String.valueOf(dataModelFacade.getUsernames());
+        if (userNames.contains(String.valueOf(txtFieldTeacherUsername.getText()))) {
+            ErrorHandlerController.createWarning("Fejl", "Brugernavn er allerede taget");
+        } else if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()) {
             String firstName = txtFieldTeacherFirstName.getText();
             String lastName = txtFieldTeacherLastName.getText();
             String userName = txtFieldTeacherUsername.getText();
             String password = txtFieldTeacherPassword.getText();
-            //TODO Errorhandling ved samme username
             dataModelFacade.createTeacher(firstName, lastName, userName, encryptor.encrypt(password), UserType.TEACHER, Integer.parseInt(txtFieldSchoolID.getText()));
             reloadTeacherTable();
         } else {
@@ -520,7 +522,10 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private void onActionEditTeacherSave() throws Exception {
         if (this.selectedTeacher != null) {
-            if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()) {
+            String userNames = String.valueOf(dataModelFacade.getUsernames());
+            if (userNames.contains(String.valueOf(txtFieldTeacherUsername.getText()))) {
+                ErrorHandlerController.createWarning("Fejl", "Brugernavn er allerede taget");
+            } else if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldTeacherID.getText());
 
                 String firstName = txtFieldTeacherFirstName.getText();
@@ -718,7 +723,10 @@ public class AdminViewController implements Initializable, IController {
      */
     @FXML
     private void btnHandleSaveStudent() throws SQLException, IOException {
-        if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
+        String userNames = String.valueOf(dataModelFacade.getUsernames());
+        if (userNames.contains(String.valueOf(txtFieldUsername.getText()))) {
+            ErrorHandlerController.createWarning("Fejl", "Brugernavn er allerede taget");
+        } else if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
             String firstName = txtFieldFirstName.getText();
             String lastName = txtFieldLastName.getText();
             String userName = txtFieldUsername.getText();
@@ -727,7 +735,6 @@ public class AdminViewController implements Initializable, IController {
             reloadStudentTable();
             clearStudentTxtField();
             tvStudent.getSelectionModel().clearSelection();
-            //TODO Errorhandling ved samme username
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal først udfylde alle den studerendes oplysninger");
         }
@@ -754,7 +761,11 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private void btnHandleEditSave() throws Exception {
         if (this.selectedStudent != null) {
-            if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
+
+            String userNames = String.valueOf(dataModelFacade.getUsernames());
+            if (userNames.contains(String.valueOf(txtFieldUsername.getText()))) {
+                ErrorHandlerController.createWarning("Fejl", "Brugernavn er allerede taget");
+            } else if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldStudentID.getText());
                 String firstName = txtFieldFirstName.getText();
                 String lastName = txtFieldLastName.getText();

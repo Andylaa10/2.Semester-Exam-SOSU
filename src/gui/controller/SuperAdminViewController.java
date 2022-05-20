@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -139,9 +140,8 @@ public class SuperAdminViewController implements Initializable, IController {
     private User selectedAdmin;
 
     private Encryptor encryptor;
-    
-    private School selectedSchoolToAssign;
 
+    private School selectedSchoolToAssign;
 
 
     public SuperAdminViewController() throws IOException, SQLException {
@@ -215,14 +215,14 @@ public class SuperAdminViewController implements Initializable, IController {
 
     @FXML
     private void onActionCreateSchool() throws SQLException {
-        if (!txtFieldSchoolName.getText().isEmpty()){
+        if (!txtFieldSchoolName.getText().isEmpty()) {
             String schoolName = txtFieldSchoolName.getText();
 
             dataModelFacade.createSchool(schoolName);
             reloadSchoolTable();
             reloadAssignSchoolTable();
             clearSchoolTxtField();
-        } else{
+        } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal først give skolen et navn");
         }
     }
@@ -244,7 +244,7 @@ public class SuperAdminViewController implements Initializable, IController {
 
     @FXML
     private void onActionEditSaveSchool() throws Exception {
-        if (this.selectedSchool != null){
+        if (this.selectedSchool != null) {
             if (!txtFieldSchoolName.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldSchoolID.getText());
                 String schoolName = txtFieldSchoolName.getText();
@@ -284,13 +284,13 @@ public class SuperAdminViewController implements Initializable, IController {
             alert.setTitle("Advarsel");
             alert.setHeaderText("Advarsel før du sletter en skole");
             alert.setContentText("Denne handling kan ikke fortrydes");
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK) {
-                    selectedSchool();
-                    dataModelFacade.deleteSchool(selectedSchool.getId());
-                    tvSchools.getSelectionModel().clearSelection();
-                    reloadSchoolTable();
-                    reloadAssignSchoolTable();
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                selectedSchool();
+                dataModelFacade.deleteSchool(selectedSchool.getId());
+                tvSchools.getSelectionModel().clearSelection();
+                reloadSchoolTable();
+                reloadAssignSchoolTable();
             }
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en skole først");
@@ -303,22 +303,17 @@ public class SuperAdminViewController implements Initializable, IController {
         String userNames = String.valueOf(dataModelFacade.getUsernames());
         if (userNames.contains(String.valueOf(txtFieldAdminUsername.getText()))) {
             ErrorHandlerController.createWarning("Fejl", "Brugernavn er allerede taget");
-            System.out.println(userNames);
-        }
-
-        if (!txtFieldAdminFirstName.getText().isEmpty() && !txtFieldAdminLastName.getText().isEmpty() && !txtFieldAdminUsername.getText().isEmpty() && !txtFieldAdminPassword.getText().isEmpty() && comboSchool.getSelectionModel().getSelectedItem() != null){
+        } else if (!txtFieldAdminFirstName.getText().isEmpty() && !txtFieldAdminLastName.getText().isEmpty() && !txtFieldAdminUsername.getText().isEmpty() && !txtFieldAdminPassword.getText().isEmpty() && comboSchool.getSelectionModel().getSelectedItem() != null) {
             String firstName = txtFieldAdminFirstName.getText();
             String lastName = txtFieldAdminLastName.getText();
             String userName = txtFieldAdminUsername.getText();
             String password = txtFieldAdminPassword.getText();
             int schoolId = Integer.parseInt(txtSchoolID.getText());
 
-
-
-            //TODO Warning Samme username
             dataModelFacade.createAdmin(firstName, lastName, userName, password, UserType.ADMINISTRATOR, schoolId);
-            clearAdminTxtField();
+
             tvAdmins.getSelectionModel().clearSelection();
+            clearAdminTxtField();
             reloadAdminTable();
             reloadAssignedAdminTable();
         } else {
@@ -342,7 +337,7 @@ public class SuperAdminViewController implements Initializable, IController {
 
     @FXML
     private void onActionEditAdminSave() throws Exception {
-        if (this.selectedAdmin != null){
+        if (this.selectedAdmin != null) {
             if (!txtFieldAdminFirstName.getText().isEmpty() && !txtFieldAdminLastName.getText().isEmpty() && !txtFieldAdminUsername.getText().isEmpty() && !txtFieldAdminPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldAdminID.getText());
                 String firstName = txtFieldAdminFirstName.getText();
@@ -490,7 +485,7 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
-    private void clearSchoolTxtField(){
+    private void clearSchoolTxtField() {
         txtFieldSchoolID.clear();
         txtFieldSchoolName.clear();
     }
@@ -517,7 +512,7 @@ public class SuperAdminViewController implements Initializable, IController {
         txtFieldAdminPassword.setStyle("-fx-border-color: red");
     }
 
-    private void selectedSchoolOnComboBox(){
+    private void selectedSchoolOnComboBox() {
         this.comboSchool.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
                 this.selectedSchoolOnComboBox = newValue;
@@ -567,7 +562,7 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
-    private void setAnchorPanesVisibility(){
+    private void setAnchorPanesVisibility() {
         labelTitle.setText("Superadmin");
         anchorPaneSuperAdmin.setVisible(true);
         anchorPaneCreateSchool.setVisible(false);
