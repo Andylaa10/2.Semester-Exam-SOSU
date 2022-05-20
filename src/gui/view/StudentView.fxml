@@ -106,36 +106,84 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="anchorPaneStudent" layoutX="189.0" layoutY="139.0" prefHeight="609.0" prefWidth="1158.0" visible="false" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneStudent" layoutX="189.0" layoutY="139.0" prefHeight="609.0" prefWidth="1158.0" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <Label alignment="TOP_LEFT" layoutX="2.0" layoutY="50.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">
+            <Label alignment="TOP_LEFT" layoutY="14.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="90.0" prefHeight="35.0" prefWidth="865.0" text="- Få et overblik over dine tildelte borgere, hvor det er muligt at se generelle informationer, helbredstilstand og funktionstilstand.">
+            <Label alignment="TOP_LEFT" layoutX="1.0" layoutY="39.0" prefHeight="35.0" prefWidth="1028.0" text="- Få et overblik over dine tildelte borgere, samt se alle deres tildelte sager. Ved et tryk på en sag er et muligt at udfylde ændre på sagens  informationer">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="107.0" prefHeight="35.0" prefWidth="586.0" text="  Derudover er det også muligt at se hvilke cases en borger har fået tildelt.">
+            <Label alignment="TOP_LEFT" layoutX="6.0" layoutY="56.0" prefHeight="35.0" prefWidth="586.0" text="  Derudover er det også muligt at søge på en borger.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="142.0" prefHeight="35.0" prefWidth="823.0" text="- Få lov til at rapportere og udfylde en borgers; generelle informationer, helbredstilstand og funktionstilstand.">
+            <Label alignment="TOP_LEFT" layoutY="340.0" prefHeight="35.0" prefWidth="1136.0" text="- Få lov til at rapportere og udfylde en borgers; generelle informationer, helbredstilstand og funktionstilstand. Her vil der blive rapporteret med udgangspunkt i Fælles Sprog III">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="160.0" prefHeight="35.0" prefWidth="710.0" text="Her vil der blive arbejdet med fællessprog tre, hvor sproget skal tages i brug ved rapporteringen af tilstande.">
+            <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="358.0" prefHeight="35.0" prefWidth="710.0" text="Derudover kan man få en opsummering af borgerens rapport ved at trykke på &quot;Se alle borgerens informationer&quot;">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <ImageView fitHeight="269.0" fitWidth="416.0" layoutX="11.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" style="fx: yellow;">
+               <image>
+                  <Image url="@img/Screenshot%208.jpg" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="269.0" fitWidth="416.0" layoutX="451.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/Screenshot%209.jpg" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="240.0" fitWidth="251.0" layoutX="885.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/screenshot%2010.jpg" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="207.0" fitWidth="346.0" layoutX="13.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true" style="fx: yellow;">
+               <image>
+                  <Image url="@img/Screenshot%203.jpg" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="227.0" fitWidth="346.0" layoutX="399.0" layoutY="393.0" pickOnBounds="true" preserveRatio="true" style="fx: yellow;">
+               <image>
+                  <Image url="@img/Screenshot%204.jpg" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
+            <ImageView fitHeight="218.0" fitWidth="346.0" layoutX="778.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true" style="fx: yellow;">
+               <image>
+                  <Image url="@img/Screenshot%205.jpg" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0">
+      <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0" visible="false">
          <children>
             <TableView fx:id="tvCases" layoutX="606.0" layoutY="73.0" prefHeight="490.0" prefWidth="528.0" style="-fx-background-color: transparent;">
               <columns>
@@ -167,12 +215,17 @@
             </Label>
             <Button fx:id="btnBack" layoutX="982.0" layoutY="577.0" mnemonicParsing="false" onAction="#btnClickBack" prefHeight="27.0" prefWidth="150.0" text="Tilbage" />
             <Label alignment="CENTER_RIGHT" layoutX="746.0" layoutY="582.0" text="Dobbeltklik for at se sagens informationer" />
-            <TextField fx:id="txtFieldSearchCitizens" layoutX="385.0" layoutY="39.0" onAction="#onActionSearchCitizens" />
-            <Button fx:id="btnSearchCitizens" layoutX="535.0" layoutY="39.0" mnemonicParsing="false" onAction="#onActionSearchCitizens" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="🔍">
+            <TextField fx:id="txtFieldSearchCitizens" layoutX="395.0" layoutY="569.0" onAction="#onActionSearchCitizens" />
+            <Button fx:id="btnSearchCitizens" layoutX="545.0" layoutY="569.0" mnemonicParsing="false" onAction="#onActionSearchCitizens" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="🔍">
                <effect>
                   <DropShadow />
                </effect>
             </Button>
+            <Label layoutX="275.0" layoutY="572.0" text="Søg på borger her:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0" visible="false">
