@@ -113,40 +113,32 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="43.0" prefHeight="35.0" prefWidth="1028.0" text="- Få et overblik over dine tildelte borgere, samt se alle deres tildelte sager. Ved et tryk på en sag er et muligt at udfylde ændre på sagens  informationer">
+            <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="43.0" prefHeight="35.0" prefWidth="1028.0" text="- Få et overblik over dine tildelte borgere, samt se alle deres tildelte sager. Ved et tryk på en sag er et muligt at udfylde ændre på sagens informationer">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="15.0" layoutY="60.0" prefHeight="35.0" prefWidth="586.0" text="  Derudover er det også muligt at søge på en borger.">
+            <Label alignment="TOP_LEFT" layoutX="15.0" layoutY="60.0" prefHeight="35.0" prefWidth="586.0" text=" Derudover er det også muligt at søge på en borger.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="85.0" prefHeight="35.0" prefWidth="1136.0" text="- Få lov til at rapportere og udfylde en borgers; generelle informationer, helbredstilstand og funktionstilstand. Her vil der blive rapporteret med udgangspunkt i Fælles Sprog III">
+            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="85.0" prefHeight="35.0" prefWidth="1136.0" text="- Mulighed for at rapportere og udfylde en borgers; generelle informationer, helbredstilstand og funktionsevnetilstand.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="21.0" layoutY="103.0" prefHeight="35.0" prefWidth="710.0" text="Derudover kan man få en opsummering af borgerens rapport ved at trykke på &quot;Se alle borgerens informationer&quot;">
+            <Label alignment="TOP_LEFT" layoutX="21.0" layoutY="103.0" prefHeight="25.0" prefWidth="710.0" text="Derudover kan man få en opsummering af borgerens rapport ved at trykke på &quot;Se alle borgerens informationer&quot;">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="395.0" fitWidth="799.0" layoutX="226.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/Screenshot%2014.jpg" />
-               </image>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </ImageView>
             <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="132.0" prefHeight="35.0" prefWidth="1136.0" text="- Bruge logoet til at komme tilbage på hjemmeskærmen">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="159.0" prefHeight="35.0" prefWidth="1136.0" text="- Få lov til at logge ud">
+            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="159.0" prefHeight="35.0" prefWidth="1136.0" text="- Logge ud">
                <font>
                   <Font size="14.0" />
                </font>

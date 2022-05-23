@@ -114,12 +114,12 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="45.0" prefHeight="35.0" prefWidth="400.0" text="- Få et overblik og håndtere alle dine elever, samt deres logins">
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="45.0" prefHeight="35.0" prefWidth="431.0" text="- Få et overblik og håndtere alle skolens elever, samt deres logins">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="71.0" prefHeight="35.0" prefWidth="586.0" text="- Få et overblik eller opret flere borgere i systemet, samt udfylde deres generelle informationer">
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="71.0" prefHeight="35.0" prefWidth="586.0" text="- Få et overblik eller opret flere borgere i systemet">
                <font>
                   <Font size="14.0" />
                </font>
@@ -149,14 +149,6 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="252.0" fitWidth="325.0" layoutX="252.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/screenshot%2011.jpg" />
-               </image>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneStudent" layoutX="228.0" layoutY="140.0" prefHeight="456.0" prefWidth="609.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">

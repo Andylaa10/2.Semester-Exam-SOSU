@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -114,12 +113,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="123.0" prefHeight="35.0" prefWidth="545.0" text="- Få et overblik over alle oprettede skoler, samt admins. Herefter er det muligt at tildele">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label alignment="TOP_LEFT" layoutX="22.0" layoutY="140.0" prefHeight="35.0" prefWidth="225.0" text="admins til deres tilhørende skole">
+            <Label alignment="TOP_LEFT" layoutX="12.0" layoutY="123.0" prefHeight="35.0" prefWidth="545.0" text="- Få et overblik over alle oprettede skoler, samt admins.">
                <font>
                   <Font size="14.0" />
                </font>
@@ -134,14 +128,6 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="316.0" fitWidth="362.0" layoutX="236.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/screenshot%2013.jpg" />
-               </image>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneCreateSchool" layoutX="185.0" layoutY="139.0" prefHeight="456.0" prefWidth="610.0" visible="false">
