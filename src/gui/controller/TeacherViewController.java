@@ -5,7 +5,6 @@ import be.Citizen;
 import be.GeneralInformation;
 import be.User;
 import be.enums.UserType;
-import bll.utilities.BCrypt.BCrypt;
 import bll.utilities.Encryptor;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
@@ -19,7 +18,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -30,8 +28,6 @@ import java.util.ResourceBundle;
 
 public class TeacherViewController implements Initializable, IController {
 
-    public TextField txtFieldSearchCitizens;
-    public Button btnSearchCitizens;
     /**
      * Top Pane
      */
@@ -116,6 +112,10 @@ public class TeacherViewController implements Initializable, IController {
     private TextField txtFieldName;
     @FXML
     private TextArea txtAreaInfo;
+    @FXML
+    private TextField txtFieldSearchCitizens;
+    @FXML
+    private Button btnSearchCitizens;
 
     /**
      * CitizenPane
@@ -248,6 +248,9 @@ public class TeacherViewController implements Initializable, IController {
         selectedCaseOnCitizen();
     }
 
+    /**
+     * Set the radio button in a group, so that only one button can be picked
+     */
     public void setToggleGroup() {
         ToggleGroup group = new ToggleGroup();
         radioMale.setToggleGroup(group);
@@ -255,6 +258,9 @@ public class TeacherViewController implements Initializable, IController {
         radioOther.setToggleGroup(group);
     }
 
+    /**
+     * Initializes the different tables views
+     */
     private void initializeTable() {
         //Initialize the students table
         tcStudentFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -441,6 +447,9 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Deletes a case from a selected citizen
+     */
     @FXML
     private void onActionDeleteCaseFromCitizen() {
         if (selectedCaseOnCitizen != null && selectedCitizen != null) {
@@ -455,6 +464,10 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Creates a citizen and when press on save button, the different text fields get cleared
+     * @throws SQLException
+     */
     @FXML
     private void btnHandleSaveCitizen() throws SQLException {
         if (!txtFieldCitizenFirstName.getText().isEmpty() && !txtFieldCitizenLastName.getText().isEmpty()
@@ -483,6 +496,9 @@ public class TeacherViewController implements Initializable, IController {
 
     }
 
+    /**
+     * Clear text fields when creating a citizen
+     */
     private void clearTextFieldCreate() {
         txtFieldCitizenFirstName.clear();
         txtFieldCitizenLastName.clear();
@@ -540,6 +556,10 @@ public class TeacherViewController implements Initializable, IController {
         btnSaveStudent.setDisable(true);
     }
 
+    /**
+     * Edits a student when selected, and check if the username is already i the database
+     * @throws Exception
+     */
     @FXML
     private void btnHandleEditSave() throws Exception {
         if (this.selectedStudent != null) {
@@ -570,6 +590,10 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Deletes a citizen when selected and the alert box is checked
+     * @throws Exception
+     */
     @FXML
     private void btnHandleDeleteCitizen() throws Exception {
         if (selectedCreatedCitizen != null) {
@@ -589,6 +613,9 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Clears the selection and text fields cleared when edit cancel is pressed
+     */
     @FXML
     private void btnHandleEditCancel() {
         reloadStudentTable();
@@ -659,7 +686,7 @@ public class TeacherViewController implements Initializable, IController {
 
 
     /**
-     * Selects a citizen from the citizens TableView
+     * Selects a citizen from the citizens TableView and when clicked two times on a citizen, then the student view opens with the selected citizens credentials
      */
     private void selectedCitizen() {
         this.tvCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
@@ -707,7 +734,7 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     /**
-     * Selects a citizen from the citizens TableView
+     * Selects a citizen from the citizens TableView and when clicked two times on a citizen, then the student view opens with the selected citizens credentials
      */
     private void selectedCreatedCitizen() {
         this.tvCreatedCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
@@ -797,7 +824,7 @@ public class TeacherViewController implements Initializable, IController {
     }
 
     /**
-     * Makes you able to select a student from the table
+     * Makes you able to select a student from the table when clicked two times on a case, then the case view opens with the selected cases information
      */
     private void selectedCase() {
         this.tvCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
@@ -837,6 +864,9 @@ public class TeacherViewController implements Initializable, IController {
         });
     }
 
+    /**
+     * Selects a vase on a citizen
+     */
     private void selectedCaseOnCitizen() {
         this.tvCasesOnCitizen.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
@@ -858,6 +888,9 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Reloads the citizen table
+     */
     private void reloadCitizenTable() {
         try {
             int index = tvCitizens.getSelectionModel().getFocusedIndex();
@@ -868,6 +901,9 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Reloads the current cases table
+     */
     private void reloadCurrentCasesTable() {
         try {
             int index = tvCurrentCases.getSelectionModel().getFocusedIndex();
@@ -887,6 +923,10 @@ public class TeacherViewController implements Initializable, IController {
         txtAreaInfo.setText(aCase.getInfo());
     }
 
+    /**
+     * Creates a case and give it a date
+     * @throws Exception
+     */
     @FXML
     private void btnHandleSaveCase() throws Exception {
         if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
@@ -903,6 +943,10 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Assigns a date when a case is created
+     * @throws Exception
+     */
     private void assignDate() throws Exception {
         selectedCase = allCases.get(allCases.size() - 1);
         if (selectedCase != null) {
@@ -915,6 +959,10 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Deletes a case when selected and the alert box is answered
+     * @throws Exception
+     */
     @FXML
     private void btnHandleDeleteCase() throws Exception {
         if (selectedCase != null) {
@@ -935,6 +983,9 @@ public class TeacherViewController implements Initializable, IController {
 
     }
 
+    /**
+     * Makes the different buttons user-friendly
+     */
     @FXML
     private void btnHandleEditCase() {
         if (selectedCase != null) {
@@ -950,6 +1001,9 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Edits a selected case
+     */
     @FXML
     private void btnHandleEditCaseSave() throws Exception {
         if (this.selectedCase != null) {
@@ -973,6 +1027,9 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Clear the different text field
+     */
     @FXML
     private void btnHandleEditCaseCancel() {
         reloadCaseTable();
@@ -981,6 +1038,9 @@ public class TeacherViewController implements Initializable, IController {
         setCaseBtnVisibility();
     }
 
+    /**
+     * Copies a case by filling the text fields with the selected case, that you want to copy
+     */
     @FXML
     private void btnHandleCopyCase() {
         if (this.selectedCase != null) {
@@ -998,7 +1058,12 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
-    public void btnHandleCopySave() throws Exception {
+    /**
+     * Saves the informations
+     * @throws Exception
+     */
+    @FXML
+    private void btnHandleCopySave() throws Exception {
         if (selectedCase != null) {
             btnHandleSaveCase();
             setCaseBtnVisibility();
@@ -1007,6 +1072,9 @@ public class TeacherViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Sets the visibility on the buttons
+     */
     public void setCaseBtnVisibility() {
         btnEditCase.setDisable(false);
         btnCopyCase.setDisable(false);
@@ -1120,6 +1188,10 @@ public class TeacherViewController implements Initializable, IController {
         switcher.centerOnScreen();
     }
 
+    /**
+     * Method that filters the events, with the text input you write in the textfield.
+     * Updates the icon with each press and clears the search on every second click
+     */
     @FXML
     private void onActionSearchCitizens() {
         if (hasSearched && !txtFieldSearchCitizens.getText().equals("")) {
