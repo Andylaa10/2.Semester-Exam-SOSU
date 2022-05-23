@@ -31,6 +31,10 @@ public class EditCaseViewController {
     public EditCaseViewController() throws IOException, SQLException {
     }
 
+    /**
+     * Method for setting the selectedCase info.
+     * @param aCase
+     */
     public void setSelectedCase(Case aCase) {
         txtFieldCaseId.setText(String.valueOf(aCase.getId()));
         txtFieldCaseDate.setText(aCase.getDate());
@@ -38,6 +42,10 @@ public class EditCaseViewController {
         txtAreaCaseInfo.setText(aCase.getInfo());
     }
 
+    /**
+     * On action method for saving the edited case.
+     * @throws Exception
+     */
     @FXML
     private void onActionSave() throws Exception {
         int caseId = Integer.parseInt(txtFieldCaseId.getText());
@@ -53,6 +61,9 @@ public class EditCaseViewController {
         stage.close();
     }
 
+    /**
+     * On action method for the cancel button, that closes the window.
+     */
     @FXML
     private void onActionCloseWindow() {
         Stage stage = (Stage) btnCancel.getScene().getWindow();

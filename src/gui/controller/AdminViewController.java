@@ -5,13 +5,11 @@ import be.Citizen;
 import be.GeneralInformation;
 import be.User;
 import be.enums.UserType;
-import bll.utilities.BCrypt.BCrypt;
 import bll.utilities.Encryptor;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -281,6 +279,9 @@ public class AdminViewController implements Initializable, IController {
         selectedCaseOnCitizen();
     }
 
+    /**
+     * Method to fill all the tables with information from the database.
+     */
     private void initializeTable() {
         //Initialize the teacher table
         tcTeacherFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -292,6 +293,7 @@ public class AdminViewController implements Initializable, IController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         //Initialize the students table
         tcStudentFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcStudentLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
@@ -349,6 +351,10 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+
+    /**
+     * Method to set togglegroup for radiobuttons.
+     */
     private void setToggleGroup() {
         ToggleGroup group = new ToggleGroup();
         radioMale.setToggleGroup(group);
@@ -482,6 +488,12 @@ public class AdminViewController implements Initializable, IController {
     }
 
 
+    /**
+     * On Action method for creating a teacher.
+     * Gets the text from all the txtfields and creates a teacher using the dataModelFacade method createTeacher.
+     * @throws SQLException
+     * @throws IOException
+     */
     @FXML
     private void onActionCreateTeacher() throws SQLException, IOException {
         String userNames = String.valueOf(dataModelFacade.getUsernames());
@@ -500,6 +512,10 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * On Action method for the edit button in the create teacher view.
+     * Sets the visibility of buttons and disables buttons, so you dont make a mistake.
+     */
     @FXML
     private void onActionEditTeacher() {
         if (selectedTeacher != null) {
@@ -516,6 +532,11 @@ public class AdminViewController implements Initializable, IController {
 
     }
 
+    /**
+     * On action method for saving the edited teacher info.
+     * Gets all the text from the textFields and uses the editTeacher method from dataModelFacade.
+     * @throws Exception
+     */
     @FXML
     private void onActionEditTeacherSave() throws Exception {
         if (this.selectedTeacher != null) {
@@ -547,6 +568,12 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * On action method for deleting a teacher.
+     * Uses the deleteTeacher method from the dataModelFacade.
+     * @throws SQLException
+     */
+
     @FXML
     private void onActionDeleteTeacher() throws SQLException {
         if (selectedTeacher != null) {
@@ -568,7 +595,10 @@ public class AdminViewController implements Initializable, IController {
 
     }
 
-
+    /**
+     * On action method for cancelling your edit.
+     * Sets the visibility and disables back to normal when cancelling.
+     */
     @FXML
     private void onActionEditTeacherCancel() {
         reloadTeacherTable();
@@ -595,6 +625,10 @@ public class AdminViewController implements Initializable, IController {
         }));
     }
 
+    /**
+     * Method for setting the selected teacher.
+     * @param teacher
+     */
     private void setSelectedTeacher(User teacher) {
         txtFieldTeacherID.setText(String.valueOf(teacher.getId()));
         txtFieldTeacherFirstName.setText(teacher.getFirstName());
@@ -604,6 +638,9 @@ public class AdminViewController implements Initializable, IController {
 
     }
 
+    /**
+     * Method for reloading the teacher table, so it is always up to date with displayed info.
+     */
     private void reloadTeacherTable() {
         try {
             int index = tvTeachers.getSelectionModel().getFocusedIndex();
@@ -614,6 +651,9 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Method for clearing textFields.
+     */
     private void clearTeacherTxtField() {
         txtFieldTeacherID.clear();
         txtFieldTeacherFirstName.clear();
@@ -639,6 +679,9 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Method to delete a case from a citizen.
+     */
     @FXML
     private void onActionDeleteCaseFromCitizen() {
         if (selectedCaseOnCitizen != null && selectedCitizen != null) {
@@ -653,6 +696,11 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * On action method for saving and creating a new citizen.
+     * Gets all text from textFields and creates a citizen using the createCitizen method from dataModelFacade
+     * @throws SQLException
+     */
     @FXML
     private void btnHandleSaveCitizen() throws SQLException {
         if (!txtFieldCitizenFirstName.getText().isEmpty() && !txtFieldCitizenLastName.getText().isEmpty()
@@ -680,6 +728,9 @@ public class AdminViewController implements Initializable, IController {
 
     }
 
+    /**
+     * Method to clear textfields from create citizen.
+     */
     private void clearTextFieldCreate() {
         txtFieldCitizenFirstName.clear();
         txtFieldCitizenLastName.clear();
@@ -754,6 +805,11 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * On action method for saving edits on a student.
+     * Gets all information from textfields and saves the edits using the editStudent method from dataModelFacade.
+     * @throws Exception
+     */
     @FXML
     private void btnHandleEditSave() throws Exception {
         if (this.selectedStudent != null) {
@@ -785,6 +841,12 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * On action method for deleting citizen.
+     * Uses the selectedCreatedCitizen and deletes using the id from citizen, with the deleteCitizen method from -
+     * dataModelFacade.
+     * @throws Exception
+     */
     @FXML
     private void btnHandleDeleteCitizen() throws Exception {
         if (selectedCreatedCitizen != null) {
@@ -804,6 +866,10 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * On action method for cancelling an edit.
+     * Clears textfields and sets buttons visibility and disable back to normal.
+     */
     @FXML
     private void btnHandleEditCancel() {
         reloadStudentTable();
@@ -874,6 +940,7 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * Selects a citizen from the citizens TableView
+     * Also opens a new view when a citizen is doubleClicked.
      */
     private void selectedCitizen() {
         this.tvCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
@@ -923,6 +990,7 @@ public class AdminViewController implements Initializable, IController {
 
     /**
      * Selects a citizen from the citizens TableView
+     * Also opens a new view when a citizen is doubleClicked.
      */
     private void selectedCreatedCitizen() {
         this.tvCreatedCitizens.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
@@ -1013,7 +1081,8 @@ public class AdminViewController implements Initializable, IController {
     }
 
     /**
-     * Makes you able to select a student from the table
+     * Makes you able to select a case from the table
+     * Also opens a new view when a case is doubleClicked.
      */
     private void selectedCase() {
         this.tvCases.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
@@ -1053,6 +1122,9 @@ public class AdminViewController implements Initializable, IController {
         });
     }
 
+    /**
+     * Makes you able to select a case on citizen, from the tvCasesOnCitizen.
+     */
     private void selectedCaseOnCitizen() {
         this.tvCasesOnCitizen.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
@@ -1074,6 +1146,9 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Method for reloading the current cases table.
+     */
     private void reloadCurrentCasesTable() {
         try {
             int index = tvCurrentCases.getSelectionModel().getFocusedIndex();
@@ -1093,6 +1168,11 @@ public class AdminViewController implements Initializable, IController {
         txtAreaInfo.setText(aCase.getInfo());
     }
 
+    /**
+     * On action method for saving a case.
+     * Get the text from textFields and creates a case using the createCase method from the dataModelFacade
+     * @throws Exception
+     */
     @FXML
     private void btnHandleSaveCase() throws Exception {
         if (!txtFieldName.getText().isEmpty() && !txtAreaInfo.getText().isEmpty()) {
@@ -1109,6 +1189,10 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Method for assigning date when creating/editing a case.
+     * @throws Exception
+     */
     private void assignDate() throws Exception {
         selectedCase = allCases.get(allCases.size() - 1);
         if (selectedCase != null) {
@@ -1121,6 +1205,11 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * On action method for deleting a case.
+     * Uses the caseId when deleting a case, using the deleteCase method from dataModelFacade
+     * @throws Exception
+     */
     @FXML
     private void btnHandleDeleteCase() throws Exception {
         if (selectedCase != null) {
@@ -1140,6 +1229,10 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * On action method for when you press edit case in the view.
+     * Sets the buttons visibility and disables not useful buttons, to avoid mistakes.
+     */
     @FXML
     private void btnHandleEditCase() {
         if (selectedCase != null) {
@@ -1155,6 +1248,11 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * On action method for saving edited cases.
+     * Gets all the information from textFields and uses editCase method from dataModelFacade.
+     * @throws Exception
+     */
     @FXML
     private void btnHandleEditCaseSave() throws Exception {
         if (this.selectedCase != null) {
@@ -1178,6 +1276,9 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * On action method for when you press cancel when editing a case.
+     */
     @FXML
     private void btnHandleEditCaseCancel() {
         reloadCaseTable();
@@ -1186,6 +1287,10 @@ public class AdminViewController implements Initializable, IController {
         setCaseBtnVisibility();
     }
 
+    /**
+     * On action method for when you copy a case.
+     * It fills the textarea with the picked case's information, and then you can save it as a new one.
+     */
     @FXML
     private void btnHandleCopyCase() {
         if (this.selectedCase != null) {
@@ -1203,6 +1308,10 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * On action method for saving a copied case.
+     * @throws Exception
+     */
     @FXML
     private void btnHandleCopySave() throws Exception {
         if (selectedCase != null) {
@@ -1211,6 +1320,9 @@ public class AdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Method to set the only useful buttons visible, and disabling the not useful buttons.
+     */
     @FXML
     private void setCaseBtnVisibility() {
         btnEditCase.setDisable(false);
@@ -1236,6 +1348,9 @@ public class AdminViewController implements Initializable, IController {
         anchorPaneCreateTeacher.setVisible(false);
     }
 
+    /**
+     * Loads the teacher overview anchorpane when clicked.
+     */
     @FXML
     private void btnClickCreateTeacher() {
         labelTitle.setText("Lærere");
@@ -1281,6 +1396,9 @@ public class AdminViewController implements Initializable, IController {
         anchorPaneCreateTeacher.setVisible(false);
     }
 
+    /**
+     * Loads the citizen overview anchorPane when clicked.
+     */
     @FXML
     private void btnClickSeeCitizens() {
         labelTitle.setText("Borgere");
@@ -1294,6 +1412,9 @@ public class AdminViewController implements Initializable, IController {
         anchorPaneCreateTeacher.setVisible(false);
     }
 
+    /**
+     * Loads the create citizen overview anchorPane when clicked.
+     */
     @FXML
     private void btnClickCitizen() {
         labelTitle.setText("Opret Borger");
@@ -1307,6 +1428,9 @@ public class AdminViewController implements Initializable, IController {
         anchorPaneCreateTeacher.setVisible(false);
     }
 
+    /**
+     * Loads the home anchorPane when clicked.
+     */
     @FXML
     private void btnClickHome() {
         labelTitle.setText("Admin");
@@ -1335,6 +1459,10 @@ public class AdminViewController implements Initializable, IController {
         switcher.centerOnScreen();
     }
 
+    /**
+     * On action method for searching a citizen.
+     * Uses the input from the search textField to load the tableview with the search results.
+     */
     @FXML
     private void onActionSearchCitizens() {
         if (hasSearched && !txtFieldSearchCitizens.getText().equals("")) {

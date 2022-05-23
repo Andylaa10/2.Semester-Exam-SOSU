@@ -15,7 +15,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ObservationNoteViewController implements Initializable {
+public class ObservationNoteViewController {
 
     @FXML
     private TextField txtFieldFollowUpDate;
@@ -35,11 +35,12 @@ public class ObservationNoteViewController implements Initializable {
     public ObservationNoteViewController() throws IOException, SQLException {
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
 
-
+    /**
+     * Method for setting the selected citizen, with the data that follows.
+     * @param citizen
+     * @throws Exception
+     */
     public void setSelectedCitizen(Citizen citizen) throws Exception {
         txtFieldCitizenId.setText(String.valueOf(citizen.getId()));
         citizenId = Integer.parseInt(txtFieldCitizenId.getText());
@@ -54,6 +55,11 @@ public class ObservationNoteViewController implements Initializable {
     }
 
 
+    /**
+     * OnAction method for saving.
+     * Gets the text from textfields and uses the createObservationNote method from the dataModelFacade.
+     * @throws Exception
+     */
     @FXML
     private void onActionSave() throws Exception {
         Stage stage = (Stage) btnSave.getScene().getWindow();
@@ -73,6 +79,9 @@ public class ObservationNoteViewController implements Initializable {
         }
     }
 
+    /**
+     * OnAction method for clicking the close button, which closes the stage.
+     */
     @FXML
     private void onActionClose() {
         Stage stage = (Stage) btnClose.getScene().getWindow();

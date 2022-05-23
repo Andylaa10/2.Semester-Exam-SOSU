@@ -245,7 +245,6 @@ public class StudentViewController implements IController, Initializable {
     private Case selectedCase;
     private Citizen selectedCitizenOnComboBox;
     private FunctionalAbilitySubCategoryText selectedFunctionalAbilitySubCategory;
-
     private HealthConditionSubCategory selectedHealthConditionSubCategory;
     private HealthCondition selectedHealthCondition;
 
@@ -273,6 +272,11 @@ public class StudentViewController implements IController, Initializable {
         initializeCitizenComboBox();
     }
 
+    /**
+     * Initialize method for studentViewController.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setAnchorPanesVisibility();
@@ -377,48 +381,13 @@ public class StudentViewController implements IController, Initializable {
             } else {
                 clearHealthConditionTxtField();
             }
-            changeColorOnTV(subCategoryText);
         }
     }
 
-    public void changeColorOnTV(HealthConditionSubCategoryText subCategoryText) {
-        Callback<TableColumn<HealthConditionSubCategory, String>, TableCell<HealthConditionSubCategory, String>> cellFactory = new Callback<>() {
-            @Override
-            public TableCell<HealthConditionSubCategory, String> call(final TableColumn<HealthConditionSubCategory, String> param) {
-                return new TableCell<>() {
 
-                    @Override
-                    public void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                            setText(null);
-                        } else {
-                            setText(item);
-                            TableRow<HealthConditionSubCategory> row = getTableRow();
-                            if (subCategoryText == null) {
-                                row.setStyle("");
-                            } else if (row.getItem().getCondition(subCategoryText) == 0 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
-                                row.getStyleClass().clear();
-                                row.setStyle("-fx-background-color: red");
-                            } else if (row.getItem().getCondition(subCategoryText) == 1 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
-                                row.getStyleClass().clear();
-                                row.setStyle("-fx-background-color: yellow");
-                            } else if (row.getItem().getCondition(subCategoryText) == 2 && row.getItem().getSubCategoryName().equals(selectedHealthConditionSubCategory.getSubCategoryName())) {
-                                row.getStyleClass().clear();
-                                row.setStyle("-fx-background-color: green");
-                            } else {
-                                row.setStyle("");
-                            }
-                        }
-                    }
-                };
-            }
-        };
-        tcSubCategoriesName.setCellFactory(cellFactory);
-    }
-
-
+    /**
+     * Method for clearing the HealthCondtionTextFields and radiobuttons.
+     */
     public void clearHealthConditionTxtField() {
         txtAreaNoteOnSubCategory.clear();
         txtAreaCurrentLevelAssessment.clear();
@@ -448,12 +417,18 @@ public class StudentViewController implements IController, Initializable {
         radioOther.setToggleGroup(group);
     }
 
+    /**
+     * Method for setting the ExpectedLevelAssessment comboBox items.
+     */
     private void setExpectedLevelAssessmentComboBoxItems() {
         comboBoxExpectedLevelAssessment.getItems().addAll(
                 "Mindskes", "Forbliver uændret", "Forsvinder"
         );
     }
 
+    /**
+     * Method for setting the functionalAbility comboBox items.
+     */
     private void setFunctionalAbilityComboBoxItems() {
         ImageWithText iWT0 = new ImageWithText("gui/view/img/funktionstilstand0.png", 100, 100, false, false, "0");
         ImageWithText iWT1 = new ImageWithText("gui/view/img/funktionstilstand1.png", 100, 100, false, false, "1");
@@ -538,6 +513,10 @@ public class StudentViewController implements IController, Initializable {
         comboBoxCitizen.setItems(allCitizens);
     }
 
+    /**
+     * Method for setting the citizens in the comboBoxCitzen.
+     * @param citizen
+     */
     public void setCitizenComboBoxItems(Citizen citizen) {
         txtFieldCitizenID.setText(String.valueOf(citizen.getId()));
         txtFieldSchoolID.setText(String.valueOf(citizen.getSchoolID()));
@@ -659,6 +638,10 @@ public class StudentViewController implements IController, Initializable {
         return allSubCategories;
     }
 
+    /**
+     * loads the functionalAbilitySubCategories tableview.
+     * @param allFunctionalAbilitySubCategories
+     */
     private void tableViewLoadFunctionalAbilitySubCategories(ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories) {
         new Thread(() -> {
             tvFunctionalConditions.setItems(getFunctionalAbilitySubCategories());
@@ -667,6 +650,10 @@ public class StudentViewController implements IController, Initializable {
 
     }
 
+    /**
+     * Gets the functionalAbilitySubCategories data.
+     * @return
+     */
     private ObservableList<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories() {
         return allFunctionalAbilitySubCategories;
     }
@@ -877,6 +864,11 @@ public class StudentViewController implements IController, Initializable {
 
     }
 
+    /**
+     * Method for setting the info for a citizen, with data from the database.
+     * @param citizenID
+     * @throws SQLException
+     */
     public void setCitizenInfo(int citizenID) throws SQLException {
         txtFieldCitizenID.setText(String.valueOf(citizenID));
 
@@ -896,6 +888,10 @@ public class StudentViewController implements IController, Initializable {
     }
 
 
+    /**
+     * Method for setting the functionalAbility info.
+     * @throws SQLException
+     */
     private void setFunctionalAbilityInfo() throws SQLException {
 
         if (txtFieldCitizenID != null && txtFieldFunctionalAbilityID != null) {
@@ -950,6 +946,9 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
+    /**
+     * Method for clearing the functionalAbilityTextFields.
+     */
     private void clearFunctionalAbilityTextFields() {
         comboBoxCurrentLevel.getSelectionModel().clearSelection();
         comboBoxExpectedLevel.getSelectionModel().clearSelection();
@@ -959,6 +958,9 @@ public class StudentViewController implements IController, Initializable {
         txtAreaCitizenGoals.clear();
     }
 
+    /**
+     * Method for clearing the healthConditions.
+     */
     private void clearHealthCondition() {
         txtAreaCoping.clear();
         txtAreaMotivation.clear();
@@ -973,6 +975,13 @@ public class StudentViewController implements IController, Initializable {
         txtAreaHomeLayout.clear();
     }
 
+    /**
+     * On action method for saving the functionalAbility info.
+     * If there is already data, the editFunctionalAbility method from the dataModelFacade is used.
+     * If there is not data, the createFunctionalAbility method from the dataModelFacade is used.
+     * The citizen data will always be using the editCitizen method from the facade.
+     * @throws SQLException
+     */
     @FXML
     private void btnHandleSaveFunctionalAbilityInfo() throws SQLException {
         if (txtFieldCitizenID != null && txtFieldFunctionalAbilityID != null) {
@@ -1012,6 +1021,11 @@ public class StudentViewController implements IController, Initializable {
 
     }
 
+    /**
+     * OnAction method for saving the HealthConditions.
+     * Uses the inserIntoSubCategory method if data is created, and uses the editSubCategory method if data is edited.
+     * @throws Exception
+     */
     @FXML
     private void btnHandleSaveHC() throws Exception {
         if (txtFieldCitizenID != null && subCatTxtID != null) {
@@ -1073,6 +1087,9 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
+    /**
+     * OnACtion method for when cancel button is pressed.
+     */
     @FXML
     private void btnHandelCancelChangesHC() {
         txtAreaNoteOnSubCategory.clear();
@@ -1084,6 +1101,9 @@ public class StudentViewController implements IController, Initializable {
     }
 
 
+    /**
+     * Method for loading the tableview with selfCare subcategories when selfCare button is pressed.
+     */
     @FXML
     private void btnLoadSelfCare() {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -1096,6 +1116,9 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
+    /**
+     * Method for loading the tableview with mental function subcategories when mentalFunctions button is pressed.
+     */
     @FXML
     private void btnLoadMentalFunctions() throws SQLException {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -1108,6 +1131,9 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
+    /**
+     * Method for loading the tableview with mobility subcategories when mobility button is pressed.
+     */
     @FXML
     private void btnLoadMobility() throws SQLException {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -1120,6 +1146,9 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
+    /**
+     * Method for loading the tableview with practical assignments subcategories when PracticalAssignments button is pressed.
+     */
     @FXML
     private void btnLoadPracticalAssignments() throws SQLException {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -1132,6 +1161,9 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
+    /**
+     * Method for loading the tableview with Community Life subcategories when CommunityLife button is pressed.
+     */
     @FXML
     private void btnLoadCommunityLife() throws SQLException {
         tcFunctionalConditionID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -1144,6 +1176,11 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
+    /**
+     * OnAction method for pressing the observationNote button.
+     * Opens the observationNoteView when pressed.
+     * @throws Exception
+     */
     @FXML
     private void btnHandleObservationFA() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -1161,6 +1198,11 @@ public class StudentViewController implements IController, Initializable {
         stage.show();
     }
 
+    /**
+     * OnAction method for pressing the observationNote button.
+     * Opens the observationNoteView when pressed.
+     * @throws Exception
+     */
     @FXML
     private void btnHandleObservationHC() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -1333,6 +1375,12 @@ public class StudentViewController implements IController, Initializable {
         btnClickGeneralInformation();
     }
 
+    /**
+     * OnAction method for clicking the citizenInfo button.
+     * Opens the citizenInfoView when clicked, and sets the selected citizens info, using the citizenInfoViewController-
+     * method setSelectedCitizen.
+     * @throws Exception
+     */
     public void btnOpenCitizenInfo() throws Exception {
 
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -1352,11 +1400,20 @@ public class StudentViewController implements IController, Initializable {
     }
 
 
+    /**
+     * OnAction method for clicking the btnClose. It closes the stage when pressed.
+     * @param actionEvent
+     */
     public void btnClickClose(ActionEvent actionEvent) {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
     }
 
+
+    /**
+     * On action method for searching a citizen.
+     * Uses the input from the search textField to load the tableview with the search results.
+     */
     @FXML
     private void onActionSearchCitizens() {
         if (hasSearched && !txtFieldSearchCitizens.getText().equals("")) {

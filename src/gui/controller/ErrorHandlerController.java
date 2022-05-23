@@ -20,14 +20,25 @@ public class ErrorHandlerController {
     @FXML
     private Label lblTitle;
 
+    /**
+     * Method for setting text in the error messsage
+     * @param text
+     */
     public void setText(String text) {
         textArea.setText(text);
     }
 
+    /**
+     * Method for setting the text for the title in the error message.
+     * @param title
+     */
     public void setTitle(String title) {
         lblTitle.setText(title);
     }
 
+    /**
+     * On action method for the ok button, that closes the window.
+     */
     public void handleBtnOk() {
         Stage stage = (Stage) root.getScene().getWindow();
         stage.close();

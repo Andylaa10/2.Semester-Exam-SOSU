@@ -27,7 +27,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class CitizenInfoViewController implements Initializable {
+public class CitizenInfoViewController {
 
     @FXML
     private Button btnSaveDateAndNote;
@@ -59,10 +59,12 @@ public class CitizenInfoViewController implements Initializable {
     public CitizenInfoViewController() throws IOException, SQLException {
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
-
+    /**
+     * Method to set the selected citizen from the studentviews info.
+     * Also creates all the vBoxes for cases, healthConditions and functionalAbilities.
+     * @param citizen
+     * @throws Exception
+     */
     public void setSelectedCitizen(Citizen citizen) throws Exception {
         txtFieldCitizenID.setText(String.valueOf(citizen.getId()));
         citizenId = Integer.parseInt(txtFieldCitizenID.getText());
@@ -87,6 +89,10 @@ public class CitizenInfoViewController implements Initializable {
     }
 
 
+    /**
+     * On action method for saving the observationNote and date for the citizen.
+     * @throws Exception
+     */
     @FXML
     private void onActionSaveDateAndNote() throws Exception {
         Stage stage = (Stage) btnSaveDateAndNote.getScene().getWindow();
@@ -106,6 +112,10 @@ public class CitizenInfoViewController implements Initializable {
         }
     }
 
+    /**
+     * Method for creating all the cases a citizen have.
+     * Uses a thread for optimized loading.
+     */
     private void createCases() {
         Thread t1 = new Thread(() -> {
             ObservableList<Case> allCasesOnCitizen = null;
@@ -128,6 +138,10 @@ public class CitizenInfoViewController implements Initializable {
 
     }
 
+    /**
+     * Method for creating all healthConditions the citizen have.
+     * Uses a thread for optimized loading.
+     */
     private void createHealthConditions() {
         Thread t1 = new Thread(() -> {
             ObservableList<HealthConditionSubCategoryText> allSubCategories = null;
@@ -150,6 +164,11 @@ public class CitizenInfoViewController implements Initializable {
 
     }
 
+    /**
+     * Method for creating the functionalAbilites the citizen have.
+     * @throws SQLException
+     */
+
     private void createFunctionalAbilities() throws SQLException {
         ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFAInfoOnSubCategories(citizenId));
         for (FunctionalAbilitySubCategoryText FAOnCitizen : allFunctionalAbilitySubCategories) {
@@ -159,6 +178,12 @@ public class CitizenInfoViewController implements Initializable {
     }
 
 
+    /**
+     * Method for creating a vbox, using the caseId.
+     * Creates all the elements in the vBox and fills it out with info from the database.
+     * @param caseId
+     * @throws SQLException
+     */
     private void newCaseToVBox(int caseId) throws SQLException {
         Case aCase = dataModelFacade.getCaseOnCitizen(Integer.parseInt(txtFieldCitizenID.getText()), caseId);
         Label labelName = new Label("Sagsnavn");
@@ -191,6 +216,11 @@ public class CitizenInfoViewController implements Initializable {
     }
 
 
+    /**
+     * Method for creating a vbox for a healthCondition
+     * Creates all the elements in the vBox and fills it out with info from the database.
+     * @throws SQLException
+     */
     private void newHCToVBox(int condition) throws SQLException {
         HealthConditionSubCategoryText hcSubCategoryText = dataModelFacade.getTextOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), this.healthConditionId);
 
@@ -366,13 +396,17 @@ public class CitizenInfoViewController implements Initializable {
 
         VBox vBoxNewHC = new VBox();
 
-        //vBoxHealthConditions.setBackground(new Background(new BackgroundFill(Color.CYAN, CornerRadii.EMPTY, new Insets(-15, -30,-30,-30))));
-        //vBoxHealthConditions.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT, new Insets(-15, -30,-30,-30))));
         vBoxNewHC.getChildren().addAll(hBox1, hBox2, lblHCNote, txtAreaHCNote, lblCurrentLevel, txtAreaCurrentLevel, hBox3, hBox4, lblNewLine, lblNewLine2, line);
         vBoxNewHC.setPadding(new Insets(5, 5, 5, 20));
         vBoxHealthCondition.getChildren().add(vBoxNewHC);
     }
 
+    /**
+     * Method for creating a vbox for a functionalAbility
+     * Creates all the elements in the vBox and fills it out with info from the database.
+     * @param functionalAbilitySubCategoryId
+     * @throws SQLException
+     */
     private void newFAToVBox(int functionalAbilitySubCategoryId) throws SQLException {
         FunctionalAbilitySubCategoryText faSubCategoryText = dataModelFacade.getInfoOnSubCategory(Integer.parseInt(txtFieldCitizenID.getText()), functionalAbilitySubCategoryId);
         HBox hBox1 = new HBox();

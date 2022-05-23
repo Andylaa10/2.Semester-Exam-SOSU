@@ -65,12 +65,18 @@ public class LoginViewController implements Initializable {
         comboBoxSchool.setItems(allSchools);
     }
 
+    /**
+     * Method for logging in
+     * Checks if you are a superadmin, teacher, admin or student. Then opens the view located to usertype.
+     * Also uses bcrypt through the facade, with the getHashedPaswword methods.
+     * Checks if the password written matches the hashed password.
+     * @throws Exception
+     */
     @FXML
     private void Login() throws Exception {
         String username = txtFieldUsername.getText();
         String password = pField.getText();
         SuperAdmin superAdmin = facade.getHashedPasswordSuperAdmin(username, password);
-        //SuperAdmin superAdmin = facade.superAdminLogin(username, password);
         if (superAdmin != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/SuperAdminView.fxml"));
             Scene scene = new Scene(loader.load());
@@ -131,6 +137,11 @@ public class LoginViewController implements Initializable {
         Login();
     }
 
+    /**
+     * Key event method for using enter button to log in instead of pressing the button manually.
+     * @param keyEvent
+     * @throws Exception
+     */
     @FXML
     private void onEnterPressedLogin(KeyEvent keyEvent) throws Exception {
         if (keyEvent.getCode().getName().equals("Enter")) {
