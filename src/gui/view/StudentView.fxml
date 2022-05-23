@@ -113,74 +113,44 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="1.0" layoutY="39.0" prefHeight="35.0" prefWidth="1028.0" text="- Få et overblik over dine tildelte borgere, samt se alle deres tildelte sager. Ved et tryk på en sag er et muligt at udfylde ændre på sagens  informationer">
+            <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="43.0" prefHeight="35.0" prefWidth="1028.0" text="- Få et overblik over dine tildelte borgere, samt se alle deres tildelte sager. Ved et tryk på en sag er et muligt at udfylde ændre på sagens  informationer">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="6.0" layoutY="56.0" prefHeight="35.0" prefWidth="586.0" text="  Derudover er det også muligt at søge på en borger.">
+            <Label alignment="TOP_LEFT" layoutX="15.0" layoutY="60.0" prefHeight="35.0" prefWidth="586.0" text="  Derudover er det også muligt at søge på en borger.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutY="340.0" prefHeight="35.0" prefWidth="1136.0" text="- Få lov til at rapportere og udfylde en borgers; generelle informationer, helbredstilstand og funktionstilstand. Her vil der blive rapporteret med udgangspunkt i Fælles Sprog III">
+            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="85.0" prefHeight="35.0" prefWidth="1136.0" text="- Få lov til at rapportere og udfylde en borgers; generelle informationer, helbredstilstand og funktionstilstand. Her vil der blive rapporteret med udgangspunkt i Fælles Sprog III">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="358.0" prefHeight="35.0" prefWidth="710.0" text="Derudover kan man få en opsummering af borgerens rapport ved at trykke på &quot;Se alle borgerens informationer&quot;">
+            <Label alignment="TOP_LEFT" layoutX="21.0" layoutY="103.0" prefHeight="35.0" prefWidth="710.0" text="Derudover kan man få en opsummering af borgerens rapport ved at trykke på &quot;Se alle borgerens informationer&quot;">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <ImageView fitHeight="269.0" fitWidth="416.0" layoutX="11.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true" style="fx: yellow;">
+            <ImageView fitHeight="395.0" fitWidth="799.0" layoutX="226.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/Screenshot%208.jpg" />
+                  <Image url="@img/Screenshot%2014.jpg" />
                </image>
                <effect>
                   <DropShadow />
                </effect>
             </ImageView>
-            <ImageView fitHeight="269.0" fitWidth="416.0" layoutX="451.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/Screenshot%209.jpg" />
-               </image>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </ImageView>
-            <ImageView fitHeight="240.0" fitWidth="251.0" layoutX="885.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/screenshot%2010.jpg" />
-               </image>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </ImageView>
-            <ImageView fitHeight="207.0" fitWidth="346.0" layoutX="13.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true" style="fx: yellow;">
-               <image>
-                  <Image url="@img/Screenshot%203.jpg" />
-               </image>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </ImageView>
-            <ImageView fitHeight="227.0" fitWidth="346.0" layoutX="399.0" layoutY="393.0" pickOnBounds="true" preserveRatio="true" style="fx: yellow;">
-               <image>
-                  <Image url="@img/Screenshot%204.jpg" />
-               </image>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </ImageView>
-            <ImageView fitHeight="218.0" fitWidth="346.0" layoutX="778.0" layoutY="392.0" pickOnBounds="true" preserveRatio="true" style="fx: yellow;">
-               <image>
-                  <Image url="@img/Screenshot%205.jpg" />
-               </image>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </ImageView>
+            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="132.0" prefHeight="35.0" prefWidth="1136.0" text="- Bruge logoet til at komme tilbage på hjemmeskærmen">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="159.0" prefHeight="35.0" prefWidth="1136.0" text="- Få lov til at logge ud">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="anchorPaneCitizens" layoutX="191.0" layoutY="136.0" prefHeight="610.0" prefWidth="1152.0" visible="false">
