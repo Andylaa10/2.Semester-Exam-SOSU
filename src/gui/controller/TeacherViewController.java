@@ -563,10 +563,7 @@ public class TeacherViewController implements Initializable, IController {
     @FXML
     private void btnHandleEditSave() throws Exception {
         if (this.selectedStudent != null) {
-            String userNames = String.valueOf(dataModelFacade.getUsernames());
-            if (userNames.contains(String.valueOf(txtFieldUsername.getText()))) {
-                ErrorHandlerController.createWarning("Fejl", "Brugernavn er allerede taget");
-            } else if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
+            if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldStudentID.getText());
                 String firstName = txtFieldFirstName.getText();
                 String lastName = txtFieldLastName.getText();

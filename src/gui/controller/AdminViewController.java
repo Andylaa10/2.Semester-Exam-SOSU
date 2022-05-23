@@ -540,10 +540,7 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private void onActionEditTeacherSave() throws Exception {
         if (this.selectedTeacher != null) {
-            String userNames = String.valueOf(dataModelFacade.getUsernames());
-            if (userNames.contains(String.valueOf(txtFieldTeacherUsername.getText()))) {
-                ErrorHandlerController.createWarning("Fejl", "Brugernavn er allerede taget");
-            } else if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()) {
+            if (!txtFieldTeacherFirstName.getText().isEmpty() && !txtFieldTeacherLastName.getText().isEmpty() && !txtFieldTeacherUsername.getText().isEmpty() && !txtFieldTeacherPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldTeacherID.getText());
 
                 String firstName = txtFieldTeacherFirstName.getText();
@@ -813,11 +810,7 @@ public class AdminViewController implements Initializable, IController {
     @FXML
     private void btnHandleEditSave() throws Exception {
         if (this.selectedStudent != null) {
-
-            String userNames = String.valueOf(dataModelFacade.getUsernames());
-            if (userNames.contains(String.valueOf(txtFieldUsername.getText()))) {
-                ErrorHandlerController.createWarning("Fejl", "Brugernavn er allerede taget");
-            } else if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
+            if (!txtFieldFirstName.getText().isEmpty() && !txtFieldLastName.getText().isEmpty() && !txtFieldUsername.getText().isEmpty() && !txtFieldPassword.getText().isEmpty()) {
                 int id = Integer.parseInt(txtFieldStudentID.getText());
                 String firstName = txtFieldFirstName.getText();
                 String lastName = txtFieldLastName.getText();
