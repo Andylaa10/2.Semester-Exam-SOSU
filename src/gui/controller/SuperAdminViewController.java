@@ -16,7 +16,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -163,6 +162,10 @@ public class SuperAdminViewController implements Initializable, IController {
         selectedSchoolOnComboBox();
     }
 
+    /**
+     * Initializes the different table views
+     * @throws Exception
+     */
     private void initializeTables() throws Exception {
         //Initialize the school table
         tcSchools.setCellValueFactory(new PropertyValueFactory<>("schoolName"));
@@ -207,11 +210,19 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Initializes the combobox with schools
+     * @throws SQLException
+     */
     private void initializeComboBox() throws SQLException {
         ObservableList<School> allSchoolsOnCombo = FXCollections.observableArrayList(dataModelFacade.getSchools());
         comboSchool.setItems(allSchoolsOnCombo);
     }
 
+    /**
+     * Creates a school when the name is given
+     * @throws SQLException
+     */
     @FXML
     private void onActionCreateSchool() throws SQLException {
         if (!txtFieldSchoolName.getText().isEmpty()) {
@@ -226,6 +237,9 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Edit a school
+     */
     @FXML
     private void onActionEditSchool() {
         if (selectedSchool != null) {
@@ -241,6 +255,11 @@ public class SuperAdminViewController implements Initializable, IController {
 
     }
 
+
+    /**
+     * Edits a school, and makes the different button user-friendly
+     * @throws Exception
+     */
     @FXML
     private void onActionEditSaveSchool() throws Exception {
         if (this.selectedSchool != null) {
@@ -264,6 +283,9 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Cancels the edit and makes the buttons user-friendly
+     */
     @FXML
     private void onActionEditCancel() {
         reloadSchoolTable();
@@ -276,6 +298,10 @@ public class SuperAdminViewController implements Initializable, IController {
         btnEditCancel.setVisible(false);
     }
 
+    /**
+     * Deletes a selected school when the alert box is answered
+     * @throws SQLException
+     */
     @FXML
     private void onActionDeleteSchool() throws SQLException {
         if (selectedSchool != null) {
@@ -297,6 +323,11 @@ public class SuperAdminViewController implements Initializable, IController {
 
     }
 
+    /**
+     * Creates an admin when credential is given and checks for if the username is already in the database
+     * @throws SQLException
+     * @throws IOException
+     */
     @FXML
     private void onActionCreateAdmin() throws SQLException, IOException {
         String userNames = String.valueOf(dataModelFacade.getUsernames());
@@ -320,6 +351,9 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Makes it user-friendly when press edit
+     */
     @FXML
     private void onActionEditAdmin() {
         if (selectedAdmin != null) {
@@ -334,6 +368,10 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Saves the edits, when the changes are given
+     * @throws Exception
+     */
     @FXML
     private void onActionEditAdminSave() throws Exception {
         if (this.selectedAdmin != null) {
@@ -361,6 +399,9 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Makes it user-friendly
+     */
     @FXML
     private void onActionEditAdminCancel() {
         reloadAdminTable();
@@ -374,6 +415,10 @@ public class SuperAdminViewController implements Initializable, IController {
         txtFieldAdminPassword.setStyle("-fx-border-color: transparent");
     }
 
+    /**
+     * Deletes a selected admin when the alert box is answered
+     * @throws SQLException
+     */
     @FXML
     private void OnActionDeleteAdmin() throws SQLException {
         if (selectedAdmin != null) {
@@ -393,57 +438,99 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Loads the school  table view
+     * @param allSchools
+     */
     private void tableViewLoadSchools(ObservableList<School> allSchools) {
         new Thread(() -> {
             tvSchools.setItems(getSchoolData());
         }).start();
     }
 
+    /**
+     * Gets the school data
+     * @return
+     */
     private ObservableList<School> getSchoolData() {
         return allSchools;
     }
 
+    /**
+     * Loads the admin table view
+     * @param allAdmins
+     */
     private void tableViewLoadAdmins(ObservableList<User> allAdmins) {
         new Thread(() -> {
             tvAdmins.setItems(getAdminData());
         }).start();
     }
 
+    /**
+     * Gets the admins data
+     * @return
+     */
     private ObservableList<User> getAdminData() {
         return allAdmins;
     }
 
-
+    /**
+     * Loads the assigned admins table view
+     * @param allAssignAdmins
+     */
     private void tableViewLoadAssignAdmins(ObservableList<User> allAssignAdmins) {
         new Thread(() -> {
             tvAssignAdmin.setItems(getAssignAdminData());
         }).start();
     }
 
+    /**
+     * Gets the assigned admins data
+     * @return
+     */
     private ObservableList<User> getAssignAdminData() {
         return allAssignAdmins;
     }
 
+    /**
+     * Loads the assigned school table view
+     * @param allAssignedSchools
+     */
     private void tableViewLoadAssignedSchools(ObservableList<School> allAssignedSchools) {
         new Thread(() -> {
             tvAssignedSchool.setItems(getAssignedSchoolData());
         }).start();
     }
 
+    /**
+     * Gets the assigned school data
+     * @return
+     */
     private ObservableList<School> getAssignedSchoolData() {
         return allAssignedSchools;
     }
 
+    /**
+     * Loads the assigned admins table view
+     * @param allAssignedAdmins
+     */
     private void tableViewLoadAssignedAdmins(ObservableList<User> allAssignedAdmins) {
         new Thread(() -> {
             tvAssignedAdminsOnSchool.setItems(getAssignedAdminData());
         }).start();
     }
 
+    /**
+     * Gets the assigned admin data
+     * @return
+     */
     private ObservableList<User> getAssignedAdminData() {
         return allAssignedAdmins;
     }
 
+    /**
+     * Reloads the school table
+     */
     private void reloadSchoolTable() {
         try {
             int index = tvSchools.getSelectionModel().getFocusedIndex();
@@ -454,6 +541,9 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Reloads the assigned school table
+     */
     private void reloadAssignSchoolTable() {
         try {
             int index = tvAssignedSchool.getSelectionModel().getFocusedIndex();
@@ -464,6 +554,9 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Reloads the admin table
+     */
     private void reloadAdminTable() {
         try {
             int index = tvAdmins.getSelectionModel().getFocusedIndex();
@@ -474,6 +567,9 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Reloads the assigned table views
+     */
     private void reloadAssignedAdminTable() {
         try {
             int index = tvAssignedAdminsOnSchool.getSelectionModel().getFocusedIndex();
@@ -484,11 +580,17 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * Clear school text fields
+     */
     private void clearSchoolTxtField() {
         txtFieldSchoolID.clear();
         txtFieldSchoolName.clear();
     }
 
+    /**
+     * Clear admin text fields
+     */
     private void clearAdminTxtField() {
         txtFieldAdminID.clear();
         txtFieldAdminFirstName.clear();
@@ -497,11 +599,19 @@ public class SuperAdminViewController implements Initializable, IController {
         txtFieldAdminPassword.clear();
     }
 
+    /**
+     * Sets the selected school in the text fields
+     * @param school
+     */
     private void setSelectedSchool(School school) {
         txtFieldSchoolID.setText(String.valueOf(school.getId()));
         txtFieldSchoolName.setText(school.getSchoolName());
     }
 
+    /**
+     * Set the selected admin in the text fields
+     * @param admin
+     */
     private void setSelectedAdmin(User admin) {
         txtFieldAdminID.setText(String.valueOf(admin.getId()));
         txtFieldAdminFirstName.setText(admin.getFirstName());
@@ -511,6 +621,9 @@ public class SuperAdminViewController implements Initializable, IController {
         txtFieldAdminPassword.setStyle("-fx-border-color: red");
     }
 
+    /**
+     * Selected a school on combobox
+     */
     private void selectedSchoolOnComboBox() {
         this.comboSchool.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
@@ -521,6 +634,9 @@ public class SuperAdminViewController implements Initializable, IController {
         }));
     }
 
+    /**
+     * Selected a school
+     */
     private void selectedSchool() {
         this.tvSchools.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
@@ -529,6 +645,9 @@ public class SuperAdminViewController implements Initializable, IController {
         }));
     }
 
+    /**
+     * Selected an admin
+     */
     private void selectedAdmin() {
         this.tvAdmins.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
@@ -537,6 +656,9 @@ public class SuperAdminViewController implements Initializable, IController {
         }));
     }
 
+    /**
+     * Selected a school to get assigned to an admin
+     */
     private void selectedSchoolToAssign() {
         this.tvAssignedSchool.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             if (newValue != null) {
@@ -546,7 +668,9 @@ public class SuperAdminViewController implements Initializable, IController {
         }));
     }
 
-
+    /**
+     * Sets the assigned admins' data in the table view
+     */
     private void seeAssignedAdminsOnSchool() {
         //Initialize the assigned admins table on the assign admin view
         tcAssignedSchoolID.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -561,6 +685,9 @@ public class SuperAdminViewController implements Initializable, IController {
         }
     }
 
+    /**
+     * This is the default view
+     */
     private void setAnchorPanesVisibility() {
         labelTitle.setText("Superadmin");
         anchorPaneSuperAdmin.setVisible(true);
@@ -569,6 +696,9 @@ public class SuperAdminViewController implements Initializable, IController {
         anchorPaneConfigureSchool.setVisible(false);
     }
 
+    /**
+     * When clicked on the logo, it brings you back to the default view
+     */
     @FXML
     private void btnClickHome() {
         labelTitle.setText("Super Admin");
@@ -580,6 +710,9 @@ public class SuperAdminViewController implements Initializable, IController {
         anchorPaneConfigureSchool.setVisible(false);
     }
 
+    /**
+     * When clicked on create school, a "new" create scene is the main view
+     */
     @FXML
     private void btnClickCreateSchool() {
         labelTitle.setText("Opret Skole");
@@ -591,6 +724,9 @@ public class SuperAdminViewController implements Initializable, IController {
         anchorPaneConfigureSchool.setVisible(false);
     }
 
+    /**
+     * When clicked on create admin, a "new" create scene is the main view
+     */
     @FXML
     private void btnClickCreateAdmin() {
         labelTitle.setText("Opret Admin");
@@ -602,6 +738,9 @@ public class SuperAdminViewController implements Initializable, IController {
         anchorPaneConfigureSchool.setVisible(false);
     }
 
+    /**
+     * When clicked on assigned school, a "new" assigned scene is the main view
+     */
     @FXML
     private void btnClickAssignSchools() {
         labelTitle.setText("Tildel Skole");
@@ -613,6 +752,10 @@ public class SuperAdminViewController implements Initializable, IController {
         anchorPaneCreateAdmin.setVisible(false);
     }
 
+    /**
+     * Logs out and bring ypu back to login screen
+     * @throws IOException
+     */
     @FXML
     private void btnClickLogout() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/LoginView.fxml"));
@@ -624,6 +767,10 @@ public class SuperAdminViewController implements Initializable, IController {
         switcher.centerOnScreen();
     }
 
+    /**
+     * Sets the logged in user 
+     * @param user
+     */
     @Override
     public void setUser(User user) {
         labelTitle.setText("Super Admin");
