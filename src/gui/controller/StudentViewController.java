@@ -1322,7 +1322,7 @@ public class StudentViewController implements IController, Initializable {
      */
     @FXML
     private void btnClickFunctionalCondition() {
-        labelTitle.setText("Funktionstilstanden for borgeren");
+        labelTitle.setText("Funktionsevnetilstanden for borgeren");
         labelInfo.setText("Overblik over borgerens funktionstilstand, hvor der skal tages stilling til den nuværende funktionstilstand");
         labelInfoNewLine.setText("Her er det muligt at se et skema over definitionen på funktionsevnetilstandene, men der skal også tages stilling til den forventede funktionstilstand");
         anchorPaneStudent.setVisible(false);
