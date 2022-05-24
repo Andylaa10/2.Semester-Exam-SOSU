@@ -106,7 +106,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="anchorPaneStudent" layoutX="189.0" layoutY="139.0" prefHeight="609.0" prefWidth="1158.0" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneStudent" layoutX="189.0" layoutY="139.0" prefHeight="609.0" prefWidth="1158.0" visible="false" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Label alignment="TOP_LEFT" layoutY="14.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">
                <font>
@@ -190,7 +190,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0" visible="false">
+      <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0">
          <children>
             <Pane prefHeight="42.0" prefWidth="1158.0" style="-fx-background-color: transparent;">
                <children>
@@ -233,7 +233,7 @@
                   <ColorAdjust brightness="-0.24" contrast="0.17" />
                </effect>
             </Pane>
-            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="-1.0" layoutY="51.0" prefHeight="546.0" prefWidth="1161.0">
+            <AnchorPane fx:id="anchorPaneGeneralInformation" layoutX="-1.0" layoutY="51.0" prefHeight="546.0" prefWidth="1161.0" visible="false">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b85f7" height="423.0" layoutX="934.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" width="218.0">
                      <effect>
@@ -603,7 +603,7 @@
                </children>
             </AnchorPane>
             <TextField fx:id="txtFieldCitizenID" layoutX="886.0" layoutY="38.0" prefHeight="26.0" prefWidth="31.0" style="-fx-background-color: red;" visible="false" />
-            <AnchorPane fx:id="anchorPaneFunctionalCondition" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1122.0" visible="false">
+            <AnchorPane fx:id="anchorPaneFunctionalCondition" layoutX="14.0" layoutY="51.0" prefHeight="546.0" prefWidth="1122.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b85f7" height="469.0" layoutX="3.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" width="365.0">
                      <effect>
@@ -615,7 +615,7 @@
                         <ColorAdjust brightness="0.49" />
                      </effect>
                   </Rectangle>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b85f7" height="469.0" layoutX="753.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" width="365.0">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b85f7" height="469.0" layoutX="752.0" layoutY="41.0" stroke="BLACK" strokeType="INSIDE" width="365.0">
                      <effect>
                         <ColorAdjust brightness="0.49" />
                      </effect>
@@ -671,7 +671,7 @@
                         <ColorAdjust />
                      </effect>
                   </Button>
-                  <Label layoutX="74.0" layoutY="46.0" text="Funktionsevne tilstande">
+                  <Label layoutX="74.0" layoutY="46.0" text="Funktionsevnetilstande">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -681,53 +681,53 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="391.0" layoutY="103.0" text="Nuværende niveau: ">
+                  <Label layoutX="391.0" layoutY="94.0" text="Nuværende niveau: ">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBoxCurrentLevel" layoutX="536.0" layoutY="103.0" prefHeight="26.0" prefWidth="198.0" />
-                  <Label layoutX="403.0" layoutY="177.0" text="Forventet niveau:">
+                  <ComboBox fx:id="comboBoxCurrentLevel" layoutX="536.0" layoutY="94.0" prefHeight="26.0" prefWidth="198.0" />
+                  <Label layoutX="403.0" layoutY="198.0" text="Forventet niveau:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboBoxExpectedLevel" layoutX="536.0" layoutY="177.0" prefHeight="26.0" prefWidth="198.0" />
-                  <Label layoutX="399.0" layoutY="273.0" text="Fagligt notat:">
+                  <ComboBox fx:id="comboBoxExpectedLevel" layoutX="536.0" layoutY="198.0" prefHeight="26.0" prefWidth="198.0" />
+                  <Label layoutX="399.0" layoutY="284.0" text="Fagligt notat:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="txtAreaNoteOnCondition" layoutX="399.0" layoutY="296.0" prefHeight="200.0" prefWidth="334.0" />
+                  <TextArea fx:id="txtAreaNoteOnCondition" layoutX="399.0" layoutY="312.0" prefHeight="184.0" prefWidth="334.0" />
                   <Label layoutX="836.0" layoutY="46.0" text="Borgerens vurdering">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboboxPerformance" layoutX="909.0" layoutY="103.0" prefHeight="26.0" prefWidth="198.0" />
+                  <ComboBox fx:id="comboboxPerformance" layoutX="909.0" layoutY="94.0" prefHeight="26.0" prefWidth="198.0" />
                   <Label layoutX="880.0" layoutY="123.0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="809.0" layoutY="163.0" text="Betydning af">
+                  <Label layoutX="809.0" layoutY="184.0" text="Betydning af">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="comboboxMeaningOfPerformance" layoutX="909.0" layoutY="179.0" prefHeight="26.0" prefWidth="198.0" />
-                  <Label layoutX="772.0" layoutY="273.0" text="Borgerens ønsker og mål:">
+                  <ComboBox fx:id="comboboxMeaningOfPerformance" layoutX="909.0" layoutY="200.0" prefHeight="26.0" prefWidth="198.0" />
+                  <Label layoutX="772.0" layoutY="284.0" text="Borgerens ønsker og mål:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="txtAreaCitizenGoals" layoutX="772.0" layoutY="297.0" prefHeight="200.0" prefWidth="334.0" />
-                  <Label layoutX="826.0" layoutY="103.0" text="Udførelse:">
+                  <TextArea fx:id="txtAreaCitizenGoals" layoutX="772.0" layoutY="313.0" prefHeight="184.0" prefWidth="334.0" />
+                  <Label layoutX="826.0" layoutY="94.0" text="Udførelse:">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="827.0" layoutY="190.0" text="udførelse:">
+                  <Label layoutX="827.0" layoutY="211.0" text="udførelse:">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -747,6 +747,22 @@
                      </image>
                   </ImageView>
                   <Button fx:id="btnObservationFA" layoutX="3.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnHandleObservationFA" prefHeight="26.0" prefWidth="198.0" text="Observartions notat" />
+                  <Label layoutX="574.0" layoutY="131.0" text="0, 1, 2, 3, 4 eller 9">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="574.0" layoutY="230.0" text="0, 1, 2, 3, 4 eller 9">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="912.0" layoutY="126.0" text="- Udfører selv" />
+                  <Label layoutX="912.0" layoutY="158.0" text="- Udfører dele selv" />
+                  <Label layoutX="912.0" layoutY="141.0" text="- Udfører ikke selv" />
+                  <Label layoutX="912.0" layoutY="175.0" text="- Ikke relevant" />
+                  <Label layoutX="908.0" layoutY="234.0" text="- Oplever ikke begrænsninger" />
+                  <Label layoutX="909.0" layoutY="250.0" text="- Oplever begrænsninger" />
                </children>
             </AnchorPane>
             <Button fx:id="btnCitizenInfo" layoutX="944.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnOpenCitizenInfo" prefHeight="25.0" prefWidth="200.0" text="Se alle borgerens informationer" />
