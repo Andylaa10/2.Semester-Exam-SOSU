@@ -40,8 +40,6 @@ import java.util.ResourceBundle;
 
 public class StudentViewController implements IController, Initializable {
 
-    public TextField txtFieldSearchCitizens;
-    public Button btnSearchCitizens;
     /**
      * General info on Citizen pane
      */
@@ -147,6 +145,10 @@ public class StudentViewController implements IController, Initializable {
     private TextArea txtAreaNetwork;
     @FXML
     private TextField subCatTxtID;
+    @FXML
+    private TextField txtFieldSearchCitizens;
+    @FXML
+    private Button btnSearchCitizens;
 
 
     /**
@@ -542,9 +544,9 @@ public class StudentViewController implements IController, Initializable {
         txtFieldSSN.setText(selectedCitizenInfo.getSSN());
         txtFieldAddress.setText(selectedCitizenInfo.getAddress());
         switch (selectedCitizenInfo.getSex()) {
-            case "Male" -> radioMale.setSelected(true);
-            case "Female" -> radioFemale.setSelected(true);
-            case "Other" -> radioOther.setSelected(true);
+            case "Mand" -> radioMale.setSelected(true);
+            case "Kvinde" -> radioFemale.setSelected(true);
+            case "Andet" -> radioOther.setSelected(true);
         }
 
         GeneralInformation generalInformation = dataModelFacade.getGeneralInformationOnCitizen(Integer.parseInt((txtFieldCitizenID.getText())));
@@ -785,11 +787,11 @@ public class StudentViewController implements IController, Initializable {
             int schoolId = Integer.parseInt(txtFieldSchoolID.getText());
             String sex = null;
             if (radioMale.isSelected()) {
-                sex = "Male";
+                sex = "Mand";
             } else if (radioFemale.isSelected()) {
-                sex = "Female";
+                sex = "Kvinde";
             } else if (radioOther.isSelected()) {
-                sex = "Other";
+                sex = "Andet";
             }
             Citizen citizen = new Citizen(citizenId, citizenFirstName, citizenLastName, citizenSSN, citizenAddress, sex, schoolId);
             dataModelFacade.editCitizen(citizen);
@@ -864,9 +866,9 @@ public class StudentViewController implements IController, Initializable {
         radioFemale.setToggleGroup(group);
         radioOther.setToggleGroup(group);
         switch (selectedCitizenInfo.getSex()) {
-            case "Male" -> radioMale.setSelected(true);
-            case "Female" -> radioFemale.setSelected(true);
-            case "Other" -> radioOther.setSelected(true);
+            case "Mand" -> radioMale.setSelected(true);
+            case "Kvinde" -> radioFemale.setSelected(true);
+            case "Andet" -> radioOther.setSelected(true);
         }
     }
 
