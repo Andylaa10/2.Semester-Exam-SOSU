@@ -830,7 +830,7 @@ public class AdminViewController implements Initializable, IController {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Advarsel");
             alert.setHeaderText("Advarsel før du sletter en borger");
-            alert.setContentText("Du skal slette alle sager fra en borgeren, før du kan slette borgeren");
+            alert.setContentText("Denne handling kan ikke fortrydes");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 selectedCitizen();
