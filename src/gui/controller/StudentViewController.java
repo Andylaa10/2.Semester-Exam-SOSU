@@ -1279,7 +1279,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalCondition.setVisible(false);
-        btnCitizenInfo.setVisible(true);
+        btnCitizenInfo.setVisible(false);
     }
 
     /**
@@ -1296,6 +1296,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(true);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalCondition.setVisible(false);
+        btnCitizenInfo.setVisible(true);
     }
 
     /**
@@ -1313,6 +1314,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(true);
         anchorPaneFunctionalCondition.setVisible(false);
+        btnCitizenInfo.setVisible(true);
     }
 
     /**
@@ -1330,6 +1332,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalCondition.setVisible(true);
+        btnCitizenInfo.setVisible(true);
     }
 
     /**
