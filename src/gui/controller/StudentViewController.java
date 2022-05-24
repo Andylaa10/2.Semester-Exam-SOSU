@@ -13,6 +13,7 @@ import be.Utilities.ImageWithText;
 import be.enums.ConditionEnum;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,6 +31,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -37,6 +39,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class StudentViewController implements IController, Initializable {
 
@@ -253,6 +257,7 @@ public class StudentViewController implements IController, Initializable {
     private final DataModelFacade dataModelFacade = DataModelFacade.getInstance();
     private EditCaseViewController editCaseViewController;
     private ObservationNoteViewController observationNoteViewController;
+    private ExecutorService executorService = Executors.newCachedThreadPool();
     private ToggleGroup group;
 
     private boolean hasSearched = true;
@@ -276,6 +281,7 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * Initialize method for studentViewController.
+     *
      * @param location
      * @param resources
      */
@@ -516,6 +522,7 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * Method for setting the citizens in the comboBoxCitzen.
+     *
      * @param citizen
      */
     public void setCitizenComboBoxItems(Citizen citizen) {
@@ -629,6 +636,7 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * loads the functionalAbilitySubCategories tableview.
+     *
      * @param allFunctionalAbilitySubCategories
      */
     private void tableViewLoadFunctionalAbilitySubCategories(ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories) {
@@ -637,6 +645,7 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * Gets the functionalAbilitySubCategories data.
+     *
      * @return
      */
     private ObservableList<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories() {
@@ -850,6 +859,7 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * Method for setting the info for a citizen, with data from the database.
+     *
      * @param citizenID
      * @throws SQLException
      */
@@ -873,6 +883,7 @@ public class StudentViewController implements IController, Initializable {
 
     /**
      * Method for setting the functionalAbility info.
+     *
      * @throws SQLException
      */
     private void setFunctionalAbilityInfo() throws SQLException {
@@ -963,6 +974,7 @@ public class StudentViewController implements IController, Initializable {
      * If there is already data, the editFunctionalAbility method from the dataModelFacade is used.
      * If there is not data, the createFunctionalAbility method from the dataModelFacade is used.
      * The citizen data will always be using the editCitizen method from the facade.
+     *
      * @throws SQLException
      */
     @FXML
@@ -1007,6 +1019,7 @@ public class StudentViewController implements IController, Initializable {
     /**
      * OnAction method for saving the HealthConditions.
      * Uses the inserIntoSubCategory method if data is created, and uses the editSubCategory method if data is edited.
+     *
      * @throws Exception
      */
     @FXML
@@ -1149,6 +1162,7 @@ public class StudentViewController implements IController, Initializable {
     /**
      * OnAction method for pressing the observationNote button.
      * Opens the observationNoteView when pressed.
+     *
      * @throws Exception
      */
     @FXML
@@ -1337,29 +1351,38 @@ public class StudentViewController implements IController, Initializable {
      * OnAction method for clicking the citizenInfo button.
      * Opens the citizenInfoView when clicked, and sets the selected citizens info, using the citizenInfoViewController-
      * method setSelectedCitizen.
+     *
      * @throws Exception
      */
-    public void btnOpenCitizenInfo() throws Exception {
+    public void btnOpenCitizenInfo() {
+        executorService.submit(() -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/gui/view/CitizenInfoView.fxml"));
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/gui/view/CitizenInfoView.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
 
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
+                CitizenInfoViewController citizenInfoViewController = fxmlLoader.getController();
+                citizenInfoViewController.setSelectedCitizen(selectedCitizenOnComboBox);
 
+                Platform.runLater(() -> {
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.setResizable(false);
+                    stage.show();
 
-        CitizenInfoViewController citizenInfoViewController = fxmlLoader.getController();
-        citizenInfoViewController.setSelectedCitizen(selectedCitizenOnComboBox);
-
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
     }
 
 
     /**
      * OnAction method for clicking the btnClose. It closes the stage when pressed.
+     *
      * @param actionEvent
      */
     public void btnClickClose(ActionEvent actionEvent) {
