@@ -1038,18 +1038,12 @@ public class StudentViewController implements IController, Initializable {
                 if (radioNotRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
                     dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
-                    tcSubCategoriesName.setStyle("");
-                    tcSubCategoriesName.setStyle("-fx-text-fill: red");
                 } else if (radioPotential.isSelected()) {
                     int conditionValue = ConditionEnum.POTENTIAL.getValue();
                     dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
-                    tcSubCategoriesName.setStyle("");
-                    tcSubCategoriesName.setStyle("-fx-text-fill: yellow");
                 } else if (radioRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.RELEVANT.getValue();
                     dataModelFacade.insertIntoSubCategory(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
-                    tcSubCategoriesName.setStyle("");
-                    tcSubCategoriesName.setStyle("-fx-text-fill: green");
                 }
             } else {
                 int citizenId = Integer.parseInt(txtFieldCitizenID.getText());
@@ -1061,22 +1055,14 @@ public class StudentViewController implements IController, Initializable {
                     int conditionValue = ConditionEnum.NOT_RELEVANT.getValue();
                     HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
-                    tcSubCategoriesName.setStyle("");
-                    tcSubCategoriesName.setStyle("-fx-text-fill: red");
                 } else if (radioPotential.isSelected()) {
                     int conditionValue = ConditionEnum.POTENTIAL.getValue();
                     HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
-                    tcSubCategoriesName.setStyle("");
-                    tcSubCategoriesName.setStyle("-fx-text-fill: yellow");
                 } else if (radioRelevant.isSelected()) {
                     int conditionValue = ConditionEnum.RELEVANT.getValue();
                     HealthConditionSubCategoryText subCategoryText = new HealthConditionSubCategoryText(citizenId, subCategoryId, professionalNote, currentLevelAssessment, expectedLevelAssessment, conditionValue);
                     dataModelFacade.editSubcategory(subCategoryText);
-                    tcSubCategoriesName.setStyle("");
-                    tcSubCategoriesName.setStyle("-fx-text-fill: green");
-                } else {
-                    tcSubCategoriesName.setStyle("");
                 }
             }
             lblInfoStateHC.setText("Ændringer - Gemt");
@@ -1273,6 +1259,8 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalCondition.setVisible(false);
+        tvSubCategories.getSelectionModel().clearSelection();
+        tvHealthConditions.getSelectionModel().clearSelection();
     }
 
 
@@ -1291,7 +1279,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalCondition.setVisible(false);
-        btnCitizenInfo.setVisible(false);
+        btnCitizenInfo.setVisible(true);
     }
 
     /**
