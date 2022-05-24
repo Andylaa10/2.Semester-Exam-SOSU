@@ -9,15 +9,15 @@ import java.util.List;
 
 class SearcherUnitTesting {
 
-    @DisplayName("Test user search on user name")
+    @DisplayName("Test citizen search on citizen name")
     @Test
-    void userSearch() {
+    void citizenSearch() {
         //Triple A pattern
         //Arrange - set up our test object etc.
-        //Make a list of Users
-        List<Citizen> searchData = new ArrayList<>();
-        //Make an instance of EventSearcher
+        //Make an instance of CitizenSearcher
         CitizenSearcher searcher = new CitizenSearcher();
+        //Make a list of Citizens
+        List<Citizen> searchData = new ArrayList<>();
 
         //Making data to insert into searchData list
         Citizen citizen1 = new Citizen(1, "John", "Johnson", "121200-4673", "Mand", 1);
@@ -40,13 +40,13 @@ class SearcherUnitTesting {
 
     @DisplayName("Test citizen search on citizen ssn")
     @Test
-    void locationSearch() {
+    void ssnSearch() {
         //Triple A pattern
         //Arrange - set up our test object etc.
-        //Make a list of Events
-        List<Citizen> searchData = new ArrayList<>();
-        //Make an instance of EventSearcher
+        //Make an instance of CitizenSearcher
         CitizenSearcher searcher = new CitizenSearcher();
+        //Make a list of Citizens
+        List<Citizen> searchData = new ArrayList<>();
         //Making data to insert into searchData list
         Citizen citizen1 = new Citizen(1, "John", "Johnson", "121200-4673", "Mand", 1);
         Citizen citizen2 = new Citizen(2, "Jonas", "Johansen", "020301-1243", "Mand", 1);
