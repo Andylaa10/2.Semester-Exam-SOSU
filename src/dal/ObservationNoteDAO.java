@@ -3,7 +3,6 @@ package dal;
 import be.ObservationNote;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
-
 import java.io.IOException;
 import java.sql.*;
 
@@ -49,10 +48,6 @@ public class ObservationNoteDAO {
 
     /**
      * Creates an observation on a selected citizen
-     * @param citizenId
-     * @param date
-     * @param note
-     * @return
      * @throws SQLException
      */
     public ObservationNote createObservationNote(int citizenId, String date, String note) throws SQLException {
@@ -84,7 +79,9 @@ public class ObservationNoteDAO {
      */
     public void editObservationNote(ObservationNote observationNote) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "UPDATE ObservationNote SET date = ?, note = ? WHERE citizenId = ? ;";
+            String sql = "UPDATE ObservationNote " +
+                    "SET date = ?, note = ? " +
+                    "WHERE citizenId = ? ;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, observationNote.getDate());
             preparedStatement.setString(2, observationNote.getNote());

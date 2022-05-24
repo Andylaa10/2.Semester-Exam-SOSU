@@ -32,7 +32,9 @@ public class UserDAO {
         ArrayList<User> allStudents = new ArrayList<>();
 
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM Login WHERE userType =?;";
+            String sql = "SELECT * " +
+                    "FROM Login " +
+                    "WHERE userType =?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, String.valueOf(UserType.STUDENT));
@@ -63,7 +65,9 @@ public class UserDAO {
     public List<User> getTeachers() throws SQLException {
         ArrayList<User> allTeachers = new ArrayList<>();
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM Login WHERE userType =? ;";
+            String sql = "SELECT * " +
+                    "FROM Login " +
+                    "WHERE userType =? ;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, String.valueOf(UserType.TEACHER));
@@ -94,7 +98,9 @@ public class UserDAO {
         ArrayList<User> allAdmins = new ArrayList<>();
 
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM Login WHERE userType =? ;";
+            String sql = "SELECT * " +
+                    "FROM Login " +
+                    "WHERE userType =? ;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, String.valueOf(UserType.ADMINISTRATOR));
@@ -234,7 +240,8 @@ public class UserDAO {
      */
     public void deleteStudent(int id, UserType userType) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "DELETE FROM Login WHERE LoginID =? AND userType =?;";
+            String sql = "DELETE FROM Login " +
+                    "WHERE LoginID =? AND userType =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             preparedStatement.setString(2, String.valueOf(userType.STUDENT));
@@ -249,7 +256,8 @@ public class UserDAO {
      */
     public void deleteTeacher(int id, UserType userType) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "DELETE FROM Login WHERE LoginID =? AND userType =?;";
+            String sql = "DELETE FROM Login " +
+                    "WHERE LoginID =? AND userType =?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             preparedStatement.setString(2, String.valueOf(userType.TEACHER));
@@ -264,7 +272,8 @@ public class UserDAO {
      */
     public void deleteAdmin(int id, UserType userType) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "DELETE FROM Login WHERE LoginID =? AND userType =?;";
+            String sql = "DELETE FROM Login " +
+                    "WHERE LoginID =? AND userType =?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
@@ -280,7 +289,9 @@ public class UserDAO {
      */
     public void editStudent(User student) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "UPDATE Login SET firstName=?, lastName=?, username=?, password=? WHERE LoginID=? AND userType=?;";
+            String sql = "UPDATE Login " +
+                    "SET firstName=?, lastName=?, username=?, password=? " +
+                    "WHERE LoginID=? AND userType=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, student.getFirstName());
             preparedStatement.setString(2, student.getLastName());
@@ -299,7 +310,10 @@ public class UserDAO {
      */
     public void editTeacher(User teacher) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "UPDATE Login SET firstName=?, lastName=?, username=?, password=? WHERE LoginID=? AND userType=?;";
+            String sql = "UPDATE Login " +
+                    "SET firstName=?, lastName=?, username=?, password=? " +
+                    "WHERE LoginID=? AND userType=?;";
+
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, teacher.getFirstName());
             preparedStatement.setString(2, teacher.getLastName());
@@ -318,7 +332,10 @@ public class UserDAO {
      */
     public void editAdmin(User admin) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "UPDATE Login SET firstName=?, lastName=?, username=?, password=? WHERE LoginID=? AND userType=?;";
+            String sql = "UPDATE Login " +
+                    "SET firstName=?, lastName=?, username=?, password=? " +
+                    "WHERE LoginID=? AND userType=?;";
+
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, admin.getFirstName());
             preparedStatement.setString(2, admin.getLastName());
@@ -337,7 +354,9 @@ public class UserDAO {
      * This method gets a userLogin from the database and check if it is a student, teacher or administrator
      */
     public User userLogin(String user, String pass, int schoolId) throws SQLException {
-        String sql = "SELECT * FROM Login WHERE username =? AND password =? AND schoolId=?;";
+        String sql = "SELECT * " +
+                "FROM Login " +
+                "WHERE username =? AND password =? AND schoolId=?;";
         try (Connection connection = databaseConnector.getConnection()) {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, user);
@@ -376,7 +395,9 @@ public class UserDAO {
     public User getHashedPassword(String userName, String password, int schoolId) throws SQLException {
 
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM Login WHERE userName =? AND schoolId =? ;";
+            String sql = "SELECT * " +
+                    "FROM Login " +
+                    "WHERE userName =? AND schoolId =? ;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, userName);

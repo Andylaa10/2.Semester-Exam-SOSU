@@ -57,7 +57,9 @@ public class HealthConditionsDAO {
      */
     public HealthConditionSubCategoryText getHealthConditionData(int citizenId, int subCategoryId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM SubCatTextOnCitizen WHERE citizenId =? AND subCategoryId = ?;";
+            String sql = "SELECT * " +
+                    "FROM SubCatTextOnCitizen " +
+                    "WHERE citizenId =? AND subCategoryId = ?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
@@ -170,7 +172,11 @@ public class HealthConditionsDAO {
         ArrayList<HealthConditionSubCategory> allSubCategories = new ArrayList<>();
 
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT subCategoryID, subCategoryName FROM SubCategory INNER JOIN HealthCondition ON HealthCondition.healthConditionID = subCategory.healthConditionId where HealthCondition.HealthConditionID = ?;";
+            String sql = "SELECT subCategoryID, subCategoryName " +
+                    "FROM SubCategory " +
+                    "INNER JOIN HealthCondition " +
+                    "ON HealthCondition.healthConditionID = subCategory.healthConditionId " +
+                    "WHERE HealthCondition.HealthConditionID = ?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, categoryId);
@@ -192,12 +198,6 @@ public class HealthConditionsDAO {
 
     /**
      * Insert data into a selected health condition subcategory on a selected citizen
-     * @param citizenId
-     * @param subCategoryId
-     * @param professionalNote
-     * @param currentLevelAssessment
-     * @param expectedLevelAssessment
-     * @param condition
      * @throws SQLException
      */
     public void insertIntoSubCategory(int citizenId, int subCategoryId, String professionalNote, String currentLevelAssessment, String expectedLevelAssessment, int condition) throws SQLException {
@@ -224,7 +224,9 @@ public class HealthConditionsDAO {
      */
     public void editSubcategory(HealthConditionSubCategoryText subCategoryText) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "UPDATE SubCatTextOnCitizen SET professionalNote = ?, currentLevelAssessment = ?, expectedLevelAssessment = ?, Condition = ? WHERE citizenId =? AND subCategoryId=?";
+            String sql = "UPDATE SubCatTextOnCitizen " +
+                    "SET professionalNote = ?, currentLevelAssessment = ?, expectedLevelAssessment = ?, Condition = ? " +
+                    "WHERE citizenId =? AND subCategoryId=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, subCategoryText.getProfessionalNote());
             preparedStatement.setString(2, subCategoryText.getCurrentLevelAssessment());
