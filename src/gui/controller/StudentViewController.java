@@ -1288,7 +1288,7 @@ public class StudentViewController implements IController, Initializable {
     public void btnClickGeneralInformation() {
         labelTitle.setText("Generelle Informationer for borgeren");
         labelInfo.setText("Overblik over borgerens generelle informationer, hvor det er muligt at redigere og gemme eventuelle ændringer");
-        labelInfoNewLine.setText("Her kan du se alle informationer for borgeren");
+        labelInfoNewLine.setText("Her kan du se alle informationer for borgeren, samt se alle opsummerede informationer ved at trykke på knappen 'Se alle borgerens informationer'");
         anchorPaneStudent.setVisible(false);
         anchorPaneCitizens.setVisible(false);
         anchorPaneFS3.setVisible(true);
@@ -1303,9 +1303,9 @@ public class StudentViewController implements IController, Initializable {
      */
     @FXML
     private void btnClickHealthCondition() {
-        labelTitle.setText("Helbreds Tilstande for borgeren");
+        labelTitle.setText("Helbredstilstande for borgeren");
         labelInfo.setText("Overblik over borgerens helbredstilstande, hvor det er muligt at ændre og gemme eventuelle observationer og ændringer");
-        labelInfoNewLine.setText("Her er det muligt at rapportere borgerens helbredstilstande og øve FS3. Der skal tages stilling til alle tilstande for at gemme.");
+        labelInfoNewLine.setText("Her er det muligt at rapportere borgerens helbredstilstande og øve FS3. Der skal tages stilling til alle tilstande.");
         anchorPaneStudent.setVisible(false);
         anchorPaneCitizens.setVisible(false);
         anchorPaneFS3.setVisible(true);
@@ -1320,8 +1320,8 @@ public class StudentViewController implements IController, Initializable {
      */
     @FXML
     private void btnClickFunctionalCondition() {
-        labelTitle.setText("Funktionstilstanden for borgeren");
-        labelInfo.setText("Overblik over borgerens funktionstilstand, hvor der skal tages stilling til den nuværende funktionstilstand");
+        labelTitle.setText("Funktionsevnetilstanden for borgeren");
+        labelInfo.setText("Overblik over borgerens funktionsevnetilstand, hvor der skal tages stilling til den nuværende funktionstilstand");
         labelInfoNewLine.setText("Her er det muligt at se et skema over definitionen på funktionsevnetilstandene, men der skal også tages stilling til den forventede funktionstilstand");
         anchorPaneStudent.setVisible(false);
         anchorPaneCitizens.setVisible(false);
