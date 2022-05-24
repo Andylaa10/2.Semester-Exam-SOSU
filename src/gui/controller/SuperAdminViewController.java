@@ -443,9 +443,7 @@ public class SuperAdminViewController implements Initializable, IController {
      * @param allSchools
      */
     private void tableViewLoadSchools(ObservableList<School> allSchools) {
-        new Thread(() -> {
-            tvSchools.setItems(getSchoolData());
-        }).start();
+        tvSchools.setItems(getSchoolData());
     }
 
     /**
@@ -461,9 +459,7 @@ public class SuperAdminViewController implements Initializable, IController {
      * @param allAdmins
      */
     private void tableViewLoadAdmins(ObservableList<User> allAdmins) {
-        new Thread(() -> {
-            tvAdmins.setItems(getAdminData());
-        }).start();
+        tvAdmins.setItems(getAdminData());
     }
 
     /**
@@ -479,9 +475,7 @@ public class SuperAdminViewController implements Initializable, IController {
      * @param allAssignAdmins
      */
     private void tableViewLoadAssignAdmins(ObservableList<User> allAssignAdmins) {
-        new Thread(() -> {
-            tvAssignAdmin.setItems(getAssignAdminData());
-        }).start();
+        tvAssignAdmin.setItems(getAssignAdminData());
     }
 
     /**
@@ -497,9 +491,7 @@ public class SuperAdminViewController implements Initializable, IController {
      * @param allAssignedSchools
      */
     private void tableViewLoadAssignedSchools(ObservableList<School> allAssignedSchools) {
-        new Thread(() -> {
-            tvAssignedSchool.setItems(getAssignedSchoolData());
-        }).start();
+        tvAssignedSchool.setItems(getAssignedSchoolData());
     }
 
     /**
@@ -515,9 +507,7 @@ public class SuperAdminViewController implements Initializable, IController {
      * @param allAssignedAdmins
      */
     private void tableViewLoadAssignedAdmins(ObservableList<User> allAssignedAdmins) {
-        new Thread(() -> {
-            tvAssignedAdminsOnSchool.setItems(getAssignedAdminData());
-        }).start();
+        tvAssignedAdminsOnSchool.setItems(getAssignedAdminData());
     }
 
     /**
