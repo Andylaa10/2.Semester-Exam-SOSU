@@ -39,11 +39,10 @@ public class CitizenDAO {
                 String firstName = resultset.getString("firstName");
                 String lastName = resultset.getString("lastName");
                 String ssn = resultset.getString("SSN");
-                String address = resultset.getString("address");
                 String sex = resultset.getString("sex");
                 int schoolId = resultset.getInt("schoolId");
 
-                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex, schoolId);
+                Citizen citizen = new Citizen(id, firstName, lastName, ssn, sex, schoolId);
                 allCitizens.add(citizen);
             }
 
@@ -75,11 +74,10 @@ public class CitizenDAO {
                 String firstName = resultset.getString("firstName");
                 String lastName = resultset.getString("lastName");
                 String ssn = resultset.getString("SSN");
-                String address = resultset.getString("address");
                 String sex = resultset.getString("sex");
                 int schoolID = resultset.getInt("schoolId");
 
-                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex, schoolID);
+                Citizen citizen = new Citizen(id, firstName, lastName, ssn, sex, schoolID);
                 allCitizens.add(citizen);
             }
 
@@ -106,10 +104,9 @@ public class CitizenDAO {
                 String firstName = resultset.getString("firstName");
                 String lastName = resultset.getString("lastName");
                 String ssn = resultset.getString("SSN");
-                String address = resultset.getString("address");
                 String sex = resultset.getString("sex");
 
-                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex);
+                Citizen citizen = new Citizen(id, firstName, lastName, ssn, sex);
                 return citizen;
             }
 
@@ -123,16 +120,15 @@ public class CitizenDAO {
     /**
      * Creates a citizen, by inserting firstName, lastName, SSN, address and sex into the Citizen table
      */
-    public Citizen createCitizen(String firstName, String lastName, String SSN, String address, String sex, int schoolId) throws SQLException {
+    public Citizen createCitizen(String firstName, String lastName, String SSN, String sex, int schoolId) throws SQLException {
         try (Connection connection = connector.getConnection()) {
-            String sql = "INSERT INTO Citizen (firstName, lastName , SSN, address, sex, schoolId) VALUES (?,?,?,?,?,?);";
+            String sql = "INSERT INTO Citizen (firstName, lastName , SSN, sex, schoolId) VALUES (?,?,?,?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setString(1, firstName);
                 preparedStatement.setString(2, lastName);
                 preparedStatement.setString(3, SSN);
-                preparedStatement.setString(4, address);
-                preparedStatement.setString(5, sex);
-                preparedStatement.setInt(6, schoolId);
+                preparedStatement.setString(4, sex);
+                preparedStatement.setInt(5, schoolId);
                 preparedStatement.execute();
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
                 int id = 0;
@@ -140,7 +136,7 @@ public class CitizenDAO {
                     id = resultSet.getInt(1);
                 }
 
-                Citizen citizen = new Citizen(id, firstName, lastName, SSN, address, sex, schoolId);
+                Citizen citizen = new Citizen(id, firstName, lastName, SSN, sex, schoolId);
                 return citizen;
             }
         } catch (SQLServerException throwables) {
@@ -169,15 +165,14 @@ public class CitizenDAO {
     public void editCitizen(Citizen citizen) throws SQLException {
         try (Connection connection = connector.getConnection()) {
             String sql = "UPDATE Citizen " +
-                    "SET firstName=?, lastName=?, SSN=?, address=?, sex=? " +
+                    "SET firstName=?, lastName=?, SSN=?, sex=? " +
                     "WHERE citizenID=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, citizen.getFirstName());
             preparedStatement.setString(2, citizen.getLastName());
             preparedStatement.setString(3, citizen.getSSN());
-            preparedStatement.setString(4, citizen.getAddress());
-            preparedStatement.setString(5, citizen.getSex());
-            preparedStatement.setInt(6, citizen.getId());
+            preparedStatement.setString(4, citizen.getSex());
+            preparedStatement.setInt(5, citizen.getId());
             preparedStatement.executeUpdate();
             if (preparedStatement.executeUpdate() != 1) {
                 throw new SQLException();
@@ -191,14 +186,14 @@ public class CitizenDAO {
      */
     public static void main(String[] args) throws Exception {
         CitizenDAO citizenDAO = new CitizenDAO();
-        citizenDAO.createCitizen("Andy Lam", "Nguyen", "040100-1111", "Golfvej 8", "Male", 1);
-        citizenDAO.createCitizen("Kristian", "Hollænder", "140396-2222", "Hollændervej 4", "Male", 1);
-        citizenDAO.createCitizen("Marcus", "Iversen", "271100-3333", "Skolegade 8", "Male", 1);
-        citizenDAO.createCitizen("Lise", "Billeschou", "170901-4444", "Skolegade 8", "Female", 1);
-        citizenDAO.createCitizen("Agnes", "Mynte", "140598-5555", "Transvej 2", "Other", 2);
-        citizenDAO.createCitizen("Peter", "Stegger", "260869-6666", "Hackervej 69", "Male", 2);
-        citizenDAO.createCitizen("Trine", "Thomsen", "190974-7777", "ITO Vej 12", "Female", 2);
-        citizenDAO.createCitizen("Jeppe", "Led", "221067-8888", "Designvej 96", "Male", 2);
+        citizenDAO.createCitizen("Andy Lam", "Nguyen", "040100-1111", "Male", 1);
+        citizenDAO.createCitizen("Kristian", "Hollænder", "140396-2222",  "Male", 1);
+        citizenDAO.createCitizen("Marcus", "Iversen", "271100-3333",  "Male", 1);
+        citizenDAO.createCitizen("Lise", "Billeschou", "170901-4444",  "Female", 1);
+        citizenDAO.createCitizen("Agnes", "Mynte", "140598-5555",  "Other", 2);
+        citizenDAO.createCitizen("Peter", "Stegger", "260869-6666",  "Male", 2);
+        citizenDAO.createCitizen("Trine", "Thomsen", "190974-7777",  "Female", 2);
+        citizenDAO.createCitizen("Jeppe", "Led", "221067-8888", "Male", 2);
         System.out.println(citizenDAO.getCitizens());
 
     }

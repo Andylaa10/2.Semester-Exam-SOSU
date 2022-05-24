@@ -67,6 +67,8 @@ public class StudentViewController implements IController, Initializable {
     private TextField txtFieldSchoolID;
     @FXML
     private TextField txtFieldGeneralInfoId;
+    @FXML
+    private Button btnObservationNote;
 
 
     /**
@@ -302,7 +304,6 @@ public class StudentViewController implements IController, Initializable {
         tcCitizenFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         tcCitizenLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         tcCitizenSSN.setCellValueFactory(new PropertyValueFactory<>("SSN"));
-        tcCitizenAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         tcCitizenSex.setCellValueFactory(new PropertyValueFactory<>("sex"));
         try {
             allCitizens = FXCollections.observableList(dataModelFacade.getAssignedCitizen(Integer.parseInt(txtFieldSchoolID.getText())));
@@ -542,7 +543,6 @@ public class StudentViewController implements IController, Initializable {
         txtFieldFirstName.setText(selectedCitizenInfo.getFirstName());
         txtFieldLastName.setText(selectedCitizenInfo.getLastName());
         txtFieldSSN.setText(selectedCitizenInfo.getSSN());
-        txtFieldAddress.setText(selectedCitizenInfo.getAddress());
         switch (selectedCitizenInfo.getSex()) {
             case "Mand" -> radioMale.setSelected(true);
             case "Kvinde" -> radioFemale.setSelected(true);
@@ -783,7 +783,6 @@ public class StudentViewController implements IController, Initializable {
             String citizenFirstName = txtFieldFirstName.getText();
             String citizenLastName = txtFieldLastName.getText();
             String citizenSSN = txtFieldSSN.getText();
-            String citizenAddress = txtFieldAddress.getText();
             int schoolId = Integer.parseInt(txtFieldSchoolID.getText());
             String sex = null;
             if (radioMale.isSelected()) {
@@ -793,7 +792,7 @@ public class StudentViewController implements IController, Initializable {
             } else if (radioOther.isSelected()) {
                 sex = "Andet";
             }
-            Citizen citizen = new Citizen(citizenId, citizenFirstName, citizenLastName, citizenSSN, citizenAddress, sex, schoolId);
+            Citizen citizen = new Citizen(citizenId, citizenFirstName, citizenLastName, citizenSSN, sex, schoolId);
             dataModelFacade.editCitizen(citizen);
 
             String coping = txtAreaCoping.getText();
@@ -861,7 +860,6 @@ public class StudentViewController implements IController, Initializable {
         txtFieldFirstName.setText(selectedCitizenInfo.getFirstName());
         txtFieldLastName.setText(selectedCitizenInfo.getLastName());
         txtFieldSSN.setText(selectedCitizenInfo.getSSN());
-        txtFieldAddress.setText(selectedCitizenInfo.getAddress());
         radioMale.setToggleGroup(group);
         radioFemale.setToggleGroup(group);
         radioOther.setToggleGroup(group);
@@ -1147,27 +1145,6 @@ public class StudentViewController implements IController, Initializable {
         }
     }
 
-    /**
-     * OnAction method for pressing the observationNote button.
-     * Opens the observationNoteView when pressed.
-     * @throws Exception
-     */
-    @FXML
-    private void btnHandleObservationFA() throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/gui/view/ObservationNoteView.fxml"));
-
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-
-
-        observationNoteViewController = fxmlLoader.getController();
-        observationNoteViewController.setSelectedCitizen(selectedCitizenOnComboBox);
-
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-    }
 
     /**
      * OnAction method for pressing the observationNote button.
@@ -1175,7 +1152,7 @@ public class StudentViewController implements IController, Initializable {
      * @throws Exception
      */
     @FXML
-    private void btnHandleObservationHC() throws Exception {
+    private void btnHandleObservationNote() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/gui/view/ObservationNoteView.fxml"));
 
@@ -1265,6 +1242,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalCondition.setVisible(false);
         btnCitizenInfo.setVisible(false);
+        btnObservationNote.setVisible(false);
     }
 
     /**
@@ -1282,6 +1260,8 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalCondition.setVisible(false);
         btnCitizenInfo.setVisible(true);
+        btnObservationNote.setVisible(false);
+
     }
 
     /**
@@ -1300,6 +1280,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneHealthConditions.setVisible(true);
         anchorPaneFunctionalCondition.setVisible(false);
         btnCitizenInfo.setVisible(true);
+        btnObservationNote.setVisible(true);
     }
 
     /**
@@ -1318,6 +1299,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalCondition.setVisible(true);
         btnCitizenInfo.setVisible(true);
+        btnObservationNote.setVisible(true);
     }
 
     /**

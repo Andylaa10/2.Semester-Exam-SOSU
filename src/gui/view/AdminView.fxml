@@ -128,7 +128,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="anchorPaneAdmin" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneAdmin" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Label alignment="TOP_LEFT" layoutX="2.0" layoutY="4.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">
                <font>
@@ -412,7 +412,7 @@
                </font>
             </Label>
          </children></AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
+      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0">
          <children>
             <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -421,19 +421,17 @@
             </ImageView>
             <Label layoutX="44.0" layoutY="85.0" text="Fornavn" />
             <Label layoutX="38.0" layoutY="125.0" text="Efternavn" />
-            <Label layoutX="44.0" layoutY="200.0" text="Adresse" />
-            <Label layoutX="63.0" layoutY="237.0" text="Køn" />
+            <Label layoutX="63.0" layoutY="207.0" text="Køn" />
             <Label layoutX="15.0" layoutY="163.0" text="CPR-Nummer" />
             <TextField fx:id="txtFieldCitizenFirstName" layoutX="107.0" layoutY="81.0" prefHeight="26.0" prefWidth="180.0" />
             <TextField fx:id="txtFieldCitizenLastName" layoutX="107.0" layoutY="121.0" prefHeight="26.0" prefWidth="180.0" />
             <TextField fx:id="txtFieldCitizenSSN" layoutX="107.0" layoutY="160.0" prefHeight="26.0" prefWidth="180.0" />
-            <TextField fx:id="txtFieldCitizenAddress" layoutX="107.0" layoutY="196.0" prefHeight="26.0" prefWidth="180.0" />
             <Label layoutX="98.0" layoutY="16.0" text="Oprettelse af borger">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Button fx:id="btnSaveCitizen" layoutX="107.0" layoutY="273.0" mnemonicParsing="false" onAction="#btnHandleSaveCitizen" prefHeight="26.0" prefWidth="180.0" text="Opret Borger">
+            <Button fx:id="btnSaveCitizen" layoutX="107.0" layoutY="243.0" mnemonicParsing="false" onAction="#btnHandleSaveCitizen" prefHeight="26.0" prefWidth="180.0" text="Opret Borger">
                <effect>
                   <ColorAdjust brightness="0.1" />
                </effect>
@@ -468,9 +466,9 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <RadioButton fx:id="radioMale" layoutX="105.0" layoutY="237.0" mnemonicParsing="false" text="Mand" />
-            <RadioButton fx:id="radioFemale" layoutX="163.0" layoutY="237.0" mnemonicParsing="false" text="Kvinde" />
-            <RadioButton fx:id="radioOther" layoutX="232.0" layoutY="237.0" mnemonicParsing="false" text="Andet" />
+            <RadioButton fx:id="radioMale" layoutX="105.0" layoutY="207.0" mnemonicParsing="false" text="Mand" />
+            <RadioButton fx:id="radioFemale" layoutX="163.0" layoutY="207.0" mnemonicParsing="false" text="Kvinde" />
+            <RadioButton fx:id="radioOther" layoutX="232.0" layoutY="207.0" mnemonicParsing="false" text="Andet" />
             <Label layoutX="368.0" layoutY="394.0" text="Søg: ">
                <font>
                   <Font size="13.0" />

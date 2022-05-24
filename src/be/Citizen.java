@@ -6,26 +6,23 @@ public class Citizen {
     private String firstName;
     private String lastName;
     private String SSN;
-    private String address;
     private String sex;
     private int schoolID;
 
 
-    public Citizen(int id, String firstName, String lastName, String SSN, String address, String sex) {
+    public Citizen(int id, String firstName, String lastName, String SSN, String sex) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.SSN = SSN;
-        this.address = address;
         this.sex = sex;
     }
 
-    public Citizen(int id, String firstName, String lastName, String SSN, String address, String sex, int schoolID) {
+    public Citizen(int id, String firstName, String lastName, String SSN, String sex, int schoolID) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.SSN = SSN;
-        this.address = address;
         this.sex = sex;
         this.schoolID = schoolID;
     }
@@ -67,14 +64,6 @@ public class Citizen {
 
     public void setSSN(String SSN) {
         this.SSN = SSN;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getSex() {

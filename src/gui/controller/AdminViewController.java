@@ -690,7 +690,6 @@ public class AdminViewController implements Initializable, IController {
             String firstName = txtFieldCitizenFirstName.getText();
             String lastName = txtFieldCitizenLastName.getText();
             String SSN = txtFieldCitizenSSN.getText();
-            String address = txtFieldCitizenAddress.getText();
             String sex = null;
             if (radioMale.isSelected()) {
                 sex = "Mand";
@@ -699,7 +698,7 @@ public class AdminViewController implements Initializable, IController {
             } else if (radioOther.isSelected()) {
                 sex = "Andet";
             }
-            dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex, Integer.parseInt(txtFieldSchoolID.getText()));
+            dataModelFacade.createCitizen(firstName, lastName, SSN, sex, Integer.parseInt(txtFieldSchoolID.getText()));
             clearTextFieldCreate();
             reloadCreatedCitizensTable();
             reloadCitizenTable();

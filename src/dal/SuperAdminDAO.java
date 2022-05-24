@@ -295,12 +295,11 @@ public class SuperAdminDAO {
                 String firstName = resultset.getString("firstName");
                 String lastName = resultset.getString("lastName");
                 String ssn = resultset.getString("SSN");
-                String address = resultset.getString("address");
                 String sex = resultset.getString("sex");
                 int schoolID = resultset.getInt("schoolId");
 
 
-                Citizen citizen = new Citizen(id, firstName, lastName, ssn, address, sex, schoolID);
+                Citizen citizen = new Citizen(id, firstName, lastName, ssn, sex, schoolID);
                 allCitizens.add(citizen);
             }
             return allCitizens;

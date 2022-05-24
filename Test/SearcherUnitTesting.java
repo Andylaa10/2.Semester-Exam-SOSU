@@ -20,11 +20,11 @@ class SearcherUnitTesting {
         CitizenSearcher searcher = new CitizenSearcher();
 
         //Making data to insert into searchData list
-        Citizen citizen1 = new Citizen(1, "John", "Johnson", "121200-4673", "Allé vej 32", "male");
-        Citizen citizen2 = new Citizen(2, "Jonas", "Johansen", "020301-1243", "Allé vej 32", "male");
-        Citizen citizen3 = new Citizen(3, "Jena", "Andersen", "0602-1522", "Bulgursvej 124", "female");
-        Citizen citizen4 = new Citizen(4, "Andy", "Lam", "230301-2577", "Spangsbjergs allé 2", "male");
-        Citizen citizen5 = new Citizen(5, "Kristian", "Iversen", "171198-2221", "Håndsprit vej 1", "male");
+        Citizen citizen1 = new Citizen(1, "John", "Johnson", "121200-4673", "Mand", 1);
+        Citizen citizen2 = new Citizen(2, "Jonas", "Johansen", "020301-1243", "Mand", 1);
+        Citizen citizen3 = new Citizen(3, "Jena", "Andersen", "0602-1522", "Kvinde", 1);
+        Citizen citizen4 = new Citizen(4, "Andy", "Lam", "230301-2577", "Mand", 1);
+        Citizen citizen5 = new Citizen(5, "Kristian", "Iversen", "171198-2221", "Mand", 1);
         //Added data
         searchData.add(citizen1);
         searchData.add(citizen2);
@@ -48,11 +48,11 @@ class SearcherUnitTesting {
         //Make an instance of EventSearcher
         CitizenSearcher searcher = new CitizenSearcher();
         //Making data to insert into searchData list
-        Citizen citizen1 = new Citizen(1, "John", "Johnson", "121200-4673", "Allé vej 32", "male");
-        Citizen citizen2 = new Citizen(2, "Jonas", "Johansen", "020301-1243", "Allé vej 32", "male");
-        Citizen citizen3 = new Citizen(3, "Jena", "Andersen", "0602-1522", "Bulgursvej 124", "female");
-        Citizen citizen4 = new Citizen(4, "Andy", "Lam", "230301-2577", "Spangsbjergs allé 2", "male");
-        Citizen citizen5 = new Citizen(5, "Kristian", "Iversen", "171198-2221", "Håndsprit vej 1", "male");
+        Citizen citizen1 = new Citizen(1, "John", "Johnson", "121200-4673", "Mand", 1);
+        Citizen citizen2 = new Citizen(2, "Jonas", "Johansen", "020301-1243", "Mand", 1);
+        Citizen citizen3 = new Citizen(3, "Jena", "Andersen", "0602-1522", "Kvinde", 1);
+        Citizen citizen4 = new Citizen(4, "Andy", "Lam", "230301-2577", "Mand", 1);
+        Citizen citizen5 = new Citizen(5, "Kristian", "Iversen", "171198-2221", "Mand", 1);
         //Added data
         searchData.add(citizen1);
         searchData.add(citizen2);

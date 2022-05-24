@@ -107,7 +107,7 @@
             <Label fx:id="labelInfoNewLine" layoutX="34.0" layoutY="58.0" prefHeight="35.0" prefWidth="580.0" text="Tekst2" textFill="WHITE" />
          </children>
       </Pane>
-      <AnchorPane fx:id="anchorPaneTeacher" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneTeacher" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Label alignment="TOP_LEFT" layoutX="2.0" layoutY="9.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">
                <font>
@@ -265,72 +265,6 @@
             <Label alignment="CENTER_RIGHT" layoutX="350.0" layoutY="433.0" text="Dobbeltklik for at se sagens informationer" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="185.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0" visible="false">
-         <children>
-            <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="14.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@img/Citizen%20Icon.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="43.0" layoutY="84.0" text="Fornavn" />
-            <Label layoutX="37.0" layoutY="124.0" text="Efternavn" />
-            <Label layoutX="43.0" layoutY="199.0" text="Adresse" />
-            <Label layoutX="62.0" layoutY="236.0" text="Køn" />
-            <Label layoutX="14.0" layoutY="162.0" text="CPR-Nummer" />
-            <TextField fx:id="txtFieldCitizenFirstName" layoutX="106.0" layoutY="80.0" prefHeight="26.0" prefWidth="180.0" />
-            <TextField fx:id="txtFieldCitizenLastName" layoutX="106.0" layoutY="120.0" prefHeight="26.0" prefWidth="180.0" />
-            <TextField fx:id="txtFieldCitizenSSN" layoutX="106.0" layoutY="159.0" prefHeight="26.0" prefWidth="180.0" />
-            <TextField fx:id="txtFieldCitizenAddress" layoutX="106.0" layoutY="195.0" prefHeight="26.0" prefWidth="180.0" />
-            <Label layoutX="104.0" layoutY="11.0" text="Oprettelse af borger">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <Button fx:id="btnSaveCitizen" layoutX="106.0" layoutY="272.0" mnemonicParsing="false" onAction="#btnHandleSaveCitizen" prefHeight="26.0" prefWidth="180.0" text="Opret Borger">
-               <effect>
-                  <ColorAdjust brightness="0.3" />
-               </effect>
-            </Button>
-            <TextField fx:id="txtFieldSearchCitizens" layoutX="402.0" layoutY="387.0" onAction="#onActionSearchCitizens" />
-            <Button fx:id="btnSearchCitizens" layoutX="560.0" layoutY="387.0" mnemonicParsing="false" onAction="#onActionSearchCitizens" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="🔍">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
-            <Label layoutX="420.0" layoutY="11.0" text="Borgere">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <TableView fx:id="tvCreatedCitizens" layoutX="325.0" layoutY="55.0" prefHeight="325.0" prefWidth="266.0" style="-fx-background-color: transparent;">
-               <columns>
-                  <TableColumn fx:id="tcCreatedCitizenID" prefWidth="75.0" text="ID" visible="false" />
-                  <TableColumn fx:id="tcCreatedCitizenSchoolId" prefWidth="108.800048828125" text="SchoolID" visible="false" />
-                  <TableColumn fx:id="tcCreatedCitizenFirstName" prefWidth="75.0" text="Fornavn" />
-                  <TableColumn fx:id="tcCreatedCitizenLastName" prefWidth="79.9998779296875" text="Efternavn" />
-                  <TableColumn fx:id="tcCreatedCitizenSSN" prefWidth="108.800048828125" text="CPR-Nummer" />
-               </columns>
-            </TableView>
-            <Label layoutX="420.0" layoutY="419.0" text="Dobbeltklik for at åbne borger">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <RadioButton fx:id="radioMale" layoutX="104.0" layoutY="236.0" mnemonicParsing="false" text="Mand" />
-            <RadioButton fx:id="radioFemale" layoutX="162.0" layoutY="236.0" mnemonicParsing="false" text="Kvinde" />
-            <RadioButton fx:id="radioOther" layoutX="231.0" layoutY="236.0" mnemonicParsing="false" text="Andet" />
-            <Button fx:id="btnDeleteCitizen" layoutX="16.0" layoutY="416.0" mnemonicParsing="false" onAction="#btnHandleDeleteCitizen" prefHeight="26.0" prefWidth="84.0" text="Slet Borger">
-               <effect>
-                  <ColorAdjust brightness="0.3" />
-               </effect>
-            </Button>
-            <Label layoutX="362.0" layoutY="390.0" text="Søg:">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="anchorPaneCitizen" layoutX="238.0" layoutY="150.0" prefHeight="456.0" prefWidth="610.0" visible="false" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <TableView fx:id="tvCurrentCases" layoutX="315.0" layoutY="23.0" prefHeight="207.0" prefWidth="266.0" style="-fx-background-color: transparent;">
@@ -384,5 +318,69 @@
             </Label>
          </children></AnchorPane>
       <TextField fx:id="txtFieldSchoolID" layoutX="321.0" layoutY="541.0" prefHeight="26.0" prefWidth="35.0" visible="false" />
+      <AnchorPane fx:id="anchorPaneCreateCitizen" layoutX="186.0" layoutY="138.0" prefHeight="456.0" prefWidth="610.0">
+         <children>
+            <ImageView fitHeight="63.0" fitWidth="84.0" layoutX="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/Citizen%20Icon.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="44.0" layoutY="85.0" text="Fornavn" />
+            <Label layoutX="38.0" layoutY="125.0" text="Efternavn" />
+            <Label layoutX="63.0" layoutY="207.0" text="Køn" />
+            <Label layoutX="15.0" layoutY="163.0" text="CPR-Nummer" />
+            <TextField fx:id="txtFieldCitizenFirstName" layoutX="107.0" layoutY="81.0" prefHeight="26.0" prefWidth="180.0" />
+            <TextField fx:id="txtFieldCitizenLastName" layoutX="107.0" layoutY="121.0" prefHeight="26.0" prefWidth="180.0" />
+            <TextField fx:id="txtFieldCitizenSSN" layoutX="107.0" layoutY="160.0" prefHeight="26.0" prefWidth="180.0" />
+            <Label layoutX="98.0" layoutY="16.0" text="Oprettelse af borger">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnSaveCitizen" layoutX="107.0" layoutY="243.0" mnemonicParsing="false" onAction="#btnHandleSaveCitizen" prefHeight="26.0" prefWidth="180.0" text="Opret Borger">
+               <effect>
+                  <ColorAdjust brightness="0.1" />
+               </effect>
+            </Button>
+            <Button fx:id="btnDeleteCitizen" layoutX="15.0" layoutY="416.0" mnemonicParsing="false" onAction="#btnHandleDeleteCitizen" prefHeight="26.0" prefWidth="84.0" text="Slet Borger">
+               <effect>
+                  <ColorAdjust brightness="0.1" />
+               </effect>
+            </Button>
+            <TextField fx:id="txtFieldSearchCitizens" layoutX="411.0" layoutY="391.0" onAction="#onActionSearchCitizens" />
+            <Button fx:id="btnSearchCitizens" layoutX="561.0" layoutY="391.0" mnemonicParsing="false" onAction="#onActionSearchCitizens" prefHeight="25.0" prefWidth="30.0" style="-fx-background-color: transparent;" text="🔍">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Label layoutX="368.0" layoutY="16.0" text="Oprettede Borgere">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tvCreatedCitizens" layoutX="326.0" layoutY="56.0" prefHeight="328.0" prefWidth="266.0" style="-fx-background-color: transparent;">
+               <columns>
+                  <TableColumn fx:id="tcCreatedCitizenID" prefWidth="75.0" text="ID" visible="false" />
+                  <TableColumn fx:id="tcCreatedCitizenSchoolId" prefWidth="75.0" text="ID" visible="false" />
+                  <TableColumn fx:id="tcCreatedCitizenFirstName" prefWidth="75.0" text="Fornavn" />
+                  <TableColumn fx:id="tcCreatedCitizenLastName" prefWidth="79.9998779296875" text="Efternavn" />
+                  <TableColumn fx:id="tcCreatedCitizenSSN" prefWidth="108.800048828125" text="CPR-Nummer" />
+               </columns>
+            </TableView>
+            <Label layoutX="411.0" layoutY="419.0" text="Dobbeltklik for at åbne borger">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <RadioButton fx:id="radioMale" layoutX="105.0" layoutY="207.0" mnemonicParsing="false" text="Mand" />
+            <RadioButton fx:id="radioFemale" layoutX="163.0" layoutY="207.0" mnemonicParsing="false" text="Kvinde" />
+            <RadioButton fx:id="radioOther" layoutX="232.0" layoutY="207.0" mnemonicParsing="false" text="Andet" />
+            <Label layoutX="368.0" layoutY="394.0" text="Søg: ">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

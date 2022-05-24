@@ -285,8 +285,8 @@ public class DataModelFacade {
     }
 
 
-    public Citizen createCitizen(String firstname, String lastName, String SSN, String address, String sex, int schoolId) throws SQLException {
-        return citizenModel.createCitizen(firstname, lastName, SSN, address, sex, schoolId);
+    public Citizen createCitizen(String firstname, String lastName, String SSN, String sex, int schoolId) throws SQLException {
+        return citizenModel.createCitizen(firstname, lastName, SSN, sex, schoolId);
     }
 
 

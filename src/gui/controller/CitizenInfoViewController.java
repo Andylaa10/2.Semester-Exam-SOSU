@@ -68,7 +68,6 @@ public class CitizenInfoViewController {
 
         lblName.setText(citizen.getFirstName() + " " + citizen.getLastName());
         lblSSN.setText(citizen.getSSN());
-        lblAddress.setText(citizen.getAddress());
 
         ObservationNote observationNote = dataModelFacade.getObservationNote(citizenId);
         if (observationNote != null) {
