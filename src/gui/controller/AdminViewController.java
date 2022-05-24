@@ -950,10 +950,9 @@ public class AdminViewController implements Initializable, IController {
                     if (generalInformation != null) {
                         studentViewController.setGeneralInfoFromID(String.valueOf(tvCitizens.getSelectionModel().getSelectedItem().getId()), String.valueOf(generalInformation.getId()));
                     }
-                    studentViewController.setCitizenComboBoxItems(tvCreatedCitizens.getSelectionModel().getSelectedItem());
+                    studentViewController.setCitizenComboBoxItems(tvCitizens.getSelectionModel().getSelectedItem());
                     studentViewController.initializeTables();
                     studentViewController.initializeCitizenComboBox();
-
 
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();

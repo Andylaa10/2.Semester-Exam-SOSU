@@ -703,9 +703,10 @@ public class TeacherViewController implements Initializable, IController {
                     if (generalInformation != null) {
                         studentViewController.setGeneralInfoFromID(String.valueOf(tvCitizens.getSelectionModel().getSelectedItem().getId()), String.valueOf(generalInformation.getId()));
                     }
+                    studentViewController.setCitizenComboBoxItems(tvCitizens.getSelectionModel().getSelectedItem());
                     studentViewController.initializeTables();
                     studentViewController.initializeCitizenComboBox();
-                    studentViewController.setCitizenComboBoxItems(tvCreatedCitizens.getSelectionModel().getSelectedItem());
+
 
                     viewCitizenStage.setResizable(false);
                     viewCitizenStage.show();

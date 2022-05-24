@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -57,6 +58,7 @@ public class CitizenInfoViewController {
     /**
      * Method to set the selected citizen from the studentviews info.
      * Also creates all the vBoxes for cases, healthConditions and functionalAbilities.
+     *
      * @param citizen
      * @throws Exception
      */
@@ -86,6 +88,7 @@ public class CitizenInfoViewController {
 
     /**
      * On action method for saving the observationNote and date for the citizen.
+     *
      * @throws Exception
      */
     @FXML
@@ -111,25 +114,27 @@ public class CitizenInfoViewController {
      * Method for creating all the cases a citizen have.
      * Uses a thread for optimized loading.
      */
-    private void createCases() {
-        Thread t1 = new Thread(() -> {
-            ObservableList<Case> allCasesOnCitizen = null;
-            try {
-                allCasesOnCitizen = FXCollections.observableList(dataModelFacade.getCasesOnCitizen(citizenId));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            for (Case casesOnCitizen : allCasesOnCitizen) {
-                int caseId = casesOnCitizen.getId();
+    private void createCases() throws SQLException {
+
+        if (dataModelFacade.getCasesOnCitizen(citizenId) != null) {
+            Thread t1 = new Thread(() -> {
+                ObservableList<Case> allCasesOnCitizen = null;
                 try {
-                    newCaseToVBox(caseId);
+                    allCasesOnCitizen = FXCollections.observableList(dataModelFacade.getCasesOnCitizen(citizenId));
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            }
-        });
-        t1.start();
-
+                for (Case casesOnCitizen : allCasesOnCitizen) {
+                    int caseId = casesOnCitizen.getId();
+                    try {
+                        newCaseToVBox(caseId);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            t1.start();
+        }
 
     }
 
@@ -137,38 +142,43 @@ public class CitizenInfoViewController {
      * Method for creating all healthConditions the citizen have.
      * Uses a thread for optimized loading.
      */
-    private void createHealthConditions() {
-        Thread t1 = new Thread(() -> {
-            ObservableList<HealthConditionSubCategoryText> allSubCategories = null;
-            try {
-                allSubCategories = FXCollections.observableList(dataModelFacade.getHCInfoOnSubCategories(citizenId));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            for (HealthConditionSubCategoryText HCSubCategoryText : allSubCategories) {
-                healthConditionId = HCSubCategoryText.getCategoryId();
+    private void createHealthConditions() throws SQLException {
+
+        if (dataModelFacade.getHCInfoOnSubCategories(citizenId) != null) {
+            Thread t1 = new Thread(() -> {
+                ObservableList<HealthConditionSubCategoryText> allSubCategories = null;
                 try {
-                    newHCToVBox(healthConditionId);
+                    allSubCategories = FXCollections.observableList(dataModelFacade.getHCInfoOnSubCategories(citizenId));
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            }
-        });
-        t1.start();
-
+                for (HealthConditionSubCategoryText HCSubCategoryText : allSubCategories) {
+                    healthConditionId = HCSubCategoryText.getCategoryId();
+                    try {
+                        newHCToVBox(healthConditionId);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            t1.start();
+        }
 
     }
 
     /**
      * Method for creating the functionalAbilites the citizen have.
+     *
      * @throws SQLException
      */
 
     private void createFunctionalAbilities() throws SQLException {
-        ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFAInfoOnSubCategories(citizenId));
-        for (FunctionalAbilitySubCategoryText FAOnCitizen : allFunctionalAbilitySubCategories) {
-            int functionalAbilityId = FAOnCitizen.getSubCategoryId();
-            newFAToVBox(functionalAbilityId);
+        if (dataModelFacade.getFAInfoOnSubCategories(citizenId) != null) {
+            ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories = FXCollections.observableList(dataModelFacade.getFAInfoOnSubCategories(citizenId));
+            for (FunctionalAbilitySubCategoryText FAOnCitizen : allFunctionalAbilitySubCategories) {
+                int functionalAbilityId = FAOnCitizen.getSubCategoryId();
+                newFAToVBox(functionalAbilityId);
+            }
         }
     }
 
@@ -176,6 +186,7 @@ public class CitizenInfoViewController {
     /**
      * Method for creating a vbox, using the caseId.
      * Creates all the elements in the vBox and fills it out with info from the database.
+     *
      * @param caseId
      * @throws SQLException
      */
@@ -214,6 +225,7 @@ public class CitizenInfoViewController {
     /**
      * Method for creating a vbox for a healthCondition
      * Creates all the elements in the vBox and fills it out with info from the database.
+     *
      * @throws SQLException
      */
     private void newHCToVBox(int condition) throws SQLException {
@@ -247,7 +259,8 @@ public class CitizenInfoViewController {
         txtFieldHC.setPrefWidth(215);
         txtFieldHC.setMinHeight(25);
         txtFieldHC.setMinWidth(215);
-        int hcCondition = hcSubCategoryText.getCondition();
+        int hcCondition = hcSubCategoryText.getHealthConditionId();
+        System.out.println(hcCondition);
         switch (hcCondition) {
             case 1 -> txtFieldHC.setText("Funktionsniveau");
             case 2 -> txtFieldHC.setText("Bevægeapparat");
@@ -399,6 +412,7 @@ public class CitizenInfoViewController {
     /**
      * Method for creating a vbox for a functionalAbility
      * Creates all the elements in the vBox and fills it out with info from the database.
+     *
      * @param functionalAbilitySubCategoryId
      * @throws SQLException
      */
