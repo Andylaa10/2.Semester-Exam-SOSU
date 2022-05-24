@@ -71,7 +71,9 @@ public class SuperAdminDAO {
      */
     public void editSuperAdmin(SuperAdmin superAdmin) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "UPDATE SuperAdmin SET username=?, password=? WHERE superAdminID=?;";
+            String sql = "UPDATE SuperAdmin " +
+                    "SET username=?, password=? " +
+                    "WHERE superAdminID=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, superAdmin.getUsername());
             preparedStatement.setString(2, superAdmin.getPassword());
@@ -88,7 +90,9 @@ public class SuperAdminDAO {
      * Makes the superAdmin able to login by checking if the login info is in the database
      */
     public SuperAdmin superAdminLogin(String user, String pass) throws SQLException {
-        String sql = "SELECT * FROM SuperAdmin WHERE username =? AND password =?;";
+        String sql = "SELECT * " +
+                "FROM SuperAdmin " +
+                "WHERE username =? AND password =?;";
         try (Connection connection = databaseConnector.getConnection()) {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, user);
@@ -140,7 +144,9 @@ public class SuperAdminDAO {
         ArrayList<User> allStudents = new ArrayList<>();
 
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM Login WHERE userType =? AND schoolId=?;";
+            String sql = "SELECT * " +
+                    "FROM Login " +
+                    "WHERE userType =? AND schoolId=?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, String.valueOf(UserType.STUDENT));
@@ -172,7 +178,9 @@ public class SuperAdminDAO {
     public List<User> getAssignedTeachers(int schoolId) throws SQLException {
         ArrayList<User> allTeachers = new ArrayList<>();
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM Login WHERE userType =? AND schoolId=? ;";
+            String sql = "SELECT * " +
+                    "FROM Login " +
+                    "WHERE userType =? AND schoolId=? ;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, String.valueOf(UserType.TEACHER));
@@ -204,7 +212,9 @@ public class SuperAdminDAO {
         ArrayList<User> allAdmins = new ArrayList<>();
 
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM Login WHERE userType =? AND schoolId=? ;";
+            String sql = "SELECT * " +
+                    "FROM Login " +
+                    "WHERE userType =? AND schoolId=? ;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, String.valueOf(UserType.ADMINISTRATOR));
@@ -234,7 +244,11 @@ public class SuperAdminDAO {
     public List<User> getAdminsOnSchool(int schoolId) throws SQLException {
         ArrayList<User> allAdmins = new ArrayList<>();
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM [Login] INNER JOIN School ON School.schoolID = [Login].schoolId WHERE [Login].userType=? AND [Login].schoolId =?;";
+            String sql = "SELECT * " +
+                    "FROM [Login] " +
+                    "INNER JOIN School " +
+                    "ON School.schoolID = [Login].schoolId " +
+                    "WHERE [Login].userType=? AND [Login].schoolId =?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -270,7 +284,9 @@ public class SuperAdminDAO {
     public List<Citizen> getAssignedCitizen(int schoolId) throws SQLException {
         ArrayList<Citizen> allCitizens = new ArrayList<>();
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM Citizen WHERE schoolId =?";
+            String sql = "SELECT * " +
+                    "FROM Citizen " +
+                    "WHERE schoolId =?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, schoolId);
             ResultSet resultset = preparedStatement.executeQuery();
@@ -302,7 +318,9 @@ public class SuperAdminDAO {
     public List<Case> getAssignedCases(int schoolId) throws SQLException {
         ArrayList<Case> allCases = new ArrayList<>();
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM Cases WHERE schoolId =?";
+            String sql = "SELECT * " +
+                    "FROM Cases " +
+                    "WHERE schoolId =?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, schoolId);
             ResultSet resultset = preparedStatement.executeQuery();
@@ -396,7 +414,8 @@ public class SuperAdminDAO {
      * Deletes an admin from the UserOnSchool table, so he is no longer assigned to that school.
      */
     public void deleteAdminFromSchool(int userId, int schoolId) throws SQLException {
-        String sql = "DELETE FROM UserOnSchool WHERE loginId = ? AND schoolId = ?;";
+        String sql = "DELETE FROM UserOnSchool " +
+                "WHERE loginId = ? AND schoolId = ?;";
         try (Connection con = databaseConnector.getConnection();
              PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             st.setInt(1, userId);
@@ -415,7 +434,9 @@ public class SuperAdminDAO {
     public SuperAdmin getHashedPasswordSuperAdmin(String username, String password) throws SQLException {
 
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM SuperAdmin WHERE username =?";
+            String sql = "SELECT * " +
+                    "FROM SuperAdmin " +
+                    "WHERE username =?";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);

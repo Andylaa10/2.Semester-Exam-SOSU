@@ -67,9 +67,10 @@ public class FunctionalAbilitiesDAO {
 
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT functionalAbilitySubCategoryID, functionalAbilitySubCategoryName " +
-                    "FROM FunctionalAbilitySubCategory INNER JOIN FunctionalAbilityName" +
-                    " ON FunctionalAbilityName.functionalAbilityNamesID = FunctionalAbilitySubCategory.functionalAbilityNameId" +
-                    " WHERE FunctionalAbilitySubCategory.functionalAbilityNameId = ?;";
+                    "FROM FunctionalAbilitySubCategory " +
+                    "INNER JOIN FunctionalAbilityName " +
+                    "ON FunctionalAbilityName.functionalAbilityNamesID = FunctionalAbilitySubCategory.functionalAbilityNameId " +
+                    "WHERE FunctionalAbilitySubCategory.functionalAbilityNameId = ?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, functionalAbilitySubCategoryId);
@@ -99,7 +100,9 @@ public class FunctionalAbilitiesDAO {
      */
     public FunctionalAbility getSubcategoryData(int citizenId, int functionalAbilitySubCategoryId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT * FROM FunctionalAbility WHERE citizenId = ? AND functionalAbilitySubCategoryId =?;";
+            String sql = "SELECT * " +
+                    "FROM FunctionalAbility " +
+                    "WHERE citizenId = ? AND functionalAbilitySubCategoryId =?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
@@ -137,10 +140,10 @@ public class FunctionalAbilitiesDAO {
 
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT *" +
-                    " FROM FunctionalAbility" +
-                    " INNER JOIN FunctionalAbilitySubCategory" +
-                    " ON FunctionalAbility.functionalAbilitySubCategoryId = FunctionalAbilitySubCategory.functionalAbilitySubCategoryID" +
-                    " WHERE FunctionalAbility.citizenId = ? AND FunctionalAbilitySubCategory.functionalAbilitySubCategoryID = ?";
+                    "FROM FunctionalAbility " +
+                    "INNER JOIN FunctionalAbilitySubCategory " +
+                    "ON FunctionalAbility.functionalAbilitySubCategoryId = FunctionalAbilitySubCategory.functionalAbilitySubCategoryID " +
+                    "WHERE FunctionalAbility.citizenId = ? AND FunctionalAbilitySubCategory.functionalAbilitySubCategoryID = ?";
 
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -181,10 +184,10 @@ public class FunctionalAbilitiesDAO {
 
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "SELECT *" +
-                    " FROM FunctionalAbility" +
-                    " INNER JOIN FunctionalAbilitySubCategory" +
-                    " ON FunctionalAbility.functionalAbilitySubCategoryId = FunctionalAbilitySubCategory.functionalAbilitySubCategoryID" +
-                    " WHERE FunctionalAbility.citizenId = ?;";
+                    "FROM FunctionalAbility " +
+                    "INNER JOIN FunctionalAbilitySubCategory " +
+                    "ON FunctionalAbility.functionalAbilitySubCategoryId = FunctionalAbilitySubCategory.functionalAbilitySubCategoryID " +
+                    "WHERE FunctionalAbility.citizenId = ?; ";
 
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -218,20 +221,12 @@ public class FunctionalAbilitiesDAO {
 
     /**
      * Creates the functional abilities
-     * @param citizenId
-     * @param functionalAbilitySubCategoryId
-     * @param abilityNow
-     * @param abilityExpected
-     * @param abilityNote
-     * @param citizenPerformance
-     * @param citizenMeaningOfPerformance
-     * @param abilityNoteCitizen
-     * @return
      * @throws SQLException
      */
     public FunctionalAbility createFunctionalAbilities(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "INSERT INTO FunctionalAbility (citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote , citizenPerfomance, citizenMeaningOfPerfomance, abilityNoteCitizen) VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO FunctionalAbility (citizenId, functionalAbilitySubCategoryId, abilityNow, abilityExpected, abilityNote , citizenPerfomance, citizenMeaningOfPerfomance, abilityNoteCitizen) " +
+                    "VALUES (?,?,?,?,?,?,?,?)";
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setInt(1, citizenId);
@@ -264,7 +259,8 @@ public class FunctionalAbilitiesDAO {
      */
     public void editAbilities(FunctionalAbility functionalAbility) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "UPDATE FunctionalAbility SET abilityNow = ?, abilityExpected = ?, abilityNote = ?, citizenPerfomance =?, citizenMeaningOfPerfomance =?, abilityNoteCitizen = ? WHERE citizenId = ? AND functionalAbilitySubCategoryId = ?;";
+            String sql = "UPDATE FunctionalAbility SET abilityNow = ?, abilityExpected = ?, abilityNote = ?, citizenPerfomance =?, citizenMeaningOfPerfomance =?, abilityNoteCitizen = ? " +
+                    "WHERE citizenId = ? AND functionalAbilitySubCategoryId = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, functionalAbility.getAbilityNow());
             preparedStatement.setInt(2, functionalAbility.getAbilityExcepted());
