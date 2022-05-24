@@ -5,12 +5,10 @@ import be.Citizen;
 import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
 import be.HealthCondition.HealthConditionSubCategoryText;
 import be.ObservationNote;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,11 +19,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 public class CitizenInfoViewController {
 

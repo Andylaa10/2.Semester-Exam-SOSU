@@ -22,7 +22,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -366,18 +365,14 @@ public class AdminViewController implements Initializable, IController {
      * loads the teacher view
      */
     private void tableViewLoadTeachers(ObservableList<User> allTeachers) {
-        new Thread(() -> {
-            tvTeachers.setItems(getTeacherData());
-        }).start();
+        tvTeachers.setItems(getTeacherData());
     }
 
     /**
      * loads the students tableview.
      */
     private void tableViewLoadStudents(ObservableList<User> allStudents) {
-        new Thread(() -> {
-            tvStudent.setItems(getStudentData());
-        }).start();
+        tvStudent.setItems(getStudentData());
     }
 
     /**
@@ -400,9 +395,7 @@ public class AdminViewController implements Initializable, IController {
      * loads the cases TableView.
      */
     private void tableViewLoadCases(ObservableList<Case> allCases) {
-        new Thread(() -> {
-            tvCases.setItems(getCaseData());
-        }).start();
+        tvCases.setItems(getCaseData());
     }
 
     /**
@@ -418,10 +411,7 @@ public class AdminViewController implements Initializable, IController {
      * loads the Citizens table view
      */
     private void tableViewLoadCitizens(ObservableList<Citizen> allCitizens) {
-        new Thread(() -> {
-            tvCitizens.setItems(getCitizenData());
-        }).start();
-
+        tvCitizens.setItems(getCitizenData());
     }
 
     /**
@@ -437,9 +427,7 @@ public class AdminViewController implements Initializable, IController {
      * loads the CurrentCases tableview.
      */
     private void tableViewLoadCurrentCases(ObservableList<Case> allCurrentCases) {
-        new Thread(() -> {
-            tvCurrentCases.setItems(getCurrentCasesData());
-        }).start();
+        tvCurrentCases.setItems(getCurrentCasesData());
     }
 
     /**
@@ -455,9 +443,7 @@ public class AdminViewController implements Initializable, IController {
      * loads the casesOnCitizen tableview.
      */
     private void tableViewLoadCasesOnCitizen(ObservableList<Case> allCasesOnCitizen) {
-        new Thread(() -> {
-            tvCasesOnCitizen.setItems(getCasesOnCitizenData());
-        }).start();
+        tvCasesOnCitizen.setItems(getCasesOnCitizenData());
     }
 
     /**
@@ -473,9 +459,7 @@ public class AdminViewController implements Initializable, IController {
      * loads the Citizens table view
      */
     private void tableViewLoadCreatedCitizens(ObservableList<Citizen> allCreatedCitizens) {
-        new Thread(() -> {
-            tvCreatedCitizens.setItems(getCreatedCitizenData());
-        }).start();
+        tvCreatedCitizens.setItems(getCreatedCitizenData());
     }
 
     /**

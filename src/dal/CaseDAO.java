@@ -55,7 +55,11 @@ public class CaseDAO {
     public List<Case> getCasesOnCitizen(int citizenId) throws SQLException {
         ArrayList<Case> allCases = new ArrayList<>();
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT Cases.casesID, name, date, info FROM Cases INNER JOIN CasesOnCitizen ON CasesOnCitizen.casesId = Cases.casesID WHERE CasesOnCitizen.citizenId = ?;";
+            String sql = "SELECT Cases.casesID, name, date, info " +
+                    "FROM Cases " +
+                    "INNER JOIN CasesOnCitizen " +
+                    "ON CasesOnCitizen.casesId = Cases.casesID " +
+                    "WHERE CasesOnCitizen.citizenId = ?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -84,7 +88,11 @@ public class CaseDAO {
      */
     public Case getCaseOnCitizen(int citizenId, int casesId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "SELECT Cases.casesID, name, date, info FROM Cases INNER JOIN CasesOnCitizen ON CasesOnCitizen.casesId = Cases.casesID WHERE CasesOnCitizen.citizenId = ? AND CasesOnCitizen.casesId = ?;";
+            String sql = "SELECT Cases.casesID, name, date, info " +
+                    "FROM Cases " +
+                    "INNER JOIN CasesOnCitizen " +
+                    "ON CasesOnCitizen.casesId = Cases.casesID " +
+                    "WHERE CasesOnCitizen.citizenId = ? AND CasesOnCitizen.casesId = ?;";
 
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -202,27 +210,12 @@ public class CaseDAO {
     public static void main(String[] args) throws Exception {
         CaseDAO caseDAO = new CaseDAO();
         //caseDAO.deleteCaseFromCitizen(107, 2);
-        /**caseDAO.createCase("Knoglebrud i anklen", "Borgeren har oplevet et knoglebrud af 3. grad, skal restituere " +
-         "i op til 12 uger ", 2);
-         caseDAO.createCase("Kateter seponering", "Borgeren har problemer med udskillelsen af affaldsstoffer" +
-         " derfor skal borgeren have seponeret sit kateter", 2);
-         caseDAO.createCase("Covid-19 Positiv Testsvar", "Borgeren har modtaget en positiv covid-19 Delta test." +
-         " Derfor skal der tages covid 19 forholdsregler ved håndteringen af borgeren", 2);
-         caseDAO.createCase("Skulder skred i venstre skulder", "Borgeren har oplevet en skulder der er gået af led. " +
-         "Borgerens ledbånd i skulderen er revet over grundet et 3. grads skulderskred, restitution i op til 8 uger med slynge", 1);
-         caseDAO.createCase("Cancer sår i brystet", "Grundet brystkræft har borgeren oplevet cancer sår omkring " +
-         "brystområdet. Der skal ydes sårepleje på inficerede sår.", 1);
-         caseDAO.createCase("Diabetes type 2", "Borgeren har fået eklæret diabetes type 2. Derfor skal der " +
-         "holdes øje med kost og sukkerindtag, samt blodsukkerniveau og insulin", 1);
-         caseDAO.createCase("Afasi af mindre grad", "Borgeren har for nyligt oplevet en blodprop der har " +
-         "vist sig at give taleproblemer (afasi), derfor skal der observeres om der bliver forbedret", 1);*/
-        /**System.out.println(caseDAO.getCaseOnCitizen(7,1));
-         System.out.println("-----------------------------------------");
-         System.out.println(caseDAO.getCaseOnCitizen(7,2));
-         System.out.println("-----------------------------------------");
-         System.out.println(caseDAO.getCaseOnCitizen(7,3));*/
+        System.out.println(caseDAO.getCaseOnCitizen(7,1));
+        System.out.println("-----------------------------------------");
+        System.out.println(caseDAO.getCaseOnCitizen(7,2));
+        System.out.println("-----------------------------------------");
+        System.out.println(caseDAO.getCaseOnCitizen(7,3));
 
         caseDAO.getCasesOnCitizen(7);
-
     }
 }

@@ -101,19 +101,6 @@ public class GeneralInformationDAO {
 
     /**
      * Creates general information on a selected citizen
-     * @param citizenId
-     * @param coping
-     * @param motivation
-     * @param resources
-     * @param roles
-     * @param habits
-     * @param educationAndJob
-     * @param lifeStory
-     * @param network
-     * @param healthInformation
-     * @param equipmentAids
-     * @param homeLayout
-     * @return
      * @throws SQLException
      */
     public GeneralInformation createGeneralInformation(int citizenId, String coping, String motivation, String resources, String roles,
@@ -123,7 +110,8 @@ public class GeneralInformationDAO {
 
         try (Connection connection = databaseConnector.getConnection()) {
             String sql = "INSERT INTO GeneralInformation (citizenId, coping, motivation, resources, roles, habits," +
-                    "educationAndJob, lifestory, network, healthInformation, equipmentAids, homelayout) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
+                    "educationAndJob, lifestory, network, healthInformation, equipmentAids, homelayout) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 preparedStatement.setInt(1, citizenId);
                 preparedStatement.setString(2, coping);
@@ -161,9 +149,11 @@ public class GeneralInformationDAO {
      */
     public void editGeneralInformation(GeneralInformation generalInformation) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
-            String sql = "UPDATE GeneralInformation SET coping = ?, motivation = ?, resources = ?, roles = ?," +
-                    " habits = ?,educationAndJob = ?, lifestory = ?, network = ?, healthInformation = ?," +
-                    " equipmentAids = ?, homelayout = ? WHERE generalInfoID = ?;";
+            String sql = "UPDATE GeneralInformation " +
+                    "SET coping = ?, motivation = ?, resources = ?, roles = ?, " +
+                    "habits = ?,educationAndJob = ?, lifestory = ?, network = ?, healthInformation = ?, " +
+                    "equipmentAids = ?, homelayout = ? " +
+                    "WHERE generalInfoID = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, generalInformation.getCoping());
             preparedStatement.setString(2, generalInformation.getMotivation());

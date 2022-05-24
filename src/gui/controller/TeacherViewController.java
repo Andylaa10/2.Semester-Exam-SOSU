@@ -324,10 +324,7 @@ public class TeacherViewController implements Initializable, IController {
      * loads the students tableview.
      */
     private void tableViewLoadStudents(ObservableList<User> allStudents) {
-        new Thread(() -> {
-            tvStudent.setItems(getStudentData());
-        }).start();
-
+        tvStudent.setItems(getStudentData());
     }
 
     /**
@@ -343,9 +340,7 @@ public class TeacherViewController implements Initializable, IController {
      * loads the cases TableView.
      */
     private void tableViewLoadCases(ObservableList<Case> allCases) {
-        new Thread(() -> {
-            tvCases.setItems(getCaseData());
-        }).start();
+        tvCases.setItems(getCaseData());
     }
 
     /**
@@ -361,9 +356,7 @@ public class TeacherViewController implements Initializable, IController {
      * loads the Citizens table view
      */
     private void tableViewLoadCitizens(ObservableList<Citizen> allCitizens) {
-        new Thread(() -> {
-            tvCitizens.setItems(getCitizenData());
-        }).start();
+        tvCitizens.setItems(getCitizenData());
     }
 
     /**
@@ -379,9 +372,7 @@ public class TeacherViewController implements Initializable, IController {
      * loads the Citizens table view
      */
     private void tableViewLoadCreatedCitizens(ObservableList<Citizen> allCreatedCitizens) {
-        new Thread(() -> {
-            tvCreatedCitizens.setItems(getCreatedCitizenData());
-        }).start();
+        tvCreatedCitizens.setItems(getCreatedCitizenData());
     }
 
     /**
@@ -397,9 +388,7 @@ public class TeacherViewController implements Initializable, IController {
      * loads the CurrentCases tableview.
      */
     private void tableViewLoadCurrentCases(ObservableList<Case> allCurrentCases) {
-        new Thread(() -> {
-            tvCurrentCases.setItems(getCurrentCasesData());
-        }).start();
+        tvCurrentCases.setItems(getCurrentCasesData());
     }
 
     /**
@@ -415,9 +404,7 @@ public class TeacherViewController implements Initializable, IController {
      * loads the casesOnCitizen tableview.
      */
     private void tableViewLoadCasesOnCitizen(ObservableList<Case> allCasesOnCitizen) {
-        new Thread(() -> {
-            tvCasesOnCitizen.setItems(getCasesOnCitizenData());
-        }).start();
+        tvCasesOnCitizen.setItems(getCasesOnCitizenData());
     }
 
 

@@ -11,7 +11,6 @@ import be.HealthCondition.HealthConditionSubCategoryText;
 import be.User;
 import be.Utilities.ImageWithText;
 import be.enums.ConditionEnum;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
@@ -31,7 +30,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
@@ -587,10 +585,7 @@ public class StudentViewController implements IController, Initializable {
      * loads the casesOnCitizen tableview.
      */
     private void tableViewLoadCasesOnCitizen(ObservableList<Case> allCasesOnCitizen) {
-        new Thread(() -> {
-            tvCases.setItems(getCasesOnCitizenData());
-        }).start();
-
+        tvCases.setItems(getCasesOnCitizenData());
     }
 
     /**
@@ -606,11 +601,7 @@ public class StudentViewController implements IController, Initializable {
      * loads the health condition tableview.
      */
     private void tableViewLoadHealthConditions(ObservableList<HealthCondition> allHealthConditions) {
-        new Thread(() -> {
-            tvHealthConditions.setItems(getHealthConditionData());
-        }).start();
-
-
+        tvHealthConditions.setItems(getHealthConditionData());
     }
 
     /**
@@ -624,11 +615,7 @@ public class StudentViewController implements IController, Initializable {
      * loads the sub categories tableview.
      */
     private void tableViewLoadSubCategories(ObservableList<HealthConditionSubCategory> allSubCategories) {
-        new Thread(() -> {
-            tvSubCategories.setItems(getSubCategories());
-        }).start();
-
-
+        tvSubCategories.setItems(getSubCategories());
     }
 
     /**
@@ -643,11 +630,7 @@ public class StudentViewController implements IController, Initializable {
      * @param allFunctionalAbilitySubCategories
      */
     private void tableViewLoadFunctionalAbilitySubCategories(ObservableList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories) {
-        new Thread(() -> {
-            tvFunctionalConditions.setItems(getFunctionalAbilitySubCategories());
-
-        }).start();
-
+        tvFunctionalConditions.setItems(getFunctionalAbilitySubCategories());
     }
 
     /**
@@ -1279,7 +1262,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalCondition.setVisible(false);
-        btnCitizenInfo.setVisible(true);
+        btnCitizenInfo.setVisible(false);
     }
 
     /**
@@ -1296,6 +1279,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(true);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalCondition.setVisible(false);
+        btnCitizenInfo.setVisible(true);
     }
 
     /**
@@ -1313,6 +1297,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(true);
         anchorPaneFunctionalCondition.setVisible(false);
+        btnCitizenInfo.setVisible(true);
     }
 
     /**
@@ -1330,6 +1315,7 @@ public class StudentViewController implements IController, Initializable {
         anchorPaneGeneralInformation.setVisible(false);
         anchorPaneHealthConditions.setVisible(false);
         anchorPaneFunctionalCondition.setVisible(true);
+        btnCitizenInfo.setVisible(true);
     }
 
     /**
