@@ -1304,7 +1304,7 @@ public class StudentViewController implements IController, Initializable {
      */
     @FXML
     private void btnClickHealthCondition() {
-        labelTitle.setText("Helbreds Tilstande for borgeren");
+        labelTitle.setText("Helbredstilstande for borgeren");
         labelInfo.setText("Overblik over borgerens helbredstilstande, hvor det er muligt at ændre og gemme eventuelle observationer og ændringer");
         labelInfoNewLine.setText("Her er det muligt at rapportere borgerens helbredstilstande og øve FS3. Der skal tages stilling til alle tilstande for at gemme.");
         anchorPaneStudent.setVisible(false);
