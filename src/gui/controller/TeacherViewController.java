@@ -584,7 +584,7 @@ public class TeacherViewController implements Initializable, IController {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Advarsel");
             alert.setHeaderText("Advarsel før du sletter en borger");
-            alert.setContentText("Du skal slette alle tager fra en borger, før du kan slette borgeren");
+            alert.setContentText("Denne handling kan ikke fortrydes");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 selectedCitizen();
