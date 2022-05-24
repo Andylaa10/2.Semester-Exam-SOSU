@@ -106,39 +106,84 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="anchorPaneStudent" layoutX="189.0" layoutY="139.0" prefHeight="609.0" prefWidth="1158.0" visible="false" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="5.0">
+      <AnchorPane fx:id="anchorPaneStudent" layoutX="189.0" layoutY="139.0" prefHeight="609.0" prefWidth="1158.0" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <Label alignment="TOP_LEFT" layoutY="14.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">
+            <Label alignment="TOP_LEFT" layoutX="3.0" layoutY="14.0" prefHeight="35.0" prefWidth="302.0" text="Med dashboardet til venstre kan du følgende:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="43.0" prefHeight="35.0" prefWidth="1028.0" text="- Få et overblik over dine tildelte borgere, samt se alle deres tildelte sager. Ved et tryk på en sag er et muligt at udfylde ændre på sagens informationer">
+            <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="51.0" prefHeight="35.0" prefWidth="1028.0" text="- Få et overblik over dine tildelte borgere, samt se alle deres tildelte sager. Ved et tryk på en sag er et muligt at udfylde eller ændre på sagens informationer">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="15.0" layoutY="60.0" prefHeight="35.0" prefWidth="586.0" text=" Derudover er det også muligt at søge på en borger.">
+            <Label alignment="TOP_LEFT" layoutX="15.0" layoutY="68.0" prefHeight="35.0" prefWidth="586.0" text=" Derudover er det også muligt at søge på en borger.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="85.0" prefHeight="35.0" prefWidth="1136.0" text="- Mulighed for at rapportere og udfylde en borgers; generelle informationer, helbredstilstand og funktionsevnetilstand.">
+            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="103.0" prefHeight="35.0" prefWidth="1136.0" text="- Mulighed for at rapportere og udfylde en borgers; generelle informationer, helbredstilstand og funktionsevnetilstand.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="21.0" layoutY="103.0" prefHeight="25.0" prefWidth="710.0" text="Derudover kan man få en opsummering af borgerens rapport ved at trykke på &quot;Se alle borgerens informationer&quot;">
+            <Label alignment="TOP_LEFT" layoutX="21.0" layoutY="121.0" prefHeight="25.0" prefWidth="710.0" text="Derudover kan man få en opsummering af borgerens rapport ved at trykke på &quot;Se alle borgerens informationer&quot;">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="132.0" prefHeight="35.0" prefWidth="1136.0" text="- Bruge logoet til at komme tilbage på hjemmeskærmen">
+            <Label alignment="TOP_LEFT" layoutX="9.0" layoutY="371.0" prefHeight="35.0" prefWidth="1136.0" text="- Ved et tryk på logoet i øverste venstre hjørne, vil du blive vist tilbage til dette vindue.">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="159.0" prefHeight="35.0" prefWidth="1136.0" text="- Logge ud">
+            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="417.0" prefHeight="35.0" prefWidth="1136.0" text="- For at logge ud skal der bare trykkes på log ud nederst til venstre">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="147.0" prefHeight="35.0" prefWidth="1136.0" text="- Generelle informationer: ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="33.0" layoutY="168.0" prefHeight="35.0" prefWidth="1136.0" text="- Ved at holde musen over de små info tegn, vil du få en kort forklaring af de forskellige rapporterings områder.">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="33.0" layoutY="189.0" prefHeight="35.0" prefWidth="1084.0" text="- Ved at trykke på de små info tegn, vil FSIII håndbogen, med en mere dybdegående forklaring, åbne sig op på din browser.">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="214.0" prefHeight="35.0" prefWidth="1136.0" text="- Helbredstilstande: ">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="35.0" layoutY="238.0" prefHeight="35.0" prefWidth="1084.0" text="- Ved at trykke på observationsnotat knappen, vil det være muligt at udfylde observationsnotatet.">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="35.0" layoutY="262.0" prefHeight="35.0" prefWidth="1084.0" text="- Ved at trykke på &quot;Se alle borgerens informationer&quot; vil det være muligt at se alle borgerens rapporterede informationer, samt udfylde observationsnotatet.">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="287.0" prefHeight="35.0" prefWidth="1136.0" text="- Funktionsevnetilstand:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="37.0" layoutY="308.0" prefHeight="35.0" prefWidth="1084.0" text="- Ved at trykke på en af de forskellige funktionsevnetilstande vil du få alle underkategorier, hvor du efter at have valgt en underkategori, nu kan gå igang med at rapportere">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="37.0" layoutY="336.0" prefHeight="35.0" prefWidth="1084.0" text="- Ved at trykke på observationsnotat knappen eller &quot;Se alle borgerens informationer&quot;, vil det igen være muligt at udfylde observationsnotatet.">
                <font>
                   <Font size="14.0" />
                </font>
@@ -190,7 +235,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0">
+      <AnchorPane fx:id="anchorPaneFS3" layoutX="189.0" layoutY="139.0" prefHeight="602.0" prefWidth="1158.0" visible="false">
          <children>
             <Pane prefHeight="42.0" prefWidth="1158.0" style="-fx-background-color: transparent;">
                <children>
