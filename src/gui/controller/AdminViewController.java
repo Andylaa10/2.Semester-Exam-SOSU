@@ -693,11 +693,11 @@ public class AdminViewController implements Initializable, IController {
             String address = txtFieldCitizenAddress.getText();
             String sex = null;
             if (radioMale.isSelected()) {
-                sex = "Male";
+                sex = "Mand";
             } else if (radioFemale.isSelected()) {
-                sex = "Female";
+                sex = "Kvinde";
             } else if (radioOther.isSelected()) {
-                sex = "Other";
+                sex = "Andet";
             }
             dataModelFacade.createCitizen(firstName, lastName, SSN, address, sex, Integer.parseInt(txtFieldSchoolID.getText()));
             clearTextFieldCreate();
