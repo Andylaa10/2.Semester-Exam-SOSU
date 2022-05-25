@@ -11,7 +11,7 @@ import be.HealthCondition.HealthConditionSubCategoryText;
 import be.User;
 import be.Utilities.ImageWithText;
 import be.enums.ConditionEnum;
-import gui.Facade.DataModelFacade;
+import gui.model.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;

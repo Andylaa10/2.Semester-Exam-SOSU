@@ -5,7 +5,7 @@ import be.Citizen;
 import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
 import be.HealthCondition.HealthConditionSubCategoryText;
 import be.ObservationNote;
-import gui.Facade.DataModelFacade;
+import gui.model.Facade.DataModelFacade;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

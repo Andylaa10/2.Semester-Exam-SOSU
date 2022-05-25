@@ -1,4 +1,4 @@
-package gui.Facade;
+package gui.model.Facade;
 
 import be.*;
 import be.FunctionalAbilities.FunctionalAbilitySubCategoryText;
@@ -7,8 +7,6 @@ import be.HealthCondition.HealthCondition;
 import be.HealthCondition.HealthConditionSubCategory;
 import be.HealthCondition.HealthConditionSubCategoryText;
 import be.enums.UserType;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-import dal.db.DatabaseConnector;
 import gui.model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

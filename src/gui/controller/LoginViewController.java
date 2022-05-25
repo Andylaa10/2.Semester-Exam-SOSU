@@ -4,7 +4,7 @@ import be.School;
 import be.SuperAdmin;
 import be.User;
 import be.enums.UserType;
-import gui.Facade.DataModelFacade;
+import gui.model.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

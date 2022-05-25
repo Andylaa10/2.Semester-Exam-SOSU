@@ -6,7 +6,7 @@ import be.GeneralInformation;
 import be.User;
 import be.enums.UserType;
 import bll.utilities.Encryptor;
-import gui.Facade.DataModelFacade;
+import gui.model.Facade.DataModelFacade;
 import gui.controller.Interface.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

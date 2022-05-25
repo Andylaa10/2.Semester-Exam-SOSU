@@ -1,7 +1,7 @@
 package gui.controller;
 
 import be.Case;
-import gui.Facade.DataModelFacade;
+import gui.model.Facade.DataModelFacade;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
