@@ -73,7 +73,8 @@ public class StudentViewController implements IController, Initializable {
     private TextField txtFieldGeneralInfoId;
     @FXML
     private Button btnObservationNote;
-
+    @FXML
+    private ImageView imageLoadingGif;
 
     /**
      * Functional Ability Pane
@@ -393,6 +394,23 @@ public class StudentViewController implements IController, Initializable {
 
 
     /**
+     * Method for clearing all the generalInformation txtAreas.
+     */
+    private void clearGeneralInformation(){
+        txtAreaCoping.clear();
+        txtAreaMotivation.clear();
+        txtAreaResources.clear();
+        txtAreaRoles.clear();
+        txtAreaHabits.clear();
+        txtAreaEducationAndJobs.clear();
+        txtAreaLifeStory.clear();
+        txtAreaHealthInfo.clear();
+        txtAreaEquipmentAids.clear();
+        txtAreaHomeLayout.clear();
+        txtAreaNetwork.clear();
+    }
+
+    /**
      * Method for clearing the HealthCondtionTextFields and radiobuttons.
      */
     public void clearHealthConditionTxtField() {
@@ -540,6 +558,7 @@ public class StudentViewController implements IController, Initializable {
      */
     @FXML
     private void onActionComboClicked() throws SQLException {
+        clearGeneralInformation();
         lblInfoState.setText("Ændringer - Ikke Gemt");
         imgViewNotSaved.setVisible(true);
         imgViewSaved.setVisible(false);
@@ -573,6 +592,7 @@ public class StudentViewController implements IController, Initializable {
         }
         btnCitizenInfo.setVisible(true);
     }
+
 
     /**
      * loads the Citizens table view
@@ -1357,6 +1377,7 @@ public class StudentViewController implements IController, Initializable {
     public void btnOpenCitizenInfo() {
         executorService.submit(() -> {
             try {
+                imageLoadingGif.setVisible(true);
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/gui/view/CitizenInfoView.fxml"));
 
@@ -1370,6 +1391,7 @@ public class StudentViewController implements IController, Initializable {
                     stage.setScene(scene);
                     stage.setResizable(false);
                     stage.show();
+                    imageLoadingGif.setVisible(false);
 
                 });
             } catch (Exception e) {

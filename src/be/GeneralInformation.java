@@ -34,7 +34,9 @@ public class GeneralInformation {
         this.homeLayout = homeLayout;
     }
 
-    public GeneralInformation(int id, int citizenId, String coping, String motivation, String resources, String roles, String habits, String educationAndJob, String lifeStory, String network, String healthInformation, String equipmentAids, String homeLayout) {
+    public GeneralInformation(int id, int citizenId, String coping, String motivation, String resources,
+                              String roles, String habits, String educationAndJob, String lifeStory,
+                              String network, String healthInformation, String equipmentAids, String homeLayout) {
         this.id = id;
         this.citizenId = citizenId;
         this.coping = coping;
