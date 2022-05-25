@@ -376,19 +376,19 @@ public class AdminViewController implements Initializable, IController {
     }
 
     /**
-     * gets the data for teachers
-     */
-    private ObservableList<User> getTeacherData() {
-        return allTeachers;
-    }
-
-    /**
      * gets the data for students.
      *
      * @return ObservableList<User>
      */
     private ObservableList<User> getStudentData() {
         return allStudents;
+    }
+
+    /**
+     * gets the data for teachers
+     */
+    private ObservableList<User> getTeacherData() {
+        return allTeachers;
     }
 
     /**
