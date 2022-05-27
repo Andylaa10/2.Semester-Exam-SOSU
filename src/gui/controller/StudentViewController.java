@@ -288,7 +288,7 @@ public class StudentViewController implements IController, Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setAnchorPanesVisibility();
+        btnClickFS3();
         selectedCitizen();
         selectedCase();
         selectedCitizenOnComboBox();
@@ -1210,20 +1210,7 @@ public class StudentViewController implements IController, Initializable {
     private void coupingLink() throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("http://www.fs3.nu/filer/Dokumenter/Metode/FSIII-Guide-til-generelle-oplysninger.pdf?t=1647518630"));
     }
-
-    /**
-     * Set up the student anchor pane
-     */
-    private void setAnchorPanesVisibility() {
-        labelInfoNewLine.setText("");
-        anchorPaneStudent.setVisible(true);
-        anchorPaneCitizens.setVisible(false);
-        anchorPaneFS3.setVisible(false);
-        anchorPaneOBS.setVisible(false);
-        anchorPaneGeneralInformation.setVisible(false);
-        anchorPaneHealthConditions.setVisible(false);
-        anchorPaneFunctionalCondition.setVisible(false);
-    }
+    
 
     /**
      * Takes you back to the start screen/pane when clicked on logo
