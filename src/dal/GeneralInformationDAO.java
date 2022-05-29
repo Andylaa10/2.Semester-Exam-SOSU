@@ -60,9 +60,6 @@ public class GeneralInformationDAO {
 
     /**
      * Gets all the general information on a citizen
-     * @param citizenId
-     * @return
-     * @throws SQLException
      */
     public GeneralInformation getGeneralInformationOnCitizen(int citizenId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
@@ -101,7 +98,6 @@ public class GeneralInformationDAO {
 
     /**
      * Creates general information on a selected citizen
-     * @throws SQLException
      */
     public GeneralInformation createGeneralInformation(int citizenId, String coping, String motivation, String resources, String roles,
                                                        String habits, String educationAndJob, String lifeStory,
@@ -144,8 +140,6 @@ public class GeneralInformationDAO {
 
     /**
      * Edits general information
-     * @param generalInformation
-     * @throws SQLException
      */
     public void editGeneralInformation(GeneralInformation generalInformation) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
@@ -177,8 +171,6 @@ public class GeneralInformationDAO {
 
     /**
      * Deletes general information on a citizen
-     * @param id
-     * @throws SQLException
      */
     public void deleteGeneralInformation(int id) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {

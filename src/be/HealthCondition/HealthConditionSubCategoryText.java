@@ -61,48 +61,29 @@ public class HealthConditionSubCategoryText {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
 
     public int getHealthConditionId() {
         return healthConditionId;
     }
 
-    public void setHealthConditionId(int healthConditionId) {
-        this.healthConditionId = healthConditionId;
-    }
 
     public String getProfessionalNote() {
         return professionalNote;
     }
 
-    public void setProfessionalNote(String professionalNote) {
-        this.professionalNote = professionalNote;
-    }
 
     public String getCurrentLevelAssessment() {
         return currentLevelAssessment;
     }
 
-    public void setCurrentLevelAssessment(String currentLevelAssessment) {
-        this.currentLevelAssessment = currentLevelAssessment;
-    }
 
     public String getExpectedLevelAssessment() {
         return expectedLevelAssessment;
     }
 
-    public void setExpectedLevelAssessment(String expectedLevelAssessment) {
-        this.expectedLevelAssessment = expectedLevelAssessment;
-    }
 
     public int getCondition() {
         return condition;
-    }
-
-    public void setCondition(int condition) {
-        this.condition = condition;
     }
 
     @Override

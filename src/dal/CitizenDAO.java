@@ -15,8 +15,6 @@ public class CitizenDAO {
 
     /**
      * Constructor
-     *
-     * @throws IOException
      */
     public CitizenDAO() throws IOException {
     }
@@ -54,10 +52,6 @@ public class CitizenDAO {
 
     /**
      * Gets a list of citizens assigned to a school
-     *
-     * @param schoolId
-     * @return
-     * @throws SQLException
      */
     public List<Citizen> getCitizenAndSchool(int schoolId) throws SQLException {
         ArrayList<Citizen> allCitizens = new ArrayList<>();

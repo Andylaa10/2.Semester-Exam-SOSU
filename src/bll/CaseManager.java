@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CaseManager {
 
-    private CaseDAO caseDAO;
+    private final CaseDAO caseDAO;
 
     public CaseManager() throws IOException {
         caseDAO = new CaseDAO();
@@ -45,9 +45,6 @@ public class CaseManager {
 
     /**
      * When a case and a citizen is selected, you can assign case to citizen, by using the method from caseDAO
-     *
-     * @param caseId
-     * @param citizenId
      */
     public void assignCaseToCitizen(int caseId, int citizenId) throws SQLException {
         caseDAO.assignCaseToCitizen(caseId, citizenId);
@@ -55,9 +52,6 @@ public class CaseManager {
 
     /**
      * When a case and a citizen is selected, you can delete a case from citizen, by using the method from caseDAO
-     *
-     * @param caseId
-     * @param citizenId
      */
     public void deleteCaseFromCitizen(int caseId, int citizenId) throws SQLException {
         caseDAO.deleteCaseFromCitizen(caseId, citizenId);
@@ -65,10 +59,6 @@ public class CaseManager {
 
     /**
      * Gets assigned cases on the selected citizen, by using the method from caseDAO
-     *
-     * @param citizenId
-     * @return
-     * @throws SQLException
      */
     public List<Case> getCasesOnCitizen(int citizenId) throws SQLException {
         return caseDAO.getCasesOnCitizen(citizenId);
@@ -76,11 +66,6 @@ public class CaseManager {
 
     /**
      * Gets a selected case on the selected citizen, by using the method from caseDAO
-     *
-     * @param citizenId
-     * @param casesId
-     * @return
-     * @throws SQLException
      */
     public Case getCaseOnCitizen(int citizenId, int casesId) throws SQLException {
         return caseDAO.getCaseOnCitizen(citizenId, casesId);

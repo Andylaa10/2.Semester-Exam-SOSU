@@ -62,16 +62,8 @@ public class Citizen {
         return SSN;
     }
 
-    public void setSSN(String SSN) {
-        this.SSN = SSN;
-    }
-
     public String getSex() {
         return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
     }
 
     public int getSchoolID() {

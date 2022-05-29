@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserManager {
 
-    private UserDAO userDAO;
+    private final UserDAO userDAO;
 
     public UserManager() throws IOException {
         userDAO = new UserDAO();
@@ -18,9 +18,6 @@ public class UserManager {
 
     /**
      * Get a list of student using the getStudents method from userDAO
-     *
-     * @return
-     * @throws SQLException
      */
     public List<User> getStudents() throws SQLException {
         return userDAO.getStudents();
@@ -32,9 +29,6 @@ public class UserManager {
 
     /**
      * Get a list of teachers using the getTeachers method from userDAO
-     *
-     * @return
-     * @throws SQLException
      */
     public List<User> getTeachers() throws SQLException {
         return userDAO.getTeachers();
@@ -42,9 +36,6 @@ public class UserManager {
 
     /**
      * Get a list of admins using the getAdmins method from userDAO
-     *
-     * @return
-     * @throws SQLException
      */
     public List<User> getAdmins() throws SQLException {
         return userDAO.getAdmins();
@@ -78,9 +69,6 @@ public class UserManager {
 
     /**
      * Deletes a student using the deleteStudent method from userDAO
-     *
-     * @param id
-     * @param userType
      */
     public void deleteStudent(int id, UserType userType) throws SQLException {
         userDAO.deleteStudent(id, userType);
@@ -88,9 +76,6 @@ public class UserManager {
 
     /**
      * Deletes a teacher using the deleteTeacher method from userDAO
-     *
-     * @param id
-     * @param userType
      */
     public void deleteTeacher(int id, UserType userType) throws SQLException {
         userDAO.deleteTeacher(id, userType);
@@ -98,9 +83,6 @@ public class UserManager {
 
     /**
      * Deletes an admin using the deleteAdmin method from userDAO
-     *
-     * @param id
-     * @param userType
      */
     public void deleteAdmin(int id, UserType userType) throws SQLException {
         userDAO.deleteAdmin(id, userType);
@@ -108,9 +90,6 @@ public class UserManager {
 
     /**
      * Edits a student using the editStudent method from userDAO
-     *
-     * @param student
-     * @throws Exception
      */
     public void editStudent(User student) throws Exception {
         userDAO.editStudent(student);
@@ -118,9 +97,6 @@ public class UserManager {
 
     /**
      * Edits a teacher using the editTeacher method from userDAO
-     *
-     * @param teacher
-     * @throws Exception
      */
     public void editTeacher(User teacher) throws Exception {
         userDAO.editTeacher(teacher);
@@ -128,9 +104,6 @@ public class UserManager {
 
     /**
      * Edits an admin using the editAdmin method from userDAO
-     *
-     * @param admin
-     * @throws Exception
      */
     public void editAdmin(User admin) throws Exception {
         userDAO.editAdmin(admin);
@@ -138,10 +111,6 @@ public class UserManager {
 
     /**
      * Gets the user userLogin using the userLogin method from userDAO
-     *
-     * @param username
-     * @param password
-     * @return
      */
     public User userLogin(String username, String password, int schoolId) throws SQLException {
         return userDAO.userLogin(username, password, schoolId);

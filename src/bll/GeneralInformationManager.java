@@ -9,12 +9,10 @@ import java.util.List;
 
 public class GeneralInformationManager {
 
-    private GeneralInformationDAO generalInformationDAO;
+    private final GeneralInformationDAO generalInformationDAO;
 
     /**
      * Constructor
-     *
-     * @throws IOException
      */
     public GeneralInformationManager() throws IOException {
         generalInformationDAO = new GeneralInformationDAO();
@@ -22,9 +20,6 @@ public class GeneralInformationManager {
 
     /**
      * Get a list of generalInformation using the getgeneralInformations method from generalInformationDAO
-     *
-     * @return
-     * @throws SQLException
      */
     public List<GeneralInformation> getGeneralInformation() throws SQLException {
         return generalInformationDAO.getGeneralInformation();
@@ -33,10 +28,6 @@ public class GeneralInformationManager {
     /**
      * Gets generalInformation that is assigned to citizen, using the getGeneralInformationsOnCitizen
      * method from generalInformationDAO
-     *
-     * @param citizenID
-     * @return
-     * @throws SQLException
      */
     public GeneralInformation getGeneralInformationOnCitizen(int citizenID) throws SQLException {
         return generalInformationDAO.getGeneralInformationOnCitizen(citizenID);
@@ -56,9 +47,6 @@ public class GeneralInformationManager {
 
     /**
      * Deletes generalInformation using the deleteGeneralInformation method from generalInformationDAO
-     *
-     * @param id
-     * @throws Exception
      */
     public void deleteGeneralInformation(int id) throws Exception {
         generalInformationDAO.deleteGeneralInformation(id);
@@ -66,9 +54,6 @@ public class GeneralInformationManager {
 
     /**
      * Edits generalInformation using the editGeneralInformation method in generalInformationDAO
-     *
-     * @param generalInformation
-     * @throws Exception
      */
     public void editGeneralInformation(GeneralInformation generalInformation) throws Exception {
         generalInformationDAO.editGeneralInformation(generalInformation);

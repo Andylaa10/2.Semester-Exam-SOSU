@@ -78,12 +78,7 @@ public class GeneralInformation {
         return coping;
     }
 
-    /**
-     * Set the coping
-     */
-    public void setCoping(String coping) {
-        this.coping = coping;
-    }
+
 
     /**
      * Gets the motivation
@@ -92,12 +87,6 @@ public class GeneralInformation {
         return motivation;
     }
 
-    /**
-     * Sets the motivation
-     */
-    public void setMotivation(String motivation) {
-        this.motivation = motivation;
-    }
 
     /**
      * Gets the resources
@@ -106,12 +95,6 @@ public class GeneralInformation {
         return resources;
     }
 
-    /**
-     * Sets the resources
-     */
-    public void setResources(String resources) {
-        this.resources = resources;
-    }
 
     /**
      * Gets the roles
@@ -120,12 +103,6 @@ public class GeneralInformation {
         return roles;
     }
 
-    /**
-     * Sets the roles
-     */
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
 
     /**
      * Gets the habits
@@ -134,12 +111,6 @@ public class GeneralInformation {
         return habits;
     }
 
-    /**
-     * Sets the habits
-     */
-    public void setHabits(String habits) {
-        this.habits = habits;
-    }
 
     /**
      * Gets the educationAndJob
@@ -148,12 +119,6 @@ public class GeneralInformation {
         return educationAndJob;
     }
 
-    /**
-     * Sets the educationAndJob
-     */
-    public void setEducationAndJob(String educationAndJob) {
-        this.educationAndJob = educationAndJob;
-    }
 
     /**
      * Gets the lifeStory
@@ -162,12 +127,6 @@ public class GeneralInformation {
         return lifeStory;
     }
 
-    /**
-     * Sets the lifeStory
-     */
-    public void setLifeStory(String lifeStory) {
-        this.lifeStory = lifeStory;
-    }
 
     /**
      * Gets the network
@@ -176,12 +135,6 @@ public class GeneralInformation {
         return network;
     }
 
-    /**
-     * Sets the network
-     */
-    public void setNetwork(String network) {
-        this.network = network;
-    }
 
     /**
      * Gets the healthInformation
@@ -190,12 +143,6 @@ public class GeneralInformation {
         return healthInformation;
     }
 
-    /**
-     * Sets the healthInformation
-     */
-    public void setHealthInformation(String healthInformation) {
-        this.healthInformation = healthInformation;
-    }
 
     /**
      * Gets the equipmentAids
@@ -205,24 +152,10 @@ public class GeneralInformation {
     }
 
     /**
-     * Sets the equipmentAids
-     */
-    public void setEquipmentAids(String equipmentAids) {
-        this.equipmentAids = equipmentAids;
-    }
-
-    /**
      * Gets the homeLayout
      */
     public String getHomeLayout() {
         return homeLayout;
-    }
-
-    /**
-     * Sets the homeLayout
-     */
-    public void setHomeLayout(String homeLayout) {
-        this.homeLayout = homeLayout;
     }
 
     @Override

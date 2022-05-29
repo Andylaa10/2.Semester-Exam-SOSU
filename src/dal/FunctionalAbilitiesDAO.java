@@ -12,21 +12,17 @@ import java.util.List;
 
 public class FunctionalAbilitiesDAO {
 
-    private DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
+    private final DatabaseConnector databaseConnector = DatabaseConnector.getInstance();
 
 
     /**
      * Constructor
-     * @throws IOException
      */
     public FunctionalAbilitiesDAO() throws IOException {
     }
 
     /**
      * Gets a list of every functional ability
-     *
-     * @return
-     * @throws SQLException
      */
     public List<FunctionalAbility> getFunctionalAbilities() throws SQLException {
         ArrayList<FunctionalAbility> allFunctionalAbilities = new ArrayList<>();
@@ -58,9 +54,6 @@ public class FunctionalAbilitiesDAO {
 
     /**
      * Gets a list of all functional ability subcategories
-     * @param functionalAbilitySubCategoryId
-     * @return
-     * @throws SQLException
      */
     public List<FunctionalAbilitySubCategoryText> getFunctionalAbilitySubCategories(int functionalAbilitySubCategoryId) throws SQLException {
         ArrayList<FunctionalAbilitySubCategoryText> allFunctionalAbilitySubCategories = new ArrayList<>();
@@ -93,10 +86,6 @@ public class FunctionalAbilitiesDAO {
 
     /**
      * Gets functional abilities subcategory data
-     * @param citizenId
-     * @param functionalAbilitySubCategoryId
-     * @return
-     * @throws SQLException
      */
     public FunctionalAbility getSubcategoryData(int citizenId, int functionalAbilitySubCategoryId) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
@@ -131,10 +120,6 @@ public class FunctionalAbilitiesDAO {
 
     /**
      * Gets all the citizens functional abilities with information noted by a student
-     * @param citizenId
-     * @param functionalAbilitySubCategoryId
-     * @return
-     * @throws SQLException
      */
     public FunctionalAbilitySubCategoryText getInfoOnSubCategory(int citizenId, int functionalAbilitySubCategoryId) throws SQLException {
 
@@ -175,9 +160,6 @@ public class FunctionalAbilitiesDAO {
 
     /**
      * Gets a list of the citizens functional ability information
-     * @param citizenId
-     * @return
-     * @throws SQLException
      */
     public List<FunctionalAbilitySubCategoryText> getInfoOnSubCategories(int citizenId) throws SQLException {
         ArrayList<FunctionalAbilitySubCategoryText> allFASubcategories = new ArrayList();
@@ -221,7 +203,6 @@ public class FunctionalAbilitiesDAO {
 
     /**
      * Creates the functional abilities
-     * @throws SQLException
      */
     public FunctionalAbility createFunctionalAbilities(int citizenId, int functionalAbilitySubCategoryId, int abilityNow, int abilityExpected, String abilityNote, String citizenPerformance, String citizenMeaningOfPerformance, String abilityNoteCitizen) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {
@@ -282,8 +263,6 @@ public class FunctionalAbilitiesDAO {
 
     /**
      * Deletes a functional ability
-     * @param id
-     * @throws SQLException
      */
     public void deleteFunctionalAbility(int id) throws SQLException {
         try (Connection connection = databaseConnector.getConnection()) {

@@ -10,8 +10,8 @@ import java.util.List;
 
 public class CitizenManager {
 
-    private CitizenDAO citizenDAO;
-    private CitizenSearcher citizenSearcher;
+    private final CitizenDAO citizenDAO;
+    private final CitizenSearcher citizenSearcher;
 
     public CitizenManager() throws IOException {
         citizenDAO = new CitizenDAO();
@@ -20,9 +20,6 @@ public class CitizenManager {
 
     /**
      * Get a list of citizen using the getCitizens method from citizenDAO
-     *
-     * @return
-     * @throws SQLException
      */
     public List<Citizen> getCitizens() throws SQLException {
         return citizenDAO.getCitizens();
@@ -30,10 +27,6 @@ public class CitizenManager {
 
     /**
      * Gets all the citizens, that is assigned to school, by using the method from citizenDAO
-     *
-     * @param schoolId
-     * @return
-     * @throws SQLException
      */
     public List<Citizen> getCitizensAndSchool(int schoolId) throws SQLException {
         return citizenDAO.getCitizenAndSchool(schoolId);
@@ -41,10 +34,6 @@ public class CitizenManager {
 
     /**
      * Gets all the general information on a selected citizen, by using the method from citizenDAO
-     *
-     * @param citizenId
-     * @return
-     * @throws SQLException
      */
     public Citizen getInfoOnCitizen(int citizenId) throws SQLException {
         return citizenDAO.getInfoOnCitizen(citizenId);
@@ -59,9 +48,6 @@ public class CitizenManager {
 
     /**
      * Deletes a citizen using the deleteCitizen method from citizenDAO
-     *
-     * @param
-     * @throws Exception
      */
     public void deleteCitizen(int citizenID) throws Exception {
         citizenDAO.deleteCitizen(citizenID);
@@ -69,9 +55,6 @@ public class CitizenManager {
 
     /**
      * Edits a citizen using the editCitizen method in citizenDAO
-     *
-     * @param citizen
-     * @throws Exception
      */
     public void editCitizen(Citizen citizen) throws Exception {
         citizenDAO.editCitizen(citizen);
@@ -79,11 +62,6 @@ public class CitizenManager {
 
     /**
      * Gets a list of citizen based on the query, by using the method from citizenDAO
-     *
-     * @param query
-     * @param schoolId
-     * @return
-     * @throws SQLException
      */
     public List<Citizen> searchCitizen(String query, int schoolId) throws SQLException {
         List<Citizen> allCitizens = getCitizensAndSchool(schoolId);

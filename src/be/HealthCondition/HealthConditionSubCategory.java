@@ -20,16 +20,8 @@ public class HealthConditionSubCategory {
         return subCategoryName;
     }
 
-    public void setSubCategoryName(String subCategoryName) {
-        this.subCategoryName = subCategoryName;
-    }
-
     public int getHealthConditionId() {
         return healthConditionId;
-    }
-
-    public void setHealthConditionId(int healthConditionId) {
-        this.healthConditionId = healthConditionId;
     }
 
     public int getCondition(HealthConditionSubCategoryText subCategoryText) {

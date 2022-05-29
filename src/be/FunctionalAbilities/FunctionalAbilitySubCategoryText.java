@@ -44,16 +44,8 @@ public class FunctionalAbilitySubCategoryText {
         return subCategoryName;
     }
 
-    public void setSubCategoryName(String subCategoryName) {
-        this.subCategoryName = subCategoryName;
-    }
-
     public int getFunctionalAbilityID() {
         return functionalAbilityID;
-    }
-
-    public void setFunctionalAbilityID(int functionalAbilityID) {
-        this.functionalAbilityID = functionalAbilityID;
     }
 
     public int getCitizenID() {
@@ -68,48 +60,29 @@ public class FunctionalAbilitySubCategoryText {
         return abilityNow;
     }
 
-    public void setAbilityNow(int abilityNow) {
-        this.abilityNow = abilityNow;
-    }
 
     public int getAbilityExpected() {
         return abilityExpected;
     }
 
-    public void setAbilityExpected(int abilityExpected) {
-        this.abilityExpected = abilityExpected;
-    }
 
     public String getAbilityNote() {
         return abilityNote;
     }
 
-    public void setAbilityNote(String abilityNote) {
-        this.abilityNote = abilityNote;
-    }
 
     public String getCitizenPerformance() {
         return citizenPerformance;
     }
 
-    public void setCitizenPerformance(String citizenPerformance) {
-        this.citizenPerformance = citizenPerformance;
-    }
 
     public String getCitizenMeaningOfPerformance() {
         return citizenMeaningOfPerformance;
     }
 
-    public void setCitizenMeaningOfPerformance(String citizenMeaningOfPerformance) {
-        this.citizenMeaningOfPerformance = citizenMeaningOfPerformance;
-    }
 
     public String getAbilityNoteCitizen() {
         return abilityNoteCitizen;
-    }
-
-    public void setAbilityNoteCitizen(String abilityNoteCitizen) {
-        this.abilityNoteCitizen = abilityNoteCitizen;
     }
 
     /**
@@ -140,12 +113,6 @@ public class FunctionalAbilitySubCategoryText {
         return subCategoryId;
     }
 
-    /**
-     * Sets the functionalAbilityNameId
-     */
-    public void setSubCategoryId(int subCategoryId) {
-        this.subCategoryId = subCategoryId;
-    }
 
     @Override
     public String toString() {
