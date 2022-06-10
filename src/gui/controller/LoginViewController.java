@@ -90,7 +90,6 @@ public class LoginViewController implements Initializable {
             } else {
                 int school = Integer.parseInt(txtFieldSchoolId.getText());
                 User user = facade.getHashedPassword(username, password, school);
-                //User user = facade.userLogin(username, password, school);
                 if (user != null && user.getUsertype() == UserType.STUDENT && user.getSchoolId() == school) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/view/StudentView.fxml"));
                     Scene scene = new Scene(loader.load());

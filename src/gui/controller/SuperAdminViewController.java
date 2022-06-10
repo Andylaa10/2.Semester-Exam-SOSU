@@ -232,6 +232,7 @@ public class SuperAdminViewController implements Initializable, IController {
             reloadSchoolTable();
             reloadAssignSchoolTable();
             clearSchoolTxtField();
+            reloadSchoolComboBox();
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal først give skolen et navn");
         }
@@ -271,6 +272,7 @@ public class SuperAdminViewController implements Initializable, IController {
                 dataModelFacade.editSchool(school);
                 reloadSchoolTable();
                 clearSchoolTxtField();
+                reloadSchoolComboBox();
                 tvSchools.getSelectionModel().clearSelection();
                 btnEditSchool.setDisable(false);
                 btnEditSave.setVisible(false);
@@ -316,6 +318,7 @@ public class SuperAdminViewController implements Initializable, IController {
                 tvSchools.getSelectionModel().clearSelection();
                 reloadSchoolTable();
                 reloadAssignSchoolTable();
+                reloadSchoolComboBox();
             }
         } else {
             ErrorHandlerController.createWarning("Fejl", "Du skal vælge en skole først");
@@ -565,6 +568,19 @@ public class SuperAdminViewController implements Initializable, IController {
             int index = tvAssignedAdminsOnSchool.getSelectionModel().getFocusedIndex();
             this.tvAssignedAdminsOnSchool.setItems(FXCollections.observableList(dataModelFacade.getAssignedAdmins(selectedSchoolOnComboBox.getId())));
             tvAssignedAdminsOnSchool.getSelectionModel().select(index);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    /**
+     * Reloads the schoolComboBox
+     */
+    private void reloadSchoolComboBox() {
+        try {
+            int index = comboSchool.getSelectionModel().getSelectedIndex();
+            this.comboSchool.setItems(FXCollections.observableList(dataModelFacade.getSchools()));
+            comboSchool.getSelectionModel().select(index);
         } catch (Exception exception) {
             exception.printStackTrace();
         }
